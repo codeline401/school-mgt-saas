@@ -1,0 +1,39 @@
+services:
+  # Service de base de données
+  db:
+    image: postgres:15-alpine # version stable et légère de PostgreSQL
+    container_name: school_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin_user # nom d'utilisateur de la DB
+      POSTGRES_PASSWORD: dev_codeline401 # Mot de passe (à changer en prod)
+      POSTGRES_DB: school_saas_db
+    ports:
+      - "5432:5432" # Expose le port 5432  en local
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persistance des données
+
+  # Service Redis pour le cache et les sessions
+  redis:
+    image: redis:alpine # version légère de Redis
+    container_name: school_redis
+    restart: always
+    ports:
+      - "6379:6379" # Expose le port 6379 en local
+
+  # Interface graphique pour gérer la base de données
+  pgadmin:
+    image: dpage/pgadmin4 # image officielle de pgAdmin
+    container_name: school_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@ecole.com # Login pour l'interface pgAdmin
+      PGADMIN_DEFAULT_PASSWORD: admin_codeline401 # Mot de passe pour pgAdmin (à changer en prod)
+    ports:
+      - "8080:80" # Expose le port 80 de pgAdmin, accéssible sur http://localhost:8080
+    depends_on:
+      - db # Ne démarre qu'après la base de données
+
+# Définition du volume pour ne pas perdre les données quand on arrête Docker
+volumes:
+  postgres_data:

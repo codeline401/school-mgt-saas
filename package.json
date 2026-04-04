@@ -1,0 +1,15 @@
+{
+  "name": "school-management-saas",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.6.0"
+  }
+}

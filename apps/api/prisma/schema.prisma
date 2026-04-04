@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Modele SAAS
+
+model School {
+  id        String       @id @default(uuid())
+  nom       String
+  classes   Classe[]
+  eleves    Eleve[]
+  profs     Professeur[]
+  createdAt DateTime     @default(now())
+}
+
+model Classe {
+  id       String       @id @default(uuid())
+  nom      String // ex: "6ème A", "5ème B", etc.
+  schoolId String
+  school   School       @relation(fields: [schoolId], references: [id])
+  eleves   Eleve[] // Une classe a plusieurs élèves
+  profs    Professeur[] // Une classe a plusieurs professeurs
+}
+
+model Eleve {
+  id       String @id @default(uuid())
+  nom      String
+  prenom   String
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id])
+  classeId String
+  classe   Classe @relation(fields: [classeId], references: [id])
+}
+
+model Professeur {
+  id       String   @id @default(uuid())
+  nom      String
+  prenom   String
+  schoolId String
+  school   School   @relation(fields: [schoolId], references: [id])
+  classes  Classe[] // Un professeur peut enseigner dans plusieurs classes
+}

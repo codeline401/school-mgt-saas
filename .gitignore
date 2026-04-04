@@ -1,0 +1,13 @@
+# Dépendance
+node_modules/
+dist/
+
+# Sécurité
+.env
+.env.local
+
+# Docker & données locales
+postgres-data/
+
+# Logs
+npm-debug.log*
