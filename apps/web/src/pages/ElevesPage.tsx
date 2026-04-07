@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 import { api } from "../lib/api";
 import { Plus } from "lucide-react";
+import type { Eleve, Classe } from "@school-mgt/types";
 
-interface Eleve {
-  id: number;
-  nom: string;
-  prenom: string;
-  classe?: { nom: string };
-}
+// Extend shared Eleve type to inculde the populate classe object
+type EleveWithClasse = Omit<Eleve, "classeId"> & { classe?: Classe };
 
 function ElevesPage() {
   // Etat pour stocker la liste des élèves
-  const [eleves, setEleves] = useState<Eleve[]>([]);
+  const [eleves, setEleves] = useState<EleveWithClasse[]>([]);
 
   // Etat pour gérer le chargement
   const [loading, setLoading] = useState(true);
+
+  // Etat pour gérer les erreurs
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Appel API vers le backend pour récupérer les élèves
@@ -26,6 +26,9 @@ function ElevesPage() {
       })
       .catch((err) => {
         console.error("Erreur lors de la récupération des élèves:", err);
+        setError(
+          "Impossible de charger les élèves. Veuillez réessayer plus tard.",
+        );
         setLoading(false); // Fin du chargement même en cas d'erreur
       });
   }, []);
@@ -64,7 +67,13 @@ function ElevesPage() {
           </thead>
 
           <tbody className="divide-y divide-gray-100">
-            {loading ? (
+            {error ? (
+              <tr>
+                <td colSpan={3} className="text-center py-4 text-red-600">
+                  {error}
+                </td>
+              </tr>
+            ) : loading ? (
               <tr>
                 <td colSpan={3} className="text-center py-4">
                   <span className="loading loading-dots loading-xs"></span>
