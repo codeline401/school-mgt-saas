@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { registerUser, loginUser } from "../controllers/authController.js";
 import { authenticate, authorizeRoles } from "../middlewares/authMiddleware.js";
+import { Role } from "../generated/prisma/enums.js";
 
 const router = Router();
 
@@ -8,7 +9,7 @@ const router = Router();
 router.post(
   "/register",
   authenticate,
-  authorizeRoles("SUDO_ADMIN", "ADMIN"),
+  authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN),
   registerUser,
 );
 

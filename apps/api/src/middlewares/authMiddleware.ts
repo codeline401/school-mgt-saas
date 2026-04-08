@@ -2,7 +2,10 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { Role } from "../generated/prisma/enums";
 
-const JWT_SECRET = process.env.JWT_SECRET || "default_token";
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error("JWT_SECRET environment variable is required");
+}
 
 // 1. Middleware pour vérifier que l'utilisateur est connecté
 export const authenticate = (

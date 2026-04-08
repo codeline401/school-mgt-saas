@@ -15,7 +15,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.6.0",
     "@prisma/config": "^7.6.0",
-    "@school-saas/types": "*",
+    "@school-mgt/types": "*",
     "@types/pg": "^8.20.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",

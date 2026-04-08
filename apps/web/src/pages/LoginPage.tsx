@@ -27,7 +27,7 @@ function LoginPage() {
       // On range le token et l'user dans le store de Zustand
       setAuth(data.user, data.token);
       // On redirige vers la page d'accueil ou le dashboard
-      navigate("/dashboard");
+      navigate("/");
     },
   });
 
