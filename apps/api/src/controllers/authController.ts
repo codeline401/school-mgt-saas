@@ -4,7 +4,10 @@ import bcrypt from "bcrypt";
 import { prisma } from "../lib/prisma.js";
 import { registerSchema, loginSchema } from "../schemas/authSchema.js";
 
-const JWT_SECRET = process.env.JWT_SECRET || "default_token";
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error("JWT_SECRET environment variable is required");
+}
 
 // Inscription d'un nouvel utilisateur
 export const registerUser = async (req: Request, res: Response) => {
