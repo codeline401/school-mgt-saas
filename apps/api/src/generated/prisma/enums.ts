@@ -9,7 +9,13 @@
 * 🟢 You can import this file directly.
 */
 
+export const Role = {
+  SUDO_ADMIN: 'SUDO_ADMIN',
+  ADMIN: 'ADMIN',
+  USER: 'USER',
+  PROF: 'PROF',
+  ELEVE: 'ELEVE',
+  PARENT: 'PARENT'
+} as const
 
-
-// This file is empty because there are no enums in the schema.
-export {}
+export type Role = (typeof Role)[keyof typeof Role]

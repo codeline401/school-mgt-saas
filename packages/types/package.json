@@ -1,5 +1,5 @@
 {
-  "name": "@school-saas/types",
+  "name": "@school-mgt/types",
   "version": "1.0.0",
   "private": true,
   "main": "./index.ts",

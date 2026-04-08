@@ -12,6 +12,27 @@ datasource db {
   provider = "postgresql"
 }
 
+// Ajout d'énumération des rôles
+enum Role {
+  SUDO_ADMIN
+  ADMIN
+  USER
+  PROF
+  ELEVE
+  PARENT
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  role     Role   @default(USER)
+
+  // Le Sudo_Admin n'a pas de schoolId, les autres OUI.
+  schoolId String? // nullable pour le Sudo_Admin
+  school   School? @relation(fields: [schoolId], references: [id])
+}
+
 // Modele SAAS
 
 model School {
@@ -21,6 +42,7 @@ model School {
   eleves    Eleve[]
   profs     Professeur[]
   createdAt DateTime     @default(now())
+  users     User[]
 }
 
 model Classe {

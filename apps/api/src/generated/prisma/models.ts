@@ -8,6 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/User.js'
 export type * from './models/School.js'
 export type * from './models/Classe.js'
 export type * from './models/Eleve.js'
