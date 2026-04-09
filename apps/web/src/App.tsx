@@ -3,6 +3,10 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import ElevesPage from "./pages/ElevesPage";
 import LoginPage from "./pages/LoginPage";
 
+// ProtectedRoute est un composant qui vérifie si l'utilisateur est connecté et a les rôles nécessaires pour accéder à une route
+import ProtectedRoute from "./components/ProtectedRoute";
+import RegisterPage from "./pages/RegisterPage";
+
 // Composant temp pour le Dashboard vide
 const DashboardTemp = () => (
   <div>
@@ -17,14 +21,30 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/**Toutes les routes à l'intérieur de DashboardLayout partageront la Sidebar  */}
-        <Route path="/" element={<DashboardLayout />}>
-          <Route index element={<DashboardTemp />} />
-          <Route path="eleves" element={<ElevesPage />} />
-
-          {/** TODO ajouter Profs et Setting plus tard */}
-        </Route>
+        {/** Route publique : accéssible sans être connecté */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
+        {/** Routes protégées : accéssible uniquement si connecté */}
+        <Route element={<ProtectedRoute />}>
+          <Route element={<DashboardLayout />}>
+            {/** Acceuil pour tous les connectés */}
+            <Route path="/" element={<DashboardTemp />} />
+
+            {/** Section élèves : accessible seulement pour les ADMIN, USER et SUDO_ADMIN */}
+            <Route
+              element={
+                <ProtectedRoute
+                  allowedRoles={["ADMIN", "USER", "SUDO_ADMIN"]}
+                />
+              }
+            >
+              <Route path="/eleves" element={<ElevesPage />} />
+            </Route>
+
+            {/** TODO: ajouter /profs, /classes, /settings plus tard */}
+          </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );

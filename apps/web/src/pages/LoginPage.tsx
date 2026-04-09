@@ -1,137 +1,144 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store/authStore";
-import { useMutation } from "@tanstack/react-query";
-import { api } from "../lib/api.js";
-import type { AxiosError } from "axios";
-import { AlertCircle, Loader2, LogIn } from "lucide-react";
+import { Link } from "react-router-dom";
+import { LogIn, Loader2, AlertCircle, GraduationCap } from "lucide-react";
+import { useLogin } from "../hooks/useAuth";
 
-function LoginPage() {
-  const navigate = useNavigate();
-  const setAuth = useAuthStore((state) => state.setAuth); // Récupère la fonction setAuth du store d'authentification
-
-  // Etats Locaux seulement pour le formulaire
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const loginMutation = useLogin();
 
-  // Définition de la mutation avec tanStack Query
-  const loginMutation = useMutation({
-    // La fonction qui appelle notre API pour se connecter
-    mutationFn: async () => {
-      const response = await api.post("/api/auth/login", { email, password });
-      return response.data; // L'API renvoie { user, token}
-    },
-
-    // Ce qu'on fait si la connexion réussit
-    onSuccess: (data) => {
-      // On range le token et l'user dans le store de Zustand
-      setAuth(data.user, data.token);
-      // On redirige vers la page d'accueil ou le dashboard
-      navigate("/");
-    },
-  });
-
-  // Gestion du submit du formulaire
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // Empêche le rechargement de la page
-    loginMutation.mutate(); // Lance la mutation de connexion
+    e.preventDefault();
+    loginMutation.mutate({ email, password });
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
-      {/* Decorative blobs */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 pointer-events-none" />
+    <div
+      className="min-h-screen bg-texture flex items-center justify-center p-6"
+      style={{
+        background:
+          "linear-gradient(135deg, #0a0e45 0%, #1a237e 50%, #0d3b0e 100%)",
+      }}
+    >
+      {/* Cercles décoratifs en arrière-plan */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute -top-32 -left-32 w-96 h-96 rounded-full opacity-10"
+          style={{
+            background: "radial-gradient(circle, #4caf50, transparent)",
+          }}
+        />
+        <div
+          className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full opacity-10"
+          style={{
+            background: "radial-gradient(circle, #3949ab, transparent)",
+          }}
+        />
+      </div>
 
       <div className="relative max-w-md w-full">
-        {/* Logo / header */}
+        {/* Logo et titre */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-600 shadow-lg shadow-indigo-600/40 mb-4">
-            <LogIn size={28} className="text-white" />
+          <div
+            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4"
+            style={{ background: "linear-gradient(135deg, #2e7d32, #4caf50)" }}
+          >
+            <GraduationCap size={32} className="text-white" />
           </div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight">
-            School Management
+          <h1
+            className="text-4xl font-bold text-white"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            School SaaS
           </h1>
-          <p className="text-slate-400 mt-1 text-sm">
-            Connectez-vous pour continuer
+          <p className="text-blue-200 mt-2 font-medium">
+            Plateforme de Gestion Scolaire 🇲🇬
           </p>
         </div>
 
-        {/* Card */}
-        <div className="bg-slate-800/60 backdrop-blur-md border border-slate-700/50 rounded-2xl shadow-2xl p-8">
-          {/* Erreur */}
-          {loginMutation.isError && (
-            <div
-              role="alert"
-              aria-live="assertive"
-              className="flex items-center gap-3 bg-red-500/10 text-red-400 p-4 rounded-xl mb-6 text-sm border border-red-500/20"
-            >
-              <AlertCircle size={18} className="shrink-0" />
-              <span>
-                {(loginMutation.error as AxiosError<{ error: string }>)
-                  ?.response?.data?.error || "Erreur de connexion"}
-              </span>
-            </div>
-          )}
+        {/* Carte du formulaire */}
+        <div className="bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl">
+          <div className="p-8">
+            {loginMutation.isError && (
+              <div className="flex items-center gap-3 bg-red-500/20 text-red-200 p-4 rounded-2xl mb-6 text-sm border border-red-500/30">
+                <AlertCircle size={18} />
+                <span>
+                  {(
+                    loginMutation.error as {
+                      response?: { data?: { error?: string } };
+                    }
+                  )?.response?.data?.error || "Identifiants incorrects"}
+                </span>
+              </div>
+            )}
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2"
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label className="block text-sm font-semibold text-blue-100 mb-2">
+                  Email professionnel
+                </label>
+                <input
+                  type="email"
+                  placeholder="nom@ecole.mg"
+                  className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-blue-100 mb-2">
+                  Mot de passe
+                </label>
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loginMutation.isPending}
+                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-bold text-white transition-all active:scale-95 disabled:opacity-60 mt-2"
+                style={{
+                  background: "linear-gradient(135deg, #2e7d32, #4caf50)",
+                }}
               >
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                autoComplete="email"
-                className="w-full px-4 py-3 bg-slate-900/60 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-                placeholder="vous@exemple.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
+                {loginMutation.isPending ? (
+                  <Loader2 className="animate-spin" size={20} />
+                ) : (
+                  <>
+                    <LogIn size={20} />
+                    Se connecter
+                  </>
+                )}
+              </button>
+            </form>
 
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2"
-              >
-                Mot de passe
-              </label>
-              <input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                className="w-full px-4 py-3 bg-slate-900/60 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+            <div className="mt-6 pt-6 border-t border-white/10 text-center">
+              <p className="text-blue-200 text-sm">
+                Pas encore de compte ?{" "}
+                <Link
+                  to="/register"
+                  className="font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
+                >
+                  Créer un compte
+                </Link>
+              </p>
             </div>
-
-            <button
-              type="submit"
-              disabled={loginMutation.isPending}
-              className="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 active:scale-[.98] text-white py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-indigo-600/30 disabled:opacity-60 disabled:cursor-not-allowed mt-2"
-            >
-              {loginMutation.isPending ? (
-                <Loader2 className="animate-spin" size={20} />
-              ) : (
-                <>
-                  <LogIn size={20} />
-                  Se connecter
-                </>
-              )}
-            </button>
-          </form>
+          </div>
         </div>
+
+        <p className="text-center text-blue-300/50 text-xs mt-6">
+          by codeline401 © 2026 School SaaS Madagascar — Tous droits réservés
+        </p>
       </div>
     </div>
   );
 }
-
-export default LoginPage;

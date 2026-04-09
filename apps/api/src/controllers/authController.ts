@@ -26,13 +26,45 @@ export const registerUser = async (req: Request, res: Response) => {
     // Hashage du mot de passe
     const hashedPassword = await bcrypt.hash(data.password, 12);
 
+    let schoolId: string | null = null; // Par défaut null, sera défini selon le rôle et le code d'invitation
+
+    // Logique selon le role
+    if (data.role === "ADMIN") {
+      // L'ADMIN n'a pas encore d'école, schoolId reste null
+      // Il crééra son école plus tard dans le Dashboard après sa connexion
+      schoolId = null;
+    } else if (data.role === "SUDO_ADMIN") {
+      // Le sudo-admin n'appartient à aucun école
+      schoolId = null;
+    } else {
+      // Pour USER, PROF, ELEVE, PARENT : l'inviteCode est obligatoire pour rejoindre une école existante
+      if (!data.inviteCode) {
+        return res.status(400).json({
+          error: "Un code d'invitation est requis pour ce type d'utilisateur",
+        });
+      }
+
+      // On recherche l'école corrspondante au code d'invitation
+      const school = await prisma.school.findUnique({
+        where: { inviteCode: data.inviteCode || "" },
+      });
+
+      if (!school) {
+        return res.status(400).json({ error: "Code d'invitation invalide" });
+      }
+
+      schoolId = school.id; // On assigne l'école trouvée à l'utilisateur
+    }
+
     // Création de l'utilisateur
     const newUser = await prisma.user.create({
       data: {
         email: data.email,
         password: hashedPassword,
+        nom: data.nom,
+        prenom: data.prenom,
         role: data.role,
-        ...(data.schoolId !== undefined && { schoolId: data.schoolId }), // Ajout conditionnel de schoolId uniquement s'il est fourni
+        schoolId,
       },
     });
 
