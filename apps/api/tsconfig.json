@@ -42,7 +42,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@school-saas/types": ["../../packages/types/"] // Alias pour importer les types depuis le package local
+      "@school-mgt/types": ["../../packages/types/"] // Alias pour importer les types depuis le package local
     }
   },
   "include": ["src/**/*", "../../packages/types/**/*"] // Inclut les types externes

@@ -85,10 +85,12 @@ function ElevesPage() {
                   key={eleve.id}
                   className="hover:bg-gray-50 transition-colors"
                 >
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-gray-700 font-medium">
                     {eleve.nom} {eleve.prenom}
                   </td>
-                  <td className="px-6 py-4">{eleve.classe?.nom || "N/A"}</td>
+                  <td className="px-6 py-4 text-gray-600 font-medium">
+                    {eleve.classe?.nom || "N/A"}
+                  </td>
                   <td className="px-6 py-4">
                     <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                       Actif

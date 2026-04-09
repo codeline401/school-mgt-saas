@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ElevesPage from "./pages/ElevesPage";
+import LoginPage from "./pages/LoginPage";
 
 // Composant temp pour le Dashboard vide
 const DashboardTemp = () => (
@@ -23,6 +24,7 @@ function App() {
 
           {/** TODO ajouter Profs et Setting plus tard */}
         </Route>
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

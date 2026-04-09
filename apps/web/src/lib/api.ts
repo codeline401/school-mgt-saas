@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuthStore } from "../store/authStore.js";
 
 const envBaseUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -10,3 +11,23 @@ export const api = axios.create({
   baseURL: envBaseUrl ?? "http://localhost:5000",
   timeout: 10_000, // 10 secondes
 });
+
+// Intercepteur : Ajoute automatiquement le token JWT à chaque appel
+api.interceptors.request.use((config) => {
+  const token = useAuthStore.getState().token; // Récupère le token depuis le store d'authentification
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`; // Ajoute le token dans les headers
+  }
+  return config;
+});
+
+// Gestion des erreurs: Si le token est expiré ou invalide, on peut gérer la déconnexion automatique
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      useAuthStore.getState().logout(); // Déconnexion automatique si le token est invalide
+    }
+    return Promise.reject(error); // Rejette l'erreur pour que les composants puissent la gérer
+  },
+);
