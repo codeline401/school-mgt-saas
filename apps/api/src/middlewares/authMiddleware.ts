@@ -55,10 +55,12 @@ export const authenticate = (
 // 2. Middleware pour vérifier que l'utilisateur a le bon role
 export const authorizeRoles = (...allowedRoles: Role[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    // Retourne une fonction middleware
-    if (!req.user || !allowedRoles.includes(req.user.role)) {
-      // Vérifie que l'utilisateur est authentifié et que son rôle est autorisé
-      return res.status(403).json({ error: "Accès refusé, rôle non autorisé" }); // 403 Forbidden
+    // Vérifie que l'utilisateur est authentifié et que son rôle est dans la liste des rôles autorisés
+    if (!req.user) {
+      return res.status(401).json({ error: "Non autorisé" });
+    }
+    if (!allowedRoles.includes(req.user.role)) {
+      return res.status(403).json({ error: "Accès refusé, rôle non autorisé" });
     }
     next(); // Passe au middleware suivant si le rôle est autorisé
   };
