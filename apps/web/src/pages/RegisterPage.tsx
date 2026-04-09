@@ -106,8 +106,11 @@ export default function RegisterPage() {
               <div className="flex items-center gap-3 bg-red-500/20 text-red-200 p-4 rounded-2xl mb-6 text-sm border border-red-500/30">
                 <AlertCircle size={18} />
                 <span>
-                  {(registerMutation.error as Error & { response?: { data?: { error?: string } } })?.response?.data?.error ||
-                    "Erreur lors de l'inscription"}
+                  {(
+                    registerMutation.error as Error & {
+                      response?: { data?: { error?: string } };
+                    }
+                  )?.response?.data?.error || "Erreur lors de l'inscription"}
                 </span>
               </div>
             )}
