@@ -31,7 +31,7 @@ export default function RegisterPage() {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "inviteCode" ? value.toUpperCase().trim() : value,
+      [name]: name === "inviteCode" ? value.trim() : value,
       ...(name === "role" && value === "ADMIN" ? { inviteCode: "" } : {}),
     }));
   };
@@ -190,8 +190,8 @@ export default function RegisterPage() {
                     id="inviteCode"
                     type="text"
                     name="inviteCode"
-                    className="input w-full font-mono tracking-widest uppercase"
-                    placeholder="Ex : ECOLE2026"
+                    className="input w-full font-mono tracking-widest lowercase"
+                    placeholder="Ex : ecole2026"
                     value={formData.inviteCode}
                     onChange={handleChange}
                     required
