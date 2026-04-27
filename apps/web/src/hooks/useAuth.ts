@@ -3,6 +3,19 @@ import { useAuthStore } from "../store/authStore";
 import { api } from "../lib/api";
 import { useNavigate } from "react-router-dom";
 
+// Type de la réponse retournée par POST /api/auth/login
+interface LoginResponse {
+  user: {
+    id: string;
+    email: string;
+    nom: string;
+    prenom: string;
+    role: "SUDO_ADMIN" | "ADMIN" | "USER" | "PROF" | "ELEVE" | "PARENT";
+    schoolId: string | null;
+  };
+  token: string;
+}
+
 // Type pour les données de formulaire
 export interface RegisterInput {
   email: string;
@@ -44,12 +57,12 @@ export const useLogin = () => {
   return useMutation({
     // Fonction de mutation pour se connecter
     mutationFn: async (data: LoginInput) => {
-      const response = await api.post("/api/auth/login", data); // Appel à l'API pour se connecter
+      const response = await api.post<LoginResponse>("/api/auth/login", data); // Appel à l'API pour se connecter
       return response.data; // On retourne les données de l'utilisateur connecté
     },
 
     // Après la connexion réussie, on stocke les données de l'utilisateur et le token, puis on redirige vers le dashboard
-    onSuccess: (data) => {
+    onSuccess: (data: LoginResponse) => {
       setAuth(data.user, data.token); // On stocke l'utilisateur et le token dans Zustand
       navigate("/"); // Redirection vers la page d'accueil du dashboard
     },

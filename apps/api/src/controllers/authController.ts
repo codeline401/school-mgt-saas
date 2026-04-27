@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { ZodError } from "zod";
 import { prisma } from "../lib/prisma.js";
 import { registerSchema, loginSchema } from "../schemas/authSchema.js";
+import { Role } from "../generated/prisma/enums.js";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
@@ -29,11 +31,11 @@ export const registerUser = async (req: Request, res: Response) => {
     let schoolId: string | null = null; // Par défaut null, sera défini selon le rôle et le code d'invitation
 
     // Logique selon le role
-    if (data.role === "ADMIN") {
+    if (data.role === Role.ADMIN) {
       // L'ADMIN n'a pas encore d'école, schoolId reste null
       // Il crééra son école plus tard dans le Dashboard après sa connexion
       schoolId = null;
-    } else if (data.role === "SUDO_ADMIN") {
+    } else if (data.role === Role.SUDO_ADMIN) {
       // Le sudo-admin n'appartient à aucun école
       schoolId = null;
     } else {
@@ -44,9 +46,9 @@ export const registerUser = async (req: Request, res: Response) => {
         });
       }
 
-      // On recherche l'école corrspondante au code d'invitation
+      // On recherche l'école correspondante au code d'invitation
       const school = await prisma.school.findUnique({
-        where: { inviteCode: data.inviteCode || "" },
+        where: { inviteCode: data.inviteCode },
       });
 
       if (!school) {
@@ -72,8 +74,8 @@ export const registerUser = async (req: Request, res: Response) => {
     const { password, ...userWithoutPassword } = newUser;
 
     res.status(201).json(userWithoutPassword);
-  } catch (error: any) {
-    if (error.errors) return res.status(400).json({ error: error.errors });
+  } catch (error) {
+    if (error instanceof ZodError) return res.status(400).json({ error: error.issues });
     console.error("Erreur lors de l'inscription:", error);
     res.status(500).json({ error: "Erreur serveur lors de l'inscription" });
   }
@@ -109,8 +111,8 @@ export const loginUser = async (req: Request, res: Response) => {
     const { password, ...userWithoutPassword } = user;
 
     res.status(200).json({ user: userWithoutPassword, token });
-  } catch (error: any) {
-    if (error.errors) return res.status(400).json({ error: error.errors });
+  } catch (error) {
+    if (error instanceof ZodError) return res.status(400).json({ error: error.issues });
     console.error("Erreur lors de la connexion:", error);
     res.status(500).json({ error: "Erreur serveur lors de la connexion" });
   }

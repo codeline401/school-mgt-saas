@@ -75,10 +75,11 @@ export default function LoginPage() {
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-semibold text-blue-100 mb-2">
+                <label htmlFor="email" className="block text-sm font-semibold text-blue-100 mb-2">
                   Email professionnel
                 </label>
                 <input
+                  id="email"
                   type="email"
                   placeholder="nom@ecole.mg"
                   className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all"
@@ -89,10 +90,11 @@ export default function LoginPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-blue-100 mb-2">
+                <label htmlFor="password" className="block text-sm font-semibold text-blue-100 mb-2">
                   Mot de passe
                 </label>
                 <input
+                  id="password"
                   type="password"
                   placeholder="••••••••"
                   className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all"

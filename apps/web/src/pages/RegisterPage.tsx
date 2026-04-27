@@ -37,7 +37,7 @@ export default function RegisterPage() {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: name === "inviteCode" ? value.toUpperCase().trim() : value,
       ...(name === "role" && value === "ADMIN" ? { inviteCode: "" } : {}),
     }));
   };
@@ -118,13 +118,14 @@ export default function RegisterPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Nom */}
               <div>
-                <label className="block text-sm font-semibold text-blue-100 mb-2">
+                <label htmlFor="nom" className="block text-sm font-semibold text-blue-100 mb-2">
                   Nom
                 </label>
                 <input
+                  id="nom"
                   type="text"
                   name="nom"
-                  placeholder="Jean Rakoto"
+                  placeholder="Rakoto"
                   className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all"
                   value={formData.nom}
                   onChange={handleChange}
@@ -134,10 +135,11 @@ export default function RegisterPage() {
 
               {/* Prénom */}
               <div>
-                <label className="block text-sm font-semibold text-blue-100 mb-2">
+                <label htmlFor="prenom" className="block text-sm font-semibold text-blue-100 mb-2">
                   Prénom
                 </label>
                 <input
+                  id="prenom"
                   type="text"
                   name="prenom"
                   placeholder="Jean"
@@ -150,10 +152,11 @@ export default function RegisterPage() {
 
               {/* Email */}
               <div>
-                <label className="block text-sm font-semibold text-blue-100 mb-2">
+                <label htmlFor="email" className="block text-sm font-semibold text-blue-100 mb-2">
                   Email professionnel
                 </label>
                 <input
+                  id="email"
                   type="email"
                   name="email"
                   placeholder="nom@ecole.mg"
@@ -166,10 +169,11 @@ export default function RegisterPage() {
 
               {/* Mot de passe */}
               <div>
-                <label className="block text-sm font-semibold text-blue-100 mb-2">
+                <label htmlFor="password" className="block text-sm font-semibold text-blue-100 mb-2">
                   Mot de passe
                 </label>
                 <input
+                  id="password"
                   type="password"
                   name="password"
                   placeholder="Minimum 6 caractères"
@@ -183,10 +187,11 @@ export default function RegisterPage() {
 
               {/* Rôle */}
               <div>
-                <label className="block text-sm font-semibold text-blue-100 mb-2">
+                <label htmlFor="role" className="block text-sm font-semibold text-blue-100 mb-2">
                   Je suis un(e)...
                 </label>
                 <select
+                  id="role"
                   name="role"
                   className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all appearance-none"
                   value={formData.role}
@@ -197,8 +202,7 @@ export default function RegisterPage() {
                     <option
                       key={role.value}
                       value={role.value}
-                      className="bg-imperial-800 text-white"
-                      style={{ backgroundColor: "#1a237e" }}
+                      className="bg-imperial-600 text-white"
                     >
                       {role.label}
                     </option>
@@ -209,11 +213,12 @@ export default function RegisterPage() {
               {/* Code d'invitation (conditionnel) */}
               {needsInviteCode && (
                 <div>
-                  <label className="block text-sm font-semibold text-blue-100 mb-2">
+                  <label htmlFor="inviteCode" className="block text-sm font-semibold text-blue-100 mb-2">
                     <KeyRound size={14} className="inline mr-1" />
                     Code d'invitation
                   </label>
                   <input
+                    id="inviteCode"
                     type="text"
                     name="inviteCode"
                     placeholder="Ex: ECOLE2026"
@@ -243,13 +248,17 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={registerMutation.isPending}
+                aria-busy={registerMutation.isPending}
                 className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-bold text-white transition-all active:scale-95 disabled:opacity-60 mt-2"
                 style={{
                   background: "linear-gradient(135deg, #2e7d32, #4caf50)",
                 }}
               >
                 {registerMutation.isPending ? (
-                  <Loader2 className="animate-spin" size={20} />
+                  <>
+                    <Loader2 className="animate-spin" size={20} aria-hidden="true" />
+                    <span className="sr-only">Création du compte en cours...</span>
+                  </>
                 ) : (
                   <>
                     <UserPlus size={20} />

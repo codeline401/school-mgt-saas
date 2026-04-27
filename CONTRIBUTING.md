@@ -6,15 +6,15 @@ Merci de contribuer à ce projet ! Ce guide explique tout ce qu'il faut savoir p
 
 ## 📋 Table des matières
 
-1. [Prérequis](#-prérequis)
-2. [Installation](#-installation)
-3. [Structure du projet](#-structure-du-projet)
-4. [Conventions de code](#-conventions-de-code)
-5. [Travailler sur le backend](#-travailler-sur-le-backend)
-6. [Travailler sur le frontend](#-travailler-sur-le-frontend)
-7. [Base de données & Prisma](#-base-de-données--prisma)
-8. [Workflow Git](#-workflow-git)
-9. [Variables d'environnement](#-variables-denvironnement)
+1. [Prérequis](#prérequis)
+2. [Installation](#installation)
+3. [Structure du projet](#structure-du-projet)
+4. [Conventions de code](#conventions-de-code)
+5. [Travailler sur le backend](#travailler-sur-le-backend)
+6. [Travailler sur le frontend](#travailler-sur-le-frontend)
+7. [Base de données & Prisma](#base-de-données--prisma)
+8. [Workflow Git](#workflow-git)
+9. [Variables d'environnement](#variables-denvironnement)
 
 ---
 
@@ -286,8 +286,7 @@ npx prisma studio
 ```
 
 Ou utiliser pgAdmin : http://localhost:8080
-- Email : `admin@ecole.com`
-- Mot de passe : `admin_codeline401`
+> Voir les valeurs dans votre `docker-compose.yml` et `.env.example`.
 
 ---
 
@@ -295,7 +294,7 @@ Ou utiliser pgAdmin : http://localhost:8080
 
 ### Nommage des branches
 
-```
+```text
 feat/nom-de-la-fonctionnalite
 fix/description-du-bug
 chore/tache-technique
@@ -309,7 +308,7 @@ Exemples :
 
 ### Convention des commits (Conventional Commits)
 
-```
+```text
 type(scope): description courte en français
 
 Corps optionnel expliquant le pourquoi.
@@ -334,7 +333,7 @@ chore(deps): mettre à jour Prisma vers 7.7.0
 
 ### Process de contribution
 
-```
+```text
 main (production)
   └── develop (intégration)
         ├── feat/professeurs-crud
@@ -356,10 +355,10 @@ main (production)
 
 ```env
 # Base de données
-DATABASE_URL="postgresql://admin_user:dev_codeline401@localhost:5432/school_saas_db?schema=public"
+DATABASE_URL="postgresql://<db-user>:<db-password>@localhost:5432/<db-name>?schema=public"
 
 # JWT
-JWT_SECRET="changez-cette-valeur-en-production"
+JWT_SECRET="<choisir-une-valeur-longue-et-aleatoire>"
 JWT_EXPIRES_IN="8h"
 
 # Serveur

@@ -120,7 +120,7 @@
 
 ## 📐 Architecture multi-tenant
 
-```
+```text
 SUDO_ADMIN
   └─ Accès à toutes les écoles
 

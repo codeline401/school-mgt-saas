@@ -4,8 +4,8 @@ import { Role } from "../generated/prisma/enums";
 // Schema d'inscription pour la validation des données d'inscription et de connexion
 export const registerSchema = z.object({
   email: z.string().email("Email invalide"),
-  nom: z.string().min(3, "Le nom est requis"),
-  prenom: z.string().min(3, "Le prénom est requis"),
+  nom: z.string().trim().min(2, "Le nom doit contenir au moins 2 caractères"),
+  prenom: z.string().trim().min(2, "Le prénom doit contenir au moins 2 caractères"),
   password: z
     .string()
     .min(6, "Le mot de passe doit contenir au moins 6 caractères"),
