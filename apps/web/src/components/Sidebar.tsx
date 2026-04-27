@@ -1,13 +1,37 @@
-import { GraduationCap, LayoutDashboard, Settings, Users } from "lucide-react";
+import {
+  Building2,
+  GraduationCap,
+  LayoutDashboard,
+  Settings,
+  Users,
+} from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
 
 function Sidebar() {
-  const menuItems = [
-    { icon: LayoutDashboard, label: "Tableau de bord", path: "/" },
-    { icon: GraduationCap, label: "Elèves", path: "/eleves" },
-    { icon: Users, label: "Professeurs", path: "/" },
-    { icon: Settings, label: "Paramètres", path: "/" },
+  const user = useAuthStore((state) => state.user);
+
+  const allMenuItems = [
+    {
+      icon: LayoutDashboard,
+      label: "Tableau de bord",
+      path: "/",
+      roles: null as string[] | null,
+    },
+    { icon: GraduationCap, label: "Elèves", path: "/eleves", roles: null },
+    {
+      icon: Building2,
+      label: "Écoles",
+      path: "/schools",
+      roles: ["SUDO_ADMIN", "ADMIN"],
+    },
+    { icon: Users, label: "Professeurs", path: "/professeurs", roles: null },
+    { icon: Settings, label: "Paramètres", path: "/parametres", roles: null },
   ];
+
+  const menuItems = allMenuItems.filter(
+    (item) => item.roles === null || (user && item.roles.includes(user.role)),
+  );
   return (
     <div className="w-64 bg-white/5 backdrop-blur-sm h-screen border-r border-white/10 p-4 shrink-0">
       <h2 className="text-xl font-bold text-emerald-400 mb-8 px-2">

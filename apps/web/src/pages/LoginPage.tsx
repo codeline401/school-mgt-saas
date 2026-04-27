@@ -91,10 +91,18 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loginMutation.isPending}
+                aria-busy={loginMutation.isPending}
                 className="btn btn-success btn-block mt-2"
               >
                 {loginMutation.isPending ? (
-                  <Loader2 className="animate-spin" size={20} />
+                  <>
+                    <Loader2
+                      className="animate-spin"
+                      aria-hidden="true"
+                      size={20}
+                    />
+                    <span className="sr-only">Connexion en cours…</span>
+                  </>
                 ) : (
                   <>
                     <LogIn size={20} />

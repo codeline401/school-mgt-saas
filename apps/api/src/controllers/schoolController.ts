@@ -67,11 +67,19 @@ export const createSchool = async (req: Request, res: Response) => {
       });
 
       // Lier l'ADMIN à l'école qu'il vient de créer (les SUDO_ADMIN ne sont pas liés à une école)
+      // updateMany with schoolId: null guard prevents a concurrent transaction from
+      // assigning a second school (write-time check eliminates the TOCTOU window).
       if (userRole === Role.ADMIN) {
-        await tx.user.update({
-          where: { id: adminId },
+        const { count } = await tx.user.updateMany({
+          where: { id: adminId, schoolId: null },
           data: { schoolId: school.id },
         });
+        if (count === 0) {
+          // Another concurrent request already assigned a school; abort the tx.
+          const err: any = new Error("ALREADY_HAS_SCHOOL");
+          err.code = "ALREADY_HAS_SCHOOL";
+          throw err;
+        }
       }
 
       return school;
