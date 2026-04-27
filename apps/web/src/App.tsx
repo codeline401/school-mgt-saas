@@ -8,7 +8,7 @@ import RegisterPage from "./pages/RegisterPage";
 
 const DashboardTemp = () => (
   <div>
-    <p className="text-2xl font-bold">Bievenu(e) sur School Management</p>
+    <p className="text-2xl font-bold">Bienvenu(e) sur School Management</p>
     <p className="text-gray-500 mt-2">
       Sélectionnez une section dans le menu pour commencer
     </p>

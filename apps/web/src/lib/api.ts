@@ -34,7 +34,11 @@ api.interceptors.response.use(
 
 export function getApiError(error: unknown, fallback: string): string {
   if (axios.isAxiosError(error)) {
-    return (error.response?.data as { error?: string })?.error ?? fallback;
+    const data = error.response?.data;
+    if (typeof data === "string" && data.trim()) return data.trim();
+    if (data && typeof data === "object") {
+      return (data as { error?: string })?.error ?? fallback;
+    }
   }
   return fallback;
 }

@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
+import { ZodError } from "zod";
 import { prisma } from "../lib/prisma.js";
+import { Role } from "../generated/prisma/enums.js";
 import { createSchoolSchema } from "../schemas/schoolSchema.js";
 
 // GET /api/schools - résérvé au SUDO_ADMIN
@@ -36,36 +38,64 @@ export const createSchool = async (req: Request, res: Response) => {
     const validatedData = createSchoolSchema.parse(req.body); // Validation des données d'entrée
 
     const adminId = req.user!.id; // Récupérer l'ID de l'admin à partir du token d'authentification
+    const userRole = req.user!.role;
 
-    // Vérifier que l'admin existe et récupérer son école actuelle (s'il en a une)
-    const existingUser = await prisma.user.findUnique({
-      where: { id: adminId },
-      include: { school: true },
+    // Transaction atomique : lecture + création + mise à jour dans une seule opération
+    const newSchool = await prisma.$transaction(async (tx) => {
+      // Re-vérifier l'utilisateur à l'intérieur de la transaction (évite TOCTOU)
+      const existingUser = await tx.user.findUnique({
+        where: { id: adminId },
+      });
+
+      if (!existingUser) {
+        const err: any = new Error("USER_NOT_FOUND");
+        err.code = "USER_NOT_FOUND";
+        throw err;
+      }
+
+      if (userRole === Role.ADMIN && existingUser.schoolId) {
+        const err: any = new Error("ALREADY_HAS_SCHOOL");
+        err.code = "ALREADY_HAS_SCHOOL";
+        throw err;
+      }
+
+      // Créer l'école - l'inviteCode est généré auto par Prisma
+      const school = await tx.school.create({
+        data: {
+          nom: validatedData.nom,
+        },
+      });
+
+      // Lier l'ADMIN à l'école qu'il vient de créer (les SUDO_ADMIN ne sont pas liés à une école)
+      if (userRole === Role.ADMIN) {
+        await tx.user.update({
+          where: { id: adminId },
+          data: { schoolId: school.id },
+        });
+      }
+
+      return school;
     });
 
-    if (existingUser?.schoolId) {
+    res.status(201).json(newSchool);
+  } catch (error: any) {
+    if (error instanceof ZodError) {
+      return res.status(400).json({ error: error.issues });
+    }
+    if (error.code === "USER_NOT_FOUND") {
+      return res.status(404).json({ error: "Utilisateur introuvable." });
+    }
+    if (error.code === "ALREADY_HAS_SCHOOL") {
       return res.status(400).json({
         error:
           "Vous êtes déjà associé à une école. Veuillez contacter un SUDO_ADMIN pour créer une nouvelle école.",
       });
     }
-
-    // Créer l'école - l'inviteCode est généré auto par Prisma
-    const newSchool = await prisma.school.create({
-      data: {
-        nom: validatedData.nom,
-      },
-    });
-
-    // Lier l'ADMIN à l'école qu'il vient de créer
-    await prisma.user.update({
-      where: { id: adminId },
-      data: { schoolId: newSchool.id },
-    });
-
-    res.status(201).json(newSchool);
-  } catch (error: any) {
-    if (error.errors) return res.status(400).json({ error: error.errors }); // Erreurs de validation Zod
+    if (error.code === "P2002") {
+      return res
+        .status(409)
+        .json({ error: "Une école avec ce nom existe déjà." });
+    }
     console.error("Erreur lors de la création de l'école :", error);
     res
       .status(500)

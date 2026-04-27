@@ -31,17 +31,17 @@ export interface School {
   id: string;
   nom: string;
   inviteCode: string; // Code d'invitation unique pour rejoindre l'école
-  createdAt: Date;
+  createdAt: string;
   // Compteurs optionnels retournés par l'API (include _count)
-  _count: {
+  _count?: {
     eleves: number;
     classes: number;
     profs: number;
-    user: number;
+    users: number;
   };
 }
 
-// Playload envoyé pour créer une école
+// Payload envoyé pour créer une école
 export interface CreateSchoolInput {
   nom: string;
 }

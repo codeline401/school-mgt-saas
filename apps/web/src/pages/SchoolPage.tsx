@@ -16,7 +16,7 @@ function SchoolsPage() {
 
   const isSudoAdmin = user?.role === "SUDO_ADMIN";
   const isAdmin = user?.role === "ADMIN";
-  const alreadyHasSchool = isAdmin && user?.schoolId !== null;
+  const alreadyHasSchool = isAdmin && user?.schoolId != null;
 
   // Charge la liste des écoles — uniquement pour le SUDO_ADMIN
   const {
@@ -43,13 +43,24 @@ function SchoolsPage() {
       queryClient.invalidateQueries({ queryKey: ["schools"] });
       modalRef.current?.close();
       setNom("");
+      // Sync the auth store so the UI reflects the new schoolId immediately
+      const store = useAuthStore.getState();
+      if (store.user && store.token) {
+        store.setAuth({ ...store.user, schoolId: data.id }, store.token);
+      }
     },
   });
 
   const handleCopy = (code: string) => {
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    navigator.clipboard
+      .writeText(code)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => {
+        setCopied(false);
+      });
   };
 
   // ── VUE ADMIN ──────────────────────────────────────────────
@@ -116,7 +127,10 @@ function SchoolsPage() {
             {createMutation.isError && (
               <div role="alert" className="alert alert-error alert-soft mb-4">
                 <span>
-                  {getApiError(createMutation.error, "Erreur lors de la création")}
+                  {getApiError(
+                    createMutation.error,
+                    "Erreur lors de la création",
+                  )}
                 </span>
               </div>
             )}
