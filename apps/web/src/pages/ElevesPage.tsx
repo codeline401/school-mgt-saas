@@ -1,106 +1,100 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/api";
-import { Plus } from "lucide-react";
+import { Plus, Users } from "lucide-react";
 import type { Eleve, Classe } from "@school-mgt/types";
 
-// Extend shared Eleve type to inculde the populate classe object
 type EleveWithClasse = Omit<Eleve, "classeId"> & { classe?: Classe };
 
 function ElevesPage() {
-  // Etat pour stocker la liste des élèves
-  const [eleves, setEleves] = useState<EleveWithClasse[]>([]);
+  const {
+    data: eleves = [],
+    isLoading,
+    isError,
+  } = useQuery<EleveWithClasse[]>({
+    queryKey: ["eleves"],
+    queryFn: async () => {
+      const { data } = await api.get("/api/eleves");
+      return data;
+    },
+  });
 
-  // Etat pour gérer le chargement
-  const [loading, setLoading] = useState(true);
-
-  // Etat pour gérer les erreurs
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Appel API vers le backend pour récupérer les élèves
-    api
-      .get("/api/eleves")
-      .then((res) => {
-        setEleves(res.data); // Stocker les élèves dans l'état
-        setLoading(false); // Fin du chargement
-      })
-      .catch((err) => {
-        console.error("Erreur lors de la récupération des élèves:", err);
-        setError(
-          "Impossible de charger les élèves. Veuillez réessayer plus tard.",
-        );
-        setLoading(false); // Fin du chargement même en cas d'erreur
-      });
-  }, []);
-
-  // Vue de la page
   return (
     <div>
-      {/**En-tête avec un bouton action */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
-            Gestion des élèves
-          </h1>
-          <p className="text-gray-500 ">
+          <h1 className="text-2xl font-bold">Gestion des élèves</h1>
+          <p className="text-base-content/60">
             Liste exhaustive des élèves par classe
           </p>
         </div>
-
-        <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+        <button className="btn btn-primary gap-2">
           <Plus size={16} />
           Ajouter un élève
         </button>
       </div>
 
-      {/**Tableau de données */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <table className="w-full text-left">
-          <thead className="bg-gray-500 border-b border-gray-200">
-            <tr>
-              <th className="px-6 py-4 font-semibold text-gray-700">
-                Nom & Prénoms
-              </th>
-              <th className="px-6 py-4 font-semibold text-gray-700">Classe</th>
-              <th className="px-6 py-4 font-semibold text-gray-700">Status</th>
-            </tr>
-          </thead>
+      {isError && (
+        <div role="alert" className="alert alert-error alert-soft mb-4">
+          <span>
+            Impossible de charger les élèves. Veuillez réessayer plus tard.
+          </span>
+        </div>
+      )}
 
-          <tbody className="divide-y divide-gray-100">
-            {error ? (
+      <div className="card bg-base-100 shadow-sm border border-base-200">
+        <div className="overflow-x-auto">
+          <table className="table table-zebra">
+            <thead>
               <tr>
-                <td colSpan={3} className="text-center py-4 text-red-600">
-                  {error}
-                </td>
+                <th>Nom &amp; Prénoms</th>
+                <th>Classe</th>
+                <th>Statut</th>
               </tr>
-            ) : loading ? (
-              <tr>
-                <td colSpan={3} className="text-center py-4">
-                  <span className="loading loading-dots loading-xs"></span>
-                </td>
-              </tr>
-            ) : (
-              eleves.map((eleve) => (
-                <tr
-                  key={eleve.id}
-                  className="hover:bg-gray-50 transition-colors"
-                >
-                  <td className="px-6 py-4 text-gray-700 font-medium">
-                    {eleve.nom} {eleve.prenom}
-                  </td>
-                  <td className="px-6 py-4 text-gray-600 font-medium">
-                    {eleve.classe?.nom || "N/A"}
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      Actif
-                    </span>
+            </thead>
+            <tbody>
+              {isLoading ? (
+                <tr>
+                  <td colSpan={3} className="text-center py-10">
+                    <span className="loading loading-spinner loading-md" />
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : eleves.length === 0 ? (
+                <tr>
+                  <td colSpan={3} className="text-center py-12">
+                    <Users
+                      size={36}
+                      className="mx-auto mb-3 text-base-content/30"
+                    />
+                    <p className="text-base-content/50 font-medium">
+                      Aucun élève enregistré
+                    </p>
+                    <p className="text-base-content/30 text-sm mt-1">
+                      Commencez par ajouter un élève.
+                    </p>
+                  </td>
+                </tr>
+              ) : (
+                eleves.map((eleve) => (
+                  <tr key={eleve.id} className="hover">
+                    <td className="font-medium">
+                      {eleve.nom} {eleve.prenom}
+                    </td>
+                    <td>
+                      {eleve.classe?.nom ?? (
+                        <span className="text-base-content/40">N/A</span>
+                      )}
+                    </td>
+                    <td>
+                      <span className="badge badge-success badge-soft">
+                        Actif
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

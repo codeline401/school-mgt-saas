@@ -12,7 +12,8 @@
 
 body {
   font-family: "DM Sans", sans-serif;
-  background-color: #f0f2f8;
+  background: linear-gradient(135deg, #0a0e45 0%, #1a237e 50%, #0d3b0e 100%);
+  min-height: 100vh;
 }
 
 /* Texture subtile sur les fonds */

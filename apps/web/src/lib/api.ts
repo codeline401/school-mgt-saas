@@ -31,3 +31,22 @@ api.interceptors.response.use(
     return Promise.reject(error); // Rejette l'erreur pour que les composants puissent la gérer
   },
 );
+
+export function getApiError(error: unknown, fallback: string): string {
+  if (axios.isAxiosError(error)) {
+    const data = error.response?.data;
+    if (typeof data === "string" && data.trim()) return data.trim();
+    if (data && typeof data === "object") {
+      const raw = (data as { error?: unknown }).error;
+      if (typeof raw === "string") return raw || fallback;
+      if (Array.isArray(raw))
+        return (
+          raw.map((issue: any) => issue?.message ?? String(issue)).join(", ") ||
+          fallback
+        );
+      if (raw && typeof raw === "object" && "message" in raw)
+        return String((raw as { message: unknown }).message) || fallback;
+    }
+  }
+  return fallback;
+}

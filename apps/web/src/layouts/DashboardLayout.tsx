@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom"; // Import Outlet for nested routing
 
 function DashboardLayout() {
   return (
-    <div className="flex bg-gray-50 min-h-screen">
+    <div className="flex min-h-screen">
       {/**Barre latérale fixe sur la gauche */}
       <Sidebar />
 

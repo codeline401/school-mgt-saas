@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { LogIn, Loader2, AlertCircle, GraduationCap } from "lucide-react";
+import { LogIn, Loader2, GraduationCap } from "lucide-react";
 import { useLogin } from "../hooks/useAuth";
+import { getApiError } from "../lib/api";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -14,14 +15,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div
-      className="min-h-screen bg-texture flex items-center justify-center p-6"
-      style={{
-        background:
-          "linear-gradient(135deg, #0a0e45 0%, #1a237e 50%, #0d3b0e 100%)",
-      }}
-    >
-      {/* Cercles décoratifs en arrière-plan */}
+    <div className="min-h-screen flex items-center justify-center p-6">
+      {/* Cercles décoratifs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
           className="absolute -top-32 -left-32 w-96 h-96 rounded-full opacity-10"
@@ -38,7 +33,7 @@ export default function LoginPage() {
       </div>
 
       <div className="relative max-w-md w-full">
-        {/* Logo et titre */}
+        {/* Logo */}
         <div className="text-center mb-8">
           <div
             className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4"
@@ -46,10 +41,7 @@ export default function LoginPage() {
           >
             <GraduationCap size={32} className="text-white" />
           </div>
-          <h1
-            className="text-4xl font-bold text-white"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
+          <h1 className="text-4xl font-bold text-white font-display">
             School SaaS
           </h1>
           <p className="text-blue-200 mt-2 font-medium">
@@ -57,63 +49,60 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Carte du formulaire */}
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl">
-          <div className="p-8">
+        {/* Carte DaisyUI */}
+        <div className="card bg-base-100 shadow-2xl">
+          <div className="card-body gap-5">
+            {/* Erreur API */}
             {loginMutation.isError && (
-              <div className="flex items-center gap-3 bg-red-500/20 text-red-200 p-4 rounded-2xl mb-6 text-sm border border-red-500/30">
-                <AlertCircle size={18} />
+              <div role="alert" className="alert alert-error alert-soft">
                 <span>
-                  {(
-                    loginMutation.error as {
-                      response?: { data?: { error?: string } };
-                    }
-                  )?.response?.data?.error || "Identifiants incorrects"}
+                  {getApiError(loginMutation.error, "Identifiants incorrects")}
                 </span>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-blue-100 mb-2">
-                  Email professionnel
-                </label>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">Email professionnel</legend>
                 <input
                   id="email"
                   type="email"
+                  className="input w-full"
                   placeholder="nom@ecole.mg"
-                  className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-              </div>
+              </fieldset>
 
-              <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-blue-100 mb-2">
-                  Mot de passe
-                </label>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">Mot de passe</legend>
                 <input
                   id="password"
                   type="password"
+                  className="input w-full"
                   placeholder="••••••••"
-                  className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-              </div>
+              </fieldset>
 
               <button
                 type="submit"
                 disabled={loginMutation.isPending}
-                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-bold text-white transition-all active:scale-95 disabled:opacity-60 mt-2"
-                style={{
-                  background: "linear-gradient(135deg, #2e7d32, #4caf50)",
-                }}
+                aria-busy={loginMutation.isPending}
+                className="btn btn-success btn-block mt-2"
               >
                 {loginMutation.isPending ? (
-                  <Loader2 className="animate-spin" size={20} />
+                  <>
+                    <Loader2
+                      className="animate-spin"
+                      aria-hidden="true"
+                      size={20}
+                    />
+                    <span className="sr-only">Connexion en cours…</span>
+                  </>
                 ) : (
                   <>
                     <LogIn size={20} />
@@ -123,17 +112,13 @@ export default function LoginPage() {
               </button>
             </form>
 
-            <div className="mt-6 pt-6 border-t border-white/10 text-center">
-              <p className="text-blue-200 text-sm">
-                Pas encore de compte ?{" "}
-                <Link
-                  to="/register"
-                  className="font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
-                >
-                  Créer un compte
-                </Link>
-              </p>
+            <div className="divider text-xs text-base-content/40">
+              Pas encore de compte ?
             </div>
+
+            <Link to="/register" className="btn btn-ghost btn-block">
+              Créer un compte
+            </Link>
           </div>
         </div>
 
