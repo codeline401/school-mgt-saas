@@ -1,2 +1,31 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@config "../tailwind.config.js";
+
+/* Variables globales du thème */
+:root {
+  --imperial: #1a237e;
+  --imperial-dark: #0a0e45;
+  --emerald: #2e7d32;
+  --emerald-light: #4caf50;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background-color: #f0f2f8;
+}
+
+/* Texture subtile sur les fonds */
+.bg-texture {
+  background-image:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(26, 35, 126, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(46, 125, 50, 0.08) 0%,
+      transparent 50%
+    );
+}
