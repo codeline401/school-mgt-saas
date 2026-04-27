@@ -24,3 +24,24 @@ export interface Professeur extends BaseEntity {
   prenom: string;
   classeIds: string[]; // IDs des classes que le professeur enseigne
 }
+
+// Une école est le tenant principal du Saas
+// Elle n'étend PAS BaseEntity car elle n'a pas de schoolId (elle est l'école)
+export interface School {
+  id: string;
+  nom: string;
+  inviteCode: string; // Code d'invitation unique pour rejoindre l'école
+  createdAt: Date;
+  // Compteurs optionnels retournés par l'API (include _count)
+  _count: {
+    eleves: number;
+    classes: number;
+    profs: number;
+    user: number;
+  };
+}
+
+// Playload envoyé pour créer une école
+export interface CreateSchoolInput {
+  nom: string;
+}

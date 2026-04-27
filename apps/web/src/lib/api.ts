@@ -31,3 +31,10 @@ api.interceptors.response.use(
     return Promise.reject(error); // Rejette l'erreur pour que les composants puissent la gérer
   },
 );
+
+export function getApiError(error: unknown, fallback: string): string {
+  if (axios.isAxiosError(error)) {
+    return (error.response?.data as { error?: string })?.error ?? fallback;
+  }
+  return fallback;
+}

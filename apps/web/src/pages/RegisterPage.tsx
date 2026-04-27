@@ -1,14 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  UserPlus,
-  Loader2,
-  AlertCircle,
-  GraduationCap,
-  KeyRound,
-  Info,
-} from "lucide-react";
+import { UserPlus, Loader2, GraduationCap, KeyRound, Info } from "lucide-react";
 import { useRegister, type RegisterInput } from "../hooks/useAuth";
+import { getApiError } from "../lib/api";
 
 const ROLES = [
   { value: "ADMIN", label: "Directeur / Administrateur" },
@@ -56,13 +50,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-6"
-      style={{
-        background:
-          "linear-gradient(135deg, #0a0e45 0%, #1a237e 50%, #0d3b0e 100%)",
-      }}
-    >
+    <div className="min-h-screen flex items-center justify-center p-6">
       {/* Cercles décoratifs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
@@ -88,10 +76,7 @@ export default function RegisterPage() {
           >
             <GraduationCap size={32} className="text-white" />
           </div>
-          <h1
-            className="text-4xl font-bold text-white"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
+          <h1 className="text-4xl font-bold text-white font-display">
             Créer un compte
           </h1>
           <p className="text-blue-200 mt-2">
@@ -99,148 +84,135 @@ export default function RegisterPage() {
           </p>
         </div>
 
-        {/* Carte */}
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
-          <div className="p-8">
+        {/* Carte DaisyUI */}
+        <div className="card bg-base-100 shadow-2xl">
+          <div className="card-body gap-4">
+            {/* Erreur API */}
             {registerMutation.isError && (
-              <div className="flex items-center gap-3 bg-red-500/20 text-red-200 p-4 rounded-2xl mb-6 text-sm border border-red-500/30">
-                <AlertCircle size={18} />
+              <div role="alert" className="alert alert-error alert-soft">
                 <span>
-                  {(
-                    registerMutation.error as Error & {
-                      response?: { data?: { error?: string } };
-                    }
-                  )?.response?.data?.error || "Erreur lors de l'inscription"}
+                  {getApiError(
+                    registerMutation.error,
+                    "Erreur lors de l'inscription",
+                  )}
                 </span>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               {/* Nom */}
-              <div>
-                <label htmlFor="nom" className="block text-sm font-semibold text-blue-100 mb-2">
-                  Nom
-                </label>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">Nom</legend>
                 <input
                   id="nom"
                   type="text"
                   name="nom"
+                  className="input w-full"
                   placeholder="Rakoto"
-                  className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all"
                   value={formData.nom}
                   onChange={handleChange}
                   required
                 />
-              </div>
+              </fieldset>
 
               {/* Prénom */}
-              <div>
-                <label htmlFor="prenom" className="block text-sm font-semibold text-blue-100 mb-2">
-                  Prénom
-                </label>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">Prénom</legend>
                 <input
                   id="prenom"
                   type="text"
                   name="prenom"
+                  className="input w-full"
                   placeholder="Jean"
-                  className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all"
                   value={formData.prenom}
                   onChange={handleChange}
                   required
                 />
-              </div>
+              </fieldset>
 
               {/* Email */}
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-blue-100 mb-2">
-                  Email professionnel
-                </label>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">Email professionnel</legend>
                 <input
                   id="email"
                   type="email"
                   name="email"
+                  className="input w-full"
                   placeholder="nom@ecole.mg"
-                  className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all"
                   value={formData.email}
                   onChange={handleChange}
                   required
                 />
-              </div>
+              </fieldset>
 
               {/* Mot de passe */}
-              <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-blue-100 mb-2">
-                  Mot de passe
-                </label>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">Mot de passe</legend>
                 <input
                   id="password"
                   type="password"
                   name="password"
+                  className="input w-full"
                   placeholder="Minimum 6 caractères"
-                  className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all"
                   value={formData.password}
                   onChange={handleChange}
                   required
                   minLength={6}
                 />
-              </div>
+              </fieldset>
 
               {/* Rôle */}
-              <div>
-                <label htmlFor="role" className="block text-sm font-semibold text-blue-100 mb-2">
-                  Je suis un(e)...
-                </label>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">Je suis un(e)...</legend>
                 <select
                   id="role"
                   name="role"
-                  className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all appearance-none"
+                  className="select w-full"
                   value={formData.role}
                   onChange={handleChange}
-                  style={{ colorScheme: "dark" }}
                 >
                   {ROLES.map((role) => (
-                    <option
-                      key={role.value}
-                      value={role.value}
-                      className="bg-imperial-600 text-white"
-                    >
+                    <option key={role.value} value={role.value}>
                       {role.label}
                     </option>
                   ))}
                 </select>
-              </div>
+              </fieldset>
 
-              {/* Code d'invitation (conditionnel) */}
+              {/* Code d'invitation conditionnel */}
               {needsInviteCode && (
-                <div>
-                  <label htmlFor="inviteCode" className="block text-sm font-semibold text-blue-100 mb-2">
-                    <KeyRound size={14} className="inline mr-1" />
+                <fieldset className="fieldset">
+                  <legend className="fieldset-legend">
+                    <KeyRound size={13} className="inline mr-1" />
                     Code d'invitation
-                  </label>
+                  </legend>
                   <input
                     id="inviteCode"
                     type="text"
                     name="inviteCode"
-                    placeholder="Ex: ECOLE2026"
-                    className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-blue-300/50 focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none transition-all uppercase tracking-widest"
+                    className="input w-full font-mono tracking-widest uppercase"
+                    placeholder="Ex : ECOLE2026"
                     value={formData.inviteCode}
                     onChange={handleChange}
                     required
                   />
-                  <p className="text-xs text-blue-300/60 mt-1.5 flex items-center gap-1">
-                    <Info size={12} />
+                  <p className="fieldset-label flex items-center gap-1">
+                    <Info size={11} />
                     Fourni par votre directeur d'établissement
                   </p>
-                </div>
+                </fieldset>
               )}
 
-              {/* Message informatif ADMIN */}
+              {/* Info ADMIN */}
               {!needsInviteCode && (
-                <div className="flex items-start gap-3 bg-emerald-500/10 text-emerald-300 p-4 rounded-2xl text-sm border border-emerald-500/20">
-                  <Info size={18} className="shrink-0 mt-0.5" />
+                <div
+                  role="alert"
+                  className="alert alert-success alert-soft text-sm"
+                >
+                  <Info size={16} className="shrink-0" />
                   <span>
                     En tant que Directeur, vous créerez votre établissement
-                    depuis votre tableau de bord après connexion.
+                    depuis le tableau de bord.
                   </span>
                 </div>
               )}
@@ -249,15 +221,18 @@ export default function RegisterPage() {
                 type="submit"
                 disabled={registerMutation.isPending}
                 aria-busy={registerMutation.isPending}
-                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-bold text-white transition-all active:scale-95 disabled:opacity-60 mt-2"
-                style={{
-                  background: "linear-gradient(135deg, #2e7d32, #4caf50)",
-                }}
+                className="btn btn-success btn-block mt-2"
               >
                 {registerMutation.isPending ? (
                   <>
-                    <Loader2 className="animate-spin" size={20} aria-hidden="true" />
-                    <span className="sr-only">Création du compte en cours...</span>
+                    <Loader2
+                      className="animate-spin"
+                      size={20}
+                      aria-hidden="true"
+                    />
+                    <span className="sr-only">
+                      Création du compte en cours...
+                    </span>
                   </>
                 ) : (
                   <>
@@ -268,17 +243,13 @@ export default function RegisterPage() {
               </button>
             </form>
 
-            <div className="mt-6 pt-6 border-t border-white/10 text-center">
-              <p className="text-blue-200 text-sm">
-                Déjà un compte ?{" "}
-                <Link
-                  to="/login"
-                  className="font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
-                >
-                  Se connecter
-                </Link>
-              </p>
+            <div className="divider text-xs text-base-content/40">
+              Déjà un compte ?
             </div>
+
+            <Link to="/login" className="btn btn-ghost btn-block">
+              Se connecter
+            </Link>
           </div>
         </div>
 
