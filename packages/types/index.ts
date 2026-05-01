@@ -58,3 +58,44 @@ export interface School {
 export interface CreateSchoolInput {
   nom: string;
 }
+
+// Parent : repsonsable légal d'un élève
+export interface Parent {
+  id: string;
+  nom: string;
+  prenom: string;
+  email?: string | null;
+  telephone?: string | null;
+  adresse?: string | null;
+  schoolId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Résumé d'un dossier d'admission (pour l'histo dans la fiche élève)
+export interface DossierAdmission {
+  id: string;
+  statut: "EN_ATTENTE" | "EN_LISTE_ATTENTE" | "ADMIS" | "REFUSE";
+  nomEleve: string;
+  prenomEleve: string;
+  classeVisee: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Profil complet retourné par GET /api/profils/eleves/:id
+// Etend BaseEntity et inclut les relations (classes, parent, admissions)
+export interface EleveProfil extends BaseEntity {
+  nom: string;
+  prenom: string;
+  dateNaissance?: string | null;
+  telephone?: string | null;
+  adresse?: string | null;
+  photoUrl?: string | null;
+  classeId?: string | null;
+  parentId?: string | null;
+  // Relantions imbriquées (retournées par Prisma avec include)
+  classe?: Classe | null;
+  parent?: Parent | null;
+  admissions?: DossierAdmission[];
+}

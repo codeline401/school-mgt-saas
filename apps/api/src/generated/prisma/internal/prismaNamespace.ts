@@ -1137,6 +1137,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const SchoolScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
+  tenantKey: 'tenantKey',
   inviteCode: 'inviteCode',
   createdAt: 'createdAt'
 } as const
@@ -1248,6 +1249,7 @@ export const RemplacementScalarFieldEnum = {
   id: 'id',
   schoolId: 'schoolId',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   date: 'date',
   motif: 'motif',
   professeurAbsentId: 'professeurAbsentId',
@@ -1359,16 +1361,16 @@ export type ListEnumTypeContratFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
- * Reference to a field of type 'Float'
+ * Reference to a field of type 'Decimal'
  */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
     
 
 
 /**
- * Reference to a field of type 'Float[]'
+ * Reference to a field of type 'Decimal[]'
  */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 

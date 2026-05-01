@@ -28,6 +28,7 @@ export type RemplacementMinAggregateOutputType = {
   id: string | null
   schoolId: string | null
   createdAt: Date | null
+  updatedAt: Date | null
   date: Date | null
   motif: string | null
   professeurAbsentId: string | null
@@ -39,6 +40,7 @@ export type RemplacementMaxAggregateOutputType = {
   id: string | null
   schoolId: string | null
   createdAt: Date | null
+  updatedAt: Date | null
   date: Date | null
   motif: string | null
   professeurAbsentId: string | null
@@ -50,6 +52,7 @@ export type RemplacementCountAggregateOutputType = {
   id: number
   schoolId: number
   createdAt: number
+  updatedAt: number
   date: number
   motif: number
   professeurAbsentId: number
@@ -63,6 +66,7 @@ export type RemplacementMinAggregateInputType = {
   id?: true
   schoolId?: true
   createdAt?: true
+  updatedAt?: true
   date?: true
   motif?: true
   professeurAbsentId?: true
@@ -74,6 +78,7 @@ export type RemplacementMaxAggregateInputType = {
   id?: true
   schoolId?: true
   createdAt?: true
+  updatedAt?: true
   date?: true
   motif?: true
   professeurAbsentId?: true
@@ -85,6 +90,7 @@ export type RemplacementCountAggregateInputType = {
   id?: true
   schoolId?: true
   createdAt?: true
+  updatedAt?: true
   date?: true
   motif?: true
   professeurAbsentId?: true
@@ -169,6 +175,7 @@ export type RemplacementGroupByOutputType = {
   id: string
   schoolId: string
   createdAt: Date
+  updatedAt: Date
   date: Date
   motif: string | null
   professeurAbsentId: string
@@ -201,6 +208,7 @@ export type RemplacementWhereInput = {
   id?: Prisma.StringFilter<"Remplacement"> | string
   schoolId?: Prisma.StringFilter<"Remplacement"> | string
   createdAt?: Prisma.DateTimeFilter<"Remplacement"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Remplacement"> | Date | string
   date?: Prisma.DateTimeFilter<"Remplacement"> | Date | string
   motif?: Prisma.StringNullableFilter<"Remplacement"> | string | null
   professeurAbsentId?: Prisma.StringFilter<"Remplacement"> | string
@@ -215,6 +223,7 @@ export type RemplacementOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   date?: Prisma.SortOrder
   motif?: Prisma.SortOrderInput | Prisma.SortOrder
   professeurAbsentId?: Prisma.SortOrder
@@ -232,6 +241,7 @@ export type RemplacementWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.RemplacementWhereInput | Prisma.RemplacementWhereInput[]
   schoolId?: Prisma.StringFilter<"Remplacement"> | string
   createdAt?: Prisma.DateTimeFilter<"Remplacement"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Remplacement"> | Date | string
   date?: Prisma.DateTimeFilter<"Remplacement"> | Date | string
   motif?: Prisma.StringNullableFilter<"Remplacement"> | string | null
   professeurAbsentId?: Prisma.StringFilter<"Remplacement"> | string
@@ -246,6 +256,7 @@ export type RemplacementOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   date?: Prisma.SortOrder
   motif?: Prisma.SortOrderInput | Prisma.SortOrder
   professeurAbsentId?: Prisma.SortOrder
@@ -263,6 +274,7 @@ export type RemplacementScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Remplacement"> | string
   schoolId?: Prisma.StringWithAggregatesFilter<"Remplacement"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Remplacement"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Remplacement"> | Date | string
   date?: Prisma.DateTimeWithAggregatesFilter<"Remplacement"> | Date | string
   motif?: Prisma.StringNullableWithAggregatesFilter<"Remplacement"> | string | null
   professeurAbsentId?: Prisma.StringWithAggregatesFilter<"Remplacement"> | string
@@ -273,6 +285,7 @@ export type RemplacementScalarWhereWithAggregatesInput = {
 export type RemplacementCreateInput = {
   id?: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   classeNom?: string | null
@@ -285,6 +298,7 @@ export type RemplacementUncheckedCreateInput = {
   id?: string
   schoolId: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   professeurAbsentId: string
@@ -295,6 +309,7 @@ export type RemplacementUncheckedCreateInput = {
 export type RemplacementUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classeNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -307,6 +322,7 @@ export type RemplacementUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professeurAbsentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -318,6 +334,7 @@ export type RemplacementCreateManyInput = {
   id?: string
   schoolId: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   professeurAbsentId: string
@@ -328,6 +345,7 @@ export type RemplacementCreateManyInput = {
 export type RemplacementUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classeNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -337,6 +355,7 @@ export type RemplacementUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professeurAbsentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -358,6 +377,7 @@ export type RemplacementCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   date?: Prisma.SortOrder
   motif?: Prisma.SortOrder
   professeurAbsentId?: Prisma.SortOrder
@@ -369,6 +389,7 @@ export type RemplacementMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   date?: Prisma.SortOrder
   motif?: Prisma.SortOrder
   professeurAbsentId?: Prisma.SortOrder
@@ -380,6 +401,7 @@ export type RemplacementMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   date?: Prisma.SortOrder
   motif?: Prisma.SortOrder
   professeurAbsentId?: Prisma.SortOrder
@@ -516,6 +538,7 @@ export type RemplacementUncheckedUpdateManyWithoutProfesseurAbsentNestedInput = 
 export type RemplacementCreateWithoutRemplacantInput = {
   id?: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   classeNom?: string | null
@@ -527,6 +550,7 @@ export type RemplacementUncheckedCreateWithoutRemplacantInput = {
   id?: string
   schoolId: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   professeurAbsentId: string
@@ -566,6 +590,7 @@ export type RemplacementScalarWhereInput = {
   id?: Prisma.StringFilter<"Remplacement"> | string
   schoolId?: Prisma.StringFilter<"Remplacement"> | string
   createdAt?: Prisma.DateTimeFilter<"Remplacement"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Remplacement"> | Date | string
   date?: Prisma.DateTimeFilter<"Remplacement"> | Date | string
   motif?: Prisma.StringNullableFilter<"Remplacement"> | string | null
   professeurAbsentId?: Prisma.StringFilter<"Remplacement"> | string
@@ -576,6 +601,7 @@ export type RemplacementScalarWhereInput = {
 export type RemplacementCreateWithoutSchoolInput = {
   id?: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   classeNom?: string | null
@@ -586,6 +612,7 @@ export type RemplacementCreateWithoutSchoolInput = {
 export type RemplacementUncheckedCreateWithoutSchoolInput = {
   id?: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   professeurAbsentId: string
@@ -622,6 +649,7 @@ export type RemplacementUpdateManyWithWhereWithoutSchoolInput = {
 export type RemplacementCreateWithoutProfesseurAbsentInput = {
   id?: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   classeNom?: string | null
@@ -633,6 +661,7 @@ export type RemplacementUncheckedCreateWithoutProfesseurAbsentInput = {
   id?: string
   schoolId: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   remplacantUserId?: string | null
@@ -669,6 +698,7 @@ export type RemplacementCreateManyRemplacantInput = {
   id?: string
   schoolId: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   professeurAbsentId: string
@@ -678,6 +708,7 @@ export type RemplacementCreateManyRemplacantInput = {
 export type RemplacementUpdateWithoutRemplacantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classeNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -689,6 +720,7 @@ export type RemplacementUncheckedUpdateWithoutRemplacantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professeurAbsentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -699,6 +731,7 @@ export type RemplacementUncheckedUpdateManyWithoutRemplacantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professeurAbsentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -708,6 +741,7 @@ export type RemplacementUncheckedUpdateManyWithoutRemplacantInput = {
 export type RemplacementCreateManySchoolInput = {
   id?: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   professeurAbsentId: string
@@ -718,6 +752,7 @@ export type RemplacementCreateManySchoolInput = {
 export type RemplacementUpdateWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classeNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -728,6 +763,7 @@ export type RemplacementUpdateWithoutSchoolInput = {
 export type RemplacementUncheckedUpdateWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professeurAbsentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -738,6 +774,7 @@ export type RemplacementUncheckedUpdateWithoutSchoolInput = {
 export type RemplacementUncheckedUpdateManyWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professeurAbsentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -749,6 +786,7 @@ export type RemplacementCreateManyProfesseurAbsentInput = {
   id?: string
   schoolId: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   date: Date | string
   motif?: string | null
   remplacantUserId?: string | null
@@ -758,6 +796,7 @@ export type RemplacementCreateManyProfesseurAbsentInput = {
 export type RemplacementUpdateWithoutProfesseurAbsentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classeNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -769,6 +808,7 @@ export type RemplacementUncheckedUpdateWithoutProfesseurAbsentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remplacantUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -779,6 +819,7 @@ export type RemplacementUncheckedUpdateManyWithoutProfesseurAbsentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   motif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remplacantUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -791,6 +832,7 @@ export type RemplacementSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   schoolId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   date?: boolean
   motif?: boolean
   professeurAbsentId?: boolean
@@ -805,6 +847,7 @@ export type RemplacementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   schoolId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   date?: boolean
   motif?: boolean
   professeurAbsentId?: boolean
@@ -819,6 +862,7 @@ export type RemplacementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   schoolId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   date?: boolean
   motif?: boolean
   professeurAbsentId?: boolean
@@ -833,6 +877,7 @@ export type RemplacementSelectScalar = {
   id?: boolean
   schoolId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   date?: boolean
   motif?: boolean
   professeurAbsentId?: boolean
@@ -840,7 +885,7 @@ export type RemplacementSelectScalar = {
   classeNom?: boolean
 }
 
-export type RemplacementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "schoolId" | "createdAt" | "date" | "motif" | "professeurAbsentId" | "remplacantUserId" | "classeNom", ExtArgs["result"]["remplacement"]>
+export type RemplacementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "schoolId" | "createdAt" | "updatedAt" | "date" | "motif" | "professeurAbsentId" | "remplacantUserId" | "classeNom", ExtArgs["result"]["remplacement"]>
 export type RemplacementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   professeurAbsent?: boolean | Prisma.ProfesseurDefaultArgs<ExtArgs>
@@ -868,6 +913,7 @@ export type $RemplacementPayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: string
     schoolId: string
     createdAt: Date
+    updatedAt: Date
     date: Date
     motif: string | null
     professeurAbsentId: string
@@ -1302,6 +1348,7 @@ export interface RemplacementFieldRefs {
   readonly id: Prisma.FieldRef<"Remplacement", 'String'>
   readonly schoolId: Prisma.FieldRef<"Remplacement", 'String'>
   readonly createdAt: Prisma.FieldRef<"Remplacement", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Remplacement", 'DateTime'>
   readonly date: Prisma.FieldRef<"Remplacement", 'DateTime'>
   readonly motif: Prisma.FieldRef<"Remplacement", 'String'>
   readonly professeurAbsentId: Prisma.FieldRef<"Remplacement", 'String'>

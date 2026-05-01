@@ -27,11 +27,11 @@ export type AggregateContrat = {
 }
 
 export type ContratAvgAggregateOutputType = {
-  salaire: number | null
+  salaire: runtime.Decimal | null
 }
 
 export type ContratSumAggregateOutputType = {
-  salaire: number | null
+  salaire: runtime.Decimal | null
 }
 
 export type ContratMinAggregateOutputType = {
@@ -43,7 +43,7 @@ export type ContratMinAggregateOutputType = {
   dateDebut: Date | null
   dateFin: Date | null
   poste: string | null
-  salaire: number | null
+  salaire: runtime.Decimal | null
   professeurId: string | null
   userId: string | null
 }
@@ -57,7 +57,7 @@ export type ContratMaxAggregateOutputType = {
   dateDebut: Date | null
   dateFin: Date | null
   poste: string | null
-  salaire: number | null
+  salaire: runtime.Decimal | null
   professeurId: string | null
   userId: string | null
 }
@@ -224,7 +224,7 @@ export type ContratGroupByOutputType = {
   dateDebut: Date
   dateFin: Date | null
   poste: string
-  salaire: number | null
+  salaire: runtime.Decimal | null
   professeurId: string | null
   userId: string | null
   _count: ContratCountAggregateOutputType | null
@@ -261,7 +261,7 @@ export type ContratWhereInput = {
   dateDebut?: Prisma.DateTimeFilter<"Contrat"> | Date | string
   dateFin?: Prisma.DateTimeNullableFilter<"Contrat"> | Date | string | null
   poste?: Prisma.StringFilter<"Contrat"> | string
-  salaire?: Prisma.FloatNullableFilter<"Contrat"> | number | null
+  salaire?: Prisma.DecimalNullableFilter<"Contrat"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: Prisma.StringNullableFilter<"Contrat"> | string | null
   userId?: Prisma.StringNullableFilter<"Contrat"> | string | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
@@ -298,7 +298,7 @@ export type ContratWhereUniqueInput = Prisma.AtLeast<{
   dateDebut?: Prisma.DateTimeFilter<"Contrat"> | Date | string
   dateFin?: Prisma.DateTimeNullableFilter<"Contrat"> | Date | string | null
   poste?: Prisma.StringFilter<"Contrat"> | string
-  salaire?: Prisma.FloatNullableFilter<"Contrat"> | number | null
+  salaire?: Prisma.DecimalNullableFilter<"Contrat"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: Prisma.StringNullableFilter<"Contrat"> | string | null
   userId?: Prisma.StringNullableFilter<"Contrat"> | string | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
@@ -337,7 +337,7 @@ export type ContratScalarWhereWithAggregatesInput = {
   dateDebut?: Prisma.DateTimeWithAggregatesFilter<"Contrat"> | Date | string
   dateFin?: Prisma.DateTimeNullableWithAggregatesFilter<"Contrat"> | Date | string | null
   poste?: Prisma.StringWithAggregatesFilter<"Contrat"> | string
-  salaire?: Prisma.FloatNullableWithAggregatesFilter<"Contrat"> | number | null
+  salaire?: Prisma.DecimalNullableWithAggregatesFilter<"Contrat"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: Prisma.StringNullableWithAggregatesFilter<"Contrat"> | string | null
   userId?: Prisma.StringNullableWithAggregatesFilter<"Contrat"> | string | null
 }
@@ -350,7 +350,7 @@ export type ContratCreateInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   school: Prisma.SchoolCreateNestedOneWithoutContratsInput
   professeur?: Prisma.ProfesseurCreateNestedOneWithoutContratInput
   user?: Prisma.UserCreateNestedOneWithoutContratsInput
@@ -365,7 +365,7 @@ export type ContratUncheckedCreateInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: string | null
   userId?: string | null
 }
@@ -378,7 +378,7 @@ export type ContratUpdateInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   school?: Prisma.SchoolUpdateOneRequiredWithoutContratsNestedInput
   professeur?: Prisma.ProfesseurUpdateOneWithoutContratNestedInput
   user?: Prisma.UserUpdateOneWithoutContratsNestedInput
@@ -393,7 +393,7 @@ export type ContratUncheckedUpdateInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -407,7 +407,7 @@ export type ContratCreateManyInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: string | null
   userId?: string | null
 }
@@ -420,7 +420,7 @@ export type ContratUpdateManyMutationInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ContratUncheckedUpdateManyInput = {
@@ -432,7 +432,7 @@ export type ContratUncheckedUpdateManyInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -627,12 +627,12 @@ export type EnumTypeContratFieldUpdateOperationsInput = {
   set?: $Enums.TypeContrat
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type ContratCreateWithoutUserInput = {
@@ -643,7 +643,7 @@ export type ContratCreateWithoutUserInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   school: Prisma.SchoolCreateNestedOneWithoutContratsInput
   professeur?: Prisma.ProfesseurCreateNestedOneWithoutContratInput
 }
@@ -657,7 +657,7 @@ export type ContratUncheckedCreateWithoutUserInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: string | null
 }
 
@@ -699,7 +699,7 @@ export type ContratScalarWhereInput = {
   dateDebut?: Prisma.DateTimeFilter<"Contrat"> | Date | string
   dateFin?: Prisma.DateTimeNullableFilter<"Contrat"> | Date | string | null
   poste?: Prisma.StringFilter<"Contrat"> | string
-  salaire?: Prisma.FloatNullableFilter<"Contrat"> | number | null
+  salaire?: Prisma.DecimalNullableFilter<"Contrat"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: Prisma.StringNullableFilter<"Contrat"> | string | null
   userId?: Prisma.StringNullableFilter<"Contrat"> | string | null
 }
@@ -712,7 +712,7 @@ export type ContratCreateWithoutSchoolInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeur?: Prisma.ProfesseurCreateNestedOneWithoutContratInput
   user?: Prisma.UserCreateNestedOneWithoutContratsInput
 }
@@ -725,7 +725,7 @@ export type ContratUncheckedCreateWithoutSchoolInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: string | null
   userId?: string | null
 }
@@ -764,7 +764,7 @@ export type ContratCreateWithoutProfesseurInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   school: Prisma.SchoolCreateNestedOneWithoutContratsInput
   user?: Prisma.UserCreateNestedOneWithoutContratsInput
 }
@@ -778,7 +778,7 @@ export type ContratUncheckedCreateWithoutProfesseurInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   userId?: string | null
 }
 
@@ -817,7 +817,7 @@ export type ContratCreateManyUserInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: string | null
 }
 
@@ -829,7 +829,7 @@ export type ContratUpdateWithoutUserInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   school?: Prisma.SchoolUpdateOneRequiredWithoutContratsNestedInput
   professeur?: Prisma.ProfesseurUpdateOneWithoutContratNestedInput
 }
@@ -843,7 +843,7 @@ export type ContratUncheckedUpdateWithoutUserInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -856,7 +856,7 @@ export type ContratUncheckedUpdateManyWithoutUserInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -868,7 +868,7 @@ export type ContratCreateManySchoolInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: string | null
   userId?: string | null
 }
@@ -881,7 +881,7 @@ export type ContratUpdateWithoutSchoolInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeur?: Prisma.ProfesseurUpdateOneWithoutContratNestedInput
   user?: Prisma.UserUpdateOneWithoutContratsNestedInput
 }
@@ -894,7 +894,7 @@ export type ContratUncheckedUpdateWithoutSchoolInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -907,7 +907,7 @@ export type ContratUncheckedUpdateManyWithoutSchoolInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   professeurId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -921,7 +921,7 @@ export type ContratCreateManyProfesseurInput = {
   dateDebut: Date | string
   dateFin?: Date | string | null
   poste: string
-  salaire?: number | null
+  salaire?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   userId?: string | null
 }
 
@@ -933,7 +933,7 @@ export type ContratUpdateWithoutProfesseurInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   school?: Prisma.SchoolUpdateOneRequiredWithoutContratsNestedInput
   user?: Prisma.UserUpdateOneWithoutContratsNestedInput
 }
@@ -947,7 +947,7 @@ export type ContratUncheckedUpdateWithoutProfesseurInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -960,7 +960,7 @@ export type ContratUncheckedUpdateManyWithoutProfesseurInput = {
   dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   poste?: Prisma.StringFieldUpdateOperationsInput | string
-  salaire?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaire?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -1064,7 +1064,7 @@ export type $ContratPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     dateDebut: Date
     dateFin: Date | null
     poste: string
-    salaire: number | null
+    salaire: runtime.Decimal | null
     professeurId: string | null
     userId: string | null
   }, ExtArgs["result"]["contrat"]>
@@ -1501,7 +1501,7 @@ export interface ContratFieldRefs {
   readonly dateDebut: Prisma.FieldRef<"Contrat", 'DateTime'>
   readonly dateFin: Prisma.FieldRef<"Contrat", 'DateTime'>
   readonly poste: Prisma.FieldRef<"Contrat", 'String'>
-  readonly salaire: Prisma.FieldRef<"Contrat", 'Float'>
+  readonly salaire: Prisma.FieldRef<"Contrat", 'Decimal'>
   readonly professeurId: Prisma.FieldRef<"Contrat", 'String'>
   readonly userId: Prisma.FieldRef<"Contrat", 'String'>
 }

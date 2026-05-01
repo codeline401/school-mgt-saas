@@ -256,6 +256,7 @@ export type ProfesseurOrderByWithRelationInput = {
 
 export type ProfesseurWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  schoolId_nom_prenom?: Prisma.ProfesseurSchoolIdNomPrenomCompoundUniqueInput
   AND?: Prisma.ProfesseurWhereInput | Prisma.ProfesseurWhereInput[]
   OR?: Prisma.ProfesseurWhereInput[]
   NOT?: Prisma.ProfesseurWhereInput | Prisma.ProfesseurWhereInput[]
@@ -273,7 +274,7 @@ export type ProfesseurWhereUniqueInput = Prisma.AtLeast<{
   classes?: Prisma.ClasseListRelationFilter
   contrat?: Prisma.ContratListRelationFilter
   remplacements?: Prisma.RemplacementListRelationFilter
-}, "id">
+}, "id" | "schoolId_nom_prenom">
 
 export type ProfesseurOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -426,6 +427,12 @@ export type ProfesseurListRelationFilter = {
 
 export type ProfesseurOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ProfesseurSchoolIdNomPrenomCompoundUniqueInput = {
+  schoolId: string
+  nom: string
+  prenom: string
 }
 
 export type ProfesseurCountOrderByAggregateInput = {
