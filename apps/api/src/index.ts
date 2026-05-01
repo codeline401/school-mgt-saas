@@ -1,7 +1,11 @@
 import express from "express"; // Importation d'Express pour créer le serveur API
 import cors from "cors"; // Importation de CORS pour gérer les requêtes cross-origin
 
-import { getAllEleves, createEleve } from "./controllers/elevesController.js"; // Importation du contrôleur pour les élèves
+import {
+  getAllEleves,
+  createEleve,
+  getAllProfesseurs,
+} from "./controllers/elevesController.js"; // Importation du contrôleur pour les élèves
 import authRoutes from "./routes/authRoutes.js"; // Importation des routes d'authentification
 import schoolRoutes from "./routes/schoolRoute.js"; // Importation des routes pour les écoles
 import classesRoutes from "./routes/classesRoute.js"; // Importation des routes pour les classes
@@ -21,6 +25,7 @@ app.use("/api/profils", profilsRoutes); // Utilisation des routes pour les profi
 
 app.get("/api/eleves", authenticate, getAllEleves); // Route GET pour récupérer tous les élèves
 app.post("/api/eleves", authenticate, createEleve); // Route POST pour créer un nouvel élève
+app.get("/api/professeurs", authenticate, getAllProfesseurs); // Route GET pour récupérer tous les professeurs
 
 // Lancement du serveur
 app.listen(PORT, () => {
