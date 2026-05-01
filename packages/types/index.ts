@@ -126,7 +126,7 @@ export interface Contrat {
 }
 
 // Remplacement (absence d'un prof)
-export interface Remplecement {
+export interface Remplacement {
   id: string;
   date: string;
   motif?: string | null;
@@ -147,7 +147,7 @@ export interface ProfesseurProfil extends BaseEntity {
   specialites?: string | null; // ex: "Mathématiques, Physique"
   classes: Classe[]; // Les classes que le prof enseigne
   contrat: Contrat[]; // Historique des contrats du prof
-  remplacements: Remplecement[]; // Historique des remplacements du prof
+  remplacements: Remplacement[]; // Historique des remplacements du prof
 }
 
 // Profil complet d'un parent (GET /api/profils/parents/:id)
