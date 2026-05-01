@@ -6,6 +6,7 @@ import ClassesPage from "./pages/ClassesPage";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RegisterPage from "./pages/RegisterPage";
+import EleveProfilPage from "./pages/EleveProfilPage";
 
 const DashboardTemp = () => (
   <div>
@@ -35,6 +36,7 @@ function App() {
               }
             >
               <Route path="/eleves" element={<ElevesPage />} />
+              <Route path="/eleves/:id" element={<EleveProfilPage />} />
             </Route>
 
             {/* Route écoles : ADMIN crée la sienne, SUDO_ADMIN voit tout */}

@@ -33,3 +33,16 @@ ALTER TABLE "Contrat" ADD CONSTRAINT "Contrat_exactly_one_target_chk"
     (CASE WHEN "professeurId" IS NOT NULL THEN 1 ELSE 0 END +
      CASE WHEN "userId" IS NOT NULL THEN 1 ELSE 0 END) = 1
   );
+
+-- 2. Add missing updatedAt column to Remplacement (omitted from initial migration)
+ALTER TABLE "Remplacement" ADD COLUMN IF NOT EXISTS "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE "Remplacement" ALTER COLUMN "updatedAt" DROP DEFAULT;
+
+-- 4. Remove stray userId column from Remplacement (was added by mistake in migration 20260428043030)
+ALTER TABLE "Remplacement" DROP COLUMN IF EXISTS "userId";
+
+-- 5. Add unique constraints to support idempotent seed upserts
+CREATE UNIQUE INDEX IF NOT EXISTS "School_nom_key"           ON "School"("nom");
+CREATE UNIQUE INDEX IF NOT EXISTS "Classe_schoolId_nom_key"    ON "Classe"("schoolId", "nom");
+CREATE UNIQUE INDEX IF NOT EXISTS "Eleve_schoolId_nom_key"     ON "Eleve"("schoolId", "nom");
+CREATE UNIQUE INDEX IF NOT EXISTS "Professeur_schoolId_nom_key" ON "Professeur"("schoolId", "nom");

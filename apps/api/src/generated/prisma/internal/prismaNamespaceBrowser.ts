@@ -209,6 +209,7 @@ export const RemplacementScalarFieldEnum = {
   id: 'id',
   schoolId: 'schoolId',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   date: 'date',
   motif: 'motif',
   professeurAbsentId: 'professeurAbsentId',

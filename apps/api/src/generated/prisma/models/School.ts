@@ -201,11 +201,11 @@ export type SchoolOrderByWithRelationInput = {
 
 export type SchoolWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  nom?: string
   inviteCode?: string
   AND?: Prisma.SchoolWhereInput | Prisma.SchoolWhereInput[]
   OR?: Prisma.SchoolWhereInput[]
   NOT?: Prisma.SchoolWhereInput | Prisma.SchoolWhereInput[]
-  nom?: Prisma.StringFilter<"School"> | string
   createdAt?: Prisma.DateTimeFilter<"School"> | Date | string
   classes?: Prisma.ClasseListRelationFilter
   eleves?: Prisma.EleveListRelationFilter
@@ -215,7 +215,7 @@ export type SchoolWhereUniqueInput = Prisma.AtLeast<{
   dossierAdmissions?: Prisma.DossierAdmissionListRelationFilter
   contrats?: Prisma.ContratListRelationFilter
   remplacements?: Prisma.RemplacementListRelationFilter
-}, "id" | "inviteCode">
+}, "id" | "nom" | "inviteCode">
 
 export type SchoolOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

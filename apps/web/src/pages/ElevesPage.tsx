@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/api";
 import { Plus, Users } from "lucide-react";
 import type { Eleve, Classe } from "@school-mgt/types";
+import { useNavigate } from "react-router-dom"; // ajouter en haut
 
 type EleveWithClasse = Omit<Eleve, "classeId"> & { classe?: Classe };
 
 function ElevesPage() {
+  const navigate = useNavigate();
   const {
     data: eleves = [],
     isLoading,
@@ -75,7 +77,11 @@ function ElevesPage() {
                 </tr>
               ) : (
                 eleves.map((eleve) => (
-                  <tr key={eleve.id} className="hover">
+                  <tr
+                    key={eleve.id}
+                    className="hover cursor-pointer"
+                    onClick={() => navigate(`/eleves/${eleve.id}`)}
+                  >
                     <td className="font-medium">
                       {eleve.nom} {eleve.prenom}
                     </td>
