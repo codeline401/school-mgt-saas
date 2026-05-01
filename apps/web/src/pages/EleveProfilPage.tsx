@@ -143,12 +143,13 @@ export default function EleveProfilPage() {
       const body: Record<string, unknown> = {};
       if (f.nom.trim()) body.nom = f.nom.trim();
       if (f.prenom.trim()) body.prenom = f.prenom.trim();
-      // Nullable fields: send explicit null when cleared so the server removes old values
-      body.dateNaissance = f.dateNaissance || null;
-      body.telephone = f.telephone.trim() || null;
-      body.adresse = f.adresse.trim() || null;
-      body.photoUrl = f.photoUrl.trim() || null;
-      body.classeId = f.classeId || null;
+      // Optional fields: omit when cleared so Zod optional() validation passes
+      if (f.dateNaissance) body.dateNaissance = f.dateNaissance;
+      if (f.telephone.trim()) body.telephone = f.telephone.trim();
+      if (f.adresse.trim()) body.adresse = f.adresse.trim();
+      if (f.photoUrl.trim()) body.photoUrl = f.photoUrl.trim();
+      if (f.classeId) body.classeId = f.classeId;
+      // parentId is nullable().optional() in the schema — explicit null removes the link
       body.parentId = f.parentId || null;
 
       const { data } = await api.put(`/api/profils/eleves/${id}`, body);
