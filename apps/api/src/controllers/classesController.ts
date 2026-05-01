@@ -50,12 +50,13 @@ export const getAllClasses = async (req: Request, res: Response) => {
 export const createClasse = async (req: Request, res: Response) => {
   try {
     const validatedData = createClasseSchema.parse(req.body);
+    const schoolId = req.user!.schoolId;
+
     if (!schoolId) {
-      return res.status(403).json({
+      return res.status(400).json({
         error:
           "Vous devez être associé à une école pour créer une classe. Créez d'abord votre école.",
       });
-    }      });
     }
 
     const newClasse = await prisma.classe.create({
