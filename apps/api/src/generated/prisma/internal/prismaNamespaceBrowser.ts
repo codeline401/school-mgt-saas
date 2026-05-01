@@ -55,7 +55,11 @@ export const ModelName = {
   School: 'School',
   Classe: 'Classe',
   Eleve: 'Eleve',
-  Professeur: 'Professeur'
+  Professeur: 'Professeur',
+  Parent: 'Parent',
+  DossierAdmission: 'DossierAdmission',
+  Contrat: 'Contrat',
+  Remplacement: 'Remplacement'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -81,7 +85,11 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role',
-  schoolId: 'schoolId'
+  schoolId: 'schoolId',
+  telephone: 'telephone',
+  adresse: 'adresse',
+  dateNaissance: 'dateNaissance',
+  photoUrl: 'photoUrl'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -100,7 +108,9 @@ export type SchoolScalarFieldEnum = (typeof SchoolScalarFieldEnum)[keyof typeof 
 export const ClasseScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
-  schoolId: 'schoolId'
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ClasseScalarFieldEnum = (typeof ClasseScalarFieldEnum)[keyof typeof ClasseScalarFieldEnum]
@@ -111,7 +121,14 @@ export const EleveScalarFieldEnum = {
   nom: 'nom',
   prenom: 'prenom',
   schoolId: 'schoolId',
-  classeId: 'classeId'
+  classeId: 'classeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  dateNaissance: 'dateNaissance',
+  telephone: 'telephone',
+  adresse: 'adresse',
+  photoUrl: 'photoUrl',
+  parentId: 'parentId'
 } as const
 
 export type EleveScalarFieldEnum = (typeof EleveScalarFieldEnum)[keyof typeof EleveScalarFieldEnum]
@@ -121,10 +138,85 @@ export const ProfesseurScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
   prenom: 'prenom',
-  schoolId: 'schoolId'
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  telephone: 'telephone',
+  adresse: 'adresse',
+  dateNaissance: 'dateNaissance',
+  photoUrl: 'photoUrl',
+  specialites: 'specialites'
 } as const
 
 export type ProfesseurScalarFieldEnum = (typeof ProfesseurScalarFieldEnum)[keyof typeof ProfesseurScalarFieldEnum]
+
+
+export const ParentScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  prenom: 'prenom',
+  email: 'email',
+  telephone: 'telephone',
+  adresse: 'adresse',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ParentScalarFieldEnum = (typeof ParentScalarFieldEnum)[keyof typeof ParentScalarFieldEnum]
+
+
+export const DossierAdmissionScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  nomEleve: 'nomEleve',
+  prenomEleve: 'prenomEleve',
+  dateNaissance: 'dateNaissance',
+  classeVisee: 'classeVisee',
+  adresse: 'adresse',
+  nomParent: 'nomParent',
+  prenomParent: 'prenomParent',
+  telephoneParent: 'telephoneParent',
+  emailParent: 'emailParent',
+  statut: 'statut',
+  eleveId: 'eleveId',
+  notesAdmin: 'notesAdmin'
+} as const
+
+export type DossierAdmissionScalarFieldEnum = (typeof DossierAdmissionScalarFieldEnum)[keyof typeof DossierAdmissionScalarFieldEnum]
+
+
+export const ContratScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  typeContrat: 'typeContrat',
+  dateDebut: 'dateDebut',
+  dateFin: 'dateFin',
+  poste: 'poste',
+  salaire: 'salaire',
+  professeurId: 'professeurId',
+  userId: 'userId'
+} as const
+
+export type ContratScalarFieldEnum = (typeof ContratScalarFieldEnum)[keyof typeof ContratScalarFieldEnum]
+
+
+export const RemplacementScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  date: 'date',
+  motif: 'motif',
+  professeurAbsentId: 'professeurAbsentId',
+  remplacantUserId: 'remplacantUserId',
+  classeNom: 'classeNom'
+} as const
+
+export type RemplacementScalarFieldEnum = (typeof RemplacementScalarFieldEnum)[keyof typeof RemplacementScalarFieldEnum]
 
 
 export const SortOrder = {

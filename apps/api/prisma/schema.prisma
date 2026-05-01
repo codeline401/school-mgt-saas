@@ -33,6 +33,16 @@ model User {
   // Le Sudo_Admin n'a pas de schoolId, les autres OUI.
   schoolId String? // nullable pour le Sudo_Admin
   school   School? @relation(fields: [schoolId], references: [id])
+
+  // -- Champs profil ajoutés
+  telephone     String?
+  adresse       String? // Adresse postale
+  dateNaissance DateTime? // Date de naissance
+  photoUrl      String? // URL de la photo de profil
+
+  // Relations vers les dossiers liés à cet utilisateur
+  contrats      Contrat[] // Contrat (pour prof / collaborateur)
+  remplacements Remplacement[] @relation("Remplacant") // pour les remplacements où cet utilisateur est le remplaçant
 }
 
 // Modele SAAS
@@ -44,11 +54,15 @@ model School {
   // Code unique généré automatiquement que l'ADMIN partagera à ses collaborateurs
   inviteCode String @unique @default(cuid())
 
-  classes   Classe[]
-  eleves    Eleve[]
-  profs     Professeur[]
-  createdAt DateTime     @default(now())
-  users     User[]
+  classes           Classe[]
+  eleves            Eleve[]
+  profs             Professeur[]
+  createdAt         DateTime           @default(now())
+  users             User[]
+  parents           Parent[]
+  dossierAdmissions DossierAdmission[]
+  contrats          Contrat[]
+  remplacements     Remplacement[]
 }
 
 model Classe {
@@ -58,6 +72,9 @@ model Classe {
   school   School       @relation(fields: [schoolId], references: [id])
   eleves   Eleve[] // Une classe a plusieurs élèves
   profs    Professeur[] // Une classe a plusieurs professeurs
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Eleve {
@@ -68,6 +85,26 @@ model Eleve {
   school   School @relation(fields: [schoolId], references: [id])
   classeId String
   classe   Classe @relation(fields: [classeId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // -- Champs profil ajoutés
+  dateNaissance DateTime? // Date de naissance
+  telephone     String?
+  adresse       String?
+  photoUrl      String? // URL de la photo de profil
+
+  // Relation vers le parent responsable
+  parentId String?
+
+  // Historique des admissions de l'élève
+  admissions DossierAdmission[]
+  parent     Parent?            @relation(fields: [parentId], references: [id])
+
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([classeId]) // Index pour optimiser les requêtes par classe
+  @@index([parentId]) // lookup parent + enfants
 }
 
 model Professeur {
@@ -77,4 +114,145 @@ model Professeur {
   schoolId String
   school   School   @relation(fields: [schoolId], references: [id])
   classes  Classe[] // Un professeur peut enseigner dans plusieurs classes
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // -- champs profil ajoutés
+  telephone     String?
+  adresse       String? // Adresse postale
+  dateNaissance DateTime? // Date de naissance
+  photoUrl      String? // URL de la photo de profil
+  specialites   String? // Matières enseignées, ex: "Mathématiques, Physique"
+
+  // Relation dossier RH
+  contrat       Contrat[]
+  remplacements Remplacement[] @relation("ProfesseurAbsent") // Remplacement assuré par ce professeur
+
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+}
+
+// MODELE PARENT 
+// Découplé de USER - un parent peut ne pas avoir de compte
+model Parent {
+  id        String  @id @default(uuid())
+  nom       String
+  prenom    String
+  email     String? // Un parent peut ne pas avoir d'email
+  telephone String? // Un parent peut ne pas avoir de téléphone
+  adresse   String? // Un parent peut ne pas avoir d'adresse
+  schoolId  String
+  school    School  @relation(fields: [schoolId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // peut avoir plusieurs enfants dans l'école
+  eleves Eleve[]
+
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+}
+
+// MODELE DOSSIER D'ADMISSION - nouveau
+// Gère les demandes d'inscription et la liste d'attente
+model DossierAdmission {
+  id        String   @id @default(uuid())
+  schoolId  String
+  school    School   @relation(fields: [schoolId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Information sur le candidat
+  nomEleve      String
+  prenomEleve   String
+  dateNaissance DateTime
+  classeVisee   String // ex: "6ème", "5ème", etc.
+  adresse       String?
+
+  // Contact parent / tuteur
+  nomParent       String
+  prenomParent    String
+  telephoneParent String
+  emailParent     String?
+
+  // Statut du dossier
+  statut StatutAdmission @default(EN_ATTENTE)
+
+  // Si admis, on peut lier à l'élève créé
+  eleveId String? @unique
+  eleve   Eleve?  @relation(fields: [eleveId], references: [id])
+
+  // Note interne de l'admin
+  notesAdmin String?
+
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([statut]) // filtre par statut (EN_ATTENTE, ADMIS, etc.)
+}
+
+// Status possibles d'un dossier d'admission
+enum StatutAdmission {
+  EN_ATTENTE // dossier reçu mais pas encore traité
+  EN_LISTE_ATTENTE // dossier retenu mais en liste d'attente
+  ADMIS // dossier accepté, élève admis
+  REFUSE // dossier refusé
+}
+
+// MODELE CONTRAT - 
+// Dossier admin d'un membre personnel (prof ou collaborateur)
+model Contrat {
+  id        String   @id @default(uuid())
+  schoolId  String
+  school    School   @relation(fields: [schoolId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  typeContrat  TypeContrat // ex: "CDI", "CDD", "Vacataire"
+  dateDebut    DateTime
+  dateFin      DateTime?
+  poste        String // ex: "Professeur de Mathématiques", "Agent d'entretien", etc.
+  salaire      Decimal? // optionnel, peut être négocié ou non divulgué
+  // lien soit à un prof, soit à un user (collaborateur administratif)
+  professeurId String?
+  professeur   Professeur? @relation(fields: [professeurId], references: [id])
+  userId       String?
+  user         User?       @relation(fields: [userId], references: [id])
+
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([professeurId]) // Index pour optimiser les requêtes par professeur
+  @@index([userId]) // Index pour optimiser les requêtes par collaborateur
+}
+
+enum TypeContrat {
+  CDI
+  CDD
+  VACATAIRE
+  STAGIAIRE
+}
+
+// MODELE REMPLACEMENT -
+// Suivi des remplacements de professeurs absents
+model Remplacement {
+  id        String   @id @default(uuid())
+  schoolId  String
+  school    School   @relation(fields: [schoolId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  date  DateTime // date du remplacement
+  motif String? // raison de l'absence du prof titulaire
+
+  // Professeur absent
+  professeurAbsentId String
+  professeurAbsent   Professeur @relation("ProfesseurAbsent", fields: [professeurAbsentId], references: [id], onDelete: Cascade)
+
+  // Remplaçant
+  remplacantUserId String?
+  remplacant       User?   @relation("Remplacant", fields: [remplacantUserId], references: [id])
+
+  // Classe concernée par le remplacement
+  classeNom String? // ex: "6ème A", "5ème B", etc.
+
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([professeurAbsentId]) // Index pour optimiser les requêtes par professeur absent
+  @@index([date]) // Index pour optimiser les requêtes par date
 }

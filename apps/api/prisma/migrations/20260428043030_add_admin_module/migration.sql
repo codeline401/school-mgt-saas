@@ -1,0 +1,2 @@
+-- This migration was intentionally left empty after correction.
+-- The "userId" column was mistakenly added to Remplacement; it does not exist in the schema.

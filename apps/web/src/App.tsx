@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ElevesPage from "./pages/ElevesPage";
-import SchoolsPage from "./pages/SchoolPage"; // 👇 AJOUTER
+import SchoolsPage from "./pages/SchoolPage";
+import ClassesPage from "./pages/ClassesPage";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RegisterPage from "./pages/RegisterPage";
@@ -44,6 +45,9 @@ function App() {
             >
               <Route path="/schools" element={<SchoolsPage />} />
             </Route>
+
+            {/* Route classes : tous les utilisateurs authentifiés */}
+            <Route path="/classes" element={<ClassesPage />} />
           </Route>
         </Route>
       </Routes>

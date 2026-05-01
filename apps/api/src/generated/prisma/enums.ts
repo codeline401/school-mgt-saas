@@ -19,3 +19,23 @@ export const Role = {
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const StatutAdmission = {
+  EN_ATTENTE: 'EN_ATTENTE',
+  EN_LISTE_ATTENTE: 'EN_LISTE_ATTENTE',
+  ADMIS: 'ADMIS',
+  REFUSE: 'REFUSE'
+} as const
+
+export type StatutAdmission = (typeof StatutAdmission)[keyof typeof StatutAdmission]
+
+
+export const TypeContrat = {
+  CDI: 'CDI',
+  CDD: 'CDD',
+  VACATAIRE: 'VACATAIRE',
+  STAGIAIRE: 'STAGIAIRE'
+} as const
+
+export type TypeContrat = (typeof TypeContrat)[keyof typeof TypeContrat]

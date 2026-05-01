@@ -66,3 +66,23 @@ export type Eleve = Prisma.EleveModel
  * 
  */
 export type Professeur = Prisma.ProfesseurModel
+/**
+ * Model Parent
+ * 
+ */
+export type Parent = Prisma.ParentModel
+/**
+ * Model DossierAdmission
+ * 
+ */
+export type DossierAdmission = Prisma.DossierAdmissionModel
+/**
+ * Model Contrat
+ * 
+ */
+export type Contrat = Prisma.ContratModel
+/**
+ * Model Remplacement
+ * 
+ */
+export type Remplacement = Prisma.RemplacementModel
