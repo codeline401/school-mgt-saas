@@ -99,3 +99,67 @@ export interface EleveProfil extends BaseEntity {
   parent?: Parent | null;
   admissions?: DossierAdmission[];
 }
+
+// résumé d'un élève (pour la fiche parent)
+export interface EleveResume {
+  id: string;
+  nom: string;
+  prenom: string;
+  schoolId: string;
+  classeId: string;
+  createdAt: string;
+  updatedAt: string;
+  classe?: Classe | null;
+}
+
+// Contrat d'un membre du personnel
+export interface Contrat {
+  id: string;
+  typeContrat: "CDI" | "CDD" | "VACATAIRE" | "STAGIAIRE";
+  dateDebut: string;
+  dateFin?: string | null;
+  poste: string;
+  salaire: number | null;
+  schoolId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Remplacement (absence d'un prof)
+export interface Remplacement {
+  id: string;
+  date: string;
+  motif?: string | null;
+  classeNom?: string | null; // Nom de la classe concernée
+  schoolId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Profil complet d'un professeur (GET /api/profils/profs/:id)
+export interface ProfesseurProfil extends BaseEntity {
+  nom: string;
+  prenom: string;
+  telephone?: string | null;
+  adresse?: string | null;
+  dateNaissance?: string | null;
+  photoUrl?: string | null;
+  specialites?: string | null; // ex: "Mathématiques, Physique"
+  classes: Classe[]; // Les classes que le prof enseigne
+  contrat: Contrat[]; // Historique des contrats du prof
+  remplacements: Remplacement[]; // Historique des remplacements du prof
+}
+
+// Profil complet d'un parent (GET /api/profils/parents/:id)
+export interface ParentProfil {
+  id: string;
+  nom: string;
+  prenom: string;
+  email?: string | null;
+  telephone?: string | null;
+  adresse?: string | null;
+  schoolId: string;
+  createdAt: string;
+  updatedAt: string;
+  eleves: EleveResume[];
+}

@@ -39,3 +39,36 @@ export const createEleve = async (req: Request, res: Response) => {
     });
   }
 };
+
+// GET /api/professeurs - liste les professeurs de l'école de l'utilisateur connecté
+export const getAllProfesseurs = async (req: Request, res: Response) => {
+  try {
+    const { schoolId, role } = req.user!; // Récupérer l'ID de l'école et le rôle de l'utilisateur connecté
+
+    if (role !== "SUDO_ADMIN" && !schoolId) {
+      return res
+        .status(403)
+        .json({ error: "Vous n'êtes rattaché à aucune école." });
+    }
+
+    const filterSchoolId =
+      role === "SUDO_ADMIN"
+        ? typeof req.query.schoolId === "string"
+          ? req.query.schoolId
+          : undefined
+        : (schoolId ?? undefined);
+
+    const professeur = await prisma.professeur.findMany({
+      ...(filterSchoolId ? { where: { schoolId: filterSchoolId } } : {}),
+      include: { classes: true }, // Inclure les classes associées à chaque professeur
+      orderBy: { nom: "asc" }, // Trier les professeurs par nom
+    });
+
+    res.status(200).json(professeur);
+  } catch (err) {
+    console.error("Erreur lors de la récupération des professeurs:", err);
+    res.status(500).json({
+      error: "Une erreur est survenue lors de la récupération des professeurs.",
+    });
+  }
+};
