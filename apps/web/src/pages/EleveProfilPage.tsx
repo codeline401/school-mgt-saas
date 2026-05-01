@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import type { ReactNode, ChangeEvent, FormEvent } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
@@ -36,7 +37,7 @@ function InfoRow({
   label,
   value,
 }: {
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   label: string;
   value?: string | null;
 }) {
@@ -142,12 +143,12 @@ export default function EleveProfilPage() {
       const body: Record<string, unknown> = {};
       if (f.nom.trim()) body.nom = f.nom.trim();
       if (f.prenom.trim()) body.prenom = f.prenom.trim();
-      if (f.dateNaissance) body.dateNaissance = f.dateNaissance;
-      if (f.telephone.trim()) body.telephone = f.telephone.trim();
-      if (f.adresse.trim()) body.adresse = f.adresse.trim();
-      if (f.photoUrl.trim()) body.photoUrl = f.photoUrl.trim();
-      if (f.classeId) body.classeId = f.classeId;
-      // parentId peut être explicitement null pour retirer le lien parental
+      // Nullable fields: send explicit null when cleared so the server removes old values
+      body.dateNaissance = f.dateNaissance || null;
+      body.telephone = f.telephone.trim() || null;
+      body.adresse = f.adresse.trim() || null;
+      body.photoUrl = f.photoUrl.trim() || null;
+      body.classeId = f.classeId || null;
       body.parentId = f.parentId || null;
 
       const { data } = await api.put(`/api/profils/eleves/${id}`, body);
@@ -162,15 +163,13 @@ export default function EleveProfilPage() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >,
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     updateMutation.mutate(form);
   };

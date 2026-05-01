@@ -10,39 +10,73 @@ ALTER TABLE "Parent" ADD COLUMN IF NOT EXISTS "updatedAt" TIMESTAMP(3) NOT NULL 
 ALTER TABLE "Parent" ALTER COLUMN "updatedAt" DROP DEFAULT;
 
 -- 3. Add CHECK constraint to Contrat: exactly one of professeurId or userId must be set
-DO $
+--    Consolidated: drop any weak existing constraint and add the strict XOR version atomically.
+DO $$
 BEGIN
+  ALTER TABLE "Contrat" DROP CONSTRAINT IF EXISTS "Contrat_person_check";
   IF NOT EXISTS (
     SELECT 1 FROM pg_constraint WHERE conname = 'Contrat_exactly_one_target_chk'
   ) THEN
-    -- Optionally fix violating rows first, or use NOT VALID to defer validation
     ALTER TABLE "Contrat" ADD CONSTRAINT "Contrat_exactly_one_target_chk"
       CHECK (
         (CASE WHEN "professeurId" IS NOT NULL THEN 1 ELSE 0 END +
          CASE WHEN "userId" IS NOT NULL THEN 1 ELSE 0 END) = 1
       );
   END IF;
-END $;
--- 3. Upgrade Contrat person check to exactly-one (XOR) constraint
--- Drop the weaker "at least one" constraint added in the initial migration first
-ALTER TABLE "Contrat" DROP CONSTRAINT IF EXISTS "Contrat_person_check";
-
--- Re-add as a strict exactly-one constraint: professeurId XOR userId must be set
-ALTER TABLE "Contrat" ADD CONSTRAINT "Contrat_exactly_one_target_chk"
-  CHECK (
-    (CASE WHEN "professeurId" IS NOT NULL THEN 1 ELSE 0 END +
-     CASE WHEN "userId" IS NOT NULL THEN 1 ELSE 0 END) = 1
-  );
+END $$;
 
 -- 2. Add missing updatedAt column to Remplacement (omitted from initial migration)
 ALTER TABLE "Remplacement" ADD COLUMN IF NOT EXISTS "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE "Remplacement" ALTER COLUMN "updatedAt" DROP DEFAULT;
 
--- 4. Remove stray userId column from Remplacement (was added by mistake in migration 20260428043030)
+-- 4. Backfill stray userId into remplacantUserId where it is not yet set,
+--    then drop the column that was added by mistake in migration 20260428043030.
+UPDATE "Remplacement"
+   SET "remplacantUserId" = "userId"
+ WHERE "remplacantUserId" IS NULL
+   AND "userId" IS NOT NULL;
 ALTER TABLE "Remplacement" DROP COLUMN IF EXISTS "userId";
 
--- 5. Add unique constraints to support idempotent seed upserts
-CREATE UNIQUE INDEX IF NOT EXISTS "School_nom_key"           ON "School"("nom");
-CREATE UNIQUE INDEX IF NOT EXISTS "Classe_schoolId_nom_key"    ON "Classe"("schoolId", "nom");
-CREATE UNIQUE INDEX IF NOT EXISTS "Eleve_schoolId_nom_key"     ON "Eleve"("schoolId", "nom");
-CREATE UNIQUE INDEX IF NOT EXISTS "Professeur_schoolId_nom_key" ON "Professeur"("schoolId", "nom");
+-- 5. Preflight duplicate detection: raise an exception listing offending rows if any
+--    column group contains duplicates that would violate the indexes about to be created.
+DO $$
+DECLARE dup_info TEXT;
+BEGIN
+  SELECT string_agg('"schoolId"=' || "schoolId" || ' nom=' || nom, ', ') INTO dup_info
+    FROM (SELECT "schoolId", nom FROM "Classe" GROUP BY "schoolId", nom HAVING COUNT(*) > 1) t;
+  IF dup_info IS NOT NULL THEN
+    RAISE EXCEPTION 'Cannot create Classe_schoolId_nom_key: duplicate (schoolId,nom) groups found [%]. Resolve duplicates before running this migration.', dup_info;
+  END IF;
+END $$;
+
+DO $$
+DECLARE dup_info TEXT;
+BEGIN
+  SELECT string_agg('"schoolId"=' || "schoolId" || ' nom=' || nom || ' prenom=' || prenom, ', ') INTO dup_info
+    FROM (SELECT "schoolId", nom, prenom FROM "Eleve" GROUP BY "schoolId", nom, prenom HAVING COUNT(*) > 1) t;
+  IF dup_info IS NOT NULL THEN
+    RAISE EXCEPTION 'Cannot create Eleve_schoolId_nom_prenom_key: duplicate (schoolId,nom,prenom) groups found [%]. Resolve duplicates before running this migration.', dup_info;
+  END IF;
+END $$;
+
+DO $$
+DECLARE dup_info TEXT;
+BEGIN
+  SELECT string_agg('"schoolId"=' || "schoolId" || ' nom=' || nom || ' prenom=' || prenom, ', ') INTO dup_info
+    FROM (SELECT "schoolId", nom, prenom FROM "Professeur" GROUP BY "schoolId", nom, prenom HAVING COUNT(*) > 1) t;
+  IF dup_info IS NOT NULL THEN
+    RAISE EXCEPTION 'Cannot create Professeur_schoolId_nom_prenom_key: duplicate (schoolId,nom,prenom) groups found [%]. Resolve duplicates before running this migration.', dup_info;
+  END IF;
+END $$;
+
+-- Add tenantKey to School: stable technical identifier, distinct from the display name.
+-- Existing rows receive a generated UUID; new rows use Prisma's @default(cuid()) value.
+ALTER TABLE "School" ADD COLUMN IF NOT EXISTS "tenantKey" TEXT;
+UPDATE "School" SET "tenantKey" = gen_random_uuid()::TEXT WHERE "tenantKey" IS NULL;
+ALTER TABLE "School" ALTER COLUMN "tenantKey" SET NOT NULL;
+
+-- Create unique indexes
+CREATE UNIQUE INDEX IF NOT EXISTS "School_tenantKey_key"              ON "School"("tenantKey");
+CREATE UNIQUE INDEX IF NOT EXISTS "Classe_schoolId_nom_key"            ON "Classe"("schoolId", "nom");
+CREATE UNIQUE INDEX IF NOT EXISTS "Eleve_schoolId_nom_prenom_key"      ON "Eleve"("schoolId", "nom", "prenom");
+CREATE UNIQUE INDEX IF NOT EXISTS "Professeur_schoolId_nom_prenom_key" ON "Professeur"("schoolId", "nom", "prenom");

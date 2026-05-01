@@ -49,7 +49,10 @@ model User {
 
 model School {
   id  String @id @default(uuid())
-  nom String @unique
+  nom String // Display name only — not globally unique; can be renamed freely
+
+  // Stable technical tenant identifier (never changes after creation)
+  tenantKey String @unique @default(cuid())
 
   // Code unique généré automatiquement que l'ADMIN partagera à ses collaborateurs
   inviteCode String @unique @default(cuid())
@@ -104,7 +107,7 @@ model Eleve {
   admissions DossierAdmission[]
   parent     Parent?            @relation(fields: [parentId], references: [id])
 
-  @@unique([schoolId, nom]) // Un nom d'élève unique par école (pour les upserts)
+  @@unique([schoolId, nom, prenom]) // Nom + prénom unique par école (pour les upserts)
   @@index([schoolId]) // Index pour optimiser les requêtes par école
   @@index([classeId]) // Index pour optimiser les requêtes par classe
   @@index([parentId]) // lookup parent + enfants
@@ -132,7 +135,7 @@ model Professeur {
   contrat       Contrat[]
   remplacements Remplacement[] @relation("ProfesseurAbsent") // Remplacement assuré par ce professeur
 
-  @@unique([schoolId, nom]) // Un nom de professeur unique par école (pour les upserts)
+  @@unique([schoolId, nom, prenom]) // Nom + prénom unique par école (pour les upserts)
   @@index([schoolId]) // Index pour optimiser les requêtes par école
 }
 

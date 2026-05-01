@@ -265,7 +265,7 @@ export type EleveOrderByWithRelationInput = {
 
 export type EleveWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  schoolId_nom?: Prisma.EleveSchoolIdNomCompoundUniqueInput
+  schoolId_nom_prenom?: Prisma.EleveSchoolIdNomPrenomCompoundUniqueInput
   AND?: Prisma.EleveWhereInput | Prisma.EleveWhereInput[]
   OR?: Prisma.EleveWhereInput[]
   NOT?: Prisma.EleveWhereInput | Prisma.EleveWhereInput[]
@@ -284,7 +284,7 @@ export type EleveWhereUniqueInput = Prisma.AtLeast<{
   classe?: Prisma.XOR<Prisma.ClasseScalarRelationFilter, Prisma.ClasseWhereInput>
   admissions?: Prisma.DossierAdmissionListRelationFilter
   parent?: Prisma.XOR<Prisma.ParentNullableScalarRelationFilter, Prisma.ParentWhereInput> | null
-}, "id" | "schoolId_nom">
+}, "id" | "schoolId_nom_prenom">
 
 export type EleveOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -438,9 +438,10 @@ export type EleveOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type EleveSchoolIdNomCompoundUniqueInput = {
+export type EleveSchoolIdNomPrenomCompoundUniqueInput = {
   schoolId: string
   nom: string
+  prenom: string
 }
 
 export type EleveCountOrderByAggregateInput = {
