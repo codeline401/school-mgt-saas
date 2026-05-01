@@ -156,7 +156,7 @@ export const updateElevesProfil = async (req: Request, res: Response) => {
 // ===================================================================
 /**
  * GET /api/profils/parents/:id
- * Retourne la fiche complète d'un parent avec la iste de ses enfants
+ * Retourne la fiche complète d'un parent avec la liste de ses enfants
  */
 export const getParentProfil = async (req: Request, res: Response) => {
   try {
@@ -180,13 +180,13 @@ export const getParentProfil = async (req: Request, res: Response) => {
         parent.schoolId,
       )
     ) {
-      return res.status(403).json({ error: "Accès réfusé!!!" });
+      return res.status(403).json({ error: "Accès refusé" });
     }
 
     res.status(200).json(parent);
   } catch (err) {
     console.error("Erreur getParentProfil :", err);
-    res.status(500).json({ error: "Erreur Serveur!!!" });
+    res.status(500).json({ error: "Erreur serveur" });
   }
 };
 
@@ -203,8 +203,7 @@ export const updateParentProfil = async (req: Request, res: Response) => {
       where: { id },
     });
     if (!existingParent)
-      return res.status(400).json({ error: "Parent non introuvable" });
-
+      return res.status(404).json({ error: "Parent introuvable" });
     if (
       !isAuthorizedForSchool(
         req.user!.role,
@@ -283,7 +282,7 @@ export const getProfesseurProfil = async (req: Request, res: Response) => {
 
     res.status(200).json(professeur);
   } catch (err) {
-    console.error("Erreur getProfesseurProfil");
+    console.error("Erreur getProfesseurProfil:", err);
     res.status(500).json({ error: "Erreur serveur" });
   }
 };
@@ -324,19 +323,23 @@ export const updateProfesseurProfil = async (req: Request, res: Response) => {
       Object.entries(restData).filter(([, value]) => value !== undefined),
     );
     if (classeIds !== undefined) {
+      const uniqueClasseIds = [...new Set(classeIds)];
       // Vérifier que tous les classeIds appartiennent à l'école du professeur
       const classesValides = await prisma.classe.findMany({
-        where: { id: { in: classeIds }, schoolId: existingProfesseur.schoolId },
+        where: {
+          id: { in: uniqueClasseIds },
+          schoolId: existingProfesseur.schoolId,
+        },
         select: { id: true },
       });
-      if (classesValides.length !== classeIds.length) {
+      if (classesValides.length !== uniqueClasseIds.length) {
         return res.status(400).json({
           error:
             "Un ou plusieurs IDs de classe sont invalides ou n'appartiennent pas à votre école",
         });
       }
       // Si classeIds est fourni, on remplace entièrement la liste des classes assignées
-      updateData.classes = { set: classeIds.map((cid) => ({ id: cid })) }; // set remplace toute la relation par les nouveaux IDs fournis
+      updateData.classes = { set: uniqueClasseIds.map((cid) => ({ id: cid })) }; // set remplace toute la relation par les nouveaux IDs fournis
     }
 
     const updatedProfesseur = await prisma.professeur.update({

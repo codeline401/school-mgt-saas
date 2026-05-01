@@ -11,6 +11,7 @@ function ClassesPage() {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const [nom, setNom] = useState("");
+  const [nomError, setNomError] = useState<string | null>(null);
 
   const isAdmin = user?.role === "ADMIN";
   const isSudoAdmin = user?.role === "SUDO_ADMIN";
@@ -44,12 +45,19 @@ function ClassesPage() {
   const closeModal = () => {
     modalRef.current?.close();
     setNom("");
+    setNomError(null);
     createMutation.reset();
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    createMutation.mutate({ nom });
+    const trimmed = nom.trim();
+    if (trimmed.length < 2) {
+      setNomError("Le nom doit contenir au moins 2 caractères.");
+      return;
+    }
+    setNomError(null);
+    createMutation.mutate({ nom: trimmed });
   };
 
   return (
@@ -174,14 +182,20 @@ function ClassesPage() {
               <legend className="fieldset-legend">Nom de la classe</legend>
               <input
                 type="text"
-                className="input w-full"
+                className={`input w-full${nomError ? " input-error" : ""}`}
                 placeholder="Ex : 6ème A, Terminale S…"
                 value={nom}
-                onChange={(e) => setNom(e.target.value)}
+                onChange={(e) => {
+                  setNom(e.target.value);
+                  if (nomError) setNomError(null);
+                }}
                 required
                 minLength={2}
                 maxLength={50}
               />
+              {nomError && (
+                <p className="text-error text-sm mt-1">{nomError}</p>
+              )}
             </fieldset>
 
             <div className="modal-action">

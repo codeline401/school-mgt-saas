@@ -19,7 +19,9 @@ export const getAllClasses = async (req: Request, res: Response) => {
 
     const filterSchoolId =
       role === "SUDO_ADMIN"
-        ? (req.query.schoolId as string | undefined)
+        ? typeof req.query.schoolId === "string"
+          ? req.query.schoolId
+          : undefined
         : (userSchoolId ?? undefined);
 
     const classes = await prisma.classe.findMany({
@@ -28,7 +30,7 @@ export const getAllClasses = async (req: Request, res: Response) => {
         _count: {
           select: {
             eleves: true, // Nombre d'élèves dans la classe
-            profs: true,  // Nombre de professeurs dans la classe
+            profs: true, // Nombre de professeurs dans la classe
           },
         },
       },
@@ -48,13 +50,12 @@ export const getAllClasses = async (req: Request, res: Response) => {
 export const createClasse = async (req: Request, res: Response) => {
   try {
     const validatedData = createClasseSchema.parse(req.body);
-    const schoolId = req.user!.schoolId;
-
     if (!schoolId) {
-      return res.status(400).json({
+      return res.status(403).json({
         error:
           "Vous devez être associé à une école pour créer une classe. Créez d'abord votre école.",
       });
+    }      });
     }
 
     const newClasse = await prisma.classe.create({

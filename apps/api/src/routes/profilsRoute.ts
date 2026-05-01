@@ -19,10 +19,9 @@ router.use(authenticate);
 // Lecture : ADMIN, SUDO_ADMIN, PROF
 router.get(
   "/eleves/:id",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
   getElevesProfil,
 );
-
 // Modification : ADMIN et SUDO_ADMIN only
 router.put(
   "/eleves/:id",

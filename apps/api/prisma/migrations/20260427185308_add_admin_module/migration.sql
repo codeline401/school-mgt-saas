@@ -47,7 +47,7 @@ CREATE TABLE "Parent" (
     "adresse" TEXT,
     "schoolId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Parent_pkey" PRIMARY KEY ("id")
 );
@@ -88,7 +88,8 @@ CREATE TABLE "Contrat" (
     "professeurId" TEXT,
     "userId" TEXT,
 
-    CONSTRAINT "Contrat_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Contrat_pkey" PRIMARY KEY ("id"),
+    CONSTRAINT "Contrat_person_check" CHECK ("professeurId" IS NOT NULL OR "userId" IS NOT NULL)
 );
 
 -- CreateTable
@@ -96,6 +97,7 @@ CREATE TABLE "Remplacement" (
     "id" TEXT NOT NULL,
     "schoolId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
     "motif" TEXT,
     "professeurAbsentId" TEXT NOT NULL,
@@ -133,7 +135,7 @@ ALTER TABLE "Contrat" ADD CONSTRAINT "Contrat_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Remplacement" ADD CONSTRAINT "Remplacement_schoolId_fkey" FOREIGN KEY ("schoolId") REFERENCES "School"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Remplacement" ADD CONSTRAINT "Remplacement_professeurAbsentId_fkey" FOREIGN KEY ("professeurAbsentId") REFERENCES "Professeur"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Remplacement" ADD CONSTRAINT "Remplacement_professeurAbsentId_fkey" FOREIGN KEY ("professeurAbsentId") REFERENCES "Professeur"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Remplacement" ADD CONSTRAINT "Remplacement_remplacantUserId_fkey" FOREIGN KEY ("remplacantUserId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

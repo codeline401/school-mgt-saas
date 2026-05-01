@@ -206,12 +206,11 @@ model Contrat {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  typeContrat TypeContrat // ex: "CDI", "CDD", "Vacataire"
-  dateDebut   DateTime
-  dateFin     DateTime?
-  poste       String // ex: "Professeur de Mathématiques", "Agent d'entretien", etc.
-  salaire     Float? // optionnel, peut être négocié ou non divulgué
-
+  typeContrat  TypeContrat // ex: "CDI", "CDD", "Vacataire"
+  dateDebut    DateTime
+  dateFin      DateTime?
+  poste        String // ex: "Professeur de Mathématiques", "Agent d'entretien", etc.
+  salaire      Decimal? // optionnel, peut être négocié ou non divulgué
   // lien soit à un prof, soit à un user (collaborateur administratif)
   professeurId String?
   professeur   Professeur? @relation(fields: [professeurId], references: [id])
@@ -237,13 +236,14 @@ model Remplacement {
   schoolId  String
   school    School   @relation(fields: [schoolId], references: [id])
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   date  DateTime // date du remplacement
   motif String? // raison de l'absence du prof titulaire
 
   // Professeur absent
   professeurAbsentId String
-  professeurAbsent   Professeur @relation("ProfesseurAbsent", fields: [professeurAbsentId], references: [id])
+  professeurAbsent   Professeur @relation("ProfesseurAbsent", fields: [professeurAbsentId], references: [id], onDelete: Cascade)
 
   // Remplaçant
   remplacantUserId String?

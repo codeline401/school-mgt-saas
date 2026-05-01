@@ -13,7 +13,7 @@ export const updateEleveProfilSchema = z.object({
   parentId: z.string().uuid("ID de parent invalide").nullable().optional(),
 });
 
-// Schéma de misà jour du profil d'un parent
+// Schéma de mise à jour du profil d'un parent
 export const updateParentProfilSchema = z.object({
   nom: z.string().trim().min(3).optional(),
   prenom: z.string().trim().min(3).optional(),
