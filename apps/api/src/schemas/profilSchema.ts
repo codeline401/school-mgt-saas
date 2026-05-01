@@ -5,7 +5,7 @@ import { z } from "zod";
 export const updateEleveProfilSchema = z.object({
   nom: z.string().trim().min(3).optional(),
   prenom: z.string().trim().min(3).optional(),
-  dateNaissance: z.string().optional(), // on reçoit une string ISO ou une date
+  dateNaissance: z.coerce.date().optional(),
   telephone: z.string().trim().optional(),
   adresse: z.string().trim().optional(),
   photoUrl: z.string().url("URL invalide").optional(),
@@ -26,7 +26,7 @@ export const updateParentProfilSchema = z.object({
 export const updateProfesseurProfilSchema = z.object({
   nom: z.string().trim().min(3).optional(),
   prenom: z.string().trim().min(3).optional(),
-  dateNaissance: z.string().optional(), // on reçoit une string ISO ou une date
+  dateNaissance: z.coerce.date().optional(),
   telephone: z.string().trim().optional(),
   adresse: z.string().trim().optional(),
   photoUrl: z.string().url("URL invalide").optional(),

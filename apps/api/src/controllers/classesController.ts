@@ -10,6 +10,13 @@ export const getAllClasses = async (req: Request, res: Response) => {
     const { schoolId: userSchoolId, role } = req.user!;
 
     // SUDO_ADMIN n'est rattaché à aucune école : il peut passer un schoolId en query
+    // Les autres rôles doivent obligatoirement être rattachés à une école
+    if (role !== "SUDO_ADMIN" && !userSchoolId) {
+      return res.status(403).json({
+        error: "Vous n'êtes rattaché à aucune école.",
+      });
+    }
+
     const filterSchoolId =
       role === "SUDO_ADMIN"
         ? (req.query.schoolId as string | undefined)

@@ -36,10 +36,16 @@ function ClassesPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["classes"] });
-      modalRef.current?.close();
-      setNom("");
+      // closeModal est défini après mais la callback est asynchrone — OK
+      closeModal();
     },
   });
+
+  const closeModal = () => {
+    modalRef.current?.close();
+    setNom("");
+    createMutation.reset();
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -148,7 +154,7 @@ function ClassesPage() {
       </div>
 
       {/* Modal DaisyUI — créer une classe */}
-      <dialog ref={modalRef} className="modal">
+      <dialog ref={modalRef} className="modal" onClose={closeModal}>
         <div className="modal-box">
           <h3 className="font-bold text-lg mb-4">Créer une nouvelle classe</h3>
 
@@ -182,11 +188,7 @@ function ClassesPage() {
               <button
                 type="button"
                 className="btn btn-ghost"
-                onClick={() => {
-                  modalRef.current?.close();
-                  setNom("");
-                  createMutation.reset();
-                }}
+                onClick={closeModal}
               >
                 Annuler
               </button>

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { includes, ZodError } from "zod"; // Import de ZodError pour la gestion des erreurs de validation
+import { ZodError } from "zod"; // Import de ZodError pour la gestion des erreurs de validation
 import { prisma } from "../lib/prisma";
 import {
   updateEleveProfilSchema,
@@ -103,6 +103,19 @@ export const updateElevesProfil = async (req: Request, res: Response) => {
         return res.status(400).json({
           error:
             "La classe spécifiée est invalide ou n'appartient pas à votre école",
+        });
+      }
+    }
+
+    // Si un parentId est fourni, vérifier qu'il appartient à la même école
+    if (validateData.parentId) {
+      const parent = await prisma.parent.findUnique({
+        where: { id: validateData.parentId },
+      });
+      if (!parent || parent.schoolId !== existingEleve.schoolId) {
+        return res.status(400).json({
+          error:
+            "Le parent spécifié est invalide ou n'appartient pas à votre école",
         });
       }
     }
@@ -311,6 +324,17 @@ export const updateProfesseurProfil = async (req: Request, res: Response) => {
       Object.entries(restData).filter(([, value]) => value !== undefined),
     );
     if (classeIds !== undefined) {
+      // Vérifier que tous les classeIds appartiennent à l'école du professeur
+      const classesValides = await prisma.classe.findMany({
+        where: { id: { in: classeIds }, schoolId: existingProfesseur.schoolId },
+        select: { id: true },
+      });
+      if (classesValides.length !== classeIds.length) {
+        return res.status(400).json({
+          error:
+            "Un ou plusieurs IDs de classe sont invalides ou n'appartiennent pas à votre école",
+        });
+      }
       // Si classeIds est fourni, on remplace entièrement la liste des classes assignées
       updateData.classes = { set: classeIds.map((cid) => ({ id: cid })) }; // set remplace toute la relation par les nouveaux IDs fournis
     }

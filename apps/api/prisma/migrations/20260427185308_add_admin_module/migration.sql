@@ -26,6 +26,10 @@ ADD COLUMN     "specialites" TEXT,
 ADD COLUMN     "telephone" TEXT;
 
 -- AlterTable
+-- Backfill NULL values before applying NOT NULL constraints
+UPDATE "User" SET "nom" = '' WHERE "nom" IS NULL;
+UPDATE "User" SET "prenom" = '' WHERE "prenom" IS NULL;
+
 ALTER TABLE "User" ADD COLUMN     "adresse" TEXT,
 ADD COLUMN     "dateNaissance" TIMESTAMP(3),
 ADD COLUMN     "photoUrl" TEXT,
@@ -42,6 +46,8 @@ CREATE TABLE "Parent" (
     "telephone" TEXT,
     "adresse" TEXT,
     "schoolId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Parent_pkey" PRIMARY KEY ("id")
 );
