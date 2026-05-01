@@ -14,7 +14,20 @@ export interface Eleve extends BaseEntity {
 }
 
 // Une classe contient plusieurs élèves
-export interface Classe extends BaseEntity {
+// N.B. le modèle Prisma Classe n'a pas createdAt/updatedAt
+export interface Classe {
+  id: string;
+  nom: string;
+  schoolId: string;
+  // Compteurs optionnels retournés par l'API (include _count)
+  _count?: {
+    eleves: number;
+    profs: number;
+  };
+}
+
+// Payload envoyé pour créer une classe
+export interface CreateClasseInput {
   nom: string;
 }
 

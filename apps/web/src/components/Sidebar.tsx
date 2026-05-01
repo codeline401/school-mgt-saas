@@ -1,4 +1,5 @@
 import {
+  BookOpen,
   Building2,
   GraduationCap,
   LayoutDashboard,
@@ -19,6 +20,7 @@ function Sidebar() {
       roles: null as string[] | null,
     },
     { icon: GraduationCap, label: "Elèves", path: "/eleves", roles: null },
+    { icon: BookOpen, label: "Classes", path: "/classes", roles: null },
     {
       icon: Building2,
       label: "Écoles",
@@ -35,7 +37,7 @@ function Sidebar() {
   return (
     <div className="w-64 bg-white/5 backdrop-blur-sm h-screen border-r border-white/10 p-4 shrink-0">
       <h2 className="text-xl font-bold text-emerald-400 mb-8 px-2">
-        Future School MG
+        School SaaS MG
       </h2>
       <nav className="space-y-1">
         {menuItems.map((item) => (
