@@ -50,3 +50,14 @@ export function getApiError(error: unknown, fallback: string): string {
   }
   return fallback;
 }
+
+// SUppression de l'élève
+export const deleteEleve = async (id: string) => {
+  try {
+    const response = await api.delete(`/api/eleves/${id}`);
+    return response.data;
+  } catch (err) {
+    console.error("Erreur lors de la suppresion de l'élève :", err);
+    throw err;
+  }
+};

@@ -5,6 +5,7 @@ import {
   getAllEleves,
   createEleve,
   getAllProfesseurs,
+  deleteEleve,
 } from "./controllers/elevesController.js"; // Importation du contrôleur pour les élèves
 import authRoutes from "./routes/authRoutes.js"; // Importation des routes d'authentification
 import schoolRoutes from "./routes/schoolRoute.js"; // Importation des routes pour les écoles
@@ -25,6 +26,7 @@ app.use("/api/profils", profilsRoutes); // Utilisation des routes pour les profi
 
 app.get("/api/eleves", authenticate, getAllEleves); // Route GET pour récupérer tous les élèves
 app.post("/api/eleves", authenticate, createEleve); // Route POST pour créer un nouvel élève
+app.delete("/api/eleves/:id", authenticate, deleteEleve); // Route DELETE pour supprimer un élève par ID
 app.get("/api/professeurs", authenticate, getAllProfesseurs); // Route GET pour récupérer tous les professeurs
 
 // Lancement du serveur

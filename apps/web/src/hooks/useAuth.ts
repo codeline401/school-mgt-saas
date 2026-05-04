@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useAuthStore } from "../store/authStore";
 import { api } from "../lib/api";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 // Type de la réponse retournée par POST /api/auth/login
 interface LoginResponse {
@@ -64,6 +65,7 @@ export const useLogin = () => {
     // Après la connexion réussie, on stocke les données de l'utilisateur et le token, puis on redirige vers le dashboard
     onSuccess: (data: LoginResponse) => {
       setAuth(data.user, data.token); // On stocke l'utilisateur et le token dans Zustand
+      toast.success(`Bienvenue, ${data.user.prenom} !`); // Message de bienvenue
       navigate("/"); // Redirection vers la page d'accueil du dashboard
     },
   });

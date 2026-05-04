@@ -24,7 +24,7 @@ async function main() {
 
   // ── Comptes système par défaut ────────────────────────────────────────────────────────────────────
   // SUDO_ADMIN : accès global, pas rattaché à une école
-  const sudoPassword = await bcrypt.hash(resolvePassword("SUDO_PASSWORD"), 10);
+  const sudoPassword = await bcrypt.hash(resolvePassword("SUDO_PASSWORD"), 12);
   const sudoAdmin = await prisma.user.upsert({
     where: { email: "sudo_system@school.local" },
     update: {},
@@ -41,7 +41,7 @@ async function main() {
   // ADMIN : rattaché à l'école créée plus bas
   const adminPassword = await bcrypt.hash(
     resolvePassword("ADMIN_PASSWORD"),
-    10,
+    12,
   );
 
   // ── A. Création de l'école (TENANT) ──────────────────────────────────────────────────────
