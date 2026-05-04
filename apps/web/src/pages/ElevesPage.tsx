@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/api";
-import { Plus, Users } from "lucide-react";
+import { PlusIcon, Users } from "lucide-react";
 import type { Eleve, Classe } from "@school-mgt/types";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+
+import CreateEleveModal from "../components/CreateEleveModal";
 
 type EleveWithClasse = Omit<Eleve, "classeId"> & { classe?: Classe };
 
@@ -19,6 +22,8 @@ function ElevesPage() {
     },
   });
 
+  const [showCreate, setShowCreate] = useState(false);
+
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
@@ -28,8 +33,11 @@ function ElevesPage() {
             Liste exhaustive des élèves par classe
           </p>
         </div>
-        <button className="btn btn-primary gap-2">
-          <Plus size={16} />
+        <button
+          className="btn btn-primary gap-2"
+          onClick={() => setShowCreate(true)}
+        >
+          <PlusIcon size={16} />
           Ajouter un élève
         </button>
       </div>
@@ -103,6 +111,11 @@ function ElevesPage() {
           </table>
         </div>
       </div>
+
+      <CreateEleveModal
+        isOpen={showCreate}
+        onClose={() => setShowCreate(false)}
+      />
     </div>
   );
 }

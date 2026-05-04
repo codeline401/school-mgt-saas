@@ -11,11 +11,15 @@ import {
   MapPin,
   Users,
   BookOpen,
+  Trash,
 } from "lucide-react";
 import { api, getApiError } from "../lib/api";
 import { useAuthStore } from "../store/authStore";
 import type { EleveProfil, Classe } from "@school-mgt/types";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+
+import ConfirmModal from "../components/ConfirmModal";
 
 // ─── Labels et couleurs DaisyUI pour les statuts d'admission ─────────────────
 const STATUT_CONFIG: Record<string, { label: string; cls: string }> = {
@@ -73,7 +77,8 @@ export default function EleveProfilPage() {
   const modalRef = useRef<HTMLDialogElement>(null);
   const user = useAuthStore((s) => s.user);
 
-  // Seuls ADMIN et SUDO_ADMIN peuvent modifier
+  // Seuls ADMIN et SUDO_ADMIN peuvent modifier ou supprimer un élève
+  const canSuppr = user?.role === "ADMIN" || user?.role === "SUDO_ADMIN";
   const canEdit = user?.role === "ADMIN" || user?.role === "SUDO_ADMIN";
 
   // ── 1. Chargement du profil élève complet ─────────────────────────────────
@@ -113,8 +118,10 @@ export default function EleveProfilPage() {
     parentId: "",
   });
 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   // Pré-remplit le formulaire avec les données actuelles avant d'ouvrir le modal
-  const openModal = () => {
+  const openModalModif = () => {
     if (!eleve) return;
     setForm({
       nom: eleve.nom ?? "",
@@ -176,6 +183,28 @@ export default function EleveProfilPage() {
     updateMutation.mutate(form);
   };
 
+  // ── Mutation DELETE /api/profils/eleves/:id ──────────────────────────────
+  const deleteMutation = useMutation({
+    mutationFn: async () => {
+      if (!id) throw new Error("ID élève manquant");
+      await api.delete(`/api/eleves/${id}`);
+    },
+    onSuccess: () => {
+      // Invalide les caches pour mettre à jour la liste des élèves
+      queryClient.invalidateQueries({ queryKey: ["eleves"] });
+      toast.success("Élève supprimé avec succès");
+      navigate("/eleves");
+    },
+    onError: (err) => {
+      toast.error(
+        getApiError(
+          err,
+          "Erreur lors de la suppression de l'élève \n Veuillez contacter votre Administrateur",
+        ),
+      );
+    },
+  });
+
   // ── 5. États de chargement / erreur ──────────────────────────────────────
   if (isLoading) {
     return (
@@ -207,7 +236,7 @@ export default function EleveProfilPage() {
   return (
     <div className="space-y-6">
       {/* ── En-tête : retour + bouton modifier ── */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-end">
         <button
           onClick={() => navigate("/eleves")}
           className="btn btn-ghost btn-sm gap-2"
@@ -215,10 +244,22 @@ export default function EleveProfilPage() {
           <ArrowLeft size={16} />
           Retour aux élèves
         </button>
+
         {canEdit && (
-          <button onClick={openModal} className="btn btn-primary gap-2">
+          <button onClick={openModalModif} className="btn btn-primary gap-2">
             <Edit2 size={16} />
             Modifier le profil
+          </button>
+        )}
+
+        {canSuppr && (
+          <button
+            onClick={() => setShowDeleteModal(true)}
+            className="btn btn-ghost gap-2"
+            disabled={deleteMutation.isPending}
+          >
+            <Trash size={16} />
+            Supprimer l'élève
           </button>
         )}
       </div>
@@ -512,6 +553,18 @@ export default function EleveProfilPage() {
           <button type="submit">Fermer</button>
         </form>
       </dialog>
+
+      {/** --- Modal de confirmation de suppression --- */}
+      <ConfirmModal
+        isOpen={showDeleteModal}
+        title="Supprimer l'élève"
+        message={`Êtes-vous sûr de vouloir supprimer ${eleve.nom} ${eleve.prenom} de votre école ? Cette action est irreversible`}
+        confirmLabel="Oui, Supprimer"
+        cancelLabel="Annuler"
+        isLoading={deleteMutation.isPending}
+        onConfirm={() => deleteMutation.mutate()}
+        onCancel={() => setShowDeleteModal(false)}
+      />
     </div>
   );
 }
