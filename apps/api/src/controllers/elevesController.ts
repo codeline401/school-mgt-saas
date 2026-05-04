@@ -35,7 +35,7 @@ export const createEleve = async (req: Request, res: Response) => {
         .json({ error: "Vous n'avez pas la permission de créer un élève." });
     }
 
-    if (!schoolId) {
+    if (role !== "SUDO_ADMIN" && !schoolId) {
       return res.status(400).json({
         error:
           "Vous devez être associé à une école pour créer un élève. Veuillez contacter votre administrateur.",
