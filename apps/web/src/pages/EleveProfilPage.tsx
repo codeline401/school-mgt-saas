@@ -186,6 +186,7 @@ export default function EleveProfilPage() {
   // ── Mutation DELETE /api/profils/eleves/:id ──────────────────────────────
   const deleteMutation = useMutation({
     mutationFn: async () => {
+      if (!id) throw new Error("ID élève manquant");
       await api.delete(`/api/eleves/${id}`);
     },
     onSuccess: () => {

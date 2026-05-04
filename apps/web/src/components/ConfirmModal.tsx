@@ -37,7 +37,7 @@ export default function ConfirmModal({
       <div className="modal-box max-w-sm">
         {/* Icône + Titre */}
         <div className="flex flex-col items-center text-center gap-3 py-2">
-          <div className="gb-error/10 text-error rounded-full p-3">
+          <div className="bg-error/10 text-error rounded-full p-3">
             <Trash size={24} />
           </div>
           <h3 className="font-bold text-lg">{title}</h3>

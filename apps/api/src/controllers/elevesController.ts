@@ -36,12 +36,10 @@ export const createEleve = async (req: Request, res: Response) => {
     }
 
     if (!schoolId) {
-      return res
-        .status(400)
-        .json({
-          error:
-            "Vous devez être associé à une école pour créer un élève. Veuillez contacter votre administrateur.",
-        });
+      return res.status(400).json({
+        error:
+          "Vous devez être associé à une école pour créer un élève. Veuillez contacter votre administrateur.",
+      });
     }
 
     // Valider les données d'entrée avec Zod
@@ -97,7 +95,13 @@ export const getAllProfesseurs = async (req: Request, res: Response) => {
 // DELETE /api/eleves/:id - supprimer un élève par son ID
 export const deleteEleve = async (req: Request, res: Response) => {
   try {
-    const { role } = req.user!; // Récupérer le rôle de l'utilisateur connecté
+    const { role, schoolId } = req.user!; // Récupérer le rôle de l'utilisateur connecté + school
+
+    if (role !== "SUDO_ADMIN" && !schoolId) {
+      return res
+        .status(403)
+        .json({ error: "Vous n'êtes rattaché à aucune école." });
+    }
 
     // Vérification du rôle directement via req.user
     if (role !== "ADMIN" && role !== "SUDO_ADMIN") {
@@ -110,8 +114,11 @@ export const deleteEleve = async (req: Request, res: Response) => {
     const eleveId = req.params.id;
 
     // Vérifier si l'éllève existe
-    const existingEleve = await prisma.eleve.findUnique({
-      where: { id: eleveId as string },
+    const existingEleve = await prisma.eleve.findFirst({
+      where: {
+        id: eleveId as string,
+        ...(role !== "SUDO_ADMIN" && schoolId ? { schoolId } : {}), // Si l'utilisateur est ADMIN, on filtre par schoolId
+      },
     });
 
     if (!existingEleve) {
