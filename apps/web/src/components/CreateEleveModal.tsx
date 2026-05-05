@@ -19,20 +19,26 @@ const EMPTY_FORM: CreateEleveForm = { nom: "", prenom: "", classeId: "" };
 interface CreateEleveModalProps {
   isOpen: boolean;
   onClose: () => void;
+  defaultClasseId?: string; // ← ajouter
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 export default function CreateEleveModal({
   isOpen,
   onClose,
+  defaultClasseId,
 }: CreateEleveModalProps) {
   const modalRef = useRef<HTMLDialogElement>(null);
   const queryClient = useQueryClient();
   const user = useAuthStore((s) => s.user);
 
-  const [form, setForm] = useState<CreateEleveForm>(EMPTY_FORM);
+  // Initialise le formulaire avec defaultClasseId si fourni
+  const [form, setForm] = useState<CreateEleveForm>({
+    ...EMPTY_FORM,
+    classeId: defaultClasseId ?? "",
+  });
 
-  // ── Ouvre / ferme le dialog natif en sync avec isOpen ────────────────────
+  // ── Ouvre / ferme le dialog natif — effet DOM uniquement, pas de setState ─
   useEffect(() => {
     if (isOpen) {
       modalRef.current?.showModal();
@@ -62,7 +68,11 @@ export default function CreateEleveModal({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["eleves"] });
+      if (defaultClasseId) {
+        queryClient.invalidateQueries({ queryKey: ["classe-eleves", defaultClasseId] });
+      }
       toast.success("Élève créé avec succès !");
+      setForm({ ...EMPTY_FORM, classeId: defaultClasseId ?? "" });
       onClose();
     },
     onError: (err) => {
@@ -86,6 +96,7 @@ export default function CreateEleveModal({
   const handleClose = () => {
     if (createMutation.isPending) return; // empêche la fermeture pendant l'envoi
     createMutation.reset();
+    setForm({ ...EMPTY_FORM, classeId: defaultClasseId ?? "" }); // réinitialise le formulaire
     onClose();
   };
 

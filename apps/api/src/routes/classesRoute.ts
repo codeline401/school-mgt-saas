@@ -1,7 +1,14 @@
 import { Router } from "express";
 import { authenticate, authorizeRoles } from "../middlewares/authMiddleware.js";
 import { Role } from "../generated/prisma/enums.js";
-import { getAllClasses, createClasse } from "../controllers/classesController.js";
+import {
+  getAllClasses,
+  createClasse,
+  getClasseById,
+  getClasseEleves,
+  updateClasse,
+  deleteClasse,
+} from "../controllers/classesController.js";
 
 const router = Router();
 
@@ -10,6 +17,33 @@ const router = Router();
 router.get("/", authenticate, getAllClasses);
 
 // POST /api/classes — créer une classe (ADMIN uniquement)
-router.post("/", authenticate, authorizeRoles(Role.ADMIN), createClasse);
+router.post(
+  "/",
+  authenticate,
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  createClasse,
+);
+
+/** Détail d'une classe avec professeurs et compteurs */
+router.get("/:id", authenticate, getClasseById);
+
+/** Elèves d'une classe */
+router.get("/:id/eleves", authenticate, getClasseEleves);
+
+/**Met à jour une classe (ADMIN et SUDO_ADMIN) */
+router.put(
+  "/:id",
+  authenticate,
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  updateClasse,
+);
+
+/** Supprime une classe (ADMIN et SUDO_ADMIN) */
+router.delete(
+  "/:id",
+  authenticate,
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  deleteClasse,
+);
 
 export default router;

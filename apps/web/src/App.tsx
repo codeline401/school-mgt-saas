@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ElevesPage from "./pages/ElevesPage";
 import SchoolsPage from "./pages/SchoolPage";
@@ -10,6 +11,7 @@ import EleveProfilPage from "./pages/EleveProfilPage";
 import ProfesseurProfilPage from "./pages/ProfesseurProfilPage";
 import ProfesseursPage from "./pages/ProfesseurPage";
 import ParentProfilPage from "./pages/ParentProfilPage";
+import ClasseProfilPage from "./pages/ClasseProfilPage";
 
 const DashboardTemp = () => (
   <div>
@@ -23,6 +25,7 @@ const DashboardTemp = () => (
 function App() {
   return (
     <BrowserRouter>
+      <Toaster position="bottom-center" />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
@@ -59,6 +62,7 @@ function App() {
 
             {/* Route classes : tous les utilisateurs authentifiés */}
             <Route path="/classes" element={<ClassesPage />} />
+            <Route path="/classes/:id" element={<ClasseProfilPage />} />
           </Route>
         </Route>
       </Routes>
