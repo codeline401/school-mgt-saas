@@ -4,6 +4,7 @@ import { api, getApiError } from "../lib/api";
 import { useAuthStore } from "../store/authStore";
 import { BookOpen, Plus, Users, GraduationCap } from "lucide-react";
 import type { Classe, CreateClasseInput } from "@school-mgt/types";
+import { Link } from "react-router-dom";
 
 function ClassesPage() {
   const user = useAuthStore((state) => state.user);
@@ -142,7 +143,14 @@ function ClassesPage() {
               ) : (
                 classes.map((classe) => (
                   <tr key={classe.id} className="hover">
-                    <td className="font-medium">{classe.nom}</td>
+                    <td>
+                      <Link
+                        to={`/classes/${classe.id}`}
+                        className="font-medium hover:underline"
+                      >
+                        {classe.nom}
+                      </Link>
+                    </td>
                     <td>
                       <span className="badge badge-ghost badge-sm">
                         {classe._count?.eleves ?? 0}

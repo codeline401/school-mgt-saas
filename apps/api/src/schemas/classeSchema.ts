@@ -10,4 +10,14 @@ export const createClasseSchema = z.object({
     .max(50, "Le nom de la classe ne peut pas dépasser 50 caractères"),
 });
 
+export const updateClasseSchema = z.object({
+  nom: z
+    .string()
+    .trim()
+    .min(2, "Le nom de la classe doit contenir au moins 2 caractères")
+    .max(50, "Le nom de la classe ne peut pas dépasser 50 caractères")
+    .optional(),
+});
+
 export type CreateClasseInput = z.infer<typeof createClasseSchema>;
+export type UpdateClasseInput = z.infer<typeof updateClasseSchema>;
