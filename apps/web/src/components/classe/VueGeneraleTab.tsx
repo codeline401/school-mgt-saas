@@ -145,7 +145,10 @@ export default function VueGeneraleTab({ classeId, classe, canEdit }: Props) {
               <button
                 type="button"
                 className="btn btn-ghost"
-                onClick={() => modalRef.current?.close()}
+                onClick={() => {
+                  updateMutation.reset();
+                  modalRef.current?.close();
+                }}
               >
                 Annuler
               </button>
@@ -164,7 +167,7 @@ export default function VueGeneraleTab({ classeId, classe, canEdit }: Props) {
           </form>
         </div>
         <form method="dialog" className="modal-backdrop">
-          <button>Fermer</button>
+          <button onClick={() => updateMutation.reset()}>Fermer</button>
         </form>
       </dialog>
 

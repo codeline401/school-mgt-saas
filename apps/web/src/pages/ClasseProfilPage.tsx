@@ -97,14 +97,14 @@ export default function ClasseProfilPage() {
   return (
     <div className="space-y-6">
       {/** En-tête */}
-      <div className="flex item-center gap-3">
+      <div className="flex items-center gap-3">
         <button
           onClick={() => navigate("/classes")}
           className="btn btn-primary btn-sm gap-2"
         >
           <ArrowLeft size={16} /> Retour
         </button>
-        <div className="flex item-center gap-2">
+        <div className="flex items-center gap-2">
           <BookOpen size={20} className="text-primary" />
           <h1 className="text-2xl font-bold">{classe.nom}</h1>
         </div>
@@ -116,6 +116,7 @@ export default function ClasseProfilPage() {
           <button
             key={tab.id}
             role="tab"
+            aria-selected={activeTab === tab.id}
             className={`tab ${activeTab === tab.id ? "tab-active" : ""}`}
             onClick={() => setActiveTab(tab.id)}
           >

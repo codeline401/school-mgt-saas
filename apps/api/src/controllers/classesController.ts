@@ -5,7 +5,6 @@ import {
   createClasseSchema,
   updateClasseSchema,
 } from "../schemas/classeSchema.js";
-import { error } from "node:console";
 
 // ---- HELPERS ----------------------------------------------------------------------
 
@@ -187,6 +186,9 @@ export const updateClasse = async (req: Request, res: Response) => {
 
     res.status(200).json(updatedClasse);
   } catch (err) {
+    if (err instanceof ZodError) {
+      return res.status(400).json({ error: err.issues });
+    }
     console.error("Erreur lors de la mise à jour de la classe :", err);
     res
       .status(500)
