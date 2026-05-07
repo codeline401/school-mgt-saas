@@ -131,21 +131,38 @@ async function main() {
     });
   }
 
-  console.log("Database seeded successfully! ");
-}
+  // ── E. Création des matières ───────────────────────────────────────────────
+  const matieresData = [
+    { nom: "Mathématiques", classeId: classe6A.id, schoolId: school.id },
+    { nom: "Physique", classeId: classe6A.id, schoolId: school.id },
+    { nom: "Chimie", classeId: classe5B.id, schoolId: school.id },
+  ];
+  for (const m of matieresData) {
+    await prisma.matiere.upsert({
+      where: {
+        schoolId_nom: {
+          schoolId: m.schoolId,
+          nom: m.nom,
+        },
+      },
+      update: {},
+      create: m,
+    });
+  }
 
-main()
-  .catch((e) => {
-    console.error("Seed error:", e?.message ?? String(e));
+  main()
+    .catch((e) => {
+      console.error("Seed error:", e?.message ?? String(e));
+      console.error("Stack:", e?.stack);
+      process.exit(1);
+    })
+    .finally(async () => {
+      await prisma.$disconnect();
+    });
+
+  process.on("uncaughtException", (e) => {
+    console.error("Uncaught exception:", e?.message ?? String(e));
     console.error("Stack:", e?.stack);
     process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
   });
-
-process.on("uncaughtException", (e) => {
-  console.error("Uncaught exception:", e?.message ?? String(e));
-  console.error("Stack:", e?.stack);
-  process.exit(1);
-});
+}

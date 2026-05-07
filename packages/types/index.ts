@@ -163,3 +163,13 @@ export interface ParentProfil {
   updatedAt: string;
   eleves: EleveResume[];
 }
+
+export interface Matiere {
+  id: string;
+  nom: string;
+  description?: string | null;
+  classeId: string;
+  schoolId: string;
+  createdAt: string;
+  updatedAt: string;
+}

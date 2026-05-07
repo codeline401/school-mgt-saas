@@ -59,7 +59,8 @@ export const ModelName = {
   Parent: 'Parent',
   DossierAdmission: 'DossierAdmission',
   Contrat: 'Contrat',
-  Remplacement: 'Remplacement'
+  Remplacement: 'Remplacement',
+  Matiere: 'Matiere'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -219,6 +220,19 @@ export const RemplacementScalarFieldEnum = {
 } as const
 
 export type RemplacementScalarFieldEnum = (typeof RemplacementScalarFieldEnum)[keyof typeof RemplacementScalarFieldEnum]
+
+
+export const MatiereScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  description: 'description',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MatiereScalarFieldEnum = (typeof MatiereScalarFieldEnum)[keyof typeof MatiereScalarFieldEnum]
 
 
 export const SortOrder = {

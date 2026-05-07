@@ -10,6 +10,8 @@ import {
   deleteClasse,
 } from "../controllers/classesController.js";
 
+import matieresRouter from "./matieresRoute.js"; // Importation du routeur pour les matières d'une classe
+
 const router = Router();
 
 // GET /api/classes — accessible à tous les utilisateurs authentifiés
@@ -45,5 +47,7 @@ router.delete(
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
   deleteClasse,
 );
+
+router.use("/:classeId/matieres", matieresRouter); // Sous-route pour les matières d'une classe spécifique
 
 export default router;
