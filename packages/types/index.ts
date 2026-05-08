@@ -164,12 +164,8 @@ export interface ParentProfil {
   eleves: EleveResume[];
 }
 
-export interface Matiere {
-  id: string;
+export interface Matiere extends BaseEntity {
   nom: string;
   description?: string | null;
   classeId: string;
-  schoolId: string;
-  createdAt: string;
-  updatedAt: string;
 }
