@@ -164,6 +164,7 @@ export default function MatieresTab({ classeId, canEdit }: Props) {
                           className="btn btn-ghost btn-xs"
                           onClick={() => openEdit(m)}
                           title="Modifier"
+                          aria-label={`Modifier la matière ${m.nom}`}
                         >
                           <Pencil size={14} />
                         </button>
@@ -171,6 +172,7 @@ export default function MatieresTab({ classeId, canEdit }: Props) {
                           className="btn btn-ghost btn-xs text-error"
                           onClick={() => setDeleteTarget(m)}
                           title="Supprimer"
+                          aria-label={`Supprimer la matière ${m.nom}`}
                         >
                           <Trash2 size={14} />
                         </button>

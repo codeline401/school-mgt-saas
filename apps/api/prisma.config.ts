@@ -10,6 +10,6 @@ export default defineConfig({
     seed: "npx tsx ./prisma/seed.ts",
   },
   datasource: {
-    url: "postgresql://admin_user:dev_codeline401@localhost:5432/school_saas_db?schema=public",
+    url: process.env.DATABASE_URL!,
   },
 });

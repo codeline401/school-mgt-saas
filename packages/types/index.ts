@@ -1,8 +1,8 @@
 // Définition de base pout toutes les entités du SaaS
 export interface BaseEntity {
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   schoolId: string; // ID de l'école à laquelle cette entité appartient
 }
 

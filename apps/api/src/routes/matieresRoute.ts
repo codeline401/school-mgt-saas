@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { authenticate, authorizeRoles } from "../middlewares/authMiddleware";
+import { authenticate, authorizeRoles } from "../middlewares/authMiddleware.js";
 import {
   createClasseMatiere,
   deleteClasseMatiere,
   getClasseMatieres,
   updateClasseMatiere,
-} from "../controllers/matieresController";
-import { Role } from "../generated/prisma/enums";
+} from "../controllers/matieresController.js";
+import { Role } from "../generated/prisma/enums.js";
 
 const router = Router({ mergeParams: true }); // Permet d'accéder aux paramètres de la route parente (classeId)
 

@@ -64,9 +64,6 @@ export const createClasseMatiere = async (req: Request, res: Response) => {
     const { classeId } = req.params as { classeId: string }; // Récupère l'ID de la classe depuis les paramètres de l'URL
     const validatedData = createMatieresSchema.parse(req.body); // Valide les données de la requête avec Zod
 
-    console.log("Données reçues pour la création de matière :", req.body); // Log des données reçues
-    console.log("Classe ID :", classeId); // Log de l'ID de la classe
-
     const classe = await prisma.classe.findUnique({ where: { id: classeId } }); // Récupère la classe depuis la base de données
 
     if (!classe) return res.status(404).json({ error: "Classe non trouvée." }); // Si la classe n'existe pas, retourne une erreur 404
@@ -135,12 +132,12 @@ export const updateClasseMatiere = async (req: Request, res: Response) => {
     }; // Récupère les IDs de la classe et de la matière depuis les paramètres de l'URL
     const validatedData = updateMatieresSchema.parse(req.body); // Valide les données de la requête avec Zod
 
-    const matiere = await prisma.matiere.findUnique({
-      where: { id: matiereId as string },
-    }); // Récupère la matière depuis la base de données
+    const matiere = await prisma.matiere.findFirst({
+      where: { id: matiereId as string, classeId: classeId as string },
+    }); // Récupère la matière en vérifiant qu'elle appartient bien à la classe
 
     if (!matiere)
-      return res.status(404).json({ error: "Matière non trouvée." }); // Si la matière n'existe pas, retourne une erreur 404
+      return res.status(404).json({ error: "Matière non trouvée." }); // Si la matière n'existe pas ou n'appartient pas à la classe, retourne une erreur 404
 
     if (
       !isAuthorizhedForSchool(
@@ -181,8 +178,6 @@ export const updateClasseMatiere = async (req: Request, res: Response) => {
  */
 export const deleteClasseMatiere = async (req: Request, res: Response) => {
   try {
-    console.log("Paramètres reçus :", req.params); // Log pour afficher tous les paramètres reçus
-
     const { classeId, matiereId } = {
       classeId: req.params.classeId,
       matiereId: req.params.matiereId || req.params.id, // Fallback pour utiliser `id` si `matiereId` est manquant
@@ -190,18 +185,14 @@ export const deleteClasseMatiere = async (req: Request, res: Response) => {
 
     // Validation des paramètres
     if (!classeId || !matiereId) {
-      console.error("Paramètres manquants :", { classeId, matiereId });
       return res
         .status(400)
         .json({ error: "Les paramètres classeId et matiereId sont requis." });
     }
 
-    console.log("Classe ID :", classeId);
-    console.log("Matière ID :", matiereId);
-
-    const matiere = await prisma.matiere.findUnique({
-      where: { id: matiereId as string },
-    });
+    const matiere = await prisma.matiere.findFirst({
+      where: { id: matiereId as string, classeId: classeId as string },
+    }); // Récupère la matière en vérifiant qu'elle appartient bien à la classe
     if (!matiere)
       return res.status(404).json({ error: "Matière non trouvée." }); // Si la matière n'existe pas, retourne une erreur 404
 
