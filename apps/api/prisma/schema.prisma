@@ -66,6 +66,8 @@ model School {
   dossierAdmissions DossierAdmission[]
   contrats          Contrat[]
   remplacements     Remplacement[]
+
+  matieres Matiere[] // Liste des matières enseignées dans l'école
 }
 
 model Classe {
@@ -75,6 +77,8 @@ model Classe {
   school   School       @relation(fields: [schoolId], references: [id])
   eleves   Eleve[] // Une classe a plusieurs élèves
   profs    Professeur[] // Une classe a plusieurs professeurs
+
+  matieres Matiere[] // Matières enseignées dans cette classe
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -262,4 +266,20 @@ model Remplacement {
   @@index([schoolId]) // Index pour optimiser les requêtes par école
   @@index([professeurAbsentId]) // Index pour optimiser les requêtes par professeur absent
   @@index([date]) // Index pour optimiser les requêtes par date
+}
+
+model Matiere {
+  id          String   @id @default(uuid())
+  nom         String // ex: "Mathématiques", "Français", etc.
+  description String? // description optionnelle de la matière
+  classeId    String // la classe à laquelle cette matière est associée
+  classe      Classe   @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  schoolId    String
+  school      School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([classeId, nom]) // Un nom de matière unique par classe
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([classeId]) // Index pour optimiser les requêtes par classe
 }

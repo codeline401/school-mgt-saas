@@ -31,10 +31,19 @@ ALTER TABLE "Remplacement" ALTER COLUMN "updatedAt" DROP DEFAULT;
 
 -- 4. Backfill stray userId into remplacantUserId where it is not yet set,
 --    then drop the column that was added by mistake in migration 20260428043030.
-UPDATE "Remplacement"
-   SET "remplacantUserId" = "userId"
- WHERE "remplacantUserId" IS NULL
-   AND "userId" IS NOT NULL;
+--    Guard: only run the UPDATE if the column actually exists (it may have already been removed).
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'Remplacement' AND column_name = 'userId'
+  ) THEN
+    UPDATE "Remplacement"
+       SET "remplacantUserId" = "userId"
+     WHERE "remplacantUserId" IS NULL
+       AND "userId" IS NOT NULL;
+  END IF;
+END $$;
 ALTER TABLE "Remplacement" DROP COLUMN IF EXISTS "userId";
 
 -- 5. Preflight duplicate detection: raise an exception listing offending rows if any

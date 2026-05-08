@@ -1,21 +1,27 @@
 import "dotenv/config";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+import fs from "fs";
+import path from "path";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
-/** Returns the env var value if set; otherwise generates a secure random password and logs it. */
+/** Returns the env var value if set; otherwise generates a secure random password and writes it to .env.local. */
 function resolvePassword(envVar: string): string {
   const fromEnv = process.env[envVar];
   if (fromEnv) return fromEnv;
   const generated = crypto.randomBytes(16).toString("hex");
-  console.warn(`[seed] ${envVar} not set — generated password: ${generated}`);
-  console.warn(
-    `[seed] Store this password securely; it will not be shown again.`,
-  );
+  const envLocalPath = path.resolve(process.cwd(), ".env.local");
+  try {
+    fs.appendFileSync(envLocalPath, `${envVar}=${generated}\n`, { mode: 0o600 });
+    console.warn(`[seed] ${envVar} not set — generated credential written to ${envLocalPath}`);
+    console.warn(`[seed] Keep .env.local secure and do not commit it.`);
+  } catch {
+    console.warn(`[seed] ${envVar} not set — could not persist credential to .env.local. Set ${envVar} in your environment manually.`);
+  }
   return generated;
 }
 
@@ -59,7 +65,7 @@ async function main() {
   // Création du compte ADMIN maintenant que l'école existe
   const adminUser = await prisma.user.upsert({
     where: { email: "system@school.local" },
-    update: {},
+    update: { password: adminPassword },
     create: {
       email: "system@school.local",
       password: adminPassword,
@@ -131,8 +137,33 @@ async function main() {
     });
   }
 
-  console.log("Database seeded successfully! ");
+  // ── E. Création des matières ───────────────────────────────────────────────
+  const matieresData = [
+    { nom: "Mathématiques", classeId: classe6A.id, schoolId: school.id },
+    { nom: "Physique", classeId: classe6A.id, schoolId: school.id },
+    { nom: "Chimie", classeId: classe5B.id, schoolId: school.id },
+  ];
+  for (const m of matieresData) {
+    await prisma.matiere.upsert({
+      where: {
+        classeId_nom: {
+          classeId: m.classeId,
+          nom: m.nom,
+        },
+      },
+      update: {},
+      create: m,
+    });
+  }
+
+  console.log("Seed terminé !");
 }
+
+process.on("uncaughtException", (e) => {
+  console.error("Uncaught exception:", e?.message ?? String(e));
+  console.error("Stack:", e?.stack);
+  process.exit(1);
+});
 
 main()
   .catch((e) => {
@@ -143,9 +174,3 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-
-process.on("uncaughtException", (e) => {
-  console.error("Uncaught exception:", e?.message ?? String(e));
-  console.error("Stack:", e?.stack);
-  process.exit(1);
-});

@@ -86,3 +86,8 @@ export type Contrat = Prisma.ContratModel
  * 
  */
 export type Remplacement = Prisma.RemplacementModel
+/**
+ * Model Matiere
+ * 
+ */
+export type Matiere = Prisma.MatiereModel

@@ -392,7 +392,8 @@ export const ModelName = {
   Parent: 'Parent',
   DossierAdmission: 'DossierAdmission',
   Contrat: 'Contrat',
-  Remplacement: 'Remplacement'
+  Remplacement: 'Remplacement',
+  Matiere: 'Matiere'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement"
+    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1078,6 +1079,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Matiere: {
+      payload: Prisma.$MatierePayload<ExtArgs>
+      fields: Prisma.MatiereFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MatiereFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatierePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MatiereFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatierePayload>
+        }
+        findFirst: {
+          args: Prisma.MatiereFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatierePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MatiereFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatierePayload>
+        }
+        findMany: {
+          args: Prisma.MatiereFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatierePayload>[]
+        }
+        create: {
+          args: Prisma.MatiereCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatierePayload>
+        }
+        createMany: {
+          args: Prisma.MatiereCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MatiereCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatierePayload>[]
+        }
+        delete: {
+          args: Prisma.MatiereDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatierePayload>
+        }
+        update: {
+          args: Prisma.MatiereUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatierePayload>
+        }
+        deleteMany: {
+          args: Prisma.MatiereDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MatiereUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MatiereUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatierePayload>[]
+        }
+        upsert: {
+          args: Prisma.MatiereUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatierePayload>
+        }
+        aggregate: {
+          args: Prisma.MatiereAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMatiere>
+        }
+        groupBy: {
+          args: Prisma.MatiereGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MatiereGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MatiereCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MatiereCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1258,6 +1333,19 @@ export const RemplacementScalarFieldEnum = {
 } as const
 
 export type RemplacementScalarFieldEnum = (typeof RemplacementScalarFieldEnum)[keyof typeof RemplacementScalarFieldEnum]
+
+
+export const MatiereScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  description: 'description',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MatiereScalarFieldEnum = (typeof MatiereScalarFieldEnum)[keyof typeof MatiereScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1491,6 +1579,7 @@ export type GlobalOmitConfig = {
   dossierAdmission?: Prisma.DossierAdmissionOmit
   contrat?: Prisma.ContratOmit
   remplacement?: Prisma.RemplacementOmit
+  matiere?: Prisma.MatiereOmit
 }
 
 /* Types for Logging */
