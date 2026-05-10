@@ -16,11 +16,17 @@ function resolvePassword(envVar: string): string {
   const generated = crypto.randomBytes(16).toString("hex");
   const envLocalPath = path.resolve(process.cwd(), ".env.local");
   try {
-    fs.appendFileSync(envLocalPath, `${envVar}=${generated}\n`, { mode: 0o600 });
-    console.warn(`[seed] ${envVar} not set — generated credential written to ${envLocalPath}`);
+    fs.appendFileSync(envLocalPath, `${envVar}=${generated}\n`, {
+      mode: 0o600,
+    });
+    console.warn(
+      `[seed] ${envVar} not set — generated credential written to ${envLocalPath}`,
+    );
     console.warn(`[seed] Keep .env.local secure and do not commit it.`);
   } catch {
-    console.warn(`[seed] ${envVar} not set — could not persist credential to .env.local. Set ${envVar} in your environment manually.`);
+    console.warn(
+      `[seed] ${envVar} not set — could not persist credential to .env.local. Set ${envVar} in your environment manually.`,
+    );
   }
   return generated;
 }
@@ -77,6 +83,22 @@ async function main() {
   });
   console.log(`ADMIN créé : ${adminUser.email}`);
 
+  // Compte PROF : peut se connecter et saisir des notes
+  const profPassword = await bcrypt.hash(resolvePassword("PROF_PASSWORD"), 12);
+  const profUser = await prisma.user.upsert({
+    where: { email: "prof.rakoto@school.local" },
+    update: { password: profPassword },
+    create: {
+      email: "prof.rakoto@school.local",
+      password: profPassword,
+      nom: "Rakoto",
+      prenom: "Jean",
+      role: "PROF",
+      schoolId: school.id,
+    },
+  });
+  console.log(`PROF créé : ${profUser.email}`);
+
   // ── B. Création des classes ───────────────────────────────────────────────
   const classe6A = await prisma.classe.upsert({
     where: { schoolId_nom: { schoolId: school.id, nom: "6ème A" } },
@@ -93,26 +115,6 @@ async function main() {
     create: {
       nom: "5ème B",
       schoolId: school.id,
-    },
-  });
-
-  // ── C. Création d'un professeur (Multi-classes) ───────────────────────────
-  await prisma.professeur.upsert({
-    where: {
-      schoolId_nom_prenom: {
-        schoolId: school.id,
-        nom: "M. Rakoto",
-        prenom: "Rakoto",
-      },
-    },
-    update: {},
-    create: {
-      nom: "M. Rakoto",
-      prenom: "Rakoto",
-      schoolId: school.id,
-      classes: {
-        connect: [{ id: classe6A.id }, { id: classe5B.id }],
-      },
     },
   });
 
@@ -138,23 +140,59 @@ async function main() {
   }
 
   // ── E. Création des matières ───────────────────────────────────────────────
-  const matieresData = [
-    { nom: "Mathématiques", classeId: classe6A.id, schoolId: school.id },
-    { nom: "Physique", classeId: classe6A.id, schoolId: school.id },
-    { nom: "Chimie", classeId: classe5B.id, schoolId: school.id },
-  ];
-  for (const m of matieresData) {
-    await prisma.matiere.upsert({
-      where: {
-        classeId_nom: {
-          classeId: m.classeId,
-          nom: m.nom,
-        },
+  const matieresMath = await prisma.matiere.upsert({
+    where: { classeId_nom: { classeId: classe6A.id, nom: "Mathématiques" } },
+    update: {},
+    create: { nom: "Mathématiques", classeId: classe6A.id, schoolId: school.id },
+  });
+  const matieresPhysique = await prisma.matiere.upsert({
+    where: { classeId_nom: { classeId: classe6A.id, nom: "Physique" } },
+    update: {},
+    create: { nom: "Physique", classeId: classe6A.id, schoolId: school.id },
+  });
+  const matieresChimie = await prisma.matiere.upsert({
+    where: { classeId_nom: { classeId: classe5B.id, nom: "Chimie" } },
+    update: {},
+    create: { nom: "Chimie", classeId: classe5B.id, schoolId: school.id },
+  });
+
+  // ── C. Création d'un professeur (Multi-classes) lié au compte User ────────
+  // Le prof enseigne Maths + Physique en 6ème A, et aussi en 5ème B
+  await prisma.professeur.upsert({
+    where: {
+      schoolId_nom_prenom: {
+        schoolId: school.id,
+        nom: "Rakoto",
+        prenom: "Jean",
       },
-      update: {},
-      create: m,
-    });
-  }
+    },
+    update: {
+      userId: profUser.id,
+      classes: { connect: [{ id: classe6A.id }, { id: classe5B.id }] },
+      matieres: {
+        connect: [
+          { id: matieresMath.id },
+          { id: matieresPhysique.id },
+          { id: matieresChimie.id },
+        ],
+      },
+    },
+    create: {
+      nom: "Rakoto",
+      prenom: "Jean",
+      schoolId: school.id,
+      userId: profUser.id,
+      classes: { connect: [{ id: classe6A.id }, { id: classe5B.id }] },
+      matieres: {
+        connect: [
+          { id: matieresMath.id },
+          { id: matieresPhysique.id },
+          { id: matieresChimie.id },
+        ],
+      },
+    },
+  });
+  console.log("Professeur Rakoto lié au compte prof et aux matières.");
 
   console.log("Seed terminé !");
 }

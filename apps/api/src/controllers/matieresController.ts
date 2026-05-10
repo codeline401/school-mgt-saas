@@ -44,10 +44,19 @@ export const getClasseMatieres = async (req: Request, res: Response) => {
 
     const matieres = await prisma.matiere.findMany({
       where: { classeId },
-      orderBy: { nom: "desc" }, // Trie les matières par nom dans l'ordre décroissant
+      orderBy: { nom: "desc" },
     });
 
-    res.status(200).json(matieres); // Retourne la liste des matières avec un statut 200
+    // Un PROF ne voit que les matières qu'il enseigne dans cette classe
+    if (req.user!.role === "PROF") {
+      const profMatieres = await prisma.matiere.findMany({
+        where: { classeId, profs: { some: { userId: req.user!.id } } },
+        orderBy: { nom: "desc" },
+      });
+      return res.status(200).json(profMatieres);
+    }
+
+    res.status(200).json(matieres);
   } catch (err) {
     console.error("Erreur lors de la récupération des matières :", err);
     res.status(500).json({ error: "Une erreur est survenue." }); // Si une erreur survient, retourne une erreur 500

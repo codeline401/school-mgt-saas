@@ -200,6 +200,8 @@ export type MatiereWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Matiere"> | Date | string
   classe?: Prisma.XOR<Prisma.ClasseScalarRelationFilter, Prisma.ClasseWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  notes?: Prisma.NoteListRelationFilter
+  profs?: Prisma.ProfesseurListRelationFilter
 }
 
 export type MatiereOrderByWithRelationInput = {
@@ -212,6 +214,8 @@ export type MatiereOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   classe?: Prisma.ClasseOrderByWithRelationInput
   school?: Prisma.SchoolOrderByWithRelationInput
+  notes?: Prisma.NoteOrderByRelationAggregateInput
+  profs?: Prisma.ProfesseurOrderByRelationAggregateInput
 }
 
 export type MatiereWhereUniqueInput = Prisma.AtLeast<{
@@ -228,6 +232,8 @@ export type MatiereWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Matiere"> | Date | string
   classe?: Prisma.XOR<Prisma.ClasseScalarRelationFilter, Prisma.ClasseWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  notes?: Prisma.NoteListRelationFilter
+  profs?: Prisma.ProfesseurListRelationFilter
 }, "id" | "classeId_nom">
 
 export type MatiereOrderByWithAggregationInput = {
@@ -264,6 +270,8 @@ export type MatiereCreateInput = {
   updatedAt?: Date | string
   classe: Prisma.ClasseCreateNestedOneWithoutMatieresInput
   school: Prisma.SchoolCreateNestedOneWithoutMatieresInput
+  notes?: Prisma.NoteCreateNestedManyWithoutMatiereInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutMatieresInput
 }
 
 export type MatiereUncheckedCreateInput = {
@@ -274,6 +282,8 @@ export type MatiereUncheckedCreateInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutMatiereInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutMatieresInput
 }
 
 export type MatiereUpdateInput = {
@@ -284,6 +294,8 @@ export type MatiereUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   classe?: Prisma.ClasseUpdateOneRequiredWithoutMatieresNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutMatieresNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutMatiereNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutMatieresNestedInput
 }
 
 export type MatiereUncheckedUpdateInput = {
@@ -294,6 +306,8 @@ export type MatiereUncheckedUpdateInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutMatiereNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutMatieresNestedInput
 }
 
 export type MatiereCreateManyInput = {
@@ -367,6 +381,11 @@ export type MatiereMinOrderByAggregateInput = {
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type MatiereScalarRelationFilter = {
+  is?: Prisma.MatiereWhereInput
+  isNot?: Prisma.MatiereWhereInput
 }
 
 export type MatiereCreateNestedManyWithoutSchoolInput = {
@@ -453,6 +472,58 @@ export type MatiereUncheckedUpdateManyWithoutClasseNestedInput = {
   deleteMany?: Prisma.MatiereScalarWhereInput | Prisma.MatiereScalarWhereInput[]
 }
 
+export type MatiereCreateNestedManyWithoutProfsInput = {
+  create?: Prisma.XOR<Prisma.MatiereCreateWithoutProfsInput, Prisma.MatiereUncheckedCreateWithoutProfsInput> | Prisma.MatiereCreateWithoutProfsInput[] | Prisma.MatiereUncheckedCreateWithoutProfsInput[]
+  connectOrCreate?: Prisma.MatiereCreateOrConnectWithoutProfsInput | Prisma.MatiereCreateOrConnectWithoutProfsInput[]
+  connect?: Prisma.MatiereWhereUniqueInput | Prisma.MatiereWhereUniqueInput[]
+}
+
+export type MatiereUncheckedCreateNestedManyWithoutProfsInput = {
+  create?: Prisma.XOR<Prisma.MatiereCreateWithoutProfsInput, Prisma.MatiereUncheckedCreateWithoutProfsInput> | Prisma.MatiereCreateWithoutProfsInput[] | Prisma.MatiereUncheckedCreateWithoutProfsInput[]
+  connectOrCreate?: Prisma.MatiereCreateOrConnectWithoutProfsInput | Prisma.MatiereCreateOrConnectWithoutProfsInput[]
+  connect?: Prisma.MatiereWhereUniqueInput | Prisma.MatiereWhereUniqueInput[]
+}
+
+export type MatiereUpdateManyWithoutProfsNestedInput = {
+  create?: Prisma.XOR<Prisma.MatiereCreateWithoutProfsInput, Prisma.MatiereUncheckedCreateWithoutProfsInput> | Prisma.MatiereCreateWithoutProfsInput[] | Prisma.MatiereUncheckedCreateWithoutProfsInput[]
+  connectOrCreate?: Prisma.MatiereCreateOrConnectWithoutProfsInput | Prisma.MatiereCreateOrConnectWithoutProfsInput[]
+  upsert?: Prisma.MatiereUpsertWithWhereUniqueWithoutProfsInput | Prisma.MatiereUpsertWithWhereUniqueWithoutProfsInput[]
+  set?: Prisma.MatiereWhereUniqueInput | Prisma.MatiereWhereUniqueInput[]
+  disconnect?: Prisma.MatiereWhereUniqueInput | Prisma.MatiereWhereUniqueInput[]
+  delete?: Prisma.MatiereWhereUniqueInput | Prisma.MatiereWhereUniqueInput[]
+  connect?: Prisma.MatiereWhereUniqueInput | Prisma.MatiereWhereUniqueInput[]
+  update?: Prisma.MatiereUpdateWithWhereUniqueWithoutProfsInput | Prisma.MatiereUpdateWithWhereUniqueWithoutProfsInput[]
+  updateMany?: Prisma.MatiereUpdateManyWithWhereWithoutProfsInput | Prisma.MatiereUpdateManyWithWhereWithoutProfsInput[]
+  deleteMany?: Prisma.MatiereScalarWhereInput | Prisma.MatiereScalarWhereInput[]
+}
+
+export type MatiereUncheckedUpdateManyWithoutProfsNestedInput = {
+  create?: Prisma.XOR<Prisma.MatiereCreateWithoutProfsInput, Prisma.MatiereUncheckedCreateWithoutProfsInput> | Prisma.MatiereCreateWithoutProfsInput[] | Prisma.MatiereUncheckedCreateWithoutProfsInput[]
+  connectOrCreate?: Prisma.MatiereCreateOrConnectWithoutProfsInput | Prisma.MatiereCreateOrConnectWithoutProfsInput[]
+  upsert?: Prisma.MatiereUpsertWithWhereUniqueWithoutProfsInput | Prisma.MatiereUpsertWithWhereUniqueWithoutProfsInput[]
+  set?: Prisma.MatiereWhereUniqueInput | Prisma.MatiereWhereUniqueInput[]
+  disconnect?: Prisma.MatiereWhereUniqueInput | Prisma.MatiereWhereUniqueInput[]
+  delete?: Prisma.MatiereWhereUniqueInput | Prisma.MatiereWhereUniqueInput[]
+  connect?: Prisma.MatiereWhereUniqueInput | Prisma.MatiereWhereUniqueInput[]
+  update?: Prisma.MatiereUpdateWithWhereUniqueWithoutProfsInput | Prisma.MatiereUpdateWithWhereUniqueWithoutProfsInput[]
+  updateMany?: Prisma.MatiereUpdateManyWithWhereWithoutProfsInput | Prisma.MatiereUpdateManyWithWhereWithoutProfsInput[]
+  deleteMany?: Prisma.MatiereScalarWhereInput | Prisma.MatiereScalarWhereInput[]
+}
+
+export type MatiereCreateNestedOneWithoutNotesInput = {
+  create?: Prisma.XOR<Prisma.MatiereCreateWithoutNotesInput, Prisma.MatiereUncheckedCreateWithoutNotesInput>
+  connectOrCreate?: Prisma.MatiereCreateOrConnectWithoutNotesInput
+  connect?: Prisma.MatiereWhereUniqueInput
+}
+
+export type MatiereUpdateOneRequiredWithoutNotesNestedInput = {
+  create?: Prisma.XOR<Prisma.MatiereCreateWithoutNotesInput, Prisma.MatiereUncheckedCreateWithoutNotesInput>
+  connectOrCreate?: Prisma.MatiereCreateOrConnectWithoutNotesInput
+  upsert?: Prisma.MatiereUpsertWithoutNotesInput
+  connect?: Prisma.MatiereWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MatiereUpdateToOneWithWhereWithoutNotesInput, Prisma.MatiereUpdateWithoutNotesInput>, Prisma.MatiereUncheckedUpdateWithoutNotesInput>
+}
+
 export type MatiereCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -460,6 +531,8 @@ export type MatiereCreateWithoutSchoolInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   classe: Prisma.ClasseCreateNestedOneWithoutMatieresInput
+  notes?: Prisma.NoteCreateNestedManyWithoutMatiereInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutMatieresInput
 }
 
 export type MatiereUncheckedCreateWithoutSchoolInput = {
@@ -469,6 +542,8 @@ export type MatiereUncheckedCreateWithoutSchoolInput = {
   classeId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutMatiereInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutMatieresInput
 }
 
 export type MatiereCreateOrConnectWithoutSchoolInput = {
@@ -517,6 +592,8 @@ export type MatiereCreateWithoutClasseInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   school: Prisma.SchoolCreateNestedOneWithoutMatieresInput
+  notes?: Prisma.NoteCreateNestedManyWithoutMatiereInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutMatieresInput
 }
 
 export type MatiereUncheckedCreateWithoutClasseInput = {
@@ -526,6 +603,8 @@ export type MatiereUncheckedCreateWithoutClasseInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutMatiereInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutMatieresInput
 }
 
 export type MatiereCreateOrConnectWithoutClasseInput = {
@@ -554,6 +633,109 @@ export type MatiereUpdateManyWithWhereWithoutClasseInput = {
   data: Prisma.XOR<Prisma.MatiereUpdateManyMutationInput, Prisma.MatiereUncheckedUpdateManyWithoutClasseInput>
 }
 
+export type MatiereCreateWithoutProfsInput = {
+  id?: string
+  nom: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  classe: Prisma.ClasseCreateNestedOneWithoutMatieresInput
+  school: Prisma.SchoolCreateNestedOneWithoutMatieresInput
+  notes?: Prisma.NoteCreateNestedManyWithoutMatiereInput
+}
+
+export type MatiereUncheckedCreateWithoutProfsInput = {
+  id?: string
+  nom: string
+  description?: string | null
+  classeId: string
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutMatiereInput
+}
+
+export type MatiereCreateOrConnectWithoutProfsInput = {
+  where: Prisma.MatiereWhereUniqueInput
+  create: Prisma.XOR<Prisma.MatiereCreateWithoutProfsInput, Prisma.MatiereUncheckedCreateWithoutProfsInput>
+}
+
+export type MatiereUpsertWithWhereUniqueWithoutProfsInput = {
+  where: Prisma.MatiereWhereUniqueInput
+  update: Prisma.XOR<Prisma.MatiereUpdateWithoutProfsInput, Prisma.MatiereUncheckedUpdateWithoutProfsInput>
+  create: Prisma.XOR<Prisma.MatiereCreateWithoutProfsInput, Prisma.MatiereUncheckedCreateWithoutProfsInput>
+}
+
+export type MatiereUpdateWithWhereUniqueWithoutProfsInput = {
+  where: Prisma.MatiereWhereUniqueInput
+  data: Prisma.XOR<Prisma.MatiereUpdateWithoutProfsInput, Prisma.MatiereUncheckedUpdateWithoutProfsInput>
+}
+
+export type MatiereUpdateManyWithWhereWithoutProfsInput = {
+  where: Prisma.MatiereScalarWhereInput
+  data: Prisma.XOR<Prisma.MatiereUpdateManyMutationInput, Prisma.MatiereUncheckedUpdateManyWithoutProfsInput>
+}
+
+export type MatiereCreateWithoutNotesInput = {
+  id?: string
+  nom: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  classe: Prisma.ClasseCreateNestedOneWithoutMatieresInput
+  school: Prisma.SchoolCreateNestedOneWithoutMatieresInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutMatieresInput
+}
+
+export type MatiereUncheckedCreateWithoutNotesInput = {
+  id?: string
+  nom: string
+  description?: string | null
+  classeId: string
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutMatieresInput
+}
+
+export type MatiereCreateOrConnectWithoutNotesInput = {
+  where: Prisma.MatiereWhereUniqueInput
+  create: Prisma.XOR<Prisma.MatiereCreateWithoutNotesInput, Prisma.MatiereUncheckedCreateWithoutNotesInput>
+}
+
+export type MatiereUpsertWithoutNotesInput = {
+  update: Prisma.XOR<Prisma.MatiereUpdateWithoutNotesInput, Prisma.MatiereUncheckedUpdateWithoutNotesInput>
+  create: Prisma.XOR<Prisma.MatiereCreateWithoutNotesInput, Prisma.MatiereUncheckedCreateWithoutNotesInput>
+  where?: Prisma.MatiereWhereInput
+}
+
+export type MatiereUpdateToOneWithWhereWithoutNotesInput = {
+  where?: Prisma.MatiereWhereInput
+  data: Prisma.XOR<Prisma.MatiereUpdateWithoutNotesInput, Prisma.MatiereUncheckedUpdateWithoutNotesInput>
+}
+
+export type MatiereUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classe?: Prisma.ClasseUpdateOneRequiredWithoutMatieresNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutMatieresNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutMatieresNestedInput
+}
+
+export type MatiereUncheckedUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutMatieresNestedInput
+}
+
 export type MatiereCreateManySchoolInput = {
   id?: string
   nom: string
@@ -570,6 +752,8 @@ export type MatiereUpdateWithoutSchoolInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   classe?: Prisma.ClasseUpdateOneRequiredWithoutMatieresNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutMatiereNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutMatieresNestedInput
 }
 
 export type MatiereUncheckedUpdateWithoutSchoolInput = {
@@ -579,6 +763,8 @@ export type MatiereUncheckedUpdateWithoutSchoolInput = {
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutMatiereNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutMatieresNestedInput
 }
 
 export type MatiereUncheckedUpdateManyWithoutSchoolInput = {
@@ -606,6 +792,8 @@ export type MatiereUpdateWithoutClasseInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   school?: Prisma.SchoolUpdateOneRequiredWithoutMatieresNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutMatiereNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutMatieresNestedInput
 }
 
 export type MatiereUncheckedUpdateWithoutClasseInput = {
@@ -615,6 +803,8 @@ export type MatiereUncheckedUpdateWithoutClasseInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutMatiereNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutMatieresNestedInput
 }
 
 export type MatiereUncheckedUpdateManyWithoutClasseInput = {
@@ -626,6 +816,76 @@ export type MatiereUncheckedUpdateManyWithoutClasseInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type MatiereUpdateWithoutProfsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classe?: Prisma.ClasseUpdateOneRequiredWithoutMatieresNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutMatieresNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutMatiereNestedInput
+}
+
+export type MatiereUncheckedUpdateWithoutProfsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutMatiereNestedInput
+}
+
+export type MatiereUncheckedUpdateManyWithoutProfsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type MatiereCountOutputType
+ */
+
+export type MatiereCountOutputType = {
+  notes: number
+  profs: number
+}
+
+export type MatiereCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  notes?: boolean | MatiereCountOutputTypeCountNotesArgs
+  profs?: boolean | MatiereCountOutputTypeCountProfsArgs
+}
+
+/**
+ * MatiereCountOutputType without action
+ */
+export type MatiereCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MatiereCountOutputType
+   */
+  select?: Prisma.MatiereCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * MatiereCountOutputType without action
+ */
+export type MatiereCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NoteWhereInput
+}
+
+/**
+ * MatiereCountOutputType without action
+ */
+export type MatiereCountOutputTypeCountProfsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProfesseurWhereInput
+}
 
 
 export type MatiereSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -638,6 +898,9 @@ export type MatiereSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  notes?: boolean | Prisma.Matiere$notesArgs<ExtArgs>
+  profs?: boolean | Prisma.Matiere$profsArgs<ExtArgs>
+  _count?: boolean | Prisma.MatiereCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["matiere"]>
 
 export type MatiereSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -678,6 +941,9 @@ export type MatiereOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type MatiereInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  notes?: boolean | Prisma.Matiere$notesArgs<ExtArgs>
+  profs?: boolean | Prisma.Matiere$profsArgs<ExtArgs>
+  _count?: boolean | Prisma.MatiereCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MatiereIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
@@ -693,6 +959,8 @@ export type $MatierePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     classe: Prisma.$ClassePayload<ExtArgs>
     school: Prisma.$SchoolPayload<ExtArgs>
+    notes: Prisma.$NotePayload<ExtArgs>[]
+    profs: Prisma.$ProfesseurPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1098,6 +1366,8 @@ export interface Prisma__MatiereClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   classe<T extends Prisma.ClasseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClasseDefaultArgs<ExtArgs>>): Prisma.Prisma__ClasseClient<runtime.Types.Result.GetResult<Prisma.$ClassePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  notes<T extends Prisma.Matiere$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matiere$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  profs<T extends Prisma.Matiere$profsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matiere$profsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProfesseurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1532,6 +1802,54 @@ export type MatiereDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Matieres to delete.
    */
   limit?: number
+}
+
+/**
+ * Matiere.notes
+ */
+export type Matiere$notesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Note
+   */
+  select?: Prisma.NoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Note
+   */
+  omit?: Prisma.NoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NoteInclude<ExtArgs> | null
+  where?: Prisma.NoteWhereInput
+  orderBy?: Prisma.NoteOrderByWithRelationInput | Prisma.NoteOrderByWithRelationInput[]
+  cursor?: Prisma.NoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NoteScalarFieldEnum | Prisma.NoteScalarFieldEnum[]
+}
+
+/**
+ * Matiere.profs
+ */
+export type Matiere$profsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Professeur
+   */
+  select?: Prisma.ProfesseurSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Professeur
+   */
+  omit?: Prisma.ProfesseurOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProfesseurInclude<ExtArgs> | null
+  where?: Prisma.ProfesseurWhereInput
+  orderBy?: Prisma.ProfesseurOrderByWithRelationInput | Prisma.ProfesseurOrderByWithRelationInput[]
+  cursor?: Prisma.ProfesseurWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProfesseurScalarFieldEnum | Prisma.ProfesseurScalarFieldEnum[]
 }
 
 /**

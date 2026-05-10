@@ -91,3 +91,17 @@ export type Remplacement = Prisma.RemplacementModel
  * 
  */
 export type Matiere = Prisma.MatiereModel
+/**
+ * Model Note
+ * Note — enregistre la note d'un élève pour une matière et une évaluation données.
+ * 
+ * Un élève peut avoir PLUSIEURS notes pour la même matière, chacune distinguée
+ * par un titre d'évaluation (ex: "1er DS - 1er Trimestre - 2026-2027").
+ * 
+ * Contraintes :
+ * - Unique sur (eleveId, matiereId, titre) : même élève, même matière, même éval → doublon.
+ * - note ≤ noteMax validé dans le contrôleur.
+ * - feuillePath : chemin local du fichier corrigé uploadé (optionnel).
+ * - createdById : utilisateur PROF qui a saisi la note.
+ */
+export type Note = Prisma.NoteModel
