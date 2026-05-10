@@ -169,3 +169,39 @@ export interface Matiere extends BaseEntity {
   description?: string | null;
   classeId: string;
 }
+
+/** Résumé d'un éléve retrouné dans le liste des notes */
+export interface NoteEleveResume {
+  id: string;
+  nom: string;
+  prenom: string;
+}
+
+/** Résumé d'une matière retourné dans la liste des notes */
+export interface NoteMatiereResume {
+  id: string;
+  nom: string;
+}
+
+/**
+ * Note d'un elève pour une matière dans une classe
+ *
+ * Un élève peut avoir plusieurs notes pour la m^me matière, chacune
+ * identifié par une titre d'évaluation unique (ex: "DS1", "Examen final", etc.)
+ *
+ * Retouner par GET /api/classes/:classeId/notes
+ */
+export interface Note extends BaseEntity {
+  titre: string; // ex: "DS1", "Examen final", etc.
+  note: number; // Note sur 20
+  noteMax: number; // Note maximale (ex: 20, 100, etc.)
+  coefficient: number; // Coefficient de la note (ex: 1, 2, etc.)
+  commentaire?: string | null; // Commentaire optionnel du prof
+  feuillePath?: string | null; // Chemin vers la feuille de note (PDF) générée
+  eleveId: string; // ID de l'élève concerné
+  matière: string; // Nom de la matière concernée (redondant pour faciliter l'affichage)
+  classeId: string; // ID de la classe concernée (redondant pour faciliter l'affichage)
+  createdById: string; // ID du professeur qui a créé la note
+  eleve?: NoteEleveResume; // Résumé de l'élève (inclus si demandé avec include)
+  matiere?: NoteMatiereResume; // Résumé de la matière (inclus si demandé avec include)
+}

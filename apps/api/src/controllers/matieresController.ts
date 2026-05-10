@@ -47,6 +47,20 @@ export const getClasseMatieres = async (req: Request, res: Response) => {
       orderBy: { nom: "desc" }, // Trie les matières par nom dans l'ordre décroissant
     });
 
+    // Un PROF ne voit que les matières qu'il enseigne dans cette classe
+    if (req.user!.role === "PROF") {
+      const professeur = await prisma.professeur.findUnique({
+        where: { userId: req.user!.id },
+        select: { matieres: { where: { classeId }, select: { id: true } } },
+      });
+      const profMatiereIds = new Set(
+        (professeur?.matieres ?? []).map((m) => m.id),
+      );
+      return res
+        .status(200)
+        .json(matieres.filter((m) => profMatiereIds.has(m.id)));
+    }
+
     res.status(200).json(matieres); // Retourne la liste des matières avec un statut 200
   } catch (err) {
     console.error("Erreur lors de la récupération des matières :", err);

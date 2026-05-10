@@ -1,5 +1,7 @@
 import express from "express"; // Importation d'Express pour créer le serveur API
 import cors from "cors"; // Importation de CORS pour gérer les requêtes cross-origin
+import path from "path";
+import { fileURLToPath } from "url";
 
 import {
   getAllEleves,
@@ -18,6 +20,10 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors()); // Utilisation de CORS pour permettre les requêtes cross-origin
 app.use(express.json()); // Middleware pour parser les requêtes JSON
+
+// Servir les fichiers uploadés (feuilles corrigées) en statique
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
 app.use("/api/auth", authRoutes); // Utilisation des routes d'authentification pour les endpoints commençant par /api/auth
 app.use("/api/schools", schoolRoutes); // Utilisation des routes pour les écoles pour les endpoints commençant par /api/schools

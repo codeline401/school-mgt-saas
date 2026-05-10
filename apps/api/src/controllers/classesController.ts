@@ -48,6 +48,20 @@ export const getAllClasses = async (req: Request, res: Response) => {
           : undefined
         : (userSchoolId ?? undefined);
 
+    // Un PROF ne voit que les classes auxquelles il est affecté
+    if (role === "PROF") {
+      const professeur = await prisma.professeur.findUnique({
+        where: { userId: req.user!.id },
+        include: {
+          classes: {
+            include: { _count: { select: { eleves: true, profs: true } } },
+            orderBy: { nom: "asc" },
+          },
+        },
+      });
+      return res.status(200).json(professeur?.classes ?? []);
+    }
+
     const classes = await prisma.classe.findMany({
       ...(filterSchoolId ? { where: { schoolId: filterSchoolId } } : {}),
       include: {

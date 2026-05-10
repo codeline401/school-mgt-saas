@@ -43,6 +43,8 @@ model User {
   // Relations vers les dossiers liés à cet utilisateur
   contrats      Contrat[] // Contrat (pour prof / collaborateur)
   remplacements Remplacement[] @relation("Remplacant") // pour les remplacements où cet utilisateur est le remplaçant
+  notes         Note[]         @relation("NotesCreees") // Notes créées par ce professeur
+  professeur    Professeur? // Profil RH si l'utilisateur est un PROF
 }
 
 // Modele SAAS
@@ -68,6 +70,7 @@ model School {
   remplacements     Remplacement[]
 
   matieres Matiere[] // Liste des matières enseignées dans l'école
+  notes    Note[]
 }
 
 model Classe {
@@ -82,6 +85,7 @@ model Classe {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  notes     Note[]
 
   @@unique([schoolId, nom]) // Un nom de classe unique par école (pour les upserts)
 }
@@ -110,6 +114,7 @@ model Eleve {
   // Historique des admissions de l'élève
   admissions DossierAdmission[]
   parent     Parent?            @relation(fields: [parentId], references: [id])
+  notes      Note[]
 
   @@unique([schoolId, nom, prenom]) // Nom + prénom unique par école (pour les upserts)
   @@index([schoolId]) // Index pour optimiser les requêtes par école
@@ -124,6 +129,13 @@ model Professeur {
   schoolId String
   school   School   @relation(fields: [schoolId], references: [id])
   classes  Classe[] // Un professeur peut enseigner dans plusieurs classes
+
+  // Lien vers le compte User du professeur (pour le filtrage par utilisateur connecté)
+  userId String? @unique
+  user   User?   @relation(fields: [userId], references: [id])
+
+  // Matières que ce professeur enseigne (pour filtrer les matières dans les notes)
+  matieres Matiere[] @relation("ProfesseurMatieres")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -141,6 +153,7 @@ model Professeur {
 
   @@unique([schoolId, nom, prenom]) // Nom + prénom unique par école (pour les upserts)
   @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([userId]) // Index pour optimiser les requêtes par userId
 }
 
 // MODELE PARENT 
@@ -278,8 +291,57 @@ model Matiere {
   school      School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  notes       Note[]
+  profs       Professeur[] @relation("ProfesseurMatieres") // Profs qui enseignent cette matière
 
   @@unique([classeId, nom]) // Un nom de matière unique par classe
   @@index([schoolId]) // Index pour optimiser les requêtes par école
   @@index([classeId]) // Index pour optimiser les requêtes par classe
+}
+
+// apps/api/prisma/schema.prisma
+
+/// Note — enregistre la note d'un élève pour une matière et une évaluation données.
+///
+/// Un élève peut avoir PLUSIEURS notes pour la même matière, chacune distinguée
+/// par un titre d'évaluation (ex: "1er DS - 1er Trimestre - 2026-2027").
+///
+/// Contraintes :
+///   - Unique sur (eleveId, matiereId, titre) : même élève, même matière, même éval → doublon.
+///   - note ≤ noteMax validé dans le contrôleur.
+///   - feuillePath : chemin local du fichier corrigé uploadé (optionnel).
+///   - createdById : utilisateur PROF qui a saisi la note.
+model Note {
+  id          String  @id @default(uuid())
+  titre       String // ex: "1er DS - 1er Trimestre - 2026-2027"
+  note        Decimal
+  noteMax     Decimal @default(20) // note maximale possible, par défaut 20
+  coefficient Decimal @default(1) // coefficient de la note, par défaut 1
+  commentaire String?
+  feuillePath String? // chemin local du fichier corrigé uploadé (optionnel) 
+
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  matiereId String
+  matiere   Matiere @relation(fields: [matiereId], references: [id], onDelete: Cascade)
+
+  classeId String
+  classe   Classe @relation(fields: [classeId], references: [id], onDelete: Cascade)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  /// Professeur qui a saisi la note
+  createdById String
+  createdBy   User   @relation("NotesCreees", fields: [createdById], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([eleveId, matiereId, titre]) // Un élève ne peut avoir qu'une note par matière et par titre d'évaluation
+  @@index([classeId]) // Index pour optimiser les requêtes par classe
+  @@index([matiereId]) // Index pour optimiser les requêtes par matière
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([eleveId]) // Index pour optimiser les requêtes par élève
 }

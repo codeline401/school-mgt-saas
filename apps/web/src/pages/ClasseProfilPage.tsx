@@ -9,6 +9,7 @@ import VueGeneraleTab from "../components/classe/VueGeneraleTab";
 import EleveTab from "../components/classe/EleveTab";
 import PlaceholderTab from "../components/classe/PlaceholderTab";
 import MatieresTab from "../components/classe/MatieresTab";
+import NotesTab from "../components/classe/NotesTab";
 
 // Définition des onglets pour la page de profil de classe
 const TABS = [
@@ -84,7 +85,13 @@ export default function ClasseProfilPage() {
       case "matieres":
         return <MatieresTab classeId={id} canEdit={canEdit} />;
       case "notes":
-        return <PlaceholderTab label="Notes" />;
+        return (
+          <NotesTab
+            classeId={id}
+            canWrite={user?.role === "PROF" || user?.role === "SUDO_ADMIN"}
+            canRead={user?.role === "ADMIN" || user?.role === "SUDO_ADMIN"}
+          />
+        );
       case "absences":
         return <PlaceholderTab label="Absences" />;
       case "documents":

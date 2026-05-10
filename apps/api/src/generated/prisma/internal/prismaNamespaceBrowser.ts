@@ -60,7 +60,8 @@ export const ModelName = {
   DossierAdmission: 'DossierAdmission',
   Contrat: 'Contrat',
   Remplacement: 'Remplacement',
-  Matiere: 'Matiere'
+  Matiere: 'Matiere',
+  Note: 'Note'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -141,6 +142,7 @@ export const ProfesseurScalarFieldEnum = {
   nom: 'nom',
   prenom: 'prenom',
   schoolId: 'schoolId',
+  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   telephone: 'telephone',
@@ -233,6 +235,26 @@ export const MatiereScalarFieldEnum = {
 } as const
 
 export type MatiereScalarFieldEnum = (typeof MatiereScalarFieldEnum)[keyof typeof MatiereScalarFieldEnum]
+
+
+export const NoteScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  note: 'note',
+  noteMax: 'noteMax',
+  coefficient: 'coefficient',
+  commentaire: 'commentaire',
+  feuillePath: 'feuillePath',
+  eleveId: 'eleveId',
+  matiereId: 'matiereId',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NoteScalarFieldEnum = (typeof NoteScalarFieldEnum)[keyof typeof NoteScalarFieldEnum]
 
 
 export const SortOrder = {
