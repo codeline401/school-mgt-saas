@@ -16,11 +16,17 @@ function resolvePassword(envVar: string): string {
   const generated = crypto.randomBytes(16).toString("hex");
   const envLocalPath = path.resolve(process.cwd(), ".env.local");
   try {
-    fs.appendFileSync(envLocalPath, `${envVar}=${generated}\n`, { mode: 0o600 });
-    console.warn(`[seed] ${envVar} not set — generated credential written to ${envLocalPath}`);
+    fs.appendFileSync(envLocalPath, `${envVar}=${generated}\n`, {
+      mode: 0o600,
+    });
+    console.warn(
+      `[seed] ${envVar} not set — generated credential written to ${envLocalPath}`,
+    );
     console.warn(`[seed] Keep .env.local secure and do not commit it.`);
   } catch {
-    console.warn(`[seed] ${envVar} not set — could not persist credential to .env.local. Set ${envVar} in your environment manually.`);
+    console.warn(
+      `[seed] ${envVar} not set — could not persist credential to .env.local. Set ${envVar} in your environment manually.`,
+    );
   }
   return generated;
 }
@@ -134,25 +140,20 @@ async function main() {
   }
 
   // ── E. Création des matières ───────────────────────────────────────────────
-  const matieresData = [
-    { nom: "Mathématiques", classeId: classe6A.id, schoolId: school.id },
-    { nom: "Physique", classeId: classe6A.id, schoolId: school.id },
-    { nom: "Chimie", classeId: classe5B.id, schoolId: school.id },
-  ];
   const matieresMath = await prisma.matiere.upsert({
     where: { classeId_nom: { classeId: classe6A.id, nom: "Mathématiques" } },
     update: {},
-    create: matieresData[0],
+    create: { nom: "Mathématiques", classeId: classe6A.id, schoolId: school.id },
   });
   const matieresPhysique = await prisma.matiere.upsert({
     where: { classeId_nom: { classeId: classe6A.id, nom: "Physique" } },
     update: {},
-    create: matieresData[1],
+    create: { nom: "Physique", classeId: classe6A.id, schoolId: school.id },
   });
-  await prisma.matiere.upsert({
+  const matieresChimie = await prisma.matiere.upsert({
     where: { classeId_nom: { classeId: classe5B.id, nom: "Chimie" } },
     update: {},
-    create: matieresData[2],
+    create: { nom: "Chimie", classeId: classe5B.id, schoolId: school.id },
   });
 
   // ── C. Création d'un professeur (Multi-classes) lié au compte User ────────
@@ -168,7 +169,13 @@ async function main() {
     update: {
       userId: profUser.id,
       classes: { connect: [{ id: classe6A.id }, { id: classe5B.id }] },
-      matieres: { connect: [{ id: matieresMath.id }, { id: matieresPhysique.id }] },
+      matieres: {
+        connect: [
+          { id: matieresMath.id },
+          { id: matieresPhysique.id },
+          { id: matieresChimie.id },
+        ],
+      },
     },
     create: {
       nom: "Rakoto",
@@ -176,7 +183,13 @@ async function main() {
       schoolId: school.id,
       userId: profUser.id,
       classes: { connect: [{ id: classe6A.id }, { id: classe5B.id }] },
-      matieres: { connect: [{ id: matieresMath.id }, { id: matieresPhysique.id }] },
+      matieres: {
+        connect: [
+          { id: matieresMath.id },
+          { id: matieresPhysique.id },
+          { id: matieresChimie.id },
+        ],
+      },
     },
   });
   console.log("Professeur Rakoto lié au compte prof et aux matières.");

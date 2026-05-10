@@ -43,7 +43,11 @@ export default function NotesTab({ classeId, canWrite }: Props) {
   const [deleteTarget, setDeleteTarget] = useState<Note | null>(null);
 
   // Chargement des notes de la classe
-  const { data: notes = [], isLoading } = useQuery<Note[]>({
+  const {
+    data: notes = [],
+    isLoading,
+    isError: notesError,
+  } = useQuery<Note[]>({
     queryKey: ["classe-notes", classeId],
     queryFn: async () => {
       const { data } = await api.get(`/api/classes/${classeId}/notes`);
@@ -53,7 +57,7 @@ export default function NotesTab({ classeId, canWrite }: Props) {
   });
 
   // Chargement des élèves pour le select
-  const { data: eleves = [] } = useQuery<Eleve[]>({
+  const { data: eleves = [], isError: elevesError } = useQuery<Eleve[]>({
     queryKey: ["classe-eleves", classeId],
     queryFn: async () => {
       const { data } = await api.get(`/api/classes/${classeId}/eleves`);
@@ -63,7 +67,7 @@ export default function NotesTab({ classeId, canWrite }: Props) {
   });
 
   // Chargement des matières pour le select
-  const { data: matieres = [] } = useQuery<Matiere[]>({
+  const { data: matieres = [], isError: matieresError } = useQuery<Matiere[]>({
     queryKey: ["classe-matieres", classeId],
     queryFn: async () => {
       const { data } = await api.get(`/api/classes/${classeId}/matieres`);
@@ -89,14 +93,12 @@ export default function NotesTab({ classeId, canWrite }: Props) {
         const { data } = await api.put(
           `/api/classes/${classeId}/notes/${editingId}`,
           formData,
-          { headers: { "Content-Type": "multipart/form-data" } },
         );
         return data;
       }
       const { data } = await api.post(
         `/api/classes/${classeId}/notes`,
         formData,
-        { headers: { "Content-Type": "multipart/form-data" } },
       );
       return data;
     },
@@ -178,6 +180,14 @@ export default function NotesTab({ classeId, canWrite }: Props) {
     );
   }
 
+  if (notesError) {
+    return (
+      <div className="alert alert-error">
+        Erreur lors du chargement des notes. Veuillez réessayer.
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       {/* En-tête */}
@@ -236,7 +246,7 @@ export default function NotesTab({ classeId, canWrite }: Props) {
                   <td className="text-center">
                     {n.feuillePath ? (
                       <a
-                        href={`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/${n.feuillePath.replace(/\\/g, "/")}`}
+                        href={`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/uploads/feuilles/${n.feuillePath?.split(/[\\/]/).pop()}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn-ghost btn-xs"
@@ -310,11 +320,15 @@ export default function NotesTab({ classeId, canWrite }: Props) {
                 required
               >
                 <option value="">— Sélectionner un élève —</option>
-                {eleves.map((e) => (
-                  <option key={e.id} value={e.id}>
-                    {e.nom} {e.prenom}
-                  </option>
-                ))}
+                {elevesError ? (
+                  <option disabled>Erreur de chargement</option>
+                ) : (
+                  eleves.map((e) => (
+                    <option key={e.id} value={e.id}>
+                      {e.nom} {e.prenom}
+                    </option>
+                  ))
+                )}
               </select>
             </div>
 
@@ -332,11 +346,15 @@ export default function NotesTab({ classeId, canWrite }: Props) {
                 required
               >
                 <option value="">— Sélectionner une matière —</option>
-                {matieres.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.nom}
-                  </option>
-                ))}
+                {matieresError ? (
+                  <option disabled>Erreur de chargement</option>
+                ) : (
+                  matieres.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.nom}
+                    </option>
+                  ))
+                )}
               </select>
             </div>
 

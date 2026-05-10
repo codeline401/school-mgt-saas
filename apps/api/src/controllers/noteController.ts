@@ -1,5 +1,3 @@
-// apps/api/src/schemas/noteSchema.ts
-
 import { Request, Response } from "express";
 import fs from "fs"; // Importation du module fs pour la gestion des fichiers
 import { prisma } from "../lib/prisma";
@@ -19,6 +17,20 @@ function isAuthorizhedForSchool(
 ): boolean {
   if (userRole === "SUDO_ADMIN") return true; // SUDO_ADMIN peut accéder à toutes les ressources
   return userSchoolId === ressourceSchoolId;
+}
+
+/** Supprime un fichier uploadé de manière silencieuse (best-effort). */
+function removeUploadedFile(filePath: string | undefined): void {
+  if (!filePath) return;
+  try {
+    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+  } catch (e) {
+    console.warn(
+      "[cleanup] Impossible de supprimer le fichier uploadé :",
+      filePath,
+      e,
+    );
+  }
 }
 
 // --- GET /api/classes/:classeId/notes ---------------------------------------------------
@@ -90,6 +102,7 @@ export const createClasseNote = async (req: Request, res: Response) => {
     const { classeId } = req.params as { classeId: string }; // récup l'id de la classe dans les params
 
     if (req.user!.role !== "PROF" && req.user!.role !== "SUDO_ADMIN") {
+      removeUploadedFile((req as any).file?.path);
       return res
         .status(403)
         .json({ error: " Seul un professeur peut saisir une note." });
@@ -98,7 +111,10 @@ export const createClasseNote = async (req: Request, res: Response) => {
     const validatedData = createNoteSchema.parse(req.body);
 
     const classe = await prisma.classe.findUnique({ where: { id: classeId } });
-    if (!classe) return res.status(404).json({ error: "Classe non trouvé" });
+    if (!classe) {
+      removeUploadedFile((req as any).file?.path);
+      return res.status(404).json({ error: "Classe non trouvé" });
+    }
 
     if (
       !isAuthorizhedForSchool(
@@ -107,10 +123,12 @@ export const createClasseNote = async (req: Request, res: Response) => {
         classe.schoolId,
       )
     ) {
+      removeUploadedFile((req as any).file?.path);
       return res.status(403).json({ error: "Accès refusé." });
     }
 
     if (validatedData.note > validatedData.noteMax) {
+      removeUploadedFile((req as any).file?.path);
       return res.status(400).json({
         error: `La note (${validatedData.note}) ne peut pas dépasser na note maximale (${validatedData.noteMax})`,
       });
@@ -121,6 +139,7 @@ export const createClasseNote = async (req: Request, res: Response) => {
       where: { id: validatedData.eleveId, classeId },
     });
     if (!eleve) {
+      removeUploadedFile((req as any).file?.path);
       return res
         .status(404)
         .json({ error: " Elève non trouvé dans cette classe" });
@@ -131,6 +150,7 @@ export const createClasseNote = async (req: Request, res: Response) => {
       where: { id: validatedData.matiereId, classeId },
     });
     if (!matiere) {
+      removeUploadedFile((req as any).file?.path);
       return res
         .status(404)
         .json({ error: "Matière non trouvé dans cette classe." });
@@ -157,14 +177,15 @@ export const createClasseNote = async (req: Request, res: Response) => {
 
     res.status(201).json(note);
   } catch (err) {
+    removeUploadedFile((req as any).file?.path);
     if (err instanceof ZodError) {
       return res.status(400).json({ error: err.issues });
     }
 
-    // Violation de contriante unique Prisma (doublon eleveId + matiereId + titre)
+    // Violation de contrainte unique Prisma (doublon eleveId + matiereId + titre)
     if ((err as any)?.code === "P2002") {
       return res.status(409).json({
-        rerror:
+        error:
           "Une note avec le même titre existe déjà pour cet élève et cette matière.",
       });
     }
@@ -230,15 +251,9 @@ export const updateClasseNote = async (req: Request, res: Response) => {
       });
     }
 
-    // Gestion du remplacement de fichier
-    let feuillePath = existingNote.feuillePath;
+    // Gestion du remplacement de fichier — DB first, file cleanup after
     const newFile = (req as any).file;
-    if (newFile) {
-      if (feuillePath && fs.existsSync(feuillePath)) {
-        fs.unlinkSync(feuillePath);
-      }
-      feuillePath = newFile.path;
-    }
+    const newFeuillePath = newFile?.path ?? null;
 
     const updatedNote = await prisma.note.update({
       where: { id: noteId },
@@ -255,12 +270,18 @@ export const updateClasseNote = async (req: Request, res: Response) => {
         ...(validatedData.commentaire !== undefined
           ? { commentaire: validatedData.commentaire }
           : {}),
-        ...(newFile ? { feuillePath } : {}),
+        ...(newFile ? { feuillePath: newFeuillePath } : {}),
       },
     });
 
+    // Supprimer l'ancien fichier après la mise à jour réussie en BDD
+    if (newFile && existingNote.feuillePath) {
+      removeUploadedFile(existingNote.feuillePath);
+    }
+
     res.status(200).json(updatedNote);
   } catch (err) {
+    removeUploadedFile((req as any).file?.path);
     if (err instanceof ZodError) {
       return res.status(400).json({ error: err.issues });
     }
@@ -307,19 +328,17 @@ export const updateClasseNote = async (req: Request, res: Response) => {
       existingNote.createdById === req.user!.id;
 
     if (!canDelete) {
-      return res
-        .status(403)
-        .json({
-          error:
-            "Vous ne pouvez supprimer que les notes que vous avez saisies.",
-        });
+      return res.status(403).json({
+        error: "Vous ne pouvez supprimer que les notes que vous avez saisies.",
+      });
     }
 
-    if (existingNote.feuillePath && fs.existsSync(existingNote.feuillePath)) {
-      fs.unlinkSync(existingNote.feuillePath); // Supprime le fichier de la feuille de note du disque s'il existe
-    }
+    // DB delete d'abord — le fichier est supprimé ensuite en best-effort
+    await prisma.note.delete({ where: { id: noteId } });
 
-    await prisma.note.delete({ where: { id: noteId } }); // Supprime la note de la base de données
+    if (existingNote.feuillePath) {
+      removeUploadedFile(existingNote.feuillePath);
+    }
 
     res.status(204).send(); // Retourne un statut 204 No Content pour indiquer que la suppression a réussi
   } catch (err) {
