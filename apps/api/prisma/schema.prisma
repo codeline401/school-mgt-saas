@@ -70,9 +70,10 @@ model School {
   contrats          Contrat[]
   remplacements     Remplacement[]
 
-  matieres  Matiere[] // Liste des matières enseignées dans l'école
-  notes     Note[]
-  documents Document[]
+  matieres        Matiere[] // Liste des matières enseignées dans l'école
+  notes           Note[]
+  documents       Document[]
+  creneauHoraires CreneauHoraire[]
 }
 
 model Classe {
@@ -85,10 +86,11 @@ model Classe {
 
   matieres Matiere[] // Matières enseignées dans cette classe
 
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  notes     Note[]
-  documents Document[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  notes           Note[]
+  documents       Document[]
+  creneauHoraires CreneauHoraire[]
 
   @@unique([schoolId, nom]) // Un nom de classe unique par école (pour les upserts)
 }
@@ -285,18 +287,19 @@ model Remplacement {
 }
 
 model Matiere {
-  id          String       @id @default(uuid())
-  nom         String // ex: "Mathématiques", "Français", etc.
-  description String? // description optionnelle de la matière
-  classeId    String // la classe à laquelle cette matière est associée
-  classe      Classe       @relation(fields: [classeId], references: [id], onDelete: Cascade)
-  schoolId    String
-  school      School       @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  notes       Note[]
-  profs       Professeur[] @relation("ProfesseurMatieres") // Profs qui enseignent cette matière
-  documents   Document[]
+  id              String           @id @default(uuid())
+  nom             String // ex: "Mathématiques", "Français", etc.
+  description     String? // description optionnelle de la matière
+  classeId        String // la classe à laquelle cette matière est associée
+  classe          Classe           @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  schoolId        String
+  school          School           @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  notes           Note[]
+  profs           Professeur[]     @relation("ProfesseurMatieres") // Profs qui enseignent cette matière
+  documents       Document[]
+  creneauHoraires CreneauHoraire[]
 
   @@unique([classeId, nom]) // Un nom de matière unique par classe
   @@index([schoolId]) // Index pour optimiser les requêtes par école
@@ -388,4 +391,37 @@ model Document {
   @@index([classeId])
   @@index([uploadedById])
   @@index([type])
+}
+
+// MODULE EMPLOI DU TEMPS
+enum JourSemaine {
+  LUNDI
+  MARDI
+  MERCREDI
+  JEUDI
+  VENDREDI
+  SAMEDI
+  DIMANCHE
+}
+
+model CreneauHoraire {
+  id         String      @id @default(uuid())
+  classeId   String
+  classe     Classe      @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  schoolId   String
+  school     School      @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  jour       JourSemaine
+  heureDebut String // format "HH:mm", ex: "08:30"
+  heureFin   String // format "HH:mm", ex: "10:00"
+  intitule   String? // ex: "Mathématiques - M. Dupont"
+  matiereId  String?
+  matiere    Matiere?    @relation(fields: [matiereId], references: [id])
+  couleur    String? // couleur personnalisée pour le créneau (ex: "#FF5733")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([classeId, jour, heureDebut, heureFin]) // Un créneau unique par classe, jour et heure de début
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([classeId]) // Index pour optimiser les requêtes par classe
 }

@@ -51,3 +51,16 @@ export const TypeDocument = {
 } as const
 
 export type TypeDocument = (typeof TypeDocument)[keyof typeof TypeDocument]
+
+
+export const JourSemaine = {
+  LUNDI: 'LUNDI',
+  MARDI: 'MARDI',
+  MERCREDI: 'MERCREDI',
+  JEUDI: 'JEUDI',
+  VENDREDI: 'VENDREDI',
+  SAMEDI: 'SAMEDI',
+  DIMANCHE: 'DIMANCHE'
+} as const
+
+export type JourSemaine = (typeof JourSemaine)[keyof typeof JourSemaine]

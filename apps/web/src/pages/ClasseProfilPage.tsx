@@ -11,6 +11,7 @@ import PlaceholderTab from "../components/classe/PlaceholderTab";
 import MatieresTab from "../components/classe/MatieresTab";
 import NotesTab from "../components/classe/NotesTab";
 import DocumentsTab from "../components/classe/DocumentsTab";
+import EmploiDuTempsTab from "../components/classe/EmploiDuTempsTab";
 
 // Définition des onglets pour la page de profil de classe
 const TABS = [
@@ -82,7 +83,16 @@ export default function ClasseProfilPage() {
         return <EleveTab classeId={id} canEdit={canEdit} />;
 
       case "emploi-du-temps":
-        return <PlaceholderTab label="Emploi du temps" />;
+        return (
+          <EmploiDuTempsTab
+            classeId={id}
+            canManage={
+              user?.role === "SUDO_ADMIN" ||
+              user?.role === "ADMIN" ||
+              user?.role === "USER"
+            }
+          />
+        );
       case "matieres":
         return <MatieresTab classeId={id} canEdit={canEdit} />;
       case "notes":
