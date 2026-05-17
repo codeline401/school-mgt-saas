@@ -71,7 +71,11 @@ export const createClasseDocument = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Classe non trouvée." });
     }
 
-    if (user.role !== "SUDO_ADMIN" && user.schoolId !== classe.schoolId) {
+    const allowedRoles = ["SUDO_ADMIN", "ADMIN", "PROF"];
+    if (
+      user.schoolId !== classe.schoolId ||
+      !allowedRoles.includes(user.role)
+    ) {
       removeUploadedFile(file.path);
       return res.status(403).json({ error: "Accès refusé." });
     }

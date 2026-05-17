@@ -33,6 +33,18 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: "auth-storage-school-mgt", // nom de la clé dans le localStorage
+      version: 1,
+      migrate: (persistedState: unknown, version: number) => {
+        const state = (persistedState ?? {}) as Partial<AuthState>;
+        if (version < 1 && state.user) {
+          state.user = {
+            ...state.user,
+            nom: state.user.nom ?? "",
+            prenom: state.user.prenom ?? "",
+          };
+        }
+        return state as AuthState;
+      },
     },
   ),
 );

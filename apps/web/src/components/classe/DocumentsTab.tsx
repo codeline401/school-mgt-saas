@@ -51,6 +51,8 @@ export default function DocumentsTab({ classeId, canUpload }: Props) {
   const modalRef = useRef<HTMLDialogElement>(null);
   const user = useAuthStore((s) => s.user);
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [form, setForm] = useState<DocForm>(EMPTY_FORM);
   const [deleteTarget, setDeleteTarget] = useState<ClasseDocument | null>(null);
   const [openingDocId, setOpeningDocId] = useState<string | null>(null);
@@ -99,6 +101,7 @@ export default function DocumentsTab({ classeId, canUpload }: Props) {
       toast.success("Document ajouté.");
       modalRef.current?.close();
       setForm(EMPTY_FORM);
+      if (fileInputRef.current) fileInputRef.current.value = "";
     },
     onError: (err) => toast.error(getApiError(err, "Erreur lors de l'ajout.")),
   });
@@ -152,7 +155,7 @@ export default function DocumentsTab({ classeId, canUpload }: Props) {
     if (!filename) return;
     setOpeningDocId(doc.id);
     try {
-      const response = await api.get(`/uploads/documents/${filename}`, {
+      const response = await api.get(`/uploads/documents/${encodeURIComponent(filename)}`, {
         responseType: "blob",
       });
       const blob = new Blob([response.data], {
@@ -203,6 +206,7 @@ export default function DocumentsTab({ classeId, canUpload }: Props) {
             className="btn btn-primary btn-sm gap-1"
             onClick={() => {
               setForm(EMPTY_FORM);
+              if (fileInputRef.current) fileInputRef.current.value = "";
               modalRef.current?.showModal();
             }}
           >
@@ -266,6 +270,7 @@ export default function DocumentsTab({ classeId, canUpload }: Props) {
                       <button
                         className="btn btn-ghost btn-xs"
                         title="Consulter"
+                        aria-label={`Consulter ${doc.titre || doc.id}`}
                         disabled={openingDocId === doc.id}
                         onClick={() => openDocument(doc)}
                       >
@@ -279,6 +284,7 @@ export default function DocumentsTab({ classeId, canUpload }: Props) {
                         <button
                           className="btn btn-ghost btn-xs text-error"
                           title="Supprimer"
+                          aria-label={`Supprimer ${doc.titre || doc.id}`}
                           onClick={() => setDeleteTarget(doc)}
                         >
                           <Trash2 className="w-4 h-4" />
@@ -372,6 +378,7 @@ export default function DocumentsTab({ classeId, canUpload }: Props) {
                 </span>
               </label>
               <input
+                ref={fileInputRef}
                 type="file"
                 accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.ppt,.pptx"
                 onChange={handleFileChange}

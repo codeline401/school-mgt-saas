@@ -4,13 +4,15 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import crypto from "crypto"; // Pour générer des noms de fichiers uniques
+import { fileURLToPath } from "url";
 import {
   createClasseDocument,
   deleteClasseDocument,
   getClasseDocuments,
 } from "../controllers/documentController.js";
 
-const UPLOAD_DIR = "uploads/documents";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const UPLOAD_DIR = path.join(__dirname, "../../uploads/documents");
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
 const storage = multer.diskStorage({
