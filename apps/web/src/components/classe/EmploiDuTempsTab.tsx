@@ -318,7 +318,7 @@ export default function EmploiDuTempsTab({ classeId, canManage }: Props) {
                             </span>
                             {/* Boutons édition — visibles au survol */}
                             {canManage && (
-                              <div className="absolute top-1 right-1 hidden group-hover:flex gap-0.5 bg-base-100/80 rounded p-0.5">
+                              <div className="absolute top-1 right-1 hidden group-hover:flex group-focus-within:flex gap-0.5 bg-base-100/80 rounded p-0.5">
                                 <button
                                   className="btn btn-ghost btn-xs p-0 h-5 w-5 min-h-0"
                                   title="Modifier"

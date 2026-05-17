@@ -1,4 +1,4 @@
-import { z } from "zod"; // Importation de Zod pour la validation des données
+import { z } from "zod";
 
 export const createCreneauSchema = z.object({
   jour: z.enum([
@@ -10,20 +10,18 @@ export const createCreneauSchema = z.object({
     "SAMEDI",
     "DIMANCHE",
   ]),
+  // ✅ Regex stricte 24h (était ^\d{2}:\d{2}$ — acceptait 29:99)
   heureDebut: z
     .string()
-    .regex(/^\d{2}:\d{2}$/, "Format de l'heure invalide (HH:MM)"),
+    .regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Heure invalide (HH:MM, 00:00–23:59)."),
   heureFin: z
     .string()
-    .regex(/^\d{2}:\d{2}$/, "Format de l'heure invalide (HH:MM)"),
-  intutile: z.string().max(100).optional(),
+    .regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Heure invalide (HH:MM, 00:00–23:59)."),
+  intitule: z.string().max(100).optional(), // ✅ typo corrigée (était intutile)
   matiereId: z.string().uuid("ID de matière invalide").optional(),
-  professeurId: z.string().uuid("ID de professeur invalide").optional(),
+  // ✅ professeurId retiré — absent du modèle Prisma et non utilisé par le contrôleur
   couleur: z
     .string()
-    .regex(
-      /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/,
-      "Format de couleur hexadécimal invalide",
-    )
+    .regex(/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/, "Format couleur hex invalide.")
     .optional(),
 });

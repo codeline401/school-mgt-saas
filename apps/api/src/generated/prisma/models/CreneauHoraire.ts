@@ -31,7 +31,7 @@ export type CreneauHoraireMinAggregateOutputType = {
   jour: $Enums.JourSemaine | null
   heureDebut: string | null
   heureFin: string | null
-  intutile: string | null
+  intitule: string | null
   matiereId: string | null
   couleur: string | null
   createdAt: Date | null
@@ -45,7 +45,7 @@ export type CreneauHoraireMaxAggregateOutputType = {
   jour: $Enums.JourSemaine | null
   heureDebut: string | null
   heureFin: string | null
-  intutile: string | null
+  intitule: string | null
   matiereId: string | null
   couleur: string | null
   createdAt: Date | null
@@ -59,7 +59,7 @@ export type CreneauHoraireCountAggregateOutputType = {
   jour: number
   heureDebut: number
   heureFin: number
-  intutile: number
+  intitule: number
   matiereId: number
   couleur: number
   createdAt: number
@@ -75,7 +75,7 @@ export type CreneauHoraireMinAggregateInputType = {
   jour?: true
   heureDebut?: true
   heureFin?: true
-  intutile?: true
+  intitule?: true
   matiereId?: true
   couleur?: true
   createdAt?: true
@@ -89,7 +89,7 @@ export type CreneauHoraireMaxAggregateInputType = {
   jour?: true
   heureDebut?: true
   heureFin?: true
-  intutile?: true
+  intitule?: true
   matiereId?: true
   couleur?: true
   createdAt?: true
@@ -103,7 +103,7 @@ export type CreneauHoraireCountAggregateInputType = {
   jour?: true
   heureDebut?: true
   heureFin?: true
-  intutile?: true
+  intitule?: true
   matiereId?: true
   couleur?: true
   createdAt?: true
@@ -190,7 +190,7 @@ export type CreneauHoraireGroupByOutputType = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile: string | null
+  intitule: string | null
   matiereId: string | null
   couleur: string | null
   createdAt: Date
@@ -225,7 +225,7 @@ export type CreneauHoraireWhereInput = {
   jour?: Prisma.EnumJourSemaineFilter<"CreneauHoraire"> | $Enums.JourSemaine
   heureDebut?: Prisma.StringFilter<"CreneauHoraire"> | string
   heureFin?: Prisma.StringFilter<"CreneauHoraire"> | string
-  intutile?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
+  intitule?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
   matiereId?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
   couleur?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CreneauHoraire"> | Date | string
@@ -242,7 +242,7 @@ export type CreneauHoraireOrderByWithRelationInput = {
   jour?: Prisma.SortOrder
   heureDebut?: Prisma.SortOrder
   heureFin?: Prisma.SortOrder
-  intutile?: Prisma.SortOrderInput | Prisma.SortOrder
+  intitule?: Prisma.SortOrderInput | Prisma.SortOrder
   matiereId?: Prisma.SortOrderInput | Prisma.SortOrder
   couleur?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -263,7 +263,7 @@ export type CreneauHoraireWhereUniqueInput = Prisma.AtLeast<{
   jour?: Prisma.EnumJourSemaineFilter<"CreneauHoraire"> | $Enums.JourSemaine
   heureDebut?: Prisma.StringFilter<"CreneauHoraire"> | string
   heureFin?: Prisma.StringFilter<"CreneauHoraire"> | string
-  intutile?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
+  intitule?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
   matiereId?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
   couleur?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CreneauHoraire"> | Date | string
@@ -280,7 +280,7 @@ export type CreneauHoraireOrderByWithAggregationInput = {
   jour?: Prisma.SortOrder
   heureDebut?: Prisma.SortOrder
   heureFin?: Prisma.SortOrder
-  intutile?: Prisma.SortOrderInput | Prisma.SortOrder
+  intitule?: Prisma.SortOrderInput | Prisma.SortOrder
   matiereId?: Prisma.SortOrderInput | Prisma.SortOrder
   couleur?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -300,7 +300,7 @@ export type CreneauHoraireScalarWhereWithAggregatesInput = {
   jour?: Prisma.EnumJourSemaineWithAggregatesFilter<"CreneauHoraire"> | $Enums.JourSemaine
   heureDebut?: Prisma.StringWithAggregatesFilter<"CreneauHoraire"> | string
   heureFin?: Prisma.StringWithAggregatesFilter<"CreneauHoraire"> | string
-  intutile?: Prisma.StringNullableWithAggregatesFilter<"CreneauHoraire"> | string | null
+  intitule?: Prisma.StringNullableWithAggregatesFilter<"CreneauHoraire"> | string | null
   matiereId?: Prisma.StringNullableWithAggregatesFilter<"CreneauHoraire"> | string | null
   couleur?: Prisma.StringNullableWithAggregatesFilter<"CreneauHoraire"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CreneauHoraire"> | Date | string
@@ -312,7 +312,7 @@ export type CreneauHoraireCreateInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   couleur?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -328,7 +328,7 @@ export type CreneauHoraireUncheckedCreateInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   matiereId?: string | null
   couleur?: string | null
   createdAt?: Date | string
@@ -340,7 +340,7 @@ export type CreneauHoraireUpdateInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -356,7 +356,7 @@ export type CreneauHoraireUncheckedUpdateInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matiereId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -370,7 +370,7 @@ export type CreneauHoraireCreateManyInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   matiereId?: string | null
   couleur?: string | null
   createdAt?: Date | string
@@ -382,7 +382,7 @@ export type CreneauHoraireUpdateManyMutationInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -395,7 +395,7 @@ export type CreneauHoraireUncheckedUpdateManyInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matiereId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -426,7 +426,7 @@ export type CreneauHoraireCountOrderByAggregateInput = {
   jour?: Prisma.SortOrder
   heureDebut?: Prisma.SortOrder
   heureFin?: Prisma.SortOrder
-  intutile?: Prisma.SortOrder
+  intitule?: Prisma.SortOrder
   matiereId?: Prisma.SortOrder
   couleur?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -440,7 +440,7 @@ export type CreneauHoraireMaxOrderByAggregateInput = {
   jour?: Prisma.SortOrder
   heureDebut?: Prisma.SortOrder
   heureFin?: Prisma.SortOrder
-  intutile?: Prisma.SortOrder
+  intitule?: Prisma.SortOrder
   matiereId?: Prisma.SortOrder
   couleur?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -454,7 +454,7 @@ export type CreneauHoraireMinOrderByAggregateInput = {
   jour?: Prisma.SortOrder
   heureDebut?: Prisma.SortOrder
   heureFin?: Prisma.SortOrder
-  intutile?: Prisma.SortOrder
+  intitule?: Prisma.SortOrder
   matiereId?: Prisma.SortOrder
   couleur?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -596,7 +596,7 @@ export type CreneauHoraireCreateWithoutSchoolInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   couleur?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -610,7 +610,7 @@ export type CreneauHoraireUncheckedCreateWithoutSchoolInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   matiereId?: string | null
   couleur?: string | null
   createdAt?: Date | string
@@ -653,7 +653,7 @@ export type CreneauHoraireScalarWhereInput = {
   jour?: Prisma.EnumJourSemaineFilter<"CreneauHoraire"> | $Enums.JourSemaine
   heureDebut?: Prisma.StringFilter<"CreneauHoraire"> | string
   heureFin?: Prisma.StringFilter<"CreneauHoraire"> | string
-  intutile?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
+  intitule?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
   matiereId?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
   couleur?: Prisma.StringNullableFilter<"CreneauHoraire"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CreneauHoraire"> | Date | string
@@ -665,7 +665,7 @@ export type CreneauHoraireCreateWithoutClasseInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   couleur?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -679,7 +679,7 @@ export type CreneauHoraireUncheckedCreateWithoutClasseInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   matiereId?: string | null
   couleur?: string | null
   createdAt?: Date | string
@@ -717,7 +717,7 @@ export type CreneauHoraireCreateWithoutMatiereInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   couleur?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -732,7 +732,7 @@ export type CreneauHoraireUncheckedCreateWithoutMatiereInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   couleur?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -770,7 +770,7 @@ export type CreneauHoraireCreateManySchoolInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   matiereId?: string | null
   couleur?: string | null
   createdAt?: Date | string
@@ -782,7 +782,7 @@ export type CreneauHoraireUpdateWithoutSchoolInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -796,7 +796,7 @@ export type CreneauHoraireUncheckedUpdateWithoutSchoolInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matiereId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -809,7 +809,7 @@ export type CreneauHoraireUncheckedUpdateManyWithoutSchoolInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matiereId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -822,7 +822,7 @@ export type CreneauHoraireCreateManyClasseInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   matiereId?: string | null
   couleur?: string | null
   createdAt?: Date | string
@@ -834,7 +834,7 @@ export type CreneauHoraireUpdateWithoutClasseInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -848,7 +848,7 @@ export type CreneauHoraireUncheckedUpdateWithoutClasseInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matiereId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -861,7 +861,7 @@ export type CreneauHoraireUncheckedUpdateManyWithoutClasseInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matiereId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -875,7 +875,7 @@ export type CreneauHoraireCreateManyMatiereInput = {
   jour: $Enums.JourSemaine
   heureDebut: string
   heureFin: string
-  intutile?: string | null
+  intitule?: string | null
   couleur?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -886,7 +886,7 @@ export type CreneauHoraireUpdateWithoutMatiereInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -901,7 +901,7 @@ export type CreneauHoraireUncheckedUpdateWithoutMatiereInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -914,7 +914,7 @@ export type CreneauHoraireUncheckedUpdateManyWithoutMatiereInput = {
   jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
   heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
   heureFin?: Prisma.StringFieldUpdateOperationsInput | string
-  intutile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -929,7 +929,7 @@ export type CreneauHoraireSelect<ExtArgs extends runtime.Types.Extensions.Intern
   jour?: boolean
   heureDebut?: boolean
   heureFin?: boolean
-  intutile?: boolean
+  intitule?: boolean
   matiereId?: boolean
   couleur?: boolean
   createdAt?: boolean
@@ -946,7 +946,7 @@ export type CreneauHoraireSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   jour?: boolean
   heureDebut?: boolean
   heureFin?: boolean
-  intutile?: boolean
+  intitule?: boolean
   matiereId?: boolean
   couleur?: boolean
   createdAt?: boolean
@@ -963,7 +963,7 @@ export type CreneauHoraireSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   jour?: boolean
   heureDebut?: boolean
   heureFin?: boolean
-  intutile?: boolean
+  intitule?: boolean
   matiereId?: boolean
   couleur?: boolean
   createdAt?: boolean
@@ -980,14 +980,14 @@ export type CreneauHoraireSelectScalar = {
   jour?: boolean
   heureDebut?: boolean
   heureFin?: boolean
-  intutile?: boolean
+  intitule?: boolean
   matiereId?: boolean
   couleur?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CreneauHoraireOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "classeId" | "schoolId" | "jour" | "heureDebut" | "heureFin" | "intutile" | "matiereId" | "couleur" | "createdAt" | "updatedAt", ExtArgs["result"]["creneauHoraire"]>
+export type CreneauHoraireOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "classeId" | "schoolId" | "jour" | "heureDebut" | "heureFin" | "intitule" | "matiereId" | "couleur" | "createdAt" | "updatedAt", ExtArgs["result"]["creneauHoraire"]>
 export type CreneauHoraireInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
@@ -1018,7 +1018,7 @@ export type $CreneauHorairePayload<ExtArgs extends runtime.Types.Extensions.Inte
     jour: $Enums.JourSemaine
     heureDebut: string
     heureFin: string
-    intutile: string | null
+    intitule: string | null
     matiereId: string | null
     couleur: string | null
     createdAt: Date
@@ -1455,7 +1455,7 @@ export interface CreneauHoraireFieldRefs {
   readonly jour: Prisma.FieldRef<"CreneauHoraire", 'JourSemaine'>
   readonly heureDebut: Prisma.FieldRef<"CreneauHoraire", 'String'>
   readonly heureFin: Prisma.FieldRef<"CreneauHoraire", 'String'>
-  readonly intutile: Prisma.FieldRef<"CreneauHoraire", 'String'>
+  readonly intitule: Prisma.FieldRef<"CreneauHoraire", 'String'>
   readonly matiereId: Prisma.FieldRef<"CreneauHoraire", 'String'>
   readonly couleur: Prisma.FieldRef<"CreneauHoraire", 'String'>
   readonly createdAt: Prisma.FieldRef<"CreneauHoraire", 'DateTime'>

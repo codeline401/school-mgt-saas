@@ -63,6 +63,21 @@ export const createCreneau = async (req: Request, res: Response) => {
       }
     }
 
+    // Vérifier les chevauchements d'horaires
+    const overlap = await prisma.creneauHoraire.findFirst({
+      where: {
+        classeId,
+        jour: data.jour,
+        heureDebut: { lt: data.heureFin },
+        heureFin: { gt: data.heureDebut },
+      },
+    });
+    if (overlap) {
+      return res.status(409).json({
+        error: `Ce créneau chevauche un cours existant (${overlap.heureDebut}–${overlap.heureFin}).`,
+      });
+    }
+
     const creneau = await prisma.creneauHoraire.create({
       data: {
         classeId,
@@ -70,7 +85,7 @@ export const createCreneau = async (req: Request, res: Response) => {
         jour: data.jour,
         heureDebut: data.heureDebut,
         heureFin: data.heureFin,
-        intutile: data.intutile ?? null,
+        intitule: data.intitule ?? null, // ✅ était intutile
         matiereId: data.matiereId ?? null,
         couleur: data.couleur ?? null,
       },
@@ -125,13 +140,29 @@ export const updateCreneau = async (req: Request, res: Response) => {
       }
     }
 
+    // Vérifier les chevauchements (hors l'enregistrement en cours de modification)
+    const overlap = await prisma.creneauHoraire.findFirst({
+      where: {
+        classeId,
+        jour: data.jour,
+        heureDebut: { lt: data.heureFin },
+        heureFin: { gt: data.heureDebut },
+        NOT: { id },
+      },
+    });
+    if (overlap) {
+      return res.status(409).json({
+        error: `Ce créneau chevauche un cours existant (${overlap.heureDebut}–${overlap.heureFin}).`,
+      });
+    }
+
     const updated = await prisma.creneauHoraire.update({
       where: { id },
       data: {
         jour: data.jour,
         heureDebut: data.heureDebut,
         heureFin: data.heureFin,
-        intutile: data.intutile ?? null,
+        intitule: data.intitule ?? null, // ✅ était intutile
         matiereId: data.matiereId ?? null,
         couleur: data.couleur ?? null,
       },

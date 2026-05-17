@@ -413,7 +413,7 @@ model CreneauHoraire {
   jour       JourSemaine
   heureDebut String // format "HH:mm", ex: "08:30"
   heureFin   String // format "HH:mm", ex: "10:00"
-  intutile   String? // ex: "Mathématiques - M. Dupont"
+  intitule   String? // ex: "Mathématiques - M. Dupont"
   matiereId  String?
   matiere    Matiere?    @relation(fields: [matiereId], references: [id])
   couleur    String? // couleur personnalisée pour le créneau (ex: "#FF5733")

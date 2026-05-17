@@ -284,7 +284,7 @@ export const CreneauHoraireScalarFieldEnum = {
   jour: 'jour',
   heureDebut: 'heureDebut',
   heureFin: 'heureFin',
-  intutile: 'intutile',
+  intitule: 'intitule',
   matiereId: 'matiereId',
   couleur: 'couleur',
   createdAt: 'createdAt',
