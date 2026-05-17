@@ -62,7 +62,8 @@ export const ModelName = {
   Remplacement: 'Remplacement',
   Matiere: 'Matiere',
   Note: 'Note',
-  Document: 'Document'
+  Document: 'Document',
+  CreneauHoraire: 'CreneauHoraire'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -274,6 +275,23 @@ export const DocumentScalarFieldEnum = {
 } as const
 
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
+export const CreneauHoraireScalarFieldEnum = {
+  id: 'id',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  jour: 'jour',
+  heureDebut: 'heureDebut',
+  heureFin: 'heureFin',
+  intutile: 'intutile',
+  matiereId: 'matiereId',
+  couleur: 'couleur',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CreneauHoraireScalarFieldEnum = (typeof CreneauHoraireScalarFieldEnum)[keyof typeof CreneauHoraireScalarFieldEnum]
 
 
 export const SortOrder = {

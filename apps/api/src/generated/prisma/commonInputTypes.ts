@@ -257,6 +257,23 @@ export type EnumTypeDocumentWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumTypeDocumentFilter<$PrismaModel>
 }
 
+export type EnumJourSemaineFilter<$PrismaModel = never> = {
+  equals?: $Enums.JourSemaine | Prisma.EnumJourSemaineFieldRefInput<$PrismaModel>
+  in?: $Enums.JourSemaine[] | Prisma.ListEnumJourSemaineFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JourSemaine[] | Prisma.ListEnumJourSemaineFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJourSemaineFilter<$PrismaModel> | $Enums.JourSemaine
+}
+
+export type EnumJourSemaineWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.JourSemaine | Prisma.EnumJourSemaineFieldRefInput<$PrismaModel>
+  in?: $Enums.JourSemaine[] | Prisma.ListEnumJourSemaineFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JourSemaine[] | Prisma.ListEnumJourSemaineFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJourSemaineWithAggregatesFilter<$PrismaModel> | $Enums.JourSemaine
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumJourSemaineFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumJourSemaineFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -511,6 +528,23 @@ export type NestedEnumTypeDocumentWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTypeDocumentFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTypeDocumentFilter<$PrismaModel>
+}
+
+export type NestedEnumJourSemaineFilter<$PrismaModel = never> = {
+  equals?: $Enums.JourSemaine | Prisma.EnumJourSemaineFieldRefInput<$PrismaModel>
+  in?: $Enums.JourSemaine[] | Prisma.ListEnumJourSemaineFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JourSemaine[] | Prisma.ListEnumJourSemaineFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJourSemaineFilter<$PrismaModel> | $Enums.JourSemaine
+}
+
+export type NestedEnumJourSemaineWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.JourSemaine | Prisma.EnumJourSemaineFieldRefInput<$PrismaModel>
+  in?: $Enums.JourSemaine[] | Prisma.ListEnumJourSemaineFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JourSemaine[] | Prisma.ListEnumJourSemaineFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJourSemaineWithAggregatesFilter<$PrismaModel> | $Enums.JourSemaine
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumJourSemaineFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumJourSemaineFilter<$PrismaModel>
 }
 
 

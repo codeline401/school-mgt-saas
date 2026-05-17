@@ -395,7 +395,8 @@ export const ModelName = {
   Remplacement: 'Remplacement',
   Matiere: 'Matiere',
   Note: 'Note',
-  Document: 'Document'
+  Document: 'Document',
+  CreneauHoraire: 'CreneauHoraire'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "note" | "document"
+    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "note" | "document" | "creneauHoraire"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1303,6 +1304,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CreneauHoraire: {
+      payload: Prisma.$CreneauHorairePayload<ExtArgs>
+      fields: Prisma.CreneauHoraireFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CreneauHoraireFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreneauHorairePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CreneauHoraireFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreneauHorairePayload>
+        }
+        findFirst: {
+          args: Prisma.CreneauHoraireFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreneauHorairePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CreneauHoraireFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreneauHorairePayload>
+        }
+        findMany: {
+          args: Prisma.CreneauHoraireFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreneauHorairePayload>[]
+        }
+        create: {
+          args: Prisma.CreneauHoraireCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreneauHorairePayload>
+        }
+        createMany: {
+          args: Prisma.CreneauHoraireCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CreneauHoraireCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreneauHorairePayload>[]
+        }
+        delete: {
+          args: Prisma.CreneauHoraireDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreneauHorairePayload>
+        }
+        update: {
+          args: Prisma.CreneauHoraireUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreneauHorairePayload>
+        }
+        deleteMany: {
+          args: Prisma.CreneauHoraireDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CreneauHoraireUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CreneauHoraireUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreneauHorairePayload>[]
+        }
+        upsert: {
+          args: Prisma.CreneauHoraireUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreneauHorairePayload>
+        }
+        aggregate: {
+          args: Prisma.CreneauHoraireAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCreneauHoraire>
+        }
+        groupBy: {
+          args: Prisma.CreneauHoraireGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CreneauHoraireGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CreneauHoraireCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CreneauHoraireCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1537,6 +1612,23 @@ export const DocumentScalarFieldEnum = {
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
 
 
+export const CreneauHoraireScalarFieldEnum = {
+  id: 'id',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  jour: 'jour',
+  heureDebut: 'heureDebut',
+  heureFin: 'heureFin',
+  intutile: 'intutile',
+  matiereId: 'matiereId',
+  couleur: 'couleur',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CreneauHoraireScalarFieldEnum = (typeof CreneauHoraireScalarFieldEnum)[keyof typeof CreneauHoraireScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1666,6 +1758,20 @@ export type ListEnumTypeDocumentFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
+ * Reference to a field of type 'JourSemaine'
+ */
+export type EnumJourSemaineFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JourSemaine'>
+    
+
+
+/**
+ * Reference to a field of type 'JourSemaine[]'
+ */
+export type ListEnumJourSemaineFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JourSemaine[]'>
+    
+
+
+/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1785,6 +1891,7 @@ export type GlobalOmitConfig = {
   matiere?: Prisma.MatiereOmit
   note?: Prisma.NoteOmit
   document?: Prisma.DocumentOmit
+  creneauHoraire?: Prisma.CreneauHoraireOmit
 }
 
 /* Types for Logging */

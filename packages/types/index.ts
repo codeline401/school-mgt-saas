@@ -237,3 +237,27 @@ export interface ClasseDocument {
   uploadedBy?: DocumentUploader;
   matiere?: { id: string; nom: string } | null;
 }
+
+export type JourSemaine =
+  | "LUNDI"
+  | "MARDI"
+  | "MERCREDI"
+  | "JEUDI"
+  | "VENDREDI"
+  | "SAMEDI"
+  | "DIMANCHE";
+
+export interface CreneauHoraire {
+  id: string;
+  classeId: string;
+  schoolId: string;
+  jour: JourSemaine;
+  heureDebut: string;
+  heureFin: string;
+  intitule?: string | null;
+  matiereId?: string | null;
+  matiere?: { id: string; nom: string } | null;
+  couleur?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}

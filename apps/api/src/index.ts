@@ -88,7 +88,12 @@ app.get(
     const raw = req.params["filename"];
     const filename: string = Array.isArray(raw) ? (raw[0] ?? "") : (raw ?? "");
 
-    if (!filename || filename.includes("..") || filename.includes("/") || filename.includes("\\")) {
+    if (
+      !filename ||
+      filename.includes("..") ||
+      filename.includes("/") ||
+      filename.includes("\\")
+    ) {
       return res.status(400).json({ error: "Nom de fichier invalide." });
     }
 
@@ -97,17 +102,25 @@ app.get(
       select: { schoolId: true, mimeType: true },
     });
 
-    if (!document) return res.status(404).json({ error: "Fichier non trouvé." });
+    if (!document)
+      return res.status(404).json({ error: "Fichier non trouvé." });
 
     const user = req.user!;
     if (user.role !== "SUDO_ADMIN" && user.schoolId !== document.schoolId) {
       return res.status(403).json({ error: "Accès refusé." });
     }
 
-    const filePath = path.join(__dirname, "..", "uploads", "documents", filename);
+    const filePath = path.join(
+      __dirname,
+      "..",
+      "uploads",
+      "documents",
+      filename,
+    );
     res.setHeader("Content-Type", document.mimeType);
     res.sendFile(filePath, (err) => {
-      if (err) res.status(404).json({ error: "Fichier introuvable sur le disque." });
+      if (err)
+        res.status(404).json({ error: "Fichier introuvable sur le disque." });
     });
   },
 );

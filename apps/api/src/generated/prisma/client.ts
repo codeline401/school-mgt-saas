@@ -110,3 +110,8 @@ export type Note = Prisma.NoteModel
  * 
  */
 export type Document = Prisma.DocumentModel
+/**
+ * Model CreneauHoraire
+ * 
+ */
+export type CreneauHoraire = Prisma.CreneauHoraireModel
