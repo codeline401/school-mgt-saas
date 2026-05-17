@@ -240,6 +240,23 @@ export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDecimalFilter<$PrismaModel>
 }
 
+export type EnumTypeDocumentFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeDocument | Prisma.EnumTypeDocumentFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeDocument[] | Prisma.ListEnumTypeDocumentFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeDocument[] | Prisma.ListEnumTypeDocumentFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeDocumentFilter<$PrismaModel> | $Enums.TypeDocument
+}
+
+export type EnumTypeDocumentWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeDocument | Prisma.EnumTypeDocumentFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeDocument[] | Prisma.ListEnumTypeDocumentFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeDocument[] | Prisma.ListEnumTypeDocumentFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeDocumentWithAggregatesFilter<$PrismaModel> | $Enums.TypeDocument
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeDocumentFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeDocumentFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -477,6 +494,23 @@ export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedDecimalFilter<$PrismaModel>
   _min?: Prisma.NestedDecimalFilter<$PrismaModel>
   _max?: Prisma.NestedDecimalFilter<$PrismaModel>
+}
+
+export type NestedEnumTypeDocumentFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeDocument | Prisma.EnumTypeDocumentFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeDocument[] | Prisma.ListEnumTypeDocumentFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeDocument[] | Prisma.ListEnumTypeDocumentFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeDocumentFilter<$PrismaModel> | $Enums.TypeDocument
+}
+
+export type NestedEnumTypeDocumentWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeDocument | Prisma.EnumTypeDocumentFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeDocument[] | Prisma.ListEnumTypeDocumentFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeDocument[] | Prisma.ListEnumTypeDocumentFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeDocumentWithAggregatesFilter<$PrismaModel> | $Enums.TypeDocument
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeDocumentFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeDocumentFilter<$PrismaModel>
 }
 
 

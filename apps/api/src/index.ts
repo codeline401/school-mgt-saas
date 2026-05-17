@@ -80,6 +80,38 @@ app.get(
   },
 );
 
+// Route authentifiée pour servir les documents uploadés
+app.get(
+  "/uploads/documents/:filename",
+  authenticate,
+  async (req: Request, res: Response) => {
+    const raw = req.params["filename"];
+    const filename: string = Array.isArray(raw) ? (raw[0] ?? "") : (raw ?? "");
+
+    if (!filename || filename.includes("..") || filename.includes("/") || filename.includes("\\")) {
+      return res.status(400).json({ error: "Nom de fichier invalide." });
+    }
+
+    const document = await prisma.document.findFirst({
+      where: { filePath: { endsWith: filename } },
+      select: { schoolId: true, mimeType: true },
+    });
+
+    if (!document) return res.status(404).json({ error: "Fichier non trouvé." });
+
+    const user = req.user!;
+    if (user.role !== "SUDO_ADMIN" && user.schoolId !== document.schoolId) {
+      return res.status(403).json({ error: "Accès refusé." });
+    }
+
+    const filePath = path.join(__dirname, "..", "uploads", "documents", filename);
+    res.setHeader("Content-Type", document.mimeType);
+    res.sendFile(filePath, (err) => {
+      if (err) res.status(404).json({ error: "Fichier introuvable sur le disque." });
+    });
+  },
+);
+
 // Gestionnaire d'erreurs Multer — traduit les erreurs en JSON cohérent
 app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
   if (err instanceof multer.MulterError) {

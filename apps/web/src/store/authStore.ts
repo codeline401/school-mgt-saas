@@ -5,6 +5,8 @@ import { persist } from "zustand/middleware";
 // définition de la structure d'un utilisateur connecté
 interface User {
   id: string;
+  nom: string; //
+  prenom: string; //
   email: string;
   role: "SUDO_ADMIN" | "ADMIN" | "USER" | "PROF" | "ELEVE" | "PARENT";
   schoolId: string | null;

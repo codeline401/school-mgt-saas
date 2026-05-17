@@ -187,6 +187,7 @@ export type ClasseWhereInput = {
   profs?: Prisma.ProfesseurListRelationFilter
   matieres?: Prisma.MatiereListRelationFilter
   notes?: Prisma.NoteListRelationFilter
+  documents?: Prisma.DocumentListRelationFilter
 }
 
 export type ClasseOrderByWithRelationInput = {
@@ -200,6 +201,7 @@ export type ClasseOrderByWithRelationInput = {
   profs?: Prisma.ProfesseurOrderByRelationAggregateInput
   matieres?: Prisma.MatiereOrderByRelationAggregateInput
   notes?: Prisma.NoteOrderByRelationAggregateInput
+  documents?: Prisma.DocumentOrderByRelationAggregateInput
 }
 
 export type ClasseWhereUniqueInput = Prisma.AtLeast<{
@@ -217,6 +219,7 @@ export type ClasseWhereUniqueInput = Prisma.AtLeast<{
   profs?: Prisma.ProfesseurListRelationFilter
   matieres?: Prisma.MatiereListRelationFilter
   notes?: Prisma.NoteListRelationFilter
+  documents?: Prisma.DocumentListRelationFilter
 }, "id" | "schoolId_nom">
 
 export type ClasseOrderByWithAggregationInput = {
@@ -251,6 +254,7 @@ export type ClasseCreateInput = {
   profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateInput = {
@@ -263,6 +267,7 @@ export type ClasseUncheckedCreateInput = {
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUpdateInput = {
@@ -275,6 +280,7 @@ export type ClasseUpdateInput = {
   profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateInput = {
@@ -287,6 +293,7 @@ export type ClasseUncheckedUpdateInput = {
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateManyInput = {
@@ -478,6 +485,20 @@ export type ClasseUpdateOneRequiredWithoutNotesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClasseUpdateToOneWithWhereWithoutNotesInput, Prisma.ClasseUpdateWithoutNotesInput>, Prisma.ClasseUncheckedUpdateWithoutNotesInput>
 }
 
+export type ClasseCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutDocumentsInput, Prisma.ClasseUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.ClasseWhereUniqueInput
+}
+
+export type ClasseUpdateOneRequiredWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutDocumentsInput, Prisma.ClasseUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.ClasseUpsertWithoutDocumentsInput
+  connect?: Prisma.ClasseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClasseUpdateToOneWithWhereWithoutDocumentsInput, Prisma.ClasseUpdateWithoutDocumentsInput>, Prisma.ClasseUncheckedUpdateWithoutDocumentsInput>
+}
+
 export type ClasseCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -487,6 +508,7 @@ export type ClasseCreateWithoutSchoolInput = {
   profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutSchoolInput = {
@@ -498,6 +520,7 @@ export type ClasseUncheckedCreateWithoutSchoolInput = {
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutSchoolInput = {
@@ -546,6 +569,7 @@ export type ClasseCreateWithoutElevesInput = {
   profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutElevesInput = {
@@ -557,6 +581,7 @@ export type ClasseUncheckedCreateWithoutElevesInput = {
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutElevesInput = {
@@ -584,6 +609,7 @@ export type ClasseUpdateWithoutElevesInput = {
   profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutElevesInput = {
@@ -595,6 +621,7 @@ export type ClasseUncheckedUpdateWithoutElevesInput = {
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutProfsInput = {
@@ -606,6 +633,7 @@ export type ClasseCreateWithoutProfsInput = {
   eleves?: Prisma.EleveCreateNestedManyWithoutClasseInput
   matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutProfsInput = {
@@ -617,6 +645,7 @@ export type ClasseUncheckedCreateWithoutProfsInput = {
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutProfsInput = {
@@ -649,6 +678,7 @@ export type ClasseCreateWithoutMatieresInput = {
   eleves?: Prisma.EleveCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutMatieresInput = {
@@ -660,6 +690,7 @@ export type ClasseUncheckedCreateWithoutMatieresInput = {
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutMatieresInput = {
@@ -687,6 +718,7 @@ export type ClasseUpdateWithoutMatieresInput = {
   eleves?: Prisma.EleveUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutMatieresInput = {
@@ -698,6 +730,7 @@ export type ClasseUncheckedUpdateWithoutMatieresInput = {
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutNotesInput = {
@@ -709,6 +742,7 @@ export type ClasseCreateWithoutNotesInput = {
   eleves?: Prisma.EleveCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutNotesInput = {
@@ -720,6 +754,7 @@ export type ClasseUncheckedCreateWithoutNotesInput = {
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutNotesInput = {
@@ -747,6 +782,7 @@ export type ClasseUpdateWithoutNotesInput = {
   eleves?: Prisma.EleveUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutNotesInput = {
@@ -758,6 +794,71 @@ export type ClasseUncheckedUpdateWithoutNotesInput = {
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
+}
+
+export type ClasseCreateWithoutDocumentsInput = {
+  id?: string
+  nom: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutClassesInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
+  notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+}
+
+export type ClasseUncheckedCreateWithoutDocumentsInput = {
+  id?: string
+  nom: string
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+}
+
+export type ClasseCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutDocumentsInput, Prisma.ClasseUncheckedCreateWithoutDocumentsInput>
+}
+
+export type ClasseUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.ClasseUpdateWithoutDocumentsInput, Prisma.ClasseUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutDocumentsInput, Prisma.ClasseUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.ClasseWhereInput
+}
+
+export type ClasseUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.ClasseWhereInput
+  data: Prisma.XOR<Prisma.ClasseUpdateWithoutDocumentsInput, Prisma.ClasseUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type ClasseUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutClassesNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+}
+
+export type ClasseUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateManySchoolInput = {
@@ -776,6 +877,7 @@ export type ClasseUpdateWithoutSchoolInput = {
   profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutSchoolInput = {
@@ -787,6 +889,7 @@ export type ClasseUncheckedUpdateWithoutSchoolInput = {
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutSchoolInput = {
@@ -805,6 +908,7 @@ export type ClasseUpdateWithoutProfsInput = {
   eleves?: Prisma.EleveUpdateManyWithoutClasseNestedInput
   matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutProfsInput = {
@@ -816,6 +920,7 @@ export type ClasseUncheckedUpdateWithoutProfsInput = {
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutProfsInput = {
@@ -836,6 +941,7 @@ export type ClasseCountOutputType = {
   profs: number
   matieres: number
   notes: number
+  documents: number
 }
 
 export type ClasseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -843,6 +949,7 @@ export type ClasseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   profs?: boolean | ClasseCountOutputTypeCountProfsArgs
   matieres?: boolean | ClasseCountOutputTypeCountMatieresArgs
   notes?: boolean | ClasseCountOutputTypeCountNotesArgs
+  documents?: boolean | ClasseCountOutputTypeCountDocumentsArgs
 }
 
 /**
@@ -883,6 +990,13 @@ export type ClasseCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.NoteWhereInput
 }
 
+/**
+ * ClasseCountOutputType without action
+ */
+export type ClasseCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentWhereInput
+}
+
 
 export type ClasseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -895,6 +1009,7 @@ export type ClasseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   profs?: boolean | Prisma.Classe$profsArgs<ExtArgs>
   matieres?: boolean | Prisma.Classe$matieresArgs<ExtArgs>
   notes?: boolean | Prisma.Classe$notesArgs<ExtArgs>
+  documents?: boolean | Prisma.Classe$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.ClasseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["classe"]>
 
@@ -931,6 +1046,7 @@ export type ClasseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   profs?: boolean | Prisma.Classe$profsArgs<ExtArgs>
   matieres?: boolean | Prisma.Classe$matieresArgs<ExtArgs>
   notes?: boolean | Prisma.Classe$notesArgs<ExtArgs>
+  documents?: boolean | Prisma.Classe$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.ClasseCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClasseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -948,6 +1064,7 @@ export type $ClassePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     profs: Prisma.$ProfesseurPayload<ExtArgs>[]
     matieres: Prisma.$MatierePayload<ExtArgs>[]
     notes: Prisma.$NotePayload<ExtArgs>[]
+    documents: Prisma.$DocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1354,6 +1471,7 @@ export interface Prisma__ClasseClient<T, Null = never, ExtArgs extends runtime.T
   profs<T extends Prisma.Classe$profsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$profsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProfesseurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   matieres<T extends Prisma.Classe$matieresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$matieresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatierePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notes<T extends Prisma.Classe$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documents<T extends Prisma.Classe$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1882,6 +2000,30 @@ export type Classe$notesArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.NoteScalarFieldEnum | Prisma.NoteScalarFieldEnum[]
+}
+
+/**
+ * Classe.documents
+ */
+export type Classe$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Document
+   */
+  select?: Prisma.DocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Document
+   */
+  omit?: Prisma.DocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentInclude<ExtArgs> | null
+  where?: Prisma.DocumentWhereInput
+  orderBy?: Prisma.DocumentOrderByWithRelationInput | Prisma.DocumentOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentScalarFieldEnum | Prisma.DocumentScalarFieldEnum[]
 }
 
 /**

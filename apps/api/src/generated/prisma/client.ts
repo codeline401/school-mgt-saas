@@ -105,3 +105,8 @@ export type Matiere = Prisma.MatiereModel
  * - createdById : utilisateur PROF qui a saisi la note.
  */
 export type Note = Prisma.NoteModel
+/**
+ * Model Document
+ * 
+ */
+export type Document = Prisma.DocumentModel

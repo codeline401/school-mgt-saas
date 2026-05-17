@@ -45,6 +45,7 @@ model User {
   remplacements Remplacement[] @relation("Remplacant") // pour les remplacements où cet utilisateur est le remplaçant
   notes         Note[]         @relation("NotesCreees") // Notes créées par ce professeur
   professeur    Professeur? // Profil RH si l'utilisateur est un PROF
+  documents     Document[]     @relation("DocumentsUploades") // Documents uploadés par cet utilisateur
 }
 
 // Modele SAAS
@@ -69,8 +70,9 @@ model School {
   contrats          Contrat[]
   remplacements     Remplacement[]
 
-  matieres Matiere[] // Liste des matières enseignées dans l'école
-  notes    Note[]
+  matieres  Matiere[] // Liste des matières enseignées dans l'école
+  notes     Note[]
+  documents Document[]
 }
 
 model Classe {
@@ -83,9 +85,10 @@ model Classe {
 
   matieres Matiere[] // Matières enseignées dans cette classe
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   notes     Note[]
+  documents Document[]
 
   @@unique([schoolId, nom]) // Un nom de classe unique par école (pour les upserts)
 }
@@ -282,17 +285,18 @@ model Remplacement {
 }
 
 model Matiere {
-  id          String   @id @default(uuid())
+  id          String       @id @default(uuid())
   nom         String // ex: "Mathématiques", "Français", etc.
   description String? // description optionnelle de la matière
   classeId    String // la classe à laquelle cette matière est associée
-  classe      Classe   @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  classe      Classe       @relation(fields: [classeId], references: [id], onDelete: Cascade)
   schoolId    String
-  school      School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  school      School       @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   notes       Note[]
   profs       Professeur[] @relation("ProfesseurMatieres") // Profs qui enseignent cette matière
+  documents   Document[]
 
   @@unique([classeId, nom]) // Un nom de matière unique par classe
   @@index([schoolId]) // Index pour optimiser les requêtes par école
@@ -344,4 +348,44 @@ model Note {
   @@index([matiereId]) // Index pour optimiser les requêtes par matière
   @@index([schoolId]) // Index pour optimiser les requêtes par école
   @@index([eleveId]) // Index pour optimiser les requêtes par élève
+}
+
+// ── MODULE DOCUMENTS ─────────────────────────────────────────────────────────
+
+enum TypeDocument {
+  COURS
+  DEVOIR
+  EVALUATION
+  NOTE_SERVICE
+  CIRCULAIRE
+  AUTRE
+}
+
+model Document {
+  id          String       @id @default(uuid())
+  titre       String
+  description String?
+  type        TypeDocument
+  filePath    String
+  mimeType    String
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  classeId String
+  classe   Classe @relation(fields: [classeId], references: [id], onDelete: Cascade)
+
+  matiereId String?
+  matiere   Matiere? @relation(fields: [matiereId], references: [id], onDelete: SetNull)
+
+  uploadedById String
+  uploadedBy   User   @relation("DocumentsUploades", fields: [uploadedById], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId])
+  @@index([classeId])
+  @@index([uploadedById])
+  @@index([type])
 }
