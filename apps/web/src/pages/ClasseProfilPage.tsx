@@ -10,6 +10,7 @@ import EleveTab from "../components/classe/EleveTab";
 import PlaceholderTab from "../components/classe/PlaceholderTab";
 import MatieresTab from "../components/classe/MatieresTab";
 import NotesTab from "../components/classe/NotesTab";
+import DocumentsTab from "../components/classe/DocumentsTab";
 
 // Définition des onglets pour la page de profil de classe
 const TABS = [
@@ -95,7 +96,17 @@ export default function ClasseProfilPage() {
       case "absences":
         return <PlaceholderTab label="Absences" />;
       case "documents":
-        return <PlaceholderTab label="Documents" />;
+        return (
+          <DocumentsTab
+            classeId={id}
+            canUpload={
+              user?.role === "PROF" ||
+              user?.role === "ADMIN" ||
+              user?.role === "USER" ||
+              user?.role === "SUDO_ADMIN"
+            }
+          />
+        );
       default:
         return null;
     }

@@ -61,7 +61,8 @@ export const ModelName = {
   Contrat: 'Contrat',
   Remplacement: 'Remplacement',
   Matiere: 'Matiere',
-  Note: 'Note'
+  Note: 'Note',
+  Document: 'Document'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -255,6 +256,24 @@ export const NoteScalarFieldEnum = {
 } as const
 
 export type NoteScalarFieldEnum = (typeof NoteScalarFieldEnum)[keyof typeof NoteScalarFieldEnum]
+
+
+export const DocumentScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  description: 'description',
+  type: 'type',
+  filePath: 'filePath',
+  mimeType: 'mimeType',
+  schoolId: 'schoolId',
+  classeId: 'classeId',
+  matiereId: 'matiereId',
+  uploadedById: 'uploadedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
 
 
 export const SortOrder = {

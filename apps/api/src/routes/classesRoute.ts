@@ -12,6 +12,7 @@ import {
 
 import matieresRouter from "./matieresRoute.js"; // Importation du routeur pour les matières d'une classe
 import notesRouter from "./notesRoute.js";
+import documentsRouter from "./documentsRoute.js";
 
 const router = Router();
 
@@ -51,5 +52,6 @@ router.delete(
 
 router.use("/:classeId/matieres", matieresRouter); // Sous-route pour les matières d'une classe spécifique
 router.use("/:classeId/notes", notesRouter);
+router.use("/:classeId/documents", documentsRouter);
 
 export default router;
