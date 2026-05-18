@@ -5,6 +5,7 @@ import {
   getElevesProfil,
   getParentProfil,
   getProfesseurProfil,
+  getMyProfProfil,
   updateElevesProfil,
   updateParentProfil,
   updateProfesseurProfil,
@@ -52,5 +53,8 @@ router.put(
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
   updateProfesseurProfil,
 );
+
+// PROFIL DU PROF CONNECTÉ
+router.get("/me", authorizeRoles(Role.PROF), getMyProfProfil);
 
 export default router; // Export du routeur pour l'utiliser dans app.ts

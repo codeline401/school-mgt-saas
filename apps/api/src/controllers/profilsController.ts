@@ -355,3 +355,38 @@ export const updateProfesseurProfil = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Erreur serveur" });
   }
 };
+
+// ===================================================================
+// PROFIL DU PROFESSEUR CONNECTÉ
+// ===================================================================
+/**
+ * GET /api/profils/me
+ * Retourne le profil Professeur de l'utilisateur connecté (rôle PROF uniquement).
+ * Inclut la liste des matières enseignées (id + nom).
+ */
+export const getMyProfProfil = async (req: Request, res: Response) => {
+  try {
+    const user = req.user!;
+
+    const prof = await prisma.professeur.findFirst({
+      where: { userId: user.id },
+      select: {
+        id: true,
+        nom: true,
+        prenom: true,
+        schoolId: true,
+        matieres: { select: { id: true, nom: true } },
+        classes: { select: { id: true, nom: true } },
+      },
+    });
+
+    if (!prof) {
+      return res.status(404).json({ error: "Profil professeur introuvable." });
+    }
+
+    res.status(200).json(prof);
+  } catch (err) {
+    console.error("Erreur getMyProfProfil:", err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+};

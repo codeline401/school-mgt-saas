@@ -8,6 +8,16 @@ import { ZodError } from "zod";
 
 const WRITE_ROLES = ["SUDO_ADMIN", "ADMIN", "PROF"];
 
+// ── Helper : matières enseignées par le prof connecté ─────────────────────
+async function getProfMatiereIds(userId: string): Promise<string[] | null> {
+  const prof = await prisma.professeur.findFirst({
+    where: { userId },
+    select: { matieres: { select: { id: true } } },
+  });
+  if (!prof) return null;
+  return prof.matieres.map((m) => m.id);
+}
+
 // ── Helper d'autorisation ──────────────────────────────────────────────────
 async function authorizeClasse(
   classeId: string,
@@ -149,6 +159,19 @@ export const createAppel = async (req: Request, res: Response) => {
         .status(404)
         .json({ error: "Créneau non trouvé dans cette classe." });
 
+    // Un PROF ne peut faire l'appel que pour ses propres matières
+    if (user.role === "PROF") {
+      const matiereIds = await getProfMatiereIds(user.id);
+      if (!matiereIds)
+        return res
+          .status(403)
+          .json({ error: "Profil professeur introuvable." });
+      if (!creneau.matiereId || !matiereIds.includes(creneau.matiereId))
+        return res.status(403).json({
+          error: "Vous n'enseignez pas la matière associée à ce créneau.",
+        });
+    }
+
     // Un seul appel par créneau × date
     const existing = await prisma.appel.findUnique({
       where: { creneauId_date: { creneauId: data.creneauId, date: data.date } },
@@ -196,6 +219,14 @@ export const createAppel = async (req: Request, res: Response) => {
   } catch (err) {
     if (err instanceof ZodError)
       return res.status(400).json({ error: err.issues });
+    if (
+      err instanceof Error &&
+      "code" in err &&
+      (err as { code: string }).code === "P2002"
+    )
+      return res.status(409).json({
+        error: "Un appel existe déjà pour ce créneau à cette date.",
+      });
     console.error("Erreur createAppel:", err);
     res.status(500).json({ error: "Une erreur est survenue." });
   }
@@ -231,7 +262,7 @@ export const updatePresence = async (req: Request, res: Response) => {
       where: { id: appelId },
       select: {
         classeId: true,
-        creneau: { select: { heureFin: true } },
+        creneau: { select: { heureFin: true, matiereId: true } },
         date: true,
       },
     });
@@ -239,17 +270,43 @@ export const updatePresence = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Appel non trouvé." });
     }
 
+    // Un PROF ne peut modifier les présences que pour ses propres matières
+    if (user.role === "PROF") {
+      const matiereIds = await getProfMatiereIds(user.id);
+      if (!matiereIds)
+        return res
+          .status(403)
+          .json({ error: "Profil professeur introuvable." });
+      if (
+        !appel.creneau.matiereId ||
+        !matiereIds.includes(appel.creneau.matiereId)
+      )
+        return res.status(403).json({
+          error: "Vous n'enseignez pas la matière associée à ce créneau.",
+        });
+    }
+
     // RETARD interdit après heureFin du créneau
     if (data.statut === "RETARD") {
       const now = new Date();
       const [h, m] = appel.creneau.heureFin.split(":").map(Number);
-      const fin = new Date(appel.date);
-      fin.setHours(h as number, m, 0, 0); //
+      const parts = appel.date.split("-").map(Number);
+      const fin = new Date(parts[0]!, parts[1]! - 1, parts[2]!, h, m, 0, 0); // local time, no UTC shift
       if (now > fin) {
         return res.status(422).json({
           error: "Impossible de marquer un retard après la fin du cours.",
         });
       }
+    }
+
+    // Vérifier que l'élève appartient bien à cette classe
+    const eleveInClasse = await prisma.eleve.findFirst({
+      where: { id: eleveId, classeId },
+      select: { id: true },
+    });
+    if (!eleveInClasse) {
+      return res.status(400).json({ error: "Cet élève n'appartient pas à la classe."
+      });
     }
 
     const presence = await prisma.presence.upsert({
@@ -263,6 +320,14 @@ export const updatePresence = async (req: Request, res: Response) => {
   } catch (err) {
     if (err instanceof ZodError)
       return res.status(400).json({ error: err.issues });
+    if (
+      err instanceof Error &&
+      "code" in err &&
+      (err as { code: string }).code === "P2002"
+    )
+      return res.status(409).json({
+        error: "Conflit de présence : enregistrement déjà existant.",
+      });
     console.error("Erreur updatePresence:", err);
     res.status(500).json({ error: "Une erreur est survenue." });
   }

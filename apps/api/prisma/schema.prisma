@@ -472,5 +472,4 @@ model Presence {
   updatedAt DateTime @updatedAt
 
   @@unique([appelId, eleveId]) // Un enregistrement de présence unique par appel et par élève
-  @@unique([appelId]) // Un appel ne peut avoir qu'un enregistrement de présence par élève
 }

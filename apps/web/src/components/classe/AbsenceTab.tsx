@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api, getApiError } from "../../lib/api";
+import { useAuthStore } from "../../store/authStore";
 import toast from "react-hot-toast";
 import type {
   Appel,
@@ -17,6 +18,7 @@ const JOURS: { key: JourSemaine; label: string; short: string }[] = [
   { key: "JEUDI", label: "Jeudi", short: "Jeu" },
   { key: "VENDREDI", label: "Vendredi", short: "Ven" },
   { key: "SAMEDI", label: "Samedi", short: "Sam" },
+  { key: "DIMANCHE", label: "Dimanche", short: "Dim" },
 ];
 
 const JS_DAY_TO_JOUR: Record<number, JourSemaine> = {
@@ -99,10 +101,30 @@ interface Props {
 
 export default function AbsenceTab({ classeId, canManage }: Props) {
   const queryClient = useQueryClient();
+  const user = useAuthStore((s) => s.user);
 
   const [selectedDate, setSelectedDate] = useState<string>(todayISO);
   const [selectedJour, setSelectedJour] = useState<JourSemaine>(todayJour);
   const [openAppelId, setOpenAppelId] = useState<string | null>(null);
+
+  // ── Matières du prof connecté (uniquement si rôle PROF) ───────────────
+  const { data: profMatiereIds } = useQuery<string[]>({
+    queryKey: ["my-prof-matieres"],
+    queryFn: async () => {
+      const { data } = await api.get("/api/profils/me");
+      return (data.matieres as { id: string }[]).map((m) => m.id);
+    },
+    enabled: user?.role === "PROF",
+    staleTime: 5 * 60 * 1000, // 5 min — les matières changent rarement
+  });
+
+  /** Un PROF ne peut gérer que les créneaux dont la matière lui appartient */
+  function canManageCreneau(creneau: CreneauHoraire): boolean {
+    if (!canManage) return false;
+    if (user?.role !== "PROF") return true; // ADMIN / SUDO_ADMIN : accès total
+    if (!profMatiereIds || !creneau.matiereId) return false;
+    return profMatiereIds.includes(creneau.matiereId);
+  }
 
   // ── Creneaux de la classe (emploi du temps) ────────────────────────────
   const { data: creneaux = [] } = useQuery<CreneauHoraire[]>({
@@ -294,7 +316,7 @@ export default function AbsenceTab({ classeId, canManage }: Props) {
                             {isOpen ? "Fermer" : "Voir / Modifier"}
                           </button>
                         </>
-                      ) : canManage ? (
+                      ) : canManageCreneau(creneau) ? (
                         <button
                           className="btn btn-sm btn-primary gap-1"
                           disabled={
@@ -351,7 +373,7 @@ export default function AbsenceTab({ classeId, canManage }: Props) {
                                       key={s}
                                       aria-label={s}
                                       disabled={
-                                        updatePresence.isPending || !canManage
+                                        updatePresence.isPending || !canManageCreneau(creneau)
                                       }
                                       className={`btn btn-xs ${
                                         presence.statut === s
