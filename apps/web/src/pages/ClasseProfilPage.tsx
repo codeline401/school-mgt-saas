@@ -12,6 +12,7 @@ import NotesTab from "../components/classe/NotesTab";
 import DocumentsTab from "../components/classe/DocumentsTab";
 import EmploiDuTempsTab from "../components/classe/EmploiDuTempsTab";
 import AbsenceTab from "../components/classe/AbsenceTab";
+import AbsenceStatsTab from "../components/classe/AbsenceStatsTab";
 
 // Définition des onglets pour la page de profil de classe
 const TABS = [
@@ -21,6 +22,7 @@ const TABS = [
   { id: "matieres", label: "Matières" },
   { id: "notes", label: "Notes" },
   { id: "absences", label: "Absences" },
+  { id: "stats-absences", label: "Stats présences" },
   { id: "documents", label: "Documents" },
 ] as const;
 
@@ -114,6 +116,8 @@ export default function ClasseProfilPage() {
             }
           />
         );
+      case "stats-absences":
+        return <AbsenceStatsTab classeId={id} />;
       case "documents":
         return (
           <DocumentsTab

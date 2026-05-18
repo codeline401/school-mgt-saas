@@ -300,3 +300,24 @@ export interface Appel {
   creneau?: CreneauResume;
   presences?: Presence[];
 }
+
+/** Statistiques d'absences par élève sur une période */
+export interface AbsenceStat {
+  eleveId: string;
+  nom: string;
+  prenom: string;
+  /** Appels où une présence a été enregistrée pour cet élève (peut différer du total classe si l'élève a rejoint la classe en cours de période) */
+  appelsEleve: number;
+  present: number;
+  absent: number;
+  retard: number;
+  tauxPresence: number; // 0–100 arrondi à 1 décimale, base = appelsEleve
+}
+
+/** Réponse de GET /api/classes/:classeId/appels/stats/absences */
+export interface AbsenceStatsResponse {
+  from: string;
+  to: string;
+  totalAppels: number;
+  stats: AbsenceStat[];
+}
