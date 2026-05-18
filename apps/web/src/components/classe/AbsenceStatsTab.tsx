@@ -35,6 +35,10 @@ const PERIOD_OPTIONS: { key: PeriodKey; label: string }[] = [
   { key: "annee-scolaire", label: "Année scolaire" },
 ];
 
+function isLeapYear(year: number) {
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+}
+
 function resolvePeriod(key: PeriodKey): { from: string; to: string } {
   const now = new Date();
   const y = now.getFullYear();
@@ -55,8 +59,8 @@ function resolvePeriod(key: PeriodKey): { from: string; to: string } {
       return { from: `${schoolYear}-09-01`, to: `${schoolYear}-11-30` };
     case "trimestre-2":
       return {
-        from: `${schoolYear + 1}-12-01`,
-        to: `${schoolYear + 1}-02-28`,
+        from: `${schoolYear}-12-01`,
+        to: `${schoolYear + 1}-02-${isLeapYear(schoolYear + 1) ? 29 : 28}`,
       };
     case "trimestre-3":
       return {
@@ -186,8 +190,10 @@ export default function AbsenceStatsTab({ classeId }: Props) {
               </thead>
               <tbody>
                 {data.stats.map((s) => {
-                  const nonNotes =
-                    s.totalAppels - s.present - s.absent - s.retard;
+                  const nonNotes = Math.max(
+                    0,
+                    data.totalAppels - s.appelsEleve,
+                  );
                   return (
                     <tr key={s.eleveId} className="hover">
                       <td className="font-medium">

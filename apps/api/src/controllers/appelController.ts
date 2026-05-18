@@ -385,15 +385,16 @@ export const getAbsenceStats = async (req: Request, res: Response) => {
       const present = eleve.presences.filter((p) => p.statut === "PRESENT").length;
       const absent = eleve.presences.filter((p) => p.statut === "ABSENT").length;
       const retard = eleve.presences.filter((p) => p.statut === "RETARD").length;
+      const appelsEleve = present + absent + retard;
       const tauxPresence =
-        totalAppels > 0
-          ? Math.round(((present + retard) / totalAppels) * 1000) / 10
+        appelsEleve > 0
+          ? Math.round(((present + retard) / appelsEleve) * 1000) / 10
           : 100;
       return {
         eleveId: eleve.id,
         nom: eleve.nom,
         prenom: eleve.prenom,
-        totalAppels,
+        appelsEleve, // appels où cet élève a une présence enregistrée
         present,
         absent,
         retard,
