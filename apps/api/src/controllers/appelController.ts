@@ -332,3 +332,78 @@ export const updatePresence = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Une erreur est survenue." });
   }
 };
+
+// GET /api/classes/:classeId/stats/absences?from=YYYY-MM-DD&to=YYYY-MM-DD
+export const getAbsenceStats = async (req: Request, res: Response) => {
+  try {
+    const { classeId } = req.params as { classeId: string };
+    const { from, to } = req.query as { from?: string; to?: string };
+    const user = req.user!;
+
+    const scope = await authorizeClasse(
+      classeId,
+      user.role,
+      user.schoolId as string,
+    );
+    if (!scope)
+      return res
+        .status(404)
+        .json({ error: "Classe non trouvée ou accès refusé." });
+
+    // Plage par défaut : mois en cours
+    const today = new Date();
+    const defaultFrom = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-01`;
+    const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+    const defaultTo = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(lastDay).padStart(2, "0")}`;
+
+    const dateFrom = from ?? defaultFrom;
+    const dateTo = to ?? defaultTo;
+
+    // Nombre d'appels sur la période
+    const totalAppels = await prisma.appel.count({
+      where: { classeId, date: { gte: dateFrom, lte: dateTo } },
+    });
+
+    // Élèves de la classe avec leurs présences sur la période
+    const eleves = await prisma.eleve.findMany({
+      where: { classeId },
+      select: {
+        id: true,
+        nom: true,
+        prenom: true,
+        presences: {
+          where: {
+            appel: { classeId, date: { gte: dateFrom, lte: dateTo } },
+          },
+          select: { statut: true },
+        },
+      },
+      orderBy: { nom: "asc" },
+    });
+
+    const stats = eleves.map((eleve) => {
+      const present = eleve.presences.filter((p) => p.statut === "PRESENT").length;
+      const absent = eleve.presences.filter((p) => p.statut === "ABSENT").length;
+      const retard = eleve.presences.filter((p) => p.statut === "RETARD").length;
+      const tauxPresence =
+        totalAppels > 0
+          ? Math.round(((present + retard) / totalAppels) * 1000) / 10
+          : 100;
+      return {
+        eleveId: eleve.id,
+        nom: eleve.nom,
+        prenom: eleve.prenom,
+        totalAppels,
+        present,
+        absent,
+        retard,
+        tauxPresence,
+      };
+    });
+
+    res.status(200).json({ from: dateFrom, to: dateTo, totalAppels, stats });
+  } catch (err) {
+    console.error("Erreur getAbsenceStats:", err);
+    res.status(500).json({ error: "Une erreur est survenue." });
+  }
+};

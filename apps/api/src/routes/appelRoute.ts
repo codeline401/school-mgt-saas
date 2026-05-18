@@ -6,10 +6,12 @@ import {
   getAppel,
   createAppel,
   updatePresence,
+  getAbsenceStats,
 } from "../controllers/appelController.js";
 
 const router = Router({ mergeParams: true });
 
+router.get("/stats/absences", authenticate, getAbsenceStats);
 router.get("/", authenticate, getAppels);
 router.get("/:appelId", authenticate, getAppel);
 
