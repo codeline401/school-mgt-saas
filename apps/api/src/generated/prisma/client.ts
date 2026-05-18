@@ -115,3 +115,13 @@ export type Document = Prisma.DocumentModel
  * 
  */
 export type CreneauHoraire = Prisma.CreneauHoraireModel
+/**
+ * Model Appel
+ * Un appel = une session de présence pour un creneau horaire à une date donnée
+ */
+export type Appel = Prisma.AppelModel
+/**
+ * Model Presence
+ * Présence d'un élève dans un appel
+ */
+export type Presence = Prisma.PresenceModel
