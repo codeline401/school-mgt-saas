@@ -261,3 +261,42 @@ export interface CreneauHoraire {
   createdAt: string;
   updatedAt: string;
 }
+
+export type StatutPresence = "PRESENT" | "ABSENT" | "RETARD";
+
+export interface PresenceEleve {
+  id: string;
+  nom: string;
+  prenom: string;
+}
+
+export interface Presence {
+  id: string;
+  appelId: string;
+  eleveId: string;
+  statut: StatutPresence;
+  updatedAt: string;
+  eleve?: PresenceEleve;
+}
+
+export interface CreneauResume {
+  id: string;
+  jour: JourSemaine;
+  heureDebut: string;
+  heureFin: string;
+  intitule?: string | null;
+  couleur?: string | null;
+  matiere?: { id: string; nom: string } | null;
+}
+
+export interface Appel {
+  id: string;
+  creneauId: string;
+  classeId: string;
+  schoolId: string;
+  date: string; // YYYY-MM-DD
+  createdAt: string;
+  updatedAt: string;
+  creneau?: CreneauResume;
+  presences?: Presence[];
+}

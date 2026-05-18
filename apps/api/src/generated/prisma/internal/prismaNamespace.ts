@@ -396,7 +396,9 @@ export const ModelName = {
   Matiere: 'Matiere',
   Note: 'Note',
   Document: 'Document',
-  CreneauHoraire: 'CreneauHoraire'
+  CreneauHoraire: 'CreneauHoraire',
+  Appel: 'Appel',
+  Presence: 'Presence'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -412,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "note" | "document" | "creneauHoraire"
+    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "note" | "document" | "creneauHoraire" | "appel" | "presence"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1378,6 +1380,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Appel: {
+      payload: Prisma.$AppelPayload<ExtArgs>
+      fields: Prisma.AppelFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AppelFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppelPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AppelFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppelPayload>
+        }
+        findFirst: {
+          args: Prisma.AppelFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppelPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AppelFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppelPayload>
+        }
+        findMany: {
+          args: Prisma.AppelFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppelPayload>[]
+        }
+        create: {
+          args: Prisma.AppelCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppelPayload>
+        }
+        createMany: {
+          args: Prisma.AppelCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AppelCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppelPayload>[]
+        }
+        delete: {
+          args: Prisma.AppelDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppelPayload>
+        }
+        update: {
+          args: Prisma.AppelUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppelPayload>
+        }
+        deleteMany: {
+          args: Prisma.AppelDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AppelUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AppelUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppelPayload>[]
+        }
+        upsert: {
+          args: Prisma.AppelUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppelPayload>
+        }
+        aggregate: {
+          args: Prisma.AppelAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAppel>
+        }
+        groupBy: {
+          args: Prisma.AppelGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AppelGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AppelCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AppelCountAggregateOutputType> | number
+        }
+      }
+    }
+    Presence: {
+      payload: Prisma.$PresencePayload<ExtArgs>
+      fields: Prisma.PresenceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PresenceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PresenceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencePayload>
+        }
+        findFirst: {
+          args: Prisma.PresenceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PresenceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencePayload>
+        }
+        findMany: {
+          args: Prisma.PresenceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencePayload>[]
+        }
+        create: {
+          args: Prisma.PresenceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencePayload>
+        }
+        createMany: {
+          args: Prisma.PresenceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PresenceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencePayload>[]
+        }
+        delete: {
+          args: Prisma.PresenceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencePayload>
+        }
+        update: {
+          args: Prisma.PresenceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencePayload>
+        }
+        deleteMany: {
+          args: Prisma.PresenceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PresenceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PresenceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencePayload>[]
+        }
+        upsert: {
+          args: Prisma.PresenceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencePayload>
+        }
+        aggregate: {
+          args: Prisma.PresenceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePresence>
+        }
+        groupBy: {
+          args: Prisma.PresenceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PresenceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PresenceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PresenceCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1629,6 +1779,30 @@ export const CreneauHoraireScalarFieldEnum = {
 export type CreneauHoraireScalarFieldEnum = (typeof CreneauHoraireScalarFieldEnum)[keyof typeof CreneauHoraireScalarFieldEnum]
 
 
+export const AppelScalarFieldEnum = {
+  id: 'id',
+  creneauId: 'creneauId',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  date: 'date',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AppelScalarFieldEnum = (typeof AppelScalarFieldEnum)[keyof typeof AppelScalarFieldEnum]
+
+
+export const PresenceScalarFieldEnum = {
+  id: 'id',
+  appelId: 'appelId',
+  eleveId: 'eleveId',
+  statut: 'statut',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PresenceScalarFieldEnum = (typeof PresenceScalarFieldEnum)[keyof typeof PresenceScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1772,6 +1946,20 @@ export type ListEnumJourSemaineFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'StatutPresence'
+ */
+export type EnumStatutPresenceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutPresence'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutPresence[]'
+ */
+export type ListEnumStatutPresenceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutPresence[]'>
+    
+
+
+/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1892,6 +2080,8 @@ export type GlobalOmitConfig = {
   note?: Prisma.NoteOmit
   document?: Prisma.DocumentOmit
   creneauHoraire?: Prisma.CreneauHoraireOmit
+  appel?: Prisma.AppelOmit
+  presence?: Prisma.PresenceOmit
 }
 
 /* Types for Logging */

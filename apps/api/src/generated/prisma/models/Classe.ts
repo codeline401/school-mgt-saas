@@ -189,6 +189,7 @@ export type ClasseWhereInput = {
   notes?: Prisma.NoteListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   creneauHoraires?: Prisma.CreneauHoraireListRelationFilter
+  appels?: Prisma.AppelListRelationFilter
 }
 
 export type ClasseOrderByWithRelationInput = {
@@ -204,6 +205,7 @@ export type ClasseOrderByWithRelationInput = {
   notes?: Prisma.NoteOrderByRelationAggregateInput
   documents?: Prisma.DocumentOrderByRelationAggregateInput
   creneauHoraires?: Prisma.CreneauHoraireOrderByRelationAggregateInput
+  appels?: Prisma.AppelOrderByRelationAggregateInput
 }
 
 export type ClasseWhereUniqueInput = Prisma.AtLeast<{
@@ -223,6 +225,7 @@ export type ClasseWhereUniqueInput = Prisma.AtLeast<{
   notes?: Prisma.NoteListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   creneauHoraires?: Prisma.CreneauHoraireListRelationFilter
+  appels?: Prisma.AppelListRelationFilter
 }, "id" | "schoolId_nom">
 
 export type ClasseOrderByWithAggregationInput = {
@@ -259,6 +262,7 @@ export type ClasseCreateInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateInput = {
@@ -273,6 +277,7 @@ export type ClasseUncheckedCreateInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUpdateInput = {
@@ -287,6 +292,7 @@ export type ClasseUpdateInput = {
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateInput = {
@@ -301,6 +307,7 @@ export type ClasseUncheckedUpdateInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateManyInput = {
@@ -520,6 +527,20 @@ export type ClasseUpdateOneRequiredWithoutCreneauHorairesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClasseUpdateToOneWithWhereWithoutCreneauHorairesInput, Prisma.ClasseUpdateWithoutCreneauHorairesInput>, Prisma.ClasseUncheckedUpdateWithoutCreneauHorairesInput>
 }
 
+export type ClasseCreateNestedOneWithoutAppelsInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutAppelsInput, Prisma.ClasseUncheckedCreateWithoutAppelsInput>
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutAppelsInput
+  connect?: Prisma.ClasseWhereUniqueInput
+}
+
+export type ClasseUpdateOneRequiredWithoutAppelsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutAppelsInput, Prisma.ClasseUncheckedCreateWithoutAppelsInput>
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutAppelsInput
+  upsert?: Prisma.ClasseUpsertWithoutAppelsInput
+  connect?: Prisma.ClasseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClasseUpdateToOneWithWhereWithoutAppelsInput, Prisma.ClasseUpdateWithoutAppelsInput>, Prisma.ClasseUncheckedUpdateWithoutAppelsInput>
+}
+
 export type ClasseCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -531,6 +552,7 @@ export type ClasseCreateWithoutSchoolInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutSchoolInput = {
@@ -544,6 +566,7 @@ export type ClasseUncheckedCreateWithoutSchoolInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutSchoolInput = {
@@ -594,6 +617,7 @@ export type ClasseCreateWithoutElevesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutElevesInput = {
@@ -607,6 +631,7 @@ export type ClasseUncheckedCreateWithoutElevesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutElevesInput = {
@@ -636,6 +661,7 @@ export type ClasseUpdateWithoutElevesInput = {
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutElevesInput = {
@@ -649,6 +675,7 @@ export type ClasseUncheckedUpdateWithoutElevesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutProfsInput = {
@@ -662,6 +689,7 @@ export type ClasseCreateWithoutProfsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutProfsInput = {
@@ -675,6 +703,7 @@ export type ClasseUncheckedCreateWithoutProfsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutProfsInput = {
@@ -709,6 +738,7 @@ export type ClasseCreateWithoutMatieresInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutMatieresInput = {
@@ -722,6 +752,7 @@ export type ClasseUncheckedCreateWithoutMatieresInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutMatieresInput = {
@@ -751,6 +782,7 @@ export type ClasseUpdateWithoutMatieresInput = {
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutMatieresInput = {
@@ -764,6 +796,7 @@ export type ClasseUncheckedUpdateWithoutMatieresInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutNotesInput = {
@@ -777,6 +810,7 @@ export type ClasseCreateWithoutNotesInput = {
   matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutNotesInput = {
@@ -790,6 +824,7 @@ export type ClasseUncheckedCreateWithoutNotesInput = {
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutNotesInput = {
@@ -819,6 +854,7 @@ export type ClasseUpdateWithoutNotesInput = {
   matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutNotesInput = {
@@ -832,6 +868,7 @@ export type ClasseUncheckedUpdateWithoutNotesInput = {
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutDocumentsInput = {
@@ -845,6 +882,7 @@ export type ClasseCreateWithoutDocumentsInput = {
   matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutDocumentsInput = {
@@ -858,6 +896,7 @@ export type ClasseUncheckedCreateWithoutDocumentsInput = {
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutDocumentsInput = {
@@ -887,6 +926,7 @@ export type ClasseUpdateWithoutDocumentsInput = {
   matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutDocumentsInput = {
@@ -900,6 +940,7 @@ export type ClasseUncheckedUpdateWithoutDocumentsInput = {
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutCreneauHorairesInput = {
@@ -913,6 +954,7 @@ export type ClasseCreateWithoutCreneauHorairesInput = {
   matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutCreneauHorairesInput = {
@@ -926,6 +968,7 @@ export type ClasseUncheckedCreateWithoutCreneauHorairesInput = {
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutCreneauHorairesInput = {
@@ -955,6 +998,7 @@ export type ClasseUpdateWithoutCreneauHorairesInput = {
   matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutCreneauHorairesInput = {
@@ -968,6 +1012,79 @@ export type ClasseUncheckedUpdateWithoutCreneauHorairesInput = {
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
+}
+
+export type ClasseCreateWithoutAppelsInput = {
+  id?: string
+  nom: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutClassesInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
+  notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+}
+
+export type ClasseUncheckedCreateWithoutAppelsInput = {
+  id?: string
+  nom: string
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+}
+
+export type ClasseCreateOrConnectWithoutAppelsInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutAppelsInput, Prisma.ClasseUncheckedCreateWithoutAppelsInput>
+}
+
+export type ClasseUpsertWithoutAppelsInput = {
+  update: Prisma.XOR<Prisma.ClasseUpdateWithoutAppelsInput, Prisma.ClasseUncheckedUpdateWithoutAppelsInput>
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutAppelsInput, Prisma.ClasseUncheckedCreateWithoutAppelsInput>
+  where?: Prisma.ClasseWhereInput
+}
+
+export type ClasseUpdateToOneWithWhereWithoutAppelsInput = {
+  where?: Prisma.ClasseWhereInput
+  data: Prisma.XOR<Prisma.ClasseUpdateWithoutAppelsInput, Prisma.ClasseUncheckedUpdateWithoutAppelsInput>
+}
+
+export type ClasseUpdateWithoutAppelsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutClassesNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+}
+
+export type ClasseUncheckedUpdateWithoutAppelsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateManySchoolInput = {
@@ -988,6 +1105,7 @@ export type ClasseUpdateWithoutSchoolInput = {
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutSchoolInput = {
@@ -1001,6 +1119,7 @@ export type ClasseUncheckedUpdateWithoutSchoolInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutSchoolInput = {
@@ -1021,6 +1140,7 @@ export type ClasseUpdateWithoutProfsInput = {
   notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutProfsInput = {
@@ -1034,6 +1154,7 @@ export type ClasseUncheckedUpdateWithoutProfsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutProfsInput = {
@@ -1056,6 +1177,7 @@ export type ClasseCountOutputType = {
   notes: number
   documents: number
   creneauHoraires: number
+  appels: number
 }
 
 export type ClasseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1065,6 +1187,7 @@ export type ClasseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   notes?: boolean | ClasseCountOutputTypeCountNotesArgs
   documents?: boolean | ClasseCountOutputTypeCountDocumentsArgs
   creneauHoraires?: boolean | ClasseCountOutputTypeCountCreneauHorairesArgs
+  appels?: boolean | ClasseCountOutputTypeCountAppelsArgs
 }
 
 /**
@@ -1119,6 +1242,13 @@ export type ClasseCountOutputTypeCountCreneauHorairesArgs<ExtArgs extends runtim
   where?: Prisma.CreneauHoraireWhereInput
 }
 
+/**
+ * ClasseCountOutputType without action
+ */
+export type ClasseCountOutputTypeCountAppelsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AppelWhereInput
+}
+
 
 export type ClasseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1133,6 +1263,7 @@ export type ClasseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   notes?: boolean | Prisma.Classe$notesArgs<ExtArgs>
   documents?: boolean | Prisma.Classe$documentsArgs<ExtArgs>
   creneauHoraires?: boolean | Prisma.Classe$creneauHorairesArgs<ExtArgs>
+  appels?: boolean | Prisma.Classe$appelsArgs<ExtArgs>
   _count?: boolean | Prisma.ClasseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["classe"]>
 
@@ -1171,6 +1302,7 @@ export type ClasseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   notes?: boolean | Prisma.Classe$notesArgs<ExtArgs>
   documents?: boolean | Prisma.Classe$documentsArgs<ExtArgs>
   creneauHoraires?: boolean | Prisma.Classe$creneauHorairesArgs<ExtArgs>
+  appels?: boolean | Prisma.Classe$appelsArgs<ExtArgs>
   _count?: boolean | Prisma.ClasseCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClasseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1190,6 +1322,7 @@ export type $ClassePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     notes: Prisma.$NotePayload<ExtArgs>[]
     documents: Prisma.$DocumentPayload<ExtArgs>[]
     creneauHoraires: Prisma.$CreneauHorairePayload<ExtArgs>[]
+    appels: Prisma.$AppelPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1598,6 +1731,7 @@ export interface Prisma__ClasseClient<T, Null = never, ExtArgs extends runtime.T
   notes<T extends Prisma.Classe$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.Classe$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   creneauHoraires<T extends Prisma.Classe$creneauHorairesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$creneauHorairesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CreneauHorairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  appels<T extends Prisma.Classe$appelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$appelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AppelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2174,6 +2308,30 @@ export type Classe$creneauHorairesArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.CreneauHoraireScalarFieldEnum | Prisma.CreneauHoraireScalarFieldEnum[]
+}
+
+/**
+ * Classe.appels
+ */
+export type Classe$appelsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Appel
+   */
+  select?: Prisma.AppelSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Appel
+   */
+  omit?: Prisma.AppelOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AppelInclude<ExtArgs> | null
+  where?: Prisma.AppelWhereInput
+  orderBy?: Prisma.AppelOrderByWithRelationInput | Prisma.AppelOrderByWithRelationInput[]
+  cursor?: Prisma.AppelWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AppelScalarFieldEnum | Prisma.AppelScalarFieldEnum[]
 }
 
 /**

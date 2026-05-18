@@ -64,3 +64,12 @@ export const JourSemaine = {
 } as const
 
 export type JourSemaine = (typeof JourSemaine)[keyof typeof JourSemaine]
+
+
+export const StatutPresence = {
+  PRESENT: 'PRESENT',
+  ABSENT: 'ABSENT',
+  RETARD: 'RETARD'
+} as const
+
+export type StatutPresence = (typeof StatutPresence)[keyof typeof StatutPresence]

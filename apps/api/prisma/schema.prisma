@@ -74,6 +74,7 @@ model School {
   notes           Note[]
   documents       Document[]
   creneauHoraires CreneauHoraire[]
+  appels          Appel[]
 }
 
 model Classe {
@@ -91,6 +92,7 @@ model Classe {
   notes           Note[]
   documents       Document[]
   creneauHoraires CreneauHoraire[]
+  appels          Appel[]
 
   @@unique([schoolId, nom]) // Un nom de classe unique par école (pour les upserts)
 }
@@ -120,6 +122,7 @@ model Eleve {
   admissions DossierAdmission[]
   parent     Parent?            @relation(fields: [parentId], references: [id])
   notes      Note[]
+  presences  Presence[]
 
   @@unique([schoolId, nom, prenom]) // Nom + prénom unique par école (pour les upserts)
   @@index([schoolId]) // Index pour optimiser les requêtes par école
@@ -420,8 +423,53 @@ model CreneauHoraire {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  appels    Appel[]
 
   @@unique([classeId, jour, heureDebut, heureFin]) // Un créneau unique par classe, jour et heure de début
   @@index([schoolId]) // Index pour optimiser les requêtes par école
   @@index([classeId]) // Index pour optimiser les requêtes par classe
+}
+
+// MODULE ABSENCE / APPELS
+enum StatutPresence {
+  PRESENT
+  ABSENT
+  RETARD
+}
+
+/// Un appel = une session de présence pour un creneau horaire à une date donnée
+model Appel {
+  id        String @id @default(uuid())
+  creneauId String
+  classeId  String
+  schoolId  String
+  /// Date au format "YYYY-MM-DD", ex: "2024-09-01"
+  date      String
+
+  creneau   CreneauHoraire @relation(fields: [creneauId], references: [id], onDelete: Cascade)
+  classe    Classe         @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  school    School         @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  presences Presence[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([creneauId, date]) // Un appel unique par créneau et par date
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([classeId]) // Index pour optimiser les requêtes par classe
+}
+
+/// Présence d'un élève dans un appel
+model Presence {
+  id      String         @id @default(uuid())
+  appelId String
+  eleveId String
+  statut  StatutPresence
+
+  appel Appel @relation(fields: [appelId], references: [id], onDelete: Cascade)
+  eleve Eleve @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  updatedAt DateTime @updatedAt
+
+  @@unique([appelId, eleveId]) // Un enregistrement de présence unique par appel et par élève
 }

@@ -7,11 +7,11 @@ import { ArrowLeft, BookOpen } from "lucide-react";
 import type { Classe } from "@school-mgt/types";
 import VueGeneraleTab from "../components/classe/VueGeneraleTab";
 import EleveTab from "../components/classe/EleveTab";
-import PlaceholderTab from "../components/classe/PlaceholderTab";
 import MatieresTab from "../components/classe/MatieresTab";
 import NotesTab from "../components/classe/NotesTab";
 import DocumentsTab from "../components/classe/DocumentsTab";
 import EmploiDuTempsTab from "../components/classe/EmploiDuTempsTab";
+import AbsenceTab from "../components/classe/AbsenceTab";
 
 // Définition des onglets pour la page de profil de classe
 const TABS = [
@@ -104,7 +104,16 @@ export default function ClasseProfilPage() {
           />
         );
       case "absences":
-        return <PlaceholderTab label="Absences" />;
+        return (
+          <AbsenceTab
+            classeId={id}
+            canManage={
+              user?.role === "SUDO_ADMIN" ||
+              user?.role === "ADMIN" ||
+              user?.role === "PROF"
+            }
+          />
+        );
       case "documents":
         return (
           <DocumentsTab

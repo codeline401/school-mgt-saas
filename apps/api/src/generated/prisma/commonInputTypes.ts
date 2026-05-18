@@ -274,6 +274,23 @@ export type EnumJourSemaineWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumJourSemaineFilter<$PrismaModel>
 }
 
+export type EnumStatutPresenceFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutPresence | Prisma.EnumStatutPresenceFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutPresence[] | Prisma.ListEnumStatutPresenceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutPresence[] | Prisma.ListEnumStatutPresenceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutPresenceFilter<$PrismaModel> | $Enums.StatutPresence
+}
+
+export type EnumStatutPresenceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutPresence | Prisma.EnumStatutPresenceFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutPresence[] | Prisma.ListEnumStatutPresenceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutPresence[] | Prisma.ListEnumStatutPresenceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutPresenceWithAggregatesFilter<$PrismaModel> | $Enums.StatutPresence
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutPresenceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutPresenceFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -545,6 +562,23 @@ export type NestedEnumJourSemaineWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumJourSemaineFilter<$PrismaModel>
   _max?: Prisma.NestedEnumJourSemaineFilter<$PrismaModel>
+}
+
+export type NestedEnumStatutPresenceFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutPresence | Prisma.EnumStatutPresenceFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutPresence[] | Prisma.ListEnumStatutPresenceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutPresence[] | Prisma.ListEnumStatutPresenceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutPresenceFilter<$PrismaModel> | $Enums.StatutPresence
+}
+
+export type NestedEnumStatutPresenceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutPresence | Prisma.EnumStatutPresenceFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutPresence[] | Prisma.ListEnumStatutPresenceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutPresence[] | Prisma.ListEnumStatutPresenceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutPresenceWithAggregatesFilter<$PrismaModel> | $Enums.StatutPresence
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutPresenceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutPresenceFilter<$PrismaModel>
 }
 
 
