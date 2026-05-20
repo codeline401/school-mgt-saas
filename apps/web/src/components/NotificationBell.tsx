@@ -95,20 +95,22 @@ export default function NotificationBell() {
               </li>
             )}
             {notifications.map((n) => (
-              <li
-                key={n.id}
-                className={`px-4 py-3 text-sm cursor-pointer hover:bg-base-200 transition-colors ${!n.lu ? "bg-primary/5 font-medium" : ""}`}
-                onClick={() => handleClick(n)}
-              >
-                <p className="leading-snug">{n.message}</p>
-                <p className="text-xs text-base-content/40 mt-0.5">
-                  {new Date(n.createdAt).toLocaleString("fr-FR", {
-                    day: "2-digit",
-                    month: "short",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </p>
+              <li key={n.id}>
+                <button
+                  type="button"
+                  className={`w-full text-left px-4 py-3 text-sm hover:bg-base-200 transition-colors ${!n.lu ? "bg-primary/5 font-medium" : ""}`}
+                  onClick={() => handleClick(n)}
+                >
+                  <p className="leading-snug">{n.message}</p>
+                  <p className="text-xs text-base-content/40 mt-0.5">
+                    {new Date(n.createdAt).toLocaleString("fr-FR", {
+                      day: "2-digit",
+                      month: "short",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </p>
+                </button>
               </li>
             ))}
           </ul>
