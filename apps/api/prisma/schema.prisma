@@ -46,6 +46,9 @@ model User {
   notes         Note[]         @relation("NotesCreees") // Notes créées par ce professeur
   professeur    Professeur? // Profil RH si l'utilisateur est un PROF
   documents     Document[]     @relation("DocumentsUploades") // Documents uploadés par cet utilisateur
+
+  parent        Parent? // Profil de parent si l'utilisateur est un PARENT
+  notifications Notification[] // Notifications reçues par cet utilisateur
 }
 
 // Modele SAAS
@@ -75,6 +78,7 @@ model School {
   documents       Document[]
   creneauHoraires CreneauHoraire[]
   appels          Appel[]
+  notifications   Notification[]
 }
 
 model Classe {
@@ -181,6 +185,9 @@ model Parent {
 
   // peut avoir plusieurs enfants dans l'école
   eleves Eleve[]
+
+  userId String? @unique
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   @@index([schoolId]) // Index pour optimiser les requêtes par école
 }
@@ -472,4 +479,19 @@ model Presence {
   updatedAt DateTime @updatedAt
 
   @@unique([appelId, eleveId]) // Un enregistrement de présence unique par appel et par élève
+}
+
+// MODELE NOTIFICATION - Pour gérer les notifications aux parents etc
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  schoolId  String
+  school    School   @relation(fields: [schoolId], references: [id])
+  message   String
+  lien      String? // ex: "/classes/:id" pour naviguer au cliec
+  lu        Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId, lu])
 }

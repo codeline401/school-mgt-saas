@@ -2,6 +2,8 @@ import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
 import { LogOut, UserCircle } from "lucide-react";
 
+import NotificationBell from "./NotificationBell";
+
 const ROLE_LABELS: Record<string, string> = {
   SUDO_ADMIN: "Super Admin",
   ADMIN: "Administrateur",
@@ -54,6 +56,8 @@ export default function UserHeader() {
           {ROLE_LABELS[user.role] ?? user.role}
         </span>
       </div>
+
+      <NotificationBell />
 
       {/* Bouton déconnexion */}
       <button

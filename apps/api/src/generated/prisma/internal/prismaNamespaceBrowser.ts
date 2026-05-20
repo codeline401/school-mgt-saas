@@ -65,7 +65,8 @@ export const ModelName = {
   Document: 'Document',
   CreneauHoraire: 'CreneauHoraire',
   Appel: 'Appel',
-  Presence: 'Presence'
+  Presence: 'Presence',
+  Notification: 'Notification'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -168,7 +169,8 @@ export const ParentScalarFieldEnum = {
   adresse: 'adresse',
   schoolId: 'schoolId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type ParentScalarFieldEnum = (typeof ParentScalarFieldEnum)[keyof typeof ParentScalarFieldEnum]
@@ -318,6 +320,19 @@ export const PresenceScalarFieldEnum = {
 } as const
 
 export type PresenceScalarFieldEnum = (typeof PresenceScalarFieldEnum)[keyof typeof PresenceScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  schoolId: 'schoolId',
+  message: 'message',
+  lien: 'lien',
+  lu: 'lu',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const SortOrder = {
