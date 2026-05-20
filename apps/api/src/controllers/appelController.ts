@@ -299,14 +299,39 @@ export const updatePresence = async (req: Request, res: Response) => {
       }
     }
 
+    // Notification in-app au parent si l'élève est marqué ABSENT
+    if (data.statut === "ABSENT") {
+      const eleve = await prisma.eleve.findUnique({
+        where: { id: eleveId },
+        select: {
+          nom: true,
+          prenom: true,
+          parent: { select: { userId: true } },
+        },
+      });
+
+      const parentUserId = eleve?.parent?.userId;
+      if (parentUserId) {
+        await prisma.notification.create({
+          data: {
+            userId: parentUserId,
+            schoolId: appel.classeId,
+            message: `${eleve!.prenom} ${eleve!.nom} a été marqué comme absent(e) le ${appel.date}.`,
+            lien: `/classes/${classeId}`,
+          },
+        });
+      }
+    }
+
     // Vérifier que l'élève appartient bien à cette classe
     const eleveInClasse = await prisma.eleve.findFirst({
       where: { id: eleveId, classeId },
       select: { id: true },
     });
     if (!eleveInClasse) {
-      return res.status(400).json({ error: "Cet élève n'appartient pas à la classe."
-      });
+      return res
+        .status(400)
+        .json({ error: "Cet élève n'appartient pas à la classe." });
     }
 
     const presence = await prisma.presence.upsert({
@@ -353,7 +378,11 @@ export const getAbsenceStats = async (req: Request, res: Response) => {
     // Plage par défaut : mois en cours
     const today = new Date();
     const defaultFrom = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-01`;
-    const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+    const lastDay = new Date(
+      today.getFullYear(),
+      today.getMonth() + 1,
+      0,
+    ).getDate();
     const defaultTo = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(lastDay).padStart(2, "0")}`;
 
     const dateFrom = from ?? defaultFrom;
@@ -382,9 +411,15 @@ export const getAbsenceStats = async (req: Request, res: Response) => {
     });
 
     const stats = eleves.map((eleve) => {
-      const present = eleve.presences.filter((p) => p.statut === "PRESENT").length;
-      const absent = eleve.presences.filter((p) => p.statut === "ABSENT").length;
-      const retard = eleve.presences.filter((p) => p.statut === "RETARD").length;
+      const present = eleve.presences.filter(
+        (p) => p.statut === "PRESENT",
+      ).length;
+      const absent = eleve.presences.filter(
+        (p) => p.statut === "ABSENT",
+      ).length;
+      const retard = eleve.presences.filter(
+        (p) => p.statut === "RETARD",
+      ).length;
       const appelsEleve = present + absent + retard;
       const tauxPresence =
         appelsEleve > 0

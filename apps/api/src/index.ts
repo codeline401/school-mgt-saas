@@ -15,6 +15,7 @@ import authRoutes from "./routes/authRoutes.js"; // Importation des routes d'aut
 import schoolRoutes from "./routes/schoolRoute.js"; // Importation des routes pour les écoles
 import classesRoutes from "./routes/classesRoute.js"; // Importation des routes pour les classes
 import profilsRoutes from "./routes/profilsRoute.js"; // Importation des routes pour les profils
+import notificationRoutes from "./routes/notificationRoute.js";
 import { authenticate } from "./middlewares/authMiddleware.js"; // Importation du middleware d'authentification
 
 const app = express(); // Création de l'application Express
@@ -33,6 +34,8 @@ app.get("/api/eleves", authenticate, getAllEleves);
 app.post("/api/eleves", authenticate, createEleve);
 app.delete("/api/eleves/:id", authenticate, deleteEleve);
 app.get("/api/professeurs", authenticate, getAllProfesseurs);
+
+app.use("/api/notifications", notificationRoutes);
 
 // Route authentifiée pour servir les feuilles corrigées uploadées.
 // Vérifie que l'utilisateur a accès à l'école de la note avant d'envoyer le fichier.

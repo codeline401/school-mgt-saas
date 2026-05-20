@@ -321,3 +321,12 @@ export interface AbsenceStatsResponse {
   totalAppels: number;
   stats: AbsenceStat[];
 }
+
+export interface Notification {
+  id: string;
+  userId: string;
+  message: string;
+  lien?: string | null;
+  lu: boolean;
+  createdAt: string;
+}

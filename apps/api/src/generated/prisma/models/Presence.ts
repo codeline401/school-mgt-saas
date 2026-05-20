@@ -198,17 +198,17 @@ export type PresenceOrderByWithRelationInput = {
 
 export type PresenceWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  appelId?: string
   appelId_eleveId?: Prisma.PresenceAppelIdEleveIdCompoundUniqueInput
   AND?: Prisma.PresenceWhereInput | Prisma.PresenceWhereInput[]
   OR?: Prisma.PresenceWhereInput[]
   NOT?: Prisma.PresenceWhereInput | Prisma.PresenceWhereInput[]
+  appelId?: Prisma.StringFilter<"Presence"> | string
   eleveId?: Prisma.StringFilter<"Presence"> | string
   statut?: Prisma.EnumStatutPresenceFilter<"Presence"> | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFilter<"Presence"> | Date | string
   appel?: Prisma.XOR<Prisma.AppelScalarRelationFilter, Prisma.AppelWhereInput>
   eleve?: Prisma.XOR<Prisma.EleveScalarRelationFilter, Prisma.EleveWhereInput>
-}, "id" | "appelId_eleveId" | "appelId">
+}, "id" | "appelId_eleveId">
 
 export type PresenceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

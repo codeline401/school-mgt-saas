@@ -101,3 +101,8 @@ export type Appel = Prisma.AppelModel
  * Présence d'un élève dans un appel
  */
 export type Presence = Prisma.PresenceModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
