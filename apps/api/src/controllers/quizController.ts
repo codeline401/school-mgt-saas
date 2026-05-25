@@ -319,7 +319,7 @@ export const submitQuiz = async (req: Request, res: Response) => {
 
     const eleve = await prisma.eleve.findFirst({
       where: { userId: user.id, classeId: classeId }, // Vérifie que l'élève appartient à la classe spécifiée
-      select: { id: true },
+      select: { id: true, nom: true, prenom: true }, // Sélectionne les champs nécessaires de l'élève
     });
     if (!eleve) {
       return res
@@ -329,7 +329,10 @@ export const submitQuiz = async (req: Request, res: Response) => {
 
     const quiz = await prisma.quiz.findUnique({
       where: { id: quizId },
-      include: { questions: true }, // Inclut les questions du quiz pour vérifier les réponses
+      include: {
+        questions: true,
+        professeur: { select: { userId: true, schoolId: true } }, // Inclut les informations du professeur pour vérifier les droits d'accès (SUDO_ADMIN ou appartenant à la même école) et les questions du quiz pour la validation des réponses et l'auto-correction
+      }, // Inclut les questions du quiz pour vérifier les réponses
     });
     if (!quiz || quiz.classeId !== classeId || quiz.statut !== "PUBLIE") {
       return res
@@ -351,10 +354,14 @@ export const submitQuiz = async (req: Request, res: Response) => {
     const seenIds = new Set<string>();
     for (const r of reponses) {
       if (!validQuestionIds.has(r.questionId)) {
-        return res.status(400).json({ error: `Question ${r.questionId} n'appartient pas à ce quiz.` });
+        return res.status(400).json({
+          error: `Question ${r.questionId} n'appartient pas à ce quiz.`,
+        });
       }
       if (seenIds.has(r.questionId)) {
-        return res.status(400).json({ error: `Réponse dupliquée pour la question ${r.questionId}.` });
+        return res.status(400).json({
+          error: `Réponse dupliquée pour la question ${r.questionId}.`,
+        });
       }
       seenIds.add(r.questionId);
     }
@@ -385,10 +392,29 @@ export const submitQuiz = async (req: Request, res: Response) => {
       include: { reponses: true }, // Inclut les réponses dans la soumission créée
     });
 
+    // Notification au prof - fire-and-forget (ne bloque pas la réponse à l'élève)
+    const profUserId = quiz.professeur?.userId; // Récupère l'ID utilisateur du professeur pour envoyer la notification
+    if (profUserId) {
+      prisma.notification
+        .create({
+          data: {
+            userId: profUserId, // Envoie une notification au professeur pour l'informer de la nouvelle soumission du quiz
+            schoolId: quiz.professeur!.schoolId,
+            message: `${eleve.prenom} ${eleve.nom} a soumis le quiz "${quiz.titre}" (${score}/${quiz.questions.length}).`,
+            lien: `/classes/${classeId}`,
+          },
+        })
+        .catch((err) =>
+          console.error("Erreur lors de la création de la notification:", err),
+        ); // En cas d'erreur lors de la création de la notification, log l'erreur sans bloquer la réponse à l'élève
+    }
+
     res.status(201).json(soumission); // Envoie la soumission créée en réponse avec un statut 201 (Created)
   } catch (err) {
     if (err instanceof ZodError) {
-      return res.status(400).json({ error: "Données invalides.", issues: err.issues });
+      return res
+        .status(400)
+        .json({ error: "Données invalides.", issues: err.issues });
     }
     console.error("Erreur submitQuiz:", err);
     res.status(500).json({ error: "Une erreur est survenue." }); // En cas d'erreur, envoie une réponse d'erreur générique
