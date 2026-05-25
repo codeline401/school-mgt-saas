@@ -12,6 +12,7 @@ import ProfesseurProfilPage from "./pages/ProfesseurProfilPage";
 import ProfesseursPage from "./pages/ProfesseurPage";
 import ParentProfilPage from "./pages/ParentProfilPage";
 import ClasseProfilPage from "./pages/ClasseProfilPage";
+import MonProfilProfPage from "./pages/MonProfilProfPage";
 
 const DashboardTemp = () => (
   <div>
@@ -37,7 +38,7 @@ function App() {
             <Route
               element={
                 <ProtectedRoute
-                  allowedRoles={["ADMIN", "USER", "SUDO_ADMIN"]}
+                  allowedRoles={["ADMIN", "USER", "SUDO_ADMIN", "PROF"]}
                 />
               }
             >
@@ -49,6 +50,13 @@ function App() {
               />
               <Route path="/parents/:id" element={<ParentProfilPage />} />
               <Route path="/professeurs" element={<ProfesseursPage />} />
+            </Route>
+
+            {/* Route mon profil : accessible uniquement aux PROFs */}
+            <Route
+              element={<ProtectedRoute allowedRoles={["PROF"]} />}
+            >
+              <Route path="/mon-profil" element={<MonProfilProfPage />} />
             </Route>
 
             {/* Route écoles : ADMIN crée la sienne, SUDO_ADMIN voit tout */}

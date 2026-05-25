@@ -148,6 +148,7 @@ export interface ProfesseurProfil extends BaseEntity {
   classes: Classe[]; // Les classes que le prof enseigne
   contrat: Contrat[]; // Historique des contrats du prof
   remplacements: Remplacement[]; // Historique des remplacements du prof
+  matieres: { id: string; nom: string }[]; // Les matières enseignées par le prof
 }
 
 // Profil complet d'un parent (GET /api/profils/parents/:id)
@@ -329,4 +330,85 @@ export interface Notification {
   lien?: string | null;
   lu: boolean;
   createdAt: string;
+}
+
+/**
+ * Module Prof - quiz & Cahier de texte
+ */
+export type StatutQuiz = "BROUILLON" | "PUBLIE" | "FERME";
+export type TypeQuestion = "QCM" | "VRAI_FAUX" | "REPONSE_COURTE";
+
+export interface Devoir {
+  id: string;
+  titre: string;
+  description?: string | null;
+  dateRendu: string; // YYYY-MM-DD
+  cahierTexteId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CahierTexte {
+  id: string;
+  titre: string;
+  detail?: string | null;
+  date: string;
+  classeId: string;
+  matiereId?: string | null;
+  professeurId: string;
+  schoolId: string;
+  createdAt: string;
+  updatedAt: string;
+  matiere?: { id: string; nom: string } | null;
+  classe?: { id: string; nom: string } | null;
+  devoir?: Devoir[];
+}
+
+export interface Question {
+  id: string;
+  quizId: string;
+  enonce: string;
+  type: TypeQuestion;
+  options: string[]; // Pour QCM et VRAI_FAUX, les options possibles (ex: ["A", "B", "C", "D"] ou ["VRAI", "FAUX"])
+  bonneReponse: string;
+  ordre: number; // Ordre de la question dans le quiz
+  createdAt: string;
+}
+
+export interface Reponse {
+  id: string;
+  soumissionId: string;
+  questionId: string;
+  valeur: string;
+  correcte: boolean | null;
+}
+
+export interface Soumission {
+  id: string;
+  quizId: string;
+  eleveId: string;
+  score?: number | null; // Score obtenu sur le quiz (calculé à la correction)
+  total: number; // Score total possible du quiz
+  soumisAt: string;
+  reponses?: Reponse[]; // Les réponses soumises par l'élève (inclus si demandé avec include)
+  eleve?: { id: string; nom: string; prenom: string } | null; // Résumé de l'élève (inclus si demandé avec include)
+}
+
+export interface Quiz {
+  id: string;
+  titre: string;
+  classeId: string;
+  matiereId?: string | null;
+  professeurId: string;
+  schoolId: string;
+  statut: StatutQuiz;
+  createdAt: string;
+  updatedAt: string;
+  matiere?: { id: string; nom: string } | null;
+  classe?: { id: string; nom: string } | null;
+  questions?: Question[]; // Les questions du quiz (inclus si demandé avec include)
+  _count?: {
+    questions: number;
+    soumissions: number;
+  };
 }

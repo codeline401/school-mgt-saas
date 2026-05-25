@@ -15,6 +15,8 @@ import notesRouter from "./notesRoute.js";
 import documentsRouter from "./documentsRoute.js";
 import emploiDuTempsRouter from "./emploiDuTempsRoute.js";
 import appelRouter from "./appelRoute.js";
+import cahierTexteRouter from "./cahierTexteRoute.js";
+import quizRouter from "./quizRoute.js";
 
 const router = Router();
 
@@ -57,5 +59,7 @@ router.use("/:classeId/notes", notesRouter);
 router.use("/:classeId/documents", documentsRouter);
 router.use("/:classeId/emploi-du-temps", emploiDuTempsRouter); // Sous-route pour l'emploi du temps d'une classe spécifique
 router.use("/:classeId/appels", appelRouter); // Sous-route pour les appels d'une classe spécifique
+router.use("/:classeId/cahier-de-texte", cahierTexteRouter); // Sous-route pour le cahier de texte d'une classe spécifique
+router.use("/:classeId/quiz", quizRouter); // Sous-route pour les quiz d'une classe spécifique
 
 export default router;

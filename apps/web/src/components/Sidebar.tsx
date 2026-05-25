@@ -4,6 +4,7 @@ import {
   GraduationCap,
   LayoutDashboard,
   Settings,
+  UserCircle,
   Users,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
@@ -27,7 +28,8 @@ function Sidebar() {
       path: "/schools",
       roles: ["SUDO_ADMIN", "ADMIN"],
     },
-    { icon: Users, label: "Professeurs", path: "/professeurs", roles: null },
+    { icon: Users, label: "Professeurs", path: "/professeurs", roles: ["ADMIN", "SUDO_ADMIN", "USER"] },
+    { icon: UserCircle, label: "Mon profil", path: "/mon-profil", roles: ["PROF"] },
     { icon: Settings, label: "Paramètres", path: "/parametres", roles: null },
   ];
 

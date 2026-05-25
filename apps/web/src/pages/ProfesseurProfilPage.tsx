@@ -15,6 +15,8 @@ import {
 import { api, getApiError } from "../lib/api";
 import { useAuthStore } from "../store/authStore";
 import type { ProfesseurProfil, Classe } from "@school-mgt/types";
+import CahierTexteTab from "../components/prof/CahierTexteTab";
+import QuizTab from "../components/prof/QuizTab";
 
 const CONTRAT_LABELS: Record<string, string> = {
   CDI: "CDI",
@@ -102,6 +104,9 @@ export default function ProfesseurProfilPage() {
     specialites: "",
     classeIds: [],
   });
+  const [activeTab, setActiveTab] = useState<
+    "profil" | "cahier-texte" | "quiz"
+  >("profil");
 
   const openModal = () => {
     if (!prof) return;
@@ -260,8 +265,29 @@ export default function ProfesseurProfilPage() {
         </div>
       </div>
 
-      {/* Informations personnelles */}
-      <div className="card bg-base-100 shadow-sm border border-base-200">
+      {/* Onglets */}
+      <div className="tabs tabs-bordered mb-4">
+        {(
+          [
+            { key: "profil", label: "Profil" },
+            { key: "cahier-texte", label: "Cahier de texte" },
+            { key: "quiz", label: "Quiz" },
+          ] as { key: typeof activeTab; label: string }[]
+        ).map((t) => (
+          <button
+            key={t.key}
+            className={`tab ${activeTab === t.key ? "tab-active" : ""}`}
+            onClick={() => setActiveTab(t.key)}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === "profil" && (
+        <>
+          {/* Informations personnelles */}
+          <div className="card bg-base-100 shadow-sm border border-base-200">
         <div className="card-body">
           <h2 className="card-title text-base mb-2">
             <User size={16} /> Informations personnelles
@@ -361,6 +387,8 @@ export default function ProfesseurProfilPage() {
             </div>
           </div>
         </div>
+      )}
+      </>
       )}
 
       {/* Modal d'édition */}
@@ -518,6 +546,40 @@ export default function ProfesseurProfilPage() {
           <button type="submit">Fermer</button>
         </form>
       </dialog>
+
+      {activeTab === "cahier-texte" &&
+        (prof.classes[0]?.id ? (
+          <CahierTexteTab
+            classeId={prof.classes[0].id}
+            matieres={prof.matieres ?? []}
+            canWrite={
+              user?.role === "PROF" ||
+              user?.role === "ADMIN" ||
+              user?.role === "SUDO_ADMIN"
+            }
+          />
+        ) : (
+          <p className="text-center text-base-content/50 py-8">
+            Aucune classe assignée.
+          </p>
+        ))}
+
+      {activeTab === "quiz" &&
+        (prof.classes[0]?.id ? (
+          <QuizTab
+            classeId={prof.classes[0].id}
+            matieres={prof.matieres ?? []}
+            canWrite={
+              user?.role === "PROF" ||
+              user?.role === "ADMIN" ||
+              user?.role === "SUDO_ADMIN"
+            }
+          />
+        ) : (
+          <p className="text-center text-base-content/50 py-8">
+            Aucune classe assignée.
+          </p>
+        ))}
     </div>
   );
 }

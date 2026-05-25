@@ -255,6 +255,7 @@ export const getProfesseurProfil = async (req: Request, res: Response) => {
       where: { id },
       include: {
         classes: true, // classes assignées
+        matieres: { select: { id: true, nom: true } }, // matières enseignées
         contrat: {
           // tous les contrats (CDI, CDD, ...)
           orderBy: { dateDebut: "desc" },
@@ -269,6 +270,10 @@ export const getProfesseurProfil = async (req: Request, res: Response) => {
 
     if (!professeur) {
       return res.status(404).json({ error: "Professeur introuvable" });
+    }
+    // PROF ne peut consulter que son propre profil
+    if (req.user!.role === "PROF" && professeur.userId !== req.user!.id) {
+      return res.status(403).json({ error: "Accès refusé." });
     }
     if (
       !isAuthorizedForSchool(

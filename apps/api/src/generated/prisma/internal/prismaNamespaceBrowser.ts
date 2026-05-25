@@ -66,7 +66,13 @@ export const ModelName = {
   CreneauHoraire: 'CreneauHoraire',
   Appel: 'Appel',
   Presence: 'Presence',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  CahierTexte: 'CahierTexte',
+  Devoir: 'Devoir',
+  Quiz: 'Quiz',
+  Question: 'Question',
+  Soumission: 'Soumission',
+  Reponse: 'Reponse'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -333,6 +339,87 @@ export const NotificationScalarFieldEnum = {
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const CahierTexteScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  detail: 'detail',
+  date: 'date',
+  classeId: 'classeId',
+  matiereId: 'matiereId',
+  professeurId: 'professeurId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CahierTexteScalarFieldEnum = (typeof CahierTexteScalarFieldEnum)[keyof typeof CahierTexteScalarFieldEnum]
+
+
+export const DevoirScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  description: 'description',
+  dateRendu: 'dateRendu',
+  cahierTexteId: 'cahierTexteId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DevoirScalarFieldEnum = (typeof DevoirScalarFieldEnum)[keyof typeof DevoirScalarFieldEnum]
+
+
+export const QuizScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  classeId: 'classeId',
+  matiereId: 'matiereId',
+  professeurId: 'professeurId',
+  schoolId: 'schoolId',
+  statut: 'statut',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type QuizScalarFieldEnum = (typeof QuizScalarFieldEnum)[keyof typeof QuizScalarFieldEnum]
+
+
+export const QuestionScalarFieldEnum = {
+  id: 'id',
+  quizId: 'quizId',
+  enonce: 'enonce',
+  type: 'type',
+  options: 'options',
+  bonneReponse: 'bonneReponse',
+  ordre: 'ordre',
+  createdAt: 'createdAt'
+} as const
+
+export type QuestionScalarFieldEnum = (typeof QuestionScalarFieldEnum)[keyof typeof QuestionScalarFieldEnum]
+
+
+export const SoumissionScalarFieldEnum = {
+  id: 'id',
+  quizId: 'quizId',
+  eleveId: 'eleveId',
+  score: 'score',
+  total: 'total',
+  soumisAt: 'soumisAt'
+} as const
+
+export type SoumissionScalarFieldEnum = (typeof SoumissionScalarFieldEnum)[keyof typeof SoumissionScalarFieldEnum]
+
+
+export const ReponseScalarFieldEnum = {
+  id: 'id',
+  soumissionId: 'soumissionId',
+  questionId: 'questionId',
+  valeur: 'valeur',
+  correcte: 'correcte'
+} as const
+
+export type ReponseScalarFieldEnum = (typeof ReponseScalarFieldEnum)[keyof typeof ReponseScalarFieldEnum]
 
 
 export const SortOrder = {
