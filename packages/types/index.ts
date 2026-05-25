@@ -263,6 +263,11 @@ export interface CreneauHoraire {
   updatedAt: string;
 }
 
+/** Créneau enrichi pour l'emploi du temps personnel d'un prof */
+export interface CreneauHoraireProf extends CreneauHoraire {
+  classe: { id: string; nom: string };
+}
+
 export type StatutPresence = "PRESENT" | "ABSENT" | "RETARD";
 
 export interface PresenceEleve {

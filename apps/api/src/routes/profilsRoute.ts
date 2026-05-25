@@ -9,6 +9,7 @@ import {
   updateElevesProfil,
   updateParentProfil,
   updateProfesseurProfil,
+  getProfEmploiDuTemps,
 } from "../controllers/profilsController.js";
 
 const router = Router(); // Création d'un routeur Express
@@ -56,5 +57,12 @@ router.put(
 
 // PROFIL DU PROF CONNECTÉ
 router.get("/me", authorizeRoles(Role.PROF), getMyProfProfil);
+
+// EMPLOI DU TEMPS D'UN PROFESSEUR
+router.get(
+  "/profs/:id/emploi-du-temps",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
+  getProfEmploiDuTemps,
+);
 
 export default router; // Export du routeur pour l'utiliser dans app.ts

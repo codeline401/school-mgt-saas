@@ -17,6 +17,7 @@ import { useAuthStore } from "../store/authStore";
 import type { ProfesseurProfil, Classe } from "@school-mgt/types";
 import CahierTexteTab from "../components/prof/CahierTexteTab";
 import QuizTab from "../components/prof/QuizTab";
+import EmploiDuTempsTab from "../components/prof/EmploiDuTempsTab";
 
 const CONTRAT_LABELS: Record<string, string> = {
   CDI: "CDI",
@@ -105,7 +106,7 @@ export default function ProfesseurProfilPage() {
     classeIds: [],
   });
   const [activeTab, setActiveTab] = useState<
-    "profil" | "cahier-texte" | "quiz"
+    "profil" | "cahier-texte" | "quiz" | "emploi-du-temps"
   >("profil");
 
   const openModal = () => {
@@ -272,6 +273,7 @@ export default function ProfesseurProfilPage() {
             { key: "profil", label: "Profil" },
             { key: "cahier-texte", label: "Cahier de texte" },
             { key: "quiz", label: "Quiz" },
+            { key: "emploi-du-temps", label: "Emploi du temps" },
           ] as { key: typeof activeTab; label: string }[]
         ).map((t) => (
           <button
@@ -580,6 +582,10 @@ export default function ProfesseurProfilPage() {
             Aucune classe assignée.
           </p>
         ))}
+
+      {activeTab === "emploi-du-temps" && id && (
+        <EmploiDuTempsTab profId={id} />
+      )}
     </div>
   );
 }
