@@ -138,6 +138,17 @@ export const createCahierTexte = async (req: Request, res: Response) => {
       return res.status(403).json({ error: "Accès refusé." }); // si l'utilisateur n'est pas un super admin et que son école ne correspond pas à celle de la classe, retourne une erreur 403
     }
 
+    if (data.matiereId) {
+      const matiere = await prisma.matiere.findUnique({
+        where: { id: data.matiereId },
+        select: { schoolId: true },
+      });
+      if (!matiere) return res.status(400).json({ error: "Matière introuvable." });
+      if (user.role !== "SUDO_ADMIN" && matiere.schoolId !== user.schoolId) {
+        return res.status(403).json({ error: "Matière non autorisée." });
+      }
+    }
+
     const newCahierTexte = await prisma.cahierTexte.create({
       data: {
         titre: data.titre,
@@ -192,21 +203,33 @@ export const updateCahierTexte = async (req: Request, res: Response) => {
 
     const data = createCahierTexteSchema.parse(req.body); // valide les données de la requête avec le schéma de validation
 
-    // Remplacer les devoirs en totalité (delete + recreate) pour simplifier la logique
-    await prisma.devoir.deleteMany({ where: { cahierTexteId: id } }); // supprime les devoirs existants liés à ce cahier de texte
+    if (data.matiereId) {
+      const matiere = await prisma.matiere.findUnique({
+        where: { id: data.matiereId },
+        select: { schoolId: true },
+      });
+      if (!matiere) return res.status(400).json({ error: "Matière introuvable." });
+      if (user.role !== "SUDO_ADMIN" && matiere.schoolId !== user.schoolId) {
+        return res.status(403).json({ error: "Matière non autorisée." });
+      }
+    }
 
-    const updatedCahierTexte = await prisma.cahierTexte.update({
-      where: { id },
-      data: {
-        titre: data.titre,
-        detail: data.detail ?? null, // si le détail n'est pas fourni, on le met à null
-        date: data.date,
-        matiereId: data.matiereId ?? null, // si l'id de la matière n'est pas fourni, on le met à null
-        ...(data.devoirs && data.devoirs.length > 0
-          ? { devoir: { create: data.devoirs.map((d) => ({ ...d, description: d.description ?? null })) } }
-          : {}), // si des devoirs sont fournis, on les crée
-      },
-      include: INCLUDE, // inclut les informations liées à la matière, la classe et les devoirs associés à ce cahier de texte
+    // Remplacer les devoirs en totalité (delete + recreate) pour simplifier la logique
+    const updatedCahierTexte = await prisma.$transaction(async (tx) => {
+      await tx.devoir.deleteMany({ where: { cahierTexteId: id } }); // supprime les devoirs existants liés à ce cahier de texte
+      return tx.cahierTexte.update({
+        where: { id },
+        data: {
+          titre: data.titre,
+          detail: data.detail ?? null, // si le détail n'est pas fourni, on le met à null
+          date: data.date,
+          matiereId: data.matiereId ?? null, // si l'id de la matière n'est pas fourni, on le met à null
+          ...(data.devoirs && data.devoirs.length > 0
+            ? { devoir: { create: data.devoirs.map((d) => ({ ...d, description: d.description ?? null })) } }
+            : {}), // si des devoirs sont fournis, on les crée
+        },
+        include: INCLUDE, // inclut les informations liées à la matière, la classe et les devoirs associés à ce cahier de texte
+      });
     });
     res.status(200).json(updatedCahierTexte); // retourne le cahier de texte mis à jour
   } catch (err) {
@@ -237,6 +260,10 @@ export const deleteCahierTexte = async (req: Request, res: Response) => {
       return res.status(403).json({
         error: "Vous ne pouvez supprimer que vos propres cahiers de texte.",
       }); // si l'utilisateur n'est pas le propriétaire du cahier de texte et n'est pas un super admin ou admin, retourne une erreur 403
+    }
+    // Vérification de tenant pour ADMIN (SUDO_ADMIN peut agir cross-school)
+    if (user.role === "ADMIN" && existingCahierTexte.schoolId !== user.schoolId) {
+      return res.status(403).json({ error: "Accès refusé." });
     }
 
     await prisma.cahierTexte.delete({ where: { id } }); // supprime le cahier de texte

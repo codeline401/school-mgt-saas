@@ -28,8 +28,8 @@ router.put(
 router.delete(
   "/:id",
   authenticate,
-  authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN),
+  authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.PROF),
   deleteCahierTexte,
-); // Suppression : ADMIN, SUDO_ADMIN
+); // Suppression : PROF (ses propres), ADMIN, SUDO_ADMIN
 
 export default router;

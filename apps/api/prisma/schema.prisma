@@ -533,7 +533,7 @@ model CahierTexte {
   classe     Classe     @relation(fields: [classeId], references: [id], onDelete: Cascade)
   matiere    Matiere?   @relation(fields: [matiereId], references: [id], onDelete: SetNull)
   professeur Professeur @relation(fields: [professeurId], references: [id], onDelete: Cascade)
-  school     School     @relation(fields: [schoolId], references: [id])
+  school     School     @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   devoir     Devoir[]
 
   @@index([classeId, date]) // pour optimiser les requêtes par classe et par date
@@ -568,7 +568,7 @@ model Quiz {
   classe      Classe       @relation(fields: [classeId], references: [id], onDelete: Cascade)
   matiere     Matiere?     @relation(fields: [matiereId], references: [id], onDelete: SetNull)
   professeur  Professeur   @relation(fields: [professeurId], references: [id], onDelete: Cascade)
-  school      School       @relation(fields: [schoolId], references: [id])
+  school      School       @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   questions   Question[]
   soumissions Soumission[]
 
@@ -588,6 +588,8 @@ model Question {
 
   quiz     Quiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)
   reponses Reponse[]
+
+  @@index([quizId])
 }
 
 model Soumission {

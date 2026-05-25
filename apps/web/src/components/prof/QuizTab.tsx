@@ -54,7 +54,7 @@ export default function QuizTab({ classeId, matieres, canWrite }: Props) {
   });
 
   const { data: quizDetail } = useQuery<Quiz>({
-    queryKey: ["quiz", selectedQuizId],
+    queryKey: ["quiz", classeId, selectedQuizId],
     queryFn: async () => {
       const { data } = await api.get(
         `/api/classes/${classeId}/quiz/${selectedQuizId}`,
@@ -65,7 +65,7 @@ export default function QuizTab({ classeId, matieres, canWrite }: Props) {
   });
 
   const { data: results = [] } = useQuery<Soumission[]>({
-    queryKey: ["quiz-results", selectedQuizId],
+    queryKey: ["quiz-results", classeId, selectedQuizId],
     queryFn: async () => {
       const { data } = await api.get(
         `/api/classes/${classeId}/quiz/${selectedQuizId}/results`,
@@ -119,7 +119,7 @@ export default function QuizTab({ classeId, matieres, canWrite }: Props) {
             : questionForm.options.filter(Boolean),
       }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["quiz", selectedQuizId] });
+      queryClient.invalidateQueries({ queryKey: ["quiz", classeId, selectedQuizId] });
       toast.success("Question ajoutée.");
       setShowAddQuestion(false);
       setQuestionForm({
@@ -139,7 +139,7 @@ export default function QuizTab({ classeId, matieres, canWrite }: Props) {
         `/api/classes/${classeId}/quiz/${selectedQuizId}/questions/${questionId}`,
       ),
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["quiz", selectedQuizId] }),
+      queryClient.invalidateQueries({ queryKey: ["quiz", classeId, selectedQuizId] }),
     onError: (err) => toast.error(getApiError(err, "Une erreur est survenue.")),
   });
 

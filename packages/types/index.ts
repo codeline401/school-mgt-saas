@@ -377,13 +377,10 @@ export interface Question {
 
 export interface Reponse {
   id: string;
-  quizId: string;
-  enonce: string;
-  type: TypeQuestion;
-  options: string[]; // Pour QCM et VRAI_FAUX, les options possibles (ex: ["A", "B", "C", "D"] ou ["VRAI", "FAUX"])
-  bonneReponse: string;
-  ordre: number; // Ordre de la question dans le quiz
-  createdAt: string;
+  soumissionId: string;
+  questionId: string;
+  valeur: string;
+  correcte: boolean;
 }
 
 export interface Soumission {
@@ -402,7 +399,7 @@ export interface Quiz {
   titre: string;
   classeId: string;
   matiereId?: string | null;
-  profId: string;
+  professeurId: string;
   schoolId: string;
   statut: StatutQuiz;
   createdAt: string;

@@ -194,8 +194,12 @@ export const deleteQuiz = async (req: Request, res: Response) => {
     }
 
     const isOwner = prof && quiz.professeurId === prof.id; // Vérifie si le professeur connecté est le créateur du quiz
-    if (!isOwner && user.role !== "SUDO_ADMIN" && user.role !== "ADMIN") {
-      return res.status(403).json({ error: "Accès refusé." }); // Vérifie que l'utilisateur a les droits d'accès pour supprimer le quiz (SUDO_ADMIN, ADMIN ou professeur qui a créé le quiz)
+    if (
+      !isOwner &&
+      user.role !== "SUDO_ADMIN" &&
+      !(user.role === "ADMIN" && user.schoolId === quiz.schoolId)
+    ) {
+      return res.status(403).json({ error: "Accès refusé." }); // Vérifie que l'utilisateur a les droits d'accès pour supprimer le quiz
     }
 
     await prisma.quiz.delete({ where: { id: quizId } }); // Supprime le quiz de la base de données
@@ -224,7 +228,7 @@ export const addQuestionToQuiz = async (req: Request, res: Response) => {
         .json({ error: "Quiz non trouvé dans cette classe." }); // Vérifie que le quiz existe et appartient à la classe spécifiée
     }
 
-    if (prof?.id !== quiz.professeurId && user.role !== "SUDO_ADMIN") {
+    if (prof?.id !== quiz.professeurId && user.role !== "SUDO_ADMIN" && user.role !== "ADMIN") {
       return res.status(403).json({ error: "Accès refusé." }); // Vérifie que l'utilisateur a les droits d'accès pour modifier le quiz (SUDO_ADMIN ou professeur qui a créé le quiz)
     }
 
@@ -278,7 +282,7 @@ export const deleteQuestionFromQuiz = async (req: Request, res: Response) => {
       },
     });
 
-    if (prof?.id !== quiz?.professeurId && user.role !== "SUDO_ADMIN") {
+    if (prof?.id !== quiz?.professeurId && user.role !== "SUDO_ADMIN" && user.role !== "ADMIN") {
       return res.status(403).json({ error: "Accès refusé." }); // Vérifie que l'utilisateur a les droits d'accès pour modifier le quiz (SUDO_ADMIN ou professeur qui a créé le quiz)
     }
     if (quiz?.statut !== "BROUILLON") {
@@ -333,6 +337,19 @@ export const submitQuiz = async (req: Request, res: Response) => {
 
     const { reponses } = submitQuizSchema.parse(req.body); // Valide les données de la requête à l'aide du schéma de validation
 
+    // Valider que chaque questionId appartient à ce quiz et détecter les doublons
+    const validQuestionIds = new Set(quiz.questions.map((q) => q.id));
+    const seenIds = new Set<string>();
+    for (const r of reponses) {
+      if (!validQuestionIds.has(r.questionId)) {
+        return res.status(400).json({ error: `Question ${r.questionId} n'appartient pas à ce quiz.` });
+      }
+      if (seenIds.has(r.questionId)) {
+        return res.status(400).json({ error: `Réponse dupliquée pour la question ${r.questionId}.` });
+      }
+      seenIds.add(r.questionId);
+    }
+
     // AUTO-CORRECTION : QCM et VRAI_FAUX
     let score = 0;
     const responseData = reponses.map((r) => {
@@ -361,6 +378,9 @@ export const submitQuiz = async (req: Request, res: Response) => {
 
     res.status(201).json(soumission); // Envoie la soumission créée en réponse avec un statut 201 (Created)
   } catch (err) {
+    if (err instanceof ZodError) {
+      return res.status(400).json({ error: "Données invalides.", issues: err.issues });
+    }
     console.error("Erreur submitQuiz:", err);
     res.status(500).json({ error: "Une erreur est survenue." }); // En cas d'erreur, envoie une réponse d'erreur générique
   }

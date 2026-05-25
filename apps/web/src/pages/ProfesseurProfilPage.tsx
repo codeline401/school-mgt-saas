@@ -547,29 +547,39 @@ export default function ProfesseurProfilPage() {
         </form>
       </dialog>
 
-      {activeTab === "cahier-texte" && (
-        <CahierTexteTab
-          classeId={prof.classes[0]?.id ?? ""}
-          matieres={prof.matieres ?? []}
-          canWrite={
-            user?.role === "PROF" ||
-            user?.role === "ADMIN" ||
-            user?.role === "SUDO_ADMIN"
-          }
-        />
-      )}
+      {activeTab === "cahier-texte" &&
+        (prof.classes[0]?.id ? (
+          <CahierTexteTab
+            classeId={prof.classes[0].id}
+            matieres={prof.matieres ?? []}
+            canWrite={
+              user?.role === "PROF" ||
+              user?.role === "ADMIN" ||
+              user?.role === "SUDO_ADMIN"
+            }
+          />
+        ) : (
+          <p className="text-center text-base-content/50 py-8">
+            Aucune classe assignée.
+          </p>
+        ))}
 
-      {activeTab === "quiz" && (
-        <QuizTab
-          classeId={prof.classes[0]?.id ?? ""}
-          matieres={prof.matieres ?? []}
-          canWrite={
-            user?.role === "PROF" ||
-            user?.role === "ADMIN" ||
-            user?.role === "SUDO_ADMIN"
-          }
-        />
-      )}
+      {activeTab === "quiz" &&
+        (prof.classes[0]?.id ? (
+          <QuizTab
+            classeId={prof.classes[0].id}
+            matieres={prof.matieres ?? []}
+            canWrite={
+              user?.role === "PROF" ||
+              user?.role === "ADMIN" ||
+              user?.role === "SUDO_ADMIN"
+            }
+          />
+        ) : (
+          <p className="text-center text-base-content/50 py-8">
+            Aucune classe assignée.
+          </p>
+        ))}
     </div>
   );
 }

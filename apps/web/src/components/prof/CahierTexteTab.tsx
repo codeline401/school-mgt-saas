@@ -23,7 +23,7 @@ interface Props {
 const EMPTY_FORM = {
   titre: "",
   detail: "",
-  date: new Date().toISOString().split("T")[0]!,
+  date: new Date().toLocaleDateString("en-CA"),
   matiereId: "",
   devoirs: [] as { titre: string; description: string; dateRendu: string }[],
 };
@@ -80,6 +80,7 @@ export default function CahierTexteTab({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cahier-texte", classeId] });
+      queryClient.invalidateQueries({ queryKey: ["devoirs", classeId] });
       toast.success(editingId ? "Entrée mise à jour." : "Entrée ajoutée.");
       setShowForm(false);
       setEditingId(null);
@@ -93,6 +94,7 @@ export default function CahierTexteTab({
       api.delete(`/api/classes/${classeId}/cahier-de-texte/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cahier-texte", classeId] });
+      queryClient.invalidateQueries({ queryKey: ["devoirs", classeId] });
       toast.success("Entrée supprimée.");
     },
     onError: (err) => toast.error(getApiError(err, "Une erreur est survenue.")),

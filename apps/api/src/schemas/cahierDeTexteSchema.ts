@@ -12,7 +12,12 @@ export const createCahierTexteSchema = z.object({
     .optional(), // Le détail est une chaîne optionnelle
   date: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "La date doit être au format YYYY-MM-DD."), // La date doit être au format YYYY-MM-DD
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "La date doit être au format YYYY-MM-DD.")
+    .refine((v) => {
+      const [y, m, d] = v.split("-").map(Number);
+      const dt = new Date(y!, m! - 1, d!);
+      return dt.getFullYear() === y && dt.getMonth() === m! - 1 && dt.getDate() === d;
+    }, "Date de calendrier invalide."), // La date doit être au format YYYY-MM-DD
   matiereId: z.string().uuid().optional(), // L'ID de la matière est une chaîne optionnelle qui doit être un UUID
   devoirs: z
     .array(
@@ -33,7 +38,12 @@ export const createCahierTexteSchema = z.object({
           .regex(
             /^\d{4}-\d{2}-\d{2}$/,
             "La date de rendu doit être au format YYYY-MM-DD.",
-          ), // La date de rendu doit être au format YYYY-MM-DD
+          )
+          .refine((v) => {
+            const [y, m, d] = v.split("-").map(Number);
+            const dt = new Date(y!, m! - 1, d!);
+            return dt.getFullYear() === y && dt.getMonth() === m! - 1 && dt.getDate() === d;
+          }, "Date de rendu invalide."), // La date de rendu doit être au format YYYY-MM-DD
       }),
     )
     .optional(), // Les devoirs sont un tableau optionnel d'objets avec titre, description et date de rendu
