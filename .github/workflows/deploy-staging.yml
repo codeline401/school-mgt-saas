@@ -1,0 +1,51 @@
+name: Deploy Staging
+
+on:
+  workflow_run:
+    workflows:
+      - CI
+    branches:
+      - develop
+    types:
+      - completed
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to staging VPS
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: staging
+    permissions:
+      contents: read
+
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          APP_PATH: ${{ secrets.STAGING_APP_PATH }}
+          RESTART_COMMAND: ${{ secrets.STAGING_RESTART_COMMAND }}
+        with:
+          host: ${{ secrets.STAGING_VPS_HOST }}
+          username: ${{ secrets.STAGING_VPS_USER }}
+          key: ${{ secrets.STAGING_VPS_SSH_KEY }}
+          port: ${{ secrets.STAGING_VPS_PORT }}
+          fingerprint: ${{ secrets.STAGING_VPS_SSH_FINGERPRINT }}
+          envs: APP_PATH,RESTART_COMMAND
+          script: |
+            set -e
+            cd "$APP_PATH"
+            git fetch origin
+            git checkout develop
+            git reset --hard origin/develop
+            npm ci
+            npm run build
+            if [ -n "$RESTART_COMMAND" ]; then
+              bash -lc "$RESTART_COMMAND"
+            else
+              echo "STAGING_RESTART_COMMAND not set, skipping restart command."
+            fi

@@ -41,7 +41,13 @@ export function getApiError(error: unknown, fallback: string): string {
       if (typeof raw === "string") return raw || fallback;
       if (Array.isArray(raw))
         return (
-          raw.map((issue: any) => issue?.message ?? String(issue)).join(", ") ||
+          raw
+            .map((issue: unknown) =>
+              typeof issue === "object" && issue !== null && "message" in issue
+                ? String((issue as { message?: unknown }).message ?? "")
+                : String(issue),
+            )
+            .join(", ") ||
           fallback
         );
       if (raw && typeof raw === "object" && "message" in raw)
