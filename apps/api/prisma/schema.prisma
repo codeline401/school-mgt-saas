@@ -79,6 +79,8 @@ model School {
   creneauHoraires CreneauHoraire[]
   appels          Appel[]
   notifications   Notification[]
+  cahierTextes    CahierTexte[]
+  quizzes         Quiz[]
 }
 
 model Classe {
@@ -97,6 +99,8 @@ model Classe {
   documents       Document[]
   creneauHoraires CreneauHoraire[]
   appels          Appel[]
+  cahierTextes    CahierTexte[]
+  quizzes         Quiz[]
 
   @@unique([schoolId, nom]) // Un nom de classe unique par école (pour les upserts)
 }
@@ -123,10 +127,11 @@ model Eleve {
   parentId String?
 
   // Historique des admissions de l'élève
-  admissions DossierAdmission[]
-  parent     Parent?            @relation(fields: [parentId], references: [id])
-  notes      Note[]
-  presences  Presence[]
+  admissions  DossierAdmission[]
+  parent      Parent?            @relation(fields: [parentId], references: [id])
+  notes       Note[]
+  presences   Presence[]
+  soumissions Soumission[]
 
   @@unique([schoolId, nom, prenom]) // Nom + prénom unique par école (pour les upserts)
   @@index([schoolId]) // Index pour optimiser les requêtes par école
@@ -162,6 +167,8 @@ model Professeur {
   // Relation dossier RH
   contrat       Contrat[]
   remplacements Remplacement[] @relation("ProfesseurAbsent") // Remplacement assuré par ce professeur
+  cahierTextes  CahierTexte[]
+  quizzes       Quiz[]
 
   @@unique([schoolId, nom, prenom]) // Nom + prénom unique par école (pour les upserts)
   @@index([schoolId]) // Index pour optimiser les requêtes par école
@@ -310,6 +317,8 @@ model Matiere {
   profs           Professeur[]     @relation("ProfesseurMatieres") // Profs qui enseignent cette matière
   documents       Document[]
   creneauHoraires CreneauHoraire[]
+  cahierTextes    CahierTexte[]
+  quizzes         Quiz[]
 
   @@unique([classeId, nom]) // Un nom de matière unique par classe
   @@index([schoolId]) // Index pour optimiser les requêtes par école
@@ -494,4 +503,117 @@ model Notification {
   createdAt DateTime @default(now())
 
   @@index([userId, lu])
+}
+
+// CAHIER DE TEXTE, QUIZ pour professeur
+enum StatutQuiz {
+  BROUILLON
+  PUBLIE
+  FERME
+}
+
+enum TypeQuestion {
+  QCM
+  VRAI_FAUX
+  REPONSE_COURTE
+}
+
+model CahierTexte {
+  id           String   @id @default(uuid())
+  titre        String
+  detail       String?  @db.Text // description détaillée du cours, devoir, etc.
+  date         String // YYYY-MM-DD
+  classeId     String
+  matiereId    String?
+  professeurId String // le prof qui a créé ce cahier de texte
+  schoolId     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  classe     Classe     @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  matiere    Matiere?   @relation(fields: [matiereId], references: [id], onDelete: SetNull)
+  professeur Professeur @relation(fields: [professeurId], references: [id], onDelete: Cascade)
+  school     School     @relation(fields: [schoolId], references: [id])
+  devoir     Devoir[]
+
+  @@index([classeId, date]) // pour optimiser les requêtes par classe et par date
+  @@index([professeurId]) // pour optimiser les requêtes par professeur
+}
+
+model Devoir {
+  id            String   @id @default(uuid())
+  titre         String
+  description   String?  @db.Text
+  dateRendu     String // YYYY-MM-DD
+  cahierTexteId String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  cahierTexte CahierTexte @relation(fields: [cahierTexteId], references: [id], onDelete: Cascade)
+
+  @@index([cahierTexteId]) // pour optimiser les requêtes par cahier de texte
+}
+
+model Quiz {
+  id           String     @id @default(uuid())
+  titre        String
+  classeId     String
+  matiereId    String?
+  professeurId String
+  schoolId     String
+  statut       StatutQuiz @default(BROUILLON)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  classe      Classe       @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  matiere     Matiere?     @relation(fields: [matiereId], references: [id], onDelete: SetNull)
+  professeur  Professeur   @relation(fields: [professeurId], references: [id], onDelete: Cascade)
+  school      School       @relation(fields: [schoolId], references: [id])
+  questions   Question[]
+  soumissions Soumission[]
+
+  @@index([classeId]) // pour optimiser les requêtes par classe
+  @@index([professeurId]) // pour optimiser les requêtes par professeur
+}
+
+model Question {
+  id           String       @id @default(uuid())
+  quizId       String
+  enonce       String       @db.Text
+  type         TypeQuestion
+  options      String[] // pour les QCM, stocke les options de réponse
+  bonneReponse String // pour les QCM, stocke la bonne réponse (ex: "A", "B", etc.) ou la réponse correcte pour les autres types
+  ordre        Int          @default(0) // pour ordonner les questions dans le quiz
+  createdAt    DateTime     @default(now())
+
+  quiz     Quiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  reponses Reponse[]
+}
+
+model Soumission {
+  id       String   @id @default(uuid())
+  quizId   String
+  eleveId  String
+  score    Float? // score obtenu, calculé après correction
+  total    Int
+  soumisAt DateTime @default(now())
+
+  quiz     Quiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  eleve    Eleve     @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+  reponses Reponse[]
+
+  @@unique([quizId, eleveId]) // Un élève ne peut soumettre qu'une fois par quiz
+}
+
+model Reponse {
+  id           String   @id @default(uuid())
+  soumissionId String
+  questionId   String
+  valeur       String // la réponse donnée par l'élève (ex: "A", "B", "C", "D" pour les QCM, ou la réponse textuelle pour les autres types)
+  correcte     Boolean? // indique si la réponse est correcte, calculée après correction
+
+  soumission Soumission @relation(fields: [soumissionId], references: [id], onDelete: Cascade)
+  question   Question   @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([soumissionId, questionId]) // Une réponse unique par question dans une soumission
 }

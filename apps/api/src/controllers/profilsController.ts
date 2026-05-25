@@ -255,6 +255,7 @@ export const getProfesseurProfil = async (req: Request, res: Response) => {
       where: { id },
       include: {
         classes: true, // classes assignées
+        matieres: { select: { id: true, nom: true } }, // matières enseignées
         contrat: {
           // tous les contrats (CDI, CDD, ...)
           orderBy: { dateDebut: "desc" },

@@ -130,3 +130,33 @@ export type Presence = Prisma.PresenceModel
  * 
  */
 export type Notification = Prisma.NotificationModel
+/**
+ * Model CahierTexte
+ * 
+ */
+export type CahierTexte = Prisma.CahierTexteModel
+/**
+ * Model Devoir
+ * 
+ */
+export type Devoir = Prisma.DevoirModel
+/**
+ * Model Quiz
+ * 
+ */
+export type Quiz = Prisma.QuizModel
+/**
+ * Model Question
+ * 
+ */
+export type Question = Prisma.QuestionModel
+/**
+ * Model Soumission
+ * 
+ */
+export type Soumission = Prisma.SoumissionModel
+/**
+ * Model Reponse
+ * 
+ */
+export type Reponse = Prisma.ReponseModel

@@ -45,7 +45,7 @@ router.put(
 // FICHE PROFESSEURS
 router.get(
   "/profs/:id",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
   getProfesseurProfil,
 );
 router.put(

@@ -73,3 +73,21 @@ export const StatutPresence = {
 } as const
 
 export type StatutPresence = (typeof StatutPresence)[keyof typeof StatutPresence]
+
+
+export const StatutQuiz = {
+  BROUILLON: 'BROUILLON',
+  PUBLIE: 'PUBLIE',
+  FERME: 'FERME'
+} as const
+
+export type StatutQuiz = (typeof StatutQuiz)[keyof typeof StatutQuiz]
+
+
+export const TypeQuestion = {
+  QCM: 'QCM',
+  VRAI_FAUX: 'VRAI_FAUX',
+  REPONSE_COURTE: 'REPONSE_COURTE'
+} as const
+
+export type TypeQuestion = (typeof TypeQuestion)[keyof typeof TypeQuestion]
