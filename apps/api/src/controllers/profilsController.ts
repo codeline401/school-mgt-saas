@@ -395,3 +395,76 @@ export const getMyProfProfil = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Erreur serveur" });
   }
 };
+
+// ===================================================================
+// EMPLOI DU TEMPS D'UN PROFESSEUR
+// ===================================================================
+const JOURS_ORDER: Record<string, number> = {
+  LUNDI: 0,
+  MARDI: 1,
+  MERCREDI: 2,
+  JEUDI: 3,
+  VENDREDI: 4,
+  SAMEDI: 5,
+  DIMANCHE: 6,
+};
+
+/**
+ * GET /api/profils/profs/:id/emploi-du-temps
+ * Retourne tous les créneaux horaires liés aux matières enseignées par ce professeur,
+ * toutes classes confondues (emploi du temps personnel fusionné).
+ * Chaque créneau inclut la matière et la classe pour affichage.
+ */
+export const getProfEmploiDuTemps = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params as { id: string };
+    const user = req.user!;
+
+    // Récupérer le prof avec ses matières
+    const prof = await prisma.professeur.findUnique({
+      where: { id },
+      select: {
+        schoolId: true,
+        userId: true,
+        matieres: { select: { id: true } },
+      },
+    });
+
+    if (!prof) return res.status(404).json({ error: "Professeur introuvable." });
+
+    // PROF ne peut consulter que son propre emploi du temps
+    if (user.role === "PROF" && prof.userId !== user.id) {
+      return res.status(403).json({ error: "Accès refusé." });
+    }
+
+    if (!isAuthorizedForSchool(user.role, user.schoolId, prof.schoolId)) {
+      return res.status(403).json({ error: "Accès refusé." });
+    }
+
+    const matiereIds = prof.matieres.map((m) => m.id);
+
+    if (matiereIds.length === 0) {
+      return res.status(200).json([]);
+    }
+
+    const creneaux = await prisma.creneauHoraire.findMany({
+      where: { matiereId: { in: matiereIds } },
+      include: {
+        matiere: { select: { id: true, nom: true } },
+        classe: { select: { id: true, nom: true } },
+      },
+    });
+
+    // Trier par jour puis par heure de début
+    creneaux.sort((a, b) => {
+      const jourDiff = (JOURS_ORDER[a.jour] ?? 0) - (JOURS_ORDER[b.jour] ?? 0);
+      if (jourDiff !== 0) return jourDiff;
+      return a.heureDebut.localeCompare(b.heureDebut);
+    });
+
+    res.status(200).json(creneaux);
+  } catch (err) {
+    console.error("Erreur getProfEmploiDuTemps:", err);
+    res.status(500).json({ error: "Erreur serveur." });
+  }
+};
