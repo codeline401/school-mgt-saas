@@ -1,0 +1,51 @@
+name: Deploy Production
+
+on:
+  workflow_run:
+    workflows:
+      - CI
+    branches:
+      - main
+    types:
+      - completed
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to production VPS
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          APP_PATH: ${{ secrets.PROD_APP_PATH }}
+          RESTART_COMMAND: ${{ secrets.PROD_RESTART_COMMAND }}
+        with:
+          host: ${{ secrets.PROD_VPS_HOST }}
+          username: ${{ secrets.PROD_VPS_USER }}
+          key: ${{ secrets.PROD_VPS_SSH_KEY }}
+          port: ${{ secrets.PROD_VPS_PORT }}
+          fingerprint: ${{ secrets.PROD_VPS_SSH_FINGERPRINT }}
+          envs: APP_PATH,RESTART_COMMAND
+          script: |
+            set -e
+            cd "$APP_PATH"
+            git fetch origin
+            git checkout main
+            git reset --hard origin/main
+            npm ci
+            npm run build
+            if [ -n "$RESTART_COMMAND" ]; then
+              bash -lc "$RESTART_COMMAND"
+            else
+              echo "PROD_RESTART_COMMAND not set, skipping restart command."
+            fi

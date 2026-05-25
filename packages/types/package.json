@@ -2,6 +2,9 @@
   "name": "@school-mgt/types",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "test": "echo \"No shared types tests configured yet\""
+  },
   "main": "./index.ts",
   "types": "./index.ts"
 }
