@@ -10,6 +10,9 @@ on:
       - develop
       - main
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     name: Lint, build and test
