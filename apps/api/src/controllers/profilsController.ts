@@ -272,14 +272,8 @@ export const getProfesseurProfil = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Professeur introuvable" });
     }
     // PROF ne peut consulter que son propre profil
-    if (req.user!.role === "PROF") {
-      const self = await prisma.professeur.findFirst({
-        where: { userId: req.user!.id },
-        select: { id: true },
-      });
-      if (!self || self.id !== id) {
-        return res.status(403).json({ error: "Accès refusé." });
-      }
+    if (req.user!.role === "PROF" && professeur.userId !== req.user!.id) {
+      return res.status(403).json({ error: "Accès refusé." });
     }
     if (
       !isAuthorizedForSchool(

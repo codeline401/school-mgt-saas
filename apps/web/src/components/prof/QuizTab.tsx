@@ -120,6 +120,7 @@ export default function QuizTab({ classeId, matieres, canWrite }: Props) {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["quiz", classeId, selectedQuizId] });
+      queryClient.invalidateQueries({ queryKey: ["quizzes", classeId] });
       toast.success("Question ajoutée.");
       setShowAddQuestion(false);
       setQuestionForm({
@@ -138,8 +139,10 @@ export default function QuizTab({ classeId, matieres, canWrite }: Props) {
       api.delete(
         `/api/classes/${classeId}/quiz/${selectedQuizId}/questions/${questionId}`,
       ),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["quiz", classeId, selectedQuizId] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["quiz", classeId, selectedQuizId] });
+      queryClient.invalidateQueries({ queryKey: ["quizzes", classeId] });
+    },
     onError: (err) => toast.error(getApiError(err, "Une erreur est survenue.")),
   });
 

@@ -228,7 +228,11 @@ export const addQuestionToQuiz = async (req: Request, res: Response) => {
         .json({ error: "Quiz non trouvé dans cette classe." }); // Vérifie que le quiz existe et appartient à la classe spécifiée
     }
 
-    if (prof?.id !== quiz.professeurId && user.role !== "SUDO_ADMIN" && user.role !== "ADMIN") {
+    const canModify =
+      prof?.id === quiz.professeurId ||
+      user.role === "SUDO_ADMIN" ||
+      (user.role === "ADMIN" && user.schoolId === quiz.schoolId);
+    if (!canModify) {
       return res.status(403).json({ error: "Accès refusé." }); // Vérifie que l'utilisateur a les droits d'accès pour modifier le quiz (SUDO_ADMIN ou professeur qui a créé le quiz)
     }
 
@@ -279,10 +283,15 @@ export const deleteQuestionFromQuiz = async (req: Request, res: Response) => {
       select: {
         professeurId: true,
         statut: true,
+        schoolId: true,
       },
     });
 
-    if (prof?.id !== quiz?.professeurId && user.role !== "SUDO_ADMIN" && user.role !== "ADMIN") {
+    const canModify =
+      prof?.id === quiz?.professeurId ||
+      user.role === "SUDO_ADMIN" ||
+      (user.role === "ADMIN" && user.schoolId === quiz?.schoolId);
+    if (!canModify) {
       return res.status(403).json({ error: "Accès refusé." }); // Vérifie que l'utilisateur a les droits d'accès pour modifier le quiz (SUDO_ADMIN ou professeur qui a créé le quiz)
     }
     if (quiz?.statut !== "BROUILLON") {

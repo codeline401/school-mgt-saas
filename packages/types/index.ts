@@ -380,7 +380,7 @@ export interface Reponse {
   soumissionId: string;
   questionId: string;
   valeur: string;
-  correcte: boolean;
+  correcte: boolean | null;
 }
 
 export interface Soumission {
