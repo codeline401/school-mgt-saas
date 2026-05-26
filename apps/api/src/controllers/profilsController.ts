@@ -195,26 +195,31 @@ export const createParent = async (req: Request, res: Response) => {
       }
     }
 
-    const newParent = await prisma.parent.create({
-      data: {
-        nom: validatedData.nom,
-        prenom: validatedData.prenom,
-        schoolId,
-        ...(validatedData.email ? { email: validatedData.email } : {}),
-        ...(validatedData.telephone
-          ? { telephone: validatedData.telephone }
-          : {}),
-        ...(validatedData.adresse ? { adresse: validatedData.adresse } : {}),
-      },
-    });
-
-    // Lier l'élève au nouveau parent
-    if (validatedData.eleveId) {
-      await prisma.eleve.update({
-        where: { id: validatedData.eleveId },
-        data: { parentId: newParent.id },
+    // Création du parent et liaison à l'élève dans une transaction atomique :
+    // si l'update de l'élève échoue, la création du parent est annulée.
+    const newParent = await prisma.$transaction(async (tx) => {
+      const parent = await tx.parent.create({
+        data: {
+          nom: validatedData.nom,
+          prenom: validatedData.prenom,
+          schoolId,
+          ...(validatedData.email ? { email: validatedData.email } : {}),
+          ...(validatedData.telephone
+            ? { telephone: validatedData.telephone }
+            : {}),
+          ...(validatedData.adresse ? { adresse: validatedData.adresse } : {}),
+        },
       });
-    }
+
+      if (validatedData.eleveId) {
+        await tx.eleve.update({
+          where: { id: validatedData.eleveId },
+          data: { parentId: parent.id },
+        });
+      }
+
+      return parent;
+    });
 
     return res.status(201).json(newParent);
   } catch (err) {

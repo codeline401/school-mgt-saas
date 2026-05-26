@@ -96,6 +96,7 @@ export default function CreateParentModal({
           modalRef.current?.showModal();
           return;
         }
+        mutation.reset(); // efface l'état d'erreur/succès pour la prochaine ouverture
         setForm(EMPTY);
         onClose();
       }}
