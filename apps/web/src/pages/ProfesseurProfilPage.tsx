@@ -18,6 +18,7 @@ import type { ProfesseurProfil, Classe } from "@school-mgt/types";
 import CahierTexteTab from "../components/prof/CahierTexteTab";
 import QuizTab from "../components/prof/QuizTab";
 import EmploiDuTempsTab from "../components/prof/EmploiDuTempsTab";
+import NotesTab from "../components/prof/NotesTab";
 
 const CONTRAT_LABELS: Record<string, string> = {
   CDI: "CDI",
@@ -106,8 +107,12 @@ export default function ProfesseurProfilPage() {
     classeIds: [],
   });
   const [activeTab, setActiveTab] = useState<
-    "profil" | "cahier-texte" | "quiz" | "emploi-du-temps"
+    "profil" | "cahier-texte" | "quiz" | "emploi-du-temps" | "notes"
   >("profil");
+  const [preferredClasseId, setPreferredClasseId] = useState<string>("");
+  // Derives the active class: if the user hasn't explicitly picked one yet,
+  // fall back to the first class from the prof data.
+  const selectedClasseId = preferredClasseId || prof?.classes[0]?.id || "";
 
   const openModal = () => {
     if (!prof) return;
@@ -266,6 +271,32 @@ export default function ProfesseurProfilPage() {
         </div>
       </div>
 
+      {/* Sélecteur de classe (visible pour les onglets pédagogiques) */}
+      {activeTab !== "profil" && activeTab !== "emploi-du-temps" && (
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-sm text-base-content/50">Classe :</span>
+          {prof.classes.length === 0 ? (
+            <span className="text-sm text-base-content/40">
+              Aucune classe assignée
+            </span>
+          ) : prof.classes.length === 1 ? (
+            <span className="text-sm font-medium">{prof.classes[0].nom}</span>
+          ) : (
+            <select
+              className="select select-sm select-bordered"
+              value={selectedClasseId}
+              onChange={(e) => setPreferredClasseId(e.target.value)}
+            >
+              {prof.classes.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.nom}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
+      )}
+
       {/* Onglets */}
       <div className="tabs tabs-bordered mb-4">
         {(
@@ -274,6 +305,7 @@ export default function ProfesseurProfilPage() {
             { key: "cahier-texte", label: "Cahier de texte" },
             { key: "quiz", label: "Quiz" },
             { key: "emploi-du-temps", label: "Emploi du temps" },
+            { key: "notes", label: "Notes" },
           ] as { key: typeof activeTab; label: string }[]
         ).map((t) => (
           <button
@@ -290,107 +322,156 @@ export default function ProfesseurProfilPage() {
         <>
           {/* Informations personnelles */}
           <div className="card bg-base-100 shadow-sm border border-base-200">
-        <div className="card-body">
-          <h2 className="card-title text-base mb-2">
-            <User size={16} /> Informations personnelles
-          </h2>
-          <div className="space-y-3">
-            <InfoRow
-              icon={<Calendar size={14} />}
-              label="Date de naissance"
-              value={fmt(prof.dateNaissance)}
-            />
-            <InfoRow
-              icon={<Phone size={14} />}
-              label="Téléphone"
-              value={prof.telephone}
-            />
-            <InfoRow
-              icon={<MapPin size={14} />}
-              label="Adresse"
-              value={prof.adresse}
-            />
-            <InfoRow
-              icon={<BookOpen size={14} />}
-              label="Spécialités"
-              value={prof.specialites}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Contrats */}
-      {prof.contrat.length > 0 && (
-        <div className="card bg-base-100 shadow-sm border border-base-200">
-          <div className="card-body">
-            <h2 className="card-title text-base mb-2">
-              <Briefcase size={16} /> Contrats
-            </h2>
-            <div className="overflow-x-auto">
-              <table className="table table-sm table-zebra">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Poste</th>
-                    <th>Début</th>
-                    <th>Fin</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {prof.contrat.map((c) => (
-                    <tr key={c.id}>
-                      <td>
-                        <span className="badge badge-outline badge-sm">
-                          {CONTRAT_LABELS[c.typeContrat] ?? c.typeContrat}
-                        </span>
-                      </td>
-                      <td>{c.poste}</td>
-                      <td>{fmt(c.dateDebut)}</td>
-                      <td>
-                        {c.dateFin ? (
-                          fmt(c.dateFin)
-                        ) : (
-                          <span className="text-base-content/40">En cours</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="card-body">
+              <h2 className="card-title text-base mb-2">
+                <User size={16} /> Informations personnelles
+              </h2>
+              <div className="space-y-3">
+                <InfoRow
+                  icon={<Calendar size={14} />}
+                  label="Date de naissance"
+                  value={fmt(prof.dateNaissance)}
+                />
+                <InfoRow
+                  icon={<Phone size={14} />}
+                  label="Téléphone"
+                  value={prof.telephone}
+                />
+                <InfoRow
+                  icon={<MapPin size={14} />}
+                  label="Adresse"
+                  value={prof.adresse}
+                />
+                <InfoRow
+                  icon={<BookOpen size={14} />}
+                  label="Spécialités"
+                  value={prof.specialites}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
 
-      {/* Absences / Remplacements */}
-      {prof.remplacements.length > 0 && (
-        <div className="card bg-base-100 shadow-sm border border-base-200">
-          <div className="card-body">
-            <h2 className="card-title text-base mb-2">Absences récentes</h2>
-            <div className="overflow-x-auto">
-              <table className="table table-sm table-zebra">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Classe</th>
-                    <th>Motif</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {prof.remplacements.map((r) => (
-                    <tr key={r.id}>
-                      <td>{fmt(r.date)}</td>
-                      <td>{r.classeNom ?? "—"}</td>
-                      <td>{r.motif ?? "—"}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          {/* Matières enseignées */}
+          {prof.matieres.length > 0 && (
+            <div className="card bg-base-100 shadow-sm border border-base-200">
+              <div className="card-body">
+                <h2 className="card-title text-base mb-2">
+                  <BookOpen size={16} /> Matières enseignées
+                </h2>
+                <div className="overflow-x-auto">
+                  <table className="table table-sm table-zebra">
+                    <thead>
+                      <tr>
+                        <th>Matière</th>
+                        <th>Classe</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {prof.matieres
+                        .slice()
+                        .sort((a, b) => a.nom.localeCompare(b.nom))
+                        .map((m) => {
+                          const classe = prof.classes.find(
+                            (c) => c.id === m.classeId,
+                          );
+                          return (
+                            <tr key={m.id}>
+                              <td className="font-medium">{m.nom}</td>
+                              <td>
+                                {classe ? (
+                                  <span className="badge badge-outline badge-sm">
+                                    {classe.nom}
+                                  </span>
+                                ) : (
+                                  <span className="text-base-content/30">
+                                    —
+                                  </span>
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
-      </>
+          )}
+
+          {/* Contrats */}
+          {prof.contrat.length > 0 && (
+            <div className="card bg-base-100 shadow-sm border border-base-200">
+              <div className="card-body">
+                <h2 className="card-title text-base mb-2">
+                  <Briefcase size={16} /> Contrats
+                </h2>
+                <div className="overflow-x-auto">
+                  <table className="table table-sm table-zebra">
+                    <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Poste</th>
+                        <th>Début</th>
+                        <th>Fin</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {prof.contrat.map((c) => (
+                        <tr key={c.id}>
+                          <td>
+                            <span className="badge badge-outline badge-sm">
+                              {CONTRAT_LABELS[c.typeContrat] ?? c.typeContrat}
+                            </span>
+                          </td>
+                          <td>{c.poste}</td>
+                          <td>{fmt(c.dateDebut)}</td>
+                          <td>
+                            {c.dateFin ? (
+                              fmt(c.dateFin)
+                            ) : (
+                              <span className="text-base-content/40">
+                                En cours
+                              </span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Absences / Remplacements */}
+          {prof.remplacements.length > 0 && (
+            <div className="card bg-base-100 shadow-sm border border-base-200">
+              <div className="card-body">
+                <h2 className="card-title text-base mb-2">Absences récentes</h2>
+                <div className="overflow-x-auto">
+                  <table className="table table-sm table-zebra">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Classe</th>
+                        <th>Motif</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {prof.remplacements.map((r) => (
+                        <tr key={r.id}>
+                          <td>{fmt(r.date)}</td>
+                          <td>{r.classeNom ?? "—"}</td>
+                          <td>{r.motif ?? "—"}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
       )}
 
       {/* Modal d'édition */}
@@ -550,10 +631,13 @@ export default function ProfesseurProfilPage() {
       </dialog>
 
       {activeTab === "cahier-texte" &&
-        (prof.classes[0]?.id ? (
+        (selectedClasseId ? (
           <CahierTexteTab
-            classeId={prof.classes[0].id}
-            matieres={prof.matieres ?? []}
+            classeId={selectedClasseId}
+            matieres={
+              prof.matieres?.filter((m) => m.classeId === selectedClasseId) ??
+              []
+            }
             canWrite={
               user?.role === "PROF" ||
               user?.role === "ADMIN" ||
@@ -567,10 +651,13 @@ export default function ProfesseurProfilPage() {
         ))}
 
       {activeTab === "quiz" &&
-        (prof.classes[0]?.id ? (
+        (selectedClasseId ? (
           <QuizTab
-            classeId={prof.classes[0].id}
-            matieres={prof.matieres ?? []}
+            classeId={selectedClasseId}
+            matieres={
+              prof.matieres?.filter((m) => m.classeId === selectedClasseId) ??
+              []
+            }
             canWrite={
               user?.role === "PROF" ||
               user?.role === "ADMIN" ||
@@ -586,6 +673,26 @@ export default function ProfesseurProfilPage() {
       {activeTab === "emploi-du-temps" && id && (
         <EmploiDuTempsTab profId={id} />
       )}
+
+      {activeTab === "notes" &&
+        (selectedClasseId ? (
+          <NotesTab
+            classeId={selectedClasseId}
+            matieres={
+              prof.matieres?.filter((m) => m.classeId === selectedClasseId) ??
+              []
+            }
+            canWrite={
+              user?.role === "PROF" ||
+              user?.role === "ADMIN" ||
+              user?.role === "SUDO_ADMIN"
+            }
+          />
+        ) : (
+          <p className="text-center text-base-content/50 py-8">
+            Aucune classe assignée.
+          </p>
+        ))}
     </div>
   );
 }

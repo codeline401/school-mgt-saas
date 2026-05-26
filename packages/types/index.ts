@@ -148,7 +148,7 @@ export interface ProfesseurProfil extends BaseEntity {
   classes: Classe[]; // Les classes que le prof enseigne
   contrat: Contrat[]; // Historique des contrats du prof
   remplacements: Remplacement[]; // Historique des remplacements du prof
-  matieres: { id: string; nom: string }[]; // Les matières enseignées par le prof
+  matieres: { id: string; nom: string; classeId: string }[]; // Les matières enseignées par le prof
 }
 
 // Profil complet d'un parent (GET /api/profils/parents/:id)
