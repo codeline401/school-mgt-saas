@@ -20,9 +20,16 @@ const EMPTY_FORM = {
 
 export default function NotesTab({ classeId, matieres, canWrite }: Props) {
   const queryClient = useQueryClient();
-  const [selectedMatiereId, setSelectedMatiereId] = useState<string>(
+  // preferredMatiereId tracks the user's explicit selection.
+  // selectedMatiereId is derived: falls back to matieres[0] if the preferred
+  // id is no longer in the current list (e.g. after a class switch).
+  const [preferredMatiereId, setSelectedMatiereId] = useState<string>(
     matieres[0]?.id ?? "",
   );
+  const selectedMatiereId =
+    matieres.find((m) => m.id === preferredMatiereId)?.id ??
+    matieres[0]?.id ??
+    "";
   const [showNewEval, setShowNewEval] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
   const [editNote, setEditNote] = useState<{
@@ -92,9 +99,6 @@ export default function NotesTab({ classeId, matieres, canWrite }: Props) {
       });
       return data;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["notes", classeId] });
-    },
     onError: (err) => {
       toast.error(getApiError(err, "Erreur lors de la saisie"));
     },
@@ -142,6 +146,10 @@ export default function NotesTab({ classeId, matieres, canWrite }: Props) {
   const [bulkValues, setBulkValues] = useState<Record<string, string>>({});
 
   const handleBulkSubmit = async () => {
+    if (!selectedMatiereId) {
+      toast.error("Sélectionnez une matière");
+      return;
+    }
     if (!form.titre.trim()) {
       toast.error("Le titre de l'évaluation est requis");
       return;
@@ -161,6 +169,8 @@ export default function NotesTab({ classeId, matieres, canWrite }: Props) {
       }
       await addEvalMutation.mutateAsync({ eleveId, note });
     }
+    // Single invalidation after the whole batch
+    queryClient.invalidateQueries({ queryKey: ["notes", classeId] });
     toast.success("Évaluation enregistrée");
     setShowNewEval(false);
     setForm(EMPTY_FORM);
@@ -310,7 +320,7 @@ export default function NotesTab({ classeId, matieres, canWrite }: Props) {
               <button
                 className="btn btn-sm btn-primary"
                 onClick={handleBulkSubmit}
-                disabled={addEvalMutation.isPending}
+                disabled={addEvalMutation.isPending || !selectedMatiereId}
               >
                 {addEvalMutation.isPending ? (
                   <span className="loading loading-spinner loading-xs" />

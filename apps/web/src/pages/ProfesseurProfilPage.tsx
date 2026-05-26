@@ -630,7 +630,7 @@ export default function ProfesseurProfilPage() {
         (selectedClasseId ? (
           <CahierTexteTab
             classeId={selectedClasseId}
-            matieres={prof.matieres ?? []}
+            matieres={prof.matieres?.filter((m) => m.classeId === selectedClasseId) ?? []}
             canWrite={
               user?.role === "PROF" ||
               user?.role === "ADMIN" ||
@@ -647,7 +647,7 @@ export default function ProfesseurProfilPage() {
         (selectedClasseId ? (
           <QuizTab
             classeId={selectedClasseId}
-            matieres={prof.matieres ?? []}
+            matieres={prof.matieres?.filter((m) => m.classeId === selectedClasseId) ?? []}
             canWrite={
               user?.role === "PROF" ||
               user?.role === "ADMIN" ||
@@ -668,7 +668,7 @@ export default function ProfesseurProfilPage() {
         (selectedClasseId ? (
           <NotesTab
             classeId={selectedClasseId}
-            matieres={prof.matieres ?? []}
+            matieres={prof.matieres?.filter((m) => m.classeId === selectedClasseId) ?? []}
             canWrite={
               user?.role === "PROF" ||
               user?.role === "ADMIN" ||
