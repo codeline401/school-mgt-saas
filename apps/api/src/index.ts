@@ -10,6 +10,7 @@ import {
   createEleve,
   getAllProfesseurs,
   deleteEleve,
+  importEleves,
 } from "./controllers/elevesController.js"; // Importation du contrôleur pour les élèves
 import authRoutes from "./routes/authRoutes.js"; // Importation des routes d'authentification
 import schoolRoutes from "./routes/schoolRoute.js"; // Importation des routes pour les écoles
@@ -31,6 +32,7 @@ app.use("/api/classes", classesRoutes);
 app.use("/api/profils", profilsRoutes);
 
 app.get("/api/eleves", authenticate, getAllEleves);
+app.post("/api/eleves/import", authenticate, importEleves);
 app.post("/api/eleves", authenticate, createEleve);
 app.delete("/api/eleves/:id", authenticate, deleteEleve);
 app.get("/api/professeurs", authenticate, getAllProfesseurs);
