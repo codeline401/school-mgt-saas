@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/api";
-import { PlusIcon, Users } from "lucide-react";
+import { FileSpreadsheet, PlusIcon, Users } from "lucide-react";
 import type { Eleve, Classe } from "@school-mgt/types";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import CreateEleveModal from "../components/CreateEleveModal";
+import ImportElevesModal from "../components/ImportElevesModal";
 
 type EleveWithClasse = Omit<Eleve, "classeId"> & { classe?: Classe };
 
@@ -23,6 +24,7 @@ function ElevesPage() {
   });
 
   const [showCreate, setShowCreate] = useState(false);
+  const [showImport, setShowImport] = useState(false);
 
   return (
     <div>
@@ -33,13 +35,22 @@ function ElevesPage() {
             Liste exhaustive des élèves par classe
           </p>
         </div>
-        <button
-          className="btn btn-primary gap-2"
-          onClick={() => setShowCreate(true)}
-        >
-          <PlusIcon size={16} />
-          Ajouter un élève
-        </button>
+        <div className="flex gap-2">
+          <button
+            className="btn btn-outline btn-sm gap-2"
+            onClick={() => setShowImport(true)}
+          >
+            <FileSpreadsheet size={16} />
+            Importer Excel
+          </button>
+          <button
+            className="btn btn-primary gap-2"
+            onClick={() => setShowCreate(true)}
+          >
+            <PlusIcon size={16} />
+            Ajouter un élève
+          </button>
+        </div>
       </div>
 
       {isError && (
@@ -115,6 +126,10 @@ function ElevesPage() {
       <CreateEleveModal
         isOpen={showCreate}
         onClose={() => setShowCreate(false)}
+      />
+      <ImportElevesModal
+        isOpen={showImport}
+        onClose={() => setShowImport(false)}
       />
     </div>
   );
