@@ -13,6 +13,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import { api, getApiError } from "../lib/api";
+import PhotoUpload from "../components/PhotoUpload";
 import { useAuthStore } from "../store/authStore";
 import type { ProfesseurProfil, Classe } from "@school-mgt/types";
 import CahierTexteTab from "../components/prof/CahierTexteTab";
@@ -564,19 +565,11 @@ export default function ProfesseurProfilPage() {
               </fieldset>
             </div>
 
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">
-                URL de la photo (optionnel)
-              </legend>
-              <input
-                type="url"
-                className="input w-full"
-                name="photoUrl"
-                value={form.photoUrl}
-                onChange={handleChange}
-                placeholder="https://..."
-              />
-            </fieldset>
+            {/* Photo de profil */}
+            <PhotoUpload
+              value={form.photoUrl}
+              onChange={(url) => setForm((prev) => ({ ...prev, photoUrl: url }))}
+            />
 
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Classes assignées</legend>

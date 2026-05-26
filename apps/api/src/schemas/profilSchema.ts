@@ -8,7 +8,10 @@ export const updateEleveProfilSchema = z.object({
   dateNaissance: z.coerce.date().optional(),
   telephone: z.string().trim().optional(),
   adresse: z.string().trim().optional(),
-  photoUrl: z.string().url("URL invalide").optional(),
+  photoUrl: z
+    .string()
+    .max(2 * 1024 * 1024, "Photo trop volumineuse (max 2 Mo encodé)")
+    .optional(),
   classeId: z.string().uuid("ID de classe invalide").optional(),
   parentId: z.string().uuid("ID de parent invalide").nullable().optional(),
 });
@@ -29,7 +32,10 @@ export const updateProfesseurProfilSchema = z.object({
   dateNaissance: z.coerce.date().optional(),
   telephone: z.string().trim().optional(),
   adresse: z.string().trim().optional(),
-  photoUrl: z.string().url("URL invalide").optional(),
+  photoUrl: z
+    .string()
+    .max(2 * 1024 * 1024, "Photo trop volumineuse (max 2 Mo encodé)")
+    .optional(),
   specialites: z.string().trim().optional(), // ex: "Mathématiques, Physique"
   // liste des IDs de classe à assigner (remplace la liste existante)
   classeIds: z.array(z.string().uuid("ID de classe invalide")).optional(),
