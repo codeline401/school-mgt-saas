@@ -12,6 +12,7 @@ import {
   Users,
   BookOpen,
   Trash,
+  UserPlus,
 } from "lucide-react";
 import { api, getApiError } from "../lib/api";
 import PhotoUpload from "../components/PhotoUpload";
@@ -21,6 +22,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import ConfirmModal from "../components/ConfirmModal";
+import CreateParentModal from "../components/CreateParentModal";
 
 // ─── Labels et couleurs DaisyUI pour les statuts d'admission ─────────────────
 const STATUT_CONFIG: Record<string, { label: string; cls: string }> = {
@@ -120,6 +122,7 @@ export default function EleveProfilPage() {
   });
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showCreateParent, setShowCreateParent] = useState(false);
 
   // Pré-remplit le formulaire avec les données actuelles avant d'ouvrir le modal
   const openModalModif = () => {
@@ -334,14 +337,25 @@ export default function EleveProfilPage() {
               <h2 className="card-title text-base">
                 <Users size={16} /> Parent responsable
               </h2>
-              {eleve.parent && (
-                <Link
-                  to={`/parents/${eleve.parent.id}`}
-                  className="btn btn-ghost btn-xs gap-1"
-                >
-                  Voir la fiche <ArrowLeft size={12} className="rotate-180" />
-                </Link>
-              )}
+              <div className="flex gap-2">
+                {eleve.parent && (
+                  <Link
+                    to={`/parents/${eleve.parent.id}`}
+                    className="btn btn-ghost btn-xs gap-1"
+                  >
+                    Voir la fiche <ArrowLeft size={12} className="rotate-180" />
+                  </Link>
+                )}
+                {canEdit && !eleve.parent && (
+                  <button
+                    className="btn btn-primary btn-xs gap-1"
+                    onClick={() => setShowCreateParent(true)}
+                  >
+                    <UserPlus size={12} />
+                    Créer un parent
+                  </button>
+                )}
+              </div>
             </div>
             {eleve.parent ? (
               <div className="space-y-3">
@@ -514,7 +528,9 @@ export default function EleveProfilPage() {
             {/* Photo de profil */}
             <PhotoUpload
               value={form.photoUrl}
-              onChange={(url) => setForm((prev) => ({ ...prev, photoUrl: url }))}
+              onChange={(url) =>
+                setForm((prev) => ({ ...prev, photoUrl: url }))
+              }
             />
 
             <div className="modal-action">
@@ -556,6 +572,12 @@ export default function EleveProfilPage() {
         isLoading={deleteMutation.isPending}
         onConfirm={() => deleteMutation.mutate()}
         onCancel={() => setShowDeleteModal(false)}
+      />
+      <CreateParentModal
+        isOpen={showCreateParent}
+        onClose={() => setShowCreateParent(false)}
+        eleveId={eleve.id}
+        eleveNom={`${eleve.nom} ${eleve.prenom}`}
       />
     </div>
   );
