@@ -109,12 +109,10 @@ export default function ProfesseurProfilPage() {
   const [activeTab, setActiveTab] = useState<
     "profil" | "cahier-texte" | "quiz" | "emploi-du-temps" | "notes"
   >("profil");
-  const [selectedClasseId, setSelectedClasseId] = useState<string>("");
-
-  // Initialise selectedClasseId when prof data arrives
-  if (prof && !selectedClasseId && prof.classes.length > 0) {
-    setSelectedClasseId(prof.classes[0].id);
-  }
+  const [preferredClasseId, setPreferredClasseId] = useState<string>("");
+  // Derives the active class: if the user hasn't explicitly picked one yet,
+  // fall back to the first class from the prof data.
+  const selectedClasseId = preferredClasseId || prof?.classes[0]?.id || "";
 
   const openModal = () => {
     if (!prof) return;
@@ -278,17 +276,21 @@ export default function ProfesseurProfilPage() {
         <div className="flex items-center gap-2 mb-2">
           <span className="text-sm text-base-content/50">Classe :</span>
           {prof.classes.length === 0 ? (
-            <span className="text-sm text-base-content/40">Aucune classe assignée</span>
+            <span className="text-sm text-base-content/40">
+              Aucune classe assignée
+            </span>
           ) : prof.classes.length === 1 ? (
             <span className="text-sm font-medium">{prof.classes[0].nom}</span>
           ) : (
             <select
               className="select select-sm select-bordered"
               value={selectedClasseId}
-              onChange={(e) => setSelectedClasseId(e.target.value)}
+              onChange={(e) => setPreferredClasseId(e.target.value)}
             >
               {prof.classes.map((c) => (
-                <option key={c.id} value={c.id}>{c.nom}</option>
+                <option key={c.id} value={c.id}>
+                  {c.nom}
+                </option>
               ))}
             </select>
           )}
@@ -381,7 +383,9 @@ export default function ProfesseurProfilPage() {
                                     {classe.nom}
                                   </span>
                                 ) : (
-                                  <span className="text-base-content/30">—</span>
+                                  <span className="text-base-content/30">
+                                    —
+                                  </span>
                                 )}
                               </td>
                             </tr>
@@ -630,7 +634,10 @@ export default function ProfesseurProfilPage() {
         (selectedClasseId ? (
           <CahierTexteTab
             classeId={selectedClasseId}
-            matieres={prof.matieres?.filter((m) => m.classeId === selectedClasseId) ?? []}
+            matieres={
+              prof.matieres?.filter((m) => m.classeId === selectedClasseId) ??
+              []
+            }
             canWrite={
               user?.role === "PROF" ||
               user?.role === "ADMIN" ||
@@ -647,7 +654,10 @@ export default function ProfesseurProfilPage() {
         (selectedClasseId ? (
           <QuizTab
             classeId={selectedClasseId}
-            matieres={prof.matieres?.filter((m) => m.classeId === selectedClasseId) ?? []}
+            matieres={
+              prof.matieres?.filter((m) => m.classeId === selectedClasseId) ??
+              []
+            }
             canWrite={
               user?.role === "PROF" ||
               user?.role === "ADMIN" ||
@@ -668,7 +678,10 @@ export default function ProfesseurProfilPage() {
         (selectedClasseId ? (
           <NotesTab
             classeId={selectedClasseId}
-            matieres={prof.matieres?.filter((m) => m.classeId === selectedClasseId) ?? []}
+            matieres={
+              prof.matieres?.filter((m) => m.classeId === selectedClasseId) ??
+              []
+            }
             canWrite={
               user?.role === "PROF" ||
               user?.role === "ADMIN" ||

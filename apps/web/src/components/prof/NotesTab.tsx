@@ -1,4 +1,4 @@
-import type { Note } from "@school-mgt/types";
+import type { Note, NoteEleveResume } from "@school-mgt/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -23,7 +23,7 @@ export default function NotesTab({ classeId, matieres, canWrite }: Props) {
   // preferredMatiereId tracks the user's explicit selection.
   // selectedMatiereId is derived: falls back to matieres[0] if the preferred
   // id is no longer in the current list (e.g. after a class switch).
-  const [preferredMatiereId, setSelectedMatiereId] = useState<string>(
+  const [preferredMatiereId, setPreferredMatiereId] = useState<string>(
     matieres[0]?.id ?? "",
   );
   const selectedMatiereId =
@@ -76,8 +76,11 @@ export default function NotesTab({ classeId, matieres, canWrite }: Props) {
   }, {});
 
   // For the grid: élèves who have at least one note (sorted by nom)
+  // Use find() so we get the first note that actually has eleve populated,
+  // then filter out any groups where eleve is missing (defensive guard).
   const elevesWithNotes = Object.values(byEleve)
-    .map((ns) => ns[0].eleve!)
+    .map((ns) => ns.find((n) => n.eleve)?.eleve)
+    .filter((e): e is NoteEleveResume => !!e)
     .sort((a, b) => a.nom.localeCompare(b.nom));
 
   // Add a whole evaluation column (one note per élève)
@@ -196,7 +199,7 @@ export default function NotesTab({ classeId, matieres, canWrite }: Props) {
             className="select select-sm select-bordered"
             value={selectedMatiereId}
             onChange={(e) => {
-              setSelectedMatiereId(e.target.value);
+              setPreferredMatiereId(e.target.value);
               setShowNewEval(false);
             }}
           >
