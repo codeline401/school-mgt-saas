@@ -13,7 +13,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import { api, getApiError } from "../lib/api";
-import toast from "react-hot-toast";
+import PhotoUpload from "../components/PhotoUpload";
 import { useAuthStore } from "../store/authStore";
 import type { ProfesseurProfil, Classe } from "@school-mgt/types";
 import CahierTexteTab from "../components/prof/CahierTexteTab";
@@ -566,49 +566,10 @@ export default function ProfesseurProfilPage() {
             </div>
 
             {/* Photo de profil */}
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">
-                Photo de profil (optionnel)
-              </legend>
-              {form.photoUrl && (
-                <div className="flex items-center gap-3 mb-2">
-                  <img
-                    src={form.photoUrl}
-                    alt="Aperçu"
-                    className="w-14 h-14 rounded-full object-cover border border-base-300"
-                  />
-                  <button
-                    type="button"
-                    className="btn btn-ghost btn-xs"
-                    onClick={() =>
-                      setForm((prev) => ({ ...prev, photoUrl: "" }))
-                    }
-                  >
-                    Supprimer
-                  </button>
-                </div>
-              )}
-              <input
-                type="file"
-                accept="image/jpeg,image/png,image/gif,image/webp"
-                className="file-input w-full"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (!file) return;
-                  if (file.size > 2 * 1024 * 1024) {
-                    toast.error("La photo ne doit pas dépasser 2 Mo");
-                    return;
-                  }
-                  const reader = new FileReader();
-                  reader.onload = () =>
-                    setForm((prev) => ({
-                      ...prev,
-                      photoUrl: reader.result as string,
-                    }));
-                  reader.readAsDataURL(file);
-                }}
-              />
-            </fieldset>
+            <PhotoUpload
+              value={form.photoUrl}
+              onChange={(url) => setForm((prev) => ({ ...prev, photoUrl: url }))}
+            />
 
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Classes assignées</legend>
