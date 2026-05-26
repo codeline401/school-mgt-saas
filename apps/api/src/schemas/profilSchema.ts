@@ -16,6 +16,22 @@ export const updateEleveProfilSchema = z.object({
   parentId: z.string().uuid("ID de parent invalide").nullable().optional(),
 });
 
+// Schéma pour créer un profil de parent (utilisé par l'admin pour créer un compte parent)
+export const createParentSchema = z.object({
+  nom: z.string().trim().min(2, "Nom requis (min 2 caractères)"),
+  prenom: z.string().trim().min(2, "Prénom requis (min 2 caractères)"),
+  email: z
+    .preprocess(
+      (val) => (val === "" ? undefined : val),
+      z.string().email("Email invalide"),
+    )
+    .optional(),
+  telephone: z.string().trim().optional(),
+  adresse: z.string().trim().optional(),
+  // Si fourni, le parent doit être lié à un élève existant (sinon null)
+  eleveId: z.string().uuid("ID d'élève invalide").nullable().optional(),
+});
+
 // Schéma de mise à jour du profil d'un parent
 export const updateParentProfilSchema = z.object({
   nom: z.string().trim().min(3).optional(),
@@ -46,3 +62,4 @@ export type UpdateParentProfilInput = z.infer<typeof updateParentProfilSchema>;
 export type UpdateProfesseurProfilInput = z.infer<
   typeof updateProfesseurProfilSchema
 >;
+export type CreateParentInput = z.infer<typeof createParentSchema>;

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ZodError } from "zod"; // Import de ZodError pour la gestion des erreurs de validation
 import { prisma } from "../lib/prisma";
 import {
+  createParentSchema,
   updateEleveProfilSchema,
   updateParentProfilSchema,
   updateProfesseurProfilSchema,
@@ -154,6 +155,84 @@ export const updateElevesProfil = async (req: Request, res: Response) => {
 // ===================================================================
 // PARENTS
 // ===================================================================
+/**
+ * POST /api/profils/parents
+ * Crée un parent et le lie optionnellement à un élève existant (si eleveId fourni).
+ * schoolId est toujours dérivé de la session (anti-spoofing).
+ * @param req
+ * @param res
+ * @returns
+ */
+export const createParent = async (req: Request, res: Response) => {
+  try {
+    const { role, schoolId } = req.user!; // Récupérer le rôle et l'école de l'utilisateur connecté
+
+    if (role !== "SUDO_ADMIN" && role !== "ADMIN") {
+      return res.status(403).json({
+        error:
+          "Accès refusé. Seuls les administrateurs peuvent créer des parents.",
+      });
+    }
+    if (!schoolId) {
+      return res.status(400).json({
+        error:
+          "L'utilisateur doit être associé à une école pour créer un parent.",
+      });
+    }
+
+    const validatedData = createParentSchema.parse(req.body); // Validation des données d'entrée
+
+    // Vérifier que l'élève appartient à la même école
+    if (validatedData.eleveId) {
+      const eleve = await prisma.eleve.findUnique({
+        where: { id: validatedData.eleveId },
+      });
+      if (!eleve || eleve.schoolId !== schoolId) {
+        return res.status(400).json({
+          error:
+            "L'élève spécifié est invalide ou n'appartient pas à votre école",
+        });
+      }
+    }
+
+    // Création du parent et liaison à l'élève dans une transaction atomique :
+    // si l'update de l'élève échoue, la création du parent est annulée.
+    const newParent = await prisma.$transaction(async (tx) => {
+      const parent = await tx.parent.create({
+        data: {
+          nom: validatedData.nom,
+          prenom: validatedData.prenom,
+          schoolId,
+          ...(validatedData.email ? { email: validatedData.email } : {}),
+          ...(validatedData.telephone
+            ? { telephone: validatedData.telephone }
+            : {}),
+          ...(validatedData.adresse ? { adresse: validatedData.adresse } : {}),
+        },
+      });
+
+      if (validatedData.eleveId) {
+        await tx.eleve.update({
+          where: { id: validatedData.eleveId },
+          data: { parentId: parent.id },
+        });
+      }
+
+      return parent;
+    });
+
+    return res.status(201).json(newParent);
+  } catch (err) {
+    if (err instanceof ZodError) {
+      return res.status(400).json({ error: err.issues });
+    }
+    console.error("Erreur lors de la création du parent :", err);
+    return res
+      .status(500)
+      .json({ error: "Erreur serveur lors de la création du parent" });
+  }
+};
+
 /**
  * GET /api/profils/parents/:id
  * Retourne la fiche complète d'un parent avec la liste de ses enfants
@@ -430,7 +509,8 @@ export const getProfEmploiDuTemps = async (req: Request, res: Response) => {
       },
     });
 
-    if (!prof) return res.status(404).json({ error: "Professeur introuvable." });
+    if (!prof)
+      return res.status(404).json({ error: "Professeur introuvable." });
 
     // PROF ne peut consulter que son propre emploi du temps
     if (user.role === "PROF" && prof.userId !== user.id) {

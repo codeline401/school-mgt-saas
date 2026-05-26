@@ -10,6 +10,7 @@ import {
   updateParentProfil,
   updateProfesseurProfil,
   getProfEmploiDuTemps,
+  createParent,
 } from "../controllers/profilsController.js";
 
 const router = Router(); // Création d'un routeur Express
@@ -63,6 +64,12 @@ router.get(
   "/profs/:id/emploi-du-temps",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
   getProfEmploiDuTemps,
+);
+
+router.post(
+  "/parents",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  createParent,
 );
 
 export default router; // Export du routeur pour l'utiliser dans app.ts
