@@ -101,6 +101,18 @@ export const importEleves = async (req: Request, res: Response) => {
         continue;
       }
 
+      // Validation du format de date par ligne — évite de rejeter tout le lot
+      // si une seule date est mal saisie (ex: "05/20/2010" au lieu de "2010-05-20")
+      if (row.dateNaissance && !/^\d{4}-\d{2}-\d{2}$/.test(row.dateNaissance)) {
+        errors.push({
+          ligne: i + 2,
+          nom: row.nom,
+          prenom: row.prenom,
+          raison: `Date invalide "${row.dateNaissance}" — format YYYY-MM-DD attendu`,
+        });
+        continue;
+      }
+
       try {
         // Création individuelle pour capturer les erreurs par ligne
         // (ex: contrainte d'unicité nom+prenom+schoolId)
@@ -111,7 +123,11 @@ export const importEleves = async (req: Request, res: Response) => {
             classeId,
             schoolId,
             ...(row.dateNaissance
-              ? { dateNaissance: new Date(row.dateNaissance) }
+              ? {
+                  // Suffixe Z pour forcer le parsing UTC et éviter
+                  // les décalages de date selon le fuseau horaire du serveur
+                  dateNaissance: new Date(`${row.dateNaissance}T00:00:00Z`),
+                }
               : {}),
             ...(row.telephone ? { telephone: row.telephone.trim() } : {}),
             ...(row.adresse ? { adresse: row.adresse.trim() } : {}),
@@ -181,13 +197,18 @@ export const createEleve = async (req: Request, res: Response) => {
     // Valider les données d'entrée avec Zod
     const validatedData = createEleveSchema.parse(req.body);
 
+    // Dérive l'école depuis la session authentifiée ; seul SUDO_ADMIN peut cibler
+    // une école différente via le corps de la requête (protection anti-spoofing).
+    const effectiveSchoolId =
+      role === "SUDO_ADMIN" ? validatedData.schoolId : schoolId!;
+
     // Créer un nouvel élève dans la base de données
     const nouvelEleve = await prisma.eleve.create({
       data: {
         nom: validatedData.nom,
         prenom: validatedData.prenom,
         classeId: validatedData.classeId,
-        schoolId: validatedData.schoolId,
+        schoolId: effectiveSchoolId,
         ...(validatedData.dateNaissance != null
           ? { dateNaissance: validatedData.dateNaissance }
           : {}),

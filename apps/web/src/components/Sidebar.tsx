@@ -101,7 +101,9 @@ function Sidebar() {
   const [openGroups, setOpenGroups] = useState<string[]>(() => {
     // Open the group that contains the active route on first render
     const active = MENU.filter(isGroup).find((g) =>
-      g.children.some((c) => location.pathname.startsWith(c.path)),
+      g.children.some(
+        (c) => location.pathname === c.path || location.pathname.startsWith(c.path + "/"),
+      ),
     );
     return active ? [active.label] : [];
   });
@@ -146,8 +148,8 @@ function Sidebar() {
             if (children.length === 0) return null;
 
             const isOpen = openGroups.includes(entry.label);
-            const hasActive = children.some((c) =>
-              location.pathname.startsWith(c.path),
+            const hasActive = children.some(
+              (c) => location.pathname === c.path || location.pathname.startsWith(c.path + "/"),
             );
 
             return (

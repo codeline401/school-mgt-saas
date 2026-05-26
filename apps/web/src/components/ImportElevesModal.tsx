@@ -86,7 +86,7 @@ export default function ImportElevesModal({ isOpen, onClose }: Props) {
   }, [isOpen]);
 
   // ── Classes disponibles (pour validation + canevas) ────────────────────────
-  const { data: classes = [] } = useQuery<Classe[]>({
+  const { data: classes = [], isLoading: classesLoading } = useQuery<Classe[]>({
     queryKey: ["classes"],
     queryFn: async () => {
       const { data } = await api.get("/api/classes");
@@ -196,7 +196,12 @@ export default function ImportElevesModal({ isOpen, onClose }: Props) {
           const rawDate = r[3];
           let dateNaissance = "";
           if (rawDate instanceof Date) {
-            dateNaissance = rawDate.toISOString().split("T")[0]!;
+            // Utiliser les méthodes locales pour éviter le décalage UTC :
+            // toISOString() convertirait en UTC et pourrait avancer/reculer d'un jour
+            const y = rawDate.getFullYear();
+            const m = String(rawDate.getMonth() + 1).padStart(2, "0");
+            const d = String(rawDate.getDate()).padStart(2, "0");
+            dateNaissance = `${y}-${m}-${d}`;
           } else if (rawDate) {
             dateNaissance = String(rawDate).trim();
           }
@@ -287,7 +292,21 @@ export default function ImportElevesModal({ isOpen, onClose }: Props) {
 
   // ─────────────────────────────────────────────────────────────────────────
   return (
-    <dialog ref={modalRef} className="modal" onClose={handleClose}>
+    <dialog
+      ref={modalRef}
+      className="modal"
+      // Intercepte Esc / clic backdrop AVANT la fermeture native
+      onCancel={(e) => { if (importMutation.isPending) e.preventDefault(); }}
+      // Si la fermeture native a quand même eu lieu (ex: .close() externe),
+      // on force la ré-ouverture le temps que l'import se termine
+      onClose={() => {
+        if (importMutation.isPending) {
+          modalRef.current?.showModal();
+          return;
+        }
+        handleClose();
+      }}
+    >
       <div className="modal-box w-11/12 max-w-4xl">
         <h3 className="font-bold text-lg mb-1">Importer des élèves depuis Excel</h3>
         <p className="text-base-content/60 text-sm mb-5">
@@ -322,7 +341,7 @@ export default function ImportElevesModal({ isOpen, onClose }: Props) {
             accept=".xlsx,.xls,.csv"
             className="file-input w-full"
             onChange={handleFile}
-            disabled={importMutation.isPending}
+            disabled={importMutation.isPending || classesLoading || classes.length === 0}
           />
         </div>
 
