@@ -23,6 +23,7 @@ import toast from "react-hot-toast";
 
 import ConfirmModal from "../components/ConfirmModal";
 import CreateParentModal from "../components/CreateParentModal";
+import EleveAbsenceCard from "../components/EleveAbsenceCard";
 
 // ─── Labels et couleurs DaisyUI pour les statuts d'admission ─────────────────
 const STATUT_CONFIG: Record<string, { label: string; cls: string }> = {
@@ -424,6 +425,12 @@ export default function EleveProfilPage() {
           </div>
         </div>
       )}
+
+      {/** --- Carte suivi absences / retards --- */}
+      <EleveAbsenceCard
+        eleveId={eleve.id}
+        classeId={eleve.classeId as string}
+      />
 
       {/* ── Modal d'édition ── */}
       <dialog ref={modalRef} className="modal" onClose={closeModal}>
