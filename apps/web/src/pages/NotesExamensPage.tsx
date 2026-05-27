@@ -90,6 +90,7 @@ export default function NotesExamensPage() {
         {TABS.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
+            id={`tab-${id}`}
             role="tab"
             aria-selected={activeTab === id}
             aria-controls={`tabpanel-${id}`}
@@ -106,6 +107,7 @@ export default function NotesExamensPage() {
       <div
         role="tabpanel"
         id={`tabpanel-${activeTab}`}
+        aria-labelledby={`tab-${activeTab}`}
         aria-label={TABS.find((t) => t.id === activeTab)?.label}
       >
         {renderTab()}

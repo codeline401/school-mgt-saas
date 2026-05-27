@@ -173,9 +173,9 @@ export default function SaisieNotesTab() {
     }) => {
       await api.delete(`/api/classes/${classeId}/notes/${noteId}`);
     },
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["classe-notes", deleteTarget?.classeId],
+        queryKey: ["classe-notes", variables.classeId],
       });
       toast.success("Note supprimée.");
       setDeleteTarget(null);
@@ -200,7 +200,7 @@ export default function SaisieNotesTab() {
     setForm({
       classeId: note.classeId,
       eleveId: note.eleveId,
-      matiereId: note.matiere?.id ?? "",
+      matiereId: note.matiereId ?? note.matiere?.id ?? "",
       titre: note.titre,
       note: String(note.note),
       noteMax: String(note.noteMax),
