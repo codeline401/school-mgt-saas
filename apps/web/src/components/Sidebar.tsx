@@ -5,9 +5,11 @@ import {
   Building2,
   ChevronDown,
   ChevronRight,
+  ClipboardList,
   GraduationCap,
   LayoutDashboard,
   MessageSquare,
+  NotebookPen,
   Package,
   Settings,
   UserCircle,
@@ -67,6 +69,18 @@ const MENU: MenuEntry[] = [
         path: "/professeurs",
         roles: ["ADMIN", "SUDO_ADMIN", "USER"],
       },
+      {
+        icon: ClipboardList,
+        label: "Notes & Examens",
+        path: "/notes-examens",
+        roles: ["ADMIN", "USER", "SUDO_ADMIN", "PROF"],
+      },
+      {
+        icon: NotebookPen,
+        label: "Cahier de texte",
+        path: "/cahier-texte",
+        roles: ["ADMIN", "USER", "SUDO_ADMIN", "PROF"],
+      },
     ],
   },
   { icon: Wallet, label: "Comptabilité & Finance" },
@@ -88,12 +102,13 @@ const MENU: MenuEntry[] = [
   { icon: Settings, label: "Paramètres", path: "/parametres", roles: null },
 ];
 
-const BASE =
-  "flex items-center gap-3 p-3 rounded-lg transition-colors text-sm";
+const BASE = "flex items-center gap-3 p-3 rounded-lg transition-colors text-sm";
 const ACTIVE = "bg-white/10 text-white font-semibold";
 const IDLE = "text-white/60 hover:bg-white/5 hover:text-white/90";
-const DISABLED = "text-white/25 cursor-default px-3 py-2 text-sm flex items-center gap-3";
-const SUB = "flex items-center gap-3 pl-8 py-2 pr-3 rounded-lg transition-colors text-sm";
+const DISABLED =
+  "text-white/25 cursor-default px-3 py-2 text-sm flex items-center gap-3";
+const SUB =
+  "flex items-center gap-3 pl-8 py-2 pr-3 rounded-lg transition-colors text-sm";
 
 function Sidebar() {
   const user = useAuthStore((s) => s.user);
@@ -102,7 +117,9 @@ function Sidebar() {
     // Open the group that contains the active route on first render
     const active = MENU.filter(isGroup).find((g) =>
       g.children.some(
-        (c) => location.pathname === c.path || location.pathname.startsWith(c.path + "/"),
+        (c) =>
+          location.pathname === c.path ||
+          location.pathname.startsWith(c.path + "/"),
       ),
     );
     return active ? [active.label] : [];
@@ -127,7 +144,11 @@ function Sidebar() {
           /* ── Placeholder (pas de route, pas encore implémenté) ── */
           if (!isGroup(entry) && !isItem(entry)) {
             return (
-              <div key={entry.label} className={DISABLED} title="Bientôt disponible">
+              <div
+                key={entry.label}
+                className={DISABLED}
+                title="Bientôt disponible"
+              >
                 <entry.icon className="w-5 h-5 shrink-0 opacity-50" />
                 <span>{entry.label}</span>
                 <span className="ml-auto text-[10px] bg-white/10 rounded px-1 py-0.5 leading-none">
@@ -142,14 +163,14 @@ function Sidebar() {
             if (!hasAccess(entry.roles)) return null;
 
             // Filter children by role
-            const children = entry.children.filter((c) =>
-              hasAccess(c.roles),
-            );
+            const children = entry.children.filter((c) => hasAccess(c.roles));
             if (children.length === 0) return null;
 
             const isOpen = openGroups.includes(entry.label);
             const hasActive = children.some(
-              (c) => location.pathname === c.path || location.pathname.startsWith(c.path + "/"),
+              (c) =>
+                location.pathname === c.path ||
+                location.pathname.startsWith(c.path + "/"),
             );
 
             return (
@@ -209,4 +230,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-

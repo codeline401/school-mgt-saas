@@ -13,6 +13,8 @@ import ProfesseursPage from "./pages/ProfesseurPage";
 import ParentProfilPage from "./pages/ParentProfilPage";
 import ClasseProfilPage from "./pages/ClasseProfilPage";
 import MonProfilProfPage from "./pages/MonProfilProfPage";
+import NotesExamensPage from "./pages/NotesExamensPage";
+import CahierTextePage from "./pages/CahierTextePage";
 
 const DashboardTemp = () => (
   <div>
@@ -50,6 +52,8 @@ function App() {
               />
               <Route path="/parents/:id" element={<ParentProfilPage />} />
               <Route path="/professeurs" element={<ProfesseursPage />} />
+              <Route path="/notes-examens" element={<NotesExamensPage />} />
+              <Route path="/cahier-texte" element={<CahierTextePage />} />
             </Route>
 
             {/* Route mon profil : accessible uniquement aux PROFs */}
