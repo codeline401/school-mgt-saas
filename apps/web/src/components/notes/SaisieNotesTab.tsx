@@ -18,13 +18,7 @@
 
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  ClipboardList,
-  FileText,
-  Pencil,
-  Plus,
-  Trash2,
-} from "lucide-react";
+import { ClipboardList, FileText, Pencil, Plus, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { api, getApiError } from "../../lib/api";
 import { useAuthStore } from "../../store/authStore";
@@ -35,7 +29,7 @@ import type { Classe, Eleve, Matiere, Note } from "@school-mgt/types";
 
 /** Champs du formulaire de saisie/modification d'une note. */
 interface NoteForm {
-  classeId: string;   // sélection préalable de la classe
+  classeId: string; // sélection préalable de la classe
   eleveId: string;
   matiereId: string;
   titre: string;
@@ -94,9 +88,7 @@ export default function SaisieNotesTab() {
   } = useQuery<Note[]>({
     queryKey: ["classe-notes", filterClasseId],
     queryFn: async () => {
-      const { data } = await api.get(
-        `/api/classes/${filterClasseId}/notes`,
-      );
+      const { data } = await api.get(`/api/classes/${filterClasseId}/notes`);
       return data;
     },
     // N'active la requête que si une classe est sélectionnée dans le filtre
@@ -107,9 +99,7 @@ export default function SaisieNotesTab() {
   const { data: modalEleves = [] } = useQuery<Eleve[]>({
     queryKey: ["classe-eleves", form.classeId],
     queryFn: async () => {
-      const { data } = await api.get(
-        `/api/classes/${form.classeId}/eleves`,
-      );
+      const { data } = await api.get(`/api/classes/${form.classeId}/eleves`);
       return data;
     },
     enabled: !!form.classeId,
@@ -119,9 +109,7 @@ export default function SaisieNotesTab() {
   const { data: modalMatieres = [] } = useQuery<Matiere[]>({
     queryKey: ["classe-matieres", form.classeId],
     queryFn: async () => {
-      const { data } = await api.get(
-        `/api/classes/${form.classeId}/matieres`,
-      );
+      const { data } = await api.get(`/api/classes/${form.classeId}/matieres`);
       return data;
     },
     enabled: !!form.classeId,
@@ -137,7 +125,8 @@ export default function SaisieNotesTab() {
       formData.append("note", values.note);
       formData.append("noteMax", values.noteMax);
       formData.append("coefficient", values.coefficient);
-      if (values.commentaire) formData.append("commentaire", values.commentaire);
+      if (values.commentaire)
+        formData.append("commentaire", values.commentaire);
       if (values.feuille) formData.append("feuille", values.feuille);
 
       if (editingId) {
@@ -165,7 +154,9 @@ export default function SaisieNotesTab() {
       toast.error(
         getApiError(
           err,
-          editingId ? "Erreur lors de la mise à jour." : "Erreur lors de la création.",
+          editingId
+            ? "Erreur lors de la mise à jour."
+            : "Erreur lors de la création.",
         ),
       );
     },
@@ -184,7 +175,7 @@ export default function SaisieNotesTab() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["classe-notes", filterClasseId],
+        queryKey: ["classe-notes", deleteTarget?.classeId],
       });
       toast.success("Note supprimée.");
       setDeleteTarget(null);
@@ -194,7 +185,6 @@ export default function SaisieNotesTab() {
       setDeleteTarget(null);
     },
   });
-
   // ── Helpers modal ──────────────────────────────────────────────────────────
 
   /** Ouvre le modal en mode création, pré-remplit la classe si le filtre est actif. */
@@ -375,7 +365,9 @@ export default function SaisieNotesTab() {
                             <FileText size={14} className="text-info" />
                           </a>
                         ) : (
-                          <span className="text-base-content/30 text-xs">—</span>
+                          <span className="text-base-content/30 text-xs">
+                            —
+                          </span>
                         )}
                       </td>
                       {canWrite && (
@@ -632,4 +624,3 @@ export default function SaisieNotesTab() {
     </div>
   );
 }
-
