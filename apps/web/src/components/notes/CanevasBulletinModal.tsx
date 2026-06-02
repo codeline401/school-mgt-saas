@@ -55,7 +55,7 @@ export default function CanevasBulletinModal({ config }: Props) {
     },
 
     onError: (err) => {
-      toast.error(getApiError(err, "Erreur lors de la suavagerde"));
+      toast.error(getApiError(err, "Erreur lors de la sauvegarde"));
     },
   });
 
@@ -202,7 +202,7 @@ export default function CanevasBulletinModal({ config }: Props) {
               <p className="text-sm font-medium mb-2">
                 Seuils de couleur (sur 20)
               </p>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend text-success">
                     Bien (/20) ≥
@@ -220,6 +220,21 @@ export default function CanevasBulletinModal({ config }: Props) {
                 </fieldset>
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend text-warning">
+                    Assez bien (/20) ≥
+                  </legend>
+                  <input
+                    type="number"
+                    name="seuilAssezBien"
+                    className="input w-full"
+                    min={0}
+                    max={20}
+                    step={0.5}
+                    value={form.seuilAssezBien}
+                    onChange={handleNumber}
+                  />
+                </fieldset>
+                <fieldset className="fieldset">
+                  <legend className="fieldset-legend text-base-content/60">
                     Passable (/20) ≥
                   </legend>
                   <input

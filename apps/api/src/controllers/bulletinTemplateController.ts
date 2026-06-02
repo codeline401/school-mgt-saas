@@ -19,9 +19,11 @@ import { prisma } from "../lib/prisma";
 import { Prisma } from "../generated/prisma/client.js";
 import type { BulletinTemplateConfig } from "@school-mgt/types";
 
-// Défaut local (même valeurs que DEFAULT_BULLETIN_CONFIG dans @school-mgt/types).
-// On évite d'importer une valeur runtime depuis le package de types pour ne pas
-// bloquer la résolution ESM de Node.js (le package n'expose que des types).
+// Défaut local — mêmes valeurs que DEFAULT_BULLETIN_CONFIG dans @school-mgt/types.
+// Ce doublon existe parce que packages/types/package.json pointe "main" vers le
+// source .ts et n'est donc pas importable comme module ESM runtime par Node.js.
+// Si le package est un jour compilé ("main" -> "dist/index.js"), supprimer ce
+// bloc et réimporter DEFAULT_BULLETIN_CONFIG depuis @school-mgt/types.
 const DEFAULT_BULLETIN_CONFIG: BulletinTemplateConfig = {
   enteteTexte: "Bulletin scolaire",
   anneeTexte: "2025-2026",
@@ -137,20 +139,43 @@ export const upsertBulletinTemplate = async (req: Request, res: Response) => {
           (typeof val === "string" &&
             ["enteteTexte", "anneeTexte", "piedTexte"].includes(key)) ||
           (typeof val === "boolean" &&
-            ["showRang", "showCoef", "showNbEval"].includes(key)) ||
-          (typeof val === "number" &&
-            ["seuilBien", "seuilAssezBien", "seuilPassable"].includes(key))
+            ["showRang", "showCoef", "showNbEval"].includes(key))
         ) {
           (patch as Record<string, unknown>)[key] = val;
+        } else if (
+          typeof val === "number" &&
+          Number.isFinite(val) &&
+          ["seuilBien", "seuilAssezBien", "seuilPassable"].includes(key)
+        ) {
+          // Borne à [0, 20] — l'ordre (seuilBien ≥ seuilAssezBien ≥ seuilPassable)
+          // sera vérifié après la boucle.
+          (patch as Record<string, unknown>)[key] = Math.min(
+            20,
+            Math.max(0, val),
+          );
         }
       }
     }
 
     const newConfig: BulletinTemplateConfig = { ...existingConfig, ...patch };
 
+    // Vérifier la cohérence des seuils : seuilBien ≥ seuilAssezBien ≥ seuilPassable
+    if (
+      newConfig.seuilBien < newConfig.seuilAssezBien ||
+      newConfig.seuilAssezBien < newConfig.seuilPassable
+    ) {
+      return res.status(400).json({
+        error:
+          "Les seuils doivent respecter l'ordre : seuilBien ≥ seuilAssezBien ≥ seuilPassable",
+      });
+    }
+
     const template = await prisma.bulletinTemplate.upsert({
       where: { schoolId },
-      create: { schoolId, config: newConfig as unknown as Prisma.InputJsonValue },
+      create: {
+        schoolId,
+        config: newConfig as unknown as Prisma.InputJsonValue,
+      },
       update: { config: newConfig as unknown as Prisma.InputJsonValue },
     });
 

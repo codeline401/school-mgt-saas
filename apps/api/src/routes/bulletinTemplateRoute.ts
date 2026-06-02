@@ -31,12 +31,12 @@ router.get(
 /**
  * PUT /api/bulletin-template
  * Crée ou met à jour le canevas de l'école de l'utilisateur connecté.
- * Accessible seulement aux ADMINS, SUDO_ADMIN et USER (tous les rôles authentifiés de l'école).
+ * Réservé aux ADMIN et SUDO_ADMIN (les simples USER ne peuvent pas modifier un paramètre d'école).
  */
 router.put(
   "/",
   authenticate,
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
   upsertBulletinTemplate,
 );
 

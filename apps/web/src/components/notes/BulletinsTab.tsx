@@ -101,11 +101,13 @@ const fmt = (n: number | null) => (n !== null ? n.toFixed(2) : "—");
 function colorMoyDyn(
   n: number | null,
   seuilBien: number,
+  seuilAssezBien: number,
   seuilPassable: number,
 ): string {
   if (n === null) return "text-base-content/40";
   if (n >= seuilBien) return "text-success font-semibold";
-  if (n >= seuilPassable) return "text-warning font-semibold";
+  if (n >= seuilAssezBien) return "text-warning font-semibold";
+  if (n >= seuilPassable) return "text-base-content font-semibold";
   return "text-error font-semibold";
 }
 
@@ -118,7 +120,8 @@ export default function BulletinsTab() {
 
   /** Utilisateur connecté — pour conditionner le bouton « Canevas ». */
   const user = useAuthStore((s) => s.user);
-  const canEditTemplate = user?.role === "ADMIN" || user?.role === "SUDO_ADMIN";
+  // SUDO_ADMIN n'est pas rattaché à une école — l'API rejette ses requêtes PUT.
+  const canEditTemplate = user?.role === "ADMIN" && !!user?.schoolId;
 
   const { data: classes = [] } = useQuery<Classe[]>({
     queryKey: ["classes"], // Clé de cache générique pour les classes de l'enseignant connecté. Si besoin, on pourra la spécialiser par établissement ou par année scolaire.
@@ -132,14 +135,22 @@ export default function BulletinsTab() {
     enabled: !!classeId,
   });
 
-  const { data: matieres = [] } = useQuery<Matiere[]>({
+  const {
+    data: matieres = [],
+    isLoading: loadM,
+    isError: errorM,
+  } = useQuery<Matiere[]>({
     queryKey: ["classe-matieres", classeId],
     queryFn: async () =>
       (await api.get(`/api/classes/${classeId}/matieres`)).data,
     enabled: !!classeId,
   });
 
-  const { data: allNotes = [], isLoading: loadN } = useQuery<Note[]>({
+  const {
+    data: allNotes = [],
+    isLoading: loadN,
+    isError: errorN,
+  } = useQuery<Note[]>({
     queryKey: ["classe-notes", classeId],
     queryFn: async () => (await api.get(`/api/classes/${classeId}/notes`)).data,
     enabled: !!classeId,
@@ -152,6 +163,8 @@ export default function BulletinsTab() {
   const { data: templateData } = useQuery<BulletinTemplate>({
     queryKey: ["bulletin-template"],
     queryFn: async () => (await api.get("/api/bulletin-template")).data,
+    // SUDO_ADMIN n'a pas de schoolId — l'API renverrait 400.
+    enabled: !!user?.schoolId,
   });
 
   /** Config effective : valeurs DB fusionnées avec les défauts. */
@@ -175,7 +188,8 @@ export default function BulletinsTab() {
       : classement;
   }, [classeId, eleveId, filtreEval, eleves, matieres, allNotes]);
 
-  const isLoading = loadE || loadN;
+  const isLoading = loadE || loadN || loadM;
+  const isError = errorM || errorN;
   const nomClasse = classes.find((c) => c.id === classeId)?.nom ?? "";
 
   return (
@@ -264,7 +278,13 @@ export default function BulletinsTab() {
         </div>
       )}
 
-      {!isLoading && bulletins.length > 0 && (
+      {classeId && !isLoading && isError && (
+        <div className="text-center py-12 text-error text-sm">
+          Erreur lors du chargement des données. Veuillez rafraîchir la page.
+        </div>
+      )}
+
+      {!isLoading && !isError && bulletins.length > 0 && (
         <div className="space-y-6 print:space-y-8">
           {bulletins.map((b) => (
             <BulletinCard
@@ -279,7 +299,7 @@ export default function BulletinsTab() {
         </div>
       )}
 
-      {classeId && !isLoading && bulletins.length === 0 && (
+      {classeId && !isLoading && !isError && bulletins.length === 0 && (
         <div className="text-center py-12 text-base-content/40 text-sm">
           Aucune note trouvée{filtreEval ? ` pour « ${filtreEval} »` : ""}.
         </div>
@@ -340,7 +360,7 @@ function BulletinCard({
           <div className="flex gap-4 text-center">
             <div>
               <div
-                className={`text-xl ${colorMoyDyn(moyenneGenerale, config.seuilBien, config.seuilPassable)}`}
+                className={`text-xl ${colorMoyDyn(moyenneGenerale, config.seuilBien, config.seuilAssezBien, config.seuilPassable)}`}
               >
                 {fmt(moyenneGenerale)}
                 <span className="text-xs text-base-content/40 font-normal">
@@ -395,7 +415,7 @@ function BulletinCard({
                     </td>
                   )}
                   <td
-                    className={`text-center ${colorMoyDyn(l.moyenne, config.seuilBien, config.seuilPassable)}`}
+                    className={`text-center ${colorMoyDyn(l.moyenne, config.seuilBien, config.seuilAssezBien, config.seuilPassable)}`}
                   >
                     {fmt(l.moyenne)}
                   </td>
@@ -408,7 +428,7 @@ function BulletinCard({
                 {config.showNbEval && <td />}
                 {config.showCoef && <td />}
                 <td
-                  className={`text-center ${colorMoyDyn(moyenneGenerale, config.seuilBien, config.seuilPassable)}`}
+                  className={`text-center ${colorMoyDyn(moyenneGenerale, config.seuilBien, config.seuilAssezBien, config.seuilPassable)}`}
                 >
                   {fmt(moyenneGenerale)}
                 </td>
@@ -428,12 +448,22 @@ function BulletinCard({
   );
 }
 
+/** Échappe les caractères HTML spéciaux pour éviter le DOM XSS dans handlePrint. */
+function esc(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function handlePrint(
   bulletins: Bulletin[],
   nomClasse: string,
   effectif: number,
   filtreEval: string,
-  config: BulletinTemplateConfig, // ← nouveau
+  config: BulletinTemplateConfig,
 ) {
   const cartes = bulletins
     .map((b) => {
@@ -451,7 +481,7 @@ function handlePrint(
         .map(
           (l) => `
       <tr>
-        <td>${l.matiere.nom}</td>
+        <td>${esc(l.matiere.nom)}</td>
         ${config.showNbEval ? `<td style="text-align:center">${l.nbNotes > 0 ? l.nbNotes : "—"}</td>` : ""}
         ${config.showCoef ? `<td style="text-align:center">${l.coefTotal > 0 ? l.coefTotal : "—"}</td>` : ""}
         <td style="text-align:center;font-weight:600">${l.moyenne !== null ? l.moyenne.toFixed(2) : "—"}</td>
@@ -466,11 +496,11 @@ function handlePrint(
 
       return `
       <div class="bulletin">
-        ${config.enteteTexte ? `<div class="ecole">${config.enteteTexte}</div>` : ""}
+        ${config.enteteTexte ? `<div class="ecole">${esc(config.enteteTexte)}</div>` : ""}
         <div class="entete">
           <div>
-            <strong>${eleve.nom} ${eleve.prenom}</strong><br/>
-            <span>Classe : ${nomClasse}${filtreEval ? ` — ${filtreEval}` : ""}${config.anneeTexte ? ` — ${config.anneeTexte}` : ""}</span>
+            <strong>${esc(eleve.nom)} ${esc(eleve.prenom)}</strong><br/>
+            <span>Classe : ${esc(nomClasse)}${filtreEval ? ` — ${esc(filtreEval)}` : ""}${config.anneeTexte ? ` — ${esc(config.anneeTexte)}` : ""}</span>
           </div>
           <div style="text-align:right">
             <div style="font-size:1.4rem;font-weight:700">${moyenneGenerale !== null ? moyenneGenerale.toFixed(2) + "/20" : "—"}</div>
@@ -497,7 +527,7 @@ function handlePrint(
             </tr>
           </tfoot>
         </table>
-        ${config.piedTexte ? `<div class="pied">${config.piedTexte}</div>` : ""}
+        ${config.piedTexte ? `<div class="pied">${esc(config.piedTexte)}</div>` : ""}
       </div>`;
     })
     .join("");
@@ -506,7 +536,7 @@ function handlePrint(
 <html lang="fr">
 <head>
   <meta charset="UTF-8"/>
-  <title>Bulletins — ${nomClasse}</title>
+  <title>Bulletins — ${esc(nomClasse)}</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; font-size: 12px; }
     body { padding: 1cm; }
