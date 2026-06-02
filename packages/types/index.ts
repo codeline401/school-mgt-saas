@@ -417,3 +417,52 @@ export interface Quiz {
     soumissions: number;
   };
 }
+
+// --- BULLETIN TEMPLATE ------------------------------------------
+/**
+ * COnfiguration JSON du canevas de bulletin
+ * Stockée dans BuuletinTemplate.config (Prisma Json)
+ * Les valeurs manquantes dans la DB sont complétés par DEFAULT_BULLETIN_CONFIG.
+ */
+export interface BulletinTemplateConfig {
+  /** Texte d'en-tête affiché en haut de chaque bulletin imprimé */
+  enteteTexte: string;
+  /** Année scolaire, ex: "2025-2026" */
+  anneeTexte: string;
+  /** Texte de peid de page, ex: "Le Directeur : "_______________________" */
+  piedTexte: string;
+  /** Afficher le rang de l'élève dans la classe */
+  showRang: boolean;
+  /** Afficher la colonne de coefficient dans le tableau des matières */
+  showCoef: boolean;
+  /** Afficher le nombre d'évaluation pas matières */
+  showNbEval: boolean;
+  /** Note minimale (sur 20) pour afficher la couleur "Bien" */
+  seuilBien: number;
+  /** Note minimale (sur 20) pour afficher la couleur "Assez-Bien" */
+  seuilAssezBien: number;
+  /** Note minimale (sur 20) pour afficher la couleur "Passable" */
+  seuilPassable: number;
+}
+
+/** Valeur par défaut appliquées quand aucun canevas n'a été configuré */
+export const DEFAULT_BULLETIN_CONFIG: BulletinTemplateConfig = {
+  enteteTexte: "Bulletin scolaire",
+  anneeTexte: "2025-2026",
+  piedTexte: "Le Directeur : _______________________",
+  showRang: true,
+  showCoef: true,
+  showNbEval: false,
+  seuilBien: 14,
+  seuilAssezBien: 12,
+  seuilPassable: 10,
+};
+
+/**
+ * Canevas de bulletin retourné par GET /api/bulletin-template.
+ * `config` est toujours peuplé (fusionné avec les défauts côté serveur).
+ */
+export interface BulletinTemplate extends BaseEntity {
+  schoolId: string;
+  config: BulletinTemplateConfig;
+}

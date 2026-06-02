@@ -405,7 +405,8 @@ export const ModelName = {
   Quiz: 'Quiz',
   Question: 'Question',
   Soumission: 'Soumission',
-  Reponse: 'Reponse'
+  Reponse: 'Reponse',
+  BulletinTemplate: 'BulletinTemplate'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -421,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse"
+    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2053,6 +2054,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BulletinTemplate: {
+      payload: Prisma.$BulletinTemplatePayload<ExtArgs>
+      fields: Prisma.BulletinTemplateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BulletinTemplateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinTemplatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BulletinTemplateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinTemplatePayload>
+        }
+        findFirst: {
+          args: Prisma.BulletinTemplateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinTemplatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BulletinTemplateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinTemplatePayload>
+        }
+        findMany: {
+          args: Prisma.BulletinTemplateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinTemplatePayload>[]
+        }
+        create: {
+          args: Prisma.BulletinTemplateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinTemplatePayload>
+        }
+        createMany: {
+          args: Prisma.BulletinTemplateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BulletinTemplateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinTemplatePayload>[]
+        }
+        delete: {
+          args: Prisma.BulletinTemplateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinTemplatePayload>
+        }
+        update: {
+          args: Prisma.BulletinTemplateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinTemplatePayload>
+        }
+        deleteMany: {
+          args: Prisma.BulletinTemplateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BulletinTemplateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BulletinTemplateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinTemplatePayload>[]
+        }
+        upsert: {
+          args: Prisma.BulletinTemplateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinTemplatePayload>
+        }
+        aggregate: {
+          args: Prisma.BulletinTemplateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBulletinTemplate>
+        }
+        groupBy: {
+          args: Prisma.BulletinTemplateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BulletinTemplateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BulletinTemplateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BulletinTemplateCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2423,12 +2498,30 @@ export const ReponseScalarFieldEnum = {
 export type ReponseScalarFieldEnum = (typeof ReponseScalarFieldEnum)[keyof typeof ReponseScalarFieldEnum]
 
 
+export const BulletinTemplateScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  config: 'config',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BulletinTemplateScalarFieldEnum = (typeof BulletinTemplateScalarFieldEnum)[keyof typeof BulletinTemplateScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -2445,6 +2538,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -2641,6 +2743,20 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -2758,6 +2874,7 @@ export type GlobalOmitConfig = {
   question?: Prisma.QuestionOmit
   soumission?: Prisma.SoumissionOmit
   reponse?: Prisma.ReponseOmit
+  bulletinTemplate?: Prisma.BulletinTemplateOmit
 }
 
 /* Types for Logging */

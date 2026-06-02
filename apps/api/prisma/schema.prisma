@@ -73,14 +73,15 @@ model School {
   contrats          Contrat[]
   remplacements     Remplacement[]
 
-  matieres        Matiere[] // Liste des matières enseignées dans l'école
-  notes           Note[]
-  documents       Document[]
-  creneauHoraires CreneauHoraire[]
-  appels          Appel[]
-  notifications   Notification[]
-  cahierTextes    CahierTexte[]
-  quizzes         Quiz[]
+  matieres         Matiere[] // Liste des matières enseignées dans l'école
+  notes            Note[]
+  documents        Document[]
+  creneauHoraires  CreneauHoraire[]
+  appels           Appel[]
+  notifications    Notification[]
+  cahierTextes     CahierTexte[]
+  quizzes          Quiz[]
+  bulletinTemplate BulletinTemplate?
 }
 
 model Classe {
@@ -618,4 +619,34 @@ model Reponse {
   question   Question   @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
   @@unique([soumissionId, questionId]) // Une réponse unique par question dans une soumission
+}
+
+// --- MODULE BULLETIN TEMPLATE (pour générer les bulletins de notes) ---
+
+/// Canevas personnalisé du bulletin scolaire.
+/// Il est unique par école (relation @unique sur schoolId).
+/// La configuration est stockée en JSON pour rester extensible sans migration.
+
+/// Champs JSON (BulletinTemplateConfig) :
+/// - enteteTexte     : texte affcihé en haut du bulletin (ex: "Bulletin de Notes - Année 2026-2027")
+/// - anneeTexte      : année scolaire affichée (ex: "2026-2027")
+/// - piedTexte       : pied de page, ligne de signature
+/// - showRang        : afficher la colonne coefficient dans le tableau
+/// - showCoef        : afficher la colonne coefficient dans le tableau
+/// - showNbEval      : afficher le nombre d'évaluations par matière
+/// - seuilBien       : note minimale pour la couleur "Bien" (défaut : 14)
+/// - seuiAssezBien   : note minimale pour la couleur "Assez Bien" (défaut : 12)
+/// - seuilPassable   : note minimale poue la couleur "Passable" (défaut : 10)
+model BulletinTemplate {
+  id       String @id @default(uuid())
+  schoolId String @unique // Un seul canevas par école
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  // JSON sérialisé de BulletinTemplateConfig (voir packages/types/index.ts)
+  config Json @default("{}")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
 }

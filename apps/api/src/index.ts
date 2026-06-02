@@ -19,6 +19,8 @@ import profilsRoutes from "./routes/profilsRoute.js"; // Importation des routes 
 import notificationRoutes from "./routes/notificationRoute.js";
 import { authenticate } from "./middlewares/authMiddleware.js"; // Importation du middleware d'authentification
 
+import bulletinTemplateRoute from "./routes/bulletinTemplateRoute.js"; // Importation des routes pour le canevas de bulletin
+
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -38,6 +40,7 @@ app.delete("/api/eleves/:id", authenticate, deleteEleve);
 app.get("/api/professeurs", authenticate, getAllProfesseurs);
 
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/bulletin-template", bulletinTemplateRoute);
 
 // Route authentifiée pour servir les feuilles corrigées uploadées.
 // Vérifie que l'utilisateur a accès à l'école de la note avant d'envoyer le fichier.
