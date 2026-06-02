@@ -73,10 +73,18 @@ function fmtNote(n: number | null): string {
 
 function fmtDate(iso: string | null | undefined): string {
   if (!iso) return "—";
-  const d = /^\d{4}-\d{2}-\d{2}$/.test(iso)
-    ? (() => { const [y, m, day] = iso.split("-").map(Number); return new Date(y, m - 1, day); })()
-    : new Date(iso);
-  return d.toLocaleDateString("fr-FR", {
+  // Traiter toute string commençant par YYYY-MM-DD comme une date locale
+  // (évite le décalage UTC pour les dates pures ET les datetimes complets)
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  if (m) {
+    const [, y, mo, d] = m.map(Number);
+    return new Date(y, mo - 1, d).toLocaleDateString("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  }
+  return new Date(iso).toLocaleDateString("fr-FR", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
@@ -88,9 +96,15 @@ function fmtDate(iso: string | null | undefined): string {
 export default function MoyenneAutoTab() {
   const user = useAuthStore((s) => s.user);
 
+  const canView =
+    user?.role === "ADMIN" ||
+    user?.role === "SUDO_ADMIN" ||
+    user?.role === "PROF";
+
   // ── Valeurs par défaut : année scolaire en cours (sept → juin) ────────────
   const now = new Date();
-  const anneeScolaire = now.getMonth() >= 8 ? now.getFullYear() : now.getFullYear() - 1;
+  const anneeScolaire =
+    now.getMonth() >= 8 ? now.getFullYear() : now.getFullYear() - 1;
   const defaultDebut = `${anneeScolaire}-09-01`;
   const defaultFin = `${anneeScolaire + 1}-06-30`;
 
@@ -116,6 +130,7 @@ export default function MoyenneAutoTab() {
       const { data } = await api.get("/api/classes");
       return data;
     },
+    enabled: canView,
   });
 
   // ── Chargement des moyennes auto ──────────────────────────────────────────
@@ -135,13 +150,8 @@ export default function MoyenneAutoTab() {
       );
       return data;
     },
-    enabled: !!classeId,
+    enabled: canView && !!classeId,
   });
-
-  const canView =
-    user?.role === "ADMIN" ||
-    user?.role === "SUDO_ADMIN" ||
-    user?.role === "PROF";
 
   if (!canView) {
     return (
@@ -270,7 +280,9 @@ export default function MoyenneAutoTab() {
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-base-content/50">Moy. générale</span>
+                  <span className="text-xs text-base-content/50">
+                    Moy. générale
+                  </span>
                   <span
                     className={`text-lg tabular-nums ${colorMoy(moyenneGenerale)}`}
                   >
@@ -293,12 +305,8 @@ export default function MoyenneAutoTab() {
                             Interros + DS
                           </div>
                         </th>
-                        <th className="text-center">
-                          Moy. Examen
-                        </th>
-                        <th className="text-center">
-                          Moy. Finale
-                        </th>
+                        <th className="text-center">Moy. Examen</th>
+                        <th className="text-center">Moy. Finale</th>
                         <th>Détail notes</th>
                       </tr>
                     </thead>
@@ -352,12 +360,11 @@ export default function MoyenneAutoTab() {
                               >
                                 {fmtNote(moyenneFinale)}
                               </span>
-                              {moyenneCC !== null &&
-                                moyenneExamen !== null && (
-                                  <div className="text-xs text-base-content/40">
-                                    (CC + Exam) / 2
-                                  </div>
-                                )}
+                              {moyenneCC !== null && moyenneExamen !== null && (
+                                <div className="text-xs text-base-content/40">
+                                  (CC + Exam) / 2
+                                </div>
+                              )}
                             </td>
 
                             {/* Détail des notes individuelles */}
@@ -387,7 +394,10 @@ export default function MoyenneAutoTab() {
                     {/* Pied : moyenne générale */}
                     <tfoot>
                       <tr>
-                        <td colSpan={3} className="text-right text-sm font-semibold">
+                        <td
+                          colSpan={3}
+                          className="text-right text-sm font-semibold"
+                        >
                           Moyenne générale :
                         </td>
                         <td className="text-center">
@@ -409,4 +419,3 @@ export default function MoyenneAutoTab() {
     </div>
   );
 }
-

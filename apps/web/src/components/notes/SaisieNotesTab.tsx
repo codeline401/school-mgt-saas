@@ -30,14 +30,28 @@ type TypeNote = Note["typeNote"];
 // ─── Helpers d'affichage ──────────────────────────────────────────────────────
 
 /**
+ * Retourne la date d'aujourd'hui au format YYYY-MM-DD en heure locale.
+ * À appeler au moment de l'utilisation (pas à la déclaration du module).
+ */
+function getTodayLocal(): string {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+/**
  * Parse un string de date sans décaler le jour dû à l'UTC.
- * Les strings "YYYY-MM-DD" sont traitées comme locales ; les datetimes complets
- * (avec 'T') sont passés directement au constructeur Date.
+ * Les strings "YYYY-MM-DD" et les datetimes ISO ("YYYY-MM-DDTHH:...") sont
+ * traités comme des dates locales ; les autres formats sont passés au
+ * constructeur Date.
  */
 function parseLocalDate(s: string): Date {
-  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
-    const [y, m, d] = s.split("-").map(Number);
-    return new Date(y, m - 1, d);
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s);
+  if (m) {
+    const [, y, mo, d] = m.map(Number);
+    return new Date(y, mo - 1, d);
   }
   return new Date(s);
 }
@@ -83,7 +97,7 @@ const EMPTY_FORM: NoteForm = {
   coefficient: "1",
   commentaire: "",
   typeNote: "AUTRE",
-  dateEval: new Date().toISOString().slice(0, 10),
+  dateEval: "",
   feuille: null,
 };
 
@@ -102,7 +116,10 @@ export default function SaisieNotesTab() {
 
   // ── État : filtre classe (vue tableau) et formulaire (modal) ──────────────
   const [filterClasseId, setFilterClasseId] = useState<string>("");
-  const [form, setForm] = useState<NoteForm>(EMPTY_FORM);
+  const [form, setForm] = useState<NoteForm>(() => ({
+    ...EMPTY_FORM,
+    dateEval: getTodayLocal(),
+  }));
   const [editingId, setEditingId] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Note | null>(null);
 
@@ -227,7 +244,11 @@ export default function SaisieNotesTab() {
   /** Ouvre le modal en mode création, pré-remplit la classe si le filtre est actif. */
   function openCreate() {
     setEditingId(null);
-    setForm({ ...EMPTY_FORM, classeId: filterClasseId });
+    setForm({
+      ...EMPTY_FORM,
+      classeId: filterClasseId,
+      dateEval: getTodayLocal(),
+    });
     modalRef.current?.showModal();
   }
 
@@ -244,9 +265,7 @@ export default function SaisieNotesTab() {
       coefficient: String(note.coefficient),
       commentaire: note.commentaire ?? "",
       typeNote: note.typeNote ?? "AUTRE",
-      dateEval: note.dateEval
-        ? note.dateEval.slice(0, 10)
-        : new Date().toISOString().slice(0, 10),
+      dateEval: note.dateEval ? note.dateEval.slice(0, 10) : getTodayLocal(),
       feuille: null,
     });
     modalRef.current?.showModal();
@@ -254,7 +273,7 @@ export default function SaisieNotesTab() {
 
   function closeModal() {
     modalRef.current?.close();
-    setForm(EMPTY_FORM);
+    setForm({ ...EMPTY_FORM, dateEval: getTodayLocal() });
     setEditingId(null);
   }
 

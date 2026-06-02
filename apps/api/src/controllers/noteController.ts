@@ -220,8 +220,10 @@ export const updateClasseNote = async (req: Request, res: Response) => {
     const existingNote = await prisma.note.findFirst({
       where: { id: noteId, classeId },
     });
-    if (!existingNote)
+    if (!existingNote) {
+      removeUploadedFile((req as any).file?.path);
       return res.status(404).json({ error: "Note non trouvé" });
+    }
 
     if (
       !isAuthorizhedForSchool(
@@ -230,6 +232,7 @@ export const updateClasseNote = async (req: Request, res: Response) => {
         existingNote.schoolId,
       )
     ) {
+      removeUploadedFile((req as any).file?.path);
       return res
         .status(403)
         .json({ error: "Accès refusé à la modification des notes" });
@@ -240,6 +243,7 @@ export const updateClasseNote = async (req: Request, res: Response) => {
       req.user!.role !== "SUDO_ADMIN" &&
       existingNote.createdById !== req.user!.id
     ) {
+      removeUploadedFile((req as any).file?.path);
       return res.status(403).json({
         error: "Vous ne pouvez modifier que les notes que vous avez saisies.",
       });
@@ -249,6 +253,7 @@ export const updateClasseNote = async (req: Request, res: Response) => {
       validatedData.noteMax ?? Number(existingNote.noteMax);
     const effectiveNote = validatedData.note ?? Number(existingNote.note);
     if (effectiveNote > effectiveNoteMax) {
+      removeUploadedFile((req as any).file?.path);
       return res.status(400).json({
         error: `La note ne peut pas dépasser la note maximale (${effectiveNoteMax})`,
       });
@@ -408,11 +413,21 @@ export const getMoyenneAutoClasse = async (req: Request, res: Response) => {
       dateFilter.lte = d;
     }
 
+    // Plage invalide : début postérieur à la fin
+    if (dateFilter.gte && dateFilter.lte && dateFilter.gte > dateFilter.lte) {
+      return res.status(400).json({
+        error:
+          "La date de début ne peut pas être postérieure à la date de fin.",
+      });
+    }
+
     const notes = await prisma.note.findMany({
       where: {
         classeId,
         // Seules les notes CC ou Examen entrent dans le calcul
-        typeNote: { in: [TypeNote.INTERROGATION, TypeNote.DS, TypeNote.EXAMEN] },
+        typeNote: {
+          in: [TypeNote.INTERROGATION, TypeNote.DS, TypeNote.EXAMEN],
+        },
         ...(Object.keys(dateFilter).length > 0 ? { dateEval: dateFilter } : {}),
       },
       include: {
@@ -501,7 +516,14 @@ export const getMoyenneAutoClasse = async (req: Request, res: Response) => {
               moyenneFinale = moyenneExamen;
             }
 
-            return { matiere, notesCC, notesExamen, moyenneCC, moyenneExamen, moyenneFinale };
+            return {
+              matiere,
+              notesCC,
+              notesExamen,
+              moyenneCC,
+              moyenneExamen,
+              moyenneFinale,
+            };
           },
         );
 
