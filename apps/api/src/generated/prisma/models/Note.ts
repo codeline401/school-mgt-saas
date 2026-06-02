@@ -53,6 +53,8 @@ export type NoteMinAggregateOutputType = {
   note: runtime.Decimal | null
   noteMax: runtime.Decimal | null
   coefficient: runtime.Decimal | null
+  typeNote: $Enums.TypeNote | null
+  dateEval: Date | null
   commentaire: string | null
   feuillePath: string | null
   eleveId: string | null
@@ -70,6 +72,8 @@ export type NoteMaxAggregateOutputType = {
   note: runtime.Decimal | null
   noteMax: runtime.Decimal | null
   coefficient: runtime.Decimal | null
+  typeNote: $Enums.TypeNote | null
+  dateEval: Date | null
   commentaire: string | null
   feuillePath: string | null
   eleveId: string | null
@@ -87,6 +91,8 @@ export type NoteCountAggregateOutputType = {
   note: number
   noteMax: number
   coefficient: number
+  typeNote: number
+  dateEval: number
   commentaire: number
   feuillePath: number
   eleveId: number
@@ -118,6 +124,8 @@ export type NoteMinAggregateInputType = {
   note?: true
   noteMax?: true
   coefficient?: true
+  typeNote?: true
+  dateEval?: true
   commentaire?: true
   feuillePath?: true
   eleveId?: true
@@ -135,6 +143,8 @@ export type NoteMaxAggregateInputType = {
   note?: true
   noteMax?: true
   coefficient?: true
+  typeNote?: true
+  dateEval?: true
   commentaire?: true
   feuillePath?: true
   eleveId?: true
@@ -152,6 +162,8 @@ export type NoteCountAggregateInputType = {
   note?: true
   noteMax?: true
   coefficient?: true
+  typeNote?: true
+  dateEval?: true
   commentaire?: true
   feuillePath?: true
   eleveId?: true
@@ -256,6 +268,8 @@ export type NoteGroupByOutputType = {
   note: runtime.Decimal
   noteMax: runtime.Decimal
   coefficient: runtime.Decimal
+  typeNote: $Enums.TypeNote
+  dateEval: Date
   commentaire: string | null
   feuillePath: string | null
   eleveId: string
@@ -296,6 +310,8 @@ export type NoteWhereInput = {
   note?: Prisma.DecimalFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFilter<"Note"> | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFilter<"Note"> | Date | string
   commentaire?: Prisma.StringNullableFilter<"Note"> | string | null
   feuillePath?: Prisma.StringNullableFilter<"Note"> | string | null
   eleveId?: Prisma.StringFilter<"Note"> | string
@@ -318,6 +334,8 @@ export type NoteOrderByWithRelationInput = {
   note?: Prisma.SortOrder
   noteMax?: Prisma.SortOrder
   coefficient?: Prisma.SortOrder
+  typeNote?: Prisma.SortOrder
+  dateEval?: Prisma.SortOrder
   commentaire?: Prisma.SortOrderInput | Prisma.SortOrder
   feuillePath?: Prisma.SortOrderInput | Prisma.SortOrder
   eleveId?: Prisma.SortOrder
@@ -344,6 +362,8 @@ export type NoteWhereUniqueInput = Prisma.AtLeast<{
   note?: Prisma.DecimalFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFilter<"Note"> | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFilter<"Note"> | Date | string
   commentaire?: Prisma.StringNullableFilter<"Note"> | string | null
   feuillePath?: Prisma.StringNullableFilter<"Note"> | string | null
   eleveId?: Prisma.StringFilter<"Note"> | string
@@ -366,6 +386,8 @@ export type NoteOrderByWithAggregationInput = {
   note?: Prisma.SortOrder
   noteMax?: Prisma.SortOrder
   coefficient?: Prisma.SortOrder
+  typeNote?: Prisma.SortOrder
+  dateEval?: Prisma.SortOrder
   commentaire?: Prisma.SortOrderInput | Prisma.SortOrder
   feuillePath?: Prisma.SortOrderInput | Prisma.SortOrder
   eleveId?: Prisma.SortOrder
@@ -391,6 +413,8 @@ export type NoteScalarWhereWithAggregatesInput = {
   note?: Prisma.DecimalWithAggregatesFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalWithAggregatesFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalWithAggregatesFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteWithAggregatesFilter<"Note"> | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeWithAggregatesFilter<"Note"> | Date | string
   commentaire?: Prisma.StringNullableWithAggregatesFilter<"Note"> | string | null
   feuillePath?: Prisma.StringNullableWithAggregatesFilter<"Note"> | string | null
   eleveId?: Prisma.StringWithAggregatesFilter<"Note"> | string
@@ -408,6 +432,8 @@ export type NoteCreateInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   createdAt?: Date | string
@@ -425,6 +451,8 @@ export type NoteUncheckedCreateInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   eleveId: string
@@ -442,6 +470,8 @@ export type NoteUpdateInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -459,6 +489,8 @@ export type NoteUncheckedUpdateInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -476,6 +508,8 @@ export type NoteCreateManyInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   eleveId: string
@@ -493,6 +527,8 @@ export type NoteUpdateManyMutationInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -505,6 +541,8 @@ export type NoteUncheckedUpdateManyInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -538,6 +576,8 @@ export type NoteCountOrderByAggregateInput = {
   note?: Prisma.SortOrder
   noteMax?: Prisma.SortOrder
   coefficient?: Prisma.SortOrder
+  typeNote?: Prisma.SortOrder
+  dateEval?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
   feuillePath?: Prisma.SortOrder
   eleveId?: Prisma.SortOrder
@@ -561,6 +601,8 @@ export type NoteMaxOrderByAggregateInput = {
   note?: Prisma.SortOrder
   noteMax?: Prisma.SortOrder
   coefficient?: Prisma.SortOrder
+  typeNote?: Prisma.SortOrder
+  dateEval?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
   feuillePath?: Prisma.SortOrder
   eleveId?: Prisma.SortOrder
@@ -578,6 +620,8 @@ export type NoteMinOrderByAggregateInput = {
   note?: Prisma.SortOrder
   noteMax?: Prisma.SortOrder
   coefficient?: Prisma.SortOrder
+  typeNote?: Prisma.SortOrder
+  dateEval?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
   feuillePath?: Prisma.SortOrder
   eleveId?: Prisma.SortOrder
@@ -813,12 +857,18 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type EnumTypeNoteFieldUpdateOperationsInput = {
+  set?: $Enums.TypeNote
+}
+
 export type NoteCreateWithoutCreatedByInput = {
   id?: string
   titre: string
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   createdAt?: Date | string
@@ -835,6 +885,8 @@ export type NoteUncheckedCreateWithoutCreatedByInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   eleveId: string
@@ -880,6 +932,8 @@ export type NoteScalarWhereInput = {
   note?: Prisma.DecimalFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFilter<"Note"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFilter<"Note"> | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFilter<"Note"> | Date | string
   commentaire?: Prisma.StringNullableFilter<"Note"> | string | null
   feuillePath?: Prisma.StringNullableFilter<"Note"> | string | null
   eleveId?: Prisma.StringFilter<"Note"> | string
@@ -897,6 +951,8 @@ export type NoteCreateWithoutSchoolInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   createdAt?: Date | string
@@ -913,6 +969,8 @@ export type NoteUncheckedCreateWithoutSchoolInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   eleveId: string
@@ -955,6 +1013,8 @@ export type NoteCreateWithoutClasseInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   createdAt?: Date | string
@@ -971,6 +1031,8 @@ export type NoteUncheckedCreateWithoutClasseInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   eleveId: string
@@ -1013,6 +1075,8 @@ export type NoteCreateWithoutEleveInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   createdAt?: Date | string
@@ -1029,6 +1093,8 @@ export type NoteUncheckedCreateWithoutEleveInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   matiereId: string
@@ -1071,6 +1137,8 @@ export type NoteCreateWithoutMatiereInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   createdAt?: Date | string
@@ -1087,6 +1155,8 @@ export type NoteUncheckedCreateWithoutMatiereInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   eleveId: string
@@ -1129,6 +1199,8 @@ export type NoteCreateManyCreatedByInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   eleveId: string
@@ -1145,6 +1217,8 @@ export type NoteUpdateWithoutCreatedByInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1161,6 +1235,8 @@ export type NoteUncheckedUpdateWithoutCreatedByInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1177,6 +1253,8 @@ export type NoteUncheckedUpdateManyWithoutCreatedByInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1193,6 +1271,8 @@ export type NoteCreateManySchoolInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   eleveId: string
@@ -1209,6 +1289,8 @@ export type NoteUpdateWithoutSchoolInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1225,6 +1307,8 @@ export type NoteUncheckedUpdateWithoutSchoolInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1241,6 +1325,8 @@ export type NoteUncheckedUpdateManyWithoutSchoolInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1257,6 +1343,8 @@ export type NoteCreateManyClasseInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   eleveId: string
@@ -1273,6 +1361,8 @@ export type NoteUpdateWithoutClasseInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1289,6 +1379,8 @@ export type NoteUncheckedUpdateWithoutClasseInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1305,6 +1397,8 @@ export type NoteUncheckedUpdateManyWithoutClasseInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1321,6 +1415,8 @@ export type NoteCreateManyEleveInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   matiereId: string
@@ -1337,6 +1433,8 @@ export type NoteUpdateWithoutEleveInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1353,6 +1451,8 @@ export type NoteUncheckedUpdateWithoutEleveInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1369,6 +1469,8 @@ export type NoteUncheckedUpdateManyWithoutEleveInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1385,6 +1487,8 @@ export type NoteCreateManyMatiereInput = {
   note: runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
   commentaire?: string | null
   feuillePath?: string | null
   eleveId: string
@@ -1401,6 +1505,8 @@ export type NoteUpdateWithoutMatiereInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1417,6 +1523,8 @@ export type NoteUncheckedUpdateWithoutMatiereInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1433,6 +1541,8 @@ export type NoteUncheckedUpdateManyWithoutMatiereInput = {
   note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1451,6 +1561,8 @@ export type NoteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   note?: boolean
   noteMax?: boolean
   coefficient?: boolean
+  typeNote?: boolean
+  dateEval?: boolean
   commentaire?: boolean
   feuillePath?: boolean
   eleveId?: boolean
@@ -1473,6 +1585,8 @@ export type NoteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   note?: boolean
   noteMax?: boolean
   coefficient?: boolean
+  typeNote?: boolean
+  dateEval?: boolean
   commentaire?: boolean
   feuillePath?: boolean
   eleveId?: boolean
@@ -1495,6 +1609,8 @@ export type NoteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   note?: boolean
   noteMax?: boolean
   coefficient?: boolean
+  typeNote?: boolean
+  dateEval?: boolean
   commentaire?: boolean
   feuillePath?: boolean
   eleveId?: boolean
@@ -1517,6 +1633,8 @@ export type NoteSelectScalar = {
   note?: boolean
   noteMax?: boolean
   coefficient?: boolean
+  typeNote?: boolean
+  dateEval?: boolean
   commentaire?: boolean
   feuillePath?: boolean
   eleveId?: boolean
@@ -1528,7 +1646,7 @@ export type NoteSelectScalar = {
   updatedAt?: boolean
 }
 
-export type NoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titre" | "note" | "noteMax" | "coefficient" | "commentaire" | "feuillePath" | "eleveId" | "matiereId" | "classeId" | "schoolId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["note"]>
+export type NoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titre" | "note" | "noteMax" | "coefficient" | "typeNote" | "dateEval" | "commentaire" | "feuillePath" | "eleveId" | "matiereId" | "classeId" | "schoolId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["note"]>
 export type NoteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
   matiere?: boolean | Prisma.MatiereDefaultArgs<ExtArgs>
@@ -1566,6 +1684,8 @@ export type $NotePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     note: runtime.Decimal
     noteMax: runtime.Decimal
     coefficient: runtime.Decimal
+    typeNote: $Enums.TypeNote
+    dateEval: Date
     commentaire: string | null
     feuillePath: string | null
     eleveId: string
@@ -2011,6 +2131,8 @@ export interface NoteFieldRefs {
   readonly note: Prisma.FieldRef<"Note", 'Decimal'>
   readonly noteMax: Prisma.FieldRef<"Note", 'Decimal'>
   readonly coefficient: Prisma.FieldRef<"Note", 'Decimal'>
+  readonly typeNote: Prisma.FieldRef<"Note", 'TypeNote'>
+  readonly dateEval: Prisma.FieldRef<"Note", 'DateTime'>
   readonly commentaire: Prisma.FieldRef<"Note", 'String'>
   readonly feuillePath: Prisma.FieldRef<"Note", 'String'>
   readonly eleveId: Prisma.FieldRef<"Note", 'String'>

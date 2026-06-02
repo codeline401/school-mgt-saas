@@ -189,7 +189,11 @@ export interface NoteMatiereResume {
  *
  * Un élève peut avoir plusieurs notes pour la même matière, chacune
  * identifiée par un titre d'évaluation unique (ex: "DS1", "Examen final", etc.)
- *
+ */
+
+export type TypeNote = "INTERROGATION" | "DS" | "EXAMEN" | "AUTRE";
+
+/**
  * Retourné par GET /api/classes/:classeId/notes
  */
 export interface Note extends BaseEntity {
@@ -197,6 +201,8 @@ export interface Note extends BaseEntity {
   note: number; // Note sur 20
   noteMax: number; // Note maximale (ex: 20, 100, etc.)
   coefficient: number; // Coefficient de la note (ex: 1, 2, etc.)
+  typeNote: TypeNote; // Type d'évaluation
+  dateEval: string; // Date effective de l'évaluation (ISO string)
   commentaire?: string | null; // Commentaire optionnel du prof
   feuillePath?: string | null; // Chemin vers la feuille de note (PDF) générée
   eleveId: string; // ID de l'élève concerné

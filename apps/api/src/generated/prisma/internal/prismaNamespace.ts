@@ -2331,6 +2331,8 @@ export const NoteScalarFieldEnum = {
   note: 'note',
   noteMax: 'noteMax',
   coefficient: 'coefficient',
+  typeNote: 'typeNote',
+  dateEval: 'dateEval',
   commentaire: 'commentaire',
   feuillePath: 'feuillePath',
   eleveId: 'eleveId',
@@ -2636,6 +2638,20 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeNote'
+ */
+export type EnumTypeNoteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeNote'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeNote[]'
+ */
+export type ListEnumTypeNoteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeNote[]'>
     
 
 

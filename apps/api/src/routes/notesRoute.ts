@@ -9,6 +9,7 @@ import {
   createClasseNote,
   deleteClasseNote,
   getClasseNotes,
+  getMoyenneAutoClasse,
   updateClasseNote,
 } from "../controllers/noteController.js";
 
@@ -48,6 +49,18 @@ router.get(
   authenticate,
   authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.PROF),
   getClasseNotes,
+);
+
+/**
+ * GET /api/classes/:classeId/notes/moyenne-auto?debut=&fin=
+ * Calcule les moyennes CC + Examen par élève et par matière.
+ * Accessible : SUDO_ADMIN, ADMIN, PROF
+ */
+router.get(
+  "/moyenne-auto",
+  authenticate,
+  authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.PROF),
+  getMoyenneAutoClasse,
 );
 
 /**

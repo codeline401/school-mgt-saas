@@ -2,6 +2,10 @@
 
 import { z } from "zod"; // Importation de Zod pour la validation des données
 
+/** Types d'évaluation supportés. */
+export const TYPE_NOTE_VALUES = ["INTERROGATION", "DS", "EXAMEN", "AUTRE"] as const;
+export type TypeNoteValue = (typeof TYPE_NOTE_VALUES)[number];
+
 /**
  * Schéma de validation pour la création d'une note
  *
@@ -36,6 +40,11 @@ export const createNoteSchema = z.object({
     .string()
     .max(500, "Le commentaire doit contenir au maximum 500 caractères")
     .optional(),
+  typeNote: z.enum(TYPE_NOTE_VALUES).optional().default("AUTRE"),
+  dateEval: z.preprocess(
+    (v) => (v === "" || v === null || v === undefined ? new Date() : v),
+    z.coerce.date(),
+  ),
 });
 
 /**
@@ -56,6 +65,11 @@ export const updateNoteSchema = z.object({
     .max(500, "Le commentaire doit contenir au maximum 500 caractères")
     .nullable()
     .optional(),
+  typeNote: z.enum(TYPE_NOTE_VALUES).optional(),
+  dateEval: z.preprocess(
+    (v) => (v === "" || v === null || v === undefined ? undefined : v),
+    z.coerce.date().optional(),
+  ),
 });
 
 export type CreateNoteInput = z.infer<typeof createNoteSchema>; // Type TypeScript pour la création d'une note

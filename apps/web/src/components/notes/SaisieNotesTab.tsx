@@ -25,6 +25,24 @@ import { useAuthStore } from "../../store/authStore";
 import ConfirmModal from "../ConfirmModal";
 import type { Classe, Eleve, Matiere, Note } from "@school-mgt/types";
 
+type TypeNote = Note["typeNote"];
+
+// ─── Helpers d'affichage ──────────────────────────────────────────────────────
+
+const TYPE_NOTE_LABELS: Record<TypeNote, string> = {
+  INTERROGATION: "Interro",
+  DS: "DS",
+  EXAMEN: "Examen",
+  AUTRE: "Autre",
+};
+
+const TYPE_NOTE_BADGE: Record<TypeNote, string> = {
+  INTERROGATION: "badge-info",
+  DS: "badge-warning",
+  EXAMEN: "badge-error",
+  AUTRE: "badge-ghost",
+};
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 /** Champs du formulaire de saisie/modification d'une note. */
@@ -37,6 +55,8 @@ interface NoteForm {
   noteMax: string;
   coefficient: string;
   commentaire: string;
+  typeNote: TypeNote;
+  dateEval: string; // YYYY-MM-DD
   feuille: File | null;
 }
 
@@ -49,6 +69,8 @@ const EMPTY_FORM: NoteForm = {
   noteMax: "20",
   coefficient: "1",
   commentaire: "",
+  typeNote: "AUTRE",
+  dateEval: new Date().toISOString().slice(0, 10),
   feuille: null,
 };
 
@@ -125,6 +147,8 @@ export default function SaisieNotesTab() {
       formData.append("note", values.note);
       formData.append("noteMax", values.noteMax);
       formData.append("coefficient", values.coefficient);
+      formData.append("typeNote", values.typeNote);
+      formData.append("dateEval", values.dateEval);
       if (values.commentaire)
         formData.append("commentaire", values.commentaire);
       if (values.feuille) formData.append("feuille", values.feuille);
@@ -206,6 +230,8 @@ export default function SaisieNotesTab() {
       noteMax: String(note.noteMax),
       coefficient: String(note.coefficient),
       commentaire: note.commentaire ?? "",
+      typeNote: note.typeNote ?? "AUTRE",
+      dateEval: note.dateEval ? note.dateEval.slice(0, 10) : new Date().toISOString().slice(0, 10),
       feuille: null,
     });
     modalRef.current?.showModal();
@@ -343,7 +369,25 @@ export default function SaisieNotesTab() {
                           : n.eleveId}
                       </td>
                       <td>{n.matiere?.nom ?? "—"}</td>
-                      <td className="font-medium">{n.titre}</td>
+                      <td className="font-medium">
+                        <div>{n.titre}</div>
+                        <div className="flex items-center gap-1 mt-0.5">
+                          {n.typeNote && (
+                            <span
+                              className={`badge badge-xs ${
+                                TYPE_NOTE_BADGE[n.typeNote] ?? "badge-ghost"
+                              }`}
+                            >
+                              {TYPE_NOTE_LABELS[n.typeNote] ?? n.typeNote}
+                            </span>
+                          )}
+                          {n.dateEval && (
+                            <span className="text-xs text-base-content/40">
+                              {new Date(n.dateEval).toLocaleDateString("fr-FR")}
+                            </span>
+                          )}
+                        </div>
+                      </td>
                       <td className="text-center">
                         <span className="badge badge-outline">
                           {Number(n.note)}/{Number(n.noteMax)}
@@ -499,7 +543,33 @@ export default function SaisieNotesTab() {
                 required
               />
             </fieldset>
-
+            {/* ── 4b. Type d'évaluation + Date ─────────────────────────── */}
+            <div className="grid grid-cols-2 gap-3">
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">Type d'évaluation</legend>
+                <select
+                  name="typeNote"
+                  className="select w-full"
+                  value={form.typeNote}
+                  onChange={handleChange}
+                >
+                  <option value="INTERROGATION">Interrogation</option>
+                  <option value="DS">Devoir surveillé (DS)</option>
+                  <option value="EXAMEN">Examen</option>
+                  <option value="AUTRE">Autre</option>
+                </select>
+              </fieldset>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">Date de l'évaluation</legend>
+                <input
+                  type="date"
+                  name="dateEval"
+                  className="input w-full"
+                  value={form.dateEval}
+                  onChange={handleChange}
+                />
+              </fieldset>
+            </div>
             {/* ── 5. Note / Note max ────────────────────────────────── */}
             <div className="grid grid-cols-2 gap-3">
               <fieldset className="fieldset">

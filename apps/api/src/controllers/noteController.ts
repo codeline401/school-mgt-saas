@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import fs from "fs"; // Importation du module fs pour la gestion des fichiers
 import { prisma } from "../lib/prisma";
-import { createNoteSchema, updateNoteSchema } from "../schemas/noteSchema";
+import { createNoteSchema, updateNoteSchema } from "../schemas/noteSchema.js";
+import { TypeNote } from "../generated/prisma/enums.js";
 import { ZodError } from "zod";
 
 // --- HELPERS ---------------------------------------------------
@@ -166,6 +167,8 @@ export const createClasseNote = async (req: Request, res: Response) => {
         noteMax: validatedData.noteMax,
         coefficient: validatedData.coefficient,
         commentaire: validatedData.commentaire ?? null,
+        typeNote: validatedData.typeNote ?? "AUTRE",
+        dateEval: validatedData.dateEval ?? new Date(),
         feuillePath,
         eleveId: validatedData.eleveId,
         matiereId: validatedData.matiereId,
@@ -270,6 +273,12 @@ export const updateClasseNote = async (req: Request, res: Response) => {
         ...(validatedData.commentaire !== undefined
           ? { commentaire: validatedData.commentaire }
           : {}),
+        ...(validatedData.typeNote !== undefined
+          ? { typeNote: validatedData.typeNote }
+          : {}),
+        ...(validatedData.dateEval !== undefined
+          ? { dateEval: validatedData.dateEval }
+          : {}),
         ...(newFile ? { feuillePath: newFeuillePath } : {}),
       },
     });
@@ -344,5 +353,172 @@ export const updateClasseNote = async (req: Request, res: Response) => {
   } catch (err) {
     console.error("Erreur deleteClasseNote :", err);
     res.status(500).json({ error: "Une erreur est survenue." });
+  }
+};
+
+// --- GET /api/classes/:classeId/moyenne-auto -----------------------------------
+
+/**
+ * Calcule les moyennes automatiques par élève et par matière pour une classe,
+ * en séparant les notes de contrôle continu (INTERROGATION + DS) des notes d'examen.
+ *
+ * Paramètres query optionnels :
+ *   debut  : date ISO (ex: "2025-09-01") — filtre dateEval >= debut
+ *   fin    : date ISO (ex: "2026-06-30") — filtre dateEval <= fin (jusqu'à 23:59:59)
+ *
+ * Accès : SUDO_ADMIN, ADMIN, PROF
+ */
+export const getMoyenneAutoClasse = async (req: Request, res: Response) => {
+  try {
+    const { classeId } = req.params as { classeId: string };
+    const { debut, fin } = req.query as { debut?: string; fin?: string };
+
+    const classe = await prisma.classe.findUnique({ where: { id: classeId } });
+    if (!classe) return res.status(404).json({ error: "Classe non trouvée." });
+
+    if (
+      !isAuthorizhedForSchool(
+        req.user!.role,
+        req.user!.schoolId,
+        classe.schoolId,
+      )
+    ) {
+      return res.status(403).json({ error: "Accès refusé." });
+    }
+
+    // Validation et construction du filtre de date
+    const dateFilter: { gte?: Date; lte?: Date } = {};
+    if (debut) {
+      const d = new Date(debut);
+      if (isNaN(d.getTime()))
+        return res.status(400).json({ error: "Paramètre 'debut' invalide." });
+      dateFilter.gte = d;
+    }
+    if (fin) {
+      const d = new Date(fin);
+      if (isNaN(d.getTime()))
+        return res.status(400).json({ error: "Paramètre 'fin' invalide." });
+      d.setHours(23, 59, 59, 999);
+      dateFilter.lte = d;
+    }
+
+    const notes = await prisma.note.findMany({
+      where: {
+        classeId,
+        // Seules les notes CC ou Examen entrent dans le calcul
+        typeNote: { in: [TypeNote.INTERROGATION, TypeNote.DS, TypeNote.EXAMEN] },
+        ...(Object.keys(dateFilter).length > 0 ? { dateEval: dateFilter } : {}),
+      },
+      include: {
+        eleve: { select: { id: true, nom: true, prenom: true } },
+        matiere: { select: { id: true, nom: true } },
+      },
+      orderBy: [
+        { eleve: { nom: "asc" } },
+        { matiere: { nom: "asc" } },
+        { dateEval: "asc" },
+      ],
+    });
+
+    // Groupement par élève puis par matière
+    const eleveMap = new Map<
+      string,
+      {
+        eleve: { id: string; nom: string; prenom: string };
+        matiereMap: Map<
+          string,
+          {
+            matiere: { id: string; nom: string };
+            notesCC: typeof notes;
+            notesExamen: typeof notes;
+          }
+        >;
+      }
+    >();
+
+    for (const note of notes) {
+      const eleve = note.eleve!;
+      const matiere = note.matiere!;
+
+      if (!eleveMap.has(eleve.id)) {
+        eleveMap.set(eleve.id, { eleve, matiereMap: new Map() });
+      }
+      const eleveEntry = eleveMap.get(eleve.id)!;
+
+      if (!eleveEntry.matiereMap.has(matiere.id)) {
+        eleveEntry.matiereMap.set(matiere.id, {
+          matiere,
+          notesCC: [],
+          notesExamen: [],
+        });
+      }
+      const matiereEntry = eleveEntry.matiereMap.get(matiere.id)!;
+
+      if (
+        note.typeNote === TypeNote.INTERROGATION ||
+        note.typeNote === TypeNote.DS
+      ) {
+        matiereEntry.notesCC.push(note);
+      } else if (note.typeNote === TypeNote.EXAMEN) {
+        matiereEntry.notesExamen.push(note);
+      }
+    }
+
+    /** Moyenne pondérée normalisée sur 20. */
+    function weightedAvg(ns: typeof notes): number | null {
+      const valid = ns.filter((n) => Number(n.noteMax) > 0);
+      if (valid.length === 0) return null;
+      const sumCoef = valid.reduce((s, n) => s + Number(n.coefficient), 0);
+      if (sumCoef === 0) return null;
+      const sumW = valid.reduce(
+        (s, n) =>
+          s + (Number(n.note) / Number(n.noteMax)) * 20 * Number(n.coefficient),
+        0,
+      );
+      return Math.round((sumW / sumCoef) * 100) / 100;
+    }
+
+    const result = Array.from(eleveMap.values()).map(
+      ({ eleve, matiereMap }) => {
+        const matieres = Array.from(matiereMap.values()).map(
+          ({ matiere, notesCC, notesExamen }) => {
+            const moyenneCC = weightedAvg(notesCC);
+            const moyenneExamen = weightedAvg(notesExamen);
+
+            let moyenneFinale: number | null = null;
+            if (moyenneCC !== null && moyenneExamen !== null) {
+              moyenneFinale =
+                Math.round(((moyenneCC + moyenneExamen) / 2) * 100) / 100;
+            } else if (moyenneCC !== null) {
+              moyenneFinale = moyenneCC;
+            } else if (moyenneExamen !== null) {
+              moyenneFinale = moyenneExamen;
+            }
+
+            return { matiere, notesCC, notesExamen, moyenneCC, moyenneExamen, moyenneFinale };
+          },
+        );
+
+        // Moyenne générale = moyenne des moyennesFinale de chaque matière
+        const finals = matieres
+          .map((m) => m.moyenneFinale)
+          .filter((m): m is number => m !== null);
+        const moyenneGenerale =
+          finals.length > 0
+            ? Math.round(
+                (finals.reduce((s, m) => s + m, 0) / finals.length) * 100,
+              ) / 100
+            : null;
+
+        return { eleve, matieres, moyenneGenerale };
+      },
+    );
+
+    res.status(200).json(result);
+  } catch (err) {
+    console.error("Erreur getMoyenneAutoClasse :", err);
+    res
+      .status(500)
+      .json({ error: "Une erreur est survenue lors du calcul des moyennes." });
   }
 };

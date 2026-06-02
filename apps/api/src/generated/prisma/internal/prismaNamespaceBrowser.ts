@@ -256,6 +256,8 @@ export const NoteScalarFieldEnum = {
   note: 'note',
   noteMax: 'noteMax',
   coefficient: 'coefficient',
+  typeNote: 'typeNote',
+  dateEval: 'dateEval',
   commentaire: 'commentaire',
   feuillePath: 'feuillePath',
   eleveId: 'eleveId',

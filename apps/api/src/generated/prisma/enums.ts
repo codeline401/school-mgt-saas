@@ -41,6 +41,16 @@ export const TypeContrat = {
 export type TypeContrat = (typeof TypeContrat)[keyof typeof TypeContrat]
 
 
+export const TypeNote = {
+  INTERROGATION: 'INTERROGATION',
+  DS: 'DS',
+  EXAMEN: 'EXAMEN',
+  AUTRE: 'AUTRE'
+} as const
+
+export type TypeNote = (typeof TypeNote)[keyof typeof TypeNote]
+
+
 export const TypeDocument = {
   COURS: 'COURS',
   DEVOIR: 'DEVOIR',
