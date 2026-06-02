@@ -25,6 +25,51 @@ import { useAuthStore } from "../../store/authStore";
 import ConfirmModal from "../ConfirmModal";
 import type { Classe, Eleve, Matiere, Note } from "@school-mgt/types";
 
+type TypeNote = Note["typeNote"];
+
+// ─── Helpers d'affichage ──────────────────────────────────────────────────────
+
+/**
+ * Retourne la date d'aujourd'hui au format YYYY-MM-DD en heure locale.
+ * À appeler au moment de l'utilisation (pas à la déclaration du module).
+ */
+function getTodayLocal(): string {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+/**
+ * Parse un string de date sans décaler le jour dû à l'UTC.
+ * Les strings "YYYY-MM-DD" et les datetimes ISO ("YYYY-MM-DDTHH:...") sont
+ * traités comme des dates locales ; les autres formats sont passés au
+ * constructeur Date.
+ */
+function parseLocalDate(s: string): Date {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s);
+  if (m) {
+    const [, y, mo, d] = m.map(Number);
+    return new Date(y, mo - 1, d);
+  }
+  return new Date(s);
+}
+
+const TYPE_NOTE_LABELS: Record<TypeNote, string> = {
+  INTERROGATION: "Interrogation",
+  DS: "DS",
+  EXAMEN: "Examen",
+  AUTRE: "Autre",
+};
+
+const TYPE_NOTE_BADGE: Record<TypeNote, string> = {
+  INTERROGATION: "badge-info",
+  DS: "badge-warning",
+  EXAMEN: "badge-error",
+  AUTRE: "badge-ghost",
+};
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 /** Champs du formulaire de saisie/modification d'une note. */
@@ -37,6 +82,8 @@ interface NoteForm {
   noteMax: string;
   coefficient: string;
   commentaire: string;
+  typeNote: TypeNote;
+  dateEval: string; // YYYY-MM-DD
   feuille: File | null;
 }
 
@@ -49,6 +96,8 @@ const EMPTY_FORM: NoteForm = {
   noteMax: "20",
   coefficient: "1",
   commentaire: "",
+  typeNote: "AUTRE",
+  dateEval: "",
   feuille: null,
 };
 
@@ -67,7 +116,10 @@ export default function SaisieNotesTab() {
 
   // ── État : filtre classe (vue tableau) et formulaire (modal) ──────────────
   const [filterClasseId, setFilterClasseId] = useState<string>("");
-  const [form, setForm] = useState<NoteForm>(EMPTY_FORM);
+  const [form, setForm] = useState<NoteForm>(() => ({
+    ...EMPTY_FORM,
+    dateEval: getTodayLocal(),
+  }));
   const [editingId, setEditingId] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Note | null>(null);
 
@@ -125,6 +177,8 @@ export default function SaisieNotesTab() {
       formData.append("note", values.note);
       formData.append("noteMax", values.noteMax);
       formData.append("coefficient", values.coefficient);
+      formData.append("typeNote", values.typeNote);
+      formData.append("dateEval", values.dateEval);
       if (values.commentaire)
         formData.append("commentaire", values.commentaire);
       if (values.feuille) formData.append("feuille", values.feuille);
@@ -190,7 +244,11 @@ export default function SaisieNotesTab() {
   /** Ouvre le modal en mode création, pré-remplit la classe si le filtre est actif. */
   function openCreate() {
     setEditingId(null);
-    setForm({ ...EMPTY_FORM, classeId: filterClasseId });
+    setForm({
+      ...EMPTY_FORM,
+      classeId: filterClasseId,
+      dateEval: getTodayLocal(),
+    });
     modalRef.current?.showModal();
   }
 
@@ -206,6 +264,8 @@ export default function SaisieNotesTab() {
       noteMax: String(note.noteMax),
       coefficient: String(note.coefficient),
       commentaire: note.commentaire ?? "",
+      typeNote: note.typeNote ?? "AUTRE",
+      dateEval: note.dateEval ? note.dateEval.slice(0, 10) : getTodayLocal(),
       feuille: null,
     });
     modalRef.current?.showModal();
@@ -213,7 +273,7 @@ export default function SaisieNotesTab() {
 
   function closeModal() {
     modalRef.current?.close();
-    setForm(EMPTY_FORM);
+    setForm({ ...EMPTY_FORM, dateEval: getTodayLocal() });
     setEditingId(null);
   }
 
@@ -343,7 +403,27 @@ export default function SaisieNotesTab() {
                           : n.eleveId}
                       </td>
                       <td>{n.matiere?.nom ?? "—"}</td>
-                      <td className="font-medium">{n.titre}</td>
+                      <td className="font-medium">
+                        <div>{n.titre}</div>
+                        <div className="flex items-center gap-1 mt-0.5">
+                          {n.typeNote && (
+                            <span
+                              className={`badge badge-xs ${
+                                TYPE_NOTE_BADGE[n.typeNote] ?? "badge-ghost"
+                              }`}
+                            >
+                              {TYPE_NOTE_LABELS[n.typeNote] ?? n.typeNote}
+                            </span>
+                          )}
+                          {n.dateEval && (
+                            <span className="text-xs text-base-content/40">
+                              {parseLocalDate(n.dateEval).toLocaleDateString(
+                                "fr-FR",
+                              )}
+                            </span>
+                          )}
+                        </div>
+                      </td>
                       <td className="text-center">
                         <span className="badge badge-outline">
                           {Number(n.note)}/{Number(n.noteMax)}
@@ -499,7 +579,35 @@ export default function SaisieNotesTab() {
                 required
               />
             </fieldset>
-
+            {/* ── 4b. Type d'évaluation + Date ─────────────────────────── */}
+            <div className="grid grid-cols-2 gap-3">
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">Type d'évaluation</legend>
+                <select
+                  name="typeNote"
+                  className="select w-full"
+                  value={form.typeNote}
+                  onChange={handleChange}
+                >
+                  <option value="INTERROGATION">Interrogation</option>
+                  <option value="DS">Devoir surveillé (DS)</option>
+                  <option value="EXAMEN">Examen</option>
+                  <option value="AUTRE">Autre</option>
+                </select>
+              </fieldset>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">
+                  Date de l'évaluation
+                </legend>
+                <input
+                  type="date"
+                  name="dateEval"
+                  className="input w-full"
+                  value={form.dateEval}
+                  onChange={handleChange}
+                />
+              </fieldset>
+            </div>
             {/* ── 5. Note / Note max ────────────────────────────────── */}
             <div className="grid grid-cols-2 gap-3">
               <fieldset className="fieldset">

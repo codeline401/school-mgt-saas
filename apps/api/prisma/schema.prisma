@@ -328,6 +328,13 @@ model Matiere {
 
 // apps/api/prisma/schema.prisma
 
+enum TypeNote {
+  INTERROGATION
+  DS
+  EXAMEN
+  AUTRE
+}
+
 /// Note — enregistre la note d'un élève pour une matière et une évaluation données.
 ///
 /// Un élève peut avoir PLUSIEURS notes pour la même matière, chacune distinguée
@@ -344,6 +351,8 @@ model Note {
   note        Decimal
   noteMax     Decimal @default(20) // note maximale possible, par défaut 20
   coefficient Decimal @default(1) // coefficient de la note, par défaut 1
+  typeNote    TypeNote  @default(AUTRE) // type d'évaluation : interrogation, DS, examen, autre
+  dateEval    DateTime  @default(now()) // date effective de l'évaluation (peut différer de createdAt)
   commentaire String?
   feuillePath String? // chemin local du fichier corrigé uploadé (optionnel) 
 
@@ -371,6 +380,8 @@ model Note {
   @@index([matiereId]) // Index pour optimiser les requêtes par matière
   @@index([schoolId]) // Index pour optimiser les requêtes par école
   @@index([eleveId]) // Index pour optimiser les requêtes par élève
+  @@index([typeNote]) // Index pour les requêtes filtrées par type (Moyenne Auto)
+  @@index([dateEval]) // Index pour les requêtes filtrées par date (Moyenne Auto)
 }
 
 // ── MODULE DOCUMENTS ─────────────────────────────────────────────────────────

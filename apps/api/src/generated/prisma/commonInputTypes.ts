@@ -224,6 +224,13 @@ export type DecimalFilter<$PrismaModel = never> = {
   not?: Prisma.NestedDecimalFilter<$PrismaModel> | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type EnumTypeNoteFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeNote | Prisma.EnumTypeNoteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeNote[] | Prisma.ListEnumTypeNoteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeNote[] | Prisma.ListEnumTypeNoteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeNoteFilter<$PrismaModel> | $Enums.TypeNote
+}
+
 export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[] | Prisma.ListDecimalFieldRefInput<$PrismaModel>
@@ -238,6 +245,16 @@ export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedDecimalFilter<$PrismaModel>
   _min?: Prisma.NestedDecimalFilter<$PrismaModel>
   _max?: Prisma.NestedDecimalFilter<$PrismaModel>
+}
+
+export type EnumTypeNoteWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeNote | Prisma.EnumTypeNoteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeNote[] | Prisma.ListEnumTypeNoteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeNote[] | Prisma.ListEnumTypeNoteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeNoteWithAggregatesFilter<$PrismaModel> | $Enums.TypeNote
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeNoteFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeNoteFilter<$PrismaModel>
 }
 
 export type EnumTypeDocumentFilter<$PrismaModel = never> = {
@@ -679,6 +696,13 @@ export type NestedDecimalFilter<$PrismaModel = never> = {
   not?: Prisma.NestedDecimalFilter<$PrismaModel> | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type NestedEnumTypeNoteFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeNote | Prisma.EnumTypeNoteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeNote[] | Prisma.ListEnumTypeNoteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeNote[] | Prisma.ListEnumTypeNoteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeNoteFilter<$PrismaModel> | $Enums.TypeNote
+}
+
 export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[] | Prisma.ListDecimalFieldRefInput<$PrismaModel>
@@ -693,6 +717,16 @@ export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedDecimalFilter<$PrismaModel>
   _min?: Prisma.NestedDecimalFilter<$PrismaModel>
   _max?: Prisma.NestedDecimalFilter<$PrismaModel>
+}
+
+export type NestedEnumTypeNoteWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeNote | Prisma.EnumTypeNoteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeNote[] | Prisma.ListEnumTypeNoteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeNote[] | Prisma.ListEnumTypeNoteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeNoteWithAggregatesFilter<$PrismaModel> | $Enums.TypeNote
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeNoteFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeNoteFilter<$PrismaModel>
 }
 
 export type NestedEnumTypeDocumentFilter<$PrismaModel = never> = {

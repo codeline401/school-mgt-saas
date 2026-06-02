@@ -18,7 +18,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
  * - enteteTexte     : texte affcihé en haut du bulletin (ex: "Bulletin de Notes - Année 2026-2027")
  * - anneeTexte      : année scolaire affichée (ex: "2026-2027")
  * - piedTexte       : pied de page, ligne de signature
- * - showRang        : afficher la colonne coefficient dans le tableau
+ * - showRang        : afficher la colonne rang de l'élève dans le tableau
  * - showCoef        : afficher la colonne coefficient dans le tableau
  * - showNbEval      : afficher le nombre d'évaluations par matière
  * - seuilBien       : note minimale pour la couleur "Bien" (défaut : 14)
