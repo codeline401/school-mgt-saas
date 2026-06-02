@@ -71,8 +71,12 @@ function fmtNote(n: number | null): string {
   return n.toFixed(2);
 }
 
-function fmtDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("fr-FR", {
+function fmtDate(iso: string | null | undefined): string {
+  if (!iso) return "—";
+  const d = /^\d{4}-\d{2}-\d{2}$/.test(iso)
+    ? (() => { const [y, m, day] = iso.split("-").map(Number); return new Date(y, m - 1, day); })()
+    : new Date(iso);
+  return d.toLocaleDateString("fr-FR", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",

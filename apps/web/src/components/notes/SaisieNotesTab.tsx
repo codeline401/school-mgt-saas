@@ -29,8 +29,21 @@ type TypeNote = Note["typeNote"];
 
 // ─── Helpers d'affichage ──────────────────────────────────────────────────────
 
+/**
+ * Parse un string de date sans décaler le jour dû à l'UTC.
+ * Les strings "YYYY-MM-DD" sont traitées comme locales ; les datetimes complets
+ * (avec 'T') sont passés directement au constructeur Date.
+ */
+function parseLocalDate(s: string): Date {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
+    const [y, m, d] = s.split("-").map(Number);
+    return new Date(y, m - 1, d);
+  }
+  return new Date(s);
+}
+
 const TYPE_NOTE_LABELS: Record<TypeNote, string> = {
-  INTERROGATION: "Interro",
+  INTERROGATION: "Interrogation",
   DS: "DS",
   EXAMEN: "Examen",
   AUTRE: "Autre",
@@ -231,7 +244,9 @@ export default function SaisieNotesTab() {
       coefficient: String(note.coefficient),
       commentaire: note.commentaire ?? "",
       typeNote: note.typeNote ?? "AUTRE",
-      dateEval: note.dateEval ? note.dateEval.slice(0, 10) : new Date().toISOString().slice(0, 10),
+      dateEval: note.dateEval
+        ? note.dateEval.slice(0, 10)
+        : new Date().toISOString().slice(0, 10),
       feuille: null,
     });
     modalRef.current?.showModal();
@@ -383,7 +398,9 @@ export default function SaisieNotesTab() {
                           )}
                           {n.dateEval && (
                             <span className="text-xs text-base-content/40">
-                              {new Date(n.dateEval).toLocaleDateString("fr-FR")}
+                              {parseLocalDate(n.dateEval).toLocaleDateString(
+                                "fr-FR",
+                              )}
                             </span>
                           )}
                         </div>
@@ -560,7 +577,9 @@ export default function SaisieNotesTab() {
                 </select>
               </fieldset>
               <fieldset className="fieldset">
-                <legend className="fieldset-legend">Date de l'évaluation</legend>
+                <legend className="fieldset-legend">
+                  Date de l'évaluation
+                </legend>
                 <input
                   type="date"
                   name="dateEval"

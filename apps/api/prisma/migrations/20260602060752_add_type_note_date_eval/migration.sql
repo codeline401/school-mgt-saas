@@ -5,6 +5,9 @@ CREATE TYPE "TypeNote" AS ENUM ('INTERROGATION', 'DS', 'EXAMEN', 'AUTRE');
 ALTER TABLE "Note" ADD COLUMN     "dateEval" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 ADD COLUMN     "typeNote" "TypeNote" NOT NULL DEFAULT 'AUTRE';
 
+-- Backfill existing rows with their original creation date
+UPDATE "Note" SET "dateEval" = "createdAt";
+
 -- CreateIndex
 CREATE INDEX "Note_typeNote_idx" ON "Note"("typeNote");
 

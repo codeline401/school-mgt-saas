@@ -387,18 +387,24 @@ export const getMoyenneAutoClasse = async (req: Request, res: Response) => {
     }
 
     // Validation et construction du filtre de date
+    // Les paramètres "YYYY-MM-DD" sont interprétés comme des dates UTC (comportement
+    // natif de new Date("YYYY-MM-DD")). On normalise les deux bornes en UTC pour
+    // éviter toute incohérence avec setHours() qui opère en heure locale.
     const dateFilter: { gte?: Date; lte?: Date } = {};
     if (debut) {
       const d = new Date(debut);
       if (isNaN(d.getTime()))
         return res.status(400).json({ error: "Paramètre 'debut' invalide." });
+      // Début : 00:00:00.000 UTC
+      d.setUTCHours(0, 0, 0, 0);
       dateFilter.gte = d;
     }
     if (fin) {
       const d = new Date(fin);
       if (isNaN(d.getTime()))
         return res.status(400).json({ error: "Paramètre 'fin' invalide." });
-      d.setHours(23, 59, 59, 999);
+      // Fin : 23:59:59.999 UTC
+      d.setUTCHours(23, 59, 59, 999);
       dateFilter.lte = d;
     }
 
