@@ -11,6 +11,7 @@ import {
   getClasseNotes,
   getMoyenneAutoClasse,
   updateClasseNote,
+  getCLassementClasse,
 } from "../controllers/noteController.js";
 
 const UPLOAD_DIR = "uploads/feuilles";
@@ -96,6 +97,18 @@ router.delete(
   authenticate,
   authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.PROF),
   deleteClasseNote,
+);
+
+/**
+ * GET /api/classes/:classeId/notes/classement?debut=&fin=&mode=general|matiere&matiereId=
+ * Classement des éléèves par moyenne générale ou par matière.
+ * Accessible : SUDO_ADMIN, ADMIN, PROF, USER
+ */
+router.get(
+  "/classement",
+  authenticate,
+  authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.PROF, Role.USER),
+  getCLassementClasse,
 );
 
 export default router;
