@@ -596,6 +596,12 @@ export const getCLassementClasse = async (req: Request, res: Response) => {
       return res.status(403).json({ error: "Accès refusé." });
     }
 
+    if (mode !== "general" && mode !== "matiere") {
+      return res.status(400).json({
+        error: "Paramètre 'mode' invalide. Valeurs autorisées : 'general' ou 'matiere'.",
+      });
+    }
+
     if (mode === "matiere" && !matiereId) {
       return res.status(400).json({
         error: "Le paramètre 'matiereId' est requis en mode 'matiere'.",

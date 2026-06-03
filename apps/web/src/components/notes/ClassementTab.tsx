@@ -65,7 +65,8 @@ export default function ClassementTab() {
   const canView =
     user?.role === "ADMIN" ||
     user?.role === "SUDO_ADMIN" ||
-    user?.role === "PROF";
+    user?.role === "PROF" ||
+    user?.role === "USER";
 
   // ── Année scolaire en cours comme valeurs par défaut ─────────────────────
   const now = new Date();
@@ -131,6 +132,9 @@ export default function ClassementTab() {
   // Séparer les élèves avec et sans moyenne
   const avecMoyenne = classement.filter((e) => e.moyenne !== null);
   const sansMoyenne = classement.filter((e) => e.moyenne === null);
+  const podium = avecMoyenne
+    .filter((e) => e.rang <= 3)
+    .sort((a, b) => a.rang - b.rang);
 
   return (
     <div className="space-y-4">
@@ -262,20 +266,20 @@ export default function ClassementTab() {
           </div>
 
           {/* Podium (3 premiers) */}
-          {avecMoyenne.length >= 3 && (
+          {podium.length > 0 && (
             <div className="flex justify-center gap-4 py-2">
-              {avecMoyenne.slice(0, 3).map((e, i) => (
+              {podium.map((e) => (
                 <div
                   key={e.eleve.id}
                   className={`flex flex-col items-center gap-1 p-3 rounded-box border ${
-                    i === 0
+                    e.rang === 1
                       ? "border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20"
-                      : i === 1
+                      : e.rang === 2
                         ? "border-gray-400 bg-gray-50 dark:bg-gray-800/20"
                         : "border-amber-600 bg-amber-50 dark:bg-amber-900/20"
                   }`}
                 >
-                  <span className="text-2xl">{MEDAILLES[i]}</span>
+                  <span className="text-2xl">{MEDAILLES[e.rang - 1]}</span>
                   <span className="font-semibold text-sm text-center leading-tight">
                     {e.eleve.prenom} {e.eleve.nom}
                   </span>
