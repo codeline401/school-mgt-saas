@@ -550,3 +550,269 @@ export const getMoyenneAutoClasse = async (req: Request, res: Response) => {
       .json({ error: "Une erreur est survenue lors du calcul des moyennes." });
   }
 };
+
+// --- GET /api/classes/:classeId/notes/classement -----------------------------------
+
+/**
+ * Retourne le classement des élèves d'une classe par :
+ *  - mode "general" : classement par moyenne générale
+ *  - mode "matière" : classement par moyenne dans une matière donnée
+ *
+ * Query params :
+ *  - debut     : YYYY-MM-DD (optionnel)
+ *  - fin       : YYYY-MM-DD (optionnel)
+ *  - mode      : "general" (défaut) ou "matiere"
+ *  - matiereId : string (requis si mode = "matiere")
+ *
+ * Accès : SUDO_ADMIN, ADMIN, PROF
+ */
+export const getCLassementClasse = async (req: Request, res: Response) => {
+  try {
+    const { classeId } = req.params as { classeId: string }; // ID de la classe
+    const {
+      debut,
+      fin,
+      mode = "general",
+      matiereId,
+    } = req.query as {
+      debut?: string;
+      fin?: string;
+      mode?: string;
+      matiereId?: string;
+    };
+
+    const classe = await prisma.classe.findUnique({ where: { id: classeId } });
+    if (!classe) {
+      return res.status(404).json({ error: "Classe non trouvée." }); // 404 si la classe n'existe pas
+    }
+
+    if (
+      !isAuthorizhedForSchool(
+        req.user!.role,
+        req.user!.schoolId,
+        classe.schoolId,
+      )
+    ) {
+      return res.status(403).json({ error: "Accès refusé." });
+    }
+
+    if (mode === "matiere" && !matiereId) {
+      return res.status(400).json({
+        error: "Le paramètre 'matiereId' est requis en mode 'matiere'.",
+      });
+    }
+
+    // Construction du filtre de date (même logique que pour moyenne-auto)
+    const dateFilter: { gte?: Date; lte?: Date } = {}; // filtre de date pour Prisma
+    if (debut) {
+      const d = new Date(debut); // validation de la date
+      if (isNaN(d.getTime())) {
+        // date invalide
+        return res.status(400).json({ error: "Paramètre 'debut' invalide." });
+      }
+
+      d.setUTCHours(0, 0, 0, 0); // début de journée UTC
+      dateFilter.gte = d; // dateEval >= debut
+    }
+
+    if (fin) {
+      const d = new Date(fin); // validation de la date
+      if (isNaN(d.getTime())) {
+        return res.status(400).json({ error: "Paramètre 'fin' invalide." });
+      }
+      d.setUTCHours(23, 59, 59, 999); // fin de journée UTC
+      dateFilter.lte = d; // dateEval <= fin
+    }
+
+    if (dateFilter.gte && dateFilter.lte && dateFilter.gte > dateFilter.lte) {
+      return res.status(400).json({
+        error:
+          "La date de début ne peut pas être postérieure à la date de fin.",
+      });
+    }
+
+    // --- Récupération des notes -----------------------------------------------
+    const notes = await prisma.note.findMany({
+      where: {
+        classeId,
+        typeNote: {
+          in: [TypeNote.INTERROGATION, TypeNote.DS, TypeNote.EXAMEN],
+        },
+        ...(matiereId && mode === "matiere" ? { matiereId } : {}), // filtre par matière si mode = "matiere"
+        ...(Object.keys(dateFilter).length > 0 ? { dateEval: dateFilter } : {}), // filtre de date si au moins une borne est spécifiée
+      },
+      include: {
+        eleve: { select: { id: true, nom: true, prenom: true } }, // inclus l'élève pour le classement par élève
+        matiere: { select: { id: true, nom: true } }, // inclus la matière pour le classement par matière
+      },
+    });
+
+    // --- Moyenne pondérée normalisée sur 20 ------------------------------------
+    function weightedAverage(ns: typeof notes): number | null {
+      const valid = ns.filter((n) => Number(n.noteMax) > 0); // on ne prend en compte que les notes avec noteMax > 0
+      if (!valid.length) {
+        return null; // si aucune note valide, on retourne null pour indiquer l'absence de moyenne
+      }
+
+      const sumCoef = valid.reduce((s, n) => s + Number(n.coefficient), 0); // somme des coefficients
+      if (!sumCoef) {
+        return null; // si la somme des coefficients est nulle, on ne peut pas calculer de moyenne
+      }
+
+      const sumWeighted = valid.reduce(
+        (s, n) =>
+          s + (Number(n.note) / Number(n.noteMax)) * 20 * Number(n.coefficient),
+        0,
+      ); // somme des notes pondérées
+
+      return Math.round((sumWeighted / sumCoef) * 100) / 100; // moyenne finale arrondie à 2 décimales
+    }
+
+    // --- Calcul de la moyenne par élève -------------------------------------
+    const eleveMap = new Map<
+      string,
+      {
+        eleve: { id: string; nom: string; prenom: string };
+        notes: typeof notes;
+      }
+    >(); // map pour regrouper les notes par élève
+
+    for (const note of notes) {
+      const eleve = note.eleve!; // on peut forcer le non-null car la relation est incluse dans la requête Prisma
+      if (!eleveMap.has(eleve.id)) {
+        eleveMap.set(eleve.id, { eleve, notes: [] }); // initialisation de l'entrée pour l'élève s'il n'existe pas encore
+      }
+
+      eleveMap.get(eleve.id)!.notes.push(note); // ajout de la note à l'élève correspondant
+    }
+
+    // S'assurer que tous les élèves de la classe apparaissent (même sans note)
+    const tousEleves = await prisma.eleve.findMany({
+      where: { classeId },
+      select: { id: true, nom: true, prenom: true },
+      orderBy: [{ nom: "asc" }, { prenom: "asc" }],
+    });
+    for (const eleve of tousEleves) {
+      if (!eleveMap.has(eleve.id)) {
+        eleveMap.set(eleve.id, { eleve, notes: [] }); // élève sans note
+      }
+    }
+
+    interface EntreeClassement {
+      eleve: { id: string; nom: string; prenom: string };
+      moyenne: number | null;
+      rang: number;
+      exAequo: boolean;
+      // Mode general uniquement
+      detailMatieres?: Array<{
+        matiere: { id: string; nom: string };
+        moyenne: number | null;
+      }>;
+    }
+
+    let entries: Omit<EntreeClassement, "rang" | "exAequo">[]; // classement sans les rangs calculés
+
+    if (mode === "general") {
+      entries = Array.from(eleveMap.values()).map(({ eleve, notes: ns }) => {
+        // Moyenne par matière puis moyenne des moyennes
+        const matiereMap = new Map<
+          string,
+          { matiere: { id: string; nom: string }; notes: typeof notes }
+        >();
+
+        for (const n of ns) {
+          // regroupement des notes par matière
+          const mat = n.matiere!; // non-null car inclus dans la requête
+          if (!matiereMap.has(mat.id)) {
+            matiereMap.set(mat.id, { matiere: mat, notes: [] }); // initialisation de l'entrée pour la matière
+          }
+          matiereMap.get(mat.id)!.notes.push(n); // ajout de la note à la matière correspondante
+        }
+
+        const detailMatieres = Array.from(matiereMap.values()).map(
+          ({ matiere, notes: mn }) => {
+            const cc = mn.filter(
+              (n) =>
+                n.typeNote === TypeNote.INTERROGATION ||
+                n.typeNote === TypeNote.DS,
+            );
+            const ex = mn.filter((n) => n.typeNote === TypeNote.EXAMEN);
+            const moyCC = weightedAverage(cc);
+            const moyEx = weightedAverage(ex);
+            let finale: number | null = null;
+            if (moyCC !== null && moyEx !== null)
+              finale = Math.round(((moyCC + moyEx) / 2) * 100) / 100;
+            else finale = moyCC ?? moyEx;
+            return { matiere, moyenne: finale };
+          },
+        );
+
+        const finals = detailMatieres
+          .map((d) => d.moyenne)
+          .filter((m): m is number => m !== null); // moyennes finales par matière
+
+        const moyenne =
+          finals.length > 0
+            ? Math.round(
+                (finals.reduce((s, m) => s + m, 0) / finals.length) * 100,
+              ) / 100
+            : null; // moyenne générale
+
+        return { eleve, moyenne, detailMatieres };
+      });
+    } else {
+      // mode === "matiere"
+      // mode === "matiere"
+      entries = Array.from(eleveMap.values()).map(({ eleve, notes: ns }) => {
+        const cc = ns.filter(
+          (n) =>
+            n.typeNote === TypeNote.INTERROGATION || n.typeNote === TypeNote.DS,
+        );
+        const ex = ns.filter((n) => n.typeNote === TypeNote.EXAMEN);
+        const moyCC = weightedAverage(cc);
+        const moyEx = weightedAverage(ex);
+        let moyenne: number | null = null;
+        if (moyCC !== null && moyEx !== null)
+          moyenne = Math.round(((moyCC + moyEx) / 2) * 100) / 100;
+        else moyenne = moyCC ?? moyEx;
+        return { eleve, moyenne };
+      });
+    }
+
+    // ── Tri décroissant + attribution des rangs (ex-aequo) ──────────────────
+    const sorted = [...entries].sort((a, b) => {
+      if (a.moyenne === null && b.moyenne === null) return 0;
+      if (a.moyenne === null) return 1;
+      if (b.moyenne === null) return -1;
+      return b.moyenne - a.moyenne;
+    });
+
+    const result: EntreeClassement[] = []; // résultat final avec rangs et ex-aequo
+    let currentRang = 1;
+    for (let i = 0; i < sorted.length; i++) {
+      const prev = sorted[i - 1];
+      if (
+        i > 0 &&
+        sorted[i]?.moyenne !== prev?.moyenne &&
+        sorted[i]?.moyenne !== null
+      ) {
+        currentRang = i + 1;
+      }
+      const exAequo =
+        sorted[i]?.moyenne !== null &&
+        sorted.filter((e) => e.moyenne === sorted[i]?.moyenne).length > 1;
+      result.push({
+        ...sorted[i]!,
+        rang: sorted[i]?.moyenne !== null ? currentRang : sorted.length,
+        exAequo,
+      });
+    }
+
+    res.status(200).json(result);
+  } catch (err) {
+    console.error("Erreur getCLassementClasse :", err);
+    res
+      .status(500)
+      .json({ error: "Une erreur est survenue lors du calcul du classement." });
+  }
+};
