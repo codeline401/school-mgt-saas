@@ -472,17 +472,17 @@ export const createProfesseur = async (req: Request, res: Response) => {
 
     const validatedData = createProfesseurSchema.parse(req.body); // Validation des données d'entrée
     const hashedPassword = await bcrypt.hash(
-      `Mdp${validatedData.prenom.toLowerCase()}1234!`,
+      `tempMDP${validatedData.prenom.toLowerCase()}1234!@futurecole`,
       12,
     ); // mot de passe temporaire à changer au premier login
 
     // si une classe est renseignée pendant la création, vérifier qu'elle appartient à la même école
     if (validatedData.classeIds) {
-      const classes = await prisma.classe.findFirst({
+      const classes = await prisma.classe.findMany({
         where: { id: { in: validatedData.classeIds }, schoolId },
         select: { id: true },
       });
-      if (!classes) {
+      if (classes.length !== validatedData.classeIds.length) {
         return res.status(400).json({
           error:
             "Une ou plusieurs classes spécifiées sont invalides ou n'appartiennent pas à votre école",
@@ -491,24 +491,41 @@ export const createProfesseur = async (req: Request, res: Response) => {
     }
 
     // création du compte utilisateur associé au professeur
-    const newUser = await prisma.user.create({
-      data: {
-        email: validatedData.email, // email optionnel
-        password: hashedPassword, // mot de passe temporaire à changer au premier login
-        role: "PROF",
-        schoolId,
-        nom: validatedData.nom,
-        prenom: validatedData.prenom,
-      },
-    });
+    const newProfesseur = await prisma.$transaction(async (tx) => {
+      const newUser = await tx.user.create({
+        data: {
+          email: validatedData.email,
+          password: hashedPassword,
+          role: "PROF",
+          schoolId,
+          nom: validatedData.nom,
+          prenom: validatedData.prenom,
+          telephone: validatedData.telephone ?? null,
+          adresse: validatedData.adresse ?? null,
+        },
+      });
 
-    const newProfesseur = await prisma.professeur.create({
-      data: {
-        nom: validatedData.nom,
-        prenom: validatedData.prenom,
-        schoolId,
-        userId: newUser.id,
-      },
+      const professeur = await tx.professeur.create({
+        data: {
+          nom: validatedData.nom,
+          prenom: validatedData.prenom,
+          telephone: validatedData.telephone ?? null,
+          adresse: validatedData.adresse ?? null,
+          specialites: validatedData.specialites ?? null,
+          schoolId,
+          userId: newUser.id,
+          ...(validatedData.classeIds?.length && {
+            classes: {
+              connect: validatedData.classeIds?.map((id) => ({ id })),
+            },
+          }),
+        },
+        include: {
+          classes: true,
+        },
+      });
+
+      return professeur;
     });
 
     return res.status(201).json(newProfesseur);

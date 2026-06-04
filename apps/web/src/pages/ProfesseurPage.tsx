@@ -42,7 +42,7 @@ function ProfesseursPage() {
   const [form, setForm] = useState<CreateProfForm>(EMPTY_FORM);
 
   const {
-    data: professeurs = [],
+    data: professeurs,
     isLoading,
     isError,
   } = useQuery<ProfWithClasses[]>({
@@ -53,7 +53,12 @@ function ProfesseursPage() {
     },
   });
 
-  const { data: classes = [], isLoading: isLoadingClasses } = useQuery<Classe[]>({
+  const {
+    data: classes,
+    isLoading: isLoadingClasses,
+    isError: isClassesError,
+    error: classesError,
+  } = useQuery<Classe[]>({
     queryKey: ["classes"],
     queryFn: async () => {
       const { data } = await api.get("/api/classes");
@@ -241,13 +246,20 @@ function ProfesseursPage() {
                   <div className="py-2">
                     <span className="loading loading-spinner loading-sm" />
                   </div>
-                ) : classes.length === 0 ? (
+                ) : isClassesError ? (
+                  <p className="text-sm text-error">
+                    {getApiError(
+                      classesError,
+                      "Impossible de charger les classes.",
+                    )}
+                  </p>
+                ) : classes?.length === 0 ? (
                   <p className="text-sm text-base-content/50">
                     Aucune classe disponible.
                   </p>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                    {classes.map((c) => (
+                    {classes?.map((c) => (
                       <label key={c.id} className="label cursor-pointer justify-start gap-2">
                         <input
                           type="checkbox"
@@ -316,7 +328,7 @@ function ProfesseursPage() {
                     <span className="loading loading-spinner loading-md" />
                   </td>
                 </tr>
-              ) : professeurs.length === 0 ? (
+              ) : (professeurs?.length ?? 0) === 0 ? (
                 <tr>
                   <td colSpan={3} className="text-center py-12">
                     <Users size={36} className="mx-auto mb-3 text-base-content/30" />
@@ -326,7 +338,7 @@ function ProfesseursPage() {
                   </td>
                 </tr>
               ) : (
-                professeurs.map((prof) => (
+                professeurs?.map((prof) => (
                   <tr key={prof.id} className="hover">
                     <td className="font-medium">
                       <Link
