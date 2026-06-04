@@ -41,6 +41,16 @@ export const updateParentProfilSchema = z.object({
   adresse: z.string().trim().optional(),
 });
 
+export const createProfesseurSchema = z.object({
+  nom: z.string().trim().min(2, "Nom requis (min 2 caractères)"),
+  prenom: z.string().trim().min(2, "Prénom requis (min 2 caractères)"),
+  email: z.string().email("Email invalide"),
+  telephone: z.string().trim().optional(),
+  adresse: z.string().trim().optional(),
+  specialites: z.string().trim().optional(), // ex: "Mathématiques, Physique"
+  classeIds: z.array(z.string().uuid("ID de classe invalide")).optional(),
+});
+
 // Schéma de mise à jour du profil d'un PROFESSEUR
 export const updateProfesseurProfilSchema = z.object({
   nom: z.string().trim().min(3).optional(),
@@ -63,3 +73,4 @@ export type UpdateProfesseurProfilInput = z.infer<
   typeof updateProfesseurProfilSchema
 >;
 export type CreateParentInput = z.infer<typeof createParentSchema>;
+export type CreateProfesseurInput = z.infer<typeof createProfesseurSchema>;
