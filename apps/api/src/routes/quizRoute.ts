@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authenticate, authorizeRoles } from "../middlewares/authMiddleware";
+import { authenticate, authorizeRoles } from "../middlewares/authMiddleware.js";
 import {
   addQuestionToQuiz,
   createQuiz,
@@ -10,8 +10,8 @@ import {
   getQuizzes,
   submitQuiz,
   updateQuizStatut,
-} from "../controllers/quizController";
-import { Role } from "../generated/prisma/enums";
+} from "../controllers/quizController.js";
+import { Role } from "../generated/prisma/enums.js";
 
 const router = Router({ mergeParams: true }); // mergeParams pour accéder à :classeId depuis app.ts
 

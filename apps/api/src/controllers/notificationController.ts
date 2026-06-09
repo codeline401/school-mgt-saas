@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 
 // GET /api/notifications
 export const getNotifications = async (req: Request, res: Response) => {

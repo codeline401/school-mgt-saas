@@ -1,39 +1,57 @@
+version: "3.9"
+
 services:
-  # Service de base de données
+  # ---------------- DATABASE ----------------
   db:
-    image: postgres:15-alpine # version stable et légère de PostgreSQL
+    image: postgres:15-alpine
     container_name: school_db
     restart: always
     environment:
-      POSTGRES_USER: admin_user # nom d'utilisateur de la DB
-      POSTGRES_PASSWORD: dev_codeline401 # Mot de passe (à changer en prod)
-      POSTGRES_DB: school_saas_db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "5432:5432" # Expose le port 5432  en local
+      - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data # Persistance des données
+      - ./postgres_data:/var/lib/postgresql/data
 
-  # Service Redis pour le cache et les sessions
+  # ---------------- REDIS ----------------
   redis:
-    image: redis:alpine # version légère de Redis
+    image: redis:alpine
     container_name: school_redis
     restart: always
     ports:
-      - "6379:6379" # Expose le port 6379 en local
+      - "6379:6379"
 
-  # Interface graphique pour gérer la base de données
+  # ---------------- PGADMIN ----------------
   pgadmin:
-    image: dpage/pgadmin4 # image officielle de pgAdmin
+    image: dpage/pgadmin4
     container_name: school_pgadmin
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@ecole.com # Login pour l'interface pgAdmin
-      PGADMIN_DEFAULT_PASSWORD: admin_codeline401 # Mot de passe pour pgAdmin (à changer en prod)
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
     ports:
-      - "8080:80" # Expose le port 80 de pgAdmin, accéssible sur http://localhost:8080
+      - "8080:80"
     depends_on:
-      - db # Ne démarre qu'après la base de données
+      - db
 
-# Définition du volume pour ne pas perdre les données quand on arrête Docker
-volumes:
-  postgres_data:
+  # ---------------- API (NODE + TYPESCRIPT + PRISMA) ----------------
+  api:
+    build:
+      context: .                          # 👈 IMPORTANT (monorepo complet)
+      dockerfile: apps/api/Dockerfile    # 👈 chemin du Dockerfile
+    container_name: school_api
+    restart: always
+    depends_on:
+      - db
+      - redis
+        #env_file:
+      #  - ./apps/api/.env    
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      REDIS_URL: redis://redis:6379
+      NODE_ENV: production
+      JWT_SECRET: ${JWT_SECRET}
+    ports:
+      - "5000:5000"

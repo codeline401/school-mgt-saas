@@ -5,9 +5,9 @@ import {
   updateCahierTexte,
   getCahierTextes,
   deleteCahierTexte,
-} from "../controllers/cahierTexteController";
-import { authenticate, authorizeRoles } from "../middlewares/authMiddleware";
-import { Role } from "../generated/prisma/browser";
+} from "../controllers/cahierTexteController.js";
+import { authenticate, authorizeRoles } from "../middlewares/authMiddleware.js";
+import { Role } from "../generated/prisma/browser.js";
 
 const router = Router({ mergeParams: true }); // mergeParams pour accéder à :classeId depuis app.ts
 

@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import { ZodError } from "zod"; // Import de ZodError pour la gestion des erreurs de validation
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 import {
   createParentSchema,
   createProfesseurSchema,
   updateEleveProfilSchema,
   updateParentProfilSchema,
   updateProfesseurProfilSchema,
-} from "../schemas/profilSchema";
+} from "../schemas/profilSchema.js";
 
 import bcrypt from "bcrypt";
 

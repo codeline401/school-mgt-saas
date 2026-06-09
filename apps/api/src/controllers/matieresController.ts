@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 import {
   createMatieresSchema,
   updateMatieresSchema,
-} from "../schemas/matieresSchema";
+} from "../schemas/matieresSchema.js";
 import { registry, ZodError } from "zod";
 
 // HELPERS

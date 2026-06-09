@@ -7,12 +7,12 @@
  */
 
 import { Router } from "express";
-import { authenticate, authorizeRoles } from "../middlewares/authMiddleware";
-import { Role } from "../generated/prisma/enums";
+import { authenticate, authorizeRoles } from "../middlewares/authMiddleware.js";
+import { Role } from "../generated/prisma/enums.js";
 import {
   getBulletinTemplate,
   upsertBulletinTemplate,
-} from "../controllers/bulletinTemplateController";
+} from "../controllers/bulletinTemplateController.js";
 
 const router = Router();
 
