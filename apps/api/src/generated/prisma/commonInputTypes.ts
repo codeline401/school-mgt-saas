@@ -473,6 +473,74 @@ export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
   _max?: Prisma.NestedJsonFilter<$PrismaModel>
 }
 
+export type EnumDeliberationStatutFilter<$PrismaModel = never> = {
+  equals?: $Enums.DeliberationStatut | Prisma.EnumDeliberationStatutFieldRefInput<$PrismaModel>
+  in?: $Enums.DeliberationStatut[] | Prisma.ListEnumDeliberationStatutFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DeliberationStatut[] | Prisma.ListEnumDeliberationStatutFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDeliberationStatutFilter<$PrismaModel> | $Enums.DeliberationStatut
+}
+
+export type EnumDeliberationStatutWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DeliberationStatut | Prisma.EnumDeliberationStatutFieldRefInput<$PrismaModel>
+  in?: $Enums.DeliberationStatut[] | Prisma.ListEnumDeliberationStatutFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DeliberationStatut[] | Prisma.ListEnumDeliberationStatutFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDeliberationStatutWithAggregatesFilter<$PrismaModel> | $Enums.DeliberationStatut
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDeliberationStatutFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDeliberationStatutFilter<$PrismaModel>
+}
+
+export type EnumDecisionPassageFilter<$PrismaModel = never> = {
+  equals?: $Enums.DecisionPassage | Prisma.EnumDecisionPassageFieldRefInput<$PrismaModel>
+  in?: $Enums.DecisionPassage[] | Prisma.ListEnumDecisionPassageFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DecisionPassage[] | Prisma.ListEnumDecisionPassageFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDecisionPassageFilter<$PrismaModel> | $Enums.DecisionPassage
+}
+
+export type EnumMentionDeliberationFilter<$PrismaModel = never> = {
+  equals?: $Enums.MentionDeliberation | Prisma.EnumMentionDeliberationFieldRefInput<$PrismaModel>
+  in?: $Enums.MentionDeliberation[] | Prisma.ListEnumMentionDeliberationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MentionDeliberation[] | Prisma.ListEnumMentionDeliberationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMentionDeliberationFilter<$PrismaModel> | $Enums.MentionDeliberation
+}
+
+export type EnumAvertissementDeliberationFilter<$PrismaModel = never> = {
+  equals?: $Enums.AvertissementDeliberation | Prisma.EnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  in?: $Enums.AvertissementDeliberation[] | Prisma.ListEnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AvertissementDeliberation[] | Prisma.ListEnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAvertissementDeliberationFilter<$PrismaModel> | $Enums.AvertissementDeliberation
+}
+
+export type EnumDecisionPassageWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DecisionPassage | Prisma.EnumDecisionPassageFieldRefInput<$PrismaModel>
+  in?: $Enums.DecisionPassage[] | Prisma.ListEnumDecisionPassageFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DecisionPassage[] | Prisma.ListEnumDecisionPassageFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDecisionPassageWithAggregatesFilter<$PrismaModel> | $Enums.DecisionPassage
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDecisionPassageFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDecisionPassageFilter<$PrismaModel>
+}
+
+export type EnumMentionDeliberationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MentionDeliberation | Prisma.EnumMentionDeliberationFieldRefInput<$PrismaModel>
+  in?: $Enums.MentionDeliberation[] | Prisma.ListEnumMentionDeliberationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MentionDeliberation[] | Prisma.ListEnumMentionDeliberationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMentionDeliberationWithAggregatesFilter<$PrismaModel> | $Enums.MentionDeliberation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMentionDeliberationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMentionDeliberationFilter<$PrismaModel>
+}
+
+export type EnumAvertissementDeliberationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AvertissementDeliberation | Prisma.EnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  in?: $Enums.AvertissementDeliberation[] | Prisma.ListEnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AvertissementDeliberation[] | Prisma.ListEnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAvertissementDeliberationWithAggregatesFilter<$PrismaModel> | $Enums.AvertissementDeliberation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAvertissementDeliberationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAvertissementDeliberationFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -916,6 +984,74 @@ export type NestedJsonFilterBase<$PrismaModel = never> = {
   gt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   gte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+}
+
+export type NestedEnumDeliberationStatutFilter<$PrismaModel = never> = {
+  equals?: $Enums.DeliberationStatut | Prisma.EnumDeliberationStatutFieldRefInput<$PrismaModel>
+  in?: $Enums.DeliberationStatut[] | Prisma.ListEnumDeliberationStatutFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DeliberationStatut[] | Prisma.ListEnumDeliberationStatutFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDeliberationStatutFilter<$PrismaModel> | $Enums.DeliberationStatut
+}
+
+export type NestedEnumDeliberationStatutWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DeliberationStatut | Prisma.EnumDeliberationStatutFieldRefInput<$PrismaModel>
+  in?: $Enums.DeliberationStatut[] | Prisma.ListEnumDeliberationStatutFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DeliberationStatut[] | Prisma.ListEnumDeliberationStatutFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDeliberationStatutWithAggregatesFilter<$PrismaModel> | $Enums.DeliberationStatut
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDeliberationStatutFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDeliberationStatutFilter<$PrismaModel>
+}
+
+export type NestedEnumDecisionPassageFilter<$PrismaModel = never> = {
+  equals?: $Enums.DecisionPassage | Prisma.EnumDecisionPassageFieldRefInput<$PrismaModel>
+  in?: $Enums.DecisionPassage[] | Prisma.ListEnumDecisionPassageFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DecisionPassage[] | Prisma.ListEnumDecisionPassageFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDecisionPassageFilter<$PrismaModel> | $Enums.DecisionPassage
+}
+
+export type NestedEnumMentionDeliberationFilter<$PrismaModel = never> = {
+  equals?: $Enums.MentionDeliberation | Prisma.EnumMentionDeliberationFieldRefInput<$PrismaModel>
+  in?: $Enums.MentionDeliberation[] | Prisma.ListEnumMentionDeliberationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MentionDeliberation[] | Prisma.ListEnumMentionDeliberationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMentionDeliberationFilter<$PrismaModel> | $Enums.MentionDeliberation
+}
+
+export type NestedEnumAvertissementDeliberationFilter<$PrismaModel = never> = {
+  equals?: $Enums.AvertissementDeliberation | Prisma.EnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  in?: $Enums.AvertissementDeliberation[] | Prisma.ListEnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AvertissementDeliberation[] | Prisma.ListEnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAvertissementDeliberationFilter<$PrismaModel> | $Enums.AvertissementDeliberation
+}
+
+export type NestedEnumDecisionPassageWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DecisionPassage | Prisma.EnumDecisionPassageFieldRefInput<$PrismaModel>
+  in?: $Enums.DecisionPassage[] | Prisma.ListEnumDecisionPassageFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DecisionPassage[] | Prisma.ListEnumDecisionPassageFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDecisionPassageWithAggregatesFilter<$PrismaModel> | $Enums.DecisionPassage
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDecisionPassageFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDecisionPassageFilter<$PrismaModel>
+}
+
+export type NestedEnumMentionDeliberationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MentionDeliberation | Prisma.EnumMentionDeliberationFieldRefInput<$PrismaModel>
+  in?: $Enums.MentionDeliberation[] | Prisma.ListEnumMentionDeliberationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MentionDeliberation[] | Prisma.ListEnumMentionDeliberationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMentionDeliberationWithAggregatesFilter<$PrismaModel> | $Enums.MentionDeliberation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMentionDeliberationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMentionDeliberationFilter<$PrismaModel>
+}
+
+export type NestedEnumAvertissementDeliberationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AvertissementDeliberation | Prisma.EnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  in?: $Enums.AvertissementDeliberation[] | Prisma.ListEnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AvertissementDeliberation[] | Prisma.ListEnumAvertissementDeliberationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAvertissementDeliberationWithAggregatesFilter<$PrismaModel> | $Enums.AvertissementDeliberation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAvertissementDeliberationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAvertissementDeliberationFilter<$PrismaModel>
 }
 
 

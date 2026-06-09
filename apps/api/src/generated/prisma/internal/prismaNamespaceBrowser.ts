@@ -73,7 +73,9 @@ export const ModelName = {
   Question: 'Question',
   Soumission: 'Soumission',
   Reponse: 'Reponse',
-  BulletinTemplate: 'BulletinTemplate'
+  BulletinTemplate: 'BulletinTemplate',
+  DeliberationSession: 'DeliberationSession',
+  DeliberationDecision: 'DeliberationDecision'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -434,6 +436,39 @@ export const BulletinTemplateScalarFieldEnum = {
 } as const
 
 export type BulletinTemplateScalarFieldEnum = (typeof BulletinTemplateScalarFieldEnum)[keyof typeof BulletinTemplateScalarFieldEnum]
+
+
+export const DeliberationSessionScalarFieldEnum = {
+  id: 'id',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  periodeLabel: 'periodeLabel',
+  anneeScolaire: 'anneeScolaire',
+  statut: 'statut',
+  compteRendu: 'compteRendu',
+  createdById: 'createdById',
+  validatedAt: 'validatedAt',
+  validatedById: 'validatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeliberationSessionScalarFieldEnum = (typeof DeliberationSessionScalarFieldEnum)[keyof typeof DeliberationSessionScalarFieldEnum]
+
+
+export const DeliberationDecisionScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  eleveId: 'eleveId',
+  decision: 'decision',
+  mention: 'mention',
+  avertissement: 'avertissement',
+  commentaire: 'commentaire',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeliberationDecisionScalarFieldEnum = (typeof DeliberationDecisionScalarFieldEnum)[keyof typeof DeliberationDecisionScalarFieldEnum]
 
 
 export const SortOrder = {

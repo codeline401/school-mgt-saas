@@ -406,7 +406,9 @@ export const ModelName = {
   Question: 'Question',
   Soumission: 'Soumission',
   Reponse: 'Reponse',
-  BulletinTemplate: 'BulletinTemplate'
+  BulletinTemplate: 'BulletinTemplate',
+  DeliberationSession: 'DeliberationSession',
+  DeliberationDecision: 'DeliberationDecision'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -422,7 +424,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate"
+    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2128,6 +2130,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DeliberationSession: {
+      payload: Prisma.$DeliberationSessionPayload<ExtArgs>
+      fields: Prisma.DeliberationSessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DeliberationSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationSessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DeliberationSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationSessionPayload>
+        }
+        findFirst: {
+          args: Prisma.DeliberationSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationSessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DeliberationSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationSessionPayload>
+        }
+        findMany: {
+          args: Prisma.DeliberationSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationSessionPayload>[]
+        }
+        create: {
+          args: Prisma.DeliberationSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationSessionPayload>
+        }
+        createMany: {
+          args: Prisma.DeliberationSessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DeliberationSessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationSessionPayload>[]
+        }
+        delete: {
+          args: Prisma.DeliberationSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationSessionPayload>
+        }
+        update: {
+          args: Prisma.DeliberationSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationSessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.DeliberationSessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DeliberationSessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DeliberationSessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationSessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.DeliberationSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationSessionPayload>
+        }
+        aggregate: {
+          args: Prisma.DeliberationSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDeliberationSession>
+        }
+        groupBy: {
+          args: Prisma.DeliberationSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeliberationSessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DeliberationSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeliberationSessionCountAggregateOutputType> | number
+        }
+      }
+    }
+    DeliberationDecision: {
+      payload: Prisma.$DeliberationDecisionPayload<ExtArgs>
+      fields: Prisma.DeliberationDecisionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DeliberationDecisionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationDecisionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DeliberationDecisionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationDecisionPayload>
+        }
+        findFirst: {
+          args: Prisma.DeliberationDecisionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationDecisionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DeliberationDecisionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationDecisionPayload>
+        }
+        findMany: {
+          args: Prisma.DeliberationDecisionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationDecisionPayload>[]
+        }
+        create: {
+          args: Prisma.DeliberationDecisionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationDecisionPayload>
+        }
+        createMany: {
+          args: Prisma.DeliberationDecisionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DeliberationDecisionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationDecisionPayload>[]
+        }
+        delete: {
+          args: Prisma.DeliberationDecisionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationDecisionPayload>
+        }
+        update: {
+          args: Prisma.DeliberationDecisionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationDecisionPayload>
+        }
+        deleteMany: {
+          args: Prisma.DeliberationDecisionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DeliberationDecisionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DeliberationDecisionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationDecisionPayload>[]
+        }
+        upsert: {
+          args: Prisma.DeliberationDecisionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliberationDecisionPayload>
+        }
+        aggregate: {
+          args: Prisma.DeliberationDecisionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDeliberationDecision>
+        }
+        groupBy: {
+          args: Prisma.DeliberationDecisionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeliberationDecisionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DeliberationDecisionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeliberationDecisionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2511,6 +2661,39 @@ export const BulletinTemplateScalarFieldEnum = {
 export type BulletinTemplateScalarFieldEnum = (typeof BulletinTemplateScalarFieldEnum)[keyof typeof BulletinTemplateScalarFieldEnum]
 
 
+export const DeliberationSessionScalarFieldEnum = {
+  id: 'id',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  periodeLabel: 'periodeLabel',
+  anneeScolaire: 'anneeScolaire',
+  statut: 'statut',
+  compteRendu: 'compteRendu',
+  createdById: 'createdById',
+  validatedAt: 'validatedAt',
+  validatedById: 'validatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeliberationSessionScalarFieldEnum = (typeof DeliberationSessionScalarFieldEnum)[keyof typeof DeliberationSessionScalarFieldEnum]
+
+
+export const DeliberationDecisionScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  eleveId: 'eleveId',
+  decision: 'decision',
+  mention: 'mention',
+  avertissement: 'avertissement',
+  commentaire: 'commentaire',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeliberationDecisionScalarFieldEnum = (typeof DeliberationDecisionScalarFieldEnum)[keyof typeof DeliberationDecisionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2773,6 +2956,62 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
+
+/**
+ * Reference to a field of type 'DeliberationStatut'
+ */
+export type EnumDeliberationStatutFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DeliberationStatut'>
+    
+
+
+/**
+ * Reference to a field of type 'DeliberationStatut[]'
+ */
+export type ListEnumDeliberationStatutFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DeliberationStatut[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DecisionPassage'
+ */
+export type EnumDecisionPassageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DecisionPassage'>
+    
+
+
+/**
+ * Reference to a field of type 'DecisionPassage[]'
+ */
+export type ListEnumDecisionPassageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DecisionPassage[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MentionDeliberation'
+ */
+export type EnumMentionDeliberationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MentionDeliberation'>
+    
+
+
+/**
+ * Reference to a field of type 'MentionDeliberation[]'
+ */
+export type ListEnumMentionDeliberationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MentionDeliberation[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AvertissementDeliberation'
+ */
+export type EnumAvertissementDeliberationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AvertissementDeliberation'>
+    
+
+
+/**
+ * Reference to a field of type 'AvertissementDeliberation[]'
+ */
+export type ListEnumAvertissementDeliberationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AvertissementDeliberation[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -2891,6 +3130,8 @@ export type GlobalOmitConfig = {
   soumission?: Prisma.SoumissionOmit
   reponse?: Prisma.ReponseOmit
   bulletinTemplate?: Prisma.BulletinTemplateOmit
+  deliberationSession?: Prisma.DeliberationSessionOmit
+  deliberationDecision?: Prisma.DeliberationDecisionOmit
 }
 
 /* Types for Logging */
