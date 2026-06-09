@@ -24,7 +24,7 @@ function isAuthorizedForSchool(
 }
 
 function canEdit(role: Role): boolean {
-  return role === Role.SUDO_ADMIN || role === Role.ADMIN || role === Role.PROF;
+  return role === Role.SUDO_ADMIN || role === Role.ADMIN || role === Role.USER;
 }
 
 function round2(n: number): number {
@@ -191,7 +191,7 @@ export const updateDeliberationSession = async (
       where: { id: sessionId },
       data: {
         ...(payload.periodeLabel !== undefined
-          ? { perdiodeLabel: payload.periodeLabel }
+          ? { periodeLabel: payload.periodeLabel }
           : {}),
         ...(payload.anneeScolaire !== undefined
           ? { anneeScolaire: payload.anneeScolaire }
