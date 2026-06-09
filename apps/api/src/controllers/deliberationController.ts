@@ -4,14 +4,14 @@ import {
   DeliberationStatut,
   MentionDeliberation,
   Role,
-} from "../generated/prisma/enums";
+} from "../generated/prisma/enums.js";
 import { Request, Response } from "express";
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 import {
   createSessionsSchema,
   updateSessionsSchema,
   upsertDecisionSchema,
-} from "../schemas/deliberationSchema";
+} from "../schemas/deliberationSchema.js";
 import { ZodError } from "zod";
 
 function isAuthorizedForSchool(
