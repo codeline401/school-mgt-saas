@@ -238,6 +238,8 @@ export type UserWhereInput = {
   documents?: Prisma.DocumentListRelationFilter
   parent?: Prisma.XOR<Prisma.ParentNullableScalarRelationFilter, Prisma.ParentWhereInput> | null
   notifications?: Prisma.NotificationListRelationFilter
+  deliberationSessions?: Prisma.DeliberationSessionListRelationFilter
+  deliberationSessionsValidées?: Prisma.DeliberationSessionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -260,6 +262,8 @@ export type UserOrderByWithRelationInput = {
   documents?: Prisma.DocumentOrderByRelationAggregateInput
   parent?: Prisma.ParentOrderByWithRelationInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  deliberationSessions?: Prisma.DeliberationSessionOrderByRelationAggregateInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -285,6 +289,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   documents?: Prisma.DocumentListRelationFilter
   parent?: Prisma.XOR<Prisma.ParentNullableScalarRelationFilter, Prisma.ParentWhereInput> | null
   notifications?: Prisma.NotificationListRelationFilter
+  deliberationSessions?: Prisma.DeliberationSessionListRelationFilter
+  deliberationSessionsValidées?: Prisma.DeliberationSessionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -340,6 +346,8 @@ export type UserCreateInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -361,6 +369,8 @@ export type UserUncheckedCreateInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserUpdateInput = {
@@ -382,6 +392,8 @@ export type UserUpdateInput = {
   documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -403,6 +415,8 @@ export type UserUncheckedUpdateInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -672,6 +686,36 @@ export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
 }
 
+export type UserCreateNestedOneWithoutDeliberationSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDeliberationSessionsInput, Prisma.UserUncheckedCreateWithoutDeliberationSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeliberationSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutDeliberationSessionsValidéesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDeliberationSessionsValidéesInput, Prisma.UserUncheckedCreateWithoutDeliberationSessionsValidéesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeliberationSessionsValidéesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDeliberationSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDeliberationSessionsInput, Prisma.UserUncheckedCreateWithoutDeliberationSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeliberationSessionsInput
+  upsert?: Prisma.UserUpsertWithoutDeliberationSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDeliberationSessionsInput, Prisma.UserUpdateWithoutDeliberationSessionsInput>, Prisma.UserUncheckedUpdateWithoutDeliberationSessionsInput>
+}
+
+export type UserUpdateOneWithoutDeliberationSessionsValidéesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDeliberationSessionsValidéesInput, Prisma.UserUncheckedCreateWithoutDeliberationSessionsValidéesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeliberationSessionsValidéesInput
+  upsert?: Prisma.UserUpsertWithoutDeliberationSessionsValidéesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDeliberationSessionsValidéesInput, Prisma.UserUpdateWithoutDeliberationSessionsValidéesInput>, Prisma.UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput>
+}
+
 export type UserCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -690,6 +734,8 @@ export type UserCreateWithoutSchoolInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserUncheckedCreateWithoutSchoolInput = {
@@ -710,6 +756,8 @@ export type UserUncheckedCreateWithoutSchoolInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserCreateOrConnectWithoutSchoolInput = {
@@ -773,6 +821,8 @@ export type UserCreateWithoutProfesseurInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserUncheckedCreateWithoutProfesseurInput = {
@@ -793,6 +843,8 @@ export type UserUncheckedCreateWithoutProfesseurInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserCreateOrConnectWithoutProfesseurInput = {
@@ -829,6 +881,8 @@ export type UserUpdateWithoutProfesseurInput = {
   documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfesseurInput = {
@@ -849,6 +903,8 @@ export type UserUncheckedUpdateWithoutProfesseurInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserCreateWithoutParentInput = {
@@ -869,6 +925,8 @@ export type UserCreateWithoutParentInput = {
   professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
   documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserUncheckedCreateWithoutParentInput = {
@@ -889,6 +947,8 @@ export type UserUncheckedCreateWithoutParentInput = {
   professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserCreateOrConnectWithoutParentInput = {
@@ -925,6 +985,8 @@ export type UserUpdateWithoutParentInput = {
   professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParentInput = {
@@ -945,6 +1007,8 @@ export type UserUncheckedUpdateWithoutParentInput = {
   professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserCreateWithoutContratsInput = {
@@ -965,6 +1029,8 @@ export type UserCreateWithoutContratsInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserUncheckedCreateWithoutContratsInput = {
@@ -985,6 +1051,8 @@ export type UserUncheckedCreateWithoutContratsInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserCreateOrConnectWithoutContratsInput = {
@@ -1021,6 +1089,8 @@ export type UserUpdateWithoutContratsInput = {
   documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutContratsInput = {
@@ -1041,6 +1111,8 @@ export type UserUncheckedUpdateWithoutContratsInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserCreateWithoutRemplacementsInput = {
@@ -1061,6 +1133,8 @@ export type UserCreateWithoutRemplacementsInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserUncheckedCreateWithoutRemplacementsInput = {
@@ -1081,6 +1155,8 @@ export type UserUncheckedCreateWithoutRemplacementsInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserCreateOrConnectWithoutRemplacementsInput = {
@@ -1117,6 +1193,8 @@ export type UserUpdateWithoutRemplacementsInput = {
   documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRemplacementsInput = {
@@ -1137,6 +1215,8 @@ export type UserUncheckedUpdateWithoutRemplacementsInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserCreateWithoutNotesInput = {
@@ -1157,6 +1237,8 @@ export type UserCreateWithoutNotesInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserUncheckedCreateWithoutNotesInput = {
@@ -1177,6 +1259,8 @@ export type UserUncheckedCreateWithoutNotesInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserCreateOrConnectWithoutNotesInput = {
@@ -1213,6 +1297,8 @@ export type UserUpdateWithoutNotesInput = {
   documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesInput = {
@@ -1233,6 +1319,8 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserCreateWithoutDocumentsInput = {
@@ -1253,6 +1341,8 @@ export type UserCreateWithoutDocumentsInput = {
   professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
   parent?: Prisma.ParentCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserUncheckedCreateWithoutDocumentsInput = {
@@ -1273,6 +1363,8 @@ export type UserUncheckedCreateWithoutDocumentsInput = {
   professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
   parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserCreateOrConnectWithoutDocumentsInput = {
@@ -1309,6 +1401,8 @@ export type UserUpdateWithoutDocumentsInput = {
   professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
   parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDocumentsInput = {
@@ -1329,6 +1423,8 @@ export type UserUncheckedUpdateWithoutDocumentsInput = {
   professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
   parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -1349,6 +1445,8 @@ export type UserCreateWithoutNotificationsInput = {
   professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
   documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentCreateNestedOneWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -1369,6 +1467,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -1405,6 +1505,8 @@ export type UserUpdateWithoutNotificationsInput = {
   professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -1425,6 +1527,216 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
+}
+
+export type UserCreateWithoutDeliberationSessionsInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  school?: Prisma.SchoolCreateNestedOneWithoutUsersInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
+}
+
+export type UserUncheckedCreateWithoutDeliberationSessionsInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  schoolId?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
+}
+
+export type UserCreateOrConnectWithoutDeliberationSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDeliberationSessionsInput, Prisma.UserUncheckedCreateWithoutDeliberationSessionsInput>
+}
+
+export type UserCreateWithoutDeliberationSessionsValidéesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  school?: Prisma.SchoolCreateNestedOneWithoutUsersInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutDeliberationSessionsValidéesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  schoolId?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutDeliberationSessionsValidéesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDeliberationSessionsValidéesInput, Prisma.UserUncheckedCreateWithoutDeliberationSessionsValidéesInput>
+}
+
+export type UserUpsertWithoutDeliberationSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDeliberationSessionsInput, Prisma.UserUncheckedUpdateWithoutDeliberationSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDeliberationSessionsInput, Prisma.UserUncheckedCreateWithoutDeliberationSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDeliberationSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDeliberationSessionsInput, Prisma.UserUncheckedUpdateWithoutDeliberationSessionsInput>
+}
+
+export type UserUpdateWithoutDeliberationSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneWithoutUsersNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDeliberationSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
+}
+
+export type UserUpsertWithoutDeliberationSessionsValidéesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDeliberationSessionsValidéesInput, Prisma.UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDeliberationSessionsValidéesInput, Prisma.UserUncheckedCreateWithoutDeliberationSessionsValidéesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDeliberationSessionsValidéesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDeliberationSessionsValidéesInput, Prisma.UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput>
+}
+
+export type UserUpdateWithoutDeliberationSessionsValidéesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneWithoutUsersNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateManySchoolInput = {
@@ -1458,6 +1770,8 @@ export type UserUpdateWithoutSchoolInput = {
   documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSchoolInput = {
@@ -1478,6 +1792,8 @@ export type UserUncheckedUpdateWithoutSchoolInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutSchoolInput = {
@@ -1504,6 +1820,8 @@ export type UserCountOutputType = {
   notes: number
   documents: number
   notifications: number
+  deliberationSessions: number
+  deliberationSessionsValidées: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1512,6 +1830,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   notes?: boolean | UserCountOutputTypeCountNotesArgs
   documents?: boolean | UserCountOutputTypeCountDocumentsArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+  deliberationSessions?: boolean | UserCountOutputTypeCountDeliberationSessionsArgs
+  deliberationSessionsValidées?: boolean | UserCountOutputTypeCountDeliberationSessionsValidéesArgs
 }
 
 /**
@@ -1559,6 +1879,20 @@ export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.NotificationWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDeliberationSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DeliberationSessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDeliberationSessionsValidéesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DeliberationSessionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1580,6 +1914,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   documents?: boolean | Prisma.User$documentsArgs<ExtArgs>
   parent?: boolean | Prisma.User$parentArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  deliberationSessions?: boolean | Prisma.User$deliberationSessionsArgs<ExtArgs>
+  deliberationSessionsValidées?: boolean | Prisma.User$deliberationSessionsValidéesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1637,6 +1973,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   documents?: boolean | Prisma.User$documentsArgs<ExtArgs>
   parent?: boolean | Prisma.User$parentArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  deliberationSessions?: boolean | Prisma.User$deliberationSessionsArgs<ExtArgs>
+  deliberationSessionsValidées?: boolean | Prisma.User$deliberationSessionsValidéesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1657,6 +1995,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     documents: Prisma.$DocumentPayload<ExtArgs>[]
     parent: Prisma.$ParentPayload<ExtArgs> | null
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    deliberationSessions: Prisma.$DeliberationSessionPayload<ExtArgs>[]
+    deliberationSessionsValidées: Prisma.$DeliberationSessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2072,6 +2412,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   documents<T extends Prisma.User$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   parent<T extends Prisma.User$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$parentArgs<ExtArgs>>): Prisma.Prisma__ParentClient<runtime.Types.Result.GetResult<Prisma.$ParentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deliberationSessions<T extends Prisma.User$deliberationSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deliberationSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeliberationSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deliberationSessionsValidées<T extends Prisma.User$deliberationSessionsValidéesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deliberationSessionsValidéesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeliberationSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2687,6 +3029,54 @@ export type User$notificationsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.deliberationSessions
+ */
+export type User$deliberationSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DeliberationSession
+   */
+  select?: Prisma.DeliberationSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DeliberationSession
+   */
+  omit?: Prisma.DeliberationSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeliberationSessionInclude<ExtArgs> | null
+  where?: Prisma.DeliberationSessionWhereInput
+  orderBy?: Prisma.DeliberationSessionOrderByWithRelationInput | Prisma.DeliberationSessionOrderByWithRelationInput[]
+  cursor?: Prisma.DeliberationSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DeliberationSessionScalarFieldEnum | Prisma.DeliberationSessionScalarFieldEnum[]
+}
+
+/**
+ * User.deliberationSessionsValidées
+ */
+export type User$deliberationSessionsValidéesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DeliberationSession
+   */
+  select?: Prisma.DeliberationSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DeliberationSession
+   */
+  omit?: Prisma.DeliberationSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeliberationSessionInclude<ExtArgs> | null
+  where?: Prisma.DeliberationSessionWhereInput
+  orderBy?: Prisma.DeliberationSessionOrderByWithRelationInput | Prisma.DeliberationSessionOrderByWithRelationInput[]
+  cursor?: Prisma.DeliberationSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DeliberationSessionScalarFieldEnum | Prisma.DeliberationSessionScalarFieldEnum[]
 }
 
 /**

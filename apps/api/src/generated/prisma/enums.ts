@@ -101,3 +101,43 @@ export const TypeQuestion = {
 } as const
 
 export type TypeQuestion = (typeof TypeQuestion)[keyof typeof TypeQuestion]
+
+
+export const DeliberationStatut = {
+  BROUILLON: 'BROUILLON',
+  VALIDEE: 'VALIDEE'
+} as const
+
+export type DeliberationStatut = (typeof DeliberationStatut)[keyof typeof DeliberationStatut]
+
+
+export const DecisionPassage = {
+  PASSE: 'PASSE',
+  REDOUBLE: 'REDOUBLE',
+  ORIENTE: 'ORIENTE',
+  EXCLU: 'EXCLU'
+} as const
+
+export type DecisionPassage = (typeof DecisionPassage)[keyof typeof DecisionPassage]
+
+
+export const MentionDeliberation = {
+  AUCUNE: 'AUCUNE',
+  ENCOURAGEMENT: 'ENCOURAGEMENT',
+  TABLEAU_HONNEUR: 'TABLEAU_HONNEUR',
+  FELICITATIONS: 'FELICITATIONS'
+} as const
+
+export type MentionDeliberation = (typeof MentionDeliberation)[keyof typeof MentionDeliberation]
+
+
+export const AvertissementDeliberation = {
+  AUCUN: 'AUCUN',
+  TRAVAIL: 'TRAVAIL',
+  CONDUITE: 'CONDUITE',
+  RETARDS: 'RETARDS',
+  DISCIPLINE: 'DISCIPLINE',
+  GENERAL: 'GENERAL'
+} as const
+
+export type AvertissementDeliberation = (typeof AvertissementDeliberation)[keyof typeof AvertissementDeliberation]

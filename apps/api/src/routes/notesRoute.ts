@@ -13,6 +13,13 @@ import {
   updateClasseNote,
   getCLassementClasse,
 } from "../controllers/noteController.js";
+import {
+  createDeliberationSession,
+  getClasseDeliberation,
+  updateDeliberationSession,
+  upsertDeliberationDecisions,
+  validateDeliberationSession,
+} from "../controllers/deliberationController.js";
 
 const UPLOAD_DIR = "uploads/feuilles";
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
@@ -109,6 +116,61 @@ router.get(
   authenticate,
   authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.PROF, Role.USER),
   getCLassementClasse,
+);
+
+/**
+ * GET /api/classes/:classeId/notes/deliberations
+ * Consultation : USER, PROF, SUDO_ADMIN, ADMIN
+ */
+router.get(
+  "/deliberations",
+  authenticate,
+  authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.PROF, Role.USER),
+  getClasseDeliberation,
+);
+
+/**
+ * POST /api/classes/:classeId/notes/deliberations
+ * Modification : USER, ADMIN, SUDO_ADMIN
+ */
+router.post(
+  "/deliberations",
+  authenticate,
+  authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.USER),
+  createDeliberationSession,
+);
+
+/**
+ * PUT /api/classes/:classeId/notes/deliberations/:sessionId
+ * Modification : USER, ADMIN, SUDO_ADMIN
+ */
+router.put(
+  "/deliberations/:sessionId",
+  authenticate,
+  authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.USER),
+  updateDeliberationSession,
+);
+
+/**
+ * PUT /api/classes/:classeId/notes/deliberations/:sessionId/decisions
+ * Modification : USER, ADMIN, SUDO_ADMIN
+ */
+router.put(
+  "/deliberations/:sessionId/decisions",
+  authenticate,
+  authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.USER),
+  upsertDeliberationDecisions,
+);
+
+/**
+ * POST /api/classes/:classeId/notes/deliberations/:sessionId/validate
+ * Validation finale : USER, ADMIN, SUDO_ADMIN
+ */
+router.post(
+  "/deliberations/:sessionId/validate",
+  authenticate,
+  authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.USER),
+  validateDeliberationSession,
 );
 
 export default router;

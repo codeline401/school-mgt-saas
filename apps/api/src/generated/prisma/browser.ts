@@ -150,3 +150,13 @@ export type Reponse = Prisma.ReponseModel
  * - seuilPassable   : note minimale poue la couleur "Passable" (défaut : 10)
  */
 export type BulletinTemplate = Prisma.BulletinTemplateModel
+/**
+ * Model DeliberationSession
+ * 
+ */
+export type DeliberationSession = Prisma.DeliberationSessionModel
+/**
+ * Model DeliberationDecision
+ * 
+ */
+export type DeliberationDecision = Prisma.DeliberationDecisionModel
