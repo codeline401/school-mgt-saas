@@ -206,6 +206,7 @@ export type MatiereWhereInput = {
   creneauHoraires?: Prisma.CreneauHoraireListRelationFilter
   cahierTextes?: Prisma.CahierTexteListRelationFilter
   quizzes?: Prisma.QuizListRelationFilter
+  examenSessions?: Prisma.ExamenSessionListRelationFilter
 }
 
 export type MatiereOrderByWithRelationInput = {
@@ -224,6 +225,7 @@ export type MatiereOrderByWithRelationInput = {
   creneauHoraires?: Prisma.CreneauHoraireOrderByRelationAggregateInput
   cahierTextes?: Prisma.CahierTexteOrderByRelationAggregateInput
   quizzes?: Prisma.QuizOrderByRelationAggregateInput
+  examenSessions?: Prisma.ExamenSessionOrderByRelationAggregateInput
 }
 
 export type MatiereWhereUniqueInput = Prisma.AtLeast<{
@@ -246,6 +248,7 @@ export type MatiereWhereUniqueInput = Prisma.AtLeast<{
   creneauHoraires?: Prisma.CreneauHoraireListRelationFilter
   cahierTextes?: Prisma.CahierTexteListRelationFilter
   quizzes?: Prisma.QuizListRelationFilter
+  examenSessions?: Prisma.ExamenSessionListRelationFilter
 }, "id" | "classeId_nom">
 
 export type MatiereOrderByWithAggregationInput = {
@@ -288,6 +291,7 @@ export type MatiereCreateInput = {
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereUncheckedCreateInput = {
@@ -304,6 +308,7 @@ export type MatiereUncheckedCreateInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereUpdateInput = {
@@ -320,6 +325,7 @@ export type MatiereUpdateInput = {
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateInput = {
@@ -336,6 +342,7 @@ export type MatiereUncheckedUpdateInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereCreateManyInput = {
@@ -621,6 +628,22 @@ export type MatiereUpdateOneWithoutQuizzesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MatiereUpdateToOneWithWhereWithoutQuizzesInput, Prisma.MatiereUpdateWithoutQuizzesInput>, Prisma.MatiereUncheckedUpdateWithoutQuizzesInput>
 }
 
+export type MatiereCreateNestedOneWithoutExamenSessionsInput = {
+  create?: Prisma.XOR<Prisma.MatiereCreateWithoutExamenSessionsInput, Prisma.MatiereUncheckedCreateWithoutExamenSessionsInput>
+  connectOrCreate?: Prisma.MatiereCreateOrConnectWithoutExamenSessionsInput
+  connect?: Prisma.MatiereWhereUniqueInput
+}
+
+export type MatiereUpdateOneWithoutExamenSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.MatiereCreateWithoutExamenSessionsInput, Prisma.MatiereUncheckedCreateWithoutExamenSessionsInput>
+  connectOrCreate?: Prisma.MatiereCreateOrConnectWithoutExamenSessionsInput
+  upsert?: Prisma.MatiereUpsertWithoutExamenSessionsInput
+  disconnect?: Prisma.MatiereWhereInput | boolean
+  delete?: Prisma.MatiereWhereInput | boolean
+  connect?: Prisma.MatiereWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MatiereUpdateToOneWithWhereWithoutExamenSessionsInput, Prisma.MatiereUpdateWithoutExamenSessionsInput>, Prisma.MatiereUncheckedUpdateWithoutExamenSessionsInput>
+}
+
 export type MatiereCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -634,6 +657,7 @@ export type MatiereCreateWithoutSchoolInput = {
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereUncheckedCreateWithoutSchoolInput = {
@@ -649,6 +673,7 @@ export type MatiereUncheckedCreateWithoutSchoolInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereCreateOrConnectWithoutSchoolInput = {
@@ -703,6 +728,7 @@ export type MatiereCreateWithoutClasseInput = {
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereUncheckedCreateWithoutClasseInput = {
@@ -718,6 +744,7 @@ export type MatiereUncheckedCreateWithoutClasseInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereCreateOrConnectWithoutClasseInput = {
@@ -759,6 +786,7 @@ export type MatiereCreateWithoutProfsInput = {
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereUncheckedCreateWithoutProfsInput = {
@@ -774,6 +802,7 @@ export type MatiereUncheckedCreateWithoutProfsInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereCreateOrConnectWithoutProfsInput = {
@@ -810,6 +839,7 @@ export type MatiereCreateWithoutNotesInput = {
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereUncheckedCreateWithoutNotesInput = {
@@ -825,6 +855,7 @@ export type MatiereUncheckedCreateWithoutNotesInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereCreateOrConnectWithoutNotesInput = {
@@ -856,6 +887,7 @@ export type MatiereUpdateWithoutNotesInput = {
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateWithoutNotesInput = {
@@ -871,6 +903,7 @@ export type MatiereUncheckedUpdateWithoutNotesInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereCreateWithoutDocumentsInput = {
@@ -886,6 +919,7 @@ export type MatiereCreateWithoutDocumentsInput = {
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereUncheckedCreateWithoutDocumentsInput = {
@@ -901,6 +935,7 @@ export type MatiereUncheckedCreateWithoutDocumentsInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereCreateOrConnectWithoutDocumentsInput = {
@@ -932,6 +967,7 @@ export type MatiereUpdateWithoutDocumentsInput = {
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateWithoutDocumentsInput = {
@@ -947,6 +983,7 @@ export type MatiereUncheckedUpdateWithoutDocumentsInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereCreateWithoutCreneauHorairesInput = {
@@ -962,6 +999,7 @@ export type MatiereCreateWithoutCreneauHorairesInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereUncheckedCreateWithoutCreneauHorairesInput = {
@@ -977,6 +1015,7 @@ export type MatiereUncheckedCreateWithoutCreneauHorairesInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereCreateOrConnectWithoutCreneauHorairesInput = {
@@ -1008,6 +1047,7 @@ export type MatiereUpdateWithoutCreneauHorairesInput = {
   documents?: Prisma.DocumentUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateWithoutCreneauHorairesInput = {
@@ -1023,6 +1063,7 @@ export type MatiereUncheckedUpdateWithoutCreneauHorairesInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereCreateWithoutCahierTextesInput = {
@@ -1038,6 +1079,7 @@ export type MatiereCreateWithoutCahierTextesInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutMatiereInput
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereUncheckedCreateWithoutCahierTextesInput = {
@@ -1053,6 +1095,7 @@ export type MatiereUncheckedCreateWithoutCahierTextesInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatiereInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutMatiereInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereCreateOrConnectWithoutCahierTextesInput = {
@@ -1084,6 +1127,7 @@ export type MatiereUpdateWithoutCahierTextesInput = {
   documents?: Prisma.DocumentUpdateManyWithoutMatiereNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateWithoutCahierTextesInput = {
@@ -1099,6 +1143,7 @@ export type MatiereUncheckedUpdateWithoutCahierTextesInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatiereNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereCreateWithoutQuizzesInput = {
@@ -1114,6 +1159,7 @@ export type MatiereCreateWithoutQuizzesInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutMatiereInput
   creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereUncheckedCreateWithoutQuizzesInput = {
@@ -1129,6 +1175,7 @@ export type MatiereUncheckedCreateWithoutQuizzesInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatiereInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutMatiereInput
   cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutMatiereInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutMatiereInput
 }
 
 export type MatiereCreateOrConnectWithoutQuizzesInput = {
@@ -1160,6 +1207,7 @@ export type MatiereUpdateWithoutQuizzesInput = {
   documents?: Prisma.DocumentUpdateManyWithoutMatiereNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateWithoutQuizzesInput = {
@@ -1175,6 +1223,87 @@ export type MatiereUncheckedUpdateWithoutQuizzesInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatiereNestedInput
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutMatiereNestedInput
+}
+
+export type MatiereCreateWithoutExamenSessionsInput = {
+  id?: string
+  nom: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  classe: Prisma.ClasseCreateNestedOneWithoutMatieresInput
+  school: Prisma.SchoolCreateNestedOneWithoutMatieresInput
+  notes?: Prisma.NoteCreateNestedManyWithoutMatiereInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutMatieresInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutMatiereInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutMatiereInput
+  cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutMatiereInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutMatiereInput
+}
+
+export type MatiereUncheckedCreateWithoutExamenSessionsInput = {
+  id?: string
+  nom: string
+  description?: string | null
+  classeId: string
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutMatiereInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutMatieresInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatiereInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutMatiereInput
+  cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutMatiereInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutMatiereInput
+}
+
+export type MatiereCreateOrConnectWithoutExamenSessionsInput = {
+  where: Prisma.MatiereWhereUniqueInput
+  create: Prisma.XOR<Prisma.MatiereCreateWithoutExamenSessionsInput, Prisma.MatiereUncheckedCreateWithoutExamenSessionsInput>
+}
+
+export type MatiereUpsertWithoutExamenSessionsInput = {
+  update: Prisma.XOR<Prisma.MatiereUpdateWithoutExamenSessionsInput, Prisma.MatiereUncheckedUpdateWithoutExamenSessionsInput>
+  create: Prisma.XOR<Prisma.MatiereCreateWithoutExamenSessionsInput, Prisma.MatiereUncheckedCreateWithoutExamenSessionsInput>
+  where?: Prisma.MatiereWhereInput
+}
+
+export type MatiereUpdateToOneWithWhereWithoutExamenSessionsInput = {
+  where?: Prisma.MatiereWhereInput
+  data: Prisma.XOR<Prisma.MatiereUpdateWithoutExamenSessionsInput, Prisma.MatiereUncheckedUpdateWithoutExamenSessionsInput>
+}
+
+export type MatiereUpdateWithoutExamenSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classe?: Prisma.ClasseUpdateOneRequiredWithoutMatieresNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutMatieresNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutMatiereNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutMatieresNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutMatiereNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutMatiereNestedInput
+  cahierTextes?: Prisma.CahierTexteUpdateManyWithoutMatiereNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutMatiereNestedInput
+}
+
+export type MatiereUncheckedUpdateWithoutExamenSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutMatiereNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutMatieresNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatiereNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutMatiereNestedInput
+  cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutMatiereNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereCreateManySchoolInput = {
@@ -1199,6 +1328,7 @@ export type MatiereUpdateWithoutSchoolInput = {
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateWithoutSchoolInput = {
@@ -1214,6 +1344,7 @@ export type MatiereUncheckedUpdateWithoutSchoolInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateManyWithoutSchoolInput = {
@@ -1247,6 +1378,7 @@ export type MatiereUpdateWithoutClasseInput = {
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateWithoutClasseInput = {
@@ -1262,6 +1394,7 @@ export type MatiereUncheckedUpdateWithoutClasseInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateManyWithoutClasseInput = {
@@ -1286,6 +1419,7 @@ export type MatiereUpdateWithoutProfsInput = {
   creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateWithoutProfsInput = {
@@ -1301,6 +1435,7 @@ export type MatiereUncheckedUpdateWithoutProfsInput = {
   creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutMatiereNestedInput
   cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutMatiereNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutMatiereNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutMatiereNestedInput
 }
 
 export type MatiereUncheckedUpdateManyWithoutProfsInput = {
@@ -1325,6 +1460,7 @@ export type MatiereCountOutputType = {
   creneauHoraires: number
   cahierTextes: number
   quizzes: number
+  examenSessions: number
 }
 
 export type MatiereCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1334,6 +1470,7 @@ export type MatiereCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   creneauHoraires?: boolean | MatiereCountOutputTypeCountCreneauHorairesArgs
   cahierTextes?: boolean | MatiereCountOutputTypeCountCahierTextesArgs
   quizzes?: boolean | MatiereCountOutputTypeCountQuizzesArgs
+  examenSessions?: boolean | MatiereCountOutputTypeCountExamenSessionsArgs
 }
 
 /**
@@ -1388,6 +1525,13 @@ export type MatiereCountOutputTypeCountQuizzesArgs<ExtArgs extends runtime.Types
   where?: Prisma.QuizWhereInput
 }
 
+/**
+ * MatiereCountOutputType without action
+ */
+export type MatiereCountOutputTypeCountExamenSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExamenSessionWhereInput
+}
+
 
 export type MatiereSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1405,6 +1549,7 @@ export type MatiereSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   creneauHoraires?: boolean | Prisma.Matiere$creneauHorairesArgs<ExtArgs>
   cahierTextes?: boolean | Prisma.Matiere$cahierTextesArgs<ExtArgs>
   quizzes?: boolean | Prisma.Matiere$quizzesArgs<ExtArgs>
+  examenSessions?: boolean | Prisma.Matiere$examenSessionsArgs<ExtArgs>
   _count?: boolean | Prisma.MatiereCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["matiere"]>
 
@@ -1452,6 +1597,7 @@ export type MatiereInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   creneauHoraires?: boolean | Prisma.Matiere$creneauHorairesArgs<ExtArgs>
   cahierTextes?: boolean | Prisma.Matiere$cahierTextesArgs<ExtArgs>
   quizzes?: boolean | Prisma.Matiere$quizzesArgs<ExtArgs>
+  examenSessions?: boolean | Prisma.Matiere$examenSessionsArgs<ExtArgs>
   _count?: boolean | Prisma.MatiereCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MatiereIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1474,6 +1620,7 @@ export type $MatierePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     creneauHoraires: Prisma.$CreneauHorairePayload<ExtArgs>[]
     cahierTextes: Prisma.$CahierTextePayload<ExtArgs>[]
     quizzes: Prisma.$QuizPayload<ExtArgs>[]
+    examenSessions: Prisma.$ExamenSessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1885,6 +2032,7 @@ export interface Prisma__MatiereClient<T, Null = never, ExtArgs extends runtime.
   creneauHoraires<T extends Prisma.Matiere$creneauHorairesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matiere$creneauHorairesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CreneauHorairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cahierTextes<T extends Prisma.Matiere$cahierTextesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matiere$cahierTextesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CahierTextePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quizzes<T extends Prisma.Matiere$quizzesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matiere$quizzesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuizPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  examenSessions<T extends Prisma.Matiere$examenSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matiere$examenSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExamenSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2463,6 +2611,30 @@ export type Matiere$quizzesArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.QuizScalarFieldEnum | Prisma.QuizScalarFieldEnum[]
+}
+
+/**
+ * Matiere.examenSessions
+ */
+export type Matiere$examenSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExamenSession
+   */
+  select?: Prisma.ExamenSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExamenSession
+   */
+  omit?: Prisma.ExamenSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExamenSessionInclude<ExtArgs> | null
+  where?: Prisma.ExamenSessionWhereInput
+  orderBy?: Prisma.ExamenSessionOrderByWithRelationInput | Prisma.ExamenSessionOrderByWithRelationInput[]
+  cursor?: Prisma.ExamenSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExamenSessionScalarFieldEnum | Prisma.ExamenSessionScalarFieldEnum[]
 }
 
 /**

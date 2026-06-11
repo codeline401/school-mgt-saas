@@ -141,3 +141,14 @@ export const AvertissementDeliberation = {
 } as const
 
 export type AvertissementDeliberation = (typeof AvertissementDeliberation)[keyof typeof AvertissementDeliberation]
+
+
+export const ExamenStatut = {
+  PLANIFIE: 'PLANIFIE',
+  EN_COURS: 'EN_COURS',
+  TERMINE: 'TERMINE',
+  REPORTE: 'REPORTE',
+  ANNULE: 'ANNULE'
+} as const
+
+export type ExamenStatut = (typeof ExamenStatut)[keyof typeof ExamenStatut]
