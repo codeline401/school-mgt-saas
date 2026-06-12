@@ -1,49 +1,22 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
-    "rootDir": "../../", // Étend la racine pour inclure les fichiers nécessaires
+    "rootDir": "./src",
     "outDir": "./dist",
 
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "esnext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "target": "esnext",
-    "types": ["node"],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
 
-    // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
     "strict": true,
-    "jsx": "react-jsx",
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+
+    "sourceMap": true,
+    "declaration": false,
+
     "paths": {
-      "@school-mgt/types": ["../../packages/types/"] // Alias pour importer les types depuis le package local
+      "@school-mgt/types": ["../../packages/types"]
     }
   },
-  "include": ["src/**/*", "../../packages/types/**/*"] // Inclut les types externes
+  "include": ["src/**/*"]
 }

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { prisma } from "../lib/prisma";
-import { createCahierTexteSchema } from "../schemas/cahierDeTexteSchema";
+import { prisma } from "../lib/prisma.js";
+import { createCahierTexteSchema } from "../schemas/cahierDeTexteSchema.js";
 import { ZodError } from "zod";
 
 // --- HELPER : trouve le professeur lié au User connecté ------------------------

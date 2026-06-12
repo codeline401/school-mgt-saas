@@ -1,10 +1,10 @@
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 import { Request, Response } from "express";
 import {
   createQuizSchema,
   questionSchema,
   submitQuizSchema,
-} from "../schemas/quizSchema";
+} from "../schemas/quizSchema.js";
 import { ZodError } from "zod";
 
 async function getProfRecord(userId: string) {

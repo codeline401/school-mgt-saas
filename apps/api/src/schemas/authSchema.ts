@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Role } from "../generated/prisma/enums";
+import { Role } from "../generated/prisma/enums.js";
 
 // Schema d'inscription pour la validation des données d'inscription et de connexion
 export const registerSchema = z.object({

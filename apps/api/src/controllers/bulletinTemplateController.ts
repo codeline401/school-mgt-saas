@@ -15,7 +15,7 @@
  */
 
 import { Request, Response } from "express";
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 import { Prisma } from "../generated/prisma/client.js";
 import type { BulletinTemplateConfig } from "@school-mgt/types";
 

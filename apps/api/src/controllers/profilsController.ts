@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { ZodError } from "zod"; // Import de ZodError pour la gestion des erreurs de validation
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 import {
   createParentSchema,
   updateEleveProfilSchema,
   updateParentProfilSchema,
   updateProfesseurProfilSchema,
-} from "../schemas/profilSchema";
+} from "../schemas/profilSchema.js";
 
 // ===================================================================
 // HELPERS

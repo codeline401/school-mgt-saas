@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { authenticate, authorizeRoles } from "../middlewares/authMiddleware";
-import { Role } from "../generated/prisma/enums";
-import { createSchool, getAllSchools } from "../controllers/schoolController";
+import { authenticate, authorizeRoles } from "../middlewares/authMiddleware.js";
+import { Role } from "../generated/prisma/enums.js";
+import { createSchool, getAllSchools } from "../controllers/schoolController.js";
 
 const router = Router(); // Création d'un routeur Express
 

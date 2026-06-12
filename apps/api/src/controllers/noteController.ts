@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import fs from "fs"; // Importation du module fs pour la gestion des fichiers
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 import { createNoteSchema, updateNoteSchema } from "../schemas/noteSchema.js";
 import { TypeNote } from "../generated/prisma/enums.js";
 import { ZodError } from "zod";
