@@ -27,9 +27,10 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H srv1725405.hstgr.cloud >> ~/.ssh/known_hosts
     
-      - name: Test SSH
-        run: ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes root@srv1725405.hstgr.cloud "echo OK"
-
+      - name: Debug SSH connection
+        run: |
+          ssh -vvv -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes root@srv1725405.hstgr.cloud "echo OK"
+          
       - name: Sync files to VPS
         run: |
           rsync -az --delete \
