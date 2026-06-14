@@ -3,7 +3,8 @@ name: Deploy frontend to VPS
 on:
   push:
     branches:
-      - develop/core/devOps-ready-vps
+      - develop
+  workflow_dispatch:
 
 jobs:
   deploy:
