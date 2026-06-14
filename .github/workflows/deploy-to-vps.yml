@@ -23,9 +23,11 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.APIVPSFUTURECOLE }}" | tr -d '\r' > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H srv1725405.hstgr.cloud >> ~/.ssh/known_hosts
+          cat << 'EOF' > ~/.ssh/id_ed25519
+          ${{ secrets.APIVPSFUTURECOLE }}
+          EOF
+            chmod 600 ~/.ssh/id_ed25519
+            ssh-keyscan -H srv1725405.hstgr.cloud >> ~/.ssh/known_hosts
     
       - name: Debug SSH connection
         run: |
