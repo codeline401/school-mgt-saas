@@ -31,7 +31,7 @@ jobs:
     
       - name: Debug SSH connection
         run: |
-          ssh -vvv -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes root@srv1725405.hstgr.cloud "echo OK"
+          ssh -vvv -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes ubuntu@srv1725405.hstgr.cloud "echo OK"
           
       - name: Sync files to VPS
         run: |
