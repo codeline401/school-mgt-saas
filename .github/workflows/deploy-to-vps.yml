@@ -23,17 +23,16 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          printf '%s' "${{ secrets.APIVPSFUTURECOLE }}" | tr -d '\r' > ~/.ssh/id_ed25519
+          printf '%s' "${{ secrets.APIVPSFUTURECOLE }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keygen -lf ~/.ssh/id_ed25519
           ssh-keyscan -H srv1725405.hstgr.cloud >> ~/.ssh/known_hosts
-
-      - name: Test SSH
-        run: ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes root@srv1725405.hstgr.cloud "echo OK"
       
+      - name: Test SSH
+        run: ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes root@srv1725405.hstgr.cloud "echo OK"      
+            
       - name: Sync files to VPS
         run: |
-          rsync -az --delete \
+                rsync -az --delete \
             -e "ssh -i ~/.ssh/id_ed25519" \
             apps/web/dist/ \
             root@srv1725405.hstgr.cloud:/var/www/school-web/
