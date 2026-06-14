@@ -3,7 +3,7 @@ name: Deploy frontend to VPS
 on:
   push:
     branches:
-      - main
+      - develop/core/devOps-ready-vps
 
 jobs:
   deploy:
