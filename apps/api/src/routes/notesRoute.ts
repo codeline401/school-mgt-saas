@@ -30,7 +30,7 @@ import {
   getExamenSalles,
   getExamenSurveillants,
   updateExamenStatut,
-  updateExmaneSession,
+  updateExamenSession,
 } from "../controllers/examenController.js";
 
 const UPLOAD_DIR = "uploads/feuilles";
@@ -259,7 +259,7 @@ router.put(
   "/examens/:sessionId",
   authenticate,
   authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.PROF),
-  updateExmaneSession,
+  updateExamenSession,
 );
 
 /**

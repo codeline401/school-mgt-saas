@@ -18,7 +18,7 @@ export function isAuthorizedForSchool(
  * ROles autorisés à modifier les sous-modules Notes avancés
  */
 export function canEditNotesAdvanced(role: string): boolean {
-  return role === "ADMIN" || role === "SUDO_ADMIN" || role === "PROF";
+  return role === "ADMIN" || role === "SUDO_ADMIN" || role === "USER";
 }
 
 /**

@@ -300,7 +300,7 @@ export const createExamenPlanning = async (req: Request, res: Response) => {
  * PUT /api/classes/:classeId/notes/examens/:sessionId
  * Met à jour une épreuve d'examen.
  */
-export const updateExmaneSession = async (req: Request, res: Response) => {
+export const updateExamenSession = async (req: Request, res: Response) => {
   try {
     if (!canEditNotesAdvanced(req.user!.role)) return forbiddenAcces(res);
 

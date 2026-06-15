@@ -577,9 +577,10 @@ export default function GestionExamensTab() {
                             <td>
                               {(item.surveillants ?? []).length > 0
                                 ? (item.surveillants ?? [])
-                                    .map(
-                                      (sv) =>
-                                        `${sv.user?.prenom} ${sv.user?.nom}`,
+                                    .map((sv) =>
+                                      sv.user
+                                        ? `${sv.user.prenom} ${sv.user.nom}`
+                                        : "(Surveillant inconnu)",
                                     )
                                     .join(", ")
                                 : "Aucun"}
@@ -663,7 +664,8 @@ export default function GestionExamensTab() {
                             </div>
                           </div>
                         ))}
-                        {selectedSession.incidents?.length === 0 && (
+                        {(!selectedSession.incidents ||
+                          selectedSession.incidents.length === 0) && (
                           <p className="text-sm text-base-content/50">
                             Aucun incident enregistré.
                           </p>

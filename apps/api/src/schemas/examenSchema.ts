@@ -7,22 +7,27 @@ export const createExamenSalleSchema = z.object({
   location: z.string().trim().optional(),
 });
 
-export const createExamenSessionSchema = z.object({
-  titre: z.string().trim().min(1, "Le titre de l'examen est requis"),
-  description: z.string().trim().optional(),
-  matiereId: z.string().uuid("Matiere invalide").optional(),
-  salleId: z.string().uuid("Salle invalide").optional(),
-  dateExamen: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "La date doit être au format YYYY-MM-DD"),
-  heureDebut: z
-    .string()
-    .regex(/^\d{2}:\d{2}$/, "L'heure de début doit être au format HH:mm"),
-  heureFin: z
-    .string()
-    .regex(/^\d{2}:\d{2}$/, "L'heure de fin doit être au format HH:mm"),
-  surveillantUserIds: z.array(z.string().uuid()).optional(),
-});
+export const createExamenSessionSchema = z
+  .object({
+    titre: z.string().trim().min(1, "Le titre de l'examen est requis"),
+    description: z.string().trim().optional(),
+    matiereId: z.string().uuid("Matiere invalide").optional(),
+    salleId: z.string().uuid("Salle invalide").optional(),
+    dateExamen: z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "La date doit être au format YYYY-MM-DD"),
+    heureDebut: z
+      .string()
+      .regex(/^\d{2}:\d{2}$/, "L'heure de début doit être au format HH:mm"),
+    heureFin: z
+      .string()
+      .regex(/^\d{2}:\d{2}$/, "L'heure de fin doit être au format HH:mm"),
+    surveillantUserIds: z.array(z.string().uuid()).optional(),
+  })
+  .refine((data) => data.heureDebut < data.heureFin, {
+    message: "L'heure de fin doit être postérieure à l'heure de début",
+    path: ["heureFin"],
+  });
 
 export const updateExamenSessionSchema = createExamenSessionSchema.partial();
 
