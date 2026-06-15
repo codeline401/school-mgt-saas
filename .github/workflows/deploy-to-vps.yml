@@ -37,7 +37,13 @@ jobs:
 
       - name: Test SSH
         run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.APIVPSFUTURECOLE }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ls -la ~/.ssh
+
           ssh -vvv -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes "$VPS_USER@$VPS_HOST" "echo OK"
+
       
       - name: Sync files to VPS
         run: |
