@@ -3,7 +3,7 @@ import {
   DecisionPassage,
   MentionDeliberation,
   AvertissementDeliberation,
-} from "../generated/prisma/enums";
+} from "../generated/prisma/enums.js";
 
 export const createSessionsSchema = z.object({
   periodeLabel: z.string().min(1, "Le label de la période est requis"),

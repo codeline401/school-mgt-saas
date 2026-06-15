@@ -4,14 +4,14 @@ import {
   DeliberationStatut,
   MentionDeliberation,
   Role,
-} from "../generated/prisma/enums";
+} from "../generated/prisma/enums.js";
 import { Request, Response } from "express";
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 import {
   createSessionsSchema,
   updateSessionsSchema,
   upsertDecisionSchema,
-} from "../schemas/deliberationSchema";
+} from "../schemas/deliberationSchema.js";
 import { ZodError } from "zod";
 
 function isAuthorizedForSchool(
@@ -41,7 +41,7 @@ function getTauxReussite(
   return round2((succes / decision.length) * 100); // Taux de réussite en pourcentage
 }
 
-export const getClasseDeliberation = async (req: Request, res: Response) => {
+export const getClasseDeliberation = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { classeId } = req.params as { classeId: string }; // Récupération de l'ID de la classe depuis les paramètres de la requête
 
@@ -84,7 +84,7 @@ export const getClasseDeliberation = async (req: Request, res: Response) => {
     }));
 
     return res.status(200).json(result); // Renvoi de la liste des sessions de délibération avec les taux de réussite
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(
       "Erreur lors de la récupération des sessions de délibération :",
       err,
@@ -96,7 +96,7 @@ export const getClasseDeliberation = async (req: Request, res: Response) => {
 export const createDeliberationSession = async (
   req: Request,
   res: Response,
-) => {
+): Promise<Response> => {
   try {
     if (!canEdit(req.user!.role)) {
       return res.status(403).json({ message: "Accès refusé" }); // Si l'utilisateur n'est pas autorisé à créer une session de délibération, renvoyer une erreur 403
@@ -133,7 +133,7 @@ export const createDeliberationSession = async (
     });
 
     return res.status(201).json(newSession); // Renvoi de la session de délibération nouvellement créée
-  } catch (err) {
+  } catch (err: unknown) {
     if (err instanceof ZodError) {
       return res
         .status(400)
@@ -150,7 +150,7 @@ export const createDeliberationSession = async (
 export const updateDeliberationSession = async (
   req: Request,
   res: Response,
-) => {
+): Promise<Response> => {
   try {
     if (!canEdit(req.user!.role)) {
       return res.status(403).json({ message: "Accès refusé" }); // Si l'utilisateur n'est pas autorisé à modifier une session de délibération, renvoyer une erreur 403
@@ -204,7 +204,7 @@ export const updateDeliberationSession = async (
     });
 
     return res.status(200).json(updatedSession); // Renvoi de la session de délibération mise à jour
-  } catch (err) {
+  } catch (err: unknown) {
     if (err instanceof ZodError) {
       return res
         .status(400)
@@ -221,7 +221,7 @@ export const updateDeliberationSession = async (
 export const upsertDeliberationDecisions = async (
   req: Request,
   res: Response,
-) => {
+): Promise<Response> => {
   try {
     if (!canEdit(req.user!.role)) {
       return res.status(403).json({ message: "Accès refusé" }); // Si l'utilisateur n'est pas autorisé à modifier les décisions de délibération, renvoyer une erreur 403
@@ -307,7 +307,7 @@ export const upsertDeliberationDecisions = async (
     });
 
     return res.status(200).json(refreshed); // Renvoi de la session de délibération avec les décisions mises à jour
-  } catch (err) {
+  } catch (err: unknown) {
     if (err instanceof ZodError) {
       return res
         .status(400)
@@ -321,7 +321,7 @@ export const upsertDeliberationDecisions = async (
 export const validateDeliberationSession = async (
   req: Request,
   res: Response,
-) => {
+): Promise<Response> => {
   try {
     if (!canEdit(req.user!.role)) {
       return res.status(403).json({ message: "Accès refusé" }); // Si l'utilisateur n'est pas autorisé à valider une session de délibération, renvoyer une erreur 403
@@ -382,7 +382,7 @@ export const validateDeliberationSession = async (
     return res
       .status(200)
       .json({ session: updatedSession, tauxReussiteClasse: tauxReussite }); // Renvoi de la session de délibération validée avec le taux de réussite
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(
       "Erreur lors de la validation de la session de délibération :",
       err,
