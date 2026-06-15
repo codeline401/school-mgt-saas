@@ -32,8 +32,16 @@ jobs:
 
       - name: Add VPS to known_hosts
         run: |
+          set -e
           mkdir -p ~/.ssh
-          ssh-keyscan -H "$VPS_HOST" >> ~/.ssh/known_hosts
+
+          echo "Testing connectivity..."
+          ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 -p 22 "$VPS_USER@$VPS_HOST" "echo OK" || true
+
+          echo "Scanning host key..."
+          ssh-keyscan -H "$VPS_HOST" -p 22 >> ~/.ssh/known_hosts
+          echo "known_hosts:"
+          tail -n 5 ~/.ssh/known_hosts
 
       - name: Test SSH
         run: |
