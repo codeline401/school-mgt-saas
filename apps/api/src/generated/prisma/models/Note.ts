@@ -14,16 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model Note
- * Note — enregistre la note d'un élève pour une matière et une évaluation données.
  * 
- * Un élève peut avoir PLUSIEURS notes pour la même matière, chacune distinguée
- * par un titre d'évaluation (ex: "1er DS - 1er Trimestre - 2026-2027").
- * 
- * Contraintes :
- * - Unique sur (eleveId, matiereId, titre) : même élève, même matière, même éval → doublon.
- * - note ≤ noteMax validé dans le contrôleur.
- * - feuillePath : chemin local du fichier corrigé uploadé (optionnel).
- * - createdById : utilisateur PROF qui a saisi la note.
  */
 export type NoteModel = runtime.Types.Result.DefaultSelection<Prisma.$NotePayload>
 
@@ -61,6 +52,7 @@ export type NoteMinAggregateOutputType = {
   matiereId: string | null
   classeId: string | null
   schoolId: string | null
+  periodeId: string | null
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -80,6 +72,7 @@ export type NoteMaxAggregateOutputType = {
   matiereId: string | null
   classeId: string | null
   schoolId: string | null
+  periodeId: string | null
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -99,6 +92,7 @@ export type NoteCountAggregateOutputType = {
   matiereId: number
   classeId: number
   schoolId: number
+  periodeId: number
   createdById: number
   createdAt: number
   updatedAt: number
@@ -132,6 +126,7 @@ export type NoteMinAggregateInputType = {
   matiereId?: true
   classeId?: true
   schoolId?: true
+  periodeId?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
@@ -151,6 +146,7 @@ export type NoteMaxAggregateInputType = {
   matiereId?: true
   classeId?: true
   schoolId?: true
+  periodeId?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
@@ -170,6 +166,7 @@ export type NoteCountAggregateInputType = {
   matiereId?: true
   classeId?: true
   schoolId?: true
+  periodeId?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
@@ -276,6 +273,7 @@ export type NoteGroupByOutputType = {
   matiereId: string
   classeId: string
   schoolId: string
+  periodeId: string | null
   createdById: string
   createdAt: Date
   updatedAt: Date
@@ -318,6 +316,7 @@ export type NoteWhereInput = {
   matiereId?: Prisma.StringFilter<"Note"> | string
   classeId?: Prisma.StringFilter<"Note"> | string
   schoolId?: Prisma.StringFilter<"Note"> | string
+  periodeId?: Prisma.StringNullableFilter<"Note"> | string | null
   createdById?: Prisma.StringFilter<"Note"> | string
   createdAt?: Prisma.DateTimeFilter<"Note"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Note"> | Date | string
@@ -325,6 +324,7 @@ export type NoteWhereInput = {
   matiere?: Prisma.XOR<Prisma.MatiereScalarRelationFilter, Prisma.MatiereWhereInput>
   classe?: Prisma.XOR<Prisma.ClasseScalarRelationFilter, Prisma.ClasseWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  periode?: Prisma.XOR<Prisma.PeriodeNullableScalarRelationFilter, Prisma.PeriodeWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -342,6 +342,7 @@ export type NoteOrderByWithRelationInput = {
   matiereId?: Prisma.SortOrder
   classeId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
+  periodeId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -349,6 +350,7 @@ export type NoteOrderByWithRelationInput = {
   matiere?: Prisma.MatiereOrderByWithRelationInput
   classe?: Prisma.ClasseOrderByWithRelationInput
   school?: Prisma.SchoolOrderByWithRelationInput
+  periode?: Prisma.PeriodeOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -370,6 +372,7 @@ export type NoteWhereUniqueInput = Prisma.AtLeast<{
   matiereId?: Prisma.StringFilter<"Note"> | string
   classeId?: Prisma.StringFilter<"Note"> | string
   schoolId?: Prisma.StringFilter<"Note"> | string
+  periodeId?: Prisma.StringNullableFilter<"Note"> | string | null
   createdById?: Prisma.StringFilter<"Note"> | string
   createdAt?: Prisma.DateTimeFilter<"Note"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Note"> | Date | string
@@ -377,6 +380,7 @@ export type NoteWhereUniqueInput = Prisma.AtLeast<{
   matiere?: Prisma.XOR<Prisma.MatiereScalarRelationFilter, Prisma.MatiereWhereInput>
   classe?: Prisma.XOR<Prisma.ClasseScalarRelationFilter, Prisma.ClasseWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  periode?: Prisma.XOR<Prisma.PeriodeNullableScalarRelationFilter, Prisma.PeriodeWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "eleveId_matiereId_titre">
 
@@ -394,6 +398,7 @@ export type NoteOrderByWithAggregationInput = {
   matiereId?: Prisma.SortOrder
   classeId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
+  periodeId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -421,6 +426,7 @@ export type NoteScalarWhereWithAggregatesInput = {
   matiereId?: Prisma.StringWithAggregatesFilter<"Note"> | string
   classeId?: Prisma.StringWithAggregatesFilter<"Note"> | string
   schoolId?: Prisma.StringWithAggregatesFilter<"Note"> | string
+  periodeId?: Prisma.StringNullableWithAggregatesFilter<"Note"> | string | null
   createdById?: Prisma.StringWithAggregatesFilter<"Note"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Note"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Note"> | Date | string
@@ -442,6 +448,7 @@ export type NoteCreateInput = {
   matiere: Prisma.MatiereCreateNestedOneWithoutNotesInput
   classe: Prisma.ClasseCreateNestedOneWithoutNotesInput
   school: Prisma.SchoolCreateNestedOneWithoutNotesInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutNotesInput
   createdBy: Prisma.UserCreateNestedOneWithoutNotesInput
 }
 
@@ -459,6 +466,7 @@ export type NoteUncheckedCreateInput = {
   matiereId: string
   classeId: string
   schoolId: string
+  periodeId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -480,6 +488,7 @@ export type NoteUpdateInput = {
   matiere?: Prisma.MatiereUpdateOneRequiredWithoutNotesNestedInput
   classe?: Prisma.ClasseUpdateOneRequiredWithoutNotesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutNotesNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutNotesNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutNotesNestedInput
 }
 
@@ -497,6 +506,7 @@ export type NoteUncheckedUpdateInput = {
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -516,6 +526,7 @@ export type NoteCreateManyInput = {
   matiereId: string
   classeId: string
   schoolId: string
+  periodeId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -549,6 +560,7 @@ export type NoteUncheckedUpdateManyInput = {
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -584,6 +596,7 @@ export type NoteCountOrderByAggregateInput = {
   matiereId?: Prisma.SortOrder
   classeId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
+  periodeId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -609,6 +622,7 @@ export type NoteMaxOrderByAggregateInput = {
   matiereId?: Prisma.SortOrder
   classeId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
+  periodeId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -628,6 +642,7 @@ export type NoteMinOrderByAggregateInput = {
   matiereId?: Prisma.SortOrder
   classeId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
+  periodeId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -849,6 +864,48 @@ export type NoteUncheckedUpdateManyWithoutMatiereNestedInput = {
   deleteMany?: Prisma.NoteScalarWhereInput | Prisma.NoteScalarWhereInput[]
 }
 
+export type NoteCreateNestedManyWithoutPeriodeInput = {
+  create?: Prisma.XOR<Prisma.NoteCreateWithoutPeriodeInput, Prisma.NoteUncheckedCreateWithoutPeriodeInput> | Prisma.NoteCreateWithoutPeriodeInput[] | Prisma.NoteUncheckedCreateWithoutPeriodeInput[]
+  connectOrCreate?: Prisma.NoteCreateOrConnectWithoutPeriodeInput | Prisma.NoteCreateOrConnectWithoutPeriodeInput[]
+  createMany?: Prisma.NoteCreateManyPeriodeInputEnvelope
+  connect?: Prisma.NoteWhereUniqueInput | Prisma.NoteWhereUniqueInput[]
+}
+
+export type NoteUncheckedCreateNestedManyWithoutPeriodeInput = {
+  create?: Prisma.XOR<Prisma.NoteCreateWithoutPeriodeInput, Prisma.NoteUncheckedCreateWithoutPeriodeInput> | Prisma.NoteCreateWithoutPeriodeInput[] | Prisma.NoteUncheckedCreateWithoutPeriodeInput[]
+  connectOrCreate?: Prisma.NoteCreateOrConnectWithoutPeriodeInput | Prisma.NoteCreateOrConnectWithoutPeriodeInput[]
+  createMany?: Prisma.NoteCreateManyPeriodeInputEnvelope
+  connect?: Prisma.NoteWhereUniqueInput | Prisma.NoteWhereUniqueInput[]
+}
+
+export type NoteUpdateManyWithoutPeriodeNestedInput = {
+  create?: Prisma.XOR<Prisma.NoteCreateWithoutPeriodeInput, Prisma.NoteUncheckedCreateWithoutPeriodeInput> | Prisma.NoteCreateWithoutPeriodeInput[] | Prisma.NoteUncheckedCreateWithoutPeriodeInput[]
+  connectOrCreate?: Prisma.NoteCreateOrConnectWithoutPeriodeInput | Prisma.NoteCreateOrConnectWithoutPeriodeInput[]
+  upsert?: Prisma.NoteUpsertWithWhereUniqueWithoutPeriodeInput | Prisma.NoteUpsertWithWhereUniqueWithoutPeriodeInput[]
+  createMany?: Prisma.NoteCreateManyPeriodeInputEnvelope
+  set?: Prisma.NoteWhereUniqueInput | Prisma.NoteWhereUniqueInput[]
+  disconnect?: Prisma.NoteWhereUniqueInput | Prisma.NoteWhereUniqueInput[]
+  delete?: Prisma.NoteWhereUniqueInput | Prisma.NoteWhereUniqueInput[]
+  connect?: Prisma.NoteWhereUniqueInput | Prisma.NoteWhereUniqueInput[]
+  update?: Prisma.NoteUpdateWithWhereUniqueWithoutPeriodeInput | Prisma.NoteUpdateWithWhereUniqueWithoutPeriodeInput[]
+  updateMany?: Prisma.NoteUpdateManyWithWhereWithoutPeriodeInput | Prisma.NoteUpdateManyWithWhereWithoutPeriodeInput[]
+  deleteMany?: Prisma.NoteScalarWhereInput | Prisma.NoteScalarWhereInput[]
+}
+
+export type NoteUncheckedUpdateManyWithoutPeriodeNestedInput = {
+  create?: Prisma.XOR<Prisma.NoteCreateWithoutPeriodeInput, Prisma.NoteUncheckedCreateWithoutPeriodeInput> | Prisma.NoteCreateWithoutPeriodeInput[] | Prisma.NoteUncheckedCreateWithoutPeriodeInput[]
+  connectOrCreate?: Prisma.NoteCreateOrConnectWithoutPeriodeInput | Prisma.NoteCreateOrConnectWithoutPeriodeInput[]
+  upsert?: Prisma.NoteUpsertWithWhereUniqueWithoutPeriodeInput | Prisma.NoteUpsertWithWhereUniqueWithoutPeriodeInput[]
+  createMany?: Prisma.NoteCreateManyPeriodeInputEnvelope
+  set?: Prisma.NoteWhereUniqueInput | Prisma.NoteWhereUniqueInput[]
+  disconnect?: Prisma.NoteWhereUniqueInput | Prisma.NoteWhereUniqueInput[]
+  delete?: Prisma.NoteWhereUniqueInput | Prisma.NoteWhereUniqueInput[]
+  connect?: Prisma.NoteWhereUniqueInput | Prisma.NoteWhereUniqueInput[]
+  update?: Prisma.NoteUpdateWithWhereUniqueWithoutPeriodeInput | Prisma.NoteUpdateWithWhereUniqueWithoutPeriodeInput[]
+  updateMany?: Prisma.NoteUpdateManyWithWhereWithoutPeriodeInput | Prisma.NoteUpdateManyWithWhereWithoutPeriodeInput[]
+  deleteMany?: Prisma.NoteScalarWhereInput | Prisma.NoteScalarWhereInput[]
+}
+
 export type DecimalFieldUpdateOperationsInput = {
   set?: runtime.Decimal | runtime.DecimalJsLike | number | string
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -877,6 +934,7 @@ export type NoteCreateWithoutCreatedByInput = {
   matiere: Prisma.MatiereCreateNestedOneWithoutNotesInput
   classe: Prisma.ClasseCreateNestedOneWithoutNotesInput
   school: Prisma.SchoolCreateNestedOneWithoutNotesInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutNotesInput
 }
 
 export type NoteUncheckedCreateWithoutCreatedByInput = {
@@ -893,6 +951,7 @@ export type NoteUncheckedCreateWithoutCreatedByInput = {
   matiereId: string
   classeId: string
   schoolId: string
+  periodeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -940,6 +999,7 @@ export type NoteScalarWhereInput = {
   matiereId?: Prisma.StringFilter<"Note"> | string
   classeId?: Prisma.StringFilter<"Note"> | string
   schoolId?: Prisma.StringFilter<"Note"> | string
+  periodeId?: Prisma.StringNullableFilter<"Note"> | string | null
   createdById?: Prisma.StringFilter<"Note"> | string
   createdAt?: Prisma.DateTimeFilter<"Note"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Note"> | Date | string
@@ -960,6 +1020,7 @@ export type NoteCreateWithoutSchoolInput = {
   eleve: Prisma.EleveCreateNestedOneWithoutNotesInput
   matiere: Prisma.MatiereCreateNestedOneWithoutNotesInput
   classe: Prisma.ClasseCreateNestedOneWithoutNotesInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutNotesInput
   createdBy: Prisma.UserCreateNestedOneWithoutNotesInput
 }
 
@@ -976,6 +1037,7 @@ export type NoteUncheckedCreateWithoutSchoolInput = {
   eleveId: string
   matiereId: string
   classeId: string
+  periodeId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1022,6 +1084,7 @@ export type NoteCreateWithoutClasseInput = {
   eleve: Prisma.EleveCreateNestedOneWithoutNotesInput
   matiere: Prisma.MatiereCreateNestedOneWithoutNotesInput
   school: Prisma.SchoolCreateNestedOneWithoutNotesInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutNotesInput
   createdBy: Prisma.UserCreateNestedOneWithoutNotesInput
 }
 
@@ -1038,6 +1101,7 @@ export type NoteUncheckedCreateWithoutClasseInput = {
   eleveId: string
   matiereId: string
   schoolId: string
+  periodeId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1084,6 +1148,7 @@ export type NoteCreateWithoutEleveInput = {
   matiere: Prisma.MatiereCreateNestedOneWithoutNotesInput
   classe: Prisma.ClasseCreateNestedOneWithoutNotesInput
   school: Prisma.SchoolCreateNestedOneWithoutNotesInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutNotesInput
   createdBy: Prisma.UserCreateNestedOneWithoutNotesInput
 }
 
@@ -1100,6 +1165,7 @@ export type NoteUncheckedCreateWithoutEleveInput = {
   matiereId: string
   classeId: string
   schoolId: string
+  periodeId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1146,6 +1212,7 @@ export type NoteCreateWithoutMatiereInput = {
   eleve: Prisma.EleveCreateNestedOneWithoutNotesInput
   classe: Prisma.ClasseCreateNestedOneWithoutNotesInput
   school: Prisma.SchoolCreateNestedOneWithoutNotesInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutNotesInput
   createdBy: Prisma.UserCreateNestedOneWithoutNotesInput
 }
 
@@ -1162,6 +1229,7 @@ export type NoteUncheckedCreateWithoutMatiereInput = {
   eleveId: string
   classeId: string
   schoolId: string
+  periodeId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1193,6 +1261,70 @@ export type NoteUpdateManyWithWhereWithoutMatiereInput = {
   data: Prisma.XOR<Prisma.NoteUpdateManyMutationInput, Prisma.NoteUncheckedUpdateManyWithoutMatiereInput>
 }
 
+export type NoteCreateWithoutPeriodeInput = {
+  id?: string
+  titre: string
+  note: runtime.Decimal | runtime.DecimalJsLike | number | string
+  noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
+  commentaire?: string | null
+  feuillePath?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  eleve: Prisma.EleveCreateNestedOneWithoutNotesInput
+  matiere: Prisma.MatiereCreateNestedOneWithoutNotesInput
+  classe: Prisma.ClasseCreateNestedOneWithoutNotesInput
+  school: Prisma.SchoolCreateNestedOneWithoutNotesInput
+  createdBy: Prisma.UserCreateNestedOneWithoutNotesInput
+}
+
+export type NoteUncheckedCreateWithoutPeriodeInput = {
+  id?: string
+  titre: string
+  note: runtime.Decimal | runtime.DecimalJsLike | number | string
+  noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
+  commentaire?: string | null
+  feuillePath?: string | null
+  eleveId: string
+  matiereId: string
+  classeId: string
+  schoolId: string
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type NoteCreateOrConnectWithoutPeriodeInput = {
+  where: Prisma.NoteWhereUniqueInput
+  create: Prisma.XOR<Prisma.NoteCreateWithoutPeriodeInput, Prisma.NoteUncheckedCreateWithoutPeriodeInput>
+}
+
+export type NoteCreateManyPeriodeInputEnvelope = {
+  data: Prisma.NoteCreateManyPeriodeInput | Prisma.NoteCreateManyPeriodeInput[]
+  skipDuplicates?: boolean
+}
+
+export type NoteUpsertWithWhereUniqueWithoutPeriodeInput = {
+  where: Prisma.NoteWhereUniqueInput
+  update: Prisma.XOR<Prisma.NoteUpdateWithoutPeriodeInput, Prisma.NoteUncheckedUpdateWithoutPeriodeInput>
+  create: Prisma.XOR<Prisma.NoteCreateWithoutPeriodeInput, Prisma.NoteUncheckedCreateWithoutPeriodeInput>
+}
+
+export type NoteUpdateWithWhereUniqueWithoutPeriodeInput = {
+  where: Prisma.NoteWhereUniqueInput
+  data: Prisma.XOR<Prisma.NoteUpdateWithoutPeriodeInput, Prisma.NoteUncheckedUpdateWithoutPeriodeInput>
+}
+
+export type NoteUpdateManyWithWhereWithoutPeriodeInput = {
+  where: Prisma.NoteScalarWhereInput
+  data: Prisma.XOR<Prisma.NoteUpdateManyMutationInput, Prisma.NoteUncheckedUpdateManyWithoutPeriodeInput>
+}
+
 export type NoteCreateManyCreatedByInput = {
   id?: string
   titre: string
@@ -1207,6 +1339,7 @@ export type NoteCreateManyCreatedByInput = {
   matiereId: string
   classeId: string
   schoolId: string
+  periodeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1227,6 +1360,7 @@ export type NoteUpdateWithoutCreatedByInput = {
   matiere?: Prisma.MatiereUpdateOneRequiredWithoutNotesNestedInput
   classe?: Prisma.ClasseUpdateOneRequiredWithoutNotesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutNotesNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutNotesNestedInput
 }
 
 export type NoteUncheckedUpdateWithoutCreatedByInput = {
@@ -1243,6 +1377,7 @@ export type NoteUncheckedUpdateWithoutCreatedByInput = {
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1261,6 +1396,7 @@ export type NoteUncheckedUpdateManyWithoutCreatedByInput = {
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1278,6 +1414,7 @@ export type NoteCreateManySchoolInput = {
   eleveId: string
   matiereId: string
   classeId: string
+  periodeId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1298,6 +1435,7 @@ export type NoteUpdateWithoutSchoolInput = {
   eleve?: Prisma.EleveUpdateOneRequiredWithoutNotesNestedInput
   matiere?: Prisma.MatiereUpdateOneRequiredWithoutNotesNestedInput
   classe?: Prisma.ClasseUpdateOneRequiredWithoutNotesNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutNotesNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutNotesNestedInput
 }
 
@@ -1314,6 +1452,7 @@ export type NoteUncheckedUpdateWithoutSchoolInput = {
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1332,6 +1471,7 @@ export type NoteUncheckedUpdateManyWithoutSchoolInput = {
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1350,6 +1490,7 @@ export type NoteCreateManyClasseInput = {
   eleveId: string
   matiereId: string
   schoolId: string
+  periodeId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1370,6 +1511,7 @@ export type NoteUpdateWithoutClasseInput = {
   eleve?: Prisma.EleveUpdateOneRequiredWithoutNotesNestedInput
   matiere?: Prisma.MatiereUpdateOneRequiredWithoutNotesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutNotesNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutNotesNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutNotesNestedInput
 }
 
@@ -1386,6 +1528,7 @@ export type NoteUncheckedUpdateWithoutClasseInput = {
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1404,6 +1547,7 @@ export type NoteUncheckedUpdateManyWithoutClasseInput = {
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1422,6 +1566,7 @@ export type NoteCreateManyEleveInput = {
   matiereId: string
   classeId: string
   schoolId: string
+  periodeId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1442,6 +1587,7 @@ export type NoteUpdateWithoutEleveInput = {
   matiere?: Prisma.MatiereUpdateOneRequiredWithoutNotesNestedInput
   classe?: Prisma.ClasseUpdateOneRequiredWithoutNotesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutNotesNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutNotesNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutNotesNestedInput
 }
 
@@ -1458,6 +1604,7 @@ export type NoteUncheckedUpdateWithoutEleveInput = {
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1476,6 +1623,7 @@ export type NoteUncheckedUpdateManyWithoutEleveInput = {
   matiereId?: Prisma.StringFieldUpdateOperationsInput | string
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1494,6 +1642,7 @@ export type NoteCreateManyMatiereInput = {
   eleveId: string
   classeId: string
   schoolId: string
+  periodeId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1514,6 +1663,7 @@ export type NoteUpdateWithoutMatiereInput = {
   eleve?: Prisma.EleveUpdateOneRequiredWithoutNotesNestedInput
   classe?: Prisma.ClasseUpdateOneRequiredWithoutNotesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutNotesNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutNotesNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutNotesNestedInput
 }
 
@@ -1530,6 +1680,7 @@ export type NoteUncheckedUpdateWithoutMatiereInput = {
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1546,6 +1697,83 @@ export type NoteUncheckedUpdateManyWithoutMatiereInput = {
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type NoteCreateManyPeriodeInput = {
+  id?: string
+  titre: string
+  note: runtime.Decimal | runtime.DecimalJsLike | number | string
+  noteMax?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  coefficient?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: $Enums.TypeNote
+  dateEval?: Date | string
+  commentaire?: string | null
+  feuillePath?: string | null
+  eleveId: string
+  matiereId: string
+  classeId: string
+  schoolId: string
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type NoteUpdateWithoutPeriodeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titre?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  eleve?: Prisma.EleveUpdateOneRequiredWithoutNotesNestedInput
+  matiere?: Prisma.MatiereUpdateOneRequiredWithoutNotesNestedInput
+  classe?: Prisma.ClasseUpdateOneRequiredWithoutNotesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutNotesNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutNotesNestedInput
+}
+
+export type NoteUncheckedUpdateWithoutPeriodeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titre?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eleveId?: Prisma.StringFieldUpdateOperationsInput | string
+  matiereId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type NoteUncheckedUpdateManyWithoutPeriodeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titre?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  noteMax?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  coefficient?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  typeNote?: Prisma.EnumTypeNoteFieldUpdateOperationsInput | $Enums.TypeNote
+  dateEval?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feuillePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eleveId?: Prisma.StringFieldUpdateOperationsInput | string
+  matiereId?: Prisma.StringFieldUpdateOperationsInput | string
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1569,6 +1797,7 @@ export type NoteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   matiereId?: boolean
   classeId?: boolean
   schoolId?: boolean
+  periodeId?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1576,6 +1805,7 @@ export type NoteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   matiere?: boolean | Prisma.MatiereDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.Note$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["note"]>
 
@@ -1593,6 +1823,7 @@ export type NoteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   matiereId?: boolean
   classeId?: boolean
   schoolId?: boolean
+  periodeId?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1600,6 +1831,7 @@ export type NoteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   matiere?: boolean | Prisma.MatiereDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.Note$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["note"]>
 
@@ -1617,6 +1849,7 @@ export type NoteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   matiereId?: boolean
   classeId?: boolean
   schoolId?: boolean
+  periodeId?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1624,6 +1857,7 @@ export type NoteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   matiere?: boolean | Prisma.MatiereDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.Note$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["note"]>
 
@@ -1641,17 +1875,19 @@ export type NoteSelectScalar = {
   matiereId?: boolean
   classeId?: boolean
   schoolId?: boolean
+  periodeId?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type NoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titre" | "note" | "noteMax" | "coefficient" | "typeNote" | "dateEval" | "commentaire" | "feuillePath" | "eleveId" | "matiereId" | "classeId" | "schoolId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["note"]>
+export type NoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titre" | "note" | "noteMax" | "coefficient" | "typeNote" | "dateEval" | "commentaire" | "feuillePath" | "eleveId" | "matiereId" | "classeId" | "schoolId" | "periodeId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["note"]>
 export type NoteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
   matiere?: boolean | Prisma.MatiereDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.Note$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type NoteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1659,6 +1895,7 @@ export type NoteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   matiere?: boolean | Prisma.MatiereDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.Note$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type NoteIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1666,6 +1903,7 @@ export type NoteIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   matiere?: boolean | Prisma.MatiereDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.Note$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
@@ -1676,6 +1914,7 @@ export type $NotePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     matiere: Prisma.$MatierePayload<ExtArgs>
     classe: Prisma.$ClassePayload<ExtArgs>
     school: Prisma.$SchoolPayload<ExtArgs>
+    periode: Prisma.$PeriodePayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1692,9 +1931,7 @@ export type $NotePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     matiereId: string
     classeId: string
     schoolId: string
-    /**
-     * Professeur qui a saisi la note
-     */
+    periodeId: string | null
     createdById: string
     createdAt: Date
     updatedAt: Date
@@ -2096,6 +2333,7 @@ export interface Prisma__NoteClient<T, Null = never, ExtArgs extends runtime.Typ
   matiere<T extends Prisma.MatiereDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MatiereDefaultArgs<ExtArgs>>): Prisma.Prisma__MatiereClient<runtime.Types.Result.GetResult<Prisma.$MatierePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   classe<T extends Prisma.ClasseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClasseDefaultArgs<ExtArgs>>): Prisma.Prisma__ClasseClient<runtime.Types.Result.GetResult<Prisma.$ClassePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  periode<T extends Prisma.Note$periodeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Note$periodeArgs<ExtArgs>>): Prisma.Prisma__PeriodeClient<runtime.Types.Result.GetResult<Prisma.$PeriodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2139,6 +2377,7 @@ export interface NoteFieldRefs {
   readonly matiereId: Prisma.FieldRef<"Note", 'String'>
   readonly classeId: Prisma.FieldRef<"Note", 'String'>
   readonly schoolId: Prisma.FieldRef<"Note", 'String'>
+  readonly periodeId: Prisma.FieldRef<"Note", 'String'>
   readonly createdById: Prisma.FieldRef<"Note", 'String'>
   readonly createdAt: Prisma.FieldRef<"Note", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Note", 'DateTime'>
@@ -2540,6 +2779,25 @@ export type NoteDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Notes to delete.
    */
   limit?: number
+}
+
+/**
+ * Note.periode
+ */
+export type Note$periodeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Periode
+   */
+  select?: Prisma.PeriodeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Periode
+   */
+  omit?: Prisma.PeriodeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PeriodeInclude<ExtArgs> | null
+  where?: Prisma.PeriodeWhereInput
 }
 
 /**

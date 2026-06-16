@@ -1,0 +1,221 @@
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Helvetica", "Arial", sans-serif;
+        color: #1a1a1a;
+        font-size: 9.5pt;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 3px solid #2563eb;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+      .school-info h1 {
+        font-size: 14pt;
+        color: #2563eb;
+      }
+      .school-info p {
+        font-size: 8pt;
+        color: #555;
+      }
+      .logo {
+        max-width: 60px;
+        max-height: 60px;
+      }
+      .title {
+        text-align: center;
+        font-size: 16pt;
+        font-weight: bold;
+        margin: 12px 0;
+        text-transform: uppercase;
+      }
+      .info-bar {
+        background: #f3f4f6;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        font-size: 9.5pt;
+      }
+      .info-bar strong {
+        color: #2563eb;
+      }
+      .matiere-block {
+        margin: 18px 0;
+        page-break-inside: avoid;
+      }
+      .matiere-title {
+        background: #2563eb;
+        color: white;
+        padding: 8px 12px;
+        font-size: 11pt;
+        font-weight: bold;
+        border-radius: 4px 4px 0 0;
+        display: flex;
+        justify-content: space-between;
+      }
+      .matiere-title .moy {
+        background: white;
+        color: #2563eb;
+        padding: 2px 10px;
+        border-radius: 12px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        background: #eff6ff;
+        padding: 6px 8px;
+        text-align: left;
+        font-size: 9pt;
+        border-bottom: 1px solid #2563eb;
+      }
+      td {
+        padding: 5px 8px;
+        border-bottom: 1px solid #e5e7eb;
+        font-size: 9pt;
+      }
+      tr:nth-child(even) {
+        background: #f9fafb;
+      }
+      .appreciation-box {
+        background: #fef3c7;
+        padding: 8px 12px;
+        border-left: 3px solid #f59e0b;
+        font-style: italic;
+        font-size: 9pt;
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .summary-box {
+        padding: 10px;
+        background: #eff6ff;
+        border-left: 4px solid #2563eb;
+        border-radius: 4px;
+        text-align: center;
+      }
+      .summary-box h3 {
+        font-size: 8pt;
+        color: #555;
+        margin-bottom: 3px;
+      }
+      .summary-box .value {
+        font-size: 18pt;
+        font-weight: bold;
+        color: #2563eb;
+      }
+      .footer {
+        margin-top: 25px;
+        text-align: center;
+        font-size: 8pt;
+        color: #666;
+        border-top: 1px solid #ddd;
+        padding-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="school-info">
+        <h1>{{school.nom}}</h1>
+        {{#if school.devise}}<p
+            style="font-style:italic"
+          >"{{school.devise}}"</p>{{/if}}
+        {{#if school.adresse}}<p>📍 {{school.adresse}}</p>{{/if}}
+      </div>
+      {{#if school.logoUrl}}<img src="{{school.logoUrl}}" class="logo" />{{/if}}
+    </div>
+
+    <div class="title">Relevé de notes détaillé</div>
+
+    <div class="info-bar">
+      <p><strong>Élève :</strong> {{eleve.prenom}} {{eleve.nom}}</p>
+      <p><strong>Classe :</strong> {{classe.nom}}</p>
+      <p><strong>Période :</strong>
+        {{periode.nom}}
+        —
+        {{periode.anneeScolaire}}</p>
+    </div>
+
+    {{#each matieres}}
+      <div class="matiere-block">
+        <div class="matiere-title">
+          <span>{{nom}}
+            <small style="opacity:0.8">(Coef: {{coefficient}})</small></span>
+          <span class="moy">{{moyenne}}/20</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Évaluation</th>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Note</th>
+              <th>Note / Max</th>
+              <th>Coef</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each evaluations}}
+              <tr>
+                <td><strong>{{titre}}</strong></td>
+                <td>{{type}}</td>
+                <td>{{formatDate date}}</td>
+                <td><strong>{{note}}</strong>/{{noteMax}}</td>
+                <td>{{noteNormalisee}}/20</td>
+                <td>{{coefficient}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        {{#if appreciation}}<div class="appreciation-box">💬
+            {{appreciation}}</div>{{/if}}
+      </div>
+    {{/each}}
+
+    <div class="summary">
+      <div class="summary-box">
+        <h3>Moyenne générale</h3>
+        <div class="value">{{moyenneGenerale}}/20</div>
+      </div>
+      {{#if rang}}
+        <div class="summary-box">
+          <h3>Rang</h3>
+          <div class="value">{{rang}}<small
+              style="font-size:13pt"
+            >/{{totalEleves}}</small></div>
+        </div>
+      {{/if}}
+      <div class="summary-box">
+        <h3>Appréciation</h3>
+        <div class="value" style="font-size:13pt">{{grade
+            moyenneGenerale
+          }}</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Document généré le
+      {{formatDateLong dateGeneration}}
+      —
+      {{school.nom}}
+    </div>
+  </body>
+</html>

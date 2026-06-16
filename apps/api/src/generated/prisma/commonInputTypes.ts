@@ -213,6 +213,23 @@ export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDecimalNullableFilter<$PrismaModel>
 }
 
+export type EnumTypePeriodeFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypePeriode | Prisma.EnumTypePeriodeFieldRefInput<$PrismaModel>
+  in?: $Enums.TypePeriode[] | Prisma.ListEnumTypePeriodeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypePeriode[] | Prisma.ListEnumTypePeriodeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypePeriodeFilter<$PrismaModel> | $Enums.TypePeriode
+}
+
+export type EnumTypePeriodeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypePeriode | Prisma.EnumTypePeriodeFieldRefInput<$PrismaModel>
+  in?: $Enums.TypePeriode[] | Prisma.ListEnumTypePeriodeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypePeriode[] | Prisma.ListEnumTypePeriodeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypePeriodeWithAggregatesFilter<$PrismaModel> | $Enums.TypePeriode
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypePeriodeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypePeriodeFilter<$PrismaModel>
+}
+
 export type DecimalFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[] | Prisma.ListDecimalFieldRefInput<$PrismaModel>
@@ -795,6 +812,23 @@ export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedDecimalNullableFilter<$PrismaModel>
   _min?: Prisma.NestedDecimalNullableFilter<$PrismaModel>
   _max?: Prisma.NestedDecimalNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumTypePeriodeFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypePeriode | Prisma.EnumTypePeriodeFieldRefInput<$PrismaModel>
+  in?: $Enums.TypePeriode[] | Prisma.ListEnumTypePeriodeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypePeriode[] | Prisma.ListEnumTypePeriodeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypePeriodeFilter<$PrismaModel> | $Enums.TypePeriode
+}
+
+export type NestedEnumTypePeriodeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypePeriode | Prisma.EnumTypePeriodeFieldRefInput<$PrismaModel>
+  in?: $Enums.TypePeriode[] | Prisma.ListEnumTypePeriodeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypePeriode[] | Prisma.ListEnumTypePeriodeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypePeriodeWithAggregatesFilter<$PrismaModel> | $Enums.TypePeriode
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypePeriodeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypePeriodeFilter<$PrismaModel>
 }
 
 export type NestedDecimalFilter<$PrismaModel = never> = {

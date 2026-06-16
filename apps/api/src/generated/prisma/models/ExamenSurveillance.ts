@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model ExamenSurveillance
- * assignement d'un surveillant à une session d'examen
+ * 
  */
 export type ExamenSurveillanceModel = runtime.Types.Result.DefaultSelection<Prisma.$ExamenSurveillancePayload>
 

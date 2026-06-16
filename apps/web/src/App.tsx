@@ -15,6 +15,7 @@ import ClasseProfilPage from "./pages/ClasseProfilPage";
 import MonProfilProfPage from "./pages/MonProfilProfPage";
 import NotesExamensPage from "./pages/NotesExamensPage";
 import CahierTextePage from "./pages/CahierTextePage";
+import ParametresPage from "./pages/ParametresPage";
 
 const DashboardTemp = () => (
   <div>
@@ -57,9 +58,7 @@ function App() {
             </Route>
 
             {/* Route mon profil : accessible uniquement aux PROFs */}
-            <Route
-              element={<ProtectedRoute allowedRoles={["PROF"]} />}
-            >
+            <Route element={<ProtectedRoute allowedRoles={["PROF"]} />}>
               <Route path="/mon-profil" element={<MonProfilProfPage />} />
             </Route>
 
@@ -75,6 +74,15 @@ function App() {
             {/* Route classes : tous les utilisateurs authentifiés */}
             <Route path="/classes" element={<ClassesPage />} />
             <Route path="/classes/:id" element={<ClasseProfilPage />} />
+
+            {/* Paramètres : ADMIN et SUDO_ADMIN uniquement */}
+            <Route
+              element={
+                <ProtectedRoute allowedRoles={["ADMIN", "SUDO_ADMIN"]} />
+              }
+            >
+              <Route path="/parametres" element={<ParametresPage />} />
+            </Route>
           </Route>
         </Route>
       </Routes>

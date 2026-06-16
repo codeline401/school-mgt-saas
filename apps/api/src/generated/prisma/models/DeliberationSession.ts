@@ -30,6 +30,7 @@ export type DeliberationSessionMinAggregateOutputType = {
   schoolId: string | null
   periodeLabel: string | null
   anneeScolaire: string | null
+  periodeId: string | null
   statut: $Enums.DeliberationStatut | null
   compteRendu: string | null
   createdById: string | null
@@ -45,6 +46,7 @@ export type DeliberationSessionMaxAggregateOutputType = {
   schoolId: string | null
   periodeLabel: string | null
   anneeScolaire: string | null
+  periodeId: string | null
   statut: $Enums.DeliberationStatut | null
   compteRendu: string | null
   createdById: string | null
@@ -60,6 +62,7 @@ export type DeliberationSessionCountAggregateOutputType = {
   schoolId: number
   periodeLabel: number
   anneeScolaire: number
+  periodeId: number
   statut: number
   compteRendu: number
   createdById: number
@@ -77,6 +80,7 @@ export type DeliberationSessionMinAggregateInputType = {
   schoolId?: true
   periodeLabel?: true
   anneeScolaire?: true
+  periodeId?: true
   statut?: true
   compteRendu?: true
   createdById?: true
@@ -92,6 +96,7 @@ export type DeliberationSessionMaxAggregateInputType = {
   schoolId?: true
   periodeLabel?: true
   anneeScolaire?: true
+  periodeId?: true
   statut?: true
   compteRendu?: true
   createdById?: true
@@ -107,6 +112,7 @@ export type DeliberationSessionCountAggregateInputType = {
   schoolId?: true
   periodeLabel?: true
   anneeScolaire?: true
+  periodeId?: true
   statut?: true
   compteRendu?: true
   createdById?: true
@@ -195,6 +201,7 @@ export type DeliberationSessionGroupByOutputType = {
   schoolId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId: string | null
   statut: $Enums.DeliberationStatut
   compteRendu: string | null
   createdById: string
@@ -231,6 +238,7 @@ export type DeliberationSessionWhereInput = {
   schoolId?: Prisma.StringFilter<"DeliberationSession"> | string
   periodeLabel?: Prisma.StringFilter<"DeliberationSession"> | string
   anneeScolaire?: Prisma.StringFilter<"DeliberationSession"> | string
+  periodeId?: Prisma.StringNullableFilter<"DeliberationSession"> | string | null
   statut?: Prisma.EnumDeliberationStatutFilter<"DeliberationSession"> | $Enums.DeliberationStatut
   compteRendu?: Prisma.StringNullableFilter<"DeliberationSession"> | string | null
   createdById?: Prisma.StringFilter<"DeliberationSession"> | string
@@ -240,6 +248,7 @@ export type DeliberationSessionWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"DeliberationSession"> | Date | string
   classe?: Prisma.XOR<Prisma.ClasseScalarRelationFilter, Prisma.ClasseWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  periode?: Prisma.XOR<Prisma.PeriodeNullableScalarRelationFilter, Prisma.PeriodeWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   validatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   decisions?: Prisma.DeliberationDecisionListRelationFilter
@@ -251,6 +260,7 @@ export type DeliberationSessionOrderByWithRelationInput = {
   schoolId?: Prisma.SortOrder
   periodeLabel?: Prisma.SortOrder
   anneeScolaire?: Prisma.SortOrder
+  periodeId?: Prisma.SortOrderInput | Prisma.SortOrder
   statut?: Prisma.SortOrder
   compteRendu?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -260,6 +270,7 @@ export type DeliberationSessionOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   classe?: Prisma.ClasseOrderByWithRelationInput
   school?: Prisma.SchoolOrderByWithRelationInput
+  periode?: Prisma.PeriodeOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   validatedBy?: Prisma.UserOrderByWithRelationInput
   decisions?: Prisma.DeliberationDecisionOrderByRelationAggregateInput
@@ -275,6 +286,7 @@ export type DeliberationSessionWhereUniqueInput = Prisma.AtLeast<{
   schoolId?: Prisma.StringFilter<"DeliberationSession"> | string
   periodeLabel?: Prisma.StringFilter<"DeliberationSession"> | string
   anneeScolaire?: Prisma.StringFilter<"DeliberationSession"> | string
+  periodeId?: Prisma.StringNullableFilter<"DeliberationSession"> | string | null
   statut?: Prisma.EnumDeliberationStatutFilter<"DeliberationSession"> | $Enums.DeliberationStatut
   compteRendu?: Prisma.StringNullableFilter<"DeliberationSession"> | string | null
   createdById?: Prisma.StringFilter<"DeliberationSession"> | string
@@ -284,6 +296,7 @@ export type DeliberationSessionWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"DeliberationSession"> | Date | string
   classe?: Prisma.XOR<Prisma.ClasseScalarRelationFilter, Prisma.ClasseWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  periode?: Prisma.XOR<Prisma.PeriodeNullableScalarRelationFilter, Prisma.PeriodeWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   validatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   decisions?: Prisma.DeliberationDecisionListRelationFilter
@@ -295,6 +308,7 @@ export type DeliberationSessionOrderByWithAggregationInput = {
   schoolId?: Prisma.SortOrder
   periodeLabel?: Prisma.SortOrder
   anneeScolaire?: Prisma.SortOrder
+  periodeId?: Prisma.SortOrderInput | Prisma.SortOrder
   statut?: Prisma.SortOrder
   compteRendu?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -316,6 +330,7 @@ export type DeliberationSessionScalarWhereWithAggregatesInput = {
   schoolId?: Prisma.StringWithAggregatesFilter<"DeliberationSession"> | string
   periodeLabel?: Prisma.StringWithAggregatesFilter<"DeliberationSession"> | string
   anneeScolaire?: Prisma.StringWithAggregatesFilter<"DeliberationSession"> | string
+  periodeId?: Prisma.StringNullableWithAggregatesFilter<"DeliberationSession"> | string | null
   statut?: Prisma.EnumDeliberationStatutWithAggregatesFilter<"DeliberationSession"> | $Enums.DeliberationStatut
   compteRendu?: Prisma.StringNullableWithAggregatesFilter<"DeliberationSession"> | string | null
   createdById?: Prisma.StringWithAggregatesFilter<"DeliberationSession"> | string
@@ -336,6 +351,7 @@ export type DeliberationSessionCreateInput = {
   updatedAt?: Date | string
   classe: Prisma.ClasseCreateNestedOneWithoutDeliberationSessionsInput
   school: Prisma.SchoolCreateNestedOneWithoutDeliberationSessionsInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutDeliberationSessionsInput
   createdBy: Prisma.UserCreateNestedOneWithoutDeliberationSessionsInput
   validatedBy?: Prisma.UserCreateNestedOneWithoutDeliberationSessionsValidéesInput
   decisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutSessionInput
@@ -347,6 +363,7 @@ export type DeliberationSessionUncheckedCreateInput = {
   schoolId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId?: string | null
   statut?: $Enums.DeliberationStatut
   compteRendu?: string | null
   createdById: string
@@ -368,6 +385,7 @@ export type DeliberationSessionUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   classe?: Prisma.ClasseUpdateOneRequiredWithoutDeliberationSessionsNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutDeliberationSessionsNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutDeliberationSessionsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutDeliberationSessionsNestedInput
   validatedBy?: Prisma.UserUpdateOneWithoutDeliberationSessionsValidéesNestedInput
   decisions?: Prisma.DeliberationDecisionUpdateManyWithoutSessionNestedInput
@@ -379,6 +397,7 @@ export type DeliberationSessionUncheckedUpdateInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
   compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -395,6 +414,7 @@ export type DeliberationSessionCreateManyInput = {
   schoolId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId?: string | null
   statut?: $Enums.DeliberationStatut
   compteRendu?: string | null
   createdById: string
@@ -421,6 +441,7 @@ export type DeliberationSessionUncheckedUpdateManyInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
   compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -452,6 +473,7 @@ export type DeliberationSessionCountOrderByAggregateInput = {
   schoolId?: Prisma.SortOrder
   periodeLabel?: Prisma.SortOrder
   anneeScolaire?: Prisma.SortOrder
+  periodeId?: Prisma.SortOrder
   statut?: Prisma.SortOrder
   compteRendu?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -467,6 +489,7 @@ export type DeliberationSessionMaxOrderByAggregateInput = {
   schoolId?: Prisma.SortOrder
   periodeLabel?: Prisma.SortOrder
   anneeScolaire?: Prisma.SortOrder
+  periodeId?: Prisma.SortOrder
   statut?: Prisma.SortOrder
   compteRendu?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -482,6 +505,7 @@ export type DeliberationSessionMinOrderByAggregateInput = {
   schoolId?: Prisma.SortOrder
   periodeLabel?: Prisma.SortOrder
   anneeScolaire?: Prisma.SortOrder
+  periodeId?: Prisma.SortOrder
   statut?: Prisma.SortOrder
   compteRendu?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -664,6 +688,48 @@ export type DeliberationSessionUncheckedUpdateManyWithoutClasseNestedInput = {
   deleteMany?: Prisma.DeliberationSessionScalarWhereInput | Prisma.DeliberationSessionScalarWhereInput[]
 }
 
+export type DeliberationSessionCreateNestedManyWithoutPeriodeInput = {
+  create?: Prisma.XOR<Prisma.DeliberationSessionCreateWithoutPeriodeInput, Prisma.DeliberationSessionUncheckedCreateWithoutPeriodeInput> | Prisma.DeliberationSessionCreateWithoutPeriodeInput[] | Prisma.DeliberationSessionUncheckedCreateWithoutPeriodeInput[]
+  connectOrCreate?: Prisma.DeliberationSessionCreateOrConnectWithoutPeriodeInput | Prisma.DeliberationSessionCreateOrConnectWithoutPeriodeInput[]
+  createMany?: Prisma.DeliberationSessionCreateManyPeriodeInputEnvelope
+  connect?: Prisma.DeliberationSessionWhereUniqueInput | Prisma.DeliberationSessionWhereUniqueInput[]
+}
+
+export type DeliberationSessionUncheckedCreateNestedManyWithoutPeriodeInput = {
+  create?: Prisma.XOR<Prisma.DeliberationSessionCreateWithoutPeriodeInput, Prisma.DeliberationSessionUncheckedCreateWithoutPeriodeInput> | Prisma.DeliberationSessionCreateWithoutPeriodeInput[] | Prisma.DeliberationSessionUncheckedCreateWithoutPeriodeInput[]
+  connectOrCreate?: Prisma.DeliberationSessionCreateOrConnectWithoutPeriodeInput | Prisma.DeliberationSessionCreateOrConnectWithoutPeriodeInput[]
+  createMany?: Prisma.DeliberationSessionCreateManyPeriodeInputEnvelope
+  connect?: Prisma.DeliberationSessionWhereUniqueInput | Prisma.DeliberationSessionWhereUniqueInput[]
+}
+
+export type DeliberationSessionUpdateManyWithoutPeriodeNestedInput = {
+  create?: Prisma.XOR<Prisma.DeliberationSessionCreateWithoutPeriodeInput, Prisma.DeliberationSessionUncheckedCreateWithoutPeriodeInput> | Prisma.DeliberationSessionCreateWithoutPeriodeInput[] | Prisma.DeliberationSessionUncheckedCreateWithoutPeriodeInput[]
+  connectOrCreate?: Prisma.DeliberationSessionCreateOrConnectWithoutPeriodeInput | Prisma.DeliberationSessionCreateOrConnectWithoutPeriodeInput[]
+  upsert?: Prisma.DeliberationSessionUpsertWithWhereUniqueWithoutPeriodeInput | Prisma.DeliberationSessionUpsertWithWhereUniqueWithoutPeriodeInput[]
+  createMany?: Prisma.DeliberationSessionCreateManyPeriodeInputEnvelope
+  set?: Prisma.DeliberationSessionWhereUniqueInput | Prisma.DeliberationSessionWhereUniqueInput[]
+  disconnect?: Prisma.DeliberationSessionWhereUniqueInput | Prisma.DeliberationSessionWhereUniqueInput[]
+  delete?: Prisma.DeliberationSessionWhereUniqueInput | Prisma.DeliberationSessionWhereUniqueInput[]
+  connect?: Prisma.DeliberationSessionWhereUniqueInput | Prisma.DeliberationSessionWhereUniqueInput[]
+  update?: Prisma.DeliberationSessionUpdateWithWhereUniqueWithoutPeriodeInput | Prisma.DeliberationSessionUpdateWithWhereUniqueWithoutPeriodeInput[]
+  updateMany?: Prisma.DeliberationSessionUpdateManyWithWhereWithoutPeriodeInput | Prisma.DeliberationSessionUpdateManyWithWhereWithoutPeriodeInput[]
+  deleteMany?: Prisma.DeliberationSessionScalarWhereInput | Prisma.DeliberationSessionScalarWhereInput[]
+}
+
+export type DeliberationSessionUncheckedUpdateManyWithoutPeriodeNestedInput = {
+  create?: Prisma.XOR<Prisma.DeliberationSessionCreateWithoutPeriodeInput, Prisma.DeliberationSessionUncheckedCreateWithoutPeriodeInput> | Prisma.DeliberationSessionCreateWithoutPeriodeInput[] | Prisma.DeliberationSessionUncheckedCreateWithoutPeriodeInput[]
+  connectOrCreate?: Prisma.DeliberationSessionCreateOrConnectWithoutPeriodeInput | Prisma.DeliberationSessionCreateOrConnectWithoutPeriodeInput[]
+  upsert?: Prisma.DeliberationSessionUpsertWithWhereUniqueWithoutPeriodeInput | Prisma.DeliberationSessionUpsertWithWhereUniqueWithoutPeriodeInput[]
+  createMany?: Prisma.DeliberationSessionCreateManyPeriodeInputEnvelope
+  set?: Prisma.DeliberationSessionWhereUniqueInput | Prisma.DeliberationSessionWhereUniqueInput[]
+  disconnect?: Prisma.DeliberationSessionWhereUniqueInput | Prisma.DeliberationSessionWhereUniqueInput[]
+  delete?: Prisma.DeliberationSessionWhereUniqueInput | Prisma.DeliberationSessionWhereUniqueInput[]
+  connect?: Prisma.DeliberationSessionWhereUniqueInput | Prisma.DeliberationSessionWhereUniqueInput[]
+  update?: Prisma.DeliberationSessionUpdateWithWhereUniqueWithoutPeriodeInput | Prisma.DeliberationSessionUpdateWithWhereUniqueWithoutPeriodeInput[]
+  updateMany?: Prisma.DeliberationSessionUpdateManyWithWhereWithoutPeriodeInput | Prisma.DeliberationSessionUpdateManyWithWhereWithoutPeriodeInput[]
+  deleteMany?: Prisma.DeliberationSessionScalarWhereInput | Prisma.DeliberationSessionScalarWhereInput[]
+}
+
 export type EnumDeliberationStatutFieldUpdateOperationsInput = {
   set?: $Enums.DeliberationStatut
 }
@@ -693,6 +759,7 @@ export type DeliberationSessionCreateWithoutCreatedByInput = {
   updatedAt?: Date | string
   classe: Prisma.ClasseCreateNestedOneWithoutDeliberationSessionsInput
   school: Prisma.SchoolCreateNestedOneWithoutDeliberationSessionsInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutDeliberationSessionsInput
   validatedBy?: Prisma.UserCreateNestedOneWithoutDeliberationSessionsValidéesInput
   decisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutSessionInput
 }
@@ -703,6 +770,7 @@ export type DeliberationSessionUncheckedCreateWithoutCreatedByInput = {
   schoolId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId?: string | null
   statut?: $Enums.DeliberationStatut
   compteRendu?: string | null
   validatedAt?: Date | string | null
@@ -733,6 +801,7 @@ export type DeliberationSessionCreateWithoutValidatedByInput = {
   updatedAt?: Date | string
   classe: Prisma.ClasseCreateNestedOneWithoutDeliberationSessionsInput
   school: Prisma.SchoolCreateNestedOneWithoutDeliberationSessionsInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutDeliberationSessionsInput
   createdBy: Prisma.UserCreateNestedOneWithoutDeliberationSessionsInput
   decisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutSessionInput
 }
@@ -743,6 +812,7 @@ export type DeliberationSessionUncheckedCreateWithoutValidatedByInput = {
   schoolId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId?: string | null
   statut?: $Enums.DeliberationStatut
   compteRendu?: string | null
   createdById: string
@@ -787,6 +857,7 @@ export type DeliberationSessionScalarWhereInput = {
   schoolId?: Prisma.StringFilter<"DeliberationSession"> | string
   periodeLabel?: Prisma.StringFilter<"DeliberationSession"> | string
   anneeScolaire?: Prisma.StringFilter<"DeliberationSession"> | string
+  periodeId?: Prisma.StringNullableFilter<"DeliberationSession"> | string | null
   statut?: Prisma.EnumDeliberationStatutFilter<"DeliberationSession"> | $Enums.DeliberationStatut
   compteRendu?: Prisma.StringNullableFilter<"DeliberationSession"> | string | null
   createdById?: Prisma.StringFilter<"DeliberationSession"> | string
@@ -822,6 +893,7 @@ export type DeliberationSessionCreateWithoutSchoolInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   classe: Prisma.ClasseCreateNestedOneWithoutDeliberationSessionsInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutDeliberationSessionsInput
   createdBy: Prisma.UserCreateNestedOneWithoutDeliberationSessionsInput
   validatedBy?: Prisma.UserCreateNestedOneWithoutDeliberationSessionsValidéesInput
   decisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutSessionInput
@@ -832,6 +904,7 @@ export type DeliberationSessionUncheckedCreateWithoutSchoolInput = {
   classeId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId?: string | null
   statut?: $Enums.DeliberationStatut
   compteRendu?: string | null
   createdById: string
@@ -878,6 +951,7 @@ export type DeliberationSessionCreateWithoutClasseInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   school: Prisma.SchoolCreateNestedOneWithoutDeliberationSessionsInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutDeliberationSessionsInput
   createdBy: Prisma.UserCreateNestedOneWithoutDeliberationSessionsInput
   validatedBy?: Prisma.UserCreateNestedOneWithoutDeliberationSessionsValidéesInput
   decisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutSessionInput
@@ -888,6 +962,7 @@ export type DeliberationSessionUncheckedCreateWithoutClasseInput = {
   schoolId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId?: string | null
   statut?: $Enums.DeliberationStatut
   compteRendu?: string | null
   createdById: string
@@ -924,7 +999,7 @@ export type DeliberationSessionUpdateManyWithWhereWithoutClasseInput = {
   data: Prisma.XOR<Prisma.DeliberationSessionUpdateManyMutationInput, Prisma.DeliberationSessionUncheckedUpdateManyWithoutClasseInput>
 }
 
-export type DeliberationSessionCreateWithoutDecisionsInput = {
+export type DeliberationSessionCreateWithoutPeriodeInput = {
   id?: string
   periodeLabel: string
   anneeScolaire: string
@@ -937,6 +1012,65 @@ export type DeliberationSessionCreateWithoutDecisionsInput = {
   school: Prisma.SchoolCreateNestedOneWithoutDeliberationSessionsInput
   createdBy: Prisma.UserCreateNestedOneWithoutDeliberationSessionsInput
   validatedBy?: Prisma.UserCreateNestedOneWithoutDeliberationSessionsValidéesInput
+  decisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutSessionInput
+}
+
+export type DeliberationSessionUncheckedCreateWithoutPeriodeInput = {
+  id?: string
+  classeId: string
+  schoolId: string
+  periodeLabel: string
+  anneeScolaire: string
+  statut?: $Enums.DeliberationStatut
+  compteRendu?: string | null
+  createdById: string
+  validatedAt?: Date | string | null
+  validatedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  decisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutSessionInput
+}
+
+export type DeliberationSessionCreateOrConnectWithoutPeriodeInput = {
+  where: Prisma.DeliberationSessionWhereUniqueInput
+  create: Prisma.XOR<Prisma.DeliberationSessionCreateWithoutPeriodeInput, Prisma.DeliberationSessionUncheckedCreateWithoutPeriodeInput>
+}
+
+export type DeliberationSessionCreateManyPeriodeInputEnvelope = {
+  data: Prisma.DeliberationSessionCreateManyPeriodeInput | Prisma.DeliberationSessionCreateManyPeriodeInput[]
+  skipDuplicates?: boolean
+}
+
+export type DeliberationSessionUpsertWithWhereUniqueWithoutPeriodeInput = {
+  where: Prisma.DeliberationSessionWhereUniqueInput
+  update: Prisma.XOR<Prisma.DeliberationSessionUpdateWithoutPeriodeInput, Prisma.DeliberationSessionUncheckedUpdateWithoutPeriodeInput>
+  create: Prisma.XOR<Prisma.DeliberationSessionCreateWithoutPeriodeInput, Prisma.DeliberationSessionUncheckedCreateWithoutPeriodeInput>
+}
+
+export type DeliberationSessionUpdateWithWhereUniqueWithoutPeriodeInput = {
+  where: Prisma.DeliberationSessionWhereUniqueInput
+  data: Prisma.XOR<Prisma.DeliberationSessionUpdateWithoutPeriodeInput, Prisma.DeliberationSessionUncheckedUpdateWithoutPeriodeInput>
+}
+
+export type DeliberationSessionUpdateManyWithWhereWithoutPeriodeInput = {
+  where: Prisma.DeliberationSessionScalarWhereInput
+  data: Prisma.XOR<Prisma.DeliberationSessionUpdateManyMutationInput, Prisma.DeliberationSessionUncheckedUpdateManyWithoutPeriodeInput>
+}
+
+export type DeliberationSessionCreateWithoutDecisionsInput = {
+  id?: string
+  periodeLabel: string
+  anneeScolaire: string
+  statut?: $Enums.DeliberationStatut
+  compteRendu?: string | null
+  validatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  classe: Prisma.ClasseCreateNestedOneWithoutDeliberationSessionsInput
+  school: Prisma.SchoolCreateNestedOneWithoutDeliberationSessionsInput
+  periode?: Prisma.PeriodeCreateNestedOneWithoutDeliberationSessionsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutDeliberationSessionsInput
+  validatedBy?: Prisma.UserCreateNestedOneWithoutDeliberationSessionsValidéesInput
 }
 
 export type DeliberationSessionUncheckedCreateWithoutDecisionsInput = {
@@ -945,6 +1079,7 @@ export type DeliberationSessionUncheckedCreateWithoutDecisionsInput = {
   schoolId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId?: string | null
   statut?: $Enums.DeliberationStatut
   compteRendu?: string | null
   createdById: string
@@ -981,6 +1116,7 @@ export type DeliberationSessionUpdateWithoutDecisionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   classe?: Prisma.ClasseUpdateOneRequiredWithoutDeliberationSessionsNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutDeliberationSessionsNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutDeliberationSessionsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutDeliberationSessionsNestedInput
   validatedBy?: Prisma.UserUpdateOneWithoutDeliberationSessionsValidéesNestedInput
 }
@@ -991,6 +1127,7 @@ export type DeliberationSessionUncheckedUpdateWithoutDecisionsInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
   compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1006,6 +1143,7 @@ export type DeliberationSessionCreateManyCreatedByInput = {
   schoolId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId?: string | null
   statut?: $Enums.DeliberationStatut
   compteRendu?: string | null
   validatedAt?: Date | string | null
@@ -1020,6 +1158,7 @@ export type DeliberationSessionCreateManyValidatedByInput = {
   schoolId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId?: string | null
   statut?: $Enums.DeliberationStatut
   compteRendu?: string | null
   createdById: string
@@ -1039,6 +1178,7 @@ export type DeliberationSessionUpdateWithoutCreatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   classe?: Prisma.ClasseUpdateOneRequiredWithoutDeliberationSessionsNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutDeliberationSessionsNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutDeliberationSessionsNestedInput
   validatedBy?: Prisma.UserUpdateOneWithoutDeliberationSessionsValidéesNestedInput
   decisions?: Prisma.DeliberationDecisionUpdateManyWithoutSessionNestedInput
 }
@@ -1049,6 +1189,7 @@ export type DeliberationSessionUncheckedUpdateWithoutCreatedByInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
   compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1064,6 +1205,7 @@ export type DeliberationSessionUncheckedUpdateManyWithoutCreatedByInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
   compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1083,6 +1225,7 @@ export type DeliberationSessionUpdateWithoutValidatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   classe?: Prisma.ClasseUpdateOneRequiredWithoutDeliberationSessionsNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutDeliberationSessionsNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutDeliberationSessionsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutDeliberationSessionsNestedInput
   decisions?: Prisma.DeliberationDecisionUpdateManyWithoutSessionNestedInput
 }
@@ -1093,6 +1236,7 @@ export type DeliberationSessionUncheckedUpdateWithoutValidatedByInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
   compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1108,6 +1252,7 @@ export type DeliberationSessionUncheckedUpdateManyWithoutValidatedByInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
   compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1121,6 +1266,7 @@ export type DeliberationSessionCreateManySchoolInput = {
   classeId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId?: string | null
   statut?: $Enums.DeliberationStatut
   compteRendu?: string | null
   createdById: string
@@ -1140,6 +1286,7 @@ export type DeliberationSessionUpdateWithoutSchoolInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   classe?: Prisma.ClasseUpdateOneRequiredWithoutDeliberationSessionsNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutDeliberationSessionsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutDeliberationSessionsNestedInput
   validatedBy?: Prisma.UserUpdateOneWithoutDeliberationSessionsValidéesNestedInput
   decisions?: Prisma.DeliberationDecisionUpdateManyWithoutSessionNestedInput
@@ -1150,6 +1297,7 @@ export type DeliberationSessionUncheckedUpdateWithoutSchoolInput = {
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
   periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
   compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1165,6 +1313,7 @@ export type DeliberationSessionUncheckedUpdateManyWithoutSchoolInput = {
   classeId?: Prisma.StringFieldUpdateOperationsInput | string
   periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
   compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1179,6 +1328,7 @@ export type DeliberationSessionCreateManyClasseInput = {
   schoolId: string
   periodeLabel: string
   anneeScolaire: string
+  periodeId?: string | null
   statut?: $Enums.DeliberationStatut
   compteRendu?: string | null
   createdById: string
@@ -1198,6 +1348,7 @@ export type DeliberationSessionUpdateWithoutClasseInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   school?: Prisma.SchoolUpdateOneRequiredWithoutDeliberationSessionsNestedInput
+  periode?: Prisma.PeriodeUpdateOneWithoutDeliberationSessionsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutDeliberationSessionsNestedInput
   validatedBy?: Prisma.UserUpdateOneWithoutDeliberationSessionsValidéesNestedInput
   decisions?: Prisma.DeliberationDecisionUpdateManyWithoutSessionNestedInput
@@ -1205,6 +1356,69 @@ export type DeliberationSessionUpdateWithoutClasseInput = {
 
 export type DeliberationSessionUncheckedUpdateWithoutClasseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
+  anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
+  compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  validatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  decisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutSessionNestedInput
+}
+
+export type DeliberationSessionUncheckedUpdateManyWithoutClasseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
+  anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
+  compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  validatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DeliberationSessionCreateManyPeriodeInput = {
+  id?: string
+  classeId: string
+  schoolId: string
+  periodeLabel: string
+  anneeScolaire: string
+  statut?: $Enums.DeliberationStatut
+  compteRendu?: string | null
+  createdById: string
+  validatedAt?: Date | string | null
+  validatedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DeliberationSessionUpdateWithoutPeriodeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
+  anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  statut?: Prisma.EnumDeliberationStatutFieldUpdateOperationsInput | $Enums.DeliberationStatut
+  compteRendu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classe?: Prisma.ClasseUpdateOneRequiredWithoutDeliberationSessionsNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutDeliberationSessionsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutDeliberationSessionsNestedInput
+  validatedBy?: Prisma.UserUpdateOneWithoutDeliberationSessionsValidéesNestedInput
+  decisions?: Prisma.DeliberationDecisionUpdateManyWithoutSessionNestedInput
+}
+
+export type DeliberationSessionUncheckedUpdateWithoutPeriodeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1218,8 +1432,9 @@ export type DeliberationSessionUncheckedUpdateWithoutClasseInput = {
   decisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutSessionNestedInput
 }
 
-export type DeliberationSessionUncheckedUpdateManyWithoutClasseInput = {
+export type DeliberationSessionUncheckedUpdateManyWithoutPeriodeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   periodeLabel?: Prisma.StringFieldUpdateOperationsInput | string
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1269,6 +1484,7 @@ export type DeliberationSessionSelect<ExtArgs extends runtime.Types.Extensions.I
   schoolId?: boolean
   periodeLabel?: boolean
   anneeScolaire?: boolean
+  periodeId?: boolean
   statut?: boolean
   compteRendu?: boolean
   createdById?: boolean
@@ -1278,6 +1494,7 @@ export type DeliberationSessionSelect<ExtArgs extends runtime.Types.Extensions.I
   updatedAt?: boolean
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.DeliberationSession$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   validatedBy?: boolean | Prisma.DeliberationSession$validatedByArgs<ExtArgs>
   decisions?: boolean | Prisma.DeliberationSession$decisionsArgs<ExtArgs>
@@ -1290,6 +1507,7 @@ export type DeliberationSessionSelectCreateManyAndReturn<ExtArgs extends runtime
   schoolId?: boolean
   periodeLabel?: boolean
   anneeScolaire?: boolean
+  periodeId?: boolean
   statut?: boolean
   compteRendu?: boolean
   createdById?: boolean
@@ -1299,6 +1517,7 @@ export type DeliberationSessionSelectCreateManyAndReturn<ExtArgs extends runtime
   updatedAt?: boolean
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.DeliberationSession$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   validatedBy?: boolean | Prisma.DeliberationSession$validatedByArgs<ExtArgs>
 }, ExtArgs["result"]["deliberationSession"]>
@@ -1309,6 +1528,7 @@ export type DeliberationSessionSelectUpdateManyAndReturn<ExtArgs extends runtime
   schoolId?: boolean
   periodeLabel?: boolean
   anneeScolaire?: boolean
+  periodeId?: boolean
   statut?: boolean
   compteRendu?: boolean
   createdById?: boolean
@@ -1318,6 +1538,7 @@ export type DeliberationSessionSelectUpdateManyAndReturn<ExtArgs extends runtime
   updatedAt?: boolean
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.DeliberationSession$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   validatedBy?: boolean | Prisma.DeliberationSession$validatedByArgs<ExtArgs>
 }, ExtArgs["result"]["deliberationSession"]>
@@ -1328,6 +1549,7 @@ export type DeliberationSessionSelectScalar = {
   schoolId?: boolean
   periodeLabel?: boolean
   anneeScolaire?: boolean
+  periodeId?: boolean
   statut?: boolean
   compteRendu?: boolean
   createdById?: boolean
@@ -1337,10 +1559,11 @@ export type DeliberationSessionSelectScalar = {
   updatedAt?: boolean
 }
 
-export type DeliberationSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "classeId" | "schoolId" | "periodeLabel" | "anneeScolaire" | "statut" | "compteRendu" | "createdById" | "validatedAt" | "validatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["deliberationSession"]>
+export type DeliberationSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "classeId" | "schoolId" | "periodeLabel" | "anneeScolaire" | "periodeId" | "statut" | "compteRendu" | "createdById" | "validatedAt" | "validatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["deliberationSession"]>
 export type DeliberationSessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.DeliberationSession$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   validatedBy?: boolean | Prisma.DeliberationSession$validatedByArgs<ExtArgs>
   decisions?: boolean | Prisma.DeliberationSession$decisionsArgs<ExtArgs>
@@ -1349,12 +1572,14 @@ export type DeliberationSessionInclude<ExtArgs extends runtime.Types.Extensions.
 export type DeliberationSessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.DeliberationSession$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   validatedBy?: boolean | Prisma.DeliberationSession$validatedByArgs<ExtArgs>
 }
 export type DeliberationSessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  periode?: boolean | Prisma.DeliberationSession$periodeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   validatedBy?: boolean | Prisma.DeliberationSession$validatedByArgs<ExtArgs>
 }
@@ -1364,6 +1589,7 @@ export type $DeliberationSessionPayload<ExtArgs extends runtime.Types.Extensions
   objects: {
     classe: Prisma.$ClassePayload<ExtArgs>
     school: Prisma.$SchoolPayload<ExtArgs>
+    periode: Prisma.$PeriodePayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs>
     validatedBy: Prisma.$UserPayload<ExtArgs> | null
     decisions: Prisma.$DeliberationDecisionPayload<ExtArgs>[]
@@ -1374,6 +1600,7 @@ export type $DeliberationSessionPayload<ExtArgs extends runtime.Types.Extensions
     schoolId: string
     periodeLabel: string
     anneeScolaire: string
+    periodeId: string | null
     statut: $Enums.DeliberationStatut
     compteRendu: string | null
     createdById: string
@@ -1777,6 +2004,7 @@ export interface Prisma__DeliberationSessionClient<T, Null = never, ExtArgs exte
   readonly [Symbol.toStringTag]: "PrismaPromise"
   classe<T extends Prisma.ClasseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClasseDefaultArgs<ExtArgs>>): Prisma.Prisma__ClasseClient<runtime.Types.Result.GetResult<Prisma.$ClassePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  periode<T extends Prisma.DeliberationSession$periodeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeliberationSession$periodeArgs<ExtArgs>>): Prisma.Prisma__PeriodeClient<runtime.Types.Result.GetResult<Prisma.$PeriodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   validatedBy<T extends Prisma.DeliberationSession$validatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeliberationSession$validatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   decisions<T extends Prisma.DeliberationSession$decisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeliberationSession$decisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeliberationDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1814,6 +2042,7 @@ export interface DeliberationSessionFieldRefs {
   readonly schoolId: Prisma.FieldRef<"DeliberationSession", 'String'>
   readonly periodeLabel: Prisma.FieldRef<"DeliberationSession", 'String'>
   readonly anneeScolaire: Prisma.FieldRef<"DeliberationSession", 'String'>
+  readonly periodeId: Prisma.FieldRef<"DeliberationSession", 'String'>
   readonly statut: Prisma.FieldRef<"DeliberationSession", 'DeliberationStatut'>
   readonly compteRendu: Prisma.FieldRef<"DeliberationSession", 'String'>
   readonly createdById: Prisma.FieldRef<"DeliberationSession", 'String'>
@@ -2219,6 +2448,25 @@ export type DeliberationSessionDeleteManyArgs<ExtArgs extends runtime.Types.Exte
    * Limit how many DeliberationSessions to delete.
    */
   limit?: number
+}
+
+/**
+ * DeliberationSession.periode
+ */
+export type DeliberationSession$periodeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Periode
+   */
+  select?: Prisma.PeriodeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Periode
+   */
+  omit?: Prisma.PeriodeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PeriodeInclude<ExtArgs> | null
+  where?: Prisma.PeriodeWhereInput
 }
 
 /**

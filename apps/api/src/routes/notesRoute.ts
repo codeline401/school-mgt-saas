@@ -11,7 +11,8 @@ import {
   getClasseNotes,
   getMoyenneAutoClasse,
   updateClasseNote,
-  getCLassementClasse,
+  getClassementClasse,
+  getClassePeriodes,
 } from "../controllers/noteController.js";
 import {
   createDeliberationSession,
@@ -83,6 +84,13 @@ router.get(
   getMoyenneAutoClasse,
 );
 
+router.get(
+  "/periodes",
+  authenticate,
+  authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.USER, Role.PROF),
+  getClassePeriodes,
+);
+
 /**
  * POST /api/classes/:classeId/notes/:noteId
  * Accessible : PROF créateur, ADMIN, SUDO_ADMIN
@@ -127,7 +135,7 @@ router.get(
   "/classement",
   authenticate,
   authorizeRoles(Role.SUDO_ADMIN, Role.ADMIN, Role.PROF, Role.USER),
-  getCLassementClasse,
+  getClassementClasse,
 );
 
 /**

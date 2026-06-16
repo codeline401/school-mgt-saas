@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model ExamenSalle
- * Salle d'examen configurable au niveau de l'école
+ * 
  */
 export type ExamenSalleModel = runtime.Types.Result.DefaultSelection<Prisma.$ExamenSallePayload>
 

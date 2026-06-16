@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model Presence
- * Présence d'un élève dans un appel
+ * 
  */
 export type PresenceModel = runtime.Types.Result.DefaultSelection<Prisma.$PresencePayload>
 

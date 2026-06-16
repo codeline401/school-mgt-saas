@@ -20,6 +20,8 @@ import notificationRoutes from "./routes/notificationRoute.js";
 import { authenticate } from "./middlewares/authMiddleware.js"; // Importation du middleware d'authentification
 
 import bulletinTemplateRoute from "./routes/bulletinTemplateRoute.js"; // Importation des routes pour le canevas de bulletin
+import exportRoute from "./routes/exportRoute.js";
+import periodeRoute from "./routes/periodeRoute.js";
 
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
@@ -32,6 +34,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/schools", schoolRoutes);
 app.use("/api/classes", classesRoutes);
 app.use("/api/profils", profilsRoutes);
+
+app.use("/api/export", exportRoute);
+app.use("/api/periodes", periodeRoute);
 
 app.get("/api/eleves", authenticate, getAllEleves);
 app.post("/api/eleves/import", authenticate, importEleves);
