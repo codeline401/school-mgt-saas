@@ -6,7 +6,6 @@ const exportOptionsSchema = z
     orientation: z.enum(["portrait", "landscape"]).optional(),
     watermark: z.string().optional(),
     primaryColor: z.string().optional(),
-    top: z.number().int().positive().optional(),
   })
   .optional();
 

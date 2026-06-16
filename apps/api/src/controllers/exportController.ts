@@ -160,8 +160,11 @@ export const exportController = {
       const options = mergeExportOptions(rawOptions);
 
       // FIX #2 : select explicite sur school pour avoir adresse, telephone, email
-      const eleve = await prisma.eleve.findUnique({
-        where: { id: eleveId },
+      const eleve = await prisma.eleve.findFirst({
+        where: {
+          id: eleveId,
+          classe: { schoolId: req.user!.schoolId as string },
+        },
         include: {
           classe: {
             include: {
@@ -175,8 +178,8 @@ export const exportController = {
         return;
       }
 
-      const periode = await prisma.periode.findUnique({
-        where: { id: periodeId },
+      const periode = await prisma.periode.findFirst({
+        where: { id: periodeId, schoolId: req.user!.schoolId as string },
       });
       if (!periode) {
         res.status(404).json({ error: "Période introuvable" });
@@ -315,8 +318,11 @@ export const exportController = {
       const options = mergeExportOptions(rawOptions);
 
       // FIX #2
-      const eleve = await prisma.eleve.findUnique({
-        where: { id: eleveId },
+      const eleve = await prisma.eleve.findFirst({
+        where: {
+          id: eleveId,
+          classe: { schoolId: req.user!.schoolId as string },
+        },
         include: {
           classe: {
             include: {
@@ -329,8 +335,8 @@ export const exportController = {
         res.status(404).json({ error: "Élève introuvable" });
         return;
       }
-      const periode = await prisma.periode.findUnique({
-        where: { id: periodeId },
+      const periode = await prisma.periode.findFirst({
+        where: { id: periodeId, schoolId: req.user!.schoolId as string },
       });
       if (!periode) {
         res.status(404).json({ error: "Période introuvable" });
@@ -465,8 +471,8 @@ export const exportController = {
         res.status(404).json({ error: "Classe introuvable" });
         return;
       }
-      const periode = await prisma.periode.findUnique({
-        where: { id: periodeId },
+      const periode = await prisma.periode.findFirst({
+        where: { id: periodeId, schoolId: req.user!.schoolId as string },
       });
       if (!periode) {
         res.status(404).json({ error: "Période introuvable" });
@@ -515,7 +521,15 @@ export const exportController = {
       );
 
       entriesAvecMoy.sort((a, b) => b.moyenneNumerique - a.moyenneNumerique);
-      entriesAvecMoy.forEach((e, i) => (e.rang = i + 1));
+      let lastScore: number | null = null;
+      let lastRank = 0;
+      entriesAvecMoy.forEach((e, i) => {
+        if (lastScore === null || e.moyenneNumerique < lastScore) {
+          lastRank = i + 1;
+          lastScore = e.moyenneNumerique;
+        }
+        e.rang = lastRank;
+      });
 
       const moyennes = entriesAvecMoy
         .map((e) => e.moyenneNumerique)
@@ -613,7 +627,7 @@ export const exportController = {
       const options = mergeExportOptions(rawOptions);
 
       const session = await prisma.deliberationSession.findUnique({
-        where: { id: sessionId },
+        where: { id: sessionId, schoolId: req.user!.schoolId as string },
         include: {
           // FIX #2
           classe: {

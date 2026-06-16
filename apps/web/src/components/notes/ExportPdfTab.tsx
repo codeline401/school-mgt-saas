@@ -69,11 +69,14 @@ const EXPORT_TYPES: Array<{
 export default function ExportPdfTab() {
   const user = useAuthStore((s) => s.user);
 
-  const canExport =
-    user?.role === "SUDO_ADMIN" ||
-    user?.role === "ADMIN" ||
-    user?.role === "USER" ||
-    user?.role === "PROF";
+  const allowedTypesByRole: Record<string, ExportType[]> = {
+    SUDO_ADMIN: ["bulletin", "releve", "classement", "deliberation"],
+    ADMIN: ["bulletin", "releve", "classement", "deliberation"],
+    PROF: ["bulletin", "releve", "classement"],
+    USER: ["releve", "deliberation"],
+  };
+  const allowedTypes = user ? (allowedTypesByRole[user.role] ?? []) : [];
+  const canExport = allowedTypes.length > 0;
 
   // Sélections communes
   const [exportType, setExportType] = useState<ExportType>("bulletin");
@@ -234,33 +237,35 @@ export default function ExportPdfTab() {
       <div>
         <p className="text-sm font-medium mb-2">Type de document</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2">
-          {EXPORT_TYPES.map(({ value, label, icon: Icon, description }) => (
-            <button
-              key={value}
-              type="button"
-              onClick={() => handleTypeChange(value)}
-              className={`card card-border cursor-pointer text-left transition-colors ${
-                exportType === value
-                  ? "border-primary bg-primary/5"
-                  : "hover:bg-base-200"
-              }`}
-            >
-              <div className="card-body p-3 gap-1">
-                <div className="flex items-center gap-2">
-                  <Icon
-                    size={15}
-                    className={
-                      exportType === value
-                        ? "text-primary"
-                        : "text-base-content/60"
-                    }
-                  />
-                  <span className="font-medium text-sm">{label}</span>
+          {EXPORT_TYPES.filter((t) => allowedTypes.includes(t.value)).map(
+            ({ value, label, icon: Icon, description }) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => handleTypeChange(value)}
+                className={`card card-border cursor-pointer text-left transition-colors ${
+                  exportType === value
+                    ? "border-primary bg-primary/5"
+                    : "hover:bg-base-200"
+                }`}
+              >
+                <div className="card-body p-3 gap-1">
+                  <div className="flex items-center gap-2">
+                    <Icon
+                      size={15}
+                      className={
+                        exportType === value
+                          ? "text-primary"
+                          : "text-base-content/60"
+                      }
+                    />
+                    <span className="font-medium text-sm">{label}</span>
+                  </div>
+                  <p className="text-xs text-base-content/50">{description}</p>
                 </div>
-                <p className="text-xs text-base-content/50">{description}</p>
-              </div>
-            </button>
-          ))}
+              </button>
+            ),
+          )}
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import Handlebars from "handlebars";
 import fs from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
 
 type TemplateDelegate = HandlebarsTemplateDelegate;
 
@@ -14,7 +15,8 @@ export class TemplateEngine {
 
   constructor(templatesDir?: string) {
     // Templates are co-located with the compiled code
-    this.templatesDir = templatesDir ?? path.join(__dirname, "..", "templates");
+    const dirname = path.dirname(fileURLToPath(import.meta.url));
+    this.templatesDir = templatesDir ?? path.join(dirname, "..", "templates");
     this.registerHelpers();
   }
 

@@ -7,21 +7,31 @@ import type { ExportFormat, ExportOrientation } from "@school-mgt/types";
 
 export class PdfGenerator {
   private browser: Browser | null = null;
+  private browserPromise: Promise<Browser> | null = null;
 
   private async getBrowser(): Promise<Browser> {
-    if (!this.browser) {
-      this.browser = await puppeteer.launch({
-        headless: true,
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
-        args: [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-dev-shm-usage",
-          "--disable-gpu",
-        ],
-      });
+    if (this.browser) return this.browser;
+    if (!this.browserPromise) {
+      this.browserPromise = puppeteer
+        .launch({
+          headless: true,
+          executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+          args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+          ],
+        })
+        .then((browser) => {
+          this.browser = browser;
+          return browser;
+        })
+        .finally(() => {
+          this.browserPromise = null;
+        });
     }
-    return this.browser;
+    return this.browserPromise;
   }
 
   async htmlToPdf(

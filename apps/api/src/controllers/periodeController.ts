@@ -58,8 +58,12 @@ export const getPeriodes = async (req: Request, res: Response) => {
 export const createPeriode = async (req: Request, res: Response) => {
   try {
     const schoolId = requireSchoolId(req, res);
-    if (!schoolId) return;
 
+    if (!schoolId) {
+      return res.status(400).json({
+        error: "Aucune école associée pour créer une période.",
+      });
+    }
     const validated = createPeriodeSchema.parse(req.body);
 
     const periode = await prisma.periode.create({
@@ -121,6 +125,12 @@ export const deletePeriode = async (req: Request, res: Response) => {
     await prisma.periode.delete({ where: { id } });
     res.status(204).send();
   } catch (err) {
+    if ((err as any)?.code === "P2003") {
+      return res.status(409).json({
+        error:
+          "Impossible de supprimer cette période : elle est encore référencée.",
+      });
+    }
     console.error("Erreur deletePeriode :", err);
     res.status(500).json({ error: "Une erreur est survenue." });
   }
