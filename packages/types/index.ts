@@ -472,3 +472,81 @@ export interface BulletinTemplate extends BaseEntity {
   schoolId: string;
   config: BulletinTemplateConfig;
 }
+
+export type ExamenStatut =
+  | "PLANIFIE"
+  | "EN_COURS"
+  | "TERMINE"
+  | "REPORTE"
+  | "ANNULE";
+
+export interface ExamenSalle {
+  id: string;
+  nom: string;
+  capacite?: number | null;
+  location?: string | null;
+  schoolId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ExamenSurveillant {
+  id: string;
+  userId: string;
+  roleLabel?: string | null;
+  user?: {
+    id: string;
+    nom: string;
+    prenom: string;
+    email?: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ExamenIncident {
+  id: string;
+  sessionId: string;
+  type: string;
+  message: string;
+  createdById: string;
+  createdAt: string;
+}
+
+export interface ExamenSession {
+  id: string;
+  titre: string;
+  description?: string | null;
+  classeId: string;
+  matiereId?: string | null;
+  salleId?: string | null;
+  schoolId: string;
+  dateExamen: string;
+  heureDebut: string;
+  heureFin: string;
+  statut: ExamenStatut;
+  createdById: string;
+  createdAt: string;
+  updatedAt: string;
+  salle?: ExamenSalle | null;
+  matiere?: { id: string; nom: string } | null;
+  surveillants?: ExamenSurveillant[];
+  incidents?: ExamenIncident[];
+}
+
+export interface ExamenPlanningEpreuveInput {
+  dateExamen: string;
+  matiereId: string;
+  salleId: string;
+  heureDebut: string;
+  heureFin: string;
+  surveillantUserIds: string[];
+}
+
+export interface CreateExamenPlanningInput {
+  titre: string;
+  description?: string;
+  dateDebut: string;
+  dateFin: string;
+  epreuves: ExamenPlanningEpreuveInput[];
+}

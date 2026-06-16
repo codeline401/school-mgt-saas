@@ -1,1 +1,62 @@
 
+name: Deploy frontend to VPS
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+env:
+  VPS_HOST: srv1725405.hstgr.cloud
+  VPS_USER: root
+  VPS_PATH: /var/www/school-web
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build app
+        working-directory: apps/web
+        run: |
+          npm ci
+          npm run build
+
+      - name: Start ssh-agent and load key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.APIVPSFUTURECOLE }}
+
+      - name: Add VPS to known_hosts
+        run: |
+          set -e
+          mkdir -p ~/.ssh
+
+          echo "Testing connectivity..."
+          ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 -p 22 "$VPS_USER@$VPS_HOST" "echo OK" || true
+
+          echo "Scanning host key..."
+          ssh-keyscan -H "$VPS_HOST" -p 22 >> ~/.ssh/known_hosts
+          echo "known_hosts:"
+          tail -n 5 ~/.ssh/known_hosts
+
+      - name: Test SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.APIVPSFUTURECOLE }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ls -la ~/.ssh
+
+          ssh -vvv -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes "$VPS_USER@$VPS_HOST" "echo OK"
+
+      
+      - name: Sync files to VPS
+        run: |
+          rsync -az --delete \
+            -e "ssh -o IdentitiesOnly=yes" \
+            apps/web/dist/ \
+            "$VPS_USER@$VPS_HOST:$VPS_PATH/"

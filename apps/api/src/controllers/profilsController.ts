@@ -3,10 +3,13 @@ import { ZodError } from "zod"; // Import de ZodError pour la gestion des erreur
 import { prisma } from "../lib/prisma.js";
 import {
   createParentSchema,
+  createProfesseurSchema,
   updateEleveProfilSchema,
   updateParentProfilSchema,
   updateProfesseurProfilSchema,
 } from "../schemas/profilSchema.js";
+
+import bcrypt from "bcrypt";
 
 // ===================================================================
 // HELPERS
@@ -437,6 +440,103 @@ export const updateProfesseurProfil = async (req: Request, res: Response) => {
     }
     console.error("Erreur lors de la mis à jour du profil Professeur:", err);
     res.status(500).json({ error: "Erreur serveur" });
+  }
+};
+
+/**
+ * POST /api/profils/professeurs/create
+ * @param req
+ * @param res
+ * @returns
+ * Création d'un professeur avec un compte utilisateur associé.
+ * Seuls les SUDO_ADMIN, ADMIN peuvent créer des professeurs.
+ * L'email doit être unique dans la base (contraint par Prisma).
+ */
+export const createProfesseur = async (req: Request, res: Response) => {
+  try {
+    // Seuls les SUDO_ADMIN et ADMIN peuvent créer des professeurs
+    const { role, schoolId } = req.user!; // Récupérer le rôle et l'école de l'utilisateur connecté
+    if (role !== "SUDO_ADMIN" && role !== "ADMIN") {
+      return res.status(403).json({
+        error:
+          "Accès refusé. Seuls les administrateurs peuvent créer des professeurs.",
+      });
+    }
+
+    if (!schoolId) {
+      return res.status(400).json({
+        error:
+          "L'utilisateur doit être associé à une école pour créer un professeur.",
+      });
+    }
+
+    const validatedData = createProfesseurSchema.parse(req.body); // Validation des données d'entrée
+    const hashedPassword = await bcrypt.hash(
+      `tempMDP${validatedData.prenom.toLowerCase()}1234!@futurecole`,
+      12,
+    ); // mot de passe temporaire à changer au premier login
+
+    // si une classe est renseignée pendant la création, vérifier qu'elle appartient à la même école
+    if (validatedData.classeIds) {
+      const classes = await prisma.classe.findMany({
+        where: { id: { in: validatedData.classeIds }, schoolId },
+        select: { id: true },
+      });
+      if (classes.length !== validatedData.classeIds.length) {
+        return res.status(400).json({
+          error:
+            "Une ou plusieurs classes spécifiées sont invalides ou n'appartiennent pas à votre école",
+        });
+      }
+    }
+
+    // création du compte utilisateur associé au professeur
+    const newProfesseur = await prisma.$transaction(async (tx) => {
+      const newUser = await tx.user.create({
+        data: {
+          email: validatedData.email,
+          password: hashedPassword,
+          role: "PROF",
+          schoolId,
+          nom: validatedData.nom,
+          prenom: validatedData.prenom,
+          telephone: validatedData.telephone ?? null,
+          adresse: validatedData.adresse ?? null,
+        },
+      });
+
+      const professeur = await tx.professeur.create({
+        data: {
+          nom: validatedData.nom,
+          prenom: validatedData.prenom,
+          telephone: validatedData.telephone ?? null,
+          adresse: validatedData.adresse ?? null,
+          specialites: validatedData.specialites ?? null,
+          schoolId,
+          userId: newUser.id,
+          ...(validatedData.classeIds?.length && {
+            classes: {
+              connect: validatedData.classeIds?.map((id) => ({ id })),
+            },
+          }),
+        },
+        include: {
+          classes: true,
+        },
+      });
+
+      return professeur;
+    });
+
+    return res.status(201).json(newProfesseur);
+  } catch (err) {
+    if (err instanceof ZodError) {
+      return res.status(400).json({ error: err.issues });
+    }
+    console.error("Erreur lors de la création du professeur :", err);
+    return res
+      .status(500)
+      .json({ error: "Erreur serveur lors de la création du professeur" });
   }
 };
 

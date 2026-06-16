@@ -73,7 +73,13 @@ export const ModelName = {
   Question: 'Question',
   Soumission: 'Soumission',
   Reponse: 'Reponse',
-  BulletinTemplate: 'BulletinTemplate'
+  BulletinTemplate: 'BulletinTemplate',
+  DeliberationSession: 'DeliberationSession',
+  DeliberationDecision: 'DeliberationDecision',
+  ExamenSalle: 'ExamenSalle',
+  ExamenSession: 'ExamenSession',
+  ExamenSurveillance: 'ExamenSurveillance',
+  ExamenIncident: 'ExamenIncident'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -434,6 +440,96 @@ export const BulletinTemplateScalarFieldEnum = {
 } as const
 
 export type BulletinTemplateScalarFieldEnum = (typeof BulletinTemplateScalarFieldEnum)[keyof typeof BulletinTemplateScalarFieldEnum]
+
+
+export const DeliberationSessionScalarFieldEnum = {
+  id: 'id',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  periodeLabel: 'periodeLabel',
+  anneeScolaire: 'anneeScolaire',
+  statut: 'statut',
+  compteRendu: 'compteRendu',
+  createdById: 'createdById',
+  validatedAt: 'validatedAt',
+  validatedById: 'validatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeliberationSessionScalarFieldEnum = (typeof DeliberationSessionScalarFieldEnum)[keyof typeof DeliberationSessionScalarFieldEnum]
+
+
+export const DeliberationDecisionScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  eleveId: 'eleveId',
+  decision: 'decision',
+  mention: 'mention',
+  avertissement: 'avertissement',
+  commentaire: 'commentaire',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeliberationDecisionScalarFieldEnum = (typeof DeliberationDecisionScalarFieldEnum)[keyof typeof DeliberationDecisionScalarFieldEnum]
+
+
+export const ExamenSalleScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  capacite: 'capacite',
+  location: 'location',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExamenSalleScalarFieldEnum = (typeof ExamenSalleScalarFieldEnum)[keyof typeof ExamenSalleScalarFieldEnum]
+
+
+export const ExamenSessionScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  description: 'description',
+  classeId: 'classeId',
+  matiereId: 'matiereId',
+  salleId: 'salleId',
+  schoolId: 'schoolId',
+  dateExamen: 'dateExamen',
+  heureDebut: 'heureDebut',
+  heureFin: 'heureFin',
+  statut: 'statut',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExamenSessionScalarFieldEnum = (typeof ExamenSessionScalarFieldEnum)[keyof typeof ExamenSessionScalarFieldEnum]
+
+
+export const ExamenSurveillanceScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  userId: 'userId',
+  roleLabel: 'roleLabel',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExamenSurveillanceScalarFieldEnum = (typeof ExamenSurveillanceScalarFieldEnum)[keyof typeof ExamenSurveillanceScalarFieldEnum]
+
+
+export const ExamenIncidentScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  type: 'type',
+  message: 'message',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type ExamenIncidentScalarFieldEnum = (typeof ExamenIncidentScalarFieldEnum)[keyof typeof ExamenIncidentScalarFieldEnum]
 
 
 export const SortOrder = {

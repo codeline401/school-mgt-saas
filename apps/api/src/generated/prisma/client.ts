@@ -174,3 +174,33 @@ export type Reponse = Prisma.ReponseModel
  * - seuilPassable   : note minimale poue la couleur "Passable" (défaut : 10)
  */
 export type BulletinTemplate = Prisma.BulletinTemplateModel
+/**
+ * Model DeliberationSession
+ * 
+ */
+export type DeliberationSession = Prisma.DeliberationSessionModel
+/**
+ * Model DeliberationDecision
+ * 
+ */
+export type DeliberationDecision = Prisma.DeliberationDecisionModel
+/**
+ * Model ExamenSalle
+ * Salle d'examen configurable au niveau de l'école
+ */
+export type ExamenSalle = Prisma.ExamenSalleModel
+/**
+ * Model ExamenSession
+ * Session d'examen planifiée pour une classe (et optionnellement une matière)
+ */
+export type ExamenSession = Prisma.ExamenSessionModel
+/**
+ * Model ExamenSurveillance
+ * assignement d'un surveillant à une session d'examen
+ */
+export type ExamenSurveillance = Prisma.ExamenSurveillanceModel
+/**
+ * Model ExamenIncident
+ * Journal de suivi de déroulement (incident / observations).
+ */
+export type ExamenIncident = Prisma.ExamenIncidentModel

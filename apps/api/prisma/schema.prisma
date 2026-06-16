@@ -47,8 +47,13 @@ model User {
   professeur    Professeur? // Profil RH si l'utilisateur est un PROF
   documents     Document[]     @relation("DocumentsUploades") // Documents uploadés par cet utilisateur
 
-  parent        Parent? // Profil de parent si l'utilisateur est un PARENT
-  notifications Notification[] // Notifications reçues par cet utilisateur
+  parent                        Parent? // Profil de parent si l'utilisateur est un PARENT
+  notifications                 Notification[] // Notifications reçues par cet utilisateur
+  deliberationSessions          DeliberationSession[] @relation("DelibCreatedBy") // Sessions de délibération créées par cet utilisateur
+  deliberationSessionsValidées DeliberationSession[] @relation("DelibValidatedBy") // Sessions de délibération validées par cet utilisateur
+  examensCrees                  ExamenSession[]       @relation("ExamensCrees") // Sessions d'examen créées par cet utilisateur
+  examenSurveillances           ExamenSurveillance[]  @relation("ExamenSurveilles") // Sessions d'examen où cet utilisateur est surveillant
+  examenIncidents               ExamenIncident[]      @relation("ExamenIncidentsCrees")
 }
 
 // Modele SAAS
@@ -73,15 +78,18 @@ model School {
   contrats          Contrat[]
   remplacements     Remplacement[]
 
-  matieres         Matiere[] // Liste des matières enseignées dans l'école
-  notes            Note[]
-  documents        Document[]
-  creneauHoraires  CreneauHoraire[]
-  appels           Appel[]
-  notifications    Notification[]
-  cahierTextes     CahierTexte[]
-  quizzes          Quiz[]
-  bulletinTemplate BulletinTemplate?
+  matieres             Matiere[] // Liste des matières enseignées dans l'école
+  notes                Note[]
+  documents            Document[]
+  creneauHoraires      CreneauHoraire[]
+  appels               Appel[]
+  notifications        Notification[]
+  cahierTextes         CahierTexte[]
+  quizzes              Quiz[]
+  bulletinTemplate     BulletinTemplate?
+  deliberationSessions DeliberationSession[]
+  examenSalles         ExamenSalle[]
+  examenSessions       ExamenSession[]
 }
 
 model Classe {
@@ -94,14 +102,16 @@ model Classe {
 
   matieres Matiere[] // Matières enseignées dans cette classe
 
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  notes           Note[]
-  documents       Document[]
-  creneauHoraires CreneauHoraire[]
-  appels          Appel[]
-  cahierTextes    CahierTexte[]
-  quizzes         Quiz[]
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  notes                Note[]
+  documents            Document[]
+  creneauHoraires      CreneauHoraire[]
+  appels               Appel[]
+  cahierTextes         CahierTexte[]
+  quizzes              Quiz[]
+  deliberationSessions DeliberationSession[]
+  examenSessions       ExamenSession[]
 
   @@unique([schoolId, nom]) // Un nom de classe unique par école (pour les upserts)
 }
@@ -128,11 +138,12 @@ model Eleve {
   parentId String?
 
   // Historique des admissions de l'élève
-  admissions  DossierAdmission[]
-  parent      Parent?            @relation(fields: [parentId], references: [id])
-  notes       Note[]
-  presences   Presence[]
-  soumissions Soumission[]
+  admissions            DossierAdmission[]
+  parent                Parent?                @relation(fields: [parentId], references: [id])
+  notes                 Note[]
+  presences             Presence[]
+  soumissions           Soumission[]
+  deliberationDecisions DeliberationDecision[]
 
   @@unique([schoolId, nom, prenom]) // Nom + prénom unique par école (pour les upserts)
   @@index([schoolId]) // Index pour optimiser les requêtes par école
@@ -320,6 +331,7 @@ model Matiere {
   creneauHoraires CreneauHoraire[]
   cahierTextes    CahierTexte[]
   quizzes         Quiz[]
+  examenSessions  ExamenSession[]
 
   @@unique([classeId, nom]) // Un nom de matière unique par classe
   @@index([schoolId]) // Index pour optimiser les requêtes par école
@@ -346,13 +358,13 @@ enum TypeNote {
 ///   - feuillePath : chemin local du fichier corrigé uploadé (optionnel).
 ///   - createdById : utilisateur PROF qui a saisi la note.
 model Note {
-  id          String  @id @default(uuid())
+  id          String   @id @default(uuid())
   titre       String // ex: "1er DS - 1er Trimestre - 2026-2027"
   note        Decimal
-  noteMax     Decimal @default(20) // note maximale possible, par défaut 20
-  coefficient Decimal @default(1) // coefficient de la note, par défaut 1
-  typeNote    TypeNote  @default(AUTRE) // type d'évaluation : interrogation, DS, examen, autre
-  dateEval    DateTime  @default(now()) // date effective de l'évaluation (peut différer de createdAt)
+  noteMax     Decimal  @default(20) // note maximale possible, par défaut 20
+  coefficient Decimal  @default(1) // coefficient de la note, par défaut 1
+  typeNote    TypeNote @default(AUTRE) // type d'évaluation : interrogation, DS, examen, autre
+  dateEval    DateTime @default(now()) // date effective de l'évaluation (peut différer de createdAt)
   commentaire String?
   feuillePath String? // chemin local du fichier corrigé uploadé (optionnel) 
 
@@ -660,4 +672,184 @@ model BulletinTemplate {
   updatedAt DateTime @updatedAt
 
   @@index([schoolId]) // Index pour optimiser les requêtes par école
+}
+
+enum DeliberationStatut {
+  BROUILLON
+  VALIDEE
+}
+
+enum DecisionPassage {
+  PASSE
+  REDOUBLE
+  ORIENTE
+  EXCLU
+}
+
+enum MentionDeliberation {
+  AUCUNE
+  ENCOURAGEMENT
+  TABLEAU_HONNEUR
+  FELICITATIONS
+}
+
+enum AvertissementDeliberation {
+  AUCUN
+  TRAVAIL
+  CONDUITE
+  RETARDS
+  DISCIPLINE
+  GENERAL
+}
+
+model DeliberationSession {
+  id            String @id @default(uuid())
+  classeId      String
+  classe        Classe @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  schoolId      String
+  school        School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  periodeLabel  String // ex: "Fin d'année 2026-2027"
+  anneeScolaire String // ex: "2026-2027"
+
+  statut      DeliberationStatut @default(BROUILLON)
+  compteRendu String? // compte-rendu de la délibération, texte libre
+
+  createdById String
+  createdBy   User   @relation("DelibCreatedBy", fields: [createdById], references: [id])
+
+  validatedAt   DateTime?
+  validatedById String?
+  validatedBy   User?     @relation("DelibValidatedBy", fields: [validatedById], references: [id])
+
+  decisions DeliberationDecision[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([classeId, periodeLabel, anneeScolaire]) // Une session de délibération unique par classe et par période
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([classeId]) // Index pour optimiser les requêtes par classe
+  @@index([statut]) // Index pour optimiser les requêtes par statut (brouillon, validée)
+}
+
+model DeliberationDecision {
+  id        String              @id @default(uuid())
+  sessionId String
+  session   DeliberationSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  decision      DecisionPassage
+  mention       MentionDeliberation       @default(AUCUNE)
+  avertissement AvertissementDeliberation @default(AUCUN)
+  commentaire   String? // commentaire optionnel du jury pour cette décision
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([sessionId, eleveId]) // Une décision unique par élève dans une session de délibération
+  @@index([sessionId]) // Index pour optimiser les requêtes par session de délibération
+  @@index([eleveId]) // Index pour optimiser les requêtes par élève
+}
+
+/// Statut opérationnel d'une session d'examen
+enum ExamenStatut {
+  PLANIFIE
+  EN_COURS
+  TERMINE
+  REPORTE
+  ANNULE
+}
+
+///Salle d'examen configurable au niveau de l'école
+model ExamenSalle {
+  id       String  @id @default(uuid())
+  nom      String
+  capacite Int?
+  location String? // adresse ou description de la localisation de la salle
+  schoolId String
+  school   School  @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  sessions ExamenSession[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([schoolId, nom]) // Un nom de salle unique par école
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+}
+
+/// Session d'examen planifiée pour une classe (et optionnellement une matière)
+model ExamenSession {
+  id          String  @id @default(uuid())
+  titre       String
+  description String?
+
+  classeId String
+  classe   Classe @relation(fields: [classeId], references: [id], onDelete: Cascade)
+
+  matiereId String?
+  matiere   Matiere? @relation(fields: [matiereId], references: [id], onDelete: SetNull)
+
+  salleId String?
+  salle   ExamenSalle? @relation(fields: [salleId], references: [id], onDelete: SetNull)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  dateExamen String // YYYY-MM-DD
+  heureDebut String // HH:mm
+  heureFin   String // HH:mm
+  statut     ExamenStatut @default(PLANIFIE)
+
+  createdById String
+  createdBy   User   @relation("ExamensCrees", fields: [createdById], references: [id])
+
+  surveillants ExamenSurveillance[]
+  incidents    ExamenIncident[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([classeId, dateExamen]) // Index pour optimiser les requêtes par classe
+  @@index([statut]) // Index pour optimiser les requêtes par statut d'examen
+}
+
+/// assignement d'un surveillant à une session d'examen
+model ExamenSurveillance {
+  id String @id @default(uuid())
+
+  sessionId String
+  session   ExamenSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation("ExamenSurveilles", fields: [userId], references: [id])
+
+  roleLabel String? // ex: "Surveillant Principal", "Surveillant Adjoint", etc.
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([sessionId, userId]) // Un surveillant ne peut être assigné qu'une fois par session d'examen
+  @@index([userId]) // Index pour optimiser les requêtes par session d'examen
+}
+
+/// Journal de suivi de déroulement (incident / observations).
+model ExamenIncident {
+  id String @id @default(uuid())
+
+  sessionId String
+  session   ExamenSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  type    String
+  message String
+
+  createdById String
+  createdBy   User   @relation("ExamenIncidentsCrees", fields: [createdById], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([sessionId, createdAt]) // Index pour optimiser les requêtes par session d'examen
 }
