@@ -41,6 +41,10 @@ function getTodayLocal(): string {
   return `${y}-${m}-${day}`;
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+
+
 /**
  * Parse un string de date sans décaler le jour dû à l'UTC.
  * Les strings "YYYY-MM-DD" et les datetimes ISO ("YYYY-MM-DDTHH:...") sont
@@ -434,22 +438,22 @@ export default function SaisieNotesTab() {
                         {n.commentaire ?? "—"}
                       </td>
                       <td className="text-center">
-                        {n.feuillePath ? (
-                          <a
-                            href={`${import.meta.env.VITE_API_URL ?? "http://localhost:5000"}/uploads/feuilles/${n.feuillePath.split(/[\\/]/).pop()}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-ghost btn-xs"
-                            aria-label="Voir la feuille corrigée"
-                          >
-                            <FileText size={14} className="text-info" />
-                          </a>
-                        ) : (
-                          <span className="text-base-content/30 text-xs">
-                            —
-                          </span>
-                        )}
-                      </td>
+		        {n.feuillePath ? (
+				    <a
+				          href={`${API_URL}/uploads/feuilles/${n.feuillePath.split(/[\\/]/).pop()}`}
+					        target="_blank"
+						      rel="noopener noreferrer"
+						            className="btn btn-ghost btn-xs"
+							          aria-label="Voir la feuille corrigée"
+								      >
+								            <FileText size={14} className="text-info" />
+									        </a>
+										  ) : (
+										      <span className="text-base-content/30 text-xs">—</span>
+										        )}
+											</td>
+          
+                      
                       {canWrite && (
                         <td className="text-right space-x-1">
                           <button

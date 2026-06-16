@@ -1,4 +1,4 @@
-import axios from "axios";
+/*import axios from "axios";
 import { useAuthStore } from "../store/authStore.js";
 
 const envBaseUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
@@ -10,15 +10,28 @@ if (import.meta.env.PROD && !envBaseUrl) {
 export const api = axios.create({
   baseURL: envBaseUrl ?? "http://localhost:5000",
   timeout: 10_000, // 10 secondes
+});*/
+
+import axios from "axios";
+import { useAuthStore } from "../store/authStore.js";
+
+const envBaseUrl = import.meta.env.VITE_API_URL;
+
+if (import.meta.env.PROD && !envBaseUrl) {
+	  throw new Error("VITE_API_URL must be defined in production");
+}
+
+export const api = axios.create({
+	  baseURL: envBaseUrl ?? "https://futur-ecole.com",
+	    timeout: 10000,
 });
 
-// Intercepteur : Ajoute automatiquement le token JWT à chaque appel
 api.interceptors.request.use((config) => {
-  const token = useAuthStore.getState().token; // Récupère le token depuis le store d'authentification
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`; // Ajoute le token dans les headers
-  }
-  return config;
+	  const token = useAuthStore.getState().token;
+	    if (token) {
+		        config.headers.Authorization = `Bearer ${token}`;
+			  }
+			    return config;
 });
 
 // Gestion des erreurs: Si le token est expiré ou invalide, on peut gérer la déconnexion automatique

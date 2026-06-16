@@ -4,7 +4,7 @@ import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { api, getApiError } from "../../lib/api";
 import toast from "react-hot-toast";
 import ConfirmModal from "../ConfirmModal";
-import { ClipboardList, FileText, Pencil, Plus, Trash2 } from "lucide-react";
+import { ClipboardList, Pencil, Plus, Trash2 } from "lucide-react";
 
 interface Props {
   classeId: string;
@@ -33,6 +33,8 @@ const EMPTY_FORM: NoteForm = {
   commentaire: "",
   feuille: null,
 };
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function NotesTab({ classeId, canWrite }: Props) {
   const queryClient = useQueryClient();
@@ -243,20 +245,19 @@ export default function NotesTab({ classeId, canWrite }: Props) {
                   <td className="max-w-xs truncate text-sm text-base-content/70">
                     {n.commentaire ?? "—"}
                   </td>
-                  <td className="text-center">
-                    {n.feuillePath ? (
-                      <a
-                        href={`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/uploads/feuilles/${n.feuillePath?.split(/[\\/]/).pop()}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-ghost btn-xs"
-                        aria-label="Voir la feuille corrigée"
-                      >
-                        <FileText className="w-4 h-4 text-info" />
-                      </a>
-                    ) : (
-                      <span className="text-base-content/30 text-xs">—</span>
-                    )}
+          
+	  	  <td className="text-center">
+	{n.feuillePath && (
+		  <a
+		      href={`${API_URL}/uploads/feuilles/${n.feuillePath.split(/[\\/]/).pop()}`}
+		          target="_blank"
+			      rel="noopener noreferrer"
+			          className="btn btn-ghost btn-xs"
+				      aria-label="Voir la feuille corrigée"
+				        >
+					    Voir
+					      </a>
+	)}
                   </td>
                   {canWrite && (
                     <td className="text-right space-x-1">
