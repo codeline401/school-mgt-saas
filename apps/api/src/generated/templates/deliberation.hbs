@@ -1,0 +1,236 @@
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Helvetica", "Arial", sans-serif;
+        color: #1a1a1a;
+        font-size: 10pt;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 3px solid #1e40af;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+      .school-info h1 {
+        font-size: 14pt;
+        color: #1e40af;
+      }
+      .school-info p {
+        font-size: 8pt;
+        color: #555;
+      }
+      .logo {
+        max-width: 60px;
+        max-height: 60px;
+      }
+      .title {
+        text-align: center;
+        font-size: 16pt;
+        font-weight: bold;
+        margin: 12px 0;
+        text-transform: uppercase;
+        color: #1e40af;
+      }
+      .info-box {
+        background: #eff6ff;
+        padding: 12px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+      }
+      .info-box p {
+        margin: 3px 0;
+        font-size: 10pt;
+      }
+      .info-box strong {
+        color: #1e40af;
+      }
+      .compte-rendu {
+        background: #fef3c7;
+        padding: 12px 15px;
+        border-left: 4px solid #f59e0b;
+        margin: 15px 0;
+        font-size: 9.5pt;
+        line-height: 1.5;
+      }
+      .compte-rendu h3 {
+        color: #92400e;
+        margin-bottom: 5px;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin: 15px 0;
+      }
+      .stat-box {
+        padding: 12px;
+        border-radius: 4px;
+        text-align: center;
+      }
+      .stat-box h3 {
+        font-size: 8pt;
+        margin-bottom: 3px;
+        text-transform: uppercase;
+      }
+      .stat-box .value {
+        font-size: 20pt;
+        font-weight: bold;
+      }
+      .stat-passe {
+        background: #dcfce7;
+        color: #15803d;
+      }
+      .stat-redouble {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .stat-orient {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+      .stat-reussite {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        font-size: 9pt;
+      }
+      th {
+        background: #1e40af;
+        color: white;
+        padding: 8px 6px;
+        text-align: left;
+        font-size: 9pt;
+      }
+      td {
+        padding: 6px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      tr:nth-child(even) {
+        background: #f9fafb;
+      }
+      .decision-passe {
+        color: #15803d;
+        font-weight: bold;
+      }
+      .decision-redouble {
+        color: #dc2626;
+        font-weight: bold;
+      }
+      .decision-oriente {
+        color: #1e40af;
+        font-weight: bold;
+      }
+      .decision-exclu {
+        color: #991b1b;
+        font-weight: bold;
+      }
+      .footer {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 9pt;
+      }
+      .signature {
+        text-align: center;
+        border-top: 1px solid #333;
+        padding-top: 5px;
+        width: 180px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="school-info">
+        <h1>{{school.nom}}</h1>
+        {{#if school.adresse}}<p>📍 {{school.adresse}}</p>{{/if}}
+      </div>
+      {{#if school.logoUrl}}<img src="{{school.logoUrl}}" class="logo" />{{/if}}
+    </div>
+
+    <div class="title">Compte-rendu de délibération</div>
+
+    <div class="info-box">
+      <p><strong>Classe :</strong> {{classe.nom}}</p>
+      <p><strong>Période :</strong>
+        {{session.periodeLabel}}
+        ({{session.anneeScolaire}})</p>
+      <p><strong>Statut :</strong> {{session.statut}}</p>
+      {{#if session.validePar}}<p><strong>Validé par :</strong>
+          {{session.validePar}}{{#if session.dateValidation}}
+            le
+            {{formatDate session.dateValidation}}{{/if}}</p>{{/if}}
+    </div>
+
+    <div class="stats">
+      <div class="stat-box stat-passe"><h3>Admis</h3><div
+          class="value"
+        >{{statistiques.passes}}</div></div>
+      <div class="stat-box stat-redouble"><h3>Redoublement</h3><div
+          class="value"
+        >{{statistiques.redoublants}}</div></div>
+      <div class="stat-box stat-orient"><h3>Orientés</h3><div
+          class="value"
+        >{{statistiques.orientes}}</div></div>
+      <div class="stat-box stat-reussite"><h3>Taux réussite</h3><div
+          class="value"
+        >{{statistiques.tauxReussite}}%</div></div>
+    </div>
+
+    {{#if session.compteRendu}}
+      <div class="compte-rendu">
+        <h3>Compte-rendu du conseil</h3>
+        {{session.compteRendu}}
+      </div>
+    {{/if}}
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:6%">#</th>
+          <th>Élève</th>
+          <th style="width:10%">Moyenne</th>
+          <th style="width:18%">Décision</th>
+          <th style="width:18%">Mention</th>
+          <th style="width:18%">Avertissement</th>
+          <th>Commentaire</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each entries}}
+          <tr>
+            <td>{{rang}}</td>
+            <td><strong>{{prenom}} {{nom}}</strong></td>
+            <td><strong>{{moyenne}}/20</strong></td>
+            <td class="decision-{{lowercase decision}}">{{decisionLabel
+                decision
+              }}</td>
+            <td>{{#if mention}}{{mentionLabel mention}}{{else}}-{{/if}}</td>
+            <td>{{#if avertissement}}{{avertissementLabel
+                  avertissement
+                }}{{else}}-{{/if}}</td>
+            <td><em>{{#if commentaire}}{{commentaire}}{{else}}-{{/if}}</em></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <div class="footer">
+      <div class="signature">Le président du jury<small
+        >{{school.nom}}</small></div>
+      <div class="signature">Le directeur<small>Cachet de l'établissement</small></div>
+    </div>
+  </body>
+</html>

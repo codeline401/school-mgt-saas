@@ -550,3 +550,165 @@ export interface CreateExamenPlanningInput {
   dateFin: string;
   epreuves: ExamenPlanningEpreuveInput[];
 }
+
+// EXPORT MODULE
+
+export type ExportType = "BULLETIN" | "RELEVE" | "CLASSEMENT" | "DELIBERATION";
+export type ExportFormat = "A4" | "A3" | "Letter";
+export type ExportOrientation = "portrait" | "landscape";
+
+export interface SchoolExportInfo {
+  nom: string;
+  logoUrl: string | null;
+  devise: string | null;
+  slogan: string | null;
+  adresse: string | null;
+  telephone: string | null;
+  email: string | null;
+  siteWeb: string | null;
+  numAutorisation: string | null;
+}
+
+export interface BulletinSubject {
+  matiereId: string;
+  nom: string;
+  coefficient: number;
+  moyenne: number;
+  nbEvaluations: number;
+  rang: number | null;
+  appreciation: string | null;
+}
+
+export interface BulletinData {
+  eleve: {
+    id: string;
+    nom: string;
+    prenom: string;
+    dateNaissance: string | null;
+    photoUrl: string | null;
+  };
+  classe: { id: string; nom: string };
+  periode: { id: string; nom: string; type: string; anneeScolaire: string };
+  subjects: BulletinSubject[];
+  moyenneGenerale: number;
+  rang: number | null;
+  totalEleves: number;
+  appreciationConseil: string | null;
+  decision: string | null;
+  mention: string | null;
+  avertissement: string | null;
+  config: BulletinTemplateConfig;
+  school: SchoolExportInfo;
+  dateGeneration: string;
+  watermark: string | null;
+  primaryColor: string;
+}
+
+export interface ReleveEvaluation {
+  titre: string;
+  type: string;
+  date: string;
+  note: number;
+  noteMax: number;
+  noteNormalisee: number;
+  coefficient: number;
+}
+
+export interface ReleveMatiere {
+  matiereId: string;
+  nom: string;
+  coefficient: number;
+  evaluations: ReleveEvaluation[];
+  moyenne: number;
+  appreciation: string | null;
+}
+
+export interface ReleveData {
+  eleve: BulletinData["eleve"];
+  classe: BulletinData["classe"];
+  periode: BulletinData["periode"];
+  matieres: ReleveMatiere[];
+  moyenneGenerale: number;
+  rang: number | null;
+  totalEleves: number;
+  config: BulletinTemplateConfig;
+  school: SchoolExportInfo;
+  dateGeneration: string;
+}
+
+export interface ClassementEntry {
+  rang: number;
+  eleveId: string;
+  nom: string;
+  prenom: string;
+  moyenne: number;
+  nbMatieres: number;
+  mention: string | null;
+}
+
+export interface ClassementData {
+  classe: { id: string; nom: string };
+  periode: BulletinData["periode"];
+  entries: ClassementEntry[];
+  moyenneClasse: number;
+  moyenneMin: number;
+  moyenneMax: number;
+  tauxReussite: number;
+  config: BulletinTemplateConfig;
+  school: SchoolExportInfo;
+  dateGeneration: string;
+}
+
+export interface DeliberationEntry {
+  rang: number | null;
+  eleveId: string;
+  nom: string;
+  prenom: string;
+  moyenne: number;
+  decision: string;
+  mention: string | null;
+  avertissement: string | null;
+  commentaire: string | null;
+}
+
+export interface DeliberationData {
+  session: {
+    id: string;
+    periodeLabel: string;
+    anneeScolaire: string;
+    statut: string;
+    compteRendu: string | null;
+    dateValidation: string | null;
+    validePar: string | null;
+  };
+  classe: { id: string; nom: string };
+  entries: DeliberationEntry[];
+  statistiques: {
+    totalEleves: number;
+    passes: number;
+    redoublants: number;
+    orientes: number;
+    exclus: number;
+    moyenneClasse: number;
+    tauxReussite: number;
+  };
+  config: BulletinTemplateConfig;
+  school: SchoolExportInfo;
+  dateGeneration: string;
+}
+
+export interface ExportOptions {
+  format: ExportFormat;
+  orientation: ExportOrientation;
+  watermark: string | null;
+  includeGraphs: boolean;
+  primaryColor: string | null;
+}
+
+export const DEFAULT_EXPORT_OPTIONS: ExportOptions = {
+  format: "A4",
+  orientation: "portrait",
+  watermark: null,
+  includeGraphs: false,
+  primaryColor: null,
+};

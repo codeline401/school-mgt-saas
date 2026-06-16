@@ -92,17 +92,13 @@ export type Remplacement = Prisma.RemplacementModel
  */
 export type Matiere = Prisma.MatiereModel
 /**
+ * Model Periode
+ * 
+ */
+export type Periode = Prisma.PeriodeModel
+/**
  * Model Note
- * Note — enregistre la note d'un élève pour une matière et une évaluation données.
  * 
- * Un élève peut avoir PLUSIEURS notes pour la même matière, chacune distinguée
- * par un titre d'évaluation (ex: "1er DS - 1er Trimestre - 2026-2027").
- * 
- * Contraintes :
- * - Unique sur (eleveId, matiereId, titre) : même élève, même matière, même éval → doublon.
- * - note ≤ noteMax validé dans le contrôleur.
- * - feuillePath : chemin local du fichier corrigé uploadé (optionnel).
- * - createdById : utilisateur PROF qui a saisi la note.
  */
 export type Note = Prisma.NoteModel
 /**
@@ -117,12 +113,12 @@ export type Document = Prisma.DocumentModel
 export type CreneauHoraire = Prisma.CreneauHoraireModel
 /**
  * Model Appel
- * Un appel = une session de présence pour un creneau horaire à une date donnée
+ * 
  */
 export type Appel = Prisma.AppelModel
 /**
  * Model Presence
- * Présence d'un élève dans un appel
+ * 
  */
 export type Presence = Prisma.PresenceModel
 /**
@@ -162,16 +158,7 @@ export type Soumission = Prisma.SoumissionModel
 export type Reponse = Prisma.ReponseModel
 /**
  * Model BulletinTemplate
- * Champs JSON (BulletinTemplateConfig) :
- * - enteteTexte     : texte affcihé en haut du bulletin (ex: "Bulletin de Notes - Année 2026-2027")
- * - anneeTexte      : année scolaire affichée (ex: "2026-2027")
- * - piedTexte       : pied de page, ligne de signature
- * - showRang        : afficher la colonne rang de l'élève dans le tableau
- * - showCoef        : afficher la colonne coefficient dans le tableau
- * - showNbEval      : afficher le nombre d'évaluations par matière
- * - seuilBien       : note minimale pour la couleur "Bien" (défaut : 14)
- * - seuiAssezBien   : note minimale pour la couleur "Assez Bien" (défaut : 12)
- * - seuilPassable   : note minimale poue la couleur "Passable" (défaut : 10)
+ * 
  */
 export type BulletinTemplate = Prisma.BulletinTemplateModel
 /**
@@ -186,21 +173,21 @@ export type DeliberationSession = Prisma.DeliberationSessionModel
 export type DeliberationDecision = Prisma.DeliberationDecisionModel
 /**
  * Model ExamenSalle
- * Salle d'examen configurable au niveau de l'école
+ * 
  */
 export type ExamenSalle = Prisma.ExamenSalleModel
 /**
  * Model ExamenSession
- * Session d'examen planifiée pour une classe (et optionnellement une matière)
+ * 
  */
 export type ExamenSession = Prisma.ExamenSessionModel
 /**
  * Model ExamenSurveillance
- * assignement d'un surveillant à une session d'examen
+ * 
  */
 export type ExamenSurveillance = Prisma.ExamenSurveillanceModel
 /**
  * Model ExamenIncident
- * Journal de suivi de déroulement (incident / observations).
+ * 
  */
 export type ExamenIncident = Prisma.ExamenIncidentModel

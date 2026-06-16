@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.6.0
- * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
+ * Prisma Client JS version: 7.8.0
+ * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.6.0",
-  engine: "75cbdc1eb7150937890ad5465d861175c6624711"
+  client: "7.8.0",
+  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
 }
 
 /**
@@ -394,6 +394,7 @@ export const ModelName = {
   Contrat: 'Contrat',
   Remplacement: 'Remplacement',
   Matiere: 'Matiere',
+  Periode: 'Periode',
   Note: 'Note',
   Document: 'Document',
   CreneauHoraire: 'CreneauHoraire',
@@ -428,7 +429,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident"
+    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1169,6 +1170,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.MatiereCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.MatiereCountAggregateOutputType> | number
+        }
+      }
+    }
+    Periode: {
+      payload: Prisma.$PeriodePayload<ExtArgs>
+      fields: Prisma.PeriodeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PeriodeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PeriodePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PeriodeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PeriodePayload>
+        }
+        findFirst: {
+          args: Prisma.PeriodeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PeriodePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PeriodeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PeriodePayload>
+        }
+        findMany: {
+          args: Prisma.PeriodeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PeriodePayload>[]
+        }
+        create: {
+          args: Prisma.PeriodeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PeriodePayload>
+        }
+        createMany: {
+          args: Prisma.PeriodeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PeriodeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PeriodePayload>[]
+        }
+        delete: {
+          args: Prisma.PeriodeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PeriodePayload>
+        }
+        update: {
+          args: Prisma.PeriodeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PeriodePayload>
+        }
+        deleteMany: {
+          args: Prisma.PeriodeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PeriodeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PeriodeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PeriodePayload>[]
+        }
+        upsert: {
+          args: Prisma.PeriodeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PeriodePayload>
+        }
+        aggregate: {
+          args: Prisma.PeriodeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePeriode>
+        }
+        groupBy: {
+          args: Prisma.PeriodeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PeriodeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PeriodeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PeriodeCountAggregateOutputType> | number
         }
       }
     }
@@ -2639,6 +2714,14 @@ export const SchoolScalarFieldEnum = {
   nom: 'nom',
   tenantKey: 'tenantKey',
   inviteCode: 'inviteCode',
+  adresse: 'adresse',
+  telephone: 'telephone',
+  email: 'email',
+  logoUrl: 'logoUrl',
+  devise: 'devise',
+  slogan: 'slogan',
+  siteWeb: 'siteWeb',
+  numAutorisation: 'numAutorisation',
   createdAt: 'createdAt'
 } as const
 
@@ -2775,6 +2858,21 @@ export const MatiereScalarFieldEnum = {
 export type MatiereScalarFieldEnum = (typeof MatiereScalarFieldEnum)[keyof typeof MatiereScalarFieldEnum]
 
 
+export const PeriodeScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  type: 'type',
+  anneeScolaire: 'anneeScolaire',
+  dateDebut: 'dateDebut',
+  dateFin: 'dateFin',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PeriodeScalarFieldEnum = (typeof PeriodeScalarFieldEnum)[keyof typeof PeriodeScalarFieldEnum]
+
+
 export const NoteScalarFieldEnum = {
   id: 'id',
   titre: 'titre',
@@ -2789,6 +2887,7 @@ export const NoteScalarFieldEnum = {
   matiereId: 'matiereId',
   classeId: 'classeId',
   schoolId: 'schoolId',
+  periodeId: 'periodeId',
   createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -2967,6 +3066,7 @@ export const DeliberationSessionScalarFieldEnum = {
   schoolId: 'schoolId',
   periodeLabel: 'periodeLabel',
   anneeScolaire: 'anneeScolaire',
+  periodeId: 'periodeId',
   statut: 'statut',
   compteRendu: 'compteRendu',
   createdById: 'createdById',
@@ -3178,6 +3278,20 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TypePeriode'
+ */
+export type EnumTypePeriodeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypePeriode'>
+    
+
+
+/**
+ * Reference to a field of type 'TypePeriode[]'
+ */
+export type ListEnumTypePeriodeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypePeriode[]'>
     
 
 
@@ -3476,6 +3590,21 @@ export type PrismaClientOptions = ({
    * ```
    */
   comments?: runtime.SqlCommenterPlugin[]
+  /**
+   * Optional maximum size for the query plan cache. If not provided, a default size will be used.
+   * A value of `0` can be used to disable the cache entirely. A higher cache size can improve
+   * performance for applications that execute a large number of unique queries, while a smaller
+   * cache size can reduce memory usage.
+   * 
+   * @example
+   * ```
+   * const prisma = new PrismaClient({
+   *   adapter,
+   *   queryPlanCacheMaxSize: 100,
+   * })
+   * ```
+   */
+  queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
@@ -3488,6 +3617,7 @@ export type GlobalOmitConfig = {
   contrat?: Prisma.ContratOmit
   remplacement?: Prisma.RemplacementOmit
   matiere?: Prisma.MatiereOmit
+  periode?: Prisma.PeriodeOmit
   note?: Prisma.NoteOmit
   document?: Prisma.DocumentOmit
   creneauHoraire?: Prisma.CreneauHoraireOmit

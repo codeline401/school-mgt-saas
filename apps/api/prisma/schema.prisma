@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -36,49 +31,53 @@ model User {
 
   // -- Champs profil ajoutés
   telephone     String?
-  adresse       String? // Adresse postale
-  dateNaissance DateTime? // Date de naissance
-  photoUrl      String? // URL de la photo de profil
+  adresse       String?
+  dateNaissance DateTime?
+  photoUrl      String?
 
-  // Relations vers les dossiers liés à cet utilisateur
-  contrats      Contrat[] // Contrat (pour prof / collaborateur)
-  remplacements Remplacement[] @relation("Remplacant") // pour les remplacements où cet utilisateur est le remplaçant
-  notes         Note[]         @relation("NotesCreees") // Notes créées par ce professeur
-  professeur    Professeur? // Profil RH si l'utilisateur est un PROF
-  documents     Document[]     @relation("DocumentsUploades") // Documents uploadés par cet utilisateur
-
-  parent                        Parent? // Profil de parent si l'utilisateur est un PARENT
-  notifications                 Notification[] // Notifications reçues par cet utilisateur
-  deliberationSessions          DeliberationSession[] @relation("DelibCreatedBy") // Sessions de délibération créées par cet utilisateur
-  deliberationSessionsValidées DeliberationSession[] @relation("DelibValidatedBy") // Sessions de délibération validées par cet utilisateur
-  examensCrees                  ExamenSession[]       @relation("ExamensCrees") // Sessions d'examen créées par cet utilisateur
-  examenSurveillances           ExamenSurveillance[]  @relation("ExamenSurveilles") // Sessions d'examen où cet utilisateur est surveillant
+  // Relations
+  contrats                      Contrat[]
+  remplacements                 Remplacement[]        @relation("Remplacant")
+  notes                         Note[]                @relation("NotesCreees")
+  professeur                    Professeur?
+  documents                     Document[]            @relation("DocumentsUploades")
+  parent                        Parent?
+  notifications                 Notification[]
+  deliberationSessions          DeliberationSession[] @relation("DelibCreatedBy")
+  deliberationSessionsValidées DeliberationSession[] @relation("DelibValidatedBy")
+  examensCrees                  ExamenSession[]       @relation("ExamensCrees")
+  examenSurveillances           ExamenSurveillance[]  @relation("ExamenSurveilles")
   examenIncidents               ExamenIncident[]      @relation("ExamenIncidentsCrees")
 }
 
 // Modele SAAS
 
 model School {
-  id  String @id @default(uuid())
-  nom String // Display name only — not globally unique; can be renamed freely
-
-  // Stable technical tenant identifier (never changes after creation)
-  tenantKey String @unique @default(cuid())
-
-  // Code unique généré automatiquement que l'ADMIN partagera à ses collaborateurs
+  id         String @id @default(uuid())
+  nom        String
+  tenantKey  String @unique @default(cuid())
   inviteCode String @unique @default(cuid())
 
-  classes           Classe[]
-  eleves            Eleve[]
-  profs             Professeur[]
-  createdAt         DateTime           @default(now())
-  users             User[]
-  parents           Parent[]
-  dossierAdmissions DossierAdmission[]
-  contrats          Contrat[]
-  remplacements     Remplacement[]
+  // -- Champs contact école (pour les exports PDF)
+  adresse         String?
+  telephone       String?
+  email           String?
+  logoUrl         String?
+  devise          String?
+  slogan          String?
+  siteWeb         String?
+  numAutorisation String?
 
-  matieres             Matiere[] // Liste des matières enseignées dans l'école
+  classes              Classe[]
+  eleves               Eleve[]
+  profs                Professeur[]
+  createdAt            DateTime              @default(now())
+  users                User[]
+  parents              Parent[]
+  dossierAdmissions    DossierAdmission[]
+  contrats             Contrat[]
+  remplacements        Remplacement[]
+  matieres             Matiere[]
   notes                Note[]
   documents            Document[]
   creneauHoraires      CreneauHoraire[]
@@ -90,17 +89,19 @@ model School {
   deliberationSessions DeliberationSession[]
   examenSalles         ExamenSalle[]
   examenSessions       ExamenSession[]
+
+  // -- Périodes scolaires de l'école
+  periodes Periode[]
 }
 
 model Classe {
   id       String       @id @default(uuid())
-  nom      String // ex: "6ème A", "5ème B", etc.
+  nom      String
   schoolId String
   school   School       @relation(fields: [schoolId], references: [id])
-  eleves   Eleve[] // Une classe a plusieurs élèves
-  profs    Professeur[] // Une classe a plusieurs professeurs
-
-  matieres Matiere[] // Matières enseignées dans cette classe
+  eleves   Eleve[]
+  profs    Professeur[]
+  matieres Matiere[]
 
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
@@ -113,7 +114,7 @@ model Classe {
   deliberationSessions DeliberationSession[]
   examenSessions       ExamenSession[]
 
-  @@unique([schoolId, nom]) // Un nom de classe unique par école (pour les upserts)
+  @@unique([schoolId, nom])
 }
 
 model Eleve {
@@ -125,19 +126,14 @@ model Eleve {
   classeId String
   classe   Classe @relation(fields: [classeId], references: [id])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // -- Champs profil ajoutés
-  dateNaissance DateTime? // Date de naissance
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  dateNaissance DateTime?
   telephone     String?
   adresse       String?
-  photoUrl      String? // URL de la photo de profil
+  photoUrl      String?
+  parentId      String?
 
-  // Relation vers le parent responsable
-  parentId String?
-
-  // Historique des admissions de l'élève
   admissions            DossierAdmission[]
   parent                Parent?                @relation(fields: [parentId], references: [id])
   notes                 Note[]
@@ -145,10 +141,10 @@ model Eleve {
   soumissions           Soumission[]
   deliberationDecisions DeliberationDecision[]
 
-  @@unique([schoolId, nom, prenom]) // Nom + prénom unique par école (pour les upserts)
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
-  @@index([classeId]) // Index pour optimiser les requêtes par classe
-  @@index([parentId]) // lookup parent + enfants
+  @@unique([schoolId, nom, prenom])
+  @@index([schoolId])
+  @@index([classeId])
+  @@index([parentId])
 }
 
 model Professeur {
@@ -157,62 +153,52 @@ model Professeur {
   prenom   String
   schoolId String
   school   School   @relation(fields: [schoolId], references: [id])
-  classes  Classe[] // Un professeur peut enseigner dans plusieurs classes
+  classes  Classe[]
 
-  // Lien vers le compte User du professeur (pour le filtrage par utilisateur connecté)
   userId String? @unique
   user   User?   @relation(fields: [userId], references: [id])
 
-  // Matières que ce professeur enseigne (pour filtrer les matières dans les notes)
   matieres Matiere[] @relation("ProfesseurMatieres")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // -- champs profil ajoutés
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   telephone     String?
-  adresse       String? // Adresse postale
-  dateNaissance DateTime? // Date de naissance
-  photoUrl      String? // URL de la photo de profil
-  specialites   String? // Matières enseignées, ex: "Mathématiques, Physique"
+  adresse       String?
+  dateNaissance DateTime?
+  photoUrl      String?
+  specialites   String?
 
-  // Relation dossier RH
   contrat       Contrat[]
-  remplacements Remplacement[] @relation("ProfesseurAbsent") // Remplacement assuré par ce professeur
+  remplacements Remplacement[] @relation("ProfesseurAbsent")
   cahierTextes  CahierTexte[]
   quizzes       Quiz[]
 
-  @@unique([schoolId, nom, prenom]) // Nom + prénom unique par école (pour les upserts)
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
-  @@index([userId]) // Index pour optimiser les requêtes par userId
+  @@unique([schoolId, nom, prenom])
+  @@index([schoolId])
+  @@index([userId])
 }
 
-// MODELE PARENT 
-// Découplé de USER - un parent peut ne pas avoir de compte
 model Parent {
   id        String  @id @default(uuid())
   nom       String
   prenom    String
-  email     String? // Un parent peut ne pas avoir d'email
-  telephone String? // Un parent peut ne pas avoir de téléphone
-  adresse   String? // Un parent peut ne pas avoir d'adresse
+  email     String?
+  telephone String?
+  adresse   String?
   schoolId  String
   school    School  @relation(fields: [schoolId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // peut avoir plusieurs enfants dans l'école
   eleves Eleve[]
 
   userId String? @unique
   user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
 
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([schoolId])
 }
 
-// MODELE DOSSIER D'ADMISSION - nouveau
-// Gère les demandes d'inscription et la liste d'attente
 model DossierAdmission {
   id        String   @id @default(uuid())
   schoolId  String
@@ -220,43 +206,33 @@ model DossierAdmission {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Information sur le candidat
-  nomEleve      String
-  prenomEleve   String
-  dateNaissance DateTime
-  classeVisee   String // ex: "6ème", "5ème", etc.
-  adresse       String?
-
-  // Contact parent / tuteur
+  nomEleve        String
+  prenomEleve     String
+  dateNaissance   DateTime
+  classeVisee     String
+  adresse         String?
   nomParent       String
   prenomParent    String
   telephoneParent String
   emailParent     String?
 
-  // Statut du dossier
-  statut StatutAdmission @default(EN_ATTENTE)
+  statut  StatutAdmission @default(EN_ATTENTE)
+  eleveId String?         @unique
+  eleve   Eleve?          @relation(fields: [eleveId], references: [id])
 
-  // Si admis, on peut lier à l'élève créé
-  eleveId String? @unique
-  eleve   Eleve?  @relation(fields: [eleveId], references: [id])
-
-  // Note interne de l'admin
   notesAdmin String?
 
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
-  @@index([statut]) // filtre par statut (EN_ATTENTE, ADMIS, etc.)
+  @@index([schoolId])
+  @@index([statut])
 }
 
-// Status possibles d'un dossier d'admission
 enum StatutAdmission {
-  EN_ATTENTE // dossier reçu mais pas encore traité
-  EN_LISTE_ATTENTE // dossier retenu mais en liste d'attente
-  ADMIS // dossier accepté, élève admis
-  REFUSE // dossier refusé
+  EN_ATTENTE
+  EN_LISTE_ATTENTE
+  ADMIS
+  REFUSE
 }
 
-// MODELE CONTRAT - 
-// Dossier admin d'un membre personnel (prof ou collaborateur)
 model Contrat {
   id        String   @id @default(uuid())
   schoolId  String
@@ -264,20 +240,19 @@ model Contrat {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  typeContrat  TypeContrat // ex: "CDI", "CDD", "Vacataire"
+  typeContrat  TypeContrat
   dateDebut    DateTime
   dateFin      DateTime?
-  poste        String // ex: "Professeur de Mathématiques", "Agent d'entretien", etc.
-  salaire      Decimal? // optionnel, peut être négocié ou non divulgué
-  // lien soit à un prof, soit à un user (collaborateur administratif)
+  poste        String
+  salaire      Decimal?
   professeurId String?
   professeur   Professeur? @relation(fields: [professeurId], references: [id])
   userId       String?
   user         User?       @relation(fields: [userId], references: [id])
 
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
-  @@index([professeurId]) // Index pour optimiser les requêtes par professeur
-  @@index([userId]) // Index pour optimiser les requêtes par collaborateur
+  @@index([schoolId])
+  @@index([professeurId])
+  @@index([userId])
 }
 
 enum TypeContrat {
@@ -287,8 +262,6 @@ enum TypeContrat {
   STAGIAIRE
 }
 
-// MODELE REMPLACEMENT -
-// Suivi des remplacements de professeurs absents
 model Remplacement {
   id        String   @id @default(uuid())
   schoolId  String
@@ -296,49 +269,80 @@ model Remplacement {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  date  DateTime // date du remplacement
-  motif String? // raison de l'absence du prof titulaire
+  date  DateTime
+  motif String?
 
-  // Professeur absent
   professeurAbsentId String
   professeurAbsent   Professeur @relation("ProfesseurAbsent", fields: [professeurAbsentId], references: [id], onDelete: Cascade)
 
-  // Remplaçant
   remplacantUserId String?
   remplacant       User?   @relation("Remplacant", fields: [remplacantUserId], references: [id])
 
-  // Classe concernée par le remplacement
-  classeNom String? // ex: "6ème A", "5ème B", etc.
+  classeNom String?
 
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
-  @@index([professeurAbsentId]) // Index pour optimiser les requêtes par professeur absent
-  @@index([date]) // Index pour optimiser les requêtes par date
+  @@index([schoolId])
+  @@index([professeurAbsentId])
+  @@index([date])
 }
 
 model Matiere {
-  id              String           @id @default(uuid())
-  nom             String // ex: "Mathématiques", "Français", etc.
-  description     String? // description optionnelle de la matière
-  classeId        String // la classe à laquelle cette matière est associée
-  classe          Classe           @relation(fields: [classeId], references: [id], onDelete: Cascade)
-  schoolId        String
-  school          School           @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  id          String  @id @default(uuid())
+  nom         String
+  description String?
+  classeId    String
+  classe      Classe  @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  schoolId    String
+  school      School  @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
   notes           Note[]
-  profs           Professeur[]     @relation("ProfesseurMatieres") // Profs qui enseignent cette matière
+  profs           Professeur[]     @relation("ProfesseurMatieres")
   documents       Document[]
   creneauHoraires CreneauHoraire[]
   cahierTextes    CahierTexte[]
   quizzes         Quiz[]
   examenSessions  ExamenSession[]
 
-  @@unique([classeId, nom]) // Un nom de matière unique par classe
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
-  @@index([classeId]) // Index pour optimiser les requêtes par classe
+  @@unique([classeId, nom])
+  @@index([schoolId])
+  @@index([classeId])
 }
 
-// apps/api/prisma/schema.prisma
+// ── MODULE PÉRIODES SCOLAIRES ─────────────────────────────────────────────────
+// Une période est un découpage de l'année scolaire (trimestre, semestre…)
+// défini au niveau de l'école. Elle sert à regrouper les notes et générer
+// les bulletins / relevés / classements par période.
+
+enum TypePeriode {
+  TRIMESTRE
+  SEMESTRE
+  ANNEE
+  AUTRE
+}
+
+model Periode {
+  id            String      @id @default(uuid())
+  nom           String // ex: "Trimestre 1", "Semestre 2"
+  type          TypePeriode @default(TRIMESTRE)
+  anneeScolaire String // ex: "2026-2027"
+  dateDebut     DateTime? // optionnel — permet le filtrage par date
+  dateFin       DateTime?
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations : notes et sessions de délibération liées à cette période
+  notes                Note[]
+  deliberationSessions DeliberationSession[]
+
+  @@unique([schoolId, nom, anneeScolaire]) // Une période unique par école, nom et année
+  @@index([schoolId])
+  @@index([anneeScolaire])
+}
 
 enum TypeNote {
   INTERROGATION
@@ -347,26 +351,16 @@ enum TypeNote {
   AUTRE
 }
 
-/// Note — enregistre la note d'un élève pour une matière et une évaluation données.
-///
-/// Un élève peut avoir PLUSIEURS notes pour la même matière, chacune distinguée
-/// par un titre d'évaluation (ex: "1er DS - 1er Trimestre - 2026-2027").
-///
-/// Contraintes :
-///   - Unique sur (eleveId, matiereId, titre) : même élève, même matière, même éval → doublon.
-///   - note ≤ noteMax validé dans le contrôleur.
-///   - feuillePath : chemin local du fichier corrigé uploadé (optionnel).
-///   - createdById : utilisateur PROF qui a saisi la note.
 model Note {
   id          String   @id @default(uuid())
-  titre       String // ex: "1er DS - 1er Trimestre - 2026-2027"
+  titre       String
   note        Decimal
-  noteMax     Decimal  @default(20) // note maximale possible, par défaut 20
-  coefficient Decimal  @default(1) // coefficient de la note, par défaut 1
-  typeNote    TypeNote @default(AUTRE) // type d'évaluation : interrogation, DS, examen, autre
-  dateEval    DateTime @default(now()) // date effective de l'évaluation (peut différer de createdAt)
+  noteMax     Decimal  @default(20)
+  coefficient Decimal  @default(1)
+  typeNote    TypeNote @default(AUTRE)
+  dateEval    DateTime @default(now())
   commentaire String?
-  feuillePath String? // chemin local du fichier corrigé uploadé (optionnel) 
+  feuillePath String?
 
   eleveId String
   eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
@@ -380,20 +374,24 @@ model Note {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
-  /// Professeur qui a saisi la note
+  // -- Lien optionnel vers la période (null = note hors période formelle)
+  periodeId String?
+  periode   Periode? @relation(fields: [periodeId], references: [id], onDelete: SetNull)
+
   createdById String
   createdBy   User   @relation("NotesCreees", fields: [createdById], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([eleveId, matiereId, titre]) // Un élève ne peut avoir qu'une note par matière et par titre d'évaluation
-  @@index([classeId]) // Index pour optimiser les requêtes par classe
-  @@index([matiereId]) // Index pour optimiser les requêtes par matière
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
-  @@index([eleveId]) // Index pour optimiser les requêtes par élève
-  @@index([typeNote]) // Index pour les requêtes filtrées par type (Moyenne Auto)
-  @@index([dateEval]) // Index pour les requêtes filtrées par date (Moyenne Auto)
+  @@unique([eleveId, matiereId, titre])
+  @@index([classeId])
+  @@index([matiereId])
+  @@index([schoolId])
+  @@index([eleveId])
+  @@index([typeNote])
+  @@index([dateEval])
+  @@index([periodeId]) // Index pour optimiser les requêtes par période
 }
 
 // ── MODULE DOCUMENTS ─────────────────────────────────────────────────────────
@@ -454,20 +452,20 @@ model CreneauHoraire {
   schoolId   String
   school     School      @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   jour       JourSemaine
-  heureDebut String // format "HH:mm", ex: "08:30"
-  heureFin   String // format "HH:mm", ex: "10:00"
-  intitule   String? // ex: "Mathématiques - M. Dupont"
+  heureDebut String
+  heureFin   String
+  intitule   String?
   matiereId  String?
   matiere    Matiere?    @relation(fields: [matiereId], references: [id])
-  couleur    String? // couleur personnalisée pour le créneau (ex: "#FF5733")
+  couleur    String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   appels    Appel[]
 
-  @@unique([classeId, jour, heureDebut, heureFin]) // Un créneau unique par classe, jour et heure de début
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
-  @@index([classeId]) // Index pour optimiser les requêtes par classe
+  @@unique([classeId, jour, heureDebut, heureFin])
+  @@index([schoolId])
+  @@index([classeId])
 }
 
 // MODULE ABSENCE / APPELS
@@ -477,13 +475,11 @@ enum StatutPresence {
   RETARD
 }
 
-/// Un appel = une session de présence pour un creneau horaire à une date donnée
 model Appel {
   id        String @id @default(uuid())
   creneauId String
   classeId  String
   schoolId  String
-  /// Date au format "YYYY-MM-DD", ex: "2024-09-01"
   date      String
 
   creneau   CreneauHoraire @relation(fields: [creneauId], references: [id], onDelete: Cascade)
@@ -494,12 +490,11 @@ model Appel {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([creneauId, date]) // Un appel unique par créneau et par date
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
-  @@index([classeId]) // Index pour optimiser les requêtes par classe
+  @@unique([creneauId, date])
+  @@index([schoolId])
+  @@index([classeId])
 }
 
-/// Présence d'un élève dans un appel
 model Presence {
   id      String         @id @default(uuid())
   appelId String
@@ -511,10 +506,9 @@ model Presence {
 
   updatedAt DateTime @updatedAt
 
-  @@unique([appelId, eleveId]) // Un enregistrement de présence unique par appel et par élève
+  @@unique([appelId, eleveId])
 }
 
-// MODELE NOTIFICATION - Pour gérer les notifications aux parents etc
 model Notification {
   id        String   @id @default(uuid())
   userId    String
@@ -522,14 +516,13 @@ model Notification {
   schoolId  String
   school    School   @relation(fields: [schoolId], references: [id])
   message   String
-  lien      String? // ex: "/classes/:id" pour naviguer au cliec
+  lien      String?
   lu        Boolean  @default(false)
   createdAt DateTime @default(now())
 
   @@index([userId, lu])
 }
 
-// CAHIER DE TEXTE, QUIZ pour professeur
 enum StatutQuiz {
   BROUILLON
   PUBLIE
@@ -545,11 +538,11 @@ enum TypeQuestion {
 model CahierTexte {
   id           String   @id @default(uuid())
   titre        String
-  detail       String?  @db.Text // description détaillée du cours, devoir, etc.
-  date         String // YYYY-MM-DD
+  detail       String?  @db.Text
+  date         String
   classeId     String
   matiereId    String?
-  professeurId String // le prof qui a créé ce cahier de texte
+  professeurId String
   schoolId     String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -560,22 +553,22 @@ model CahierTexte {
   school     School     @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   devoir     Devoir[]
 
-  @@index([classeId, date]) // pour optimiser les requêtes par classe et par date
-  @@index([professeurId]) // pour optimiser les requêtes par professeur
+  @@index([classeId, date])
+  @@index([professeurId])
 }
 
 model Devoir {
   id            String   @id @default(uuid())
   titre         String
   description   String?  @db.Text
-  dateRendu     String // YYYY-MM-DD
+  dateRendu     String
   cahierTexteId String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
   cahierTexte CahierTexte @relation(fields: [cahierTexteId], references: [id], onDelete: Cascade)
 
-  @@index([cahierTexteId]) // pour optimiser les requêtes par cahier de texte
+  @@index([cahierTexteId])
 }
 
 model Quiz {
@@ -596,8 +589,8 @@ model Quiz {
   questions   Question[]
   soumissions Soumission[]
 
-  @@index([classeId]) // pour optimiser les requêtes par classe
-  @@index([professeurId]) // pour optimiser les requêtes par professeur
+  @@index([classeId])
+  @@index([professeurId])
 }
 
 model Question {
@@ -605,9 +598,9 @@ model Question {
   quizId       String
   enonce       String       @db.Text
   type         TypeQuestion
-  options      String[] // pour les QCM, stocke les options de réponse
-  bonneReponse String // pour les QCM, stocke la bonne réponse (ex: "A", "B", etc.) ou la réponse correcte pour les autres types
-  ordre        Int          @default(0) // pour ordonner les questions dans le quiz
+  options      String[]
+  bonneReponse String
+  ordre        Int          @default(0)
   createdAt    DateTime     @default(now())
 
   quiz     Quiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)
@@ -620,7 +613,7 @@ model Soumission {
   id       String   @id @default(uuid())
   quizId   String
   eleveId  String
-  score    Float? // score obtenu, calculé après correction
+  score    Float?
   total    Int
   soumisAt DateTime @default(now())
 
@@ -628,50 +621,32 @@ model Soumission {
   eleve    Eleve     @relation(fields: [eleveId], references: [id], onDelete: Cascade)
   reponses Reponse[]
 
-  @@unique([quizId, eleveId]) // Un élève ne peut soumettre qu'une fois par quiz
+  @@unique([quizId, eleveId])
 }
 
 model Reponse {
   id           String   @id @default(uuid())
   soumissionId String
   questionId   String
-  valeur       String // la réponse donnée par l'élève (ex: "A", "B", "C", "D" pour les QCM, ou la réponse textuelle pour les autres types)
-  correcte     Boolean? // indique si la réponse est correcte, calculée après correction
+  valeur       String
+  correcte     Boolean?
 
   soumission Soumission @relation(fields: [soumissionId], references: [id], onDelete: Cascade)
   question   Question   @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
-  @@unique([soumissionId, questionId]) // Une réponse unique par question dans une soumission
+  @@unique([soumissionId, questionId])
 }
 
-// --- MODULE BULLETIN TEMPLATE (pour générer les bulletins de notes) ---
-
-/// Canevas personnalisé du bulletin scolaire.
-/// Il est unique par école (relation @unique sur schoolId).
-/// La configuration est stockée en JSON pour rester extensible sans migration.
-
-/// Champs JSON (BulletinTemplateConfig) :
-/// - enteteTexte     : texte affcihé en haut du bulletin (ex: "Bulletin de Notes - Année 2026-2027")
-/// - anneeTexte      : année scolaire affichée (ex: "2026-2027")
-/// - piedTexte       : pied de page, ligne de signature
-/// - showRang        : afficher la colonne rang de l'élève dans le tableau
-/// - showCoef        : afficher la colonne coefficient dans le tableau
-/// - showNbEval      : afficher le nombre d'évaluations par matière
-/// - seuilBien       : note minimale pour la couleur "Bien" (défaut : 14)
-/// - seuiAssezBien   : note minimale pour la couleur "Assez Bien" (défaut : 12)
-/// - seuilPassable   : note minimale poue la couleur "Passable" (défaut : 10)
 model BulletinTemplate {
   id       String @id @default(uuid())
-  schoolId String @unique // Un seul canevas par école
+  schoolId String @unique
   school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-
-  // JSON sérialisé de BulletinTemplateConfig (voir packages/types/index.ts)
-  config Json @default("{}")
+  config   Json   @default("{}")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@index([schoolId])
 }
 
 enum DeliberationStatut {
@@ -708,11 +683,15 @@ model DeliberationSession {
   classe        Classe @relation(fields: [classeId], references: [id], onDelete: Cascade)
   schoolId      String
   school        School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  periodeLabel  String // ex: "Fin d'année 2026-2027"
-  anneeScolaire String // ex: "2026-2027"
+  periodeLabel  String
+  anneeScolaire String
+
+  // -- Lien optionnel vers la Periode formelle (pour récupérer les notes par périodeId)
+  periodeId String?
+  periode   Periode? @relation(fields: [periodeId], references: [id], onDelete: SetNull)
 
   statut      DeliberationStatut @default(BROUILLON)
-  compteRendu String? // compte-rendu de la délibération, texte libre
+  compteRendu String?
 
   createdById String
   createdBy   User   @relation("DelibCreatedBy", fields: [createdById], references: [id])
@@ -726,10 +705,11 @@ model DeliberationSession {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([classeId, periodeLabel, anneeScolaire]) // Une session de délibération unique par classe et par période
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
-  @@index([classeId]) // Index pour optimiser les requêtes par classe
-  @@index([statut]) // Index pour optimiser les requêtes par statut (brouillon, validée)
+  @@unique([classeId, periodeLabel, anneeScolaire])
+  @@index([schoolId])
+  @@index([classeId])
+  @@index([statut])
+  @@index([periodeId])
 }
 
 model DeliberationDecision {
@@ -743,17 +723,16 @@ model DeliberationDecision {
   decision      DecisionPassage
   mention       MentionDeliberation       @default(AUCUNE)
   avertissement AvertissementDeliberation @default(AUCUN)
-  commentaire   String? // commentaire optionnel du jury pour cette décision
+  commentaire   String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([sessionId, eleveId]) // Une décision unique par élève dans une session de délibération
-  @@index([sessionId]) // Index pour optimiser les requêtes par session de délibération
-  @@index([eleveId]) // Index pour optimiser les requêtes par élève
+  @@unique([sessionId, eleveId])
+  @@index([sessionId])
+  @@index([eleveId])
 }
 
-/// Statut opérationnel d'une session d'examen
 enum ExamenStatut {
   PLANIFIE
   EN_COURS
@@ -762,12 +741,11 @@ enum ExamenStatut {
   ANNULE
 }
 
-///Salle d'examen configurable au niveau de l'école
 model ExamenSalle {
   id       String  @id @default(uuid())
   nom      String
   capacite Int?
-  location String? // adresse ou description de la localisation de la salle
+  location String?
   schoolId String
   school   School  @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
@@ -776,11 +754,10 @@ model ExamenSalle {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([schoolId, nom]) // Un nom de salle unique par école
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
+  @@unique([schoolId, nom])
+  @@index([schoolId])
 }
 
-/// Session d'examen planifiée pour une classe (et optionnellement une matière)
 model ExamenSession {
   id          String  @id @default(uuid())
   titre       String
@@ -798,9 +775,9 @@ model ExamenSession {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
-  dateExamen String // YYYY-MM-DD
-  heureDebut String // HH:mm
-  heureFin   String // HH:mm
+  dateExamen String
+  heureDebut String
+  heureFin   String
   statut     ExamenStatut @default(PLANIFIE)
 
   createdById String
@@ -812,12 +789,11 @@ model ExamenSession {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([schoolId]) // Index pour optimiser les requêtes par école
-  @@index([classeId, dateExamen]) // Index pour optimiser les requêtes par classe
-  @@index([statut]) // Index pour optimiser les requêtes par statut d'examen
+  @@index([schoolId])
+  @@index([classeId, dateExamen])
+  @@index([statut])
 }
 
-/// assignement d'un surveillant à une session d'examen
 model ExamenSurveillance {
   id String @id @default(uuid())
 
@@ -827,16 +803,15 @@ model ExamenSurveillance {
   userId String
   user   User   @relation("ExamenSurveilles", fields: [userId], references: [id])
 
-  roleLabel String? // ex: "Surveillant Principal", "Surveillant Adjoint", etc.
+  roleLabel String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([sessionId, userId]) // Un surveillant ne peut être assigné qu'une fois par session d'examen
-  @@index([userId]) // Index pour optimiser les requêtes par session d'examen
+  @@unique([sessionId, userId])
+  @@index([userId])
 }
 
-/// Journal de suivi de déroulement (incident / observations).
 model ExamenIncident {
   id String @id @default(uuid())
 
@@ -851,5 +826,5 @@ model ExamenIncident {
 
   createdAt DateTime @default(now())
 
-  @@index([sessionId, createdAt]) // Index pour optimiser les requêtes par session d'examen
+  @@index([sessionId, createdAt])
 }

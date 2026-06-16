@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model ExamenSession
- * Session d'examen planifiée pour une classe (et optionnellement une matière)
+ * 
  */
 export type ExamenSessionModel = runtime.Types.Result.DefaultSelection<Prisma.$ExamenSessionPayload>
 

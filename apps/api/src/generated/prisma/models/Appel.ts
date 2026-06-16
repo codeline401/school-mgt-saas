@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model Appel
- * Un appel = une session de présence pour un creneau horaire à une date donnée
+ * 
  */
 export type AppelModel = runtime.Types.Result.DefaultSelection<Prisma.$AppelPayload>
 
@@ -958,9 +958,6 @@ export type $AppelPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     creneauId: string
     classeId: string
     schoolId: string
-    /**
-     * Date au format "YYYY-MM-DD", ex: "2024-09-01"
-     */
     date: string
     createdAt: Date
     updatedAt: Date

@@ -61,6 +61,7 @@ export const ModelName = {
   Contrat: 'Contrat',
   Remplacement: 'Remplacement',
   Matiere: 'Matiere',
+  Periode: 'Periode',
   Note: 'Note',
   Document: 'Document',
   CreneauHoraire: 'CreneauHoraire',
@@ -120,6 +121,14 @@ export const SchoolScalarFieldEnum = {
   nom: 'nom',
   tenantKey: 'tenantKey',
   inviteCode: 'inviteCode',
+  adresse: 'adresse',
+  telephone: 'telephone',
+  email: 'email',
+  logoUrl: 'logoUrl',
+  devise: 'devise',
+  slogan: 'slogan',
+  siteWeb: 'siteWeb',
+  numAutorisation: 'numAutorisation',
   createdAt: 'createdAt'
 } as const
 
@@ -256,6 +265,21 @@ export const MatiereScalarFieldEnum = {
 export type MatiereScalarFieldEnum = (typeof MatiereScalarFieldEnum)[keyof typeof MatiereScalarFieldEnum]
 
 
+export const PeriodeScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  type: 'type',
+  anneeScolaire: 'anneeScolaire',
+  dateDebut: 'dateDebut',
+  dateFin: 'dateFin',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PeriodeScalarFieldEnum = (typeof PeriodeScalarFieldEnum)[keyof typeof PeriodeScalarFieldEnum]
+
+
 export const NoteScalarFieldEnum = {
   id: 'id',
   titre: 'titre',
@@ -270,6 +294,7 @@ export const NoteScalarFieldEnum = {
   matiereId: 'matiereId',
   classeId: 'classeId',
   schoolId: 'schoolId',
+  periodeId: 'periodeId',
   createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -448,6 +473,7 @@ export const DeliberationSessionScalarFieldEnum = {
   schoolId: 'schoolId',
   periodeLabel: 'periodeLabel',
   anneeScolaire: 'anneeScolaire',
+  periodeId: 'periodeId',
   statut: 'statut',
   compteRendu: 'compteRendu',
   createdById: 'createdById',

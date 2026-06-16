@@ -99,7 +99,13 @@ const MENU: MenuEntry[] = [
     path: "/mon-profil",
     roles: ["PROF"],
   },
-  { icon: Settings, label: "Paramètres", path: "/parametres", roles: null },
+  // Paramètres : visible uniquement pour ADMIN et SUDO_ADMIN
+  {
+    icon: Settings,
+    label: "Paramètres",
+    path: "/parametres",
+    roles: ["ADMIN", "SUDO_ADMIN"],
+  },
 ];
 
 const BASE = "flex items-center gap-3 p-3 rounded-lg transition-colors text-sm";
@@ -114,7 +120,6 @@ function Sidebar() {
   const user = useAuthStore((s) => s.user);
   const location = useLocation();
   const [openGroups, setOpenGroups] = useState<string[]>(() => {
-    // Open the group that contains the active route on first render
     const active = MENU.filter(isGroup).find((g) =>
       g.children.some(
         (c) =>
@@ -141,7 +146,7 @@ function Sidebar() {
 
       <nav className="space-y-0.5 flex-1 overflow-y-auto">
         {MENU.map((entry) => {
-          /* ── Placeholder (pas de route, pas encore implémenté) ── */
+          /* ── Placeholder ── */
           if (!isGroup(entry) && !isItem(entry)) {
             return (
               <div
@@ -162,7 +167,6 @@ function Sidebar() {
           if (isGroup(entry)) {
             if (!hasAccess(entry.roles)) return null;
 
-            // Filter children by role
             const children = entry.children.filter((c) => hasAccess(c.roles));
             if (children.length === 0) return null;
 

@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model ExamenIncident
- * Journal de suivi de déroulement (incident / observations).
+ * 
  */
 export type ExamenIncidentModel = runtime.Types.Result.DefaultSelection<Prisma.$ExamenIncidentPayload>
 

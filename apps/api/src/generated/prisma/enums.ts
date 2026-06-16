@@ -41,6 +41,16 @@ export const TypeContrat = {
 export type TypeContrat = (typeof TypeContrat)[keyof typeof TypeContrat]
 
 
+export const TypePeriode = {
+  TRIMESTRE: 'TRIMESTRE',
+  SEMESTRE: 'SEMESTRE',
+  ANNEE: 'ANNEE',
+  AUTRE: 'AUTRE'
+} as const
+
+export type TypePeriode = (typeof TypePeriode)[keyof typeof TypePeriode]
+
+
 export const TypeNote = {
   INTERROGATION: 'INTERROGATION',
   DS: 'DS',
