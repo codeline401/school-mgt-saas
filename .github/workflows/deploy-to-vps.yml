@@ -52,7 +52,3 @@ jobs:
           ls -la ~/.ssh
 
           ssh -vvv -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes "$VPS_USER@$VPS_HOST" "echo OK"
-
-
-          ssh -o IdentitiesOnly=yes "$VPS_USER@$VPS_HOST" 'node -v && which node && npm -v && which npm'
-          ssh -o IdentitiesOnly=yes "$VPS_USER@$VPS_HOST" 'export PATH="/usr/bin:$PATH"; cd /var/opt/school-mgt-saas/apps/web && node -v && npm run build && rsync -a --delete dist/ /var/www/school-web/'
