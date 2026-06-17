@@ -54,11 +54,10 @@ jobs:
           ssh -vvv -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes "$VPS_USER@$VPS_HOST" "echo OK"
 
 
-      - name: Build on VPS + sync
+      - name: Sync files to VPS
         run: |
-          ssh -o IdentitiesOnly=yes "$VPS_USER@$VPS_HOST" 'cd /var/opt/school-mgt-saas/apps/web && /usr/bin/node -v && npm run build && rsync -a --delete dist/ /var/www/school-web/'
-      
-      
+          ls -la
+        
         
       
       
