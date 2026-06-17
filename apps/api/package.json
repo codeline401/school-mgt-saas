@@ -43,12 +43,5 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2"
-  },
-
-  "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "prisma:migrate": "prisma migrate deploy",
-    "prisma:generate": "prisma generate"
   }
 }
