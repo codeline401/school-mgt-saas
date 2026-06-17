@@ -3,19 +3,10 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copier tout le monorepo
 COPY . .
-
-# Installer TOUTES les dépendances du monorepo
 RUN npm install
-
-# Build du package types (workspace)
 RUN npm run build --workspace=@school-mgt/types
-
-# Build de l'API
 RUN npm run build --workspace=apps/api
-
-# Génération Prisma
 RUN npx prisma generate --schema=apps/api/prisma/schema.prisma
 
 
@@ -24,22 +15,18 @@ FROM node:20-alpine AS runner
 
 WORKDIR /app
 
-# Copier uniquement ce qui est nécessaire
 COPY --from=builder /app/apps/api/dist ./dist
 COPY --from=builder /app/apps/api/package.json ./package.json
 COPY --from=builder /app/apps/api/prisma ./prisma
 
-# copier les types compilés (pas TS)
-# COPY --from=builder /app/packages/types/dist ./node_modules/@school-mgt/types
-
-# Copier node_modules runtime (déjà installé dans builder)
+# 1. Copier node_modules (contient un symlink cassé pour @school-mgt/types)
 COPY --from=builder /app/node_modules ./node_modules
 
-# Variables environnement
+# 2. Supprimer le symlink cassé et le remplacer par le vrai package compilé
+RUN rm -rf ./node_modules/@school-mgt/types
+COPY --from=builder /app/packages/types/dist ./node_modules/@school-mgt/types/dist
+COPY --from=builder /app/packages/types/package.json ./node_modules/@school-mgt/types/package.json
+
 ENV NODE_ENV=production
-
-# Port (optionnel mais propre)
 EXPOSE 5000
-
-# Start
 CMD ["node", "dist/index.js"]
