@@ -30,7 +30,7 @@ COPY --from=builder /app/apps/api/package.json ./package.json
 COPY --from=builder /app/apps/api/prisma ./prisma
 
 # copier les types compilés (pas TS)
-COPY --from=builder /app/packages/types/dist ./node_modules/@school-mgt/types
+# COPY --from=builder /app/packages/types/dist ./node_modules/@school-mgt/types
 
 # Copier node_modules runtime (déjà installé dans builder)
 COPY --from=builder /app/node_modules ./node_modules
