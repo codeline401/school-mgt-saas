@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "module": "ESNext",
+    "target": "ES2020",
+    "moduleResolution": "Node"
+  },
+  "include": ["index.ts"]
+}
