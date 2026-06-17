@@ -55,7 +55,7 @@ jobs:
 
       - name: Sync files to VPS
         run: |
-          rsync -az --delete \
+          rsync -av --delete --dry-run \
             -e "ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes" \
             apps/web/dist/ \
             "$VPS_USER@$VPS_HOST:$VPS_PATH/"
@@ -65,5 +65,4 @@ jobs:
 
 
 
-
-    
+  
