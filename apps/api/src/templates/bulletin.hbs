@@ -1,0 +1,243 @@
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bulletin - {{eleve.prenom}} {{eleve.nom}}</title>
+    <style>
+      @page { margin: 0; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 12px;
+        color: #1a1a1a;
+        padding: 24px 28px;
+      }{{#if watermark}}
+        .watermark { position: fixed; top: 40%; left: 50%; transform:
+        translate(-50%, -50%) rotate(-30deg); font-size: 80px; color:
+        rgba(0,0,0,0.06); font-weight: bold; z-index: 0; pointer-events: none; }
+      {{/if}}.header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              border-bottom: 3px solid{{primaryColor}};
+                padding-bottom: 14px;
+                margin-bottom: 18px;
+              }
+              .header-left { display: flex; align-items: center; gap: 12px; }
+              .header-left img { height: 56px; width: auto; object-fit: contain; }
+              .school-name { font-size: 16px; font-weight: 700; color:{{primaryColor}}; }
+              .school-meta { font-size: 10px; color: #666; margin-top: 2px; }
+              .header-right { text-align: right; font-size: 10px; color: #666; }
+
+              .title-bar {
+                background:{{primaryColor}};
+                color: #fff;
+                text-align: center;
+                padding: 8px;
+                border-radius: 6px;
+                font-size: 14px;
+                font-weight: 700;
+                margin-bottom: 16px;
+                letter-spacing: 0.5px;
+              }
+
+              .student-info {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 10px;
+                background: #f7f7f8;
+                border-radius: 8px;
+                padding: 12px 16px;
+                margin-bottom: 16px;
+                font-size: 11px;
+              }
+              .student-info .label { color: #888; font-size: 9px; text-transform: uppercase; }
+              .student-info .value { font-weight: 600; margin-top: 1px; }
+
+              table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 16px;
+              }
+              thead th {
+                background:{{primaryColor}};
+                color: #fff;
+                font-size: 10px;
+                text-transform: uppercase;
+                padding: 8px 10px;
+                text-align: left;
+              }
+              thead th.center, tbody td.center { text-align: center; }
+              tbody td {
+                padding: 7px 10px;
+                border-bottom: 1px solid #eee;
+                font-size: 11px;
+              }
+              tbody tr:nth-child(even) { background: #fafafa; }
+
+              .summary {
+                display: flex;
+                justify-content: space-between;
+                background: #f7f7f8;
+                border-radius: 8px;
+                padding: 14px 18px;
+                margin-bottom: 20px;
+              }
+              .summary-item { text-align: center; }
+              .summary-item .big { font-size: 22px; font-weight: 800; color:{{primaryColor}}; }
+              .summary-item .small { font-size: 9px; color: #888; text-transform: uppercase; margin-top: 2px; }
+
+              /* ── Zone unique signatures + date de génération ── */
+              .signatures {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 36px;
+                padding: 0 16px;
+              }
+              .signature-block { text-align: center; min-width: 160px; }
+              .signature-img { max-height: 55px; max-width: 150px; object-fit: contain; }
+              .signature-line {
+                height: 55px;
+                width: 150px;
+                border-bottom: 1px solid #ccc;
+                margin: 0 auto;
+              }
+              .signature-label { font-size: 10px; color: #555; margin-top: 6px; }
+              .signature-date { font-size: 8px; color: #999; margin-top: 2px; }
+
+              .footer {
+                margin-top: 24px;
+                text-align: center;
+                font-size: 9px;
+                color: #999;
+              }
+    </style>
+  </head>
+  <body>
+
+    {{#if watermark}}<div class="watermark">{{watermark}}</div>{{/if}}
+
+    <div class="header">
+      <div class="header-left">
+        {{#if school.logoUrl}}<img src="{{school.logoUrl}}" alt="logo" />{{/if}}
+        <div>
+          <div class="school-name">{{school.nom}}</div>
+          {{#if school.devise}}<div
+              class="school-meta"
+            >{{school.devise}}</div>{{/if}}
+          {{#if school.adresse}}<div
+              class="school-meta"
+            >{{school.adresse}}</div>{{/if}}
+        </div>
+      </div>
+      <div class="header-right">
+        {{#if school.telephone}}<div>Tél : {{school.telephone}}</div>{{/if}}
+        {{#if school.email}}<div>{{school.email}}</div>{{/if}}
+      </div>
+    </div>
+
+    <div class="title-bar">
+      BULLETIN DE NOTES &mdash;
+      {{periode.nom}}
+      &mdash;
+      {{periode.anneeScolaire}}
+    </div>
+
+    <div class="student-info">
+      <div>
+        <div class="label">Élève</div>
+        <div class="value">{{eleve.prenom}} {{eleve.nom}}</div>
+      </div>
+      <div>
+        <div class="label">Classe</div>
+        <div class="value">{{classe.nom}}</div>
+      </div>
+      <div>
+        <div class="label">Rang</div>
+        <div class="value">{{rang}} / {{totalEleves}}</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Matière</th>
+          <th class="center">Coef.</th>
+          <th class="center">Moyenne</th>
+          <th class="center">Évaluations</th>
+          <th>Appréciation</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each subjects}}
+          <tr>
+            <td>{{this.nom}}</td>
+            <td class="center">{{this.coefficient}}</td>
+            <td class="center">{{this.moyenne}}/20</td>
+            <td class="center">{{this.nbEvaluations}}</td>
+            <td>{{this.appreciation}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <div class="summary">
+      <div class="summary-item">
+        <div class="big">{{moyenneGenerale}}/20</div>
+        <div class="small">Moyenne générale</div>
+      </div>
+      <div class="summary-item">
+        <div class="big">{{rang}}<sup style="font-size:11px;">e</sup></div>
+        <div class="small">Rang de classe</div>
+      </div>
+      <div class="summary-item">
+        <div class="big">{{totalEleves}}</div>
+        <div class="small">Élèves dans la classe</div>
+      </div>
+    </div>
+
+    {{#if appreciationConseil}}
+      <div style="margin-bottom:18px; font-size:11px;">
+        <strong>Appréciation du conseil de classe :</strong>
+        {{appreciationConseil}}
+      </div>
+    {{/if}}
+
+    <!-- Zone unique signatures (le doublon avec un ancien footer "Le professeur
+     principal / Le directeur / Cachet de l'établissement" a été supprimé) -->
+    <div class="signatures">
+      <div class="signature-block">
+        {{#if signatureProfPrincipal}}
+          <img
+            class="signature-img"
+            src="{{signatureProfPrincipal}}"
+            alt="signature"
+          />
+        {{else}}
+          <div class="signature-line"></div>
+        {{/if}}
+        <div class="signature-label">Le Professeur Principal</div>
+      </div>
+      <div class="signature-block">
+        {{#if signatureDirecteur}}
+          <img
+            class="signature-img"
+            src="{{signatureDirecteur}}"
+            alt="signature"
+          />
+        {{else}}
+          <div class="signature-line"></div>
+        {{/if}}
+        <div class="signature-label">Le Directeur</div>
+        <div class="signature-date">Fait le {{formatDate dateGeneration}}</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Document généré le
+      {{formatDate dateGeneration}}
+      {{#if school.numAutorisation}}&middot; Autorisation N°
+        {{school.numAutorisation}}{{/if}}
+    </div>
+
+  </body>
+</html>
