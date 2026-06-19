@@ -602,6 +602,8 @@ export interface BulletinData {
   dateGeneration: string;
   watermark: string | null;
   primaryColor: string;
+  signatureDirecteur: string | null; // base64 de la signature du directeur
+  signatureProfPrincipal: string | null; // base64 de la signature du prof principal
 }
 
 export interface ReleveEvaluation {

@@ -48,6 +48,7 @@ model User {
   examensCrees                  ExamenSession[]       @relation("ExamensCrees")
   examenSurveillances           ExamenSurveillance[]  @relation("ExamenSurveilles")
   examenIncidents               ExamenIncident[]      @relation("ExamenIncidentsCrees")
+  signature                     Signature?
 }
 
 // Modele SAAS
@@ -827,4 +828,15 @@ model ExamenIncident {
   createdAt DateTime @default(now())
 
   @@index([sessionId, createdAt])
+}
+
+// MODEL SIGNATURE
+model Signature {
+  id        String   @id @default(uuid())
+  userId    String   @unique // une signature active par utilisateur
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  filePath  String // Chemin local du fichier
+  mimeType  String // image/png ou image/jpeg
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

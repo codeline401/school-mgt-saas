@@ -4,6 +4,7 @@ import { pdfGenerator } from "../lib/pdfGenerator.js";
 import { templateEngine } from "../lib/templateEngine.js";
 import type { BulletinTemplateConfig } from "@school-mgt/types";
 import { DEFAULT_BULLETIN_CONFIG } from "@school-mgt/types";
+import fs from "fs";
 
 import { bulletinExportSchema } from "../schemas/bulletinExportSchema.js";
 import { releveExportSchema } from "../schemas/releveExportSchema.js";
@@ -247,7 +248,47 @@ export const exportController = {
       );
       const rang = allSorted.indexOf(moyenneGenerale) + 1;
 
+      // Récupère la signature du directeur (ADMIN de l'école)
+      const admin = await prisma.user.findFirst({
+        where: {
+          schoolId: eleve.classe.schoolId,
+          role: { in: ["ADMIN", "SUDO_ADMIN"] },
+        },
+        include: { signature: true },
+      });
+
+      // Récupère la singature du prof responsable de la classe (optionnel)
+      const profPrincipal = await prisma.professeur.findFirst({
+        where: { classes: { some: { id: eleve.classeId } } },
+        include: { user: { include: { signature: true } } },
+      });
+
+      // convertit les fichiers en base64 pour injection dans le HTML
+      function singatureToDataUrl(
+        filePath: string,
+        mimeType: string,
+      ): string | null {
+        try {
+          const buffer = fs.readFileSync(filePath);
+          return `data:${mimeType};base64,${buffer.toString("base64")}`;
+        } catch (err) {
+          return null;
+        }
+      }
+
+      const signatureDirecteur = admin?.signature
+        ? singatureToDataUrl(admin.signature.filePath, admin.signature.mimeType)
+        : null;
+
+      const signatureProfPrincipal = profPrincipal?.user?.signature
+        ? singatureToDataUrl(
+            profPrincipal.user.signature.filePath,
+            profPrincipal.user.signature.mimeType,
+          )
+        : null;
+
       const config = await resolveTemplateConfig(eleve.classe.schoolId);
+
       const data: BulletinData = {
         eleve: {
           id: eleve.id,
@@ -276,6 +317,8 @@ export const exportController = {
         dateGeneration: new Date().toISOString(),
         watermark: options.watermark,
         primaryColor: options.primaryColor ?? "#2563eb",
+        signatureDirecteur, // string | null
+        signatureProfPrincipal, // string | null
       };
 
       // FIX #3 : cast vers object pour satisfaire la contrainte du templateEngine

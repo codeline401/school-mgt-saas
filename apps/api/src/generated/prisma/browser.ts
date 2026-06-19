@@ -167,3 +167,8 @@ export type ExamenSurveillance = Prisma.ExamenSurveillanceModel
  * 
  */
 export type ExamenIncident = Prisma.ExamenIncidentModel
+/**
+ * Model Signature
+ * 
+ */
+export type Signature = Prisma.SignatureModel

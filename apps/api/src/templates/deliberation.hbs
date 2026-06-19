@@ -1,0 +1,331 @@
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Délibération - {{classe.nom}}</title>
+    <style>
+      @page {
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        font-size: 11px;
+        color: #1a1a1a;
+        padding: 24px 28px;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 3px solid #2563eb;
+        padding-bottom: 14px;
+        margin-bottom: 18px;
+      }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .header-left img {
+        height: 50px;
+        width: auto;
+        object-fit: contain;
+      }
+      .school-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: #2563eb;
+      }
+      .school-meta {
+        font-size: 9px;
+        color: #666;
+        margin-top: 2px;
+      }
+
+      .title-bar {
+        background: #2563eb;
+        color: #fff;
+        text-align: center;
+        padding: 8px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        letter-spacing: 0.5px;
+      }
+
+      .session-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        background: #f7f7f8;
+        border-radius: 8px;
+        padding: 10px 16px;
+        margin-bottom: 16px;
+        font-size: 10px;
+      }
+      .session-info .label {
+        color: #888;
+        font-size: 8px;
+        text-transform: uppercase;
+      }
+      .session-info .value {
+        font-weight: 600;
+        margin-top: 1px;
+      }
+
+      .compte-rendu {
+        background: #fffbeb;
+        border-left: 3px solid #f59e0b;
+        padding: 10px 14px;
+        margin-bottom: 18px;
+        font-size: 10px;
+        line-height: 1.5;
+      }
+      .compte-rendu .ttl {
+        font-weight: 700;
+        font-size: 9px;
+        text-transform: uppercase;
+        color: #92400e;
+        margin-bottom: 4px;
+      }
+
+      .summary {
+        display: flex;
+        justify-content: space-around;
+        background: #f7f7f8;
+        border-radius: 8px;
+        padding: 14px;
+        margin-bottom: 18px;
+      }
+      .summary-item {
+        text-align: center;
+      }
+      .summary-item .big {
+        font-size: 18px;
+        font-weight: 800;
+        color: #2563eb;
+      }
+      .summary-item .small {
+        font-size: 8px;
+        color: #888;
+        text-transform: uppercase;
+        margin-top: 2px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      thead th {
+        background: #2563eb;
+        color: #fff;
+        font-size: 9px;
+        text-transform: uppercase;
+        padding: 7px 10px;
+        text-align: left;
+      }
+      thead th.center,
+      tbody td.center {
+        text-align: center;
+      }
+      tbody td {
+        padding: 6px 10px;
+        border-bottom: 1px solid #eee;
+        font-size: 10px;
+      }
+      tbody tr:nth-child(even) {
+        background: #fafafa;
+      }
+
+      .decision-passe {
+        color: #15803d;
+        font-weight: 700;
+      }
+      .decision-redouble {
+        color: #dc2626;
+        font-weight: 700;
+      }
+      .decision-oriente {
+        color: #ca8a04;
+        font-weight: 700;
+      }
+      .decision-exclu {
+        color: #7f1d1d;
+        font-weight: 700;
+      }
+
+      .avert-badge {
+        display: inline-block;
+        font-size: 8px;
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: #fee2e2;
+        color: #991b1b;
+        font-weight: 600;
+      }
+
+      .signatures {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 36px;
+        padding: 0 16px;
+      }
+      .signature-block {
+        text-align: center;
+        min-width: 160px;
+      }
+      .signature-line {
+        height: 50px;
+        width: 150px;
+        border-bottom: 1px solid #ccc;
+        margin: 0 auto;
+      }
+      .signature-label {
+        font-size: 9px;
+        color: #555;
+        margin-top: 6px;
+      }
+
+      .footer {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 9px;
+        color: #999;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="header">
+      <div class="header-left">
+        {{#if school.logoUrl}}<img src="{{school.logoUrl}}" alt="logo" />{{/if}}
+        <div>
+          <div class="school-name">{{school.nom}}</div>
+          {{#if school.adresse}}<div
+              class="school-meta"
+            >{{school.adresse}}</div>{{/if}}
+        </div>
+      </div>
+      <div class="school-meta">Généré le {{formatDate dateGeneration}}</div>
+    </div>
+
+    <div class="title-bar">
+      COMPTE-RENDU DE DÉLIBÉRATION &mdash;
+      {{classe.nom}}
+    </div>
+
+    <div class="session-info">
+      <div>
+        <div class="label">Période</div>
+        <div class="value">{{session.periodeLabel}}</div>
+      </div>
+      <div>
+        <div class="label">Année scolaire</div>
+        <div class="value">{{session.anneeScolaire}}</div>
+      </div>
+      <div>
+        <div class="label">Validé par</div>
+        <div class="value">{{#if
+            session.validePar
+          }}{{session.validePar}}{{else}}—{{/if}}</div>
+      </div>
+    </div>
+
+    {{#if session.compteRendu}}
+      <div class="compte-rendu">
+        <div class="ttl">Compte-rendu du conseil</div>
+        <div>{{session.compteRendu}}</div>
+      </div>
+    {{/if}}
+
+    <div class="summary">
+      <div class="summary-item">
+        <div class="big">{{statistiques.totalEleves}}</div>
+        <div class="small">Élèves</div>
+      </div>
+      <div class="summary-item">
+        <div class="big">{{statistiques.passes}}</div>
+        <div class="small">Admis</div>
+      </div>
+      <div class="summary-item">
+        <div class="big">{{statistiques.redoublants}}</div>
+        <div class="small">Redoublants</div>
+      </div>
+      <div class="summary-item">
+        <div class="big">{{statistiques.orientes}}</div>
+        <div class="small">Orientés</div>
+      </div>
+      <div class="summary-item">
+        <div class="big">{{statistiques.moyenneClasse}}/20</div>
+        <div class="small">Moyenne classe</div>
+      </div>
+      <div class="summary-item">
+        <div class="big">{{statistiques.tauxReussite}}%</div>
+        <div class="small">Taux de réussite</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="center">Rang</th>
+          <th>Élève</th>
+          <th class="center">Moyenne</th>
+          <th>Décision</th>
+          <th>Mention</th>
+          <th>Avertissement</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each entries}}
+          <tr>
+            <td class="center">{{this.rang}}</td>
+            <td>{{this.prenom}} {{this.nom}}</td>
+            <td class="center">{{this.moyenne}}/20</td>
+            <td class="decision-{{lowercase this.decision}}">{{decisionLabel
+                this.decision
+              }}</td>
+            <td>{{mentionLabel this.mention}}</td>
+            <td>
+              {{#if (ne this.avertissement "AUCUN")}}
+                <span class="avert-badge">{{avertissementLabel
+                    this.avertissement
+                  }}</span>
+              {{/if}}
+            </td>
+          </tr>
+          {{#if this.commentaire}}
+            <tr>
+              <td></td>
+              <td
+                colspan="5"
+                style="font-size:9px; color:#888; font-style:italic; padding-top:0; border-bottom:1px solid #eee;"
+              >
+                {{this.commentaire}}
+              </td>
+            </tr>
+          {{/if}}
+        {{/each}}
+      </tbody>
+    </table>
+
+    <div class="signatures">
+      <div class="signature-block">
+        <div class="signature-line"></div>
+        <div class="signature-label">Le Directeur / Président du conseil</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Document généré le
+      {{formatDate dateGeneration}}
+    </div>
+
+  </body>
+</html>
