@@ -413,7 +413,8 @@ export const ModelName = {
   ExamenSalle: 'ExamenSalle',
   ExamenSession: 'ExamenSession',
   ExamenSurveillance: 'ExamenSurveillance',
-  ExamenIncident: 'ExamenIncident'
+  ExamenIncident: 'ExamenIncident',
+  Signature: 'Signature'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -429,7 +430,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident"
+    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2653,6 +2654,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Signature: {
+      payload: Prisma.$SignaturePayload<ExtArgs>
+      fields: Prisma.SignatureFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SignatureFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignaturePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SignatureFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignaturePayload>
+        }
+        findFirst: {
+          args: Prisma.SignatureFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignaturePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SignatureFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignaturePayload>
+        }
+        findMany: {
+          args: Prisma.SignatureFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignaturePayload>[]
+        }
+        create: {
+          args: Prisma.SignatureCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignaturePayload>
+        }
+        createMany: {
+          args: Prisma.SignatureCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SignatureCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignaturePayload>[]
+        }
+        delete: {
+          args: Prisma.SignatureDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignaturePayload>
+        }
+        update: {
+          args: Prisma.SignatureUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignaturePayload>
+        }
+        deleteMany: {
+          args: Prisma.SignatureDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SignatureUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SignatureUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignaturePayload>[]
+        }
+        upsert: {
+          args: Prisma.SignatureUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignaturePayload>
+        }
+        aggregate: {
+          args: Prisma.SignatureAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSignature>
+        }
+        groupBy: {
+          args: Prisma.SignatureGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SignatureGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SignatureCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SignatureCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3151,6 +3226,18 @@ export const ExamenIncidentScalarFieldEnum = {
 export type ExamenIncidentScalarFieldEnum = (typeof ExamenIncidentScalarFieldEnum)[keyof typeof ExamenIncidentScalarFieldEnum]
 
 
+export const SignatureScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  filePath: 'filePath',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SignatureScalarFieldEnum = (typeof SignatureScalarFieldEnum)[keyof typeof SignatureScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3637,6 +3724,7 @@ export type GlobalOmitConfig = {
   examenSession?: Prisma.ExamenSessionOmit
   examenSurveillance?: Prisma.ExamenSurveillanceOmit
   examenIncident?: Prisma.ExamenIncidentOmit
+  signature?: Prisma.SignatureOmit
 }
 
 /* Types for Logging */

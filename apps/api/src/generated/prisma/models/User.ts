@@ -243,6 +243,7 @@ export type UserWhereInput = {
   examensCrees?: Prisma.ExamenSessionListRelationFilter
   examenSurveillances?: Prisma.ExamenSurveillanceListRelationFilter
   examenIncidents?: Prisma.ExamenIncidentListRelationFilter
+  signature?: Prisma.XOR<Prisma.SignatureNullableScalarRelationFilter, Prisma.SignatureWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -270,6 +271,7 @@ export type UserOrderByWithRelationInput = {
   examensCrees?: Prisma.ExamenSessionOrderByRelationAggregateInput
   examenSurveillances?: Prisma.ExamenSurveillanceOrderByRelationAggregateInput
   examenIncidents?: Prisma.ExamenIncidentOrderByRelationAggregateInput
+  signature?: Prisma.SignatureOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -300,6 +302,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   examensCrees?: Prisma.ExamenSessionListRelationFilter
   examenSurveillances?: Prisma.ExamenSurveillanceListRelationFilter
   examenIncidents?: Prisma.ExamenIncidentListRelationFilter
+  signature?: Prisma.XOR<Prisma.SignatureNullableScalarRelationFilter, Prisma.SignatureWhereInput> | null
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -360,6 +363,7 @@ export type UserCreateInput = {
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -386,6 +390,7 @@ export type UserUncheckedCreateInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -412,6 +417,7 @@ export type UserUpdateInput = {
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -438,6 +444,7 @@ export type UserUncheckedUpdateInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -779,6 +786,20 @@ export type UserUpdateOneRequiredWithoutExamenIncidentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutExamenIncidentsInput, Prisma.UserUpdateWithoutExamenIncidentsInput>, Prisma.UserUncheckedUpdateWithoutExamenIncidentsInput>
 }
 
+export type UserCreateNestedOneWithoutSignatureInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSignatureInput, Prisma.UserUncheckedCreateWithoutSignatureInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSignatureInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSignatureNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSignatureInput, Prisma.UserUncheckedCreateWithoutSignatureInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSignatureInput
+  upsert?: Prisma.UserUpsertWithoutSignatureInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSignatureInput, Prisma.UserUpdateWithoutSignatureInput>, Prisma.UserUncheckedUpdateWithoutSignatureInput>
+}
+
 export type UserCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -802,6 +823,7 @@ export type UserCreateWithoutSchoolInput = {
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSchoolInput = {
@@ -827,6 +849,7 @@ export type UserUncheckedCreateWithoutSchoolInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSchoolInput = {
@@ -895,6 +918,7 @@ export type UserCreateWithoutProfesseurInput = {
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfesseurInput = {
@@ -920,6 +944,7 @@ export type UserUncheckedCreateWithoutProfesseurInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfesseurInput = {
@@ -961,6 +986,7 @@ export type UserUpdateWithoutProfesseurInput = {
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfesseurInput = {
@@ -986,6 +1012,7 @@ export type UserUncheckedUpdateWithoutProfesseurInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutParentInput = {
@@ -1011,6 +1038,7 @@ export type UserCreateWithoutParentInput = {
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutParentInput = {
@@ -1036,6 +1064,7 @@ export type UserUncheckedCreateWithoutParentInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutParentInput = {
@@ -1077,6 +1106,7 @@ export type UserUpdateWithoutParentInput = {
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParentInput = {
@@ -1102,6 +1132,7 @@ export type UserUncheckedUpdateWithoutParentInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutContratsInput = {
@@ -1127,6 +1158,7 @@ export type UserCreateWithoutContratsInput = {
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutContratsInput = {
@@ -1152,6 +1184,7 @@ export type UserUncheckedCreateWithoutContratsInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutContratsInput = {
@@ -1193,6 +1226,7 @@ export type UserUpdateWithoutContratsInput = {
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutContratsInput = {
@@ -1218,6 +1252,7 @@ export type UserUncheckedUpdateWithoutContratsInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRemplacementsInput = {
@@ -1243,6 +1278,7 @@ export type UserCreateWithoutRemplacementsInput = {
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRemplacementsInput = {
@@ -1268,6 +1304,7 @@ export type UserUncheckedCreateWithoutRemplacementsInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRemplacementsInput = {
@@ -1309,6 +1346,7 @@ export type UserUpdateWithoutRemplacementsInput = {
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRemplacementsInput = {
@@ -1334,6 +1372,7 @@ export type UserUncheckedUpdateWithoutRemplacementsInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotesInput = {
@@ -1359,6 +1398,7 @@ export type UserCreateWithoutNotesInput = {
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotesInput = {
@@ -1384,6 +1424,7 @@ export type UserUncheckedCreateWithoutNotesInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotesInput = {
@@ -1425,6 +1466,7 @@ export type UserUpdateWithoutNotesInput = {
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesInput = {
@@ -1450,6 +1492,7 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDocumentsInput = {
@@ -1475,6 +1518,7 @@ export type UserCreateWithoutDocumentsInput = {
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDocumentsInput = {
@@ -1500,6 +1544,7 @@ export type UserUncheckedCreateWithoutDocumentsInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDocumentsInput = {
@@ -1541,6 +1586,7 @@ export type UserUpdateWithoutDocumentsInput = {
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDocumentsInput = {
@@ -1566,6 +1612,7 @@ export type UserUncheckedUpdateWithoutDocumentsInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -1591,6 +1638,7 @@ export type UserCreateWithoutNotificationsInput = {
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -1616,6 +1664,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -1657,6 +1706,7 @@ export type UserUpdateWithoutNotificationsInput = {
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -1682,6 +1732,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDeliberationSessionsInput = {
@@ -1707,6 +1758,7 @@ export type UserCreateWithoutDeliberationSessionsInput = {
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeliberationSessionsInput = {
@@ -1732,6 +1784,7 @@ export type UserUncheckedCreateWithoutDeliberationSessionsInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeliberationSessionsInput = {
@@ -1762,6 +1815,7 @@ export type UserCreateWithoutDeliberationSessionsValidéesInput = {
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeliberationSessionsValidéesInput = {
@@ -1787,6 +1841,7 @@ export type UserUncheckedCreateWithoutDeliberationSessionsValidéesInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeliberationSessionsValidéesInput = {
@@ -1828,6 +1883,7 @@ export type UserUpdateWithoutDeliberationSessionsInput = {
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeliberationSessionsInput = {
@@ -1853,6 +1909,7 @@ export type UserUncheckedUpdateWithoutDeliberationSessionsInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutDeliberationSessionsValidéesInput = {
@@ -1889,6 +1946,7 @@ export type UserUpdateWithoutDeliberationSessionsValidéesInput = {
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput = {
@@ -1914,6 +1972,7 @@ export type UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExamensCreesInput = {
@@ -1939,6 +1998,7 @@ export type UserCreateWithoutExamensCreesInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExamensCreesInput = {
@@ -1964,6 +2024,7 @@ export type UserUncheckedCreateWithoutExamensCreesInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExamensCreesInput = {
@@ -2005,6 +2066,7 @@ export type UserUpdateWithoutExamensCreesInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamensCreesInput = {
@@ -2030,6 +2092,7 @@ export type UserUncheckedUpdateWithoutExamensCreesInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExamenSurveillancesInput = {
@@ -2055,6 +2118,7 @@ export type UserCreateWithoutExamenSurveillancesInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExamenSurveillancesInput = {
@@ -2080,6 +2144,7 @@ export type UserUncheckedCreateWithoutExamenSurveillancesInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExamenSurveillancesInput = {
@@ -2121,6 +2186,7 @@ export type UserUpdateWithoutExamenSurveillancesInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamenSurveillancesInput = {
@@ -2146,6 +2212,7 @@ export type UserUncheckedUpdateWithoutExamenSurveillancesInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExamenIncidentsInput = {
@@ -2171,6 +2238,7 @@ export type UserCreateWithoutExamenIncidentsInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
   examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExamenIncidentsInput = {
@@ -2196,6 +2264,7 @@ export type UserUncheckedCreateWithoutExamenIncidentsInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
   examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExamenIncidentsInput = {
@@ -2237,6 +2306,7 @@ export type UserUpdateWithoutExamenIncidentsInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamenIncidentsInput = {
@@ -2262,6 +2332,127 @@ export type UserUncheckedUpdateWithoutExamenIncidentsInput = {
   deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSignatureInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  school?: Prisma.SchoolCreateNestedOneWithoutUsersInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutSignatureInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  schoolId?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutSignatureInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSignatureInput, Prisma.UserUncheckedCreateWithoutSignatureInput>
+}
+
+export type UserUpsertWithoutSignatureInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSignatureInput, Prisma.UserUncheckedUpdateWithoutSignatureInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSignatureInput, Prisma.UserUncheckedCreateWithoutSignatureInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSignatureInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSignatureInput, Prisma.UserUncheckedUpdateWithoutSignatureInput>
+}
+
+export type UserUpdateWithoutSignatureInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneWithoutUsersNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSignatureInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateManySchoolInput = {
@@ -2300,6 +2491,7 @@ export type UserUpdateWithoutSchoolInput = {
   examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSchoolInput = {
@@ -2325,6 +2517,7 @@ export type UserUncheckedUpdateWithoutSchoolInput = {
   examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutSchoolInput = {
@@ -2477,6 +2670,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   examensCrees?: boolean | Prisma.User$examensCreesArgs<ExtArgs>
   examenSurveillances?: boolean | Prisma.User$examenSurveillancesArgs<ExtArgs>
   examenIncidents?: boolean | Prisma.User$examenIncidentsArgs<ExtArgs>
+  signature?: boolean | Prisma.User$signatureArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2539,6 +2733,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   examensCrees?: boolean | Prisma.User$examensCreesArgs<ExtArgs>
   examenSurveillances?: boolean | Prisma.User$examenSurveillancesArgs<ExtArgs>
   examenIncidents?: boolean | Prisma.User$examenIncidentsArgs<ExtArgs>
+  signature?: boolean | Prisma.User$signatureArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2564,6 +2759,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     examensCrees: Prisma.$ExamenSessionPayload<ExtArgs>[]
     examenSurveillances: Prisma.$ExamenSurveillancePayload<ExtArgs>[]
     examenIncidents: Prisma.$ExamenIncidentPayload<ExtArgs>[]
+    signature: Prisma.$SignaturePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2984,6 +3180,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   examensCrees<T extends Prisma.User$examensCreesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$examensCreesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExamenSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   examenSurveillances<T extends Prisma.User$examenSurveillancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$examenSurveillancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExamenSurveillancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   examenIncidents<T extends Prisma.User$examenIncidentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$examenIncidentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExamenIncidentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  signature<T extends Prisma.User$signatureArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$signatureArgs<ExtArgs>>): Prisma.Prisma__SignatureClient<runtime.Types.Result.GetResult<Prisma.$SignaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3719,6 +3916,25 @@ export type User$examenIncidentsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.ExamenIncidentScalarFieldEnum | Prisma.ExamenIncidentScalarFieldEnum[]
+}
+
+/**
+ * User.signature
+ */
+export type User$signatureArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Signature
+   */
+  select?: Prisma.SignatureSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Signature
+   */
+  omit?: Prisma.SignatureOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SignatureInclude<ExtArgs> | null
+  where?: Prisma.SignatureWhereInput
 }
 
 /**

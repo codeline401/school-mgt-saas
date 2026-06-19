@@ -80,7 +80,8 @@ export const ModelName = {
   ExamenSalle: 'ExamenSalle',
   ExamenSession: 'ExamenSession',
   ExamenSurveillance: 'ExamenSurveillance',
-  ExamenIncident: 'ExamenIncident'
+  ExamenIncident: 'ExamenIncident',
+  Signature: 'Signature'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -556,6 +557,18 @@ export const ExamenIncidentScalarFieldEnum = {
 } as const
 
 export type ExamenIncidentScalarFieldEnum = (typeof ExamenIncidentScalarFieldEnum)[keyof typeof ExamenIncidentScalarFieldEnum]
+
+
+export const SignatureScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  filePath: 'filePath',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SignatureScalarFieldEnum = (typeof SignatureScalarFieldEnum)[keyof typeof SignatureScalarFieldEnum]
 
 
 export const SortOrder = {

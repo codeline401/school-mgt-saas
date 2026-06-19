@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<title>Classement - {{classe.nom}}</title>
+<style>
+  @page { margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; color: #1a1a1a; padding: 24px 28px; }
+
+  .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #2563eb; padding-bottom: 14px; margin-bottom: 18px; }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .header-left img { height: 50px; width: auto; object-fit: contain; }
+  .school-name { font-size: 15px; font-weight: 700; color: #2563eb; }
+  .school-meta { font-size: 9px; color: #666; margin-top: 2px; }
+
+  .title-bar { background: #2563eb; color: #fff; text-align: center; padding: 8px; border-radius: 6px; font-size: 13px; font-weight: 700; margin-bottom: 16px; letter-spacing: 0.5px; }
+
+  .summary { display: flex; justify-content: space-around; background: #f7f7f8; border-radius: 8px; padding: 14px; margin-bottom: 18px; }
+  .summary-item { text-align: center; }
+  .summary-item .big { font-size: 20px; font-weight: 800; color: #2563eb; }
+  .summary-item .small { font-size: 9px; color: #888; text-transform: uppercase; margin-top: 2px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  thead th { background: #2563eb; color: #fff; font-size: 9px; text-transform: uppercase; padding: 7px 10px; text-align: left; }
+  thead th.center, tbody td.center { text-align: center; }
+  tbody td { padding: 6px 10px; border-bottom: 1px solid #eee; font-size: 10px; }
+  tbody tr:nth-child(even) { background: #fafafa; }
+
+  .rang-1 { background: #fef9c3 !important; }
+  .rang-2 { background: #f3f4f6 !important; }
+  .rang-3 { background: #fed7aa !important; }
+  .rang-cell { font-weight: 700; }
+
+  .mention-badge { display: inline-block; font-size: 8px; padding: 2px 6px; border-radius: 4px; background: #dcfce7; color: #15803d; font-weight: 600; }
+
+  .footer { margin-top: 24px; text-align: center; font-size: 9px; color: #999; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    {{#if school.logoUrl}}<img src="{{school.logoUrl}}" alt="logo" />{{/if}}
+    <div>
+      <div class="school-name">{{school.nom}}</div>
+      {{#if school.adresse}}<div class="school-meta">{{school.adresse}}</div>{{/if}}
+    </div>
+  </div>
+  <div class="school-meta">Généré le {{formatDate dateGeneration}}</div>
+</div>
+
+<div class="title-bar">
+  CLASSEMENT &mdash; {{classe.nom}} &mdash; {{periode.nom}} {{periode.anneeScolaire}}
+</div>
+
+<div class="summary">
+  <div class="summary-item">
+    <div class="big">{{moyenneClasse}}/20</div>
+    <div class="small">Moyenne de classe</div>
+  </div>
+  <div class="summary-item">
+    <div class="big">{{moyenneMax}}/20</div>
+    <div class="small">Meilleure moyenne</div>
+  </div>
+  <div class="summary-item">
+    <div class="big">{{moyenneMin}}/20</div>
+    <div class="small">Moyenne la plus basse</div>
+  </div>
+  <div class="summary-item">
+    <div class="big">{{tauxReussite}}%</div>
+    <div class="small">Taux de réussite</div>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th class="center">Rang</th>
+      <th>Élève</th>
+      <th class="center">Moyenne</th>
+      <th class="center">Matières</th>
+      <th>Mention</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each entries}}
+    <tr class="{{#if (eq this.rang 1)}}rang-1{{else if (eq this.rang 2)}}rang-2{{else if (eq this.rang 3)}}rang-3{{/if}}">
+      <td class="center rang-cell">{{this.rang}}</td>
+      <td>{{this.prenom}} {{this.nom}}</td>
+      <td class="center">{{this.moyenne}}/20</td>
+      <td class="center">{{this.nbMatieres}}</td>
+      <td>
+        {{#if this.mention}}<span class="mention-badge">{{this.mention}}</span>{{/if}}
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<div class="footer">
+  Document généré le {{formatDate dateGeneration}}
+</div>
+
+</body>
+</html>
