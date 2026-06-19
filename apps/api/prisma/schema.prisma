@@ -104,6 +104,11 @@ model Classe {
   profs    Professeur[]
   matieres Matiere[]
 
+  // NOUVEAU : professeur principal désigné pour cette classe (optionnel)
+  // Utilisé pour déterminer qui signe le bulletin côté "professeur".
+  professeurPrincipalId String?
+  professeurPrincipal   Professeur? @relation("ProfesseurPrincipalDe", fields: [professeurPrincipalId], references: [id], onDelete: SetNull)
+
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
   notes                Note[]
@@ -116,6 +121,7 @@ model Classe {
   examenSessions       ExamenSession[]
 
   @@unique([schoolId, nom])
+  @@index([professeurPrincipalId])
 }
 
 model Eleve {
@@ -149,12 +155,13 @@ model Eleve {
 }
 
 model Professeur {
-  id       String   @id @default(uuid())
-  nom      String
-  prenom   String
-  schoolId String
-  school   School   @relation(fields: [schoolId], references: [id])
-  classes  Classe[]
+  id                    String   @id @default(uuid())
+  nom                   String
+  prenom                String
+  schoolId              String
+  school                School   @relation(fields: [schoolId], references: [id])
+  classes               Classe[]
+  classesPrincipalesDes Classe[] @relation("ProfesseurPrincipalDe")
 
   userId String? @unique
   user   User?   @relation(fields: [userId], references: [id])

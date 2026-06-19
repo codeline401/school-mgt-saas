@@ -198,7 +198,7 @@ export default function SignatureNumeriqueTab() {
             </div>
           )}
 
-          {signaturePreview && (
+          {signature && signaturePreview && (
             <div className="flex flex-col items-center gap-3">
               <div className="border border-base-300 rounded-box p-4 bg-base-200/50">
                 <img
@@ -209,7 +209,7 @@ export default function SignatureNumeriqueTab() {
               </div>
               <p className="text-xs text-base-content/40">
                 Mise à jour le{" "}
-                {new Date(signature!.updatedAt).toLocaleDateString("fr-FR", {
+                {new Date(signature.updatedAt).toLocaleDateString("fr-FR", {
                   day: "2-digit",
                   month: "long",
                   year: "numeric",

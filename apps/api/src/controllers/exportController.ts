@@ -4,7 +4,7 @@ import { pdfGenerator } from "../lib/pdfGenerator.js";
 import { templateEngine } from "../lib/templateEngine.js";
 import type { BulletinTemplateConfig } from "@school-mgt/types";
 import { DEFAULT_BULLETIN_CONFIG } from "@school-mgt/types";
-import fs from "fs";
+import fs from "fs/promises";
 
 import { bulletinExportSchema } from "../schemas/bulletinExportSchema.js";
 import { releveExportSchema } from "../schemas/releveExportSchema.js";
@@ -32,7 +32,6 @@ import { DEFAULT_EXPORT_OPTIONS } from "@school-mgt/types";
 
 // ---------- Helpers ----------
 
-// FIX #4 : options partielles acceptées pour couvrir ce que les schemas Zod produisent
 function mergeExportOptions(
   options?: Partial<ExportOptions>,
 ): Required<ExportOptions> {
@@ -58,7 +57,6 @@ async function resolveTemplateConfig(
   };
 }
 
-// FIX #2 : le paramètre inclut désormais adresse, telephone, email
 function mapSchool(school: {
   nom: string;
   logoUrl: string | null;
@@ -127,7 +125,19 @@ function computeStudentAverages(
   return { moyenneGenerale, parMatiere };
 }
 
-// Sélecteur école réutilisable pour tous les include Prisma (FIX #2)
+// FIX (typo) : singatureToDataUrl -> signatureToDataUrl, + version async
+async function signatureToDataUrl(
+  filePath: string,
+  mimeType: string,
+): Promise<string | null> {
+  try {
+    const buffer = await fs.readFile(filePath);
+    return `data:${mimeType};base64,${buffer.toString("base64")}`;
+  } catch {
+    return null;
+  }
+}
+
 const schoolSelect = {
   select: {
     nom: true,
@@ -157,10 +167,8 @@ export const exportController = {
         return;
       }
       const { eleveId, periodeId, options: rawOptions } = parsed.data;
-      // FIX #1 : rawOption → rawOptions
       const options = mergeExportOptions(rawOptions);
 
-      // FIX #2 : select explicite sur school pour avoir adresse, telephone, email
       const eleve = await prisma.eleve.findFirst({
         where: {
           id: eleveId,
@@ -257,31 +265,28 @@ export const exportController = {
         include: { signature: true },
       });
 
-      // Récupère la singature du prof responsable de la classe (optionnel)
-      const profPrincipal = await prisma.professeur.findFirst({
-        where: { classes: { some: { id: eleve.classeId } } },
-        include: { user: { include: { signature: true } } },
+      // FIX : prof principal désigné via Classe.professeurPrincipalId,
+      // au lieu d'un professeur arbitraire parmi ceux affectés à la classe.
+      const classeAvecPrincipal = await prisma.classe.findUnique({
+        where: { id: eleve.classeId },
+        include: {
+          professeurPrincipal: {
+            include: { user: { include: { signature: true } } },
+          },
+        },
       });
+      const profPrincipal = classeAvecPrincipal?.professeurPrincipal ?? null;
 
-      // convertit les fichiers en base64 pour injection dans le HTML
-      function singatureToDataUrl(
-        filePath: string,
-        mimeType: string,
-      ): string | null {
-        try {
-          const buffer = fs.readFileSync(filePath);
-          return `data:${mimeType};base64,${buffer.toString("base64")}`;
-        } catch (err) {
-          return null;
-        }
-      }
-
+      // FIX (typo + async) : signatureToDataUrl, awaited
       const signatureDirecteur = admin?.signature
-        ? singatureToDataUrl(admin.signature.filePath, admin.signature.mimeType)
+        ? await signatureToDataUrl(
+            admin.signature.filePath,
+            admin.signature.mimeType,
+          )
         : null;
 
       const signatureProfPrincipal = profPrincipal?.user?.signature
-        ? singatureToDataUrl(
+        ? await signatureToDataUrl(
             profPrincipal.user.signature.filePath,
             profPrincipal.user.signature.mimeType,
           )
@@ -317,11 +322,10 @@ export const exportController = {
         dateGeneration: new Date().toISOString(),
         watermark: options.watermark,
         primaryColor: options.primaryColor ?? "#2563eb",
-        signatureDirecteur, // string | null
-        signatureProfPrincipal, // string | null
+        signatureDirecteur,
+        signatureProfPrincipal,
       };
 
-      // FIX #3 : cast vers object pour satisfaire la contrainte du templateEngine
       const html = await templateEngine.compile(
         "bulletin",
         data as unknown as Record<string, unknown>,
@@ -360,7 +364,6 @@ export const exportController = {
       const { eleveId, periodeId, options: rawOptions } = parsed.data;
       const options = mergeExportOptions(rawOptions);
 
-      // FIX #2
       const eleve = await prisma.eleve.findFirst({
         where: {
           id: eleveId,
@@ -464,7 +467,6 @@ export const exportController = {
         dateGeneration: new Date().toISOString(),
       };
 
-      // FIX #3
       const html = await templateEngine.compile(
         "releve",
         data as unknown as Record<string, unknown>,
@@ -503,9 +505,8 @@ export const exportController = {
       const { classeId, periodeId, options: rawOptions } = parsed.data;
       const options = mergeExportOptions(rawOptions);
 
-      // FIX #2
-      const classe = await prisma.classe.findUnique({
-        where: { id: classeId },
+      const classe = await prisma.classe.findFirst({
+        where: { id: classeId, schoolId: req.user!.schoolId as string },
         include: {
           school: schoolSelect,
         },
@@ -600,13 +601,15 @@ export const exportController = {
         prenom: e.prenom,
         moyenne: e.moyenne,
         nbMatieres: e.nbMatieres,
+        // Code enum brut (MentionDeliberation) ; le label lisible est résolu
+        // côté template via le helper {{mentionLabel}}.
         mention:
           e.moyenneNumerique >= 16
-            ? "Félicitations"
+            ? "FELICITATIONS"
             : e.moyenneNumerique >= 14
-              ? "Encouragements"
+              ? "ENCOURAGEMENT"
               : e.moyenneNumerique >= 12
-                ? "Tableau d'honneur"
+                ? "TABLEAU_HONNEUR"
                 : null,
       }));
 
@@ -630,7 +633,6 @@ export const exportController = {
         dateGeneration: new Date().toISOString(),
       };
 
-      // FIX #3
       const html = await templateEngine.compile(
         "classement",
         data as unknown as Record<string, unknown>,
@@ -669,10 +671,11 @@ export const exportController = {
       const { sessionId, options: rawOptions } = parsed.data;
       const options = mergeExportOptions(rawOptions);
 
-      const session = await prisma.deliberationSession.findUnique({
+      // FIX : findUnique n'accepte pas {id, schoolId} combinés (schoolId n'est
+      // pas une clé unique) -> findFirst pour appliquer correctement le filtre tenant.
+      const session = await prisma.deliberationSession.findFirst({
         where: { id: sessionId, schoolId: req.user!.schoolId as string },
         include: {
-          // FIX #2
           classe: {
             include: {
               school: schoolSelect,
@@ -779,7 +782,6 @@ export const exportController = {
         dateGeneration: new Date().toISOString(),
       };
 
-      // FIX #3
       const html = await templateEngine.compile(
         "deliberation",
         data as unknown as Record<string, unknown>,

@@ -140,6 +140,7 @@ export const ClasseScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
   schoolId: 'schoolId',
+  professeurPrincipalId: 'professeurPrincipalId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
