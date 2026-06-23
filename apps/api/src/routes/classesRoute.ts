@@ -8,6 +8,7 @@ import {
   getClasseEleves,
   updateClasse,
   deleteClasse,
+  updateProfesseurPrincipal,
 } from "../controllers/classesController.js";
 
 import matieresRouter from "./matieresRoute.js"; // Importation du routeur pour les matières d'une classe
@@ -44,6 +45,14 @@ router.put(
   authenticate,
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
   updateClasse,
+);
+
+/**Patch /api/classes/:id/prof-principal  -  Assigner un prof principal */
+router.patch(
+  "/:id/prof-principal",
+  authenticate,
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  updateProfesseurPrincipal,
 );
 
 /** Supprime une classe (ADMIN et SUDO_ADMIN) */
