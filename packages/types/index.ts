@@ -19,6 +19,7 @@ export interface Classe {
   id: string;
   nom: string;
   schoolId: string;
+  professeurPrincipalId?: string | null; // ID du prof principal de la classe (optionnel)
   // Compteurs optionnels retournés par l'API (include _count)
   _count?: {
     eleves: number;

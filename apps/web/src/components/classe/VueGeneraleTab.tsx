@@ -1,8 +1,15 @@
 import { useState, useRef } from "react";
 import type { FormEvent } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { Edit2, Users, GraduationCap, Calendar } from "lucide-react";
+import {
+  Edit2,
+  Users,
+  GraduationCap,
+  Calendar,
+  UserCheck,
+  Loader2,
+} from "lucide-react";
 import { api, getApiError } from "../../lib/api";
 import type { Classe } from "@school-mgt/types";
 import ConfirmModal from "../ConfirmModal";
@@ -14,9 +21,16 @@ interface Props {
   canEdit: boolean;
 }
 
+interface Professeur {
+  id: string;
+  nom: string;
+  prenom: string;
+}
+
 /**
  * Onglet Vue générale — affiche les informations de la classe
- * et permet à l'ADMIN de la renommer ou supprimer.
+ * et permet à l'ADMIN de la renommer, supprimer, ou désigner
+ * le professeur principal.
  */
 export default function VueGeneraleTab({ classeId, classe, canEdit }: Props) {
   const queryClient = useQueryClient();
@@ -25,6 +39,20 @@ export default function VueGeneraleTab({ classeId, classe, canEdit }: Props) {
 
   const [nom, setNom] = useState(classe.nom);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+  // ── Query : profs de la classe ────────────────────────────────────────────
+  const {
+    data: profs = [],
+    isLoading: profsLoading,
+    isError: profsError,
+  } = useQuery<Professeur[]>({
+    queryKey: ["classe-profs", classeId],
+    queryFn: async () => {
+      const { data } = await api.get(`/api/classes/${classeId}`);
+      return data.profs ?? [];
+    },
+    enabled: canEdit,
+  });
 
   // ── Mutation PUT /api/classes/:id ─────────────────────────────────────────
   const updateMutation = useMutation({
@@ -39,6 +67,23 @@ export default function VueGeneraleTab({ classeId, classe, canEdit }: Props) {
       queryClient.invalidateQueries({ queryKey: ["classes"] });
       toast.success("Classe mise à jour !");
       modalRef.current?.close();
+    },
+    onError: (err) =>
+      toast.error(getApiError(err, "Erreur lors de la mise à jour")),
+  });
+
+  // ── Mutation PATCH /api/classes/:id/prof-principal ────────────────────────
+  const setProfPrincipalMutation = useMutation({
+    mutationFn: async (professeurPrincipalId: string | null) => {
+      const { data } = await api.patch(
+        `/api/classes/${classeId}/prof-principal`,
+        { professeurPrincipalId },
+      );
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["classe", classeId] });
+      toast.success("Professeur principal mis à jour.");
     },
     onError: (err) =>
       toast.error(getApiError(err, "Erreur lors de la mise à jour")),
@@ -66,9 +111,12 @@ export default function VueGeneraleTab({ classeId, classe, canEdit }: Props) {
     updateMutation.mutate(nom.trim());
   };
 
+  // ID du prof principal actuel (depuis la classe)
+  const currentProfPrincipalId = classe.professeurPrincipalId ?? null;
+
   return (
     <div className="space-y-4">
-      {/* Carte infos */}
+      {/* ── Carte infos ───────────────────────────────────────────────────── */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="card bg-base-100 shadow-sm border border-base-200">
           <div className="card-body flex-row items-center gap-4">
@@ -99,7 +147,68 @@ export default function VueGeneraleTab({ classeId, classe, canEdit }: Props) {
         </div>
       </div>
 
-      {/* Actions ADMIN */}
+      {/* ── Professeur principal ──────────────────────────────────────────── */}
+      {canEdit && (
+        <div className="card bg-base-100 shadow-sm border border-base-200">
+          <div className="card-body gap-3">
+            <div className="flex items-center gap-2">
+              <UserCheck size={18} className="text-primary" />
+              <h3 className="font-semibold text-sm">Professeur principal</h3>
+            </div>
+            <p className="text-xs text-base-content/50">
+              Le professeur principal apparaîtra comme signataire sur les
+              bulletins PDF générés pour cette classe.
+            </p>
+
+            {profsLoading ? (
+              <span className="loading loading-spinner loading-sm" />
+            ) : profsError ? (
+              <p className="text-xs text-error">
+                Impossible de charger les professeurs de la classe.
+              </p>
+            ) : profs.length === 0 ? (
+              <p className="text-xs text-base-content/40">
+                Aucun professeur assigné à cette classe.
+              </p>
+            ) : (
+              <div className="flex items-center gap-3 flex-wrap">
+                <select
+                  className="select select-sm max-w-xs"
+                  value={currentProfPrincipalId ?? ""}
+                  onChange={(e) =>
+                    setProfPrincipalMutation.mutate(
+                      e.target.value === "" ? null : e.target.value,
+                    )
+                  }
+                  disabled={setProfPrincipalMutation.isPending}
+                >
+                  <option value="">— Aucun prof principal —</option>
+                  {profs.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.prenom} {p.nom}
+                    </option>
+                  ))}
+                </select>
+
+                {setProfPrincipalMutation.isPending && (
+                  <Loader2 size={14} className="animate-spin text-primary" />
+                )}
+
+                {currentProfPrincipalId && (
+                  <span className="badge badge-success badge-sm gap-1">
+                    <UserCheck size={10} />
+                    {profs.find((p) => p.id === currentProfPrincipalId)
+                      ? `${profs.find((p) => p.id === currentProfPrincipalId)!.prenom} ${profs.find((p) => p.id === currentProfPrincipalId)!.nom}`
+                      : "Désigné"}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ── Actions ADMIN ─────────────────────────────────────────────────── */}
       {canEdit && (
         <div className="flex gap-2">
           <button
@@ -120,7 +229,7 @@ export default function VueGeneraleTab({ classeId, classe, canEdit }: Props) {
         </div>
       )}
 
-      {/* Modal renommer */}
+      {/* ── Modal renommer ────────────────────────────────────────────────── */}
       <dialog ref={modalRef} className="modal">
         <div className="modal-box max-w-sm">
           <h3 className="font-bold text-lg mb-4">Renommer la classe</h3>
@@ -171,7 +280,7 @@ export default function VueGeneraleTab({ classeId, classe, canEdit }: Props) {
         </form>
       </dialog>
 
-      {/* Modal confirmation suppression */}
+      {/* ── Modal confirmation suppression ───────────────────────────────── */}
       <ConfirmModal
         isOpen={showDeleteConfirm}
         title="Supprimer la classe"

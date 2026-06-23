@@ -292,3 +292,97 @@ export const getClasseEleves = async (req: Request, res: Response) => {
       .json({ error: "Erreur serveur lors de la récupération des élèves" });
   }
 };
+
+/**
+ * PATCH /api/classes/:id/prof-principal
+ * Ajoute ou modifie le professeur principal d'une classe. Le corps de la requête doit contenir un champ `professeurPrincipalId` (string ou null).
+ */
+export const updateProfesseurPrincipal = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const { id } = req.params as { id: string };
+    const { professeurPrincipalId } = req.body as {
+      professeurPrincipalId: string | null;
+    };
+
+    if (
+      professeurPrincipalId !== null &&
+      (typeof professeurPrincipalId !== "string" ||
+        !professeurPrincipalId.trim())
+    ) {
+      return res.status(400).json({ error: "professeurPrincipalId invalide" });
+    }
+
+    // vérifie que la classe existe
+    const classe = await prisma.classe.findUnique({
+      where: { id },
+      include: { profs: true },
+    });
+    if (!classe) {
+      return res.status(404).json({ error: "Classe introuvable" });
+    }
+
+    // Le prof doit être attaché à la classe
+    if (
+      professeurPrincipalId !== null &&
+      !classe.profs.some((p) => p.id === professeurPrincipalId)
+    ) {
+      return res.status(400).json({
+        error: "Le professeur principal doit être assigné à cette classe",
+      });
+    }
+
+    // vérifie les autorisation
+    if (
+      !isAuthorizhedForSchool(
+        req.user!.role,
+        req.user!.schoolId,
+        classe.schoolId,
+      )
+    ) {
+      return res.status(403).json({ error: "Accès refusé à cette ressource" });
+    }
+
+    // vérifie que le professeur existe
+    let professeur = null;
+    if (professeurPrincipalId !== null) {
+      professeur = await prisma.professeur.findUnique({
+        where: { id: professeurPrincipalId },
+      });
+      if (!professeur) {
+        return res.status(404).json({ error: "Professeur introuvable" });
+      }
+    }
+
+    // vérifie que le professeur appartient à la même école que la classe
+    if (professeur && professeur.schoolId !== classe.schoolId) {
+      return res.status(400).json({
+        error: "Le professeur n'appartient pas à la même école que la classe",
+      });
+    }
+
+    // Mettre à jour le professeur principal de la classe
+    const updatedClasse = await prisma.classe.update({
+      where: { id },
+      data: {
+        professeurPrincipalId: professeurPrincipalId, // peut être null pour retirer le professeur principal
+      },
+      include: {
+        profs: true,
+        _count: { select: { eleves: true, profs: true } },
+      },
+    });
+
+    res.status(200).json(updatedClasse);
+  } catch (err) {
+    console.error(
+      "Erreur lors de la mise à jour du professeur principal :",
+      err,
+    );
+    res.status(500).json({
+      error: "Erreur serveur lors de la mise à jour du professeur principal",
+    });
+  }
+};
