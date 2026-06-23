@@ -307,6 +307,14 @@ export const updateProfesseurPrincipal = async (
       professeurPrincipalId: string | null;
     };
 
+    if (
+      professeurPrincipalId !== null &&
+      (typeof professeurPrincipalId !== "string" ||
+        !professeurPrincipalId.trim())
+    ) {
+      return res.status(400).json({ error: "professeurPrincipalId invalide" });
+    }
+
     // vérifie que la classe existe
     const classe = await prisma.classe.findUnique({
       where: { id },
@@ -314,6 +322,16 @@ export const updateProfesseurPrincipal = async (
     });
     if (!classe) {
       return res.status(404).json({ error: "Classe introuvable" });
+    }
+
+    // Le prof doit être attaché à la classe
+    if (
+      professeurPrincipalId !== null &&
+      !classe.profs.some((p) => p.id === professeurPrincipalId)
+    ) {
+      return res.status(400).json({
+        error: "Le professeur principal doit être assigné à cette classe",
+      });
     }
 
     // vérifie les autorisation
@@ -328,16 +346,18 @@ export const updateProfesseurPrincipal = async (
     }
 
     // vérifie que le professeur existe
-    const professeur = await prisma.professeur.findUnique({
-      where: { id: professeurPrincipalId ?? undefined },
-    });
-
-    if (!professeur) {
-      return res.status(404).json({ error: "Professeur introuvable" });
+    let professeur = null;
+    if (professeurPrincipalId !== null) {
+      professeur = await prisma.professeur.findUnique({
+        where: { id: professeurPrincipalId },
+      });
+      if (!professeur) {
+        return res.status(404).json({ error: "Professeur introuvable" });
+      }
     }
 
     // vérifie que le professeur appartient à la même école que la classe
-    if (professeur.schoolId !== classe.schoolId) {
+    if (professeur && professeur.schoolId !== classe.schoolId) {
       return res.status(400).json({
         error: "Le professeur n'appartient pas à la même école que la classe",
       });

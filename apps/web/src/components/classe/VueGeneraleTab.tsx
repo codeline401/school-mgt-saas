@@ -41,7 +41,11 @@ export default function VueGeneraleTab({ classeId, classe, canEdit }: Props) {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   // ── Query : profs de la classe ────────────────────────────────────────────
-  const { data: profs = [], isLoading: profsLoading } = useQuery<Professeur[]>({
+  const {
+    data: profs = [],
+    isLoading: profsLoading,
+    isError: profsError,
+  } = useQuery<Professeur[]>({
     queryKey: ["classe-profs", classeId],
     queryFn: async () => {
       const { data } = await api.get(`/api/classes/${classeId}`);
@@ -158,6 +162,10 @@ export default function VueGeneraleTab({ classeId, classe, canEdit }: Props) {
 
             {profsLoading ? (
               <span className="loading loading-spinner loading-sm" />
+            ) : profsError ? (
+              <p className="text-xs text-error">
+                Impossible de charger les professeurs de la classe.
+              </p>
             ) : profs.length === 0 ? (
               <p className="text-xs text-base-content/40">
                 Aucun professeur assigné à cette classe.
