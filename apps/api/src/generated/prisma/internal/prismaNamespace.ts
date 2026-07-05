@@ -414,7 +414,9 @@ export const ModelName = {
   ExamenSession: 'ExamenSession',
   ExamenSurveillance: 'ExamenSurveillance',
   ExamenIncident: 'ExamenIncident',
-  Signature: 'Signature'
+  Signature: 'Signature',
+  Chapitre: 'Chapitre',
+  SousChapitre: 'SousChapitre'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -430,7 +432,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature"
+    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2728,6 +2730,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Chapitre: {
+      payload: Prisma.$ChapitrePayload<ExtArgs>
+      fields: Prisma.ChapitreFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChapitreFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapitrePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChapitreFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapitrePayload>
+        }
+        findFirst: {
+          args: Prisma.ChapitreFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapitrePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChapitreFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapitrePayload>
+        }
+        findMany: {
+          args: Prisma.ChapitreFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapitrePayload>[]
+        }
+        create: {
+          args: Prisma.ChapitreCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapitrePayload>
+        }
+        createMany: {
+          args: Prisma.ChapitreCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChapitreCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapitrePayload>[]
+        }
+        delete: {
+          args: Prisma.ChapitreDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapitrePayload>
+        }
+        update: {
+          args: Prisma.ChapitreUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapitrePayload>
+        }
+        deleteMany: {
+          args: Prisma.ChapitreDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChapitreUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChapitreUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapitrePayload>[]
+        }
+        upsert: {
+          args: Prisma.ChapitreUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapitrePayload>
+        }
+        aggregate: {
+          args: Prisma.ChapitreAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChapitre>
+        }
+        groupBy: {
+          args: Prisma.ChapitreGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChapitreGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChapitreCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChapitreCountAggregateOutputType> | number
+        }
+      }
+    }
+    SousChapitre: {
+      payload: Prisma.$SousChapitrePayload<ExtArgs>
+      fields: Prisma.SousChapitreFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SousChapitreFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SousChapitrePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SousChapitreFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SousChapitrePayload>
+        }
+        findFirst: {
+          args: Prisma.SousChapitreFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SousChapitrePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SousChapitreFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SousChapitrePayload>
+        }
+        findMany: {
+          args: Prisma.SousChapitreFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SousChapitrePayload>[]
+        }
+        create: {
+          args: Prisma.SousChapitreCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SousChapitrePayload>
+        }
+        createMany: {
+          args: Prisma.SousChapitreCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SousChapitreCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SousChapitrePayload>[]
+        }
+        delete: {
+          args: Prisma.SousChapitreDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SousChapitrePayload>
+        }
+        update: {
+          args: Prisma.SousChapitreUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SousChapitrePayload>
+        }
+        deleteMany: {
+          args: Prisma.SousChapitreDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SousChapitreUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SousChapitreUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SousChapitrePayload>[]
+        }
+        upsert: {
+          args: Prisma.SousChapitreUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SousChapitrePayload>
+        }
+        aggregate: {
+          args: Prisma.SousChapitreAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSousChapitre>
+        }
+        groupBy: {
+          args: Prisma.SousChapitreGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SousChapitreGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SousChapitreCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SousChapitreCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3239,6 +3389,34 @@ export const SignatureScalarFieldEnum = {
 export type SignatureScalarFieldEnum = (typeof SignatureScalarFieldEnum)[keyof typeof SignatureScalarFieldEnum]
 
 
+export const ChapitreScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  ordre: 'ordre',
+  statut: 'statut',
+  classeId: 'classeId',
+  matiereId: 'matiereId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChapitreScalarFieldEnum = (typeof ChapitreScalarFieldEnum)[keyof typeof ChapitreScalarFieldEnum]
+
+
+export const SousChapitreScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  ordre: 'ordre',
+  statut: 'statut',
+  chapitreId: 'chapitreId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SousChapitreScalarFieldEnum = (typeof SousChapitreScalarFieldEnum)[keyof typeof SousChapitreScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3585,6 +3763,20 @@ export type EnumExamenStatutFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 export type ListEnumExamenStatutFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExamenStatut[]'>
     
 
+
+/**
+ * Reference to a field of type 'StatutChapitre'
+ */
+export type EnumStatutChapitreFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutChapitre'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutChapitre[]'
+ */
+export type ListEnumStatutChapitreFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutChapitre[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -3726,6 +3918,8 @@ export type GlobalOmitConfig = {
   examenSurveillance?: Prisma.ExamenSurveillanceOmit
   examenIncident?: Prisma.ExamenIncidentOmit
   signature?: Prisma.SignatureOmit
+  chapitre?: Prisma.ChapitreOmit
+  sousChapitre?: Prisma.SousChapitreOmit
 }
 
 /* Types for Logging */
