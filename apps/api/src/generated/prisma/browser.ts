@@ -172,3 +172,13 @@ export type ExamenIncident = Prisma.ExamenIncidentModel
  * 
  */
 export type Signature = Prisma.SignatureModel
+/**
+ * Model Chapitre
+ * 
+ */
+export type Chapitre = Prisma.ChapitreModel
+/**
+ * Model SousChapitre
+ * 
+ */
+export type SousChapitre = Prisma.SousChapitreModel

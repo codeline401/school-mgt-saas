@@ -602,6 +602,23 @@ export type EnumExamenStatutWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumExamenStatutFilter<$PrismaModel>
 }
 
+export type EnumStatutChapitreFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutChapitre | Prisma.EnumStatutChapitreFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutChapitre[] | Prisma.ListEnumStatutChapitreFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutChapitre[] | Prisma.ListEnumStatutChapitreFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutChapitreFilter<$PrismaModel> | $Enums.StatutChapitre
+}
+
+export type EnumStatutChapitreWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutChapitre | Prisma.EnumStatutChapitreFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutChapitre[] | Prisma.ListEnumStatutChapitreFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutChapitre[] | Prisma.ListEnumStatutChapitreFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutChapitreWithAggregatesFilter<$PrismaModel> | $Enums.StatutChapitre
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutChapitreFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutChapitreFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1163,6 +1180,23 @@ export type NestedEnumExamenStatutWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumExamenStatutFilter<$PrismaModel>
   _max?: Prisma.NestedEnumExamenStatutFilter<$PrismaModel>
+}
+
+export type NestedEnumStatutChapitreFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutChapitre | Prisma.EnumStatutChapitreFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutChapitre[] | Prisma.ListEnumStatutChapitreFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutChapitre[] | Prisma.ListEnumStatutChapitreFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutChapitreFilter<$PrismaModel> | $Enums.StatutChapitre
+}
+
+export type NestedEnumStatutChapitreWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutChapitre | Prisma.EnumStatutChapitreFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutChapitre[] | Prisma.ListEnumStatutChapitreFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutChapitre[] | Prisma.ListEnumStatutChapitreFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutChapitreWithAggregatesFilter<$PrismaModel> | $Enums.StatutChapitre
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutChapitreFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutChapitreFilter<$PrismaModel>
 }
 
 

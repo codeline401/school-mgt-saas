@@ -81,7 +81,9 @@ export const ModelName = {
   ExamenSession: 'ExamenSession',
   ExamenSurveillance: 'ExamenSurveillance',
   ExamenIncident: 'ExamenIncident',
-  Signature: 'Signature'
+  Signature: 'Signature',
+  Chapitre: 'Chapitre',
+  SousChapitre: 'SousChapitre'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -570,6 +572,34 @@ export const SignatureScalarFieldEnum = {
 } as const
 
 export type SignatureScalarFieldEnum = (typeof SignatureScalarFieldEnum)[keyof typeof SignatureScalarFieldEnum]
+
+
+export const ChapitreScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  ordre: 'ordre',
+  statut: 'statut',
+  classeId: 'classeId',
+  matiereId: 'matiereId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChapitreScalarFieldEnum = (typeof ChapitreScalarFieldEnum)[keyof typeof ChapitreScalarFieldEnum]
+
+
+export const SousChapitreScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  ordre: 'ordre',
+  statut: 'statut',
+  chapitreId: 'chapitreId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SousChapitreScalarFieldEnum = (typeof SousChapitreScalarFieldEnum)[keyof typeof SousChapitreScalarFieldEnum]
 
 
 export const SortOrder = {

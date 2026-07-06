@@ -16,11 +16,15 @@ import ELearningTab from "../components/cahierTexte/ELearningTab";
 // ─── Définition des onglets ───────────────────────────────────────────────────
 
 const TABS = [
-  { id: "programme-realise",      label: "Programme réalisé",       icon: ClipboardCheck },
-  { id: "devoirs-donnes",         label: "Devoirs donnés",           icon: BookOpen       },
-  { id: "suivi-chapitres",        label: "Suivi des chapitres",      icon: Layers         },
-  { id: "documents-pedagogiques", label: "Documents pédagogiques",   icon: FolderOpen     },
-  { id: "e-learning",             label: "E-learning",               icon: MonitorPlay    },
+  { id: "programme-realise", label: "Programme réalisé", icon: ClipboardCheck },
+  { id: "devoirs-donnes", label: "Devoirs donnés", icon: BookOpen },
+  { id: "suivi-chapitres", label: "Suivi des chapitres", icon: Layers },
+  {
+    id: "documents-pedagogiques",
+    label: "Documents pédagogiques",
+    icon: FolderOpen,
+  },
+  { id: "e-learning", label: "E-learning", icon: MonitorPlay },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -40,12 +44,18 @@ export default function CahierTextePage() {
   // Rendu conditionnel de l'onglet actif
   const renderTab = () => {
     switch (activeTab) {
-      case "programme-realise":      return <ProgrammeRealiseTab />;
-      case "devoirs-donnes":         return <DevoirsDonnesTab />;
-      case "suivi-chapitres":        return <SuiviChapitresTab />;
-      case "documents-pedagogiques": return <DocumentsPedagogiquesTab />;
-      case "e-learning":             return <ELearningTab />;
-      default:                       return null;
+      case "programme-realise":
+        return <ProgrammeRealiseTab />;
+      case "devoirs-donnes":
+        return <DevoirsDonnesTab />;
+      case "suivi-chapitres":
+        return <SuiviChapitresTab />;
+      case "documents-pedagogiques":
+        return <DocumentsPedagogiquesTab />;
+      case "e-learning":
+        return <ELearningTab />;
+      default:
+        return null;
     }
   };
 

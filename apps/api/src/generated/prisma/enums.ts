@@ -162,3 +162,12 @@ export const ExamenStatut = {
 } as const
 
 export type ExamenStatut = (typeof ExamenStatut)[keyof typeof ExamenStatut]
+
+
+export const StatutChapitre = {
+  A_FAIRE: 'A_FAIRE',
+  EN_COURS: 'EN_COURS',
+  FAIT: 'FAIT'
+} as const
+
+export type StatutChapitre = (typeof StatutChapitre)[keyof typeof StatutChapitre]
