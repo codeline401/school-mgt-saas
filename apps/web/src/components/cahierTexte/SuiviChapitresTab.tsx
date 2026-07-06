@@ -16,7 +16,9 @@ import { api, getApiError } from "../../lib/api";
 import { useAuthStore } from "../../store/authStore";
 import type { Classe } from "@school-mgt/types";
 
-// ─── Types locaux ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// TYPES
+// ─────────────────────────────────────────────────────────────
 
 type StatutChapitre = "A_FAIRE" | "EN_COURS" | "FAIT";
 
@@ -41,6 +43,18 @@ interface Chapitre {
   sousChapitres: SousChapitre[];
 }
 
+/**
+ * Draft row avec ID stable pour éviter les bugs React liés aux keys indexées.
+ */
+interface SousChapitreDraftRow {
+  id: string;
+  titre: string;
+}
+
+// ─────────────────────────────────────────────────────────────
+// CONFIG STATUT
+// ─────────────────────────────────────────────────────────────
+
 const STATUT_CONFIG: Record<
   StatutChapitre,
   { label: string; badgeClass: string }
@@ -56,6 +70,9 @@ const STATUT_CYCLE: Record<StatutChapitre, StatutChapitre> = {
   FAIT: "A_FAIRE",
 };
 
+/**
+ * Calcule la progression d'un chapitre.
+ */
 function getProgress(chapitre: Chapitre): number {
   if (chapitre.sousChapitres.length === 0) {
     return chapitre.statut === "FAIT"
@@ -64,13 +81,17 @@ function getProgress(chapitre: Chapitre): number {
         ? 50
         : 0;
   }
+
   const fait = chapitre.sousChapitres.filter(
     (sc) => sc.statut === "FAIT",
   ).length;
+
   return Math.round((fait / chapitre.sousChapitres.length) * 100);
 }
 
-// ─── Composant principal ──────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// COMPONENT
+// ─────────────────────────────────────────────────────────────
 
 export default function SuiviChapitresTab() {
   const user = useAuthStore((s) => s.user);
@@ -82,13 +103,19 @@ export default function SuiviChapitresTab() {
   const [matiereId, setMatiereId] = useState("");
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
-  // État du formulaire d'ajout / édition
+  // Form state
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [titre, setTitre] = useState("");
-  const [sousChapitresDraft, setSousChapitresDraft] = useState<string[]>([""]);
 
-  // ─── Queries ────────────────────────────────────────────────────────────────
+  // ✅ FIX REVIEW: stable draft rows instead of string array
+  const [sousChapitresDraft, setSousChapitresDraft] = useState<
+    SousChapitreDraftRow[]
+  >([{ id: crypto.randomUUID(), titre: "" }]);
+
+  // ─────────────────────────────────────────────────────────────
+  // QUERIES
+  // ─────────────────────────────────────────────────────────────
 
   const { data: classes = [] } = useQuery<Classe[]>({
     queryKey: ["classes"],
@@ -130,7 +157,9 @@ export default function SuiviChapitresTab() {
     });
   }
 
-  // ─── Mutations ──────────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────────────────────
+  // MUTATIONS
+  // ─────────────────────────────────────────────────────────────
 
   const createMutation = useMutation({
     mutationFn: async (payload: {
@@ -215,7 +244,9 @@ export default function SuiviChapitresTab() {
     onSuccess: invalidateChapitres,
   });
 
-  // ─── Handlers ───────────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────────────────────
+  // HANDLERS
+  // ─────────────────────────────────────────────────────────────
 
   function handleClasseChange(id: string) {
     setClasseId(id);
@@ -231,8 +262,11 @@ export default function SuiviChapitresTab() {
   function toggleExpanded(id: string) {
     setExpandedIds((prev) => {
       const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
       return next;
     });
   }
@@ -241,42 +275,51 @@ export default function SuiviChapitresTab() {
     setShowForm(false);
     setEditingId(null);
     setTitre("");
-    setSousChapitresDraft([""]);
+    setSousChapitresDraft([{ id: crypto.randomUUID(), titre: "" }]);
   }
 
   function startEdit(chapitre: Chapitre) {
     setEditingId(chapitre.id);
     setTitre(chapitre.titre);
+
     setSousChapitresDraft(
       chapitre.sousChapitres.length > 0
-        ? chapitre.sousChapitres.map((sc) => sc.titre)
-        : [""],
+        ? chapitre.sousChapitres.map((sc) => ({
+            id: sc.id,
+            titre: sc.titre,
+          }))
+        : [{ id: crypto.randomUUID(), titre: "" }],
     );
+
     setShowForm(true);
   }
 
-  function updateDraftRow(index: number, value: string) {
+  function updateDraftRow(id: string, value: string) {
     setSousChapitresDraft((prev) =>
-      prev.map((v, i) => (i === index ? value : v)),
+      prev.map((row) => (row.id === id ? { ...row, titre: value } : row)),
     );
   }
 
   function addDraftRow() {
-    setSousChapitresDraft((prev) => [...prev, ""]);
+    setSousChapitresDraft((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), titre: "" },
+    ]);
   }
 
-  function removeDraftRow(index: number) {
-    setSousChapitresDraft((prev) => prev.filter((_, i) => i !== index));
+  function removeDraftRow(id: string) {
+    setSousChapitresDraft((prev) => prev.filter((row) => row.id !== id));
   }
 
   function handleSubmit() {
     const payload = {
       titre: titre.trim(),
       sousChapitres: sousChapitresDraft
-        .map((t) => t.trim())
+        .map((r) => r.titre.trim())
         .filter(Boolean)
         .map((t) => ({ titre: t })),
     };
+
     if (!payload.titre) return;
 
     if (editingId) {
@@ -286,24 +329,11 @@ export default function SuiviChapitresTab() {
     }
   }
 
-  function cycleStatutChapitre(chapitre: Chapitre) {
-    statutChapitreMutation.mutate({
-      id: chapitre.id,
-      statut: STATUT_CYCLE[chapitre.statut],
-    });
-  }
-
-  function cycleStatutSousChapitre(chapitreId: string, sc: SousChapitre) {
-    statutSousChapitreMutation.mutate({
-      chapitreId,
-      sousChapitreId: sc.id,
-      statut: STATUT_CYCLE[sc.statut],
-    });
-  }
-
   const isSaving = createMutation.isPending || updateMutation.isPending;
 
-  // ─── Rendu ──────────────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────────────────────
+  // RENDER
+  // ─────────────────────────────────────────────────────────────
 
   return (
     <div className="space-y-6">
@@ -312,7 +342,6 @@ export default function SuiviChapitresTab() {
         <h2 className="font-semibold text-base">Suivi de chapitre</h2>
       </div>
 
-      {/* ── Sélection classe / matière ─────────────────────────────────────── */}
       <div className="grid sm:grid-cols-2 gap-4 max-w-xl">
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Classe *</legend>
@@ -355,7 +384,6 @@ export default function SuiviChapitresTab() {
         </div>
       ) : (
         <>
-          {/* ── Erreur de chargement ─────────────────────────────────────── */}
           {isError && (
             <div className="alert alert-error text-sm">
               <AlertCircle size={15} />
@@ -370,7 +398,6 @@ export default function SuiviChapitresTab() {
             </div>
           )}
 
-          {/* ── Liste des chapitres ──────────────────────────────────────── */}
           {!isLoading && chapitres.length === 0 && !showForm && (
             <div className="text-center py-10 text-base-content/40 text-sm">
               Aucun chapitre pour cette matière.
@@ -381,12 +408,12 @@ export default function SuiviChapitresTab() {
             {chapitres.map((chapitre, index) => {
               const isExpanded = expandedIds.has(chapitre.id);
               const progress = getProgress(chapitre);
+
               return (
                 <div key={chapitre.id} className="card card-border">
                   <div className="card-body p-3 gap-2">
                     <div className="flex items-center gap-2">
                       <button
-                        type="button"
                         className="btn btn-ghost btn-xs btn-square"
                         onClick={() => toggleExpanded(chapitre.id)}
                       >
@@ -408,15 +435,14 @@ export default function SuiviChapitresTab() {
                       </span>
 
                       <button
-                        type="button"
                         disabled={!canEdit || statutChapitreMutation.isPending}
-                        onClick={() => cycleStatutChapitre(chapitre)}
-                        className={`badge ${STATUT_CONFIG[chapitre.statut].badgeClass} ${
-                          canEdit ? "cursor-pointer" : ""
-                        }`}
-                        title={
-                          canEdit ? "Cliquer pour changer le statut" : undefined
+                        onClick={() =>
+                          statutChapitreMutation.mutate({
+                            id: chapitre.id,
+                            statut: STATUT_CYCLE[chapitre.statut],
+                          })
                         }
+                        className={`badge ${STATUT_CONFIG[chapitre.statut].badgeClass}`}
                       >
                         {STATUT_CONFIG[chapitre.statut].label}
                       </button>
@@ -424,17 +450,14 @@ export default function SuiviChapitresTab() {
                       {canEdit && (
                         <>
                           <button
-                            type="button"
                             className="btn btn-ghost btn-xs btn-square"
                             onClick={() => startEdit(chapitre)}
                           >
                             <Pencil size={13} />
                           </button>
                           <button
-                            type="button"
                             className="btn btn-ghost btn-xs btn-square text-error"
                             onClick={() => deleteMutation.mutate(chapitre.id)}
-                            disabled={deleteMutation.isPending}
                           >
                             <Trash2 size={13} />
                           </button>
@@ -460,17 +483,16 @@ export default function SuiviChapitresTab() {
                             <span className="flex-1 text-base-content/70">
                               {sc.titre}
                             </span>
+
                             <button
-                              type="button"
-                              disabled={
-                                !canEdit || statutSousChapitreMutation.isPending
-                              }
+                              className={`badge badge-sm ${STATUT_CONFIG[sc.statut].badgeClass}`}
                               onClick={() =>
-                                cycleStatutSousChapitre(chapitre.id, sc)
+                                statutSousChapitreMutation.mutate({
+                                  chapitreId: chapitre.id,
+                                  sousChapitreId: sc.id,
+                                  statut: STATUT_CYCLE[sc.statut],
+                                })
                               }
-                              className={`badge badge-sm ${STATUT_CONFIG[sc.statut].badgeClass} ${
-                                canEdit ? "cursor-pointer" : ""
-                              }`}
                             >
                               {STATUT_CONFIG[sc.statut].label}
                             </button>
@@ -484,12 +506,11 @@ export default function SuiviChapitresTab() {
             })}
           </div>
 
-          {/* ── Formulaire ajout / édition ───────────────────────────────── */}
+          {/* FORM */}
           {canEdit && (
             <>
               {!showForm ? (
                 <button
-                  type="button"
                   className="btn btn-sm btn-outline"
                   onClick={() => setShowForm(true)}
                 >
@@ -499,109 +520,55 @@ export default function SuiviChapitresTab() {
               ) : (
                 <div className="card card-border">
                   <div className="card-body p-4 gap-3">
-                    <div className="flex items-center justify-between">
+                    <div className="flex justify-between">
                       <h3 className="font-medium text-sm">
-                        {editingId
-                          ? "Modifier le chapitre"
-                          : "Nouveau chapitre"}
+                        {editingId ? "Modifier" : "Créer"} chapitre
                       </h3>
-                      <button
-                        type="button"
-                        className="btn btn-ghost btn-xs btn-square"
-                        onClick={resetForm}
-                      >
+                      <button onClick={resetForm}>
                         <X size={14} />
                       </button>
                     </div>
 
-                    <fieldset className="fieldset">
-                      <legend className="fieldset-legend">
-                        Titre du chapitre *
-                      </legend>
-                      <input
-                        className="input input-sm w-full"
-                        placeholder="Ex : Les fractions"
-                        value={titre}
-                        onChange={(e) => setTitre(e.target.value)}
-                      />
-                    </fieldset>
+                    <input
+                      className="input input-sm w-full"
+                      value={titre}
+                      onChange={(e) => setTitre(e.target.value)}
+                    />
 
-                    <fieldset className="fieldset">
-                      <legend className="fieldset-legend">
-                        Sous-chapitres (optionnel)
-                      </legend>
-                      <div className="space-y-1.5">
-                        {sousChapitresDraft.map((value, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center gap-1.5"
-                          >
-                            <input
-                              className="input input-sm w-full"
-                              placeholder={`Sous-chapitre ${index + 1}`}
-                              value={value}
-                              onChange={(e) =>
-                                updateDraftRow(index, e.target.value)
-                              }
-                            />
-                            <button
-                              type="button"
-                              className="btn btn-ghost btn-xs btn-square"
-                              onClick={() => removeDraftRow(index)}
-                              disabled={sousChapitresDraft.length === 1}
-                            >
-                              <X size={13} />
-                            </button>
-                          </div>
-                        ))}
+                    {sousChapitresDraft.map((row) => (
+                      <div key={row.id} className="flex gap-2">
+                        <input
+                          className="input input-sm w-full"
+                          value={row.titre}
+                          onChange={(e) =>
+                            updateDraftRow(row.id, e.target.value)
+                          }
+                        />
+
+                        <button
+                          onClick={() => removeDraftRow(row.id)}
+                          disabled={sousChapitresDraft.length === 1}
+                        >
+                          <X size={13} />
+                        </button>
                       </div>
-                      <button
-                        type="button"
-                        className="btn btn-ghost btn-xs mt-1.5 self-start"
-                        onClick={addDraftRow}
-                      >
-                        <Plus size={12} />
-                        Ajouter un sous-chapitre
-                      </button>
-                    </fieldset>
+                    ))}
 
-                    {editingId && (
-                      <p className="text-xs text-base-content/40">
-                        Modifier les sous-chapitres réinitialise leur statut de
-                        progression.
-                      </p>
-                    )}
+                    <button onClick={addDraftRow} className="btn btn-xs">
+                      <Plus size={12} />
+                      Ajouter
+                    </button>
 
-                    {(createMutation.isError || updateMutation.isError) && (
-                      <div className="alert alert-error text-sm">
-                        <AlertCircle size={15} />
-                        {getApiError(
-                          createMutation.error || updateMutation.error,
-                          "Erreur lors de l'enregistrement du chapitre.",
-                        )}
-                      </div>
-                    )}
-
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-primary"
-                        disabled={!titre.trim() || isSaving}
-                        onClick={handleSubmit}
-                      >
-                        {isSaving && (
-                          <Loader2 size={14} className="animate-spin" />
-                        )}
-                        {editingId ? "Enregistrer" : "Créer le chapitre"}
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-ghost"
-                        onClick={resetForm}
-                      >
-                        Annuler
-                      </button>
-                    </div>
+                    <button
+                      className="btn btn-sm btn-primary"
+                      disabled={!titre.trim() || isSaving}
+                      onClick={handleSubmit}
+                    >
+                      {isSaving && (
+                        <Loader2 size={14} className="animate-spin" />
+                      )}
+                      {editingId ? "Enregistrer" : "Créer"}
+                    </button>
                   </div>
                 </div>
               )}

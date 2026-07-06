@@ -47,20 +47,38 @@ function assertSameSchoolOrSudo(user: AuthUser, schoolId: string) {
   }
 }
 
-async function assertMatiereAllowed(user: AuthUser, matiereId: string) {
+async function assertMatiereAllowed(
+  user: AuthUser,
+  matiereId: string,
+  classeId?: string,
+) {
   const matiere = await prisma.matiere.findUnique({
     where: { id: matiereId },
-    select: { schoolId: true },
+    select: {
+      schoolId: true,
+      classeId: true,
+    },
   });
+
   if (!matiere) {
     throw new AppError(400, "Matière non trouvée");
   }
+
   if (user.role !== "SUDO_ADMIN" && matiere.schoolId !== user.schoolId) {
     throw new AppError(
       403,
       "Vous n'avez pas la permission d'accéder à cette ressource",
     );
   }
+
+  if (classeId && matiere.classeId !== classeId) {
+    throw new AppError(
+      400,
+      "La matière n'appartient pas à la classe sélectionnée",
+    );
+  }
+
+  return matiere;
 }
 
 async function getChapitreOrThrow(classeId: string, chapitreId: string) {
@@ -121,7 +139,7 @@ export async function createChapitre(
 
   const classe = await getClassOrThrow(classeId);
   assertSameSchoolOrSudo(user, classe.schoolId);
-  await assertMatiereAllowed(user, data.matiereId);
+  await assertMatiereAllowed(user, data.matiereId, classeId);
 
   // Si aucun ordre n'est fourni, on place le nouveau chapitre à la fin de la liste
   let ordre = data.ordre;
@@ -166,7 +184,7 @@ export async function udpateChapitre(
   user: AuthUser,
   classeId: string,
   chapitreId: string,
-  rawData: undefined,
+  rawData: unknown,
 ) {
   if (!canWrite(user.role)) {
     throw new AppError(
@@ -180,12 +198,16 @@ export async function udpateChapitre(
 
   const data = createChapitreSchema.parse(rawData);
   if (data.matiereId !== existingChapitre.matiereId) {
-    await assertMatiereAllowed(user, data.matiereId);
+    await assertMatiereAllowed(user, data.matiereId, classeId);
   }
 
   return prisma.$transaction(async (tx) => {
-    // supprimer les sous-chapitres existants
-    await tx.sousChapitre.deleteMany({ where: { chapitreId } });
+    if (data.sousChapitres !== undefined) {
+      await tx.sousChapitre.deleteMany({
+        where: { chapitreId },
+      });
+    }
+
     return tx.chapitre.update({
       where: { id: chapitreId },
       data: {
@@ -193,7 +215,8 @@ export async function udpateChapitre(
         ordre: data.ordre ?? existingChapitre.ordre,
         statut: data.statut ?? existingChapitre.statut,
         matiereId: data.matiereId,
-        ...(data.sousChapitres && data.sousChapitres.length > 0
+
+        ...(data.sousChapitres !== undefined
           ? {
               sousChapitres: {
                 create: data.sousChapitres.map((sousChapitre, index) => ({
@@ -223,6 +246,9 @@ export async function updateChapitreStatut(
     throw new AppError(403, "Vous n'avez pas accès à cette ressource");
   }
 
+  const chapitre = await getChapitreOrThrow(classeId, chapitreId);
+  assertSameSchoolOrSudo(user, chapitre.schoolId);
+
   const { statut } = updateChapitreSchema.parse(rawStatut);
 
   return prisma.chapitre.update({
@@ -249,7 +275,7 @@ export async function updateStatutSousChapitreStatut(
   const chapitre = await getChapitreOrThrow(classeId, chapitreId);
   assertSameSchoolOrSudo(user, chapitre.schoolId);
 
-  const sousChapitre = prisma.sousChapitre.findUnique({
+  const sousChapitre = await prisma.sousChapitre.findUnique({
     where: { id: sousChapitreId },
   });
 
