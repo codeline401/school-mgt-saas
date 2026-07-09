@@ -30,6 +30,7 @@ export interface Classe {
 // Payload envoyé pour créer une classe
 export interface CreateClasseInput {
   nom: string;
+  schoolId?: string; // Requis pour SUDO_ADMIN, optionnel pour ADMIN
 }
 
 // Un prof peut avoir PLUSIEURS classes

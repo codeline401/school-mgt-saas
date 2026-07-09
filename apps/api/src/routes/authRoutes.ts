@@ -5,7 +5,9 @@ import { Role } from "../generated/prisma/enums.js";
 
 const router = Router();
 
-// Route d'inscription (accessible seulement pour les ADMIN et SUDO_ADMIN)
+// Route d'inscription :
+// 1. On vérifie d'abord que l'utilisateur est connecté (authenticate)
+// 2. On vérifie ensuite s'il a le droit (SUDO_ADMIN ou ADMIN)
 router.post(
   "/register",
   authenticate,
@@ -13,7 +15,7 @@ router.post(
   registerUser,
 );
 
-// Route de connexion (accessible à tous)
+// Route de connexion (publique : aucun middleware)
 router.post("/login", loginUser);
 
 export default router;

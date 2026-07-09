@@ -33,23 +33,31 @@ export const getAllClasses = async (req: Request, res: Response) => {
   try {
     const { schoolId: userSchoolId, role } = req.user!;
 
-    // SUDO_ADMIN n'est rattaché à aucune école : il peut passer un schoolId en query
-    // Les autres rôles doivent obligatoirement être rattachés à une école
-    if (role !== "SUDO_ADMIN" && !userSchoolId) {
+    // Normalisation du rôle en majuscules pour éviter les pièges de casse
+    const userRole = role.toUpperCase();
+
+    // 1. Protection stricte : Si pas SUDO_ADMIN et pas de schoolId -> Interdit direct
+    if (userRole !== "SUDO_ADMIN" && !userSchoolId) {
       return res.status(403).json({
         error: "Vous n'êtes rattaché à aucune école.",
       });
     }
 
-    const filterSchoolId =
-      role === "SUDO_ADMIN"
-        ? typeof req.query.schoolId === "string"
-          ? req.query.schoolId
-          : undefined
-        : (userSchoolId ?? undefined);
+    // 2. Détermination du filtre de manière sécurisée
+    let whereCondition: any = {};
 
-    // Un PROF ne voit que les classes auxquelles il est affecté
-    if (role === "PROF") {
+    if (userRole === "SUDO_ADMIN") {
+      // Le SUDO_ADMIN peut filtrer par école via la query, ou tout voir si pas spécifié
+      if (typeof req.query.schoolId === "string") {
+        whereCondition.schoolId = req.query.schoolId;
+      }
+    } else {
+      // Pour TOUS les autres (ADMIN, etc.), on FORCE le filtre avec leur propre schoolId
+      whereCondition.schoolId = userSchoolId;
+    }
+
+    // 3. Cas spécifique du PROF
+    if (userRole === "PROF") {
       const professeur = await prisma.professeur.findUnique({
         where: { userId: req.user!.id },
         include: {
@@ -62,23 +70,24 @@ export const getAllClasses = async (req: Request, res: Response) => {
       return res.status(200).json(professeur?.classes ?? []);
     }
 
+    // 4. Récupération des classes filtrées de manière étanche
     const classes = await prisma.classe.findMany({
-      ...(filterSchoolId ? { where: { schoolId: filterSchoolId } } : {}),
+      where: whereCondition, // L'objet de condition est appliqué de manière sûre
       include: {
         _count: {
           select: {
-            eleves: true, // Nombre d'élèves dans la classe
-            profs: true, // Nombre de professeurs dans la classe
+            eleves: true,
+            profs: true,
           },
         },
       },
       orderBy: { nom: "asc" },
     });
 
-    res.status(200).json(classes);
+    return res.status(200).json(classes);
   } catch (error) {
     console.error("Erreur lors de la récupération des classes :", error);
-    res
+    return res
       .status(500)
       .json({ error: "Erreur serveur lors de la récupération des classes" });
   }
@@ -91,19 +100,36 @@ export const getAllClasses = async (req: Request, res: Response) => {
 export const createClasse = async (req: Request, res: Response) => {
   try {
     const validatedData = createClasseSchema.parse(req.body);
-    const schoolId = req.user!.schoolId;
 
-    if (!schoolId) {
-      return res.status(400).json({
-        error:
-          "Vous devez être associé à une école pour créer une classe. Créez d'abord votre école.",
-      });
+    // 1. Déterminer le schoolId selon le rôle
+    let schoolId: string | undefined | null;
+
+    if (req.user!.role === "SUDO_ADMIN") {
+      // Le super admin doit passer le schoolId dans le body du JSON
+      schoolId = validatedData.schoolId;
+
+      if (!schoolId) {
+        return res.status(400).json({
+          error:
+            "En tant que SUDO_ADMIN, vous devez spécifier un 'schoolId' dans le corps de la requête.",
+        });
+      }
+    } else {
+      // Pour un admin classique ou prof, on garde la logique de sa propre école
+      schoolId = req.user!.schoolId || undefined;
+
+      if (!schoolId) {
+        return res.status(400).json({
+          error: "Vous devez être associé à une école pour créer une classe.",
+        });
+      }
     }
 
+    // 2. Création de la classe avec le schoolId retenu
     const newClasse = await prisma.classe.create({
       data: {
         nom: validatedData.nom,
-        schoolId,
+        schoolId: schoolId, // Assignation dynamique
       },
       include: {
         _count: {
@@ -115,13 +141,13 @@ export const createClasse = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(201).json(newClasse);
+    return res.status(201).json(newClasse);
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({ error: error.issues });
     }
     console.error("Erreur lors de la création de la classe :", error);
-    res
+    return res
       .status(500)
       .json({ error: "Erreur serveur lors de la création de la classe" });
   }
