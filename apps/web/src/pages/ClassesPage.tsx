@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api, getApiError } from "../lib/api";
 import { useAuthStore } from "../store/authStore";
 import { BookOpen, Plus, Users, GraduationCap } from "lucide-react";
-import type { Classe, CreateClasseInput } from "@school-mgt/types";
+import type { Classe, CreateClasseInput, School } from "@school-mgt/types";
 import { Link } from "react-router-dom";
 
 function ClassesPage() {
@@ -12,10 +12,25 @@ function ClassesPage() {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const [nom, setNom] = useState("");
+  const [schoolId, setSchoolId] = useState("");
   const [nomError, setNomError] = useState<string | null>(null);
+  const [schoolIdError, setSchoolIdError] = useState<string | null>(null);
 
   const isAdmin = user?.role === "ADMIN";
   const isSudoAdmin = user?.role === "SUDO_ADMIN";
+
+  // Charge la liste des écoles (pour SUDO_ADMIN uniquement)
+  const {
+    data: schools = [],
+    isLoading: isLoadingSchools,
+  } = useQuery<School[]>({
+    queryKey: ["schools"],
+    queryFn: async () => {
+      const { data } = await api.get("/api/schools");
+      return data;
+    },
+    enabled: isSudoAdmin, // Charger seulement si SUDO_ADMIN
+  });
 
   // Charge la liste des classes de l'école
   const {
@@ -38,7 +53,6 @@ function ClassesPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["classes"] });
-      // closeModal est défini après mais la callback est asynchrone — OK
       closeModal();
     },
   });
@@ -46,19 +60,37 @@ function ClassesPage() {
   const closeModal = () => {
     modalRef.current?.close();
     setNom("");
+    setSchoolId("");
     setNomError(null);
+    setSchoolIdError(null);
     createMutation.reset();
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = nom.trim();
+    
+    // Validation du nom
     if (trimmed.length < 2) {
       setNomError("Le nom doit contenir au moins 2 caractères.");
       return;
     }
+    
+    // Validation du schoolId pour SUDO_ADMIN
+    if (isSudoAdmin && !schoolId) {
+      setSchoolIdError("Veuillez sélectionner une école.");
+      return;
+    }
+    
     setNomError(null);
-    createMutation.mutate({ nom: trimmed });
+    setSchoolIdError(null);
+    
+    const payload: CreateClasseInput = { nom: trimmed };
+    if (isSudoAdmin && schoolId) {
+      payload.schoolId = schoolId;
+    }
+    
+    createMutation.mutate(payload);
   };
 
   return (
@@ -74,8 +106,8 @@ function ClassesPage() {
           </p>
         </div>
 
-        {/* Seul l'ADMIN peut créer une classe */}
-        {isAdmin && (
+        {/* ADMIN et SUDO_ADMIN peuvent créer une classe */}
+        {(isAdmin || isSudoAdmin) && (
           <button
             onClick={() => modalRef.current?.showModal()}
             className="btn btn-primary gap-2"
@@ -133,7 +165,7 @@ function ClassesPage() {
                     <p className="text-base-content/50 font-medium">
                       Aucune classe enregistrée
                     </p>
-                    {isAdmin && (
+                    {(isAdmin || isSudoAdmin) && (
                       <p className="text-base-content/30 text-sm mt-1">
                         Commencez par créer une classe.
                       </p>
@@ -186,6 +218,36 @@ function ClassesPage() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Sélection d'école (SUDO_ADMIN uniquement) */}
+            {isSudoAdmin && (
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">École</legend>
+                <select
+                  className={`select w-full${schoolIdError ? " select-error" : ""}`}
+                  value={schoolId}
+                  onChange={(e) => {
+                    setSchoolId(e.target.value);
+                    if (schoolIdError) setSchoolIdError(null);
+                  }}
+                  required
+                >
+                  <option value="">Sélectionnez une école</option>
+                  {isLoadingSchools ? (
+                    <option disabled>Chargement...</option>
+                  ) : (
+                    schools.map((school) => (
+                      <option key={school.id} value={school.id}>
+                        {school.nom}
+                      </option>
+                    ))
+                  )}
+                </select>
+                {schoolIdError && (
+                  <p className="text-error text-sm mt-1">{schoolIdError}</p>
+                )}
+              </fieldset>
+            )}
+
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Nom de la classe</legend>
               <input

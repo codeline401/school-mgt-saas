@@ -159,17 +159,56 @@ export const importEleves = async (req: Request, res: Response) => {
 // HELPERS pour les autorisations création et modification
 
 // method - GET /api/eleves pour récupérer tous les élèves
+// method - GET /api/eleves pour récupérer tous les élèves (Sécurisé)
 export const getAllEleves = async (req: Request, res: Response) => {
   try {
+    const { schoolId: userSchoolId, role } = req.user!;
+    const userRole = role.toUpperCase();
+
+    // 1. Protection : Si ce n'est pas un SUDO_ADMIN et qu'il n'est rattaché à aucune école -> Interdit
+    if (userRole !== "SUDO_ADMIN" && !userSchoolId) {
+      return res.status(403).json({
+        error: "Vous n'êtes rattaché à aucune école.",
+      });
+    }
+
+    // 2. Construction dynamique du filtre Prisma
+    const whereCondition: any = {};
+
+    if (userRole === "SUDO_ADMIN") {
+      // Le SUDO_ADMIN peut optionnellement filtrer par école via ?schoolId=UUID dans l'URL
+      if (
+        typeof req.query.schoolId === "string" &&
+        req.query.schoolId.trim() !== ""
+      ) {
+        whereCondition.schoolId = req.query.schoolId;
+      }
+      // Si req.query.schoolId n'est pas fourni, whereCondition reste {} et le SUDO_ADMIN voit tout le monde.
+    } else {
+      // Pour un ADMIN ou un PROF, on FORCE le filtre sur son école uniquement
+      whereCondition.schoolId = userSchoolId;
+    }
+
+    // 3. Récupération étanche des élèves
     const tousLesEleves = await prisma.eleve.findMany({
+      where: whereCondition,
       include: {
-        classe: true, // Inclure les données de la classe associée à chaque élève
+        classe: {
+          select: {
+            id: true,
+            nom: true,
+          },
+        }, // Inclut proprement les données de la classe associée
+      },
+      orderBy: {
+        nom: "asc",
       },
     });
-    res.status(200).json(tousLesEleves);
+
+    return res.status(200).json(tousLesEleves);
   } catch (error) {
     console.error("Erreur lors de la récupération des élèves:", error);
-    res.status(500).json({
+    return res.status(500).json({
       error: "Une erreur est survenue lors de la récupération des élèves.",
     });
   }
