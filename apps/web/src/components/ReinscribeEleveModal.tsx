@@ -1,33 +1,60 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api";
+import axios from "axios"; // [REVIEW FIX] : Import d'axios requis pour isAxiosError
 import type { Eleve, Classe } from "@school-mgt/types";
 
 interface ReinscribeEleveModalProps {
   isOpen: boolean;
-  onClose: () => void;
+  handleClose: () => void;
 }
 
 export default function ReinscribeEleveModal({
   isOpen,
-  onClose,
+  handleClose,
 }: ReinscribeEleveModalProps) {
   const queryClient = useQueryClient();
   const [search, setSearch] = useState("");
   const [selectedEleveId, setSelectedEleveId] = useState("");
   const [selectedClasseId, setSelectedClasseId] = useState("");
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  // 1. Récupération des données nécessaires avec tes queries habituelles
+  // [REVIEW FIX] : Déclaration de resetAndClose remontée et stabilisée avec useCallback
+  const resetAndClose = useCallback(() => {
+    setSearch("");
+    setSelectedEleveId("");
+    setSelectedClasseId("");
+    setErrorMsg("");
+    handleClose();
+  }, [handleClose]);
+
+  // Écouteur de touche Échap pour fermer le modal
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        resetAndClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, resetAndClose]); // [REVIEW FIX] : resetAndClose ajouté aux dépendances sans causer de loop grâce au useCallback
+
+  // Récupération des élèves
   const { data: eleves = [] } = useQuery<Eleve[]>({
     queryKey: ["eleves"],
     queryFn: async () => {
       const { data } = await api.get("/api/eleves");
       return data;
     },
-    enabled: isOpen, // Ne tourne que si le modal est ouvert
+    enabled: isOpen,
   });
 
+  // Récupération des classes
   const { data: classes = [] } = useQuery<Classe[]>({
     queryKey: ["classes"],
     queryFn: async () => {
@@ -37,43 +64,32 @@ export default function ReinscribeEleveModal({
     enabled: isOpen,
   });
 
-  // 2. Filtrer la liste locale des élèves à la volée pendant la saisie
+  // Filtrer la liste des élèves selon la recherche
   const filteredEleves = eleves.filter((e) =>
     `${e.nom} ${e.prenom}`.toLowerCase().includes(search.toLowerCase()),
   );
 
-  // 3. Mutation de soumission React-Query vers ton nouvel endpoint réinscription
-  // 3. Mutation de soumission React-Query vers ton nouvel endpoint réinscription
   const mutation = useMutation({
     mutationFn: async (payload: { eleveId: string; classeId: string }) => {
       const { data } = await api.post("/api/reinscription", payload);
       return data;
     },
     onSuccess: () => {
-      // Force React-Query à rafraîchir la liste en arrière-plan
       queryClient.invalidateQueries({ queryKey: ["eleves"] });
-      handleClose();
+      resetAndClose();
     },
     onError: (err) => {
-      // On extrait proprement le message d'erreur d'Axios sans passer par "any"
-      if (err && typeof err === "object" && "response" in err) {
-        const axiosError = err as { response?: { data?: { error?: string } } };
+      // [REVIEW FIX] : Remplacement de la validation manuelle par le type guard natif axios.isAxiosError
+      if (axios.isAxiosError(err)) {
         setErrorMsg(
-          axiosError.response?.data?.error || "Une erreur est survenue.",
+          err.response?.data?.error ||
+            "Une erreur est survenue lors de la communication avec le serveur.",
         );
       } else {
-        setErrorMsg("Une erreur réseau ou serveur est survenue.");
+        setErrorMsg("Une erreur réseau ou une erreur inattendue est survenue.");
       }
     },
   });
-
-  const handleClose = () => {
-    setSearch("");
-    setSelectedEleveId("");
-    setSelectedClasseId("");
-    setErrorMsg(null);
-    onClose();
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,9 +100,17 @@ export default function ReinscribeEleveModal({
   if (!isOpen) return null;
 
   return (
-    <div className="modal modal-open">
+    <div
+      className="modal modal-open"
+      // [REVIEW FIX] : Amélioration de l'accessibilité avec les attributs ARIA standardisés
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-reinscription-title"
+    >
       <div className="modal-box max-w-md border border-base-200">
-        <h3 className="font-bold text-lg mb-4">Réinscrire un élève existant</h3>
+        <h3 id="modal-reinscription-title" className="font-bold text-lg mb-4">
+          Réinscrire un élève existant
+        </h3>
 
         {errorMsg && (
           <div className="alert alert-error alert-soft mb-4 text-sm">
@@ -108,6 +132,7 @@ export default function ReinscribeEleveModal({
               className="input input-bordered w-full input-sm"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              disabled={!!selectedEleveId} // Bloque l'input si un élève est validé
             />
 
             {/* Dropdown de résultats DaisyUI */}
@@ -133,6 +158,7 @@ export default function ReinscribeEleveModal({
                 )}
               </ul>
             )}
+
             {selectedEleveId && (
               <label className="label">
                 <span className="label-text-alt text-success font-medium">
@@ -179,7 +205,7 @@ export default function ReinscribeEleveModal({
             <button
               type="button"
               className="btn btn-ghost btn-sm"
-              onClick={handleClose}
+              onClick={resetAndClose}
               disabled={mutation.isPending}
             >
               Annuler
@@ -194,7 +220,7 @@ export default function ReinscribeEleveModal({
               {mutation.isPending ? (
                 <span className="loading loading-spinner loading-xs" />
               ) : (
-                "Valider la réinscription"
+                "Confirmer la réinscription"
               )}
             </button>
           </div>

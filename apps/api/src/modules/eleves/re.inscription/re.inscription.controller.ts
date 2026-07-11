@@ -5,6 +5,7 @@ import {
   reinscriptionSchema,
 } from "./re.inscription.schema.js";
 import { prisma } from "../../../lib/prisma.js";
+import { ZodError } from "zod";
 
 const service = new InscriptionService();
 
@@ -22,7 +23,7 @@ export const handleInscription = async (req: Request, res: Response) => {
 
     // 2. Détermination du schoolId (SUDO_ADMIN vs ADMIN standard)
     const effectiveSchoolId =
-      userRole === "SUDO_ADMIN" ? validatedData.schoolId : schoolId!;
+      userRole === "SUDO_ADMIN" ? (validatedData as any).schoolId : schoolId!;
     if (!effectiveSchoolId) {
       return res
         .status(400)
@@ -33,6 +34,7 @@ export const handleInscription = async (req: Request, res: Response) => {
     const nouvelEleve = await service.inscrireNouvelEleve(
       validatedData,
       effectiveSchoolId,
+      { schoolId, role },
     );
     return res
       .status(201)
@@ -57,15 +59,14 @@ export const handleReinscription = async (req: Request, res: Response) => {
 
     const validatedData = reinscriptionSchema.parse(req.body);
 
-    // DETERMINATION AUTOMATIQUE DU SCHOOL ID
+    // [REVIEW FIX] : Retrait du bloc conditionnel de recherche de classe. Le service s'occupe de valider inconditionnellement la classe.
     let effectiveSchoolId = schoolId;
 
     if (userRole === "SUDO_ADMIN") {
-      // Si le SUDO_ADMIN l'a passé manuellement dans le body, on l'utilise
       if (validatedData.schoolId) {
         effectiveSchoolId = validatedData.schoolId;
       } else {
-        // Sinon, on va chercher l'école directement liée à la classe choisie !
+        // Si le SUDO_ADMIN n'a pas fourni de schoolId, on va le chercher via la classe cible
         const classeCible = await prisma.classe.findUnique({
           where: { id: validatedData.classeId },
           select: { schoolId: true },
@@ -81,23 +82,63 @@ export const handleReinscription = async (req: Request, res: Response) => {
     }
 
     if (!effectiveSchoolId) {
-      return res
-        .status(400)
-        .json({ error: "Impossible de déterminer l'école de destination." });
+      return res.status(400).json({
+        error: "Impossible de déterminer l'établissement de destination.",
+      });
     }
 
-    // Appel au service
     const eleveMisAJour = await service.reinscrireEleveExistant(
       validatedData.eleveId,
       validatedData.classeId,
       effectiveSchoolId,
-      { schoolId: schoolId!, role: userRole },
+      { schoolId, role },
     );
 
     return res
       .status(200)
       .json({ message: "Élève réinscrit avec succès", eleve: eleveMisAJour });
   } catch (error: any) {
-    // ... ton catch existant
+    // [REVIEW FIX] : Gestion complète et explicite de toutes les erreurs connues avec journalisation
+    console.error("Erreur détectée dans handleReinscription:", error);
+
+    if (error instanceof ZodError) {
+      return res.status(400).json({
+        error: "Données de formulaire invalides.",
+        details: error.issues,
+      });
+    }
+
+    switch (error.message) {
+      case "ELEVE_NOT_FOUND":
+        return res
+          .status(404)
+          .json({ error: "L'élève spécifié n'existe pas." });
+      case "CLASSE_NOT_FOUND":
+        return res
+          .status(400)
+          .json({ error: "La classe sélectionnée n'existe pas." });
+      case "INVALID_CLASSE_SCHOOL_MISMATCH":
+        return res.status(400).json({
+          error:
+            "La classe sélectionnée n'appartient pas à l'établissement cible.",
+        });
+      case "UNAUTHORIZED_SCHOOL_TRANSFER":
+        return res.status(403).json({
+          error:
+            "Action interdite : cet élève n'appartient pas à votre établissement.",
+        });
+      case "ALREADY_ENROLLED_IN_CLASS":
+        return res
+          .status(400)
+          .json({ error: "Cet élève est déjà inscrit dans cette classe." });
+      case "UNAUTHORIZED":
+        return res
+          .status(403)
+          .json({ error: "Droits insuffisants pour effectuer cette action." });
+      default:
+        return res
+          .status(500)
+          .json({ error: "Une erreur interne du serveur est survenue." });
+    }
   }
 };

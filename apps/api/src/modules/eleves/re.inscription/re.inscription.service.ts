@@ -1,34 +1,53 @@
-import { prisma } from "../../../lib/prisma.js";
+import { prisma } from "../../../lib/prisma.js"; // Ajuste le chemin selon ton projet
+import { z } from "zod";
+import { inscriptionSchema } from "./re.inscription.schema.js";
 
-// interface pour typer les metadonnees de l'user qui fait l'action
 interface UserContext {
   schoolId: string | null;
   role: string;
 }
 
 export class InscriptionService {
-  // FLUX 1 : Création complète d'un nouvel élève
-  async inscrireNouvelEleve(data: any, schoolId: string) {
+  /**
+   * FLUX 1 : Inscription d'un nouvel élève
+   */
+  // [REVIEW FIX] : Remplacement du type 'any' par z.infer<typeof inscriptionSchema> pour la sécurité du typage
+  async inscrireNouvelEleve(
+    data: z.infer<typeof inscriptionSchema>,
+    targetSchoolId: string,
+    currentUser: UserContext,
+  ) {
+    const userRole = currentUser.role.toUpperCase();
+
+    if (userRole !== "ADMIN" && userRole !== "SUDO_ADMIN") {
+      throw new Error("UNAUTHORIZED");
+    }
+
+    // [REVIEW FIX] : Validation centralisée de l'existence et de l'appartenance de la classe à l'école cible
+    const classeCible = await prisma.classe.findUnique({
+      where: { id: data.classeId },
+      select: { schoolId: true },
+    });
+    if (!classeCible) {
+      throw new Error("CLASSE_NOT_FOUND");
+    }
+    if (classeCible.schoolId !== targetSchoolId) {
+      throw new Error("INVALID_CLASSE_SCHOOL_MISMATCH");
+    }
+
     return await prisma.eleve.create({
       data: {
-        nom: data.nom.trim(),
-        prenom: data.prenom.trim(),
+        nom: data.nom,
+        prenom: data.prenom,
+        dateNaissance: data.dateNaissance ? new Date(data.dateNaissance) : null,
         classeId: data.classeId,
-        schoolId: schoolId,
-        ...(data.dateNaissance
-          ? { dateNaissance: new Date(`${data.dateNaissance}T00:00:00Z`) }
-          : {}),
-        ...(data.telephone ? { telephone: data.telephone.trim() } : {}),
-        ...(data.adresse ? { adresse: data.adresse.trim() } : {}),
+        schoolId: targetSchoolId,
       },
-      include: { classe: true },
     });
   }
 
-  // FLUX 2 : Liaison/Mise à jour d'un élève existant
   /**
    * FLUX 2 : Liaison / Réinscription / Transfert d'un élève existant
-   * Gère la mise à jour de classe et d'école de manière sécurisée.
    */
   async reinscrireEleveExistant(
     eleveId: string,
@@ -45,9 +64,20 @@ export class InscriptionService {
     }
 
     // 2. Sécurité anti-spoofing : Un ADMIN ne peut pas toucher à un élève d'une AUTRE école
-    // Seul le SUDO_ADMIN a le droit de faire des transferts inter-écoles libres.
     if (userRole !== "SUDO_ADMIN" && eleve.schoolId !== currentUser.schoolId) {
       throw new Error("UNAUTHORIZED_SCHOOL_TRANSFER");
+    }
+
+    // [REVIEW FIX] : Validation centralisée de l'existence et de l'appartenance de la classe à l'école cible avant update
+    const classeCible = await prisma.classe.findUnique({
+      where: { id: classeId },
+      select: { schoolId: true },
+    });
+    if (!classeCible) {
+      throw new Error("CLASSE_NOT_FOUND");
+    }
+    if (classeCible.schoolId !== targetSchoolId) {
+      throw new Error("INVALID_CLASSE_SCHOOL_MISMATCH");
     }
 
     // 3. Optimisation : Éviter de réinscrire inutilement dans la MÊME classe et MÊME école
@@ -60,7 +90,7 @@ export class InscriptionService {
       where: { id: eleveId },
       data: {
         classeId: classeId,
-        schoolId: targetSchoolId, // Permet la réinscription locale ou le transfert d'école
+        schoolId: targetSchoolId,
       },
       include: {
         classe: true,

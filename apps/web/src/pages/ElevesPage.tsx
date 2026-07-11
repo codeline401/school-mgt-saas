@@ -146,7 +146,7 @@ function ElevesPage() {
       {/* Intégration du nouveau Modal de Réinscription */}
       <ReinscribeEleveModal
         isOpen={showReinscribe}
-        onClose={() => setShowReinscribe(false)}
+        handleClose={() => setShowReinscribe(false)}
       />
     </div>
   );
