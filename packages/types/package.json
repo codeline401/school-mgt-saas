@@ -2,10 +2,13 @@
   "name": "@school-mgt/types",
   "version": "1.0.0",
   "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "echo \"No build needed for shared types\"",
+    "build": "tsc",
     "test": "echo \"No shared types tests configured yet\""
   },
-  "main": "./index.ts",
-  "types": "./index.ts"
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
 }
