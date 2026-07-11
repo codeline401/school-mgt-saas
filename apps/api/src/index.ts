@@ -12,6 +12,9 @@ import {
   deleteEleve,
   importEleves,
 } from "./controllers/elevesController.js"; // Importation du contrôleur pour les élèves
+
+import { getAdminDevoirs } from "./modules/cahierDeTexte/devoirs/devoir.controller.js"; // Importation du contrôleur pour les devoirs
+
 import authRoutes from "./routes/authRoutes.js"; // Importation des routes d'authentification
 import schoolRoutes from "./routes/schoolRoute.js"; // Importation des routes pour les écoles
 import classesRoutes from "./routes/classesRoute.js"; // Importation des routes pour les classes
@@ -25,6 +28,8 @@ import periodeRoute from "./routes/periodeRoute.js";
 import signatureRoute from "./routes/signatureRoute.js";
 import inscriptionRoutes from "./modules/eleves/re.inscription/re.inscription.routes.js"; // Importation des routes pour l'inscription et la réinscription
 
+import devoirsRoutes from "./modules/cahierDeTexte/devoirs/devoir.routes.js"; // Importation des routes pour les devoirs
+
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -36,6 +41,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/schools", schoolRoutes);
 app.use("/api/classes", classesRoutes);
 app.use("/api/profils", profilsRoutes);
+app.use("/api/devoirs-donnes", devoirsRoutes); // Ajout des routes pour les devoirs
 
 app.use("/api/export", exportRoute);
 app.use("/api/periodes", periodeRoute);
