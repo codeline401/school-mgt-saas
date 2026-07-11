@@ -23,6 +23,7 @@ import bulletinTemplateRoute from "./routes/bulletinTemplateRoute.js"; // Import
 import exportRoute from "./routes/exportRoute.js";
 import periodeRoute from "./routes/periodeRoute.js";
 import signatureRoute from "./routes/signatureRoute.js";
+import inscriptionRoutes from "./modules/eleves/re.inscription/re.inscription.routes.js"; // Importation des routes pour l'inscription et la réinscription
 
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
@@ -39,6 +40,7 @@ app.use("/api/profils", profilsRoutes);
 app.use("/api/export", exportRoute);
 app.use("/api/periodes", periodeRoute);
 app.use("/api/signature", signatureRoute);
+app.use("/api", inscriptionRoutes); // Ajout des routes pour l'inscription et la réinscription
 
 app.get("/api/eleves", authenticate, getAllEleves);
 app.post("/api/eleves/import", authenticate, importEleves);
