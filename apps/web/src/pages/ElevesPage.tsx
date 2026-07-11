@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/api";
-import { FileSpreadsheet, PlusIcon, Users } from "lucide-react";
+import { FileSpreadsheet, PlusIcon, Users, RefreshCw } from "lucide-react";
 import type { Eleve, Classe } from "@school-mgt/types";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import CreateEleveModal from "../components/CreateEleveModal";
 import ImportElevesModal from "../components/ImportElevesModal";
+import ReinscribeEleveModal from "../components/ReinscribeEleveModal";
 
 type EleveWithClasse = Omit<Eleve, "classeId"> & { classe?: Classe };
 
@@ -25,6 +26,7 @@ function ElevesPage() {
 
   const [showCreate, setShowCreate] = useState(false);
   const [showImport, setShowImport] = useState(false);
+  const [showReinscribe, setShowReinscribe] = useState(false); // État pour le nouveau modal
 
   return (
     <div>
@@ -43,8 +45,18 @@ function ElevesPage() {
             <FileSpreadsheet size={16} />
             Importer Excel
           </button>
+
+          {/* Nouveau bouton Réinscription avec style DaisyUI */}
           <button
-            className="btn btn-primary gap-2"
+            className="btn btn-neutral btn-sm gap-2"
+            onClick={() => setShowReinscribe(true)}
+          >
+            <RefreshCw size={16} />
+            Réinscrire un ancien
+          </button>
+
+          <button
+            className="btn btn-primary btn-sm gap-2"
             onClick={() => setShowCreate(true)}
           >
             <PlusIcon size={16} />
@@ -130,6 +142,11 @@ function ElevesPage() {
       <ImportElevesModal
         isOpen={showImport}
         onClose={() => setShowImport(false)}
+      />
+      {/* Intégration du nouveau Modal de Réinscription */}
+      <ReinscribeEleveModal
+        isOpen={showReinscribe}
+        handleClose={() => setShowReinscribe(false)}
       />
     </div>
   );
