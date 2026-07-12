@@ -210,9 +210,9 @@ export const getSalles = async (req: Request, res: Response) => {
     }
 
     const filters = {
-      batimentId: batimentId as string | undefined,
-      type: type as string | undefined,
-      statut: statut as string | undefined,
+      batimentId: typeof batimentId === "string" ? batimentId : undefined,
+      type: typeof type === "string" ? type : undefined,
+      statut: typeof statut === "string" ? statut : undefined,
     };
 
     const salles = await service.getSalles(schoolId, filters);
@@ -341,8 +341,6 @@ export const updateSalle = async (req: Request, res: Response) => {
       return res.status(404).json({ error: error.message });
     }
     if (
-      error.message === "Accès non autorisé à cette salle." ||
-      error.message === "Bâtiment introuvable." ||
       error.message ===
         "Le bâtiment spécifié n'appartient pas à votre école." ||
       error.message.includes("L'étage")

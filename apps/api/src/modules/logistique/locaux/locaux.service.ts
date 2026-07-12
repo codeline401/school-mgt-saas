@@ -35,8 +35,8 @@ export class LocauxService {
    * Récupérer un bâtiment par son ID
    */
   async getBatimentById(batimentId: string, schoolId: string) {
-    const batiment = await prisma.batiment.findUnique({
-      where: { id: batimentId },
+    const batiment = await prisma.batiment.findFirst({
+      where: { id: batimentId, schoolId },
       include: {
         salles: {
           orderBy: [{ etage: "asc" }, { nom: "asc" }],
@@ -46,11 +46,6 @@ export class LocauxService {
 
     if (!batiment) {
       throw new Error("Bâtiment introuvable.");
-    }
-
-    // Vérification de sécurité : le bâtiment appartient bien à l'école
-    if (batiment.schoolId !== schoolId) {
-      throw new Error("Accès non autorisé à ce bâtiment.");
     }
 
     return batiment;
@@ -80,7 +75,18 @@ export class LocauxService {
     schoolId: string,
   ) {
     // Vérifier que le bâtiment existe et appartient à l'école
-    await this.getBatimentById(batimentId, schoolId);
+    const batiment = await this.getBatimentById(batimentId, schoolId);
+
+    if (data.nbEtages !== undefined) {
+      const salleHorsBornes = batiment.salles.some(
+        (s) => s.etage > data.nbEtages! - 1,
+      );
+      if (salleHorsBornes) {
+        throw new Error(
+          `Impossible de réduire le nombre d'étages : des salles existent à des étages supérieurs à ${data.nbEtages - 1}.`,
+        );
+      }
+    }
 
     return await prisma.batiment.update({
       where: { id: batimentId },
@@ -240,7 +246,7 @@ export class LocauxService {
 
     // Préparer les données de mise à jour
     const updateData: any = { ...data };
-    
+
     // Si batimentId est fourni, il faut utiliser la syntaxe de connexion
     if (data.batimentId) {
       updateData.batiment = {

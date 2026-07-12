@@ -2,12 +2,20 @@ import { Building2, DoorOpen, Users, PieChart } from "lucide-react";
 import { useStatistiques } from "../hooks/useLocaux";
 
 export default function StatistiquesTab() {
-  const { data: stats, isLoading } = useStatistiques();
+  const { data: stats, isLoading, isError } = useStatistiques();
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
         <span className="loading loading-spinner loading-md text-primary"></span>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="alert alert-error">
+        <span>Erreur lors du chargement des statistiques</span>
       </div>
     );
   }
@@ -39,7 +47,9 @@ export default function StatistiquesTab() {
               <DoorOpen size={32} />
             </div>
             <div className="stat-title">Salles</div>
-            <div className="stat-value text-secondary">{stats.nombreSalles}</div>
+            <div className="stat-value text-secondary">
+              {stats.nombreSalles}
+            </div>
             <div className="stat-desc">Total des salles</div>
           </div>
         </div>
@@ -51,9 +61,7 @@ export default function StatistiquesTab() {
               <Users size={32} />
             </div>
             <div className="stat-title">Capacité totale</div>
-            <div className="stat-value text-accent">
-              {stats.capaciteTotale}
-            </div>
+            <div className="stat-value text-accent">{stats.capaciteTotale}</div>
             <div className="stat-desc">Places disponibles</div>
           </div>
         </div>
@@ -148,11 +156,12 @@ export default function StatistiquesTab() {
         <div>
           <div className="font-semibold mb-1">Résumé global</div>
           <div className="text-sm text-base-content/70">
-            Votre établissement dispose de <strong>{stats.nombreBatiments}</strong>{" "}
-            bâtiment{stats.nombreBatiments > 1 ? "s" : ""} contenant un total de{" "}
+            Votre établissement dispose de{" "}
+            <strong>{stats.nombreBatiments}</strong> bâtiment
+            {stats.nombreBatiments > 1 ? "s" : ""} contenant un total de{" "}
             <strong>{stats.nombreSalles}</strong> salle
-            {stats.nombreSalles > 1 ? "s" : ""}, pour une capacité d'accueil totale
-            de <strong>{stats.capaciteTotale}</strong> personnes.
+            {stats.nombreSalles > 1 ? "s" : ""}, pour une capacité d'accueil
+            totale de <strong>{stats.capaciteTotale}</strong> personnes.
           </div>
         </div>
       </div>

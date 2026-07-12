@@ -31,14 +31,19 @@ export default function BatimentModal({ isOpen, onClose, batiment }: Props) {
 
   useEffect(() => {
     if (isOpen && batiment) {
-      setForm({
-        nom: batiment.nom,
-        code: batiment.code || "",
-        description: batiment.description || "",
-        nbEtages: batiment.nbEtages,
+      // Évite le rendu en cascade en planifiant le changement d'état
+      queueMicrotask(() => {
+        setForm({
+          nom: batiment.nom,
+          code: batiment.code || "",
+          description: batiment.description || "",
+          nbEtages: batiment.nbEtages,
+        });
       });
     } else if (isOpen && !batiment) {
-      setForm(INITIAL_FORM);
+      queueMicrotask(() => {
+        setForm(INITIAL_FORM);
+      });
     }
   }, [isOpen, batiment]);
 
@@ -62,16 +67,24 @@ export default function BatimentModal({ isOpen, onClose, batiment }: Props) {
       nbEtages: form.nbEtages,
     };
 
-    if (isEdit && batiment) {
-      await updateMutation.mutateAsync({
-        id: batiment.id,
-        input,
-      });
-    } else {
-      await createMutation.mutateAsync(input);
-    }
+    try {
+      if (isEdit && batiment) {
+        await updateMutation.mutateAsync({
+          id: batiment.id,
+          input,
+        });
+      } else {
+        await createMutation.mutateAsync(input);
+      }
 
-    handleClose();
+      // S'exécute uniquement si la mutation précédente a réussi
+      handleClose();
+    } catch (error) {
+      // Les erreurs de mutateAsync sont capturées ici localement.
+      // Cela empêche le crash du composant et bloque l'exécution de handleClose().
+      // Le comportement de ton onError global dans la mutation reste préservé pour le toast.
+      console.error("Échec de la mutation du bâtiment:", error);
+    }
   };
 
   const handleClose = () => {
@@ -132,7 +145,9 @@ export default function BatimentModal({ isOpen, onClose, batiment }: Props) {
 
           {/* Description */}
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">Description (optionnelle)</legend>
+            <legend className="fieldset-legend">
+              Description (optionnelle)
+            </legend>
             <textarea
               name="description"
               value={form.description}
