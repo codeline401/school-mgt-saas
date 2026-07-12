@@ -29,6 +29,7 @@ import signatureRoute from "./routes/signatureRoute.js";
 import inscriptionRoutes from "./modules/eleves/re.inscription/re.inscription.routes.js"; // Importation des routes pour l'inscription et la réinscription
 
 import devoirsRoutes from "./modules/cahierDeTexte/devoirs/devoir.routes.js"; // Importation des routes pour les devoirs
+import programmeRoutes from "./modules/cahierDeTexte/programme.realise/programme.routes.js"; // Importation des routes pour le programme réalisé
 
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
@@ -47,6 +48,7 @@ app.use("/api/export", exportRoute);
 app.use("/api/periodes", periodeRoute);
 app.use("/api/signature", signatureRoute);
 app.use("/api", inscriptionRoutes); // Ajout des routes pour l'inscription et la réinscription
+app.use("/api/programme-realise", programmeRoutes); // Ajout des routes pour le programme réalisé
 
 app.get("/api/eleves", authenticate, getAllEleves);
 app.post("/api/eleves/import", authenticate, importEleves);
