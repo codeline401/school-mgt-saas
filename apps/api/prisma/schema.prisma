@@ -94,6 +94,8 @@ model School {
   // -- Périodes scolaires de l'école
   periodes  Periode[]
   chapitres Chapitre[]
+  batiments Batiment[]
+  salles    Salle[]
 }
 
 model Classe {
@@ -894,4 +896,78 @@ model SousChapitre {
   updatedAt DateTime @updatedAt
 
   @@index([chapitreId])
+}
+
+// ==========================================
+// MODULE LOGISTIQUE : INVENTAIRE DES LOCAUX
+// ==========================================
+
+model Batiment {
+  id          String  @id @default(uuid())
+  nom         String // Ex: "Bâtiment A", "Pavillon Sciences"
+  code        String? // Ex: "BAT-A"
+  description String?
+  nbEtages    Int     @default(1)
+
+  // Lien direct avec l'école
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  salles    Salle[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId])
+}
+
+model Salle {
+  id            String    @id @default(uuid())
+  nom           String // Ex: "Salle 204", "Laboratoire Chimie B"
+  code          String? // Ex: "S-204"
+  type          TypeSalle @default(COURS)
+  etage         Int       @default(0) // 0 = RDC, 1 = 1er étage, etc.
+  capacite      Int // Nombre de places assises max
+  pmrAccessible Boolean   @default(true)
+
+  // Équipements fixes (ex: {"videoprojecteur": true, "ordinateurs": 15})
+  equipements Json?       @default("{}")
+  statut      StatutSalle @default(DISPONIBLE)
+
+  // Lien avec le bâtiment
+  batimentId String
+  batiment   Batiment @relation(fields: [batimentId], references: [id], onDelete: Cascade)
+
+  // ✅ AJOUT : Lien direct avec l'école pour des requêtes ultra-rapides et sécurisées
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Indexations stratégiques combinant le schoolId pour la sécurité et la performance
+  @@index([schoolId])
+  @@index([schoolId, batimentId])
+  @@index([schoolId, type])
+  @@index([schoolId, statut])
+}
+
+// ==========================================
+// ENUMS
+// ==========================================
+
+enum TypeSalle {
+  COURS
+  LABO_SCIENCE
+  INFORMATIQUE
+  AMPHI
+  REUNION
+  SPORT
+  ADMINISTRATIF
+  AUTRE
+}
+
+enum StatutSalle {
+  DISPONIBLE
+  MAINTENANCE
+  RESERVEE
 }

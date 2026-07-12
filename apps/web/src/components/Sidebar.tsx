@@ -100,6 +100,50 @@ const MENU: MenuEntry[] = [
       },
     ],
   },
+  // Insérer ici la gestion Logistique
+  {
+    icon: Package,
+    label: "Gestion Logistique",
+    roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
+    children: [
+      {
+        icon: Building2,
+        label: "Locaux",
+        path: "/logistique/locaux",
+        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
+      },
+      {
+        icon: Warehouse,
+        label: "Stocks",
+        path: "/logistique/stocks",
+        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
+      },
+      {
+        icon: Monitor,
+        label: "Inventaire",
+        path: "/logistique/inventaire",
+        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
+      },
+      {
+        icon: Wrench,
+        label: "Maintenance",
+        path: "/logistique/maintenance",
+        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
+      },
+      {
+        icon: Bus,
+        label: "Transports & Sorties",
+        path: "/logistique/transports",
+        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
+      },
+      {
+        icon: UtensilsCrossed,
+        label: "Cantine & Restauration",
+        path: "/logistique/cantine",
+        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
+      },
+    ],
+  },
   {
     icon: Wallet,
     label: "Comptabilité & Finance",
@@ -229,49 +273,7 @@ const MENU: MenuEntry[] = [
       },
     ],
   },
-  {
-    icon: Package,
-    label: "Gestion Logistique",
-    roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
-    children: [
-      {
-        icon: Building2,
-        label: "Locaux",
-        path: "/logistique/locaux",
-        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
-      },
-      {
-        icon: Warehouse,
-        label: "Stocks",
-        path: "/logistique/stocks",
-        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
-      },
-      {
-        icon: Monitor,
-        label: "Inventaire",
-        path: "/logistique/inventaire",
-        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
-      },
-      {
-        icon: Wrench,
-        label: "Maintenance",
-        path: "/logistique/maintenance",
-        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
-      },
-      {
-        icon: Bus,
-        label: "Transports & Sorties",
-        path: "/logistique/transports",
-        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
-      },
-      {
-        icon: UtensilsCrossed,
-        label: "Cantine & Restauration",
-        path: "/logistique/cantine",
-        roles: ["ADMIN", "SUDO_ADMIN", "PROF"],
-      },
-    ],
-  },
+
   {
     icon: UserCircle,
     label: "Mon profil",
