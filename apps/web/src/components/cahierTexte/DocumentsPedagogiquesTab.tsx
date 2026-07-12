@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { api, getApiError } from "../../lib/api";
 import type { Classe } from "@school-mgt/types";
+import toast from "react-hot-toast";
 
 // ─────────────────────────────────────────────────────────────
 // TYPES
@@ -31,6 +32,7 @@ interface DocumentExtended {
 
 export default function DocumentsTab() {
   const [classeId, setClasseId] = useState("");
+  const [downloadingDocId, setDownloadingDocId] = useState<string | null>(null);
 
   // ─────────────────────────────────────────────────────────────
   // QUERIES
@@ -58,6 +60,36 @@ export default function DocumentsTab() {
       return data;
     },
   });
+
+  // ─────────────────────────────────────────────────────────────
+  // HANDLERS
+  // ─────────────────────────────────────────────────────────────
+
+  async function downloadDocument(doc: DocumentExtended) {
+    const filename = doc.filePath.split(/[\\/]/).pop();
+    if (!filename) return;
+    setDownloadingDocId(doc.id);
+    try {
+      const response = await api.get(`/uploads/documents/${encodeURIComponent(filename)}`, {
+        responseType: "blob",
+      });
+      const blob = new Blob([response.data], {
+        type: response.data.type || doc.mimeType,
+      });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 10_000);
+    } catch {
+      toast.error("Impossible de télécharger le document.");
+    } finally {
+      setDownloadingDocId(null);
+    }
+  }
 
   // ─────────────────────────────────────────────────────────────
   // RENDER
@@ -156,16 +188,19 @@ export default function DocumentsTab() {
                   </div>
                 </div>
 
-                {/* Lien/Bouton de téléchargement */}
-                <a
-                  href={`${api.defaults.baseURL}${doc.filePath}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                {/* Bouton de téléchargement authentifié */}
+                <button
+                  onClick={() => downloadDocument(doc)}
+                  disabled={downloadingDocId === doc.id}
                   className="btn btn-square btn-ghost btn-xs text-primary hover:bg-primary/10"
                   title="Télécharger"
                 >
-                  <Download size={14} />
-                </a>
+                  {downloadingDocId === doc.id ? (
+                    <Loader2 size={14} className="animate-spin" />
+                  ) : (
+                    <Download size={14} />
+                  )}
+                </button>
               </div>
             </div>
           </div>
