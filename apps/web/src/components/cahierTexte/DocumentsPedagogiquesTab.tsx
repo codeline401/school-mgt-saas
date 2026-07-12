@@ -105,12 +105,11 @@ export default function DocumentsTab() {
         </div>
       )}
 
-      {!isLoading && documents.length === 0 && (
+      {!isLoading && !isError && documents.length === 0 && (
         <div className="text-center py-10 text-base-content/40 text-sm">
           Aucun document disponible pour cette sélection.
         </div>
       )}
-
       {/* GRILLE DES DOCUMENTS (Style épuré DaisyUI) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {documents.map((doc) => (
