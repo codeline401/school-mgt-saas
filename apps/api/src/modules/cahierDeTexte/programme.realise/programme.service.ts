@@ -1,16 +1,5 @@
 import { prisma } from "../../../lib/prisma.js";
-
-interface ProgrammeGroup {
-  titre: string;
-  matiereNom: string;
-  classeNom: string;
-  professeurNom: string;
-  sessions: {
-    id: string;
-    date: string;
-    detail: string | null;
-  }[];
-}
+import type { ProgrammeGroup } from "@school-mgt/types";
 
 export const getProgrammeRealiseService = async (
   classeId?: string,
@@ -38,7 +27,9 @@ export const getProgrammeRealiseService = async (
   for (const c of cahiers) {
     // La clé unique combine le titre et l'ID de la classe pour éviter des fusions inter-classes erronées
     const uniqueKey = `${c.classeId}-${c.titre.trim().toLowerCase()}`;
-    const profNomComplet = `${c.professeur.prenom} ${c.professeur.nom}`;
+    const profNomComplet = c.professeur
+      ? `${c.professeur.prenom} ${c.professeur.nom}`
+      : "Professeur non assigné";
 
     if (!mapUnique.has(uniqueKey)) {
       mapUnique.set(uniqueKey, {

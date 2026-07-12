@@ -2,25 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Calendar, User, AlertCircle, Loader2, ListChecks } from "lucide-react";
 import { api, getApiError } from "../../lib/api";
-import type { Classe } from "@school-mgt/types";
-
-// ─────────────────────────────────────────────────────────────
-// TYPES ALIGNÉS SUR LE BACKEND
-// ─────────────────────────────────────────────────────────────
-
-interface SessionDetails {
-  id: string;
-  date: string;
-  detail: string | null;
-}
-
-interface ProgrammeGroup {
-  titre: string;
-  matiereNom: string;
-  classeNom: string;
-  professeurNom: string;
-  sessions: SessionDetails[];
-}
+import type { Classe, ProgrammeGroup } from "@school-mgt/types";
 
 // ─────────────────────────────────────────────────────────────
 // COMPONENT
@@ -169,7 +151,7 @@ export default function ProgrammeRealiseTab() {
                       {/* Date de la séance */}
                       <div className="flex items-center gap-1.5 text-xs font-semibold text-primary mb-1">
                         <Calendar size={12} />
-                        <span>Cours du {session.date}</span>
+                        <span>Cours du {new Date(session.date).toLocaleDateString("fr-FR", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</span>
                       </div>
 
                       {/* Contenu textuel saisi par le prof */}

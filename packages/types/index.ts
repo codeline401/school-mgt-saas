@@ -475,6 +475,24 @@ export interface BulletinTemplate extends BaseEntity {
   config: BulletinTemplateConfig;
 }
 
+// --- PROGRAMME REALISE (CAHIER DE TEXTE) -------------------
+
+export interface SessionDetails {
+  id: string;
+  date: string;
+  detail: string | null;
+}
+
+export interface ProgrammeGroup {
+  titre: string;
+  matiereNom: string;
+  classeNom: string;
+  professeurNom: string;
+  sessions: SessionDetails[];
+}
+
+// --- EXAMENS ------------------------------------------------
+
 export type ExamenStatut =
   | "PLANIFIE"
   | "EN_COURS"
