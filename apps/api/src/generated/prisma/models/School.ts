@@ -268,6 +268,8 @@ export type SchoolWhereInput = {
   examenSessions?: Prisma.ExamenSessionListRelationFilter
   periodes?: Prisma.PeriodeListRelationFilter
   chapitres?: Prisma.ChapitreListRelationFilter
+  batiments?: Prisma.BatimentListRelationFilter
+  salles?: Prisma.SalleListRelationFilter
 }
 
 export type SchoolOrderByWithRelationInput = {
@@ -306,6 +308,8 @@ export type SchoolOrderByWithRelationInput = {
   examenSessions?: Prisma.ExamenSessionOrderByRelationAggregateInput
   periodes?: Prisma.PeriodeOrderByRelationAggregateInput
   chapitres?: Prisma.ChapitreOrderByRelationAggregateInput
+  batiments?: Prisma.BatimentOrderByRelationAggregateInput
+  salles?: Prisma.SalleOrderByRelationAggregateInput
 }
 
 export type SchoolWhereUniqueInput = Prisma.AtLeast<{
@@ -347,6 +351,8 @@ export type SchoolWhereUniqueInput = Prisma.AtLeast<{
   examenSessions?: Prisma.ExamenSessionListRelationFilter
   periodes?: Prisma.PeriodeListRelationFilter
   chapitres?: Prisma.ChapitreListRelationFilter
+  batiments?: Prisma.BatimentListRelationFilter
+  salles?: Prisma.SalleListRelationFilter
 }, "id" | "tenantKey" | "inviteCode">
 
 export type SchoolOrderByWithAggregationInput = {
@@ -423,6 +429,8 @@ export type SchoolCreateInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateInput = {
@@ -461,6 +469,8 @@ export type SchoolUncheckedCreateInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUpdateInput = {
@@ -499,6 +509,8 @@ export type SchoolUpdateInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateInput = {
@@ -537,6 +549,8 @@ export type SchoolUncheckedUpdateInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateManyInput = {
@@ -959,6 +973,34 @@ export type SchoolUpdateOneRequiredWithoutChapitresNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutChapitresInput, Prisma.SchoolUpdateWithoutChapitresInput>, Prisma.SchoolUncheckedUpdateWithoutChapitresInput>
 }
 
+export type SchoolCreateNestedOneWithoutBatimentsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutBatimentsInput, Prisma.SchoolUncheckedCreateWithoutBatimentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutBatimentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutBatimentsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutBatimentsInput, Prisma.SchoolUncheckedCreateWithoutBatimentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutBatimentsInput
+  upsert?: Prisma.SchoolUpsertWithoutBatimentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutBatimentsInput, Prisma.SchoolUpdateWithoutBatimentsInput>, Prisma.SchoolUncheckedUpdateWithoutBatimentsInput>
+}
+
+export type SchoolCreateNestedOneWithoutSallesInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutSallesInput, Prisma.SchoolUncheckedCreateWithoutSallesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutSallesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutSallesNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutSallesInput, Prisma.SchoolUncheckedCreateWithoutSallesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutSallesInput
+  upsert?: Prisma.SchoolUpsertWithoutSallesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutSallesInput, Prisma.SchoolUpdateWithoutSallesInput>, Prisma.SchoolUncheckedUpdateWithoutSallesInput>
+}
+
 export type SchoolCreateWithoutUsersInput = {
   id?: string
   nom: string
@@ -994,6 +1036,8 @@ export type SchoolCreateWithoutUsersInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutUsersInput = {
@@ -1031,6 +1075,8 @@ export type SchoolUncheckedCreateWithoutUsersInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutUsersInput = {
@@ -1084,6 +1130,8 @@ export type SchoolUpdateWithoutUsersInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutUsersInput = {
@@ -1121,6 +1169,8 @@ export type SchoolUncheckedUpdateWithoutUsersInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutClassesInput = {
@@ -1158,6 +1208,8 @@ export type SchoolCreateWithoutClassesInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutClassesInput = {
@@ -1195,6 +1247,8 @@ export type SchoolUncheckedCreateWithoutClassesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutClassesInput = {
@@ -1248,6 +1302,8 @@ export type SchoolUpdateWithoutClassesInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutClassesInput = {
@@ -1285,6 +1341,8 @@ export type SchoolUncheckedUpdateWithoutClassesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutElevesInput = {
@@ -1322,6 +1380,8 @@ export type SchoolCreateWithoutElevesInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutElevesInput = {
@@ -1359,6 +1419,8 @@ export type SchoolUncheckedCreateWithoutElevesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutElevesInput = {
@@ -1412,6 +1474,8 @@ export type SchoolUpdateWithoutElevesInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutElevesInput = {
@@ -1449,6 +1513,8 @@ export type SchoolUncheckedUpdateWithoutElevesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutProfsInput = {
@@ -1486,6 +1552,8 @@ export type SchoolCreateWithoutProfsInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutProfsInput = {
@@ -1523,6 +1591,8 @@ export type SchoolUncheckedCreateWithoutProfsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutProfsInput = {
@@ -1576,6 +1646,8 @@ export type SchoolUpdateWithoutProfsInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutProfsInput = {
@@ -1613,6 +1685,8 @@ export type SchoolUncheckedUpdateWithoutProfsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutParentsInput = {
@@ -1650,6 +1724,8 @@ export type SchoolCreateWithoutParentsInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutParentsInput = {
@@ -1687,6 +1763,8 @@ export type SchoolUncheckedCreateWithoutParentsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutParentsInput = {
@@ -1740,6 +1818,8 @@ export type SchoolUpdateWithoutParentsInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutParentsInput = {
@@ -1777,6 +1857,8 @@ export type SchoolUncheckedUpdateWithoutParentsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutDossierAdmissionsInput = {
@@ -1814,6 +1896,8 @@ export type SchoolCreateWithoutDossierAdmissionsInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutDossierAdmissionsInput = {
@@ -1851,6 +1935,8 @@ export type SchoolUncheckedCreateWithoutDossierAdmissionsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutDossierAdmissionsInput = {
@@ -1904,6 +1990,8 @@ export type SchoolUpdateWithoutDossierAdmissionsInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutDossierAdmissionsInput = {
@@ -1941,6 +2029,8 @@ export type SchoolUncheckedUpdateWithoutDossierAdmissionsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutContratsInput = {
@@ -1978,6 +2068,8 @@ export type SchoolCreateWithoutContratsInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutContratsInput = {
@@ -2015,6 +2107,8 @@ export type SchoolUncheckedCreateWithoutContratsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutContratsInput = {
@@ -2068,6 +2162,8 @@ export type SchoolUpdateWithoutContratsInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutContratsInput = {
@@ -2105,6 +2201,8 @@ export type SchoolUncheckedUpdateWithoutContratsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutRemplacementsInput = {
@@ -2142,6 +2240,8 @@ export type SchoolCreateWithoutRemplacementsInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutRemplacementsInput = {
@@ -2179,6 +2279,8 @@ export type SchoolUncheckedCreateWithoutRemplacementsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutRemplacementsInput = {
@@ -2232,6 +2334,8 @@ export type SchoolUpdateWithoutRemplacementsInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutRemplacementsInput = {
@@ -2269,6 +2373,8 @@ export type SchoolUncheckedUpdateWithoutRemplacementsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutMatieresInput = {
@@ -2306,6 +2412,8 @@ export type SchoolCreateWithoutMatieresInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutMatieresInput = {
@@ -2343,6 +2451,8 @@ export type SchoolUncheckedCreateWithoutMatieresInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutMatieresInput = {
@@ -2396,6 +2506,8 @@ export type SchoolUpdateWithoutMatieresInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutMatieresInput = {
@@ -2433,6 +2545,8 @@ export type SchoolUncheckedUpdateWithoutMatieresInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutPeriodesInput = {
@@ -2470,6 +2584,8 @@ export type SchoolCreateWithoutPeriodesInput = {
   examenSalles?: Prisma.ExamenSalleCreateNestedManyWithoutSchoolInput
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutPeriodesInput = {
@@ -2507,6 +2623,8 @@ export type SchoolUncheckedCreateWithoutPeriodesInput = {
   examenSalles?: Prisma.ExamenSalleUncheckedCreateNestedManyWithoutSchoolInput
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutPeriodesInput = {
@@ -2560,6 +2678,8 @@ export type SchoolUpdateWithoutPeriodesInput = {
   examenSalles?: Prisma.ExamenSalleUpdateManyWithoutSchoolNestedInput
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutPeriodesInput = {
@@ -2597,6 +2717,8 @@ export type SchoolUncheckedUpdateWithoutPeriodesInput = {
   examenSalles?: Prisma.ExamenSalleUncheckedUpdateManyWithoutSchoolNestedInput
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutNotesInput = {
@@ -2634,6 +2756,8 @@ export type SchoolCreateWithoutNotesInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutNotesInput = {
@@ -2671,6 +2795,8 @@ export type SchoolUncheckedCreateWithoutNotesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutNotesInput = {
@@ -2724,6 +2850,8 @@ export type SchoolUpdateWithoutNotesInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutNotesInput = {
@@ -2761,6 +2889,8 @@ export type SchoolUncheckedUpdateWithoutNotesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutDocumentsInput = {
@@ -2798,6 +2928,8 @@ export type SchoolCreateWithoutDocumentsInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutDocumentsInput = {
@@ -2835,6 +2967,8 @@ export type SchoolUncheckedCreateWithoutDocumentsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutDocumentsInput = {
@@ -2888,6 +3022,8 @@ export type SchoolUpdateWithoutDocumentsInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutDocumentsInput = {
@@ -2925,6 +3061,8 @@ export type SchoolUncheckedUpdateWithoutDocumentsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutCreneauHorairesInput = {
@@ -2962,6 +3100,8 @@ export type SchoolCreateWithoutCreneauHorairesInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutCreneauHorairesInput = {
@@ -2999,6 +3139,8 @@ export type SchoolUncheckedCreateWithoutCreneauHorairesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutCreneauHorairesInput = {
@@ -3052,6 +3194,8 @@ export type SchoolUpdateWithoutCreneauHorairesInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutCreneauHorairesInput = {
@@ -3089,6 +3233,8 @@ export type SchoolUncheckedUpdateWithoutCreneauHorairesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutAppelsInput = {
@@ -3126,6 +3272,8 @@ export type SchoolCreateWithoutAppelsInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutAppelsInput = {
@@ -3163,6 +3311,8 @@ export type SchoolUncheckedCreateWithoutAppelsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutAppelsInput = {
@@ -3216,6 +3366,8 @@ export type SchoolUpdateWithoutAppelsInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutAppelsInput = {
@@ -3253,6 +3405,8 @@ export type SchoolUncheckedUpdateWithoutAppelsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutNotificationsInput = {
@@ -3290,6 +3444,8 @@ export type SchoolCreateWithoutNotificationsInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutNotificationsInput = {
@@ -3327,6 +3483,8 @@ export type SchoolUncheckedCreateWithoutNotificationsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutNotificationsInput = {
@@ -3380,6 +3538,8 @@ export type SchoolUpdateWithoutNotificationsInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutNotificationsInput = {
@@ -3417,6 +3577,8 @@ export type SchoolUncheckedUpdateWithoutNotificationsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutCahierTextesInput = {
@@ -3454,6 +3616,8 @@ export type SchoolCreateWithoutCahierTextesInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutCahierTextesInput = {
@@ -3491,6 +3655,8 @@ export type SchoolUncheckedCreateWithoutCahierTextesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutCahierTextesInput = {
@@ -3544,6 +3710,8 @@ export type SchoolUpdateWithoutCahierTextesInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutCahierTextesInput = {
@@ -3581,6 +3749,8 @@ export type SchoolUncheckedUpdateWithoutCahierTextesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutQuizzesInput = {
@@ -3618,6 +3788,8 @@ export type SchoolCreateWithoutQuizzesInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutQuizzesInput = {
@@ -3655,6 +3827,8 @@ export type SchoolUncheckedCreateWithoutQuizzesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutQuizzesInput = {
@@ -3708,6 +3882,8 @@ export type SchoolUpdateWithoutQuizzesInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutQuizzesInput = {
@@ -3745,6 +3921,8 @@ export type SchoolUncheckedUpdateWithoutQuizzesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutBulletinTemplateInput = {
@@ -3782,6 +3960,8 @@ export type SchoolCreateWithoutBulletinTemplateInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutBulletinTemplateInput = {
@@ -3819,6 +3999,8 @@ export type SchoolUncheckedCreateWithoutBulletinTemplateInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutBulletinTemplateInput = {
@@ -3872,6 +4054,8 @@ export type SchoolUpdateWithoutBulletinTemplateInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutBulletinTemplateInput = {
@@ -3909,6 +4093,8 @@ export type SchoolUncheckedUpdateWithoutBulletinTemplateInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutDeliberationSessionsInput = {
@@ -3946,6 +4132,8 @@ export type SchoolCreateWithoutDeliberationSessionsInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutDeliberationSessionsInput = {
@@ -3983,6 +4171,8 @@ export type SchoolUncheckedCreateWithoutDeliberationSessionsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutDeliberationSessionsInput = {
@@ -4036,6 +4226,8 @@ export type SchoolUpdateWithoutDeliberationSessionsInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutDeliberationSessionsInput = {
@@ -4073,6 +4265,8 @@ export type SchoolUncheckedUpdateWithoutDeliberationSessionsInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutExamenSallesInput = {
@@ -4110,6 +4304,8 @@ export type SchoolCreateWithoutExamenSallesInput = {
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutExamenSallesInput = {
@@ -4147,6 +4343,8 @@ export type SchoolUncheckedCreateWithoutExamenSallesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutExamenSallesInput = {
@@ -4200,6 +4398,8 @@ export type SchoolUpdateWithoutExamenSallesInput = {
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutExamenSallesInput = {
@@ -4237,6 +4437,8 @@ export type SchoolUncheckedUpdateWithoutExamenSallesInput = {
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutExamenSessionsInput = {
@@ -4274,6 +4476,8 @@ export type SchoolCreateWithoutExamenSessionsInput = {
   examenSalles?: Prisma.ExamenSalleCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutExamenSessionsInput = {
@@ -4311,6 +4515,8 @@ export type SchoolUncheckedCreateWithoutExamenSessionsInput = {
   examenSalles?: Prisma.ExamenSalleUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
   chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutExamenSessionsInput = {
@@ -4364,6 +4570,8 @@ export type SchoolUpdateWithoutExamenSessionsInput = {
   examenSalles?: Prisma.ExamenSalleUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutExamenSessionsInput = {
@@ -4401,6 +4609,8 @@ export type SchoolUncheckedUpdateWithoutExamenSessionsInput = {
   examenSalles?: Prisma.ExamenSalleUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
   chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutChapitresInput = {
@@ -4438,6 +4648,8 @@ export type SchoolCreateWithoutChapitresInput = {
   examenSalles?: Prisma.ExamenSalleCreateNestedManyWithoutSchoolInput
   examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutChapitresInput = {
@@ -4475,6 +4687,8 @@ export type SchoolUncheckedCreateWithoutChapitresInput = {
   examenSalles?: Prisma.ExamenSalleUncheckedCreateNestedManyWithoutSchoolInput
   examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
   periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutChapitresInput = {
@@ -4528,6 +4742,8 @@ export type SchoolUpdateWithoutChapitresInput = {
   examenSalles?: Prisma.ExamenSalleUpdateManyWithoutSchoolNestedInput
   examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutChapitresInput = {
@@ -4565,6 +4781,352 @@ export type SchoolUncheckedUpdateWithoutChapitresInput = {
   examenSalles?: Prisma.ExamenSalleUncheckedUpdateManyWithoutSchoolNestedInput
   examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
   periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutBatimentsInput = {
+  id?: string
+  nom: string
+  tenantKey?: string
+  inviteCode?: string
+  adresse?: string | null
+  telephone?: string | null
+  email?: string | null
+  logoUrl?: string | null
+  devise?: string | null
+  slogan?: string | null
+  siteWeb?: string | null
+  numAutorisation?: string | null
+  createdAt?: Date | string
+  classes?: Prisma.ClasseCreateNestedManyWithoutSchoolInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutSchoolInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  dossierAdmissions?: Prisma.DossierAdmissionCreateNestedManyWithoutSchoolInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutSchoolInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutSchoolInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutSchoolInput
+  notes?: Prisma.NoteCreateNestedManyWithoutSchoolInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutSchoolInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutSchoolInput
+  appels?: Prisma.AppelCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutSchoolInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutSchoolInput
+  bulletinTemplate?: Prisma.BulletinTemplateCreateNestedOneWithoutSchoolInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutSchoolInput
+  examenSalles?: Prisma.ExamenSalleCreateNestedManyWithoutSchoolInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
+  periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
+  chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutBatimentsInput = {
+  id?: string
+  nom: string
+  tenantKey?: string
+  inviteCode?: string
+  adresse?: string | null
+  telephone?: string | null
+  email?: string | null
+  logoUrl?: string | null
+  devise?: string | null
+  slogan?: string | null
+  siteWeb?: string | null
+  numAutorisation?: string | null
+  createdAt?: Date | string
+  classes?: Prisma.ClasseUncheckedCreateNestedManyWithoutSchoolInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutSchoolInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  dossierAdmissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutSchoolInput
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutSchoolInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutSchoolInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutSchoolInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutSchoolInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutSchoolInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutSchoolInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutSchoolInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutSchoolInput
+  bulletinTemplate?: Prisma.BulletinTemplateUncheckedCreateNestedOneWithoutSchoolInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutSchoolInput
+  examenSalles?: Prisma.ExamenSalleUncheckedCreateNestedManyWithoutSchoolInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
+  periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
+  chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutBatimentsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutBatimentsInput, Prisma.SchoolUncheckedCreateWithoutBatimentsInput>
+}
+
+export type SchoolUpsertWithoutBatimentsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutBatimentsInput, Prisma.SchoolUncheckedUpdateWithoutBatimentsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutBatimentsInput, Prisma.SchoolUncheckedCreateWithoutBatimentsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutBatimentsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutBatimentsInput, Prisma.SchoolUncheckedUpdateWithoutBatimentsInput>
+}
+
+export type SchoolUpdateWithoutBatimentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantKey?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  devise?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteWeb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numAutorisation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.ClasseUpdateManyWithoutSchoolNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutSchoolNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  dossierAdmissions?: Prisma.DossierAdmissionUpdateManyWithoutSchoolNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutSchoolNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutSchoolNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutSchoolNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutSchoolNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutSchoolNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutSchoolNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  cahierTextes?: Prisma.CahierTexteUpdateManyWithoutSchoolNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutSchoolNestedInput
+  bulletinTemplate?: Prisma.BulletinTemplateUpdateOneWithoutSchoolNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutSchoolNestedInput
+  examenSalles?: Prisma.ExamenSalleUpdateManyWithoutSchoolNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
+  periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
+  chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutBatimentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantKey?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  devise?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteWeb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numAutorisation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.ClasseUncheckedUpdateManyWithoutSchoolNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutSchoolNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  dossierAdmissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutSchoolNestedInput
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutSchoolNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutSchoolNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutSchoolNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutSchoolNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutSchoolNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutSchoolNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutSchoolNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutSchoolNestedInput
+  bulletinTemplate?: Prisma.BulletinTemplateUncheckedUpdateOneWithoutSchoolNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutSchoolNestedInput
+  examenSalles?: Prisma.ExamenSalleUncheckedUpdateManyWithoutSchoolNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
+  periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
+  chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutSallesInput = {
+  id?: string
+  nom: string
+  tenantKey?: string
+  inviteCode?: string
+  adresse?: string | null
+  telephone?: string | null
+  email?: string | null
+  logoUrl?: string | null
+  devise?: string | null
+  slogan?: string | null
+  siteWeb?: string | null
+  numAutorisation?: string | null
+  createdAt?: Date | string
+  classes?: Prisma.ClasseCreateNestedManyWithoutSchoolInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutSchoolInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  dossierAdmissions?: Prisma.DossierAdmissionCreateNestedManyWithoutSchoolInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutSchoolInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutSchoolInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutSchoolInput
+  notes?: Prisma.NoteCreateNestedManyWithoutSchoolInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutSchoolInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutSchoolInput
+  appels?: Prisma.AppelCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutSchoolInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutSchoolInput
+  bulletinTemplate?: Prisma.BulletinTemplateCreateNestedOneWithoutSchoolInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutSchoolInput
+  examenSalles?: Prisma.ExamenSalleCreateNestedManyWithoutSchoolInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
+  periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
+  chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutSallesInput = {
+  id?: string
+  nom: string
+  tenantKey?: string
+  inviteCode?: string
+  adresse?: string | null
+  telephone?: string | null
+  email?: string | null
+  logoUrl?: string | null
+  devise?: string | null
+  slogan?: string | null
+  siteWeb?: string | null
+  numAutorisation?: string | null
+  createdAt?: Date | string
+  classes?: Prisma.ClasseUncheckedCreateNestedManyWithoutSchoolInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutSchoolInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  dossierAdmissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutSchoolInput
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutSchoolInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutSchoolInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutSchoolInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutSchoolInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutSchoolInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutSchoolInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutSchoolInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutSchoolInput
+  bulletinTemplate?: Prisma.BulletinTemplateUncheckedCreateNestedOneWithoutSchoolInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutSchoolInput
+  examenSalles?: Prisma.ExamenSalleUncheckedCreateNestedManyWithoutSchoolInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
+  periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
+  chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutSallesInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutSallesInput, Prisma.SchoolUncheckedCreateWithoutSallesInput>
+}
+
+export type SchoolUpsertWithoutSallesInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutSallesInput, Prisma.SchoolUncheckedUpdateWithoutSallesInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutSallesInput, Prisma.SchoolUncheckedCreateWithoutSallesInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutSallesInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutSallesInput, Prisma.SchoolUncheckedUpdateWithoutSallesInput>
+}
+
+export type SchoolUpdateWithoutSallesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantKey?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  devise?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteWeb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numAutorisation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.ClasseUpdateManyWithoutSchoolNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutSchoolNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  dossierAdmissions?: Prisma.DossierAdmissionUpdateManyWithoutSchoolNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutSchoolNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutSchoolNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutSchoolNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutSchoolNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutSchoolNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutSchoolNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  cahierTextes?: Prisma.CahierTexteUpdateManyWithoutSchoolNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutSchoolNestedInput
+  bulletinTemplate?: Prisma.BulletinTemplateUpdateOneWithoutSchoolNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutSchoolNestedInput
+  examenSalles?: Prisma.ExamenSalleUpdateManyWithoutSchoolNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
+  periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
+  chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutSallesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantKey?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  devise?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteWeb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numAutorisation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.ClasseUncheckedUpdateManyWithoutSchoolNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutSchoolNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  dossierAdmissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutSchoolNestedInput
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutSchoolNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutSchoolNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutSchoolNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutSchoolNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutSchoolNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutSchoolNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutSchoolNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutSchoolNestedInput
+  bulletinTemplate?: Prisma.BulletinTemplateUncheckedUpdateOneWithoutSchoolNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutSchoolNestedInput
+  examenSalles?: Prisma.ExamenSalleUncheckedUpdateManyWithoutSchoolNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
+  periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
+  chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 
@@ -4594,6 +5156,8 @@ export type SchoolCountOutputType = {
   examenSessions: number
   periodes: number
   chapitres: number
+  batiments: number
+  salles: number
 }
 
 export type SchoolCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4618,6 +5182,8 @@ export type SchoolCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   examenSessions?: boolean | SchoolCountOutputTypeCountExamenSessionsArgs
   periodes?: boolean | SchoolCountOutputTypeCountPeriodesArgs
   chapitres?: boolean | SchoolCountOutputTypeCountChapitresArgs
+  batiments?: boolean | SchoolCountOutputTypeCountBatimentsArgs
+  salles?: boolean | SchoolCountOutputTypeCountSallesArgs
 }
 
 /**
@@ -4777,6 +5343,20 @@ export type SchoolCountOutputTypeCountChapitresArgs<ExtArgs extends runtime.Type
   where?: Prisma.ChapitreWhereInput
 }
 
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountBatimentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BatimentWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountSallesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalleWhereInput
+}
+
 
 export type SchoolSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4814,6 +5394,8 @@ export type SchoolSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   examenSessions?: boolean | Prisma.School$examenSessionsArgs<ExtArgs>
   periodes?: boolean | Prisma.School$periodesArgs<ExtArgs>
   chapitres?: boolean | Prisma.School$chapitresArgs<ExtArgs>
+  batiments?: boolean | Prisma.School$batimentsArgs<ExtArgs>
+  salles?: boolean | Prisma.School$sallesArgs<ExtArgs>
   _count?: boolean | Prisma.SchoolCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["school"]>
 
@@ -4889,6 +5471,8 @@ export type SchoolInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   examenSessions?: boolean | Prisma.School$examenSessionsArgs<ExtArgs>
   periodes?: boolean | Prisma.School$periodesArgs<ExtArgs>
   chapitres?: boolean | Prisma.School$chapitresArgs<ExtArgs>
+  batiments?: boolean | Prisma.School$batimentsArgs<ExtArgs>
+  salles?: boolean | Prisma.School$sallesArgs<ExtArgs>
   _count?: boolean | Prisma.SchoolCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SchoolIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -4919,6 +5503,8 @@ export type $SchoolPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     examenSessions: Prisma.$ExamenSessionPayload<ExtArgs>[]
     periodes: Prisma.$PeriodePayload<ExtArgs>[]
     chapitres: Prisma.$ChapitrePayload<ExtArgs>[]
+    batiments: Prisma.$BatimentPayload<ExtArgs>[]
+    salles: Prisma.$SallePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5350,6 +5936,8 @@ export interface Prisma__SchoolClient<T, Null = never, ExtArgs extends runtime.T
   examenSessions<T extends Prisma.School$examenSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$examenSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExamenSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   periodes<T extends Prisma.School$periodesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$periodesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PeriodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chapitres<T extends Prisma.School$chapitresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$chapitresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChapitrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  batiments<T extends Prisma.School$batimentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$batimentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BatimentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  salles<T extends Prisma.School$sallesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$sallesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SallePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6305,6 +6893,54 @@ export type School$chapitresArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.ChapitreScalarFieldEnum | Prisma.ChapitreScalarFieldEnum[]
+}
+
+/**
+ * School.batiments
+ */
+export type School$batimentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Batiment
+   */
+  select?: Prisma.BatimentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Batiment
+   */
+  omit?: Prisma.BatimentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BatimentInclude<ExtArgs> | null
+  where?: Prisma.BatimentWhereInput
+  orderBy?: Prisma.BatimentOrderByWithRelationInput | Prisma.BatimentOrderByWithRelationInput[]
+  cursor?: Prisma.BatimentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BatimentScalarFieldEnum | Prisma.BatimentScalarFieldEnum[]
+}
+
+/**
+ * School.salles
+ */
+export type School$sallesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Salle
+   */
+  select?: Prisma.SalleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Salle
+   */
+  omit?: Prisma.SalleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalleInclude<ExtArgs> | null
+  where?: Prisma.SalleWhereInput
+  orderBy?: Prisma.SalleOrderByWithRelationInput | Prisma.SalleOrderByWithRelationInput[]
+  cursor?: Prisma.SalleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalleScalarFieldEnum | Prisma.SalleScalarFieldEnum[]
 }
 
 /**

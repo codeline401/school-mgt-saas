@@ -182,3 +182,13 @@ export type Chapitre = Prisma.ChapitreModel
  * 
  */
 export type SousChapitre = Prisma.SousChapitreModel
+/**
+ * Model Batiment
+ * 
+ */
+export type Batiment = Prisma.BatimentModel
+/**
+ * Model Salle
+ * 
+ */
+export type Salle = Prisma.SalleModel

@@ -83,7 +83,9 @@ export const ModelName = {
   ExamenIncident: 'ExamenIncident',
   Signature: 'Signature',
   Chapitre: 'Chapitre',
-  SousChapitre: 'SousChapitre'
+  SousChapitre: 'SousChapitre',
+  Batiment: 'Batiment',
+  Salle: 'Salle'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -602,6 +604,39 @@ export const SousChapitreScalarFieldEnum = {
 export type SousChapitreScalarFieldEnum = (typeof SousChapitreScalarFieldEnum)[keyof typeof SousChapitreScalarFieldEnum]
 
 
+export const BatimentScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  code: 'code',
+  description: 'description',
+  nbEtages: 'nbEtages',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BatimentScalarFieldEnum = (typeof BatimentScalarFieldEnum)[keyof typeof BatimentScalarFieldEnum]
+
+
+export const SalleScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  code: 'code',
+  type: 'type',
+  etage: 'etage',
+  capacite: 'capacite',
+  pmrAccessible: 'pmrAccessible',
+  equipements: 'equipements',
+  statut: 'statut',
+  batimentId: 'batimentId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SalleScalarFieldEnum = (typeof SalleScalarFieldEnum)[keyof typeof SalleScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -615,6 +650,14 @@ export const JsonNullValueInput = {
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {

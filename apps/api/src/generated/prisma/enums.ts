@@ -171,3 +171,26 @@ export const StatutChapitre = {
 } as const
 
 export type StatutChapitre = (typeof StatutChapitre)[keyof typeof StatutChapitre]
+
+
+export const TypeSalle = {
+  COURS: 'COURS',
+  LABO_SCIENCE: 'LABO_SCIENCE',
+  INFORMATIQUE: 'INFORMATIQUE',
+  AMPHI: 'AMPHI',
+  REUNION: 'REUNION',
+  SPORT: 'SPORT',
+  ADMINISTRATIF: 'ADMINISTRATIF',
+  AUTRE: 'AUTRE'
+} as const
+
+export type TypeSalle = (typeof TypeSalle)[keyof typeof TypeSalle]
+
+
+export const StatutSalle = {
+  DISPONIBLE: 'DISPONIBLE',
+  MAINTENANCE: 'MAINTENANCE',
+  RESERVEE: 'RESERVEE'
+} as const
+
+export type StatutSalle = (typeof StatutSalle)[keyof typeof StatutSalle]

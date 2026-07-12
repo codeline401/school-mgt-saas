@@ -1,11 +1,19 @@
 import { Router } from "express";
 import {
-  getLocaux,
-  createLocal,
-  updateLocal,
-  deleteLocal,
-  createReservation,
-  getReservations,
+  // Contrôleurs pour les bâtiments
+  getBatiments,
+  getBatimentById,
+  createBatiment,
+  updateBatiment,
+  deleteBatiment,
+  // Contrôleurs pour les salles
+  getSalles,
+  getSalleById,
+  createSalle,
+  updateSalle,
+  deleteSalle,
+  // Statistiques
+  getStatistiques,
 } from "./locaux.controller.js";
 import {
   authenticate,
@@ -18,26 +26,82 @@ const router = Router();
 // Toutes les routes nécessitent une authentification
 router.use(authenticate);
 
-// Gestion des locaux (salles, bâtiments)
-router.get(
-  "/",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
-  getLocaux,
-);
-router.post("/", authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN), createLocal);
-router.put("/:id", authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN), updateLocal);
-router.delete("/:id", authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN), deleteLocal);
+// ==========================================
+// ROUTES POUR LES BÂTIMENTS
+// ==========================================
 
-// Gestion des réservations
 router.get(
-  "/reservations",
+  "/batiments",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
-  getReservations,
+  getBatiments,
 );
-router.post(
-  "/reservations",
+
+router.get(
+  "/batiments/:id",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
-  createReservation,
+  getBatimentById,
+);
+
+router.post(
+  "/batiments",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  createBatiment,
+);
+
+router.put(
+  "/batiments/:id",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  updateBatiment,
+);
+
+router.delete(
+  "/batiments/:id",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  deleteBatiment,
+);
+
+// ==========================================
+// ROUTES POUR LES SALLES
+// ==========================================
+
+router.get(
+  "/salles",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
+  getSalles,
+);
+
+router.get(
+  "/salles/:id",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
+  getSalleById,
+);
+
+router.post(
+  "/salles",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  createSalle,
+);
+
+router.put(
+  "/salles/:id",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  updateSalle,
+);
+
+router.delete(
+  "/salles/:id",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  deleteSalle,
+);
+
+// ==========================================
+// STATISTIQUES
+// ==========================================
+
+router.get(
+  "/statistiques",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  getStatistiques,
 );
 
 export default router;
