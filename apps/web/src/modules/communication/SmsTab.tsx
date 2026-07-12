@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MessageCircle, Send, FileText, BarChart3, Users } from "lucide-react";
+import { MessageCircle, Send, FileText, BarChart3 } from "lucide-react";
 import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
 
 type SubTab = "envoyer" | "envoyes" | "modeles" | "statistiques";
