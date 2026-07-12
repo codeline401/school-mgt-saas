@@ -76,9 +76,6 @@ export default function NotesExamensPage() {
         <ClipboardList size={22} className="text-primary" />
         <h1 className="text-2xl font-bold">Notes &amp; Examens</h1>
         {/* Badge indiquant que le module est en cours de développement */}
-        <span className="badge badge-warning badge-sm font-medium">
-          En maintenance
-        </span>
       </div>
 
       {/* ── Navigation par onglets ────────────────────────────────────────── */}
