@@ -23,8 +23,18 @@ import MaintenanceTab from "./modules/logistique/MaintenanceTab";
 import TransportsTab from "./modules/logistique/TransportsTab";
 import CantineTab from "./modules/logistique/CantineTab";
 import ComptabilitePage from "./modules/comptabilite/ComptabilitePage";
-import RessourcesHumainesPage from "./modules/rh/RessourcesHumainesPage";
-import CommunicationPage from "./modules/communication/CommunicationPage";
+import PersonnelTab from "./modules/rh/PersonnelTab";
+import PaieTab from "./modules/rh/PaieTab";
+import CongesTab from "./modules/rh/CongesTab";
+import ContratsTab from "./modules/rh/ContratsTab";
+import FormationsTab from "./modules/rh/FormationsTab";
+import EvaluationsTab from "./modules/rh/EvaluationsTab";
+import MessagerieTab from "./modules/communication/MessagerieTab";
+import NotificationsTab from "./modules/communication/NotificationsTab";
+import SmsTab from "./modules/communication/SmsTab";
+import ReunionsTab from "./modules/communication/ReunionsTab";
+import DocumentsTab from "./modules/communication/DocumentsTab";
+import CirculairesTab from "./modules/communication/CirculairesTab";
 
 const DashboardTemp = () => (
   <div>
@@ -143,36 +153,21 @@ function App() {
                 <ProtectedRoute allowedRoles={["ADMIN", "SUDO_ADMIN"]} />
               }
             >
-              <Route
-                path="/rh/personnel"
-                element={<RessourcesHumainesPage />}
-              />
-              <Route path="/rh/paie" element={<RessourcesHumainesPage />} />
-              <Route path="/rh/conges" element={<RessourcesHumainesPage />} />
-              <Route path="/rh/contrats" element={<RessourcesHumainesPage />} />
-              <Route
-                path="/rh/formations"
-                element={<RessourcesHumainesPage />}
-              />
-              <Route
-                path="/rh/evaluations"
-                element={<RessourcesHumainesPage />}
-              />
+              <Route path="/rh/personnel" element={<PersonnelTab />} />
+              <Route path="/rh/paie" element={<PaieTab />} />
+              <Route path="/rh/conges" element={<CongesTab />} />
+              <Route path="/rh/contrats" element={<ContratsTab />} />
+              <Route path="/rh/formations" element={<FormationsTab />} />
+              <Route path="/rh/evaluations" element={<EvaluationsTab />} />
             </Route>
 
             {/* Routes Communication : accessible à tous selon les sous-modules */}
             <Route
               path="/communication/messagerie"
-              element={<CommunicationPage />}
+              element={<MessagerieTab />}
             />
-            <Route
-              path="/communication/reunions"
-              element={<CommunicationPage />}
-            />
-            <Route
-              path="/communication/documents"
-              element={<CommunicationPage />}
-            />
+            <Route path="/communication/reunions" element={<ReunionsTab />} />
+            <Route path="/communication/documents" element={<DocumentsTab />} />
             <Route
               element={
                 <ProtectedRoute allowedRoles={["ADMIN", "SUDO_ADMIN"]} />
@@ -180,15 +175,12 @@ function App() {
             >
               <Route
                 path="/communication/notifications"
-                element={<CommunicationPage />}
+                element={<NotificationsTab />}
               />
-              <Route
-                path="/communication/sms"
-                element={<CommunicationPage />}
-              />
+              <Route path="/communication/sms" element={<SmsTab />} />
               <Route
                 path="/communication/circulaires"
-                element={<CommunicationPage />}
+                element={<CirculairesTab />}
               />
             </Route>
 
