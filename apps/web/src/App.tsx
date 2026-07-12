@@ -16,6 +16,15 @@ import MonProfilProfPage from "./pages/MonProfilProfPage";
 import NotesExamensPage from "./pages/NotesExamensPage";
 import CahierTextePage from "./pages/CahierTextePage";
 import ParametresPage from "./pages/ParametresPage";
+import LocauxTab from "./modules/logistique/LocauxTab";
+import StocksTab from "./modules/logistique/StocksTab";
+import InventaireTab from "./modules/logistique/InventaireTab";
+import MaintenanceTab from "./modules/logistique/MaintenanceTab";
+import TransportsTab from "./modules/logistique/TransportsTab";
+import CantineTab from "./modules/logistique/CantineTab";
+import ComptabilitePage from "./modules/comptabilite/ComptabilitePage";
+import RessourcesHumainesPage from "./modules/rh/RessourcesHumainesPage";
+import CommunicationPage from "./modules/communication/CommunicationPage";
 
 const DashboardTemp = () => (
   <div>
@@ -74,6 +83,114 @@ function App() {
             {/* Route classes : tous les utilisateurs authentifiés */}
             <Route path="/classes" element={<ClassesPage />} />
             <Route path="/classes/:id" element={<ClasseProfilPage />} />
+
+            {/* Routes Logistique : ADMIN, SUDO_ADMIN, PROF */}
+            <Route
+              element={
+                <ProtectedRoute
+                  allowedRoles={["ADMIN", "SUDO_ADMIN", "PROF"]}
+                />
+              }
+            >
+              <Route path="/logistique/locaux" element={<LocauxTab />} />
+              <Route path="/logistique/stocks" element={<StocksTab />} />
+              <Route
+                path="/logistique/inventaire"
+                element={<InventaireTab />}
+              />
+              <Route
+                path="/logistique/maintenance"
+                element={<MaintenanceTab />}
+              />
+              <Route
+                path="/logistique/transports"
+                element={<TransportsTab />}
+              />
+              <Route path="/logistique/cantine" element={<CantineTab />} />
+            </Route>
+
+            {/* Routes Comptabilité : ADMIN, SUDO_ADMIN */}
+            <Route
+              element={
+                <ProtectedRoute allowedRoles={["ADMIN", "SUDO_ADMIN"]} />
+              }
+            >
+              <Route
+                path="/comptabilite/frais-scolaires"
+                element={<ComptabilitePage />}
+              />
+              <Route
+                path="/comptabilite/bourses"
+                element={<ComptabilitePage />}
+              />
+              <Route
+                path="/comptabilite/generale"
+                element={<ComptabilitePage />}
+              />
+              <Route
+                path="/comptabilite/tresorerie"
+                element={<ComptabilitePage />}
+              />
+              <Route
+                path="/comptabilite/budget"
+                element={<ComptabilitePage />}
+              />
+            </Route>
+
+            {/* Routes RH : ADMIN, SUDO_ADMIN */}
+            <Route
+              element={
+                <ProtectedRoute allowedRoles={["ADMIN", "SUDO_ADMIN"]} />
+              }
+            >
+              <Route
+                path="/rh/personnel"
+                element={<RessourcesHumainesPage />}
+              />
+              <Route path="/rh/paie" element={<RessourcesHumainesPage />} />
+              <Route path="/rh/conges" element={<RessourcesHumainesPage />} />
+              <Route path="/rh/contrats" element={<RessourcesHumainesPage />} />
+              <Route
+                path="/rh/formations"
+                element={<RessourcesHumainesPage />}
+              />
+              <Route
+                path="/rh/evaluations"
+                element={<RessourcesHumainesPage />}
+              />
+            </Route>
+
+            {/* Routes Communication : accessible à tous selon les sous-modules */}
+            <Route
+              path="/communication/messagerie"
+              element={<CommunicationPage />}
+            />
+            <Route
+              path="/communication/reunions"
+              element={<CommunicationPage />}
+            />
+            <Route
+              path="/communication/documents"
+              element={<CommunicationPage />}
+            />
+            <Route
+              element={
+                <ProtectedRoute allowedRoles={["ADMIN", "SUDO_ADMIN"]} />
+              }
+            >
+              <Route
+                path="/communication/notifications"
+                element={<CommunicationPage />}
+              />
+              <Route
+                path="/communication/sms"
+                element={<CommunicationPage />}
+              />
+              <Route
+                path="/communication/circulaires"
+                element={<CommunicationPage />}
+              />
+            </Route>
 
             {/* Paramètres : ADMIN et SUDO_ADMIN uniquement */}
             <Route
