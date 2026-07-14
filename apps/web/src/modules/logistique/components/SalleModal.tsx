@@ -4,6 +4,7 @@ import {
   useCreateSalle,
   useUpdateSalle,
   useBatiments,
+  useClasses,
   type Salle,
   type CreateSalleInput,
 } from "../hooks/useLocaux";
@@ -25,6 +26,7 @@ const INITIAL_FORM: CreateSalleInput = {
   equipements: {},
   statut: "DISPONIBLE",
   batimentId: "",
+  classeId: undefined,
 };
 
 export default function SalleModal({
@@ -36,32 +38,38 @@ export default function SalleModal({
   const [form, setForm] = useState<CreateSalleInput>(INITIAL_FORM);
 
   const { data: batiments = [] } = useBatiments();
+  const { data: classes = [] } = useClasses();
   const createMutation = useCreateSalle();
   const updateMutation = useUpdateSalle();
 
   const isEdit = !!salle;
   const title = isEdit ? "Modifier la salle" : "Créer une nouvelle salle";
 
+  // Initialiser le formulaire quand le modal s'ouvre
   useEffect(() => {
-    if (isOpen && salle) {
-      setForm({
-        nom: salle.nom,
-        code: salle.code || "",
-        type: salle.type,
-        etage: salle.etage,
-        capacite: salle.capacite,
-        pmrAccessible: salle.pmrAccessible,
-        equipements: salle.equipements || {},
-        statut: salle.statut,
-        batimentId: salle.batimentId,
-      });
-    } else if (isOpen && !salle) {
-      setForm({
-        ...INITIAL_FORM,
-        batimentId: defaultBatimentId || "",
-      });
+    if (isOpen) {
+      if (salle) {
+        setForm({
+          nom: salle.nom,
+          code: salle.code || "",
+          type: salle.type,
+          etage: salle.etage,
+          capacite: salle.capacite,
+          pmrAccessible: salle.pmrAccessible,
+          equipements: salle.equipements || {},
+          statut: salle.statut,
+          batimentId: salle.batimentId,
+          classeId: salle.classeId || undefined,
+        });
+      } else {
+        setForm({
+          ...INITIAL_FORM,
+          batimentId: defaultBatimentId || "",
+        });
+      }
     }
-  }, [isOpen, salle, defaultBatimentId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, salle?.id, defaultBatimentId]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -75,6 +83,8 @@ export default function SalleModal({
       setForm((prev) => ({ ...prev, [name]: checked }));
     } else if (name === "capacite" || name === "etage") {
       setForm((prev) => ({ ...prev, [name]: parseInt(value) || 0 }));
+    } else if (name === "classeId") {
+      setForm((prev) => ({ ...prev, classeId: value || undefined }));
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
@@ -83,7 +93,7 @@ export default function SalleModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const input: any = {
+    const input: CreateSalleInput = {
       nom: form.nom.trim(),
       code: form.code?.trim() || undefined,
       type: form.type,
@@ -93,6 +103,7 @@ export default function SalleModal({
       equipements: form.equipements,
       statut: form.statut,
       batimentId: form.batimentId,
+      classeId: form.classeId || undefined,
     };
 
     if (isEdit && salle) {
@@ -260,6 +271,27 @@ export default function SalleModal({
                 <option value="RESERVEE">Réservée</option>
               </select>
             </fieldset>
+
+            {/* Classe assignée (optionnel) */}
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">
+                Classe assignée (optionnel)
+              </legend>
+              <select
+                name="classeId"
+                value={form.classeId || ""}
+                onChange={handleChange}
+                className="select select-sm w-full"
+                disabled={isPending}
+              >
+                <option value="">Aucune classe spécifique</option>
+                {classes.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.nom}
+                  </option>
+                ))}
+              </select>
+            </fieldset>
           </div>
 
           {/* PMR Accessible */}
@@ -290,9 +322,7 @@ export default function SalleModal({
             <button
               type="submit"
               className="btn btn-primary btn-sm"
-              disabled={
-                isPending || !form.nom.trim() || !form.batimentId
-              }
+              disabled={isPending || !form.nom.trim() || !form.batimentId}
             >
               {isPending ? (
                 <span className="loading loading-spinner loading-xs"></span>

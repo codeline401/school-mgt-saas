@@ -104,6 +104,10 @@ export const createSalleSchema = z.object({
     .optional(),
   statut: StatutSalleEnum.default("DISPONIBLE"),
   batimentId: z.string().uuid("L'identifiant du bâtiment est invalide"),
+  classeId: z
+    .string()
+    .uuid("L'identifiant de la classe est invalide")
+    .optional(),
 });
 
 export const updateSalleSchema = z.object({
@@ -142,6 +146,11 @@ export const updateSalleSchema = z.object({
   batimentId: z
     .string()
     .uuid("L'identifiant du bâtiment est invalide")
+    .optional(),
+
+  classeId: z
+    .string()
+    .uuid("L'identifiant de la classe est invalide")
     .optional(),
 });
 
