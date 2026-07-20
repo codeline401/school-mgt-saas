@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useMemo } from "react";
 import { X } from "lucide-react";
 import {
   useCreateSalle,
@@ -35,7 +35,49 @@ export default function SalleModal({
   salle,
   defaultBatimentId,
 }: Props) {
-  const [form, setForm] = useState<CreateSalleInput>(INITIAL_FORM);
+  // Calculer la valeur du formulaire basée sur les props
+  const initialFormValue = useMemo(
+    () =>
+      salle
+        ? {
+            nom: salle.nom,
+            code: salle.code || "",
+            type: salle.type,
+            etage: salle.etage,
+            capacite: salle.capacite,
+            pmrAccessible: salle.pmrAccessible,
+            equipements: salle.equipements || {},
+            statut: salle.statut,
+            batimentId: salle.batimentId,
+            classeId: salle.classeId || undefined,
+          }
+        : {
+            ...INITIAL_FORM,
+            batimentId: defaultBatimentId || "",
+          },
+    [salle, defaultBatimentId],
+  );
+
+  const [form, setForm] = useState<CreateSalleInput>(initialFormValue);
+
+  // Suivre les dépendances précédentes pour synchroniser pendant le rendu
+  const [prevDeps, setPrevDeps] = useState({
+    isOpen,
+    salle,
+    defaultBatimentId,
+  });
+
+  // Synchronisation pendant la phase de rendu
+  if (
+    isOpen !== prevDeps.isOpen ||
+    salle !== prevDeps.salle ||
+    defaultBatimentId !== prevDeps.defaultBatimentId
+  ) {
+    setPrevDeps({ isOpen, salle, defaultBatimentId });
+    if (isOpen) {
+      setForm(initialFormValue);
+    }
+  }
 
   const { data: batiments = [] } = useBatiments();
   const { data: classes = [] } = useClasses();
@@ -46,30 +88,6 @@ export default function SalleModal({
   const title = isEdit ? "Modifier la salle" : "Créer une nouvelle salle";
 
   // Initialiser le formulaire quand le modal s'ouvre
-  useEffect(() => {
-    if (isOpen) {
-      if (salle) {
-        setForm({
-          nom: salle.nom,
-          code: salle.code || "",
-          type: salle.type,
-          etage: salle.etage,
-          capacite: salle.capacite,
-          pmrAccessible: salle.pmrAccessible,
-          equipements: salle.equipements || {},
-          statut: salle.statut,
-          batimentId: salle.batimentId,
-          classeId: salle.classeId || undefined,
-        });
-      } else {
-        setForm({
-          ...INITIAL_FORM,
-          batimentId: defaultBatimentId || "",
-        });
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen, salle?.id, defaultBatimentId]);
 
   const handleChange = (
     e: React.ChangeEvent<
