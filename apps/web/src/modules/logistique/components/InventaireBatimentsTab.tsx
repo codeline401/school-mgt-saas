@@ -16,6 +16,7 @@ import {
   CalendarDays,
   AlertCircle,
   Loader2,
+  School2,
 } from "lucide-react";
 import {
   useBatiments,
@@ -321,6 +322,12 @@ export default function InventaireBatimentsTab() {
                                       PMR
                                     </span>
                                   )}
+                                  {salle.classe && (
+                                    <span className="flex items-center gap-3">
+                                      <School2 size={12} />
+                                      {salle.classe.nom}
+                                    </span>
+                                  )}
                                   <span className="badge badge-xs">
                                     {salle.type.replace("_", " ")}
                                   </span>
@@ -351,7 +358,10 @@ export default function InventaireBatimentsTab() {
 
                     {isExpanded && nbSalles === 0 && (
                       <div className="mt-4 pl-11 text-center py-6 text-base-content/40 text-sm">
-                        <DoorOpen size={32} className="mx-auto mb-2 opacity-20" />
+                        <DoorOpen
+                          size={32}
+                          className="mx-auto mb-2 opacity-20"
+                        />
                         Aucune salle dans ce bâtiment
                       </div>
                     )}

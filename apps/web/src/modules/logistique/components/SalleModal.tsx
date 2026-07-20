@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState, useMemo } from "react";
 import { X } from "lucide-react";
 import {
   useCreateSalle,
   useUpdateSalle,
   useBatiments,
+  useClasses,
   type Salle,
   type CreateSalleInput,
 } from "../hooks/useLocaux";
@@ -25,6 +26,7 @@ const INITIAL_FORM: CreateSalleInput = {
   equipements: {},
   statut: "DISPONIBLE",
   batimentId: "",
+  classeId: undefined,
 };
 
 export default function SalleModal({
@@ -33,35 +35,59 @@ export default function SalleModal({
   salle,
   defaultBatimentId,
 }: Props) {
-  const [form, setForm] = useState<CreateSalleInput>(INITIAL_FORM);
+  // Calculer la valeur du formulaire basée sur les props
+  const initialFormValue = useMemo(
+    () =>
+      salle
+        ? {
+            nom: salle.nom,
+            code: salle.code || "",
+            type: salle.type,
+            etage: salle.etage,
+            capacite: salle.capacite,
+            pmrAccessible: salle.pmrAccessible,
+            equipements: salle.equipements || {},
+            statut: salle.statut,
+            batimentId: salle.batimentId,
+            classeId: salle.classeId || undefined,
+          }
+        : {
+            ...INITIAL_FORM,
+            batimentId: defaultBatimentId || "",
+          },
+    [salle, defaultBatimentId],
+  );
+
+  const [form, setForm] = useState<CreateSalleInput>(initialFormValue);
+
+  // Suivre les dépendances précédentes pour synchroniser pendant le rendu
+  const [prevDeps, setPrevDeps] = useState({
+    isOpen,
+    salle,
+    defaultBatimentId,
+  });
+
+  // Synchronisation pendant la phase de rendu
+  if (
+    isOpen !== prevDeps.isOpen ||
+    salle !== prevDeps.salle ||
+    defaultBatimentId !== prevDeps.defaultBatimentId
+  ) {
+    setPrevDeps({ isOpen, salle, defaultBatimentId });
+    if (isOpen) {
+      setForm(initialFormValue);
+    }
+  }
 
   const { data: batiments = [] } = useBatiments();
+  const { data: classes = [] } = useClasses();
   const createMutation = useCreateSalle();
   const updateMutation = useUpdateSalle();
 
   const isEdit = !!salle;
   const title = isEdit ? "Modifier la salle" : "Créer une nouvelle salle";
 
-  useEffect(() => {
-    if (isOpen && salle) {
-      setForm({
-        nom: salle.nom,
-        code: salle.code || "",
-        type: salle.type,
-        etage: salle.etage,
-        capacite: salle.capacite,
-        pmrAccessible: salle.pmrAccessible,
-        equipements: salle.equipements || {},
-        statut: salle.statut,
-        batimentId: salle.batimentId,
-      });
-    } else if (isOpen && !salle) {
-      setForm({
-        ...INITIAL_FORM,
-        batimentId: defaultBatimentId || "",
-      });
-    }
-  }, [isOpen, salle, defaultBatimentId]);
+  // Initialiser le formulaire quand le modal s'ouvre
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -75,6 +101,8 @@ export default function SalleModal({
       setForm((prev) => ({ ...prev, [name]: checked }));
     } else if (name === "capacite" || name === "etage") {
       setForm((prev) => ({ ...prev, [name]: parseInt(value) || 0 }));
+    } else if (name === "classeId") {
+      setForm((prev) => ({ ...prev, classeId: value || undefined }));
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
@@ -83,7 +111,7 @@ export default function SalleModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const input: any = {
+    const input: CreateSalleInput = {
       nom: form.nom.trim(),
       code: form.code?.trim() || undefined,
       type: form.type,
@@ -93,12 +121,16 @@ export default function SalleModal({
       equipements: form.equipements,
       statut: form.statut,
       batimentId: form.batimentId,
+      classeId: form.classeId || undefined,
     };
 
     if (isEdit && salle) {
       await updateMutation.mutateAsync({
         id: salle.id,
-        input,
+        input: {
+          ...input,
+          classeId: form.classeId || null,
+        },
       });
     } else {
       await createMutation.mutateAsync(input);
@@ -260,6 +292,27 @@ export default function SalleModal({
                 <option value="RESERVEE">Réservée</option>
               </select>
             </fieldset>
+
+            {/* Classe assignée (optionnel) */}
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">
+                Classe assignée (optionnel)
+              </legend>
+              <select
+                name="classeId"
+                value={form.classeId || ""}
+                onChange={handleChange}
+                className="select select-sm w-full"
+                disabled={isPending}
+              >
+                <option value="">Aucune classe spécifique</option>
+                {classes.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.nom}
+                  </option>
+                ))}
+              </select>
+            </fieldset>
           </div>
 
           {/* PMR Accessible */}
@@ -290,9 +343,7 @@ export default function SalleModal({
             <button
               type="submit"
               className="btn btn-primary btn-sm"
-              disabled={
-                isPending || !form.nom.trim() || !form.batimentId
-              }
+              disabled={isPending || !form.nom.trim() || !form.batimentId}
             >
               {isPending ? (
                 <span className="loading loading-spinner loading-xs"></span>

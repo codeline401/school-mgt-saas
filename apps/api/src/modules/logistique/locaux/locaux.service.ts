@@ -24,6 +24,14 @@ export class LocauxService {
       where: { schoolId },
       include: {
         salles: {
+          include: {
+            classe: {
+              select: {
+                id: true,
+                nom: true,
+              },
+            },
+          },
           orderBy: [{ etage: "asc" }, { nom: "asc" }],
         },
       },
@@ -39,6 +47,14 @@ export class LocauxService {
       where: { id: batimentId, schoolId },
       include: {
         salles: {
+          include: {
+            classe: {
+              select: {
+                id: true,
+                nom: true,
+              },
+            },
+          },
           orderBy: [{ etage: "asc" }, { nom: "asc" }],
         },
       },
@@ -61,7 +77,16 @@ export class LocauxService {
         schoolId,
       },
       include: {
-        salles: true,
+        salles: {
+          include: {
+            classe: {
+              select: {
+                id: true,
+                nom: true,
+              },
+            },
+          },
+        },
       },
     });
   }
@@ -92,7 +117,16 @@ export class LocauxService {
       where: { id: batimentId },
       data,
       include: {
-        salles: true,
+        salles: {
+          include: {
+            classe: {
+              select: {
+                id: true,
+                nom: true,
+              },
+            },
+          },
+        },
       },
     });
   }
@@ -144,6 +178,12 @@ export class LocauxService {
             code: true,
           },
         },
+        classe: {
+          select: {
+            id: true,
+            nom: true,
+          },
+        },
       },
       orderBy: [{ batiment: { nom: "asc" } }, { etage: "asc" }, { nom: "asc" }],
     });
@@ -157,6 +197,12 @@ export class LocauxService {
       where: { id: salleId },
       include: {
         batiment: true,
+        classe: {
+          select: {
+            id: true,
+            nom: true,
+          },
+        },
       },
     });
 
@@ -196,6 +242,21 @@ export class LocauxService {
       );
     }
 
+    // vérifier que la classe existe et appartient à l'école si classeId est fourni
+    if (data.classeId) {
+      const classe = await prisma.classe.findUnique({
+        where: { id: data.classeId },
+      });
+
+      if (!classe) {
+        throw new Error("Classe introuvable.");
+      }
+
+      if (classe.schoolId !== schoolId) {
+        throw new Error("La classe spécifiée n'appartient pas à votre école.");
+      }
+    }
+
     return await prisma.salle.create({
       data: {
         ...data,
@@ -204,6 +265,7 @@ export class LocauxService {
       },
       include: {
         batiment: true,
+        classe: true,
       },
     });
   }
@@ -244,6 +306,26 @@ export class LocauxService {
       }
     }
 
+    // Si on change de classe, vérifier qu'elle existe et appartient à l'école
+    // (data.classeId === null signifie qu'on veut désassocier la salle)
+    if (
+      data.classeId !== undefined &&
+      data.classeId !== null &&
+      data.classeId !== salle.classeId
+    ) {
+      const classe = await prisma.classe.findUnique({
+        where: { id: data.classeId },
+      });
+
+      if (!classe) {
+        throw new Error("Classe introuvable.");
+      }
+
+      if (classe.schoolId !== schoolId) {
+        throw new Error("La classe spécifiée n'appartient pas à votre école.");
+      }
+    }
+
     // Préparer les données de mise à jour
     const updateData: any = { ...data };
 
@@ -255,11 +337,25 @@ export class LocauxService {
       delete updateData.batimentId;
     }
 
+    // gestion de classeId : connect si une valuer est fournie, disconnect si null.
+    if (data.classeId !== undefined) {
+      updateData.classe = data.classeId
+        ? { connect: { id: data.classeId } }
+        : { disconnect: true };
+      delete updateData.classeId;
+    }
+
     return await prisma.salle.update({
       where: { id: salleId },
       data: updateData,
       include: {
         batiment: true,
+        classe: {
+          select: {
+            id: true,
+            nom: true,
+          },
+        },
       },
     });
   }

@@ -3593,6 +3593,7 @@ export const SalleScalarFieldEnum = {
   statut: 'statut',
   batimentId: 'batimentId',
   schoolId: 'schoolId',
+  classeId: 'classeId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

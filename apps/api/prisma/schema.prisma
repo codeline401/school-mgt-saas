@@ -123,6 +123,7 @@ model Classe {
   deliberationSessions DeliberationSession[]
   examenSessions       ExamenSession[]
   chapitres            Chapitre[]
+  salles               Salle[]
 
   @@unique([schoolId, nom])
   @@index([professeurPrincipalId])
@@ -940,6 +941,10 @@ model Salle {
   // ✅ AJOUT : Lien direct avec l'école pour des requêtes ultra-rapides et sécurisées
   schoolId String
   school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  // Ajout : Lien avec une classe car certaines salles peuvent être réservées pour des classes spécifiques (ex: salle informatique pour la classe 3ème A)
+  classeId String?
+  classe   Classe? @relation(fields: [classeId], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

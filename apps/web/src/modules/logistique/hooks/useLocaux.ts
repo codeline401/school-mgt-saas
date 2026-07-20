@@ -16,6 +16,13 @@ export interface Batiment {
   createdAt: string;
   updatedAt: string;
   salles?: Salle[];
+  classes?: Classe[];
+}
+
+export interface Classe {
+  id: string;
+  nom: string;
+  schoolId: string;
 }
 
 export interface Salle {
@@ -38,6 +45,7 @@ export interface Salle {
   statut: "DISPONIBLE" | "MAINTENANCE" | "RESERVEE";
   batimentId: string;
   schoolId: string;
+  classeId: string | null; // ajout
   createdAt: string;
   updatedAt: string;
   batiment?: {
@@ -45,6 +53,10 @@ export interface Salle {
     nom: string;
     code: string | null;
   };
+  classe?: {
+    id: string;
+    nom: string;
+  } | null; // ajout
 }
 
 export interface Statistiques {
@@ -79,6 +91,7 @@ export interface CreateSalleInput {
   equipements?: Record<string, unknown>;
   statut?: Salle["statut"];
   batimentId: string;
+  classeId?: string; // ajout
 }
 
 export interface UpdateSalleInput {
@@ -91,6 +104,7 @@ export interface UpdateSalleInput {
   equipements?: Record<string, unknown> | null;
   statut?: Salle["statut"];
   batimentId?: string;
+  classeId?: string | null; // ajout
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -111,9 +125,7 @@ export function useBatiment(id: string) {
   return useQuery<Batiment>({
     queryKey: ["logistique-batiment", id],
     queryFn: async () => {
-      const { data } = await api.get(
-        `/api/logistique/locaux/batiments/${id}`,
-      );
+      const { data } = await api.get(`/api/logistique/locaux/batiments/${id}`);
       return data;
     },
     enabled: !!id,
@@ -138,8 +150,7 @@ export function useCreateBatiment() {
     },
     onError: (error: any) => {
       toast.error(
-        error.response?.data?.error ||
-          "Erreur lors de la création du bâtiment",
+        error.response?.data?.error || "Erreur lors de la création du bâtiment",
       );
     },
   });
@@ -205,6 +216,20 @@ export function useDeleteBatiment() {
 }
 
 // ─────────────────────────────────────────────────────────────
+// HOOKS POUR LES CLASSES
+// ─────────────────────────────────────────────────────────────
+
+export function useClasses() {
+  return useQuery<Classe[]>({
+    queryKey: ["logistique-classes"],
+    queryFn: async () => {
+      const { data } = await api.get("/api/classes");
+      return data;
+    },
+  });
+}
+
+// ─────────────────────────────────────────────────────────────
 // HOOKS POUR LES SALLES
 // ─────────────────────────────────────────────────────────────
 
@@ -212,6 +237,7 @@ export function useSalles(filters?: {
   batimentId?: string;
   type?: string;
   statut?: string;
+  classeId?: string; // ajout
 }) {
   return useQuery<Salle[]>({
     queryKey: ["logistique-salles", filters],
@@ -221,6 +247,7 @@ export function useSalles(filters?: {
           batimentId: filters?.batimentId || undefined,
           type: filters?.type || undefined,
           statut: filters?.statut || undefined,
+          classeId: filters?.classeId || undefined, // ajout
         },
       });
       return data;
@@ -326,9 +353,7 @@ export function useStatistiques() {
   return useQuery<Statistiques>({
     queryKey: ["logistique-statistiques"],
     queryFn: async () => {
-      const { data } = await api.get(
-        "/api/logistique/locaux/statistiques",
-      );
+      const { data } = await api.get("/api/logistique/locaux/statistiques");
       return data;
     },
   });
