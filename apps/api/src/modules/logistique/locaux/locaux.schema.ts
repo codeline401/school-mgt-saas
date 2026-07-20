@@ -151,7 +151,8 @@ export const updateSalleSchema = z.object({
   classeId: z
     .string()
     .uuid("L'identifiant de la classe est invalide")
-    .optional(),
+    .optional()
+    .nullable(),
 });
 
 // ==========================================

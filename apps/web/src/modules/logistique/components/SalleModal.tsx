@@ -109,7 +109,10 @@ export default function SalleModal({
     if (isEdit && salle) {
       await updateMutation.mutateAsync({
         id: salle.id,
-        input,
+        input: {
+          ...input,
+          classeId: form.classeId || null,
+        },
       });
     } else {
       await createMutation.mutateAsync(input);
