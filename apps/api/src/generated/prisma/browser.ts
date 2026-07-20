@@ -192,3 +192,8 @@ export type Batiment = Prisma.BatimentModel
  * 
  */
 export type Salle = Prisma.SalleModel
+/**
+ * Model ReservationSalle
+ * 
+ */
+export type ReservationSalle = Prisma.ReservationSalleModel

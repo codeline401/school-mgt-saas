@@ -18,20 +18,20 @@ import { useAuthStore } from "../store/authStore.js";
 const envBaseUrl = import.meta.env.VITE_API_URL;
 
 if (import.meta.env.PROD && !envBaseUrl) {
-	  throw new Error("VITE_API_URL must be defined in production");
+  throw new Error("VITE_API_URL must be defined in production");
 }
 
 export const api = axios.create({
-	  baseURL: envBaseUrl ?? "https://futur-ecole.com",
-	    timeout: 10000,
+  baseURL: envBaseUrl ?? "https://futur-ecole.com",
+  timeout: 10000,
 });
 
 api.interceptors.request.use((config) => {
-	  const token = useAuthStore.getState().token;
-	    if (token) {
-		        config.headers.Authorization = `Bearer ${token}`;
-			  }
-			    return config;
+  const token = useAuthStore.getState().token;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 // Gestion des erreurs: Si le token est expiré ou invalide, on peut gérer la déconnexion automatique
@@ -60,8 +60,7 @@ export function getApiError(error: unknown, fallback: string): string {
                 ? String((issue as { message?: unknown }).message ?? "")
                 : String(issue),
             )
-            .join(", ") ||
-          fallback
+            .join(", ") || fallback
         );
       if (raw && typeof raw === "object" && "message" in raw)
         return String((raw as { message: unknown }).message) || fallback;

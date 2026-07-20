@@ -3,6 +3,7 @@ import locauxRoutes from "./locaux/locaux.routes.js";
 import stocksRoutes from "./stocks/stocks.routes.js";
 import inventaireRoutes from "./inventaire/inventaire.routes.js";
 import maintenanceRoutes from "./maintenance/maintenance.routes.js";
+import reservationsRoutes from "./reservations/reservation.routes.js";
 
 const router = Router();
 
@@ -20,5 +21,6 @@ router.use("/locaux", locauxRoutes);
 router.use("/stocks", stocksRoutes);
 router.use("/inventaire", inventaireRoutes);
 router.use("/maintenance", maintenanceRoutes);
+router.use("/reservations", reservationsRoutes);
 
 export default router;

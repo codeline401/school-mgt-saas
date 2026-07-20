@@ -194,3 +194,13 @@ export const StatutSalle = {
 } as const
 
 export type StatutSalle = (typeof StatutSalle)[keyof typeof StatutSalle]
+
+
+export const StatutReservation = {
+  EN_ATTENTE: 'EN_ATTENTE',
+  APPROUVEE: 'APPROUVEE',
+  REFUSEE: 'REFUSEE',
+  ANNULEE: 'ANNULEE'
+} as const
+
+export type StatutReservation = (typeof StatutReservation)[keyof typeof StatutReservation]

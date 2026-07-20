@@ -291,6 +291,7 @@ export type SalleWhereInput = {
   batiment?: Prisma.XOR<Prisma.BatimentScalarRelationFilter, Prisma.BatimentWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   classe?: Prisma.XOR<Prisma.ClasseNullableScalarRelationFilter, Prisma.ClasseWhereInput> | null
+  reservationSalles?: Prisma.ReservationSalleListRelationFilter
 }
 
 export type SalleOrderByWithRelationInput = {
@@ -311,6 +312,7 @@ export type SalleOrderByWithRelationInput = {
   batiment?: Prisma.BatimentOrderByWithRelationInput
   school?: Prisma.SchoolOrderByWithRelationInput
   classe?: Prisma.ClasseOrderByWithRelationInput
+  reservationSalles?: Prisma.ReservationSalleOrderByRelationAggregateInput
 }
 
 export type SalleWhereUniqueInput = Prisma.AtLeast<{
@@ -334,6 +336,7 @@ export type SalleWhereUniqueInput = Prisma.AtLeast<{
   batiment?: Prisma.XOR<Prisma.BatimentScalarRelationFilter, Prisma.BatimentWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   classe?: Prisma.XOR<Prisma.ClasseNullableScalarRelationFilter, Prisma.ClasseWhereInput> | null
+  reservationSalles?: Prisma.ReservationSalleListRelationFilter
 }, "id">
 
 export type SalleOrderByWithAggregationInput = {
@@ -393,6 +396,7 @@ export type SalleCreateInput = {
   batiment: Prisma.BatimentCreateNestedOneWithoutSallesInput
   school: Prisma.SchoolCreateNestedOneWithoutSallesInput
   classe?: Prisma.ClasseCreateNestedOneWithoutSallesInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutSalleInput
 }
 
 export type SalleUncheckedCreateInput = {
@@ -410,6 +414,7 @@ export type SalleUncheckedCreateInput = {
   classeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutSalleInput
 }
 
 export type SalleUpdateInput = {
@@ -427,6 +432,7 @@ export type SalleUpdateInput = {
   batiment?: Prisma.BatimentUpdateOneRequiredWithoutSallesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutSallesNestedInput
   classe?: Prisma.ClasseUpdateOneWithoutSallesNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutSalleNestedInput
 }
 
 export type SalleUncheckedUpdateInput = {
@@ -444,6 +450,7 @@ export type SalleUncheckedUpdateInput = {
   classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutSalleNestedInput
 }
 
 export type SalleCreateManyInput = {
@@ -561,6 +568,11 @@ export type SalleMinOrderByAggregateInput = {
 export type SalleSumOrderByAggregateInput = {
   etage?: Prisma.SortOrder
   capacite?: Prisma.SortOrder
+}
+
+export type SalleScalarRelationFilter = {
+  is?: Prisma.SalleWhereInput
+  isNot?: Prisma.SalleWhereInput
 }
 
 export type SalleCreateNestedManyWithoutSchoolInput = {
@@ -697,6 +709,20 @@ export type EnumStatutSalleFieldUpdateOperationsInput = {
   set?: $Enums.StatutSalle
 }
 
+export type SalleCreateNestedOneWithoutReservationSallesInput = {
+  create?: Prisma.XOR<Prisma.SalleCreateWithoutReservationSallesInput, Prisma.SalleUncheckedCreateWithoutReservationSallesInput>
+  connectOrCreate?: Prisma.SalleCreateOrConnectWithoutReservationSallesInput
+  connect?: Prisma.SalleWhereUniqueInput
+}
+
+export type SalleUpdateOneRequiredWithoutReservationSallesNestedInput = {
+  create?: Prisma.XOR<Prisma.SalleCreateWithoutReservationSallesInput, Prisma.SalleUncheckedCreateWithoutReservationSallesInput>
+  connectOrCreate?: Prisma.SalleCreateOrConnectWithoutReservationSallesInput
+  upsert?: Prisma.SalleUpsertWithoutReservationSallesInput
+  connect?: Prisma.SalleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SalleUpdateToOneWithWhereWithoutReservationSallesInput, Prisma.SalleUpdateWithoutReservationSallesInput>, Prisma.SalleUncheckedUpdateWithoutReservationSallesInput>
+}
+
 export type SalleCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -711,6 +737,7 @@ export type SalleCreateWithoutSchoolInput = {
   updatedAt?: Date | string
   batiment: Prisma.BatimentCreateNestedOneWithoutSallesInput
   classe?: Prisma.ClasseCreateNestedOneWithoutSallesInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutSalleInput
 }
 
 export type SalleUncheckedCreateWithoutSchoolInput = {
@@ -727,6 +754,7 @@ export type SalleUncheckedCreateWithoutSchoolInput = {
   classeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutSalleInput
 }
 
 export type SalleCreateOrConnectWithoutSchoolInput = {
@@ -789,6 +817,7 @@ export type SalleCreateWithoutClasseInput = {
   updatedAt?: Date | string
   batiment: Prisma.BatimentCreateNestedOneWithoutSallesInput
   school: Prisma.SchoolCreateNestedOneWithoutSallesInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutSalleInput
 }
 
 export type SalleUncheckedCreateWithoutClasseInput = {
@@ -805,6 +834,7 @@ export type SalleUncheckedCreateWithoutClasseInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutSalleInput
 }
 
 export type SalleCreateOrConnectWithoutClasseInput = {
@@ -847,6 +877,7 @@ export type SalleCreateWithoutBatimentInput = {
   updatedAt?: Date | string
   school: Prisma.SchoolCreateNestedOneWithoutSallesInput
   classe?: Prisma.ClasseCreateNestedOneWithoutSallesInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutSalleInput
 }
 
 export type SalleUncheckedCreateWithoutBatimentInput = {
@@ -863,6 +894,7 @@ export type SalleUncheckedCreateWithoutBatimentInput = {
   classeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutSalleInput
 }
 
 export type SalleCreateOrConnectWithoutBatimentInput = {
@@ -889,6 +921,90 @@ export type SalleUpdateWithWhereUniqueWithoutBatimentInput = {
 export type SalleUpdateManyWithWhereWithoutBatimentInput = {
   where: Prisma.SalleScalarWhereInput
   data: Prisma.XOR<Prisma.SalleUpdateManyMutationInput, Prisma.SalleUncheckedUpdateManyWithoutBatimentInput>
+}
+
+export type SalleCreateWithoutReservationSallesInput = {
+  id?: string
+  nom: string
+  code?: string | null
+  type?: $Enums.TypeSalle
+  etage?: number
+  capacite: number
+  pmrAccessible?: boolean
+  equipements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statut?: $Enums.StatutSalle
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  batiment: Prisma.BatimentCreateNestedOneWithoutSallesInput
+  school: Prisma.SchoolCreateNestedOneWithoutSallesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutSallesInput
+}
+
+export type SalleUncheckedCreateWithoutReservationSallesInput = {
+  id?: string
+  nom: string
+  code?: string | null
+  type?: $Enums.TypeSalle
+  etage?: number
+  capacite: number
+  pmrAccessible?: boolean
+  equipements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statut?: $Enums.StatutSalle
+  batimentId: string
+  schoolId: string
+  classeId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type SalleCreateOrConnectWithoutReservationSallesInput = {
+  where: Prisma.SalleWhereUniqueInput
+  create: Prisma.XOR<Prisma.SalleCreateWithoutReservationSallesInput, Prisma.SalleUncheckedCreateWithoutReservationSallesInput>
+}
+
+export type SalleUpsertWithoutReservationSallesInput = {
+  update: Prisma.XOR<Prisma.SalleUpdateWithoutReservationSallesInput, Prisma.SalleUncheckedUpdateWithoutReservationSallesInput>
+  create: Prisma.XOR<Prisma.SalleCreateWithoutReservationSallesInput, Prisma.SalleUncheckedCreateWithoutReservationSallesInput>
+  where?: Prisma.SalleWhereInput
+}
+
+export type SalleUpdateToOneWithWhereWithoutReservationSallesInput = {
+  where?: Prisma.SalleWhereInput
+  data: Prisma.XOR<Prisma.SalleUpdateWithoutReservationSallesInput, Prisma.SalleUncheckedUpdateWithoutReservationSallesInput>
+}
+
+export type SalleUpdateWithoutReservationSallesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeSalleFieldUpdateOperationsInput | $Enums.TypeSalle
+  etage?: Prisma.IntFieldUpdateOperationsInput | number
+  capacite?: Prisma.IntFieldUpdateOperationsInput | number
+  pmrAccessible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  equipements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statut?: Prisma.EnumStatutSalleFieldUpdateOperationsInput | $Enums.StatutSalle
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batiment?: Prisma.BatimentUpdateOneRequiredWithoutSallesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutSallesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutSallesNestedInput
+}
+
+export type SalleUncheckedUpdateWithoutReservationSallesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeSalleFieldUpdateOperationsInput | $Enums.TypeSalle
+  etage?: Prisma.IntFieldUpdateOperationsInput | number
+  capacite?: Prisma.IntFieldUpdateOperationsInput | number
+  pmrAccessible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  equipements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statut?: Prisma.EnumStatutSalleFieldUpdateOperationsInput | $Enums.StatutSalle
+  batimentId?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SalleCreateManySchoolInput = {
@@ -921,6 +1037,7 @@ export type SalleUpdateWithoutSchoolInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   batiment?: Prisma.BatimentUpdateOneRequiredWithoutSallesNestedInput
   classe?: Prisma.ClasseUpdateOneWithoutSallesNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutSalleNestedInput
 }
 
 export type SalleUncheckedUpdateWithoutSchoolInput = {
@@ -937,6 +1054,7 @@ export type SalleUncheckedUpdateWithoutSchoolInput = {
   classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutSalleNestedInput
 }
 
 export type SalleUncheckedUpdateManyWithoutSchoolInput = {
@@ -985,6 +1103,7 @@ export type SalleUpdateWithoutClasseInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   batiment?: Prisma.BatimentUpdateOneRequiredWithoutSallesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutSallesNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutSalleNestedInput
 }
 
 export type SalleUncheckedUpdateWithoutClasseInput = {
@@ -1001,6 +1120,7 @@ export type SalleUncheckedUpdateWithoutClasseInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutSalleNestedInput
 }
 
 export type SalleUncheckedUpdateManyWithoutClasseInput = {
@@ -1049,6 +1169,7 @@ export type SalleUpdateWithoutBatimentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   school?: Prisma.SchoolUpdateOneRequiredWithoutSallesNestedInput
   classe?: Prisma.ClasseUpdateOneWithoutSallesNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutSalleNestedInput
 }
 
 export type SalleUncheckedUpdateWithoutBatimentInput = {
@@ -1065,6 +1186,7 @@ export type SalleUncheckedUpdateWithoutBatimentInput = {
   classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutSalleNestedInput
 }
 
 export type SalleUncheckedUpdateManyWithoutBatimentInput = {
@@ -1083,6 +1205,35 @@ export type SalleUncheckedUpdateManyWithoutBatimentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type SalleCountOutputType
+ */
+
+export type SalleCountOutputType = {
+  reservationSalles: number
+}
+
+export type SalleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  reservationSalles?: boolean | SalleCountOutputTypeCountReservationSallesArgs
+}
+
+/**
+ * SalleCountOutputType without action
+ */
+export type SalleCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalleCountOutputType
+   */
+  select?: Prisma.SalleCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SalleCountOutputType without action
+ */
+export type SalleCountOutputTypeCountReservationSallesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReservationSalleWhereInput
+}
 
 
 export type SalleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1103,6 +1254,8 @@ export type SalleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   batiment?: boolean | Prisma.BatimentDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.Salle$classeArgs<ExtArgs>
+  reservationSalles?: boolean | Prisma.Salle$reservationSallesArgs<ExtArgs>
+  _count?: boolean | Prisma.SalleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["salle"]>
 
 export type SalleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1167,6 +1320,8 @@ export type SalleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   batiment?: boolean | Prisma.BatimentDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.Salle$classeArgs<ExtArgs>
+  reservationSalles?: boolean | Prisma.Salle$reservationSallesArgs<ExtArgs>
+  _count?: boolean | Prisma.SalleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SalleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   batiment?: boolean | Prisma.BatimentDefaultArgs<ExtArgs>
@@ -1185,6 +1340,7 @@ export type $SallePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     batiment: Prisma.$BatimentPayload<ExtArgs>
     school: Prisma.$SchoolPayload<ExtArgs>
     classe: Prisma.$ClassePayload<ExtArgs> | null
+    reservationSalles: Prisma.$ReservationSallePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1598,6 +1754,7 @@ export interface Prisma__SalleClient<T, Null = never, ExtArgs extends runtime.Ty
   batiment<T extends Prisma.BatimentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BatimentDefaultArgs<ExtArgs>>): Prisma.Prisma__BatimentClient<runtime.Types.Result.GetResult<Prisma.$BatimentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   classe<T extends Prisma.Salle$classeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salle$classeArgs<ExtArgs>>): Prisma.Prisma__ClasseClient<runtime.Types.Result.GetResult<Prisma.$ClassePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  reservationSalles<T extends Prisma.Salle$reservationSallesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salle$reservationSallesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReservationSallePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2058,6 +2215,30 @@ export type Salle$classeArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.ClasseInclude<ExtArgs> | null
   where?: Prisma.ClasseWhereInput
+}
+
+/**
+ * Salle.reservationSalles
+ */
+export type Salle$reservationSallesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReservationSalle
+   */
+  select?: Prisma.ReservationSalleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReservationSalle
+   */
+  omit?: Prisma.ReservationSalleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReservationSalleInclude<ExtArgs> | null
+  where?: Prisma.ReservationSalleWhereInput
+  orderBy?: Prisma.ReservationSalleOrderByWithRelationInput | Prisma.ReservationSalleOrderByWithRelationInput[]
+  cursor?: Prisma.ReservationSalleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReservationSalleScalarFieldEnum | Prisma.ReservationSalleScalarFieldEnum[]
 }
 
 /**

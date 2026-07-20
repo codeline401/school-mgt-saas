@@ -418,7 +418,8 @@ export const ModelName = {
   Chapitre: 'Chapitre',
   SousChapitre: 'SousChapitre',
   Batiment: 'Batiment',
-  Salle: 'Salle'
+  Salle: 'Salle',
+  ReservationSalle: 'ReservationSalle'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -434,7 +435,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle"
+    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3028,6 +3029,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ReservationSalle: {
+      payload: Prisma.$ReservationSallePayload<ExtArgs>
+      fields: Prisma.ReservationSalleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReservationSalleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReservationSallePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReservationSalleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReservationSallePayload>
+        }
+        findFirst: {
+          args: Prisma.ReservationSalleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReservationSallePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReservationSalleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReservationSallePayload>
+        }
+        findMany: {
+          args: Prisma.ReservationSalleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReservationSallePayload>[]
+        }
+        create: {
+          args: Prisma.ReservationSalleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReservationSallePayload>
+        }
+        createMany: {
+          args: Prisma.ReservationSalleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReservationSalleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReservationSallePayload>[]
+        }
+        delete: {
+          args: Prisma.ReservationSalleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReservationSallePayload>
+        }
+        update: {
+          args: Prisma.ReservationSalleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReservationSallePayload>
+        }
+        deleteMany: {
+          args: Prisma.ReservationSalleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReservationSalleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReservationSalleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReservationSallePayload>[]
+        }
+        upsert: {
+          args: Prisma.ReservationSalleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReservationSallePayload>
+        }
+        aggregate: {
+          args: Prisma.ReservationSalleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReservationSalle>
+        }
+        groupBy: {
+          args: Prisma.ReservationSalleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReservationSalleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReservationSalleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReservationSalleCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3601,6 +3676,24 @@ export const SalleScalarFieldEnum = {
 export type SalleScalarFieldEnum = (typeof SalleScalarFieldEnum)[keyof typeof SalleScalarFieldEnum]
 
 
+export const ReservationSalleScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  description: 'description',
+  dateDebut: 'dateDebut',
+  dateFin: 'dateFin',
+  statut: 'statut',
+  salleId: 'salleId',
+  userId: 'userId',
+  schoolId: 'schoolId',
+  motifRefus: 'motifRefus',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReservationSalleScalarFieldEnum = (typeof ReservationSalleScalarFieldEnum)[keyof typeof ReservationSalleScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3997,6 +4090,20 @@ export type EnumStatutSalleFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
 export type ListEnumStatutSalleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutSalle[]'>
     
 
+
+/**
+ * Reference to a field of type 'StatutReservation'
+ */
+export type EnumStatutReservationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutReservation'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutReservation[]'
+ */
+export type ListEnumStatutReservationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutReservation[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -4142,6 +4249,7 @@ export type GlobalOmitConfig = {
   sousChapitre?: Prisma.SousChapitreOmit
   batiment?: Prisma.BatimentOmit
   salle?: Prisma.SalleOmit
+  reservationSalle?: Prisma.ReservationSalleOmit
 }
 
 /* Types for Logging */

@@ -85,7 +85,8 @@ export const ModelName = {
   Chapitre: 'Chapitre',
   SousChapitre: 'SousChapitre',
   Batiment: 'Batiment',
-  Salle: 'Salle'
+  Salle: 'Salle',
+  ReservationSalle: 'ReservationSalle'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -636,6 +637,24 @@ export const SalleScalarFieldEnum = {
 } as const
 
 export type SalleScalarFieldEnum = (typeof SalleScalarFieldEnum)[keyof typeof SalleScalarFieldEnum]
+
+
+export const ReservationSalleScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  description: 'description',
+  dateDebut: 'dateDebut',
+  dateFin: 'dateFin',
+  statut: 'statut',
+  salleId: 'salleId',
+  userId: 'userId',
+  schoolId: 'schoolId',
+  motifRefus: 'motifRefus',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReservationSalleScalarFieldEnum = (typeof ReservationSalleScalarFieldEnum)[keyof typeof ReservationSalleScalarFieldEnum]
 
 
 export const SortOrder = {
