@@ -17,7 +17,7 @@ const INITIAL_FORM: CreateBatimentInput = {
   nom: "",
   code: "",
   description: "",
-  nbEtages: 1,
+  nbEtages: 0,
 };
 
 export default function BatimentModal({ isOpen, onClose, batiment }: Props) {
@@ -171,7 +171,7 @@ export default function BatimentModal({ isOpen, onClose, batiment }: Props) {
               value={form.nbEtages}
               onChange={handleChange}
               className="input input-sm w-full"
-              min={1}
+              min={0}
               max={100}
               required
               disabled={isPending}

@@ -24,7 +24,7 @@ export const createBatimentSchema = z.object({
   nbEtages: z
     .number()
     .int("Le nombre d'étages doit être un entier")
-    .min(1, "Le bâtiment doit avoir au moins 1 étage")
+    .min(0, "Le bâtiment doit avoir au moins 1 étage")
     .max(100, "Le nombre d'étages ne peut pas dépasser 100")
     .default(1),
 });

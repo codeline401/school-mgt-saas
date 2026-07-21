@@ -21,11 +21,18 @@ import {
 } from "../hooks/useReservations";
 import ReservationModal from "./ReservationModal";
 import { useAuthStore } from "../../../store/authStore";
+import ConfirmModal from "../../../components/ConfirmModal";
 
 export default function ReservationsTab() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedReservation, setSelectedReservation] = useState<Reservation | null>(null);
+  const [selectedReservation, setSelectedReservation] =
+    useState<Reservation | null>(null);
   const [filtreStatut, setFiltreStatut] = useState<string>("");
+  
+  // États pour les modals de confirmation
+  const [isAnnulerModalOpen, setIsAnnulerModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [reservationToProcess, setReservationToProcess] = useState<string>("");
 
   const { user } = useAuthStore();
   const { data: reservations = [], isLoading } = useReservations(
@@ -64,16 +71,26 @@ export default function ReservationsTab() {
     }
   };
 
-  const handleAnnuler = async (id: string) => {
-    if (confirm("Annuler cette réservation ?")) {
-      await annulerMutation.mutateAsync(id);
-    }
+  const handleAnnuler = (id: string) => {
+    setReservationToProcess(id);
+    setIsAnnulerModalOpen(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (confirm("Supprimer définitivement cette réservation ?")) {
-      await deleteMutation.mutateAsync(id);
-    }
+  const confirmAnnuler = async () => {
+    await annulerMutation.mutateAsync(reservationToProcess);
+    setIsAnnulerModalOpen(false);
+    setReservationToProcess("");
+  };
+
+  const handleDelete = (id: string) => {
+    setReservationToProcess(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    await deleteMutation.mutateAsync(reservationToProcess);
+    setIsDeleteModalOpen(false);
+    setReservationToProcess("");
   };
 
   const getStatutBadge = (statut: string) => {
@@ -330,6 +347,36 @@ export default function ReservationsTab() {
           setSelectedReservation(null);
         }}
         reservation={selectedReservation}
+      />
+
+      {/* Modal d'annulation */}
+      <ConfirmModal
+        isOpen={isAnnulerModalOpen}
+        title="Annuler la réservation"
+        message="Êtes-vous sûr de vouloir annuler cette réservation ?"
+        confirmLabel="Oui, annuler"
+        cancelLabel="Non, garder"
+        isLoading={annulerMutation.isPending}
+        onConfirm={confirmAnnuler}
+        onCancel={() => {
+          setIsAnnulerModalOpen(false);
+          setReservationToProcess("");
+        }}
+      />
+
+      {/* Modal de suppression */}
+      <ConfirmModal
+        isOpen={isDeleteModalOpen}
+        title="Supprimer la réservation"
+        message="Êtes-vous sûr de vouloir supprimer définitivement cette réservation ? Cette action est irréversible."
+        confirmLabel="Oui, supprimer"
+        cancelLabel="Annuler"
+        isLoading={deleteMutation.isPending}
+        onConfirm={confirmDelete}
+        onCancel={() => {
+          setIsDeleteModalOpen(false);
+          setReservationToProcess("");
+        }}
       />
     </div>
   );

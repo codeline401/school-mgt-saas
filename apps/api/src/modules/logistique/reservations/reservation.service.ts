@@ -1,3 +1,7 @@
+import {
+  TransactionClient,
+  TransactionIsolationLevel,
+} from "../../../generated/prisma/internal/prismaNamespace.js";
 import { prisma } from "../../../lib/prisma.js";
 import {
   ApprouverReservationInput,
@@ -129,7 +133,10 @@ export class ReservationService {
     dateFin: Date,
     schoolId: string,
     excludeReservationId?: string,
+    tx?: TransactionClient | typeof prisma, // code review 1. Ajout du param tx pour la transaction
   ) {
+    const client = tx || prisma; // 2. Utiliser le client de transaction si fourni, sinon utiliser le client Prisma par défaut
+
     const where: any = {
       salleId,
       schoolId,
@@ -157,11 +164,11 @@ export class ReservationService {
       where.id = { not: excludeReservationId }; //
     }
 
-    const conflits = await prisma.reservationSalle.findMany({
+    const count = await client.reservationSalle.count({
       where,
-    });
+    }); // 3. Utiliser le client de transaction pour compter les réservations conflictuelles
 
-    return conflits.length === 0; // Retourne true si aucune réservation conflictuelle n'est trouvée
+    return count === 0; // Retourne true si aucune réservation conflictuelle n'est trouvée
   }
 
   /**
@@ -172,71 +179,86 @@ export class ReservationService {
       throw new Error("Utilisateur non autorisé ou école non spécifiée.");
     }
 
-    // Vérifier que la salle existe et appartient à l'école
-    const salle = await prisma.salle.findFirst({
-      where: { id: data.salleId, schoolId: user.schoolId },
-    });
+    const schoolId = user.schoolId as string;
+    const userId = user.userId as string;
 
-    if (!salle) {
-      throw new Error("Salle introuvable ou non autorisée pour cette école.");
-    }
+    // 🔒 Isolation Serializable pour empêcher deux réservations simultanées
+    return await prisma.$transaction(
+      async (tx) => {
+        // 1. Vérifier que la salle existe
+        const salle = await tx.salle.findFirst({
+          where: { id: data.salleId, schoolId },
+        });
 
-    // Vérifier la disponibilité de la salle
-    const disponible = await this.checkDisponibilite(
-      data.salleId,
-      new Date(data.dateDebut),
-      new Date(data.dateFin),
-      user.schoolId,
-    );
+        if (!salle) {
+          throw new Error(
+            "Salle introuvable ou non autorisée pour cette école.",
+          );
+        }
 
-    if (!disponible) {
-      throw new Error(
-        "La salle n'est pas disponible pour la période demandée.",
-      );
-    }
+        // 2. Vérifier la disponibilité AU SEIN de la transaction
+        const disponible = await this.checkDisponibilite(
+          data.salleId,
+          new Date(data.dateDebut),
+          new Date(data.dateFin),
+          schoolId,
+          undefined,
+          tx, // Transmettre le client de transaction 'tx' si adapté
+        );
 
-    // Les admins et sudo_admin peuvent créer des réservation directement approuvées
-    const statut =
-      user.role === "ADMIN" || user.role === "SUDO_ADMIN"
-        ? "APPROUVEE"
-        : "EN_ATTENTE";
+        if (!disponible) {
+          throw new Error(
+            "La salle n'est pas disponible pour la période demandée.",
+          );
+        }
 
-    return await prisma.reservationSalle.create({
-      data: {
-        ...data,
-        dateDebut: new Date(data.dateDebut),
-        dateFin: new Date(data.dateFin),
-        userId: user.userId,
-        schoolId: user.schoolId,
-        statut,
-      },
-      include: {
-        salle: {
-          select: {
-            id: true,
-            nom: true,
-            code: true,
-            type: true,
-            capacite: true,
-            batiment: {
+        const statut =
+          user.role === "ADMIN" || user.role === "SUDO_ADMIN"
+            ? "APPROUVEE"
+            : "EN_ATTENTE";
+
+        // 3. Création atomique
+        return await tx.reservationSalle.create({
+          data: {
+            ...data,
+            dateDebut: new Date(data.dateDebut),
+            dateFin: new Date(data.dateFin),
+            userId,
+            schoolId,
+            statut,
+          },
+          include: {
+            salle: {
               select: {
                 id: true,
                 nom: true,
+                code: true,
+                type: true,
+                capacite: true,
+                batiment: {
+                  select: {
+                    id: true,
+                    nom: true,
+                  },
+                },
+              },
+            },
+            user: {
+              select: {
+                id: true,
+                nom: true,
+                prenom: true,
+                email: true,
+                role: true,
               },
             },
           },
-        },
-        user: {
-          select: {
-            id: true,
-            nom: true,
-            prenom: true,
-            email: true,
-            role: true,
-          },
-        },
+        });
       },
-    });
+      {
+        isolationLevel: TransactionIsolationLevel.Serializable,
+      },
+    );
   }
 
   /**
@@ -251,76 +273,86 @@ export class ReservationService {
       throw new Error("Utilisateur non autorisé ou école non spécifiée.");
     }
 
-    const reservation = await prisma.reservationSalle.findFirst({
-      where: { id: reservationId, schoolId: user.schoolId },
-    });
+    const schoolId = user.schoolId as string;
 
-    if (!reservation) {
-      throw new Error(
-        "Réservation introuvable ou non autorisée pour cette école.",
-      );
-    }
+    return await prisma.$transaction(
+      async (tx) => {
+        const reservation = await tx.reservationSalle.findFirst({
+          where: { id: reservationId, schoolId },
+        });
 
-    // Seul le créateur ou admin peut modifier
-    const canUpdate =
-      reservation.userId === user.userId ||
-      user.role === "ADMIN" ||
-      user.role === "SUDO_ADMIN";
-    if (!canUpdate) {
-      throw new Error("Vous n'êtes pas autorisé à modifier cette réservation.");
-    }
+        if (!reservation) {
+          throw new Error(
+            "Réservation introuvable ou non autorisée pour cette école.",
+          );
+        }
 
-    // Vérifier la disponibilité si les dates ou la salle changent
-    if (data.dateDebut || data.dateFin || data.salleId) {
-      const disponible = await this.checkDisponibilite(
-        data.salleId || reservation.salleId,
-        new Date(data.dateDebut || reservation.dateDebut),
-        new Date(data.dateFin || reservation.dateFin),
-        user.schoolId,
-        reservationId, // Exclure la réservation actuelle
-      );
+        const canUpdate =
+          reservation.userId === user.userId ||
+          user.role === "ADMIN" ||
+          user.role === "SUDO_ADMIN";
+        if (!canUpdate) {
+          throw new Error(
+            "Vous n'êtes pas autorisé à modifier cette réservation.",
+          );
+        }
 
-      if (!disponible) {
-        throw new Error(
-          "La salle est déjà réservée pour cette période. Veuillez choisir une autre période ou salle",
-        );
-      }
-    }
+        if (data.dateDebut || data.dateFin || data.salleId) {
+          const disponible = await this.checkDisponibilite(
+            data.salleId || reservation.salleId,
+            new Date(data.dateDebut || reservation.dateDebut),
+            new Date(data.dateFin || reservation.dateFin),
+            schoolId,
+            reservationId,
+            tx,
+          );
 
-    return await prisma.reservationSalle.update({
-      where: { id: reservationId },
-      data: {
-        ...data,
-        dateDebut: data.dateDebut ? new Date(data.dateDebut) : undefined,
-        dateFin: data.dateFin ? new Date(data.dateFin) : undefined,
-      },
-      include: {
-        salle: {
-          select: {
-            id: true,
-            nom: true,
-            code: true,
-            type: true,
-            capacite: true,
-            batiment: {
+          if (!disponible) {
+            throw new Error(
+              "La salle est déjà réservée pour cette période. Veuillez choisir une autre période ou salle",
+            );
+          }
+        }
+
+        return await tx.reservationSalle.update({
+          where: { id: reservationId },
+          data: {
+            ...data,
+            dateDebut: data.dateDebut ? new Date(data.dateDebut) : undefined,
+            dateFin: data.dateFin ? new Date(data.dateFin) : undefined,
+          },
+          include: {
+            salle: {
               select: {
                 id: true,
                 nom: true,
+                code: true,
+                type: true,
+                capacite: true,
+                batiment: {
+                  select: {
+                    id: true,
+                    nom: true,
+                  },
+                },
+              },
+            },
+            user: {
+              select: {
+                id: true,
+                nom: true,
+                prenom: true,
+                email: true,
+                role: true,
               },
             },
           },
-        },
-        user: {
-          select: {
-            id: true,
-            nom: true,
-            prenom: true,
-            email: true,
-            role: true,
-          },
-        },
+        });
       },
-    });
+      {
+        isolationLevel: TransactionIsolationLevel.Serializable,
+      },
+    );
   }
 
   /**

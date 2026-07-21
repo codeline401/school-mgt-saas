@@ -24,6 +24,11 @@ const INITIAL_FORM: CreateReservationInput = {
   salleId: "",
 };
 
+const toLocalDateTimeInput = (date: Date) => {
+  const offsetMs = date.getTimezoneOffset() * 60000;
+  return new Date(date.getTime() - offsetMs).toISOString().slice(0, 16);
+};
+
 export default function ReservationModal({
   isOpen,
   onClose,
@@ -36,8 +41,8 @@ export default function ReservationModal({
       return {
         titre: reservation.titre,
         description: reservation.description || "",
-        dateDebut: new Date(reservation.dateDebut).toISOString().slice(0, 16),
-        dateFin: new Date(reservation.dateFin).toISOString().slice(0, 16),
+        dateDebut: toLocalDateTimeInput(new Date(reservation.dateDebut)),
+        dateFin: toLocalDateTimeInput(new Date(reservation.dateFin)),
         salleId: reservation.salleId,
       };
     }
@@ -48,8 +53,8 @@ export default function ReservationModal({
     return {
       ...INITIAL_FORM,
       salleId: defaultSalleId || "",
-      dateDebut: now.toISOString().slice(0, 16),
-      dateFin: oneHourLater.toISOString().slice(0, 16),
+      dateDebut: toLocalDateTimeInput(now),
+      dateFin: toLocalDateTimeInput(oneHourLater),
     };
   }, [reservation, defaultSalleId, defaultDateDebut]);
 

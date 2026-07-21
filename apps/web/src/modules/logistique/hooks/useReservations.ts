@@ -216,7 +216,7 @@ export function useAnnulerReservation() {
   return useMutation({
     mutationFn: async (id: string) => {
       const { data } = await api.patch(
-        `/api/logistiques/reservations/${id}/annuler`,
+        `/api/logistique/reservations/${id}/annuler`,
       );
       return data;
     },

@@ -55,6 +55,16 @@ export class ReservationsController {
       res.json(reservation);
     } catch (error: any) {
       console.error("Erreur lors de la récupération de la réservation:", error);
+
+      // Review, interception du cas "introuvable" pour renvoyer un statut HTTP 404
+      if (
+        error.message === "Reservation introuvable." ||
+        error.name === "NotFoundError" ||
+        error.status === 404
+      ) {
+        return res.status(404).json({ message: error.message });
+      }
+
       res.status(500).json({ message: error.message });
     }
   }
