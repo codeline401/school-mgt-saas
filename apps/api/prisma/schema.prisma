@@ -49,6 +49,7 @@ model User {
   examenSurveillances           ExamenSurveillance[]  @relation("ExamenSurveilles")
   examenIncidents               ExamenIncident[]      @relation("ExamenIncidentsCrees")
   signature                     Signature?
+  reservationSalles             ReservationSalle[]
 }
 
 // Modele SAAS
@@ -92,10 +93,11 @@ model School {
   examenSessions       ExamenSession[]
 
   // -- Périodes scolaires de l'école
-  periodes  Periode[]
-  chapitres Chapitre[]
-  batiments Batiment[]
-  salles    Salle[]
+  periodes          Periode[]
+  chapitres         Chapitre[]
+  batiments         Batiment[]
+  salles            Salle[]
+  reservationSalles ReservationSalle[]
 }
 
 model Classe {
@@ -946,8 +948,9 @@ model Salle {
   classeId String?
   classe   Classe? @relation(fields: [classeId], references: [id], onDelete: SetNull)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  reservationSalles ReservationSalle[]
 
   // Indexations stratégiques combinant le schoolId pour la sécurité et la performance
   @@index([schoolId])
@@ -975,4 +978,48 @@ enum StatutSalle {
   DISPONIBLE
   MAINTENANCE
   RESERVEE
+}
+
+model ReservationSalle {
+  id String @id @default(uuid())
+
+  // information de la réservation
+  titre       String
+  description String?
+  dateDebut   DateTime
+  dateFin     DateTime
+
+  // Statut de la réservation
+  statut StatutReservation @default(EN_ATTENTE)
+
+  // Salle réservée
+  salleId String
+  salle   Salle  @relation(fields: [salleId], references: [id], onDelete: Cascade)
+
+  // utilisateur qui fait la réservation
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // école
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  // Motif de refus (si applicable)
+  motifRefus String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId])
+  @@index([schoolId, salleId])
+  @@index([schoolId, userId])
+  @@index([schoolId, dateDebut, dateFin])
+  @@index([schoolId, statut])
+}
+
+enum StatutReservation {
+  EN_ATTENTE // En attente de validation
+  APPROUVEE // approuvée
+  REFUSEE // refusée
+  ANNULEE // Annulée par l'utilisateur
 }

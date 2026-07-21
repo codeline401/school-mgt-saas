@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Building2, BarChart3, Calendar } from "lucide-react";
 import InventaireBatimentsTab from "./components/InventaireBatimentsTab";
 import StatistiquesTab from "./components/StatistiquesTab";
-import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
+import ReservationsTab from "./components/ReservationsTab";
 
 type SubTab = "inventaire" | "statistiques" | "reservations";
 
@@ -62,13 +62,7 @@ export default function LocauxTab() {
       <div>
         {activeSubTab === "inventaire" && <InventaireBatimentsTab />}
         {activeSubTab === "statistiques" && <StatistiquesTab />}
-        {activeSubTab === "reservations" && (
-          <DevelopmentPlaceholder
-            icon={Calendar}
-            title="Réservations"
-            description="La gestion des réservations de salles sera bientôt disponible."
-          />
-        )}
+        {activeSubTab === "reservations" && <ReservationsTab />}
       </div>
     </div>
   );

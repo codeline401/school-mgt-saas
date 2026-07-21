@@ -704,6 +704,23 @@ export type EnumStatutSalleWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumStatutSalleFilter<$PrismaModel>
 }
 
+export type EnumStatutReservationFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutReservation | Prisma.EnumStatutReservationFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutReservation[] | Prisma.ListEnumStatutReservationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutReservation[] | Prisma.ListEnumStatutReservationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutReservationFilter<$PrismaModel> | $Enums.StatutReservation
+}
+
+export type EnumStatutReservationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutReservation | Prisma.EnumStatutReservationFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutReservation[] | Prisma.ListEnumStatutReservationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutReservation[] | Prisma.ListEnumStatutReservationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutReservationWithAggregatesFilter<$PrismaModel> | $Enums.StatutReservation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutReservationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutReservationFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1340,6 +1357,23 @@ export type NestedEnumStatutSalleWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumStatutSalleFilter<$PrismaModel>
   _max?: Prisma.NestedEnumStatutSalleFilter<$PrismaModel>
+}
+
+export type NestedEnumStatutReservationFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutReservation | Prisma.EnumStatutReservationFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutReservation[] | Prisma.ListEnumStatutReservationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutReservation[] | Prisma.ListEnumStatutReservationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutReservationFilter<$PrismaModel> | $Enums.StatutReservation
+}
+
+export type NestedEnumStatutReservationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutReservation | Prisma.EnumStatutReservationFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutReservation[] | Prisma.ListEnumStatutReservationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutReservation[] | Prisma.ListEnumStatutReservationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutReservationWithAggregatesFilter<$PrismaModel> | $Enums.StatutReservation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutReservationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutReservationFilter<$PrismaModel>
 }
 
 
