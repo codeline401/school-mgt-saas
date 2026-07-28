@@ -8,7 +8,13 @@
 BEGIN;
 CREATE TYPE "CategorieArticle_new" AS ENUM ('FOURNITURES_SCOLAIRES', 'MATERIEL_PEDAGOGIQUE', 'MATERIEL_INFORMATIQUE', 'EQUIPEMENT_SPORTIF', 'CONSOMMABLES', 'IMMOBILIERS', 'AUTRE');
 ALTER TABLE "public"."ArticleStock" ALTER COLUMN "categorie" DROP DEFAULT;
-ALTER TABLE "ArticleStock" ALTER COLUMN "categorie" TYPE "CategorieArticle_new" USING ("categorie"::text::"CategorieArticle_new");
+ALTER TABLE "ArticleStock" ALTER COLUMN "categorie" TYPE "CategorieArticle_new"
+ USING (
+   CASE "categorie"::text
+     WHEN 'FOURNITURES_SCLOLAIRES' THEN 'FOURNITURES_SCOLAIRES'
+     ELSE "categorie"::text
+   END
+     )::"CategorieArticle_new";
 ALTER TYPE "CategorieArticle" RENAME TO "CategorieArticle_old";
 ALTER TYPE "CategorieArticle_new" RENAME TO "CategorieArticle";
 DROP TYPE "public"."CategorieArticle_old";

@@ -64,8 +64,12 @@ function ArticleStockTab() {
 
   // confirma le suppression
   const handleConfirmDelete = async () => {
-    if (articleToDelete) {
+    if (!articleToDelete) return;
+    try {
       await deleteMutation.mutateAsync(articleToDelete.id);
+    } catch {
+      // erreur déjà notifiée par le hook
+    } finally {
       setIsConfirmModalOpen(false);
       setArticleToDelete(null);
     }
@@ -83,9 +87,10 @@ function ArticleStockTab() {
 
   const formatPrix = (prix: number | null) => {
     if (prix === null) return "-";
-    return new Intl.NumberFormat("fr-FR", {
+    return new Intl.NumberFormat("fr-MG", {
       style: "currency",
-      currency: "EUR",
+      currency: "MGA",
+      maximumFractionDigits: 0,
     }).format(prix);
   };
 

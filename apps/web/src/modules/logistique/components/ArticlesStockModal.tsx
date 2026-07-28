@@ -48,8 +48,8 @@ export default function ArticleStockModal({
     quantite: 0,
     unite: "unité",
     seuilMinimal: 10,
-    seuilOptimal: Number(""),
-    prixUnitaire: Number(""),
+    seuilOptimal: undefined,
+    prixUnitaire: undefined,
     emplacement: "",
   });
 
@@ -100,7 +100,7 @@ export default function ArticleStockModal({
     ];
     const processedValue = numericFields.includes(name)
       ? value === ""
-        ? "" // <- garder comme string au lieu de undefined pour permettre la suppression de la valeur
+        ? undefined // <- garder comme string au lieu de undefined pour permettre la suppression de la valeur
         : Number(value)
       : value;
 
@@ -126,7 +126,7 @@ export default function ArticleStockModal({
       newErrors.nom = "Le nom est requis";
     }
 
-    if (formData.quantite < 0) {
+    if (formData.quantite === undefined || formData.quantite < 0) {
       newErrors.quantite = "La quantité ne peut pas être négative";
     }
 
@@ -136,7 +136,7 @@ export default function ArticleStockModal({
 
     if (
       formData.seuilOptimal !== undefined &&
-      formData.seuilOptimal < formData.seuilMinimal
+      formData.seuilOptimal <= formData.seuilMinimal
     ) {
       newErrors.seuilOptimal =
         "Le seuil optimal doit être supérieur au seuil minimal";
@@ -231,7 +231,7 @@ export default function ArticleStockModal({
             {/* Nom */}
             <fieldset className="fieldset">
               <legend className="fieldset-legend required">
-                Nom de l'article *
+                Nom de l'article
               </legend>
               <input
                 type="text"
@@ -254,7 +254,7 @@ export default function ArticleStockModal({
             {/* Référence & Catégorie */}
             <div className="grid grid-cols-2 gap-4">
               <fieldset className="fieldset">
-                <legend className="fieldset-legend required">Référence</legend>
+                <legend className="fieldset-legend">Référence</legend>
                 <input
                   type="text"
                   name="reference"
@@ -267,11 +267,7 @@ export default function ArticleStockModal({
               </fieldset>
 
               <fieldset className="fieldset">
-                <label className="label">
-                  <legend className="fieldset-legend required">
-                    Categorie
-                  </legend>
-                </label>
+                <legend className="fieldset-legend">Catégorie</legend>
                 <select
                   name="categorie"
                   value={formData.categorie}
@@ -290,7 +286,7 @@ export default function ArticleStockModal({
 
             {/* Description */}
             <fieldset className="fieldset">
-              <legend className="fieldset-legend required">Descritpion</legend>
+              <legend className="fieldset-legend">Descritpion</legend>
               <textarea
                 name="description"
                 value={formData.description}
@@ -366,9 +362,7 @@ export default function ArticleStockModal({
               </fieldset>
 
               <fieldset className="fieldset">
-                <legend className="fieldset-legend required">
-                  Seuil Optimal
-                </legend>
+                <legend className="fieldset-legend">Seuil Optimal</legend>
                 <input
                   type="number"
                   name="seuilOptimal"
@@ -392,9 +386,7 @@ export default function ArticleStockModal({
             {/* Prix & Emplacement */}
             <div className="grid grid-cols-2 gap-4">
               <fieldset className="fieldset">
-                <legend className="fieldset-legend required">
-                  Prix unitaire (Ar)
-                </legend>
+                <legend className="fieldset-legend">Prix unitaire (Ar)</legend>
                 <input
                   type="number"
                   name="prixUnitaire"
@@ -416,9 +408,7 @@ export default function ArticleStockModal({
               </fieldset>
 
               <fieldset className="fieldset">
-                <legend className="fieldset-legend required">
-                  Emplacement
-                </legend>
+                <legend className="fieldset-legend">Emplacement</legend>
                 <input
                   type="text"
                   name="emplacement"

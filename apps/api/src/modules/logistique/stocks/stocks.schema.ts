@@ -59,7 +59,12 @@ export type CreateMouvementStockInput = z.infer<
 // --- Schéma de fitre de recherche ----------------------------
 export const ArticleStockFiltersSchema = z.object({
   categorie: CategorieArticleEnum.optional(),
-  enAlerte: z.boolean().optional(), // Article sous le seuil minimal
+  enAlerte: z
+    .union([
+      z.boolean(),
+      z.enum(["true", "false"]).transform((v) => v === "true"),
+    ])
+    .optional(), // Article sous le seuil minimal
   search: z.string().optional(), // Recherche par nom ou reference
 });
 

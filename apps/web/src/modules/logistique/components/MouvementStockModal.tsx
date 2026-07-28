@@ -177,7 +177,7 @@ export default function MouvementStockModal({
           <div className="space-y-4">
             {/* Sélection de l'article */}
             <fieldset className="fieldset">
-              <legend className="fieldset-legend required">Article *</legend>
+              <legend className="fieldset-legend required">Article</legend>
               <select
                 name="articleId"
                 value={formData.articleId}
@@ -226,7 +226,7 @@ export default function MouvementStockModal({
 
             {/* Quantité */}
             <fieldset className="fieldset">
-              <legend className="fieldset-legend required">Quantité *</legend>
+              <legend className="fieldset-legend required">Quantité</legend>
               <input
                 type="number"
                 name="quantite"
@@ -249,7 +249,7 @@ export default function MouvementStockModal({
             {/* Référence & Coût */}
             <div className="grid grid-cols-2 gap-4">
               <fieldset className="fieldset">
-                <legend className="fieldset-legend required">Référence</legend>
+                <legend className="fieldset-legend">Référence</legend>
                 <input
                   type="text"
                   name="reference"
@@ -263,9 +263,7 @@ export default function MouvementStockModal({
 
               {isEntree && (
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend required">
-                    Coût (Ariary)
-                  </legend>
+                  <legend className="fieldset-legend">Coût (Ariary)</legend>
                   <input
                     type="number"
                     name="cout"
@@ -290,7 +288,7 @@ export default function MouvementStockModal({
 
             {/* Motif */}
             <fieldset className="fieldset">
-              <legend className="fieldset-legend required">Motif</legend>
+              <legend className="fieldset-legend">Motif</legend>
               <textarea
                 name="motif"
                 value={formData.motif}

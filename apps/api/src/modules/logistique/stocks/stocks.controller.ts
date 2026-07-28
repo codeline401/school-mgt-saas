@@ -6,6 +6,7 @@ import {
   CreateMouvementStockSchema,
   UpdateArticleStockSchema,
 } from "./stocks.schema.js";
+import z from "zod";
 
 /**
  * CONTROLLEUR POUR LA GESTION DES ARTICLES EN STOCK
@@ -169,7 +170,13 @@ export const getMouvementsByArticleId = async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     const schoolId = req.user?.schoolId;
-    const limit = req.query.limit ? parseInt(req.query.limit as string) : 50;
+    const limit = z.coerce
+      .number()
+      .int()
+      .min(1)
+      .max(200)
+      .default(50)
+      .parse(req.query.limit ?? undefined);
 
     if (!schoolId) {
       return res.status(403).json({ error: "Ecole non spécifiée" });

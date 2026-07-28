@@ -203,8 +203,16 @@ export class ArticleStockService {
         throw new Error("Article introuvable");
       }
 
+      // Le signe est déterminé par le type de mouvement, jamais par le client
+      const delta =
+        data.type === "SORTIE"
+          ? -Math.abs(data.quantite)
+          : data.type === "ENTREE"
+            ? Math.abs(data.quantite)
+            : data.quantite; // AJUSTEMENT / TRANSFERT : signé explicitement
+
       // Calculer la nouvelle quantité
-      const nouvelleQuantite = article.quantite + data.quantite;
+      const nouvelleQuantite = article.quantite + delta;
 
       // vérifier que la quatité ne devient pas négative
       if (nouvelleQuantite < 0) {
@@ -219,14 +227,18 @@ export class ArticleStockService {
           ...data,
           userId: user.userId,
           schoolId: user.schoolId,
+          quantite: delta, // stocker le delta réel pour garder l'historique correct
         },
       });
 
       // Mettre à jour la quantité de l'article
-      await tx.articleStock.update({
-        where: { id: data.articleId },
-        data: { quantite: nouvelleQuantite },
+      const updated = await tx.articleStock.updateMany({
+        where: { id: data.articleId, quantite: article.quantite },
+        data: { quantite: { increment: delta } },
       });
+      if (updated.count === 0) {
+        throw new Error("Conflit de concurrence, veuillez réessayer");
+      }
 
       return mouvement;
     });
@@ -264,7 +276,6 @@ export class ArticleStockService {
     const articlesEnAlerte = articles.filter(
       (a) => a.quantite <= a.seuilMinimal,
     ).length;
-    1;
     const valeurTotale = articles.reduce(
       (sum, a) => sum + a.quantite * (Number(a.prixUnitaire) || 0),
       0,

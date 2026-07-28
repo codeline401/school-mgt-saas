@@ -38,13 +38,13 @@ router.get(
 
 router.post(
   "/articles",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
   createArticle,
 );
 
 router.patch(
   "/articles/:id",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
   updateArticle,
 );
 
@@ -61,7 +61,7 @@ router.post(
   createMouvement,
 );
 router.get(
-  "/mouvements",
+  "/articles/:id/mouvements",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
   getMouvementsByArticleId,
 );

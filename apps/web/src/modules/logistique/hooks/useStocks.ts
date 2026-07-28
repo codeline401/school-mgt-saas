@@ -111,7 +111,7 @@ export function useArticleStock(articleId: string | undefined) {
   return useQuery<ArticleStock>({
     queryKey: ["article-stock", articleId],
     queryFn: async () => {
-      const { data } = await api.get(`/api/sticks/articles/${articleId}`);
+      const { data } = await api.get(`/api/stocks/articles/${articleId}`);
       return data;
     },
     enabled: !!articleId, // Ne s'exécute que si articleId est défini
@@ -236,7 +236,7 @@ export function useCreateMouvement() {
       return data;
     },
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: ["article-stock"] });
+      queryClient.invalidateQueries({ queryKey: ["articles-stock"] });
       queryClient.invalidateQueries({
         queryKey: ["article-stock", variables.articleId],
       });
