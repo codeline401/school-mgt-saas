@@ -86,7 +86,9 @@ export const ModelName = {
   SousChapitre: 'SousChapitre',
   Batiment: 'Batiment',
   Salle: 'Salle',
-  ReservationSalle: 'ReservationSalle'
+  ReservationSalle: 'ReservationSalle',
+  ArticleStock: 'ArticleStock',
+  MouvementStock: 'MouvementStock'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -655,6 +657,42 @@ export const ReservationSalleScalarFieldEnum = {
 } as const
 
 export type ReservationSalleScalarFieldEnum = (typeof ReservationSalleScalarFieldEnum)[keyof typeof ReservationSalleScalarFieldEnum]
+
+
+export const ArticleStockScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  reference: 'reference',
+  description: 'description',
+  categorie: 'categorie',
+  quantite: 'quantite',
+  unite: 'unite',
+  seuilMinimal: 'seuilMinimal',
+  seuilOptimal: 'seuilOptimal',
+  prixUnitaire: 'prixUnitaire',
+  emplacement: 'emplacement',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ArticleStockScalarFieldEnum = (typeof ArticleStockScalarFieldEnum)[keyof typeof ArticleStockScalarFieldEnum]
+
+
+export const MouvementStockScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  quantite: 'quantite',
+  articleId: 'articleId',
+  motif: 'motif',
+  reference: 'reference',
+  cout: 'cout',
+  userId: 'userId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt'
+} as const
+
+export type MouvementStockScalarFieldEnum = (typeof MouvementStockScalarFieldEnum)[keyof typeof MouvementStockScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -1,39 +1,83 @@
 import { Request, Response } from "express";
-import { StocksService } from "./stocks.service.js";
-
-const service = new StocksService();
+import { ArticleStockService } from "./stocks.service.js";
+import {
+  ArticleStockFiltersSchema,
+  CreateArticleStockSchema,
+  CreateMouvementStockSchema,
+  UpdateArticleStockSchema,
+} from "./stocks.schema.js";
 
 /**
- * TODO: Récupérer tous les articles en stock
+ * CONTROLLEUR POUR LA GESTION DES ARTICLES EN STOCK
  */
-export const getStocks = async (req: Request, res: Response) => {
+const articleService = new ArticleStockService();
+
+/**
+ * Récupérer tous les articles en stock
+ * GET /api/stocks/articles
+ */
+export const getArticles = async (req: Request, res: Response) => {
   try {
-    const { schoolId } = req.user!;
+    const schoolId = req.user?.schoolId;
 
-    // TODO: Appel au service
-    // const stocks = await service.getStocks(schoolId!);
+    if (!schoolId) {
+      return res.status(403).json({
+        error: "Ecole non spécifiée",
+      });
+    }
 
-    return res.status(200).json({ message: "Not implemented" });
+    // Valider les filtres
+    const filters = ArticleStockFiltersSchema.parse(req.query);
+
+    const articles = await articleService.getArticles(schoolId, filters);
+    res.json(articles);
   } catch (error: any) {
-    console.error(error);
+    console.error("Erreur getArticles :", error);
     return res
-      .status(500)
+      .status(400)
       .json({ error: "Erreur lors de la récupération des stocks." });
   }
 };
 
 /**
- * TODO: Créer un nouvel article
+ * Récupère un article par son ID
+ * @param req
+ * @param res
+ * @returns
+ * GET /api/stocks/articles/:id
+ */
+export async function getArticleById(req: Request, res: Response) {
+  try {
+    const { id } = req.params as { id: string };
+    const schoolId = req.user?.schoolId;
+
+    if (!schoolId) {
+      return res.status(403).json({ error: "Ecole non spécifiée" });
+    }
+
+    const article = await articleService.getArticleById(id, schoolId);
+    res.json(article);
+  } catch (error: any) {
+    console.error("Erreur getArticlesByid:", error);
+    res.status(404).json({ error: error.message });
+  }
+}
+
+/**
+ * Créer un nouvel article
+ * POST /api/stocks/articles
  */
 export const createArticle = async (req: Request, res: Response) => {
   try {
-    const { schoolId, role } = req.user!;
+    const data = CreateArticleStockSchema.parse(req.body);
+    const user = {
+      schoolId: req.user?.schoolId || "",
+      role: req.user?.role || "",
+      userId: req.user?.id || "",
+    };
 
-    // TODO: Validation Zod
-    // TODO: Appel au service
-    // const article = await service.createArticle(req.body, schoolId!, { schoolId, role });
-
-    return res.status(201).json({ message: "Not implemented" });
+    const article = await articleService.createArticle(data, user);
+    res.status(201).json(article);
   } catch (error: any) {
     console.error(error);
     return res
@@ -43,20 +87,23 @@ export const createArticle = async (req: Request, res: Response) => {
 };
 
 /**
- * TODO: Mettre à jour un article
+ *  Mettre à jour un article
+ * PATCH /api/stocks/articles/:id
  */
 export const updateArticle = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const { schoolId, role } = req.user!;
+    const { id } = req.params as { id: string };
+    const data = UpdateArticleStockSchema.parse(req.body);
+    const user = {
+      schoolId: req.user?.schoolId || "",
+      role: req.user?.role || "",
+      userId: req.user?.id || "",
+    };
 
-    // TODO: Validation des données
-    // TODO: Appel au service
-    // const article = await service.updateArticle(id, req.body, { schoolId, role });
-
-    return res.status(200).json({ message: "Not implemented" });
+    const article = await articleService.updateArticle(id, data, user);
+    res.json(article);
   } catch (error: any) {
-    console.error(error);
+    console.error("Erreur updateArticle:", error);
     return res
       .status(500)
       .json({ error: "Erreur lors de la mise à jour de l'article." });
@@ -64,80 +111,99 @@ export const updateArticle = async (req: Request, res: Response) => {
 };
 
 /**
- * TODO: Supprimer un article
+ * Supprimer un article
+ * DELETE /api/stocks/articles/:id
  */
 export const deleteArticle = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const { schoolId, role } = req.user!;
+    const { id } = req.params as { id: string };
+    const user = {
+      schoolId: req.user?.schoolId || "",
+      role: req.user?.role || "",
+      userId: req.user?.id || "",
+    };
 
-    // TODO: Appel au service
-    // await service.deleteArticle(id, { schoolId, role });
-
-    return res.status(200).json({ message: "Not implemented" });
+    const result = await articleService.deleteArticle(id, user);
+    res.json(result);
   } catch (error: any) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ error: "Erreur lors de la suppression de l'article." });
+    console.error("Erreur deleteArticle:", error);
+    return res.status(400).json({
+      error: "Erreur lors de la suppression de l'article.",
+      details: error.message,
+    });
   }
 };
 
 /**
- * TODO: Créer un mouvement de stock (entrée/sortie)
+ * Créer un mouvement de stock (entrée/sortie)
+ * POST /api/stocks/mouvements
  */
 export const createMouvement = async (req: Request, res: Response) => {
   try {
-    const { schoolId, role } = req.user!;
+    const data = CreateMouvementStockSchema.parse(req.body);
+    const user = {
+      schoolId: req.user?.schoolId || "",
+      role: req.user?.role || "",
+      userId: req.user?.id || "",
+    };
 
-    // TODO: Validation des données (articleId, type: 'ENTREE' | 'SORTIE', quantité, motif)
-    // TODO: Appel au service
-    // const mouvement = await service.createMouvement(req.body, { schoolId, role });
-
-    return res.status(201).json({ message: "Not implemented" });
+    const mouvement = await articleService.createMouvement(data, user);
+    res.status(201).json(mouvement);
   } catch (error: any) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ error: "Erreur lors de la création du mouvement." });
+    console.error("Erreur createMouvement:", error);
+    return res.status(400).json({
+      error: "Erreur lors de la création du mouvement.",
+      details: error.message,
+    });
   }
 };
 
 /**
- * TODO: Récupérer les alertes de stock (articles sous le seuil)
+ * Récupérer l'historique des mouvements d'un article
+ * GET /api/stocks/articles/:id/mouvements
+ * @param req
+ * @param res
+ * @returns
  */
-export const getAlertes = async (req: Request, res: Response) => {
+export const getMouvementsByArticleId = async (req: Request, res: Response) => {
   try {
-    const { schoolId } = req.user!;
+    const { id } = req.params as { id: string };
+    const schoolId = req.user?.schoolId;
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : 50;
 
-    // TODO: Appel au service
-    // const alertes = await service.getAlertes(schoolId!);
+    if (!schoolId) {
+      return res.status(403).json({ error: "Ecole non spécifiée" });
+    }
 
-    return res.status(200).json({ message: "Not implemented" });
+    const mouvements = await articleService.getMouvements(id, limit, schoolId);
+    res.json(mouvements);
   } catch (error: any) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ error: "Erreur lors de la récupération des alertes." });
+    console.error("Erreur getMouvementsByArticleId:", error);
+    return res.status(400).json({
+      error: "Erreur lors de la récupération des mouvements.",
+      details: error.message,
+    });
   }
 };
 
 /**
- * TODO: Récupérer l'historique des mouvements
+ * Récupérer les statistiques du stock
+ * GET /api/stocks/statistiques
  */
-export const getMouvements = async (req: Request, res: Response) => {
+export async function getStatistiques(req: Request, res: Response) {
   try {
-    const { schoolId } = req.user!;
+    const schoolId = req.user?.schoolId;
+    if (!schoolId) {
+      return res.status(403).json({ error: "Ecole non spécifiée" });
+    }
 
-    // TODO: Parser les filtres
-    // TODO: Appel au service
-    // const mouvements = await service.getMouvements(req.query, schoolId!);
-
-    return res.status(200).json({ message: "Not implemented" });
+    const stats = await articleService.getStatistiques(schoolId);
+    res.json(stats);
   } catch (error: any) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ error: "Erreur lors de la récupération des mouvements." });
+    console.error("Erreur getStatistiques:", error);
+    return res.status(400).json({
+      error: "Erreur lors de la récupération des statistiques.",
+      details: error.message,
+    });
   }
-};
+}

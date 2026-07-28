@@ -50,6 +50,7 @@ model User {
   examenIncidents               ExamenIncident[]      @relation("ExamenIncidentsCrees")
   signature                     Signature?
   reservationSalles             ReservationSalle[]
+  mouvementStocks               MouvementStock[]
 }
 
 // Modele SAAS
@@ -98,6 +99,8 @@ model School {
   batiments         Batiment[]
   salles            Salle[]
   reservationSalles ReservationSalle[]
+  articleStocks     ArticleStock[]
+  mouvementStocks   MouvementStock[]
 }
 
 model Classe {
@@ -1022,4 +1025,88 @@ enum StatutReservation {
   APPROUVEE // approuvée
   REFUSEE // refusée
   ANNULEE // Annulée par l'utilisateur
+}
+
+// ==========================================
+// MODULE LOGISTIQUE : GESTION DES STOCKS
+// ==========================================
+
+enum CategorieArticle {
+  FOURNITURES_SCOLAIRES
+  MATERIEL_PEDAGOGIQUE
+  MATERIEL_INFORMATIQUE
+  EQUIPEMENT_SPORTIF
+  CONSOMMABLES
+  IMMOBILIERS
+  AUTRE
+}
+
+model ArticleStock {
+  id          String           @id @default(uuid())
+  nom         String // Ex: "Cahier 96 pages", "Ordinateur portable Dell"
+  reference   String? // Ex: "CAH-96", "ORD-Dell-2024"
+  description String?          @db.Text
+  categorie   CategorieArticle @default(FOURNITURES_SCOLAIRES)
+
+  // Gestion des quantités
+  quantite     Int // Quantité actuelle en stock
+  unite        String @default("unité") // Ex: "unité", "pièce", "kg", "litre"
+  seuilMinimal Int // Seuil minimal pour déclencher une alerte de réapprovisionnement
+  seuilOptimal Int? // Seuil optimal pour le stock
+
+  // Gestion financière
+  prixUnitaire Decimal? // Prix unitaire d'achat
+
+  emplacement String? // Ex: "Entrepôt A - Étagère 3", "Salle Informatique - Armoire 2"
+
+  // Lien avec l'école
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  // Historiques des mouvement
+  mouvements MouvementStock[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId])
+  @@index([schoolId, categorie])
+  @@index([schoolId, quantite])
+}
+
+enum TypeMouvement {
+  ENTREE // Achat, livraison, retour
+  SORTIE // Distribution, consommation, perte
+  AJUSTEMENT // correction d'inventaire
+  TRANSFERT // Changement d'emplacement ou de catégorie
+}
+
+model MouvementStock {
+  id       String        @id @default(uuid())
+  type     TypeMouvement
+  quantite Int // quatité (positif pour entrée, négatif pour sortie)
+
+  // article concerné
+  articleId String
+  article   ArticleStock @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  // Détails du mouvement
+  motif     String? // raison du mouvement (ex: "Achat fournisseur", "Distribution aux élèves", "Correction d'inventaire")
+  reference String? // bon de commande, bon de livraison, etc.
+  cout      Decimal? @db.Decimal(10, 2) // coût total du mouvement (quantité * prix unitaire)
+
+  // utilisateur responsable du mouvement
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  // école
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([schoolId])
+  @@index([articleId])
+  @@index([schoolId, type])
+  @@index([schoolId, createdAt])
 }

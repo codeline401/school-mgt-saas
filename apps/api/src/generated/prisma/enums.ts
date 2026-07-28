@@ -204,3 +204,26 @@ export const StatutReservation = {
 } as const
 
 export type StatutReservation = (typeof StatutReservation)[keyof typeof StatutReservation]
+
+
+export const CategorieArticle = {
+  FOURNITURES_SCOLAIRES: 'FOURNITURES_SCOLAIRES',
+  MATERIEL_PEDAGOGIQUE: 'MATERIEL_PEDAGOGIQUE',
+  MATERIEL_INFORMATIQUE: 'MATERIEL_INFORMATIQUE',
+  EQUIPEMENT_SPORTIF: 'EQUIPEMENT_SPORTIF',
+  CONSOMMABLES: 'CONSOMMABLES',
+  IMMOBILIERS: 'IMMOBILIERS',
+  AUTRE: 'AUTRE'
+} as const
+
+export type CategorieArticle = (typeof CategorieArticle)[keyof typeof CategorieArticle]
+
+
+export const TypeMouvement = {
+  ENTREE: 'ENTREE',
+  SORTIE: 'SORTIE',
+  AJUSTEMENT: 'AJUSTEMENT',
+  TRANSFERT: 'TRANSFERT'
+} as const
+
+export type TypeMouvement = (typeof TypeMouvement)[keyof typeof TypeMouvement]

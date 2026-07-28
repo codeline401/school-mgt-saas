@@ -197,3 +197,13 @@ export type Salle = Prisma.SalleModel
  * 
  */
 export type ReservationSalle = Prisma.ReservationSalleModel
+/**
+ * Model ArticleStock
+ * 
+ */
+export type ArticleStock = Prisma.ArticleStockModel
+/**
+ * Model MouvementStock
+ * 
+ */
+export type MouvementStock = Prisma.MouvementStockModel

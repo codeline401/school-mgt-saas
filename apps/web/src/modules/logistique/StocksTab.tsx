@@ -9,8 +9,12 @@ import {
   History,
 } from "lucide-react";
 import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
+import ArticleStockTab from "./components/ArticleStockTab";
+import ArticleStockModal from "./components/ArticlesStockModal";
+import MouvementStockModal from "./components/MouvementStockModal";
 
 type SubTab = "articles" | "mouvements" | "alertes";
+type MouvementType = "ENTREE" | "SORTIE" | null;
 
 /**
  * COMPOSANT STOCKS TAB
@@ -20,6 +24,44 @@ type SubTab = "articles" | "mouvements" | "alertes";
 
 function StocksTab() {
   const [activeSubTab, setActiveSubTab] = useState<SubTab>("articles");
+  const [isArticleModalOpen, setIsArticleModalOpen] = useState(false);
+  const [mouvementModalType, setMouvementModalType] =
+    useState<MouvementType>(null);
+
+  /**
+   * Ouvre le modal pour créer un nouvel article
+   */
+  const handleOpenArticleModal = () => {
+    setIsArticleModalOpen(true);
+  };
+
+  /**
+   * Ferme le modal d'article
+   */
+  const handleCloseArticleModal = () => {
+    setIsArticleModalOpen(false);
+  };
+
+  /**
+   * Ouvre le modal d'entrée de stock
+   */
+  const handleOpenEntreeModal = () => {
+    setMouvementModalType("ENTREE");
+  };
+
+  /**
+   * Ouvre le modal de sortie de stock
+   */
+  const handleOpenSortieModal = () => {
+    setMouvementModalType("SORTIE");
+  };
+
+  /**
+   * Ferme le modal de mouvement
+   */
+  const handleCloseMouvementModal = () => {
+    setMouvementModalType(null);
+  };
 
   return (
     <div>
@@ -35,15 +77,24 @@ function StocksTab() {
           </div>
         </div>
         <div className="flex gap-2">
-          <button className="btn btn-outline btn-sm gap-2">
+          <button
+            className="btn btn-outline btn-sm gap-2"
+            onClick={handleOpenEntreeModal}
+          >
             <TrendingUp size={16} />
             Entrée
           </button>
-          <button className="btn btn-outline btn-sm gap-2">
+          <button
+            className="btn btn-outline btn-sm gap-2"
+            onClick={handleOpenSortieModal}
+          >
             <TrendingDown size={16} />
             Sortie
           </button>
-          <button className="btn btn-primary btn-sm gap-2">
+          <button
+            className="btn btn-primary btn-sm gap-2"
+            onClick={handleOpenArticleModal}
+          >
             <PlusIcon size={16} />
             Nouvel article
           </button>
@@ -79,13 +130,7 @@ function StocksTab() {
       </div>
 
       {/* Contenu des sous-onglets */}
-      {activeSubTab === "articles" && (
-        <DevelopmentPlaceholder
-          icon={ClipboardList}
-          title="Articles en stock"
-          description="Gestion des articles avec quantités disponibles, catégories et unités de mesure."
-        />
-      )}
+      {activeSubTab === "articles" && <ArticleStockTab />}
 
       {activeSubTab === "mouvements" && (
         <DevelopmentPlaceholder
@@ -100,6 +145,19 @@ function StocksTab() {
           icon={AlertTriangle}
           title="Alertes de seuil"
           description="Notifications pour les articles en dessous du seuil minimal défini."
+        />
+      )}
+
+      {/** Modal pour création/modification d'article */}
+      {isArticleModalOpen && (
+        <ArticleStockModal article={null} onClose={handleCloseArticleModal} />
+      )}
+
+      {/** Modal pour mouvement de stock (entrée/sortie) */}
+      {mouvementModalType && (
+        <MouvementStockModal
+          type={mouvementModalType}
+          onClose={handleCloseMouvementModal}
         />
       )}
     </div>
