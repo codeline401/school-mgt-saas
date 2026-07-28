@@ -1,51 +1,76 @@
 import { Router } from "express";
 import {
-  getStocks,
-  createArticle,
-  updateArticle,
-  deleteArticle,
-  createMouvement,
-  getAlertes,
-  getMouvements,
-} from "./stocks.controller.js";
-import {
   authenticate,
   authorizeRoles,
 } from "../../../middlewares/authMiddleware.js";
 import { Role } from "../../../generated/prisma/enums.js";
+import {
+  createArticle,
+  createMouvement,
+  deleteArticle,
+  getArticleById,
+  getArticles,
+  getMouvementsByArticleId,
+  getStatistiques,
+  updateArticle,
+} from "./stocks.controller.js";
 
+/**
+ * ROUTES POUR LA GESTION DES ARTICLES EN STOCK
+ */
 const router = Router();
 
 // Toutes les routes nécessitent une authentification
 router.use(authenticate);
 
-// Gestion des articles en stock
+// Articles
 router.get(
-  "/",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
-  getStocks,
+  "/articles",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
+  getArticles,
 );
-router.post("/", authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN), createArticle);
-router.put("/:id", authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN), updateArticle);
+
+router.get(
+  "/articles/:id",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
+  getArticleById,
+);
+
+router.post(
+  "/articles",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  createArticle,
+);
+
+router.patch(
+  "/articles/:id",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  updateArticle,
+);
+
 router.delete(
-  "/:id",
+  "/articles/:id",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
   deleteArticle,
 );
 
-// Gestion des mouvements de stock
+// Mouvements de stock
 router.post(
   "/mouvements",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
   createMouvement,
 );
 router.get(
-  "/mouvements",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
-  getMouvements,
+  "/articles/:id/mouvements",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
+  getMouvementsByArticleId,
 );
 
-// Alertes de stock
-router.get("/alertes", authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN), getAlertes);
+// Statistiques
+router.get(
+  "/statistiques",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
+  getStatistiques,
+);
 
 export default router;

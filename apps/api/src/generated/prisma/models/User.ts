@@ -245,6 +245,7 @@ export type UserWhereInput = {
   examenIncidents?: Prisma.ExamenIncidentListRelationFilter
   signature?: Prisma.XOR<Prisma.SignatureNullableScalarRelationFilter, Prisma.SignatureWhereInput> | null
   reservationSalles?: Prisma.ReservationSalleListRelationFilter
+  mouvementStocks?: Prisma.MouvementStockListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -274,6 +275,7 @@ export type UserOrderByWithRelationInput = {
   examenIncidents?: Prisma.ExamenIncidentOrderByRelationAggregateInput
   signature?: Prisma.SignatureOrderByWithRelationInput
   reservationSalles?: Prisma.ReservationSalleOrderByRelationAggregateInput
+  mouvementStocks?: Prisma.MouvementStockOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -306,6 +308,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   examenIncidents?: Prisma.ExamenIncidentListRelationFilter
   signature?: Prisma.XOR<Prisma.SignatureNullableScalarRelationFilter, Prisma.SignatureWhereInput> | null
   reservationSalles?: Prisma.ReservationSalleListRelationFilter
+  mouvementStocks?: Prisma.MouvementStockListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -368,6 +371,7 @@ export type UserCreateInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -396,6 +400,7 @@ export type UserUncheckedCreateInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -424,6 +429,7 @@ export type UserUpdateInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -452,6 +458,7 @@ export type UserUncheckedUpdateInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -821,6 +828,20 @@ export type UserUpdateOneRequiredWithoutReservationSallesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReservationSallesInput, Prisma.UserUpdateWithoutReservationSallesInput>, Prisma.UserUncheckedUpdateWithoutReservationSallesInput>
 }
 
+export type UserCreateNestedOneWithoutMouvementStocksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMouvementStocksInput, Prisma.UserUncheckedCreateWithoutMouvementStocksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMouvementStocksInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMouvementStocksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMouvementStocksInput, Prisma.UserUncheckedCreateWithoutMouvementStocksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMouvementStocksInput
+  upsert?: Prisma.UserUpsertWithoutMouvementStocksInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMouvementStocksInput, Prisma.UserUpdateWithoutMouvementStocksInput>, Prisma.UserUncheckedUpdateWithoutMouvementStocksInput>
+}
+
 export type UserCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -846,6 +867,7 @@ export type UserCreateWithoutSchoolInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSchoolInput = {
@@ -873,6 +895,7 @@ export type UserUncheckedCreateWithoutSchoolInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSchoolInput = {
@@ -943,6 +966,7 @@ export type UserCreateWithoutProfesseurInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfesseurInput = {
@@ -970,6 +994,7 @@ export type UserUncheckedCreateWithoutProfesseurInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfesseurInput = {
@@ -1013,6 +1038,7 @@ export type UserUpdateWithoutProfesseurInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfesseurInput = {
@@ -1040,6 +1066,7 @@ export type UserUncheckedUpdateWithoutProfesseurInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutParentInput = {
@@ -1067,6 +1094,7 @@ export type UserCreateWithoutParentInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutParentInput = {
@@ -1094,6 +1122,7 @@ export type UserUncheckedCreateWithoutParentInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutParentInput = {
@@ -1137,6 +1166,7 @@ export type UserUpdateWithoutParentInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParentInput = {
@@ -1164,6 +1194,7 @@ export type UserUncheckedUpdateWithoutParentInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutContratsInput = {
@@ -1191,6 +1222,7 @@ export type UserCreateWithoutContratsInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutContratsInput = {
@@ -1218,6 +1250,7 @@ export type UserUncheckedCreateWithoutContratsInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutContratsInput = {
@@ -1261,6 +1294,7 @@ export type UserUpdateWithoutContratsInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutContratsInput = {
@@ -1288,6 +1322,7 @@ export type UserUncheckedUpdateWithoutContratsInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRemplacementsInput = {
@@ -1315,6 +1350,7 @@ export type UserCreateWithoutRemplacementsInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRemplacementsInput = {
@@ -1342,6 +1378,7 @@ export type UserUncheckedCreateWithoutRemplacementsInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRemplacementsInput = {
@@ -1385,6 +1422,7 @@ export type UserUpdateWithoutRemplacementsInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRemplacementsInput = {
@@ -1412,6 +1450,7 @@ export type UserUncheckedUpdateWithoutRemplacementsInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotesInput = {
@@ -1439,6 +1478,7 @@ export type UserCreateWithoutNotesInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotesInput = {
@@ -1466,6 +1506,7 @@ export type UserUncheckedCreateWithoutNotesInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotesInput = {
@@ -1509,6 +1550,7 @@ export type UserUpdateWithoutNotesInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesInput = {
@@ -1536,6 +1578,7 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDocumentsInput = {
@@ -1563,6 +1606,7 @@ export type UserCreateWithoutDocumentsInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDocumentsInput = {
@@ -1590,6 +1634,7 @@ export type UserUncheckedCreateWithoutDocumentsInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDocumentsInput = {
@@ -1633,6 +1678,7 @@ export type UserUpdateWithoutDocumentsInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDocumentsInput = {
@@ -1660,6 +1706,7 @@ export type UserUncheckedUpdateWithoutDocumentsInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -1687,6 +1734,7 @@ export type UserCreateWithoutNotificationsInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -1714,6 +1762,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -1757,6 +1806,7 @@ export type UserUpdateWithoutNotificationsInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -1784,6 +1834,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDeliberationSessionsInput = {
@@ -1811,6 +1862,7 @@ export type UserCreateWithoutDeliberationSessionsInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeliberationSessionsInput = {
@@ -1838,6 +1890,7 @@ export type UserUncheckedCreateWithoutDeliberationSessionsInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeliberationSessionsInput = {
@@ -1870,6 +1923,7 @@ export type UserCreateWithoutDeliberationSessionsValidéesInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeliberationSessionsValidéesInput = {
@@ -1897,6 +1951,7 @@ export type UserUncheckedCreateWithoutDeliberationSessionsValidéesInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeliberationSessionsValidéesInput = {
@@ -1940,6 +1995,7 @@ export type UserUpdateWithoutDeliberationSessionsInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeliberationSessionsInput = {
@@ -1967,6 +2023,7 @@ export type UserUncheckedUpdateWithoutDeliberationSessionsInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutDeliberationSessionsValidéesInput = {
@@ -2005,6 +2062,7 @@ export type UserUpdateWithoutDeliberationSessionsValidéesInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput = {
@@ -2032,6 +2090,7 @@ export type UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExamensCreesInput = {
@@ -2059,6 +2118,7 @@ export type UserCreateWithoutExamensCreesInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExamensCreesInput = {
@@ -2086,6 +2146,7 @@ export type UserUncheckedCreateWithoutExamensCreesInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExamensCreesInput = {
@@ -2129,6 +2190,7 @@ export type UserUpdateWithoutExamensCreesInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamensCreesInput = {
@@ -2156,6 +2218,7 @@ export type UserUncheckedUpdateWithoutExamensCreesInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExamenSurveillancesInput = {
@@ -2183,6 +2246,7 @@ export type UserCreateWithoutExamenSurveillancesInput = {
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExamenSurveillancesInput = {
@@ -2210,6 +2274,7 @@ export type UserUncheckedCreateWithoutExamenSurveillancesInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExamenSurveillancesInput = {
@@ -2253,6 +2318,7 @@ export type UserUpdateWithoutExamenSurveillancesInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamenSurveillancesInput = {
@@ -2280,6 +2346,7 @@ export type UserUncheckedUpdateWithoutExamenSurveillancesInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExamenIncidentsInput = {
@@ -2307,6 +2374,7 @@ export type UserCreateWithoutExamenIncidentsInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExamenIncidentsInput = {
@@ -2334,6 +2402,7 @@ export type UserUncheckedCreateWithoutExamenIncidentsInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExamenIncidentsInput = {
@@ -2377,6 +2446,7 @@ export type UserUpdateWithoutExamenIncidentsInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamenIncidentsInput = {
@@ -2404,6 +2474,7 @@ export type UserUncheckedUpdateWithoutExamenIncidentsInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSignatureInput = {
@@ -2431,6 +2502,7 @@ export type UserCreateWithoutSignatureInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSignatureInput = {
@@ -2458,6 +2530,7 @@ export type UserUncheckedCreateWithoutSignatureInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSignatureInput = {
@@ -2501,6 +2574,7 @@ export type UserUpdateWithoutSignatureInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSignatureInput = {
@@ -2528,6 +2602,7 @@ export type UserUncheckedUpdateWithoutSignatureInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReservationSallesInput = {
@@ -2555,6 +2630,7 @@ export type UserCreateWithoutReservationSallesInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReservationSallesInput = {
@@ -2582,6 +2658,7 @@ export type UserUncheckedCreateWithoutReservationSallesInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
   signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReservationSallesInput = {
@@ -2625,6 +2702,7 @@ export type UserUpdateWithoutReservationSallesInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReservationSallesInput = {
@@ -2652,6 +2730,135 @@ export type UserUncheckedUpdateWithoutReservationSallesInput = {
   examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMouvementStocksInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  school?: Prisma.SchoolCreateNestedOneWithoutUsersInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMouvementStocksInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  schoolId?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMouvementStocksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMouvementStocksInput, Prisma.UserUncheckedCreateWithoutMouvementStocksInput>
+}
+
+export type UserUpsertWithoutMouvementStocksInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMouvementStocksInput, Prisma.UserUncheckedUpdateWithoutMouvementStocksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMouvementStocksInput, Prisma.UserUncheckedCreateWithoutMouvementStocksInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMouvementStocksInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMouvementStocksInput, Prisma.UserUncheckedUpdateWithoutMouvementStocksInput>
+}
+
+export type UserUpdateWithoutMouvementStocksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneWithoutUsersNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMouvementStocksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManySchoolInput = {
@@ -2692,6 +2899,7 @@ export type UserUpdateWithoutSchoolInput = {
   examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSchoolInput = {
@@ -2719,6 +2927,7 @@ export type UserUncheckedUpdateWithoutSchoolInput = {
   examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
   signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutSchoolInput = {
@@ -2751,6 +2960,7 @@ export type UserCountOutputType = {
   examenSurveillances: number
   examenIncidents: number
   reservationSalles: number
+  mouvementStocks: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2765,6 +2975,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   examenSurveillances?: boolean | UserCountOutputTypeCountExamenSurveillancesArgs
   examenIncidents?: boolean | UserCountOutputTypeCountExamenIncidentsArgs
   reservationSalles?: boolean | UserCountOutputTypeCountReservationSallesArgs
+  mouvementStocks?: boolean | UserCountOutputTypeCountMouvementStocksArgs
 }
 
 /**
@@ -2854,6 +3065,13 @@ export type UserCountOutputTypeCountReservationSallesArgs<ExtArgs extends runtim
   where?: Prisma.ReservationSalleWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMouvementStocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MouvementStockWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2882,6 +3100,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   examenIncidents?: boolean | Prisma.User$examenIncidentsArgs<ExtArgs>
   signature?: boolean | Prisma.User$signatureArgs<ExtArgs>
   reservationSalles?: boolean | Prisma.User$reservationSallesArgs<ExtArgs>
+  mouvementStocks?: boolean | Prisma.User$mouvementStocksArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2946,6 +3165,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   examenIncidents?: boolean | Prisma.User$examenIncidentsArgs<ExtArgs>
   signature?: boolean | Prisma.User$signatureArgs<ExtArgs>
   reservationSalles?: boolean | Prisma.User$reservationSallesArgs<ExtArgs>
+  mouvementStocks?: boolean | Prisma.User$mouvementStocksArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2973,6 +3193,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     examenIncidents: Prisma.$ExamenIncidentPayload<ExtArgs>[]
     signature: Prisma.$SignaturePayload<ExtArgs> | null
     reservationSalles: Prisma.$ReservationSallePayload<ExtArgs>[]
+    mouvementStocks: Prisma.$MouvementStockPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3395,6 +3616,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   examenIncidents<T extends Prisma.User$examenIncidentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$examenIncidentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExamenIncidentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   signature<T extends Prisma.User$signatureArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$signatureArgs<ExtArgs>>): Prisma.Prisma__SignatureClient<runtime.Types.Result.GetResult<Prisma.$SignaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   reservationSalles<T extends Prisma.User$reservationSallesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reservationSallesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReservationSallePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  mouvementStocks<T extends Prisma.User$mouvementStocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mouvementStocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MouvementStockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4173,6 +4395,30 @@ export type User$reservationSallesArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.ReservationSalleScalarFieldEnum | Prisma.ReservationSalleScalarFieldEnum[]
+}
+
+/**
+ * User.mouvementStocks
+ */
+export type User$mouvementStocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MouvementStock
+   */
+  select?: Prisma.MouvementStockSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MouvementStock
+   */
+  omit?: Prisma.MouvementStockOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MouvementStockInclude<ExtArgs> | null
+  where?: Prisma.MouvementStockWhereInput
+  orderBy?: Prisma.MouvementStockOrderByWithRelationInput | Prisma.MouvementStockOrderByWithRelationInput[]
+  cursor?: Prisma.MouvementStockWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MouvementStockScalarFieldEnum | Prisma.MouvementStockScalarFieldEnum[]
 }
 
 /**
