@@ -203,7 +203,13 @@ export const getMouvementsByArticleId = async (req: Request, res: Response) => {
 export const getAllMouvements = async (req: Request, res: Response) => {
   try {
     const schoolId = req.user?.schoolId;
-    const limit = req.query.limit ? parseInt(req.query.limit as string) : 100;
+    const limit = z.coerce
+      .number()
+      .int()
+      .min(1)
+      .max(200)
+      .default(100)
+      .parse(req.query.limit ?? undefined);
 
     if (!schoolId) {
       return res.status(403).json({ error: "Ecole non spécifiée" });

@@ -97,9 +97,9 @@ function MouvementsStockTab() {
    */
   const formatCout = (cout: number | null) => {
     if (cout === null) return "-";
-    return new Intl.NumberFormat("fr-FR", {
+    return new Intl.NumberFormat("fr-MG", {
       style: "currency",
-      currency: "EUR",
+      currency: "MGA",
     }).format(cout);
   };
 
@@ -117,6 +117,9 @@ function MouvementsStockTab() {
       <div className="alert alert-error">
         <History size={20} />
         <span>Erreur lors du chargement des mouvements</span>
+        <button className="btn btn-sm" onClick={() => refetch()}>
+          Réessayer
+        </button>
       </div>
     );
   }
@@ -255,7 +258,7 @@ function MouvementsStockTab() {
                             <Calendar size={14} />
                             {formatDate(mouvement.createdAt)}
                           </div>
-                          {mouvement.cout && (
+                          {mouvement.cout !== null && (
                             <div className="text-sm font-semibold mt-1">
                               {formatCout(mouvement.cout)}
                             </div>
