@@ -86,9 +86,9 @@ function AlertesStockTab() {
    */
   const getQuantiteRecommandee = (article: ArticleStock) => {
     if (!article.seuilOptimal) {
-      return article.seuilMinimal * 2 - article.quantite;
+      return Math.max(0, article.seuilMinimal * 2 - article.quantite);
     }
-    return article.seuilOptimal - article.quantite;
+    return Math.max(0, article.seuilOptimal - article.quantite);
   };
 
   /**
@@ -348,7 +348,11 @@ function AlertesStockTab() {
 
       {/* Modal de réapprovisionnement */}
       {isEntreeModalOpen && (
-        <MouvementStockModal type="ENTREE" onClose={handleCloseModal} />
+        <MouvementStockModal
+          type="ENTREE"
+          initialArticleId={selectedArticleId}
+          onClose={handleCloseModal}
+        />
       )}
     </div>
   );
