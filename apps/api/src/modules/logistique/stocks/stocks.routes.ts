@@ -8,6 +8,7 @@ import {
   createArticle,
   createMouvement,
   deleteArticle,
+  getAllMouvements,
   getArticleById,
   getArticles,
   getMouvementsByArticleId,
@@ -64,6 +65,11 @@ router.get(
   "/articles/:id/mouvements",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
   getMouvementsByArticleId,
+);
+router.get(
+  "/mouvements/all",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  getAllMouvements,
 );
 
 // Statistiques

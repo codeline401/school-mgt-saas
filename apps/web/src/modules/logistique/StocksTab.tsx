@@ -12,6 +12,7 @@ import DevelopmentPlaceholder from "../../components/common/DevelopmentPlacehold
 import ArticleStockTab from "./components/ArticleStockTab";
 import ArticleStockModal from "./components/ArticlesStockModal";
 import MouvementStockModal from "./components/MouvementStockModal";
+import MouvementsStockTab from "./components/MouvementStockTab";
 
 type SubTab = "articles" | "mouvements" | "alertes";
 type MouvementType = "ENTREE" | "SORTIE" | null;
@@ -132,13 +133,7 @@ function StocksTab() {
       {/* Contenu des sous-onglets */}
       {activeSubTab === "articles" && <ArticleStockTab />}
 
-      {activeSubTab === "mouvements" && (
-        <DevelopmentPlaceholder
-          icon={History}
-          title="Mouvements de stock"
-          description="Historique complet des entrées et sorties de stock avec traçabilité."
-        />
-      )}
+      {activeSubTab === "mouvements" && <MouvementsStockTab />}
 
       {activeSubTab === "alertes" && (
         <DevelopmentPlaceholder
