@@ -20,18 +20,20 @@ import {
 
 interface MouvementStockModalProps {
   type: "ENTREE" | "SORTIE";
+  initialArticleId?: string | null;
   onClose: () => void;
 }
 
 export default function MouvementStockModal({
   type,
+  initialArticleId,
   onClose,
 }: MouvementStockModalProps) {
   const isEntree = type === "ENTREE";
 
   // ─── État du formulaire ──────────────────────────────────
   const [formData, setFormData] = useState<CreateMouvementStockInput>({
-    articleId: "",
+    articleId: initialArticleId ? String(initialArticleId) : "",
     type: type,
     quantite: 0,
     motif: "",
