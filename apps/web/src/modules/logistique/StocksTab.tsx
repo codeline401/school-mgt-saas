@@ -8,11 +8,11 @@ import {
   AlertTriangle,
   History,
 } from "lucide-react";
-import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
 import ArticleStockTab from "./components/ArticleStockTab";
 import ArticleStockModal from "./components/ArticlesStockModal";
 import MouvementStockModal from "./components/MouvementStockModal";
 import MouvementsStockTab from "./components/MouvementStockTab";
+import AlertesStockTab from "./components/AlertesStockTab";
 
 type SubTab = "articles" | "mouvements" | "alertes";
 type MouvementType = "ENTREE" | "SORTIE" | null;
@@ -135,13 +135,7 @@ function StocksTab() {
 
       {activeSubTab === "mouvements" && <MouvementsStockTab />}
 
-      {activeSubTab === "alertes" && (
-        <DevelopmentPlaceholder
-          icon={AlertTriangle}
-          title="Alertes de seuil"
-          description="Notifications pour les articles en dessous du seuil minimal défini."
-        />
-      )}
+      {activeSubTab === "alertes" && <AlertesStockTab />}
 
       {/** Modal pour création/modification d'article */}
       {isArticleModalOpen && (
