@@ -247,7 +247,11 @@ export class ArticleStockService {
   /**
    * Récupérer l'historique des mouvements d'un article
    */
-  async getMouvements(articleId: string, limit: number = 50, schoolId: string) {
+  async getMouvementArticleById(
+    articleId: string,
+    limit: number = 50,
+    schoolId: string,
+  ) {
     return await prisma.mouvementStock.findMany({
       where: { articleId, schoolId },
       take: limit,
@@ -258,6 +262,33 @@ export class ArticleStockService {
             id: true,
             nom: true,
             prenom: true,
+          },
+        },
+      },
+    });
+  }
+
+  /**
+   * Récupérer l'historique de tous les mouvements de stock
+   */
+  async getAllMouvements(schoolId: string, limit: number = 50) {
+    return await prisma.mouvementStock.findMany({
+      where: { schoolId },
+      take: limit,
+      orderBy: { createdAt: "desc" },
+      include: {
+        user: {
+          select: {
+            id: true,
+            nom: true,
+            prenom: true,
+          },
+        },
+        article: {
+          select: {
+            id: true,
+            nom: true,
+            unite: true,
           },
         },
       },

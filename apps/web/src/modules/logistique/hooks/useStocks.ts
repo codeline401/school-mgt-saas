@@ -76,6 +76,17 @@ export interface MouvementStock {
 }
 
 /**
+ * Mouvement stock avec article
+ */
+export interface MouvementStockWithArticle extends MouvementStock {
+  article: {
+    id: string;
+    nom: string;
+    unite: string;
+  };
+}
+
+/**
  * Input pour créer un mouvement de stock.
  */
 export interface CreateMouvementStockInput {
@@ -121,7 +132,7 @@ export function useArticleStock(articleId: string | undefined) {
 /**
  * Hook pour récupérer les mouvements d'un article
  */
-export function useMouvementsStock(articleId: string | undefined) {
+export function useMouvementsStockArticle(articleId: string | undefined) {
   return useQuery<MouvementStock[]>({
     queryKey: ["mouvements-stock", articleId],
     queryFn: async () => {
@@ -131,6 +142,19 @@ export function useMouvementsStock(articleId: string | undefined) {
       return data;
     },
     enabled: !!articleId, // Ne s'exécute que si articleId est défini
+  });
+}
+
+/**
+ * Hook pour récupérer tous les mouvements de stock de l'école
+ */
+export function useAllMouvementsStock() {
+  return useQuery<MouvementStockWithArticle[]>({
+    queryKey: ["all-mouvement-stock"],
+    queryFn: async () => {
+      const { data } = await api.get("/api/stocks/mouvements/all");
+      return data;
+    },
   });
 }
 

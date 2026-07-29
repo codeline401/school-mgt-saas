@@ -182,12 +182,39 @@ export const getMouvementsByArticleId = async (req: Request, res: Response) => {
       return res.status(403).json({ error: "Ecole non spécifiée" });
     }
 
-    const mouvements = await articleService.getMouvements(id, limit, schoolId);
+    const mouvements = await articleService.getMouvementArticleById(
+      id,
+      limit,
+      schoolId,
+    );
     res.json(mouvements);
   } catch (error: any) {
     console.error("Erreur getMouvementsByArticleId:", error);
     return res.status(400).json({
       error: "Erreur lors de la récupération des mouvements.",
+      details: error.message,
+    });
+  }
+};
+
+/**
+ * récuprère tous les historiques de mouvement
+ */
+export const getAllMouvements = async (req: Request, res: Response) => {
+  try {
+    const schoolId = req.user?.schoolId;
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : 100;
+
+    if (!schoolId) {
+      return res.status(403).json({ error: "Ecole non spécifiée" });
+    }
+
+    const mouvements = await articleService.getAllMouvements(schoolId, limit);
+    res.json(mouvements);
+  } catch (error: any) {
+    console.error("Erreur getAllMouvements :", error);
+    return res.status(400).json({
+      error: "Erreur lors de la récupération des mouvements de stocks",
       details: error.message,
     });
   }
