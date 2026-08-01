@@ -257,7 +257,7 @@ export class EquipementService {
       where: { id: pretId },
       data: {
         ...data,
-        statut: "RETORUNE",
+        statut: "RETOURNE",
         retourParId: user.userId,
       },
       include: {
@@ -322,7 +322,12 @@ export class EquipementService {
   async getPrets(schoolId: string, statut?: string) {
     const where: any = { schoolId };
 
-    if (statut) {
+    if (statut === "EN_RETARD") {
+      where.statut = "EN_COURS";
+      where.dateRetourPrevue = {
+        lt: new Date(),
+      };
+    } else if (statut) {
       where.statut = statut;
     }
 

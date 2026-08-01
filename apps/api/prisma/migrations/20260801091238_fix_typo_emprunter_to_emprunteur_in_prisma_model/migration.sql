@@ -9,9 +9,6 @@
 
 */
 -- AlterTable
-ALTER TABLE "PretEquipement" DROP COLUMN "emprunterId",
-DROP COLUMN "emprunterNom",
-DROP COLUMN "emprunterType",
-ADD COLUMN     "emprunteurId" TEXT,
-ADD COLUMN     "emprunteurNom" TEXT NOT NULL,
-ADD COLUMN     "emprunteurType" "TypeEmprunteur" NOT NULL;
+ALTER TABLE "PretEquipement" RENAME COLUMN "emprunterId" TO "emprunteurId";
+ALTER TABLE "PretEquipement" RENAME COLUMN "emprunterNom" TO "emprunteurNom";
+ALTER TABLE "PretEquipement" RENAME COLUMN "emprunterType" TO "emprunteurType";

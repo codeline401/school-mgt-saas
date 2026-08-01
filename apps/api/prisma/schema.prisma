@@ -1219,7 +1219,7 @@ enum TypeEmprunteur {
 
 enum StatutPret {
   EN_COURS
-  RETORUNE
+  RETOURNE
   EN_RETARD
-  PREDU
+  PERDU
 }

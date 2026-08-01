@@ -7,6 +7,7 @@ import {
   RetourEquipementSchema,
   UpdateEquipementSchema,
 } from "./equipement.schema.js";
+import z from "zod";
 
 /**
  * CONTROLLEUR POUR LA GESTION DES EQUIPEMENTS
@@ -73,18 +74,36 @@ export const getEquipementsById = async (req: Request, res: Response) => {
  */
 export const createEquipement = async (req: Request, res: Response) => {
   try {
+    const parsed = CreateEquipementSchema.safeParse(req.body);
+
+    if (!parsed.success) {
+      return res.status(400).json({
+        error: "Données invalides",
+        details: z.treeifyError(parsed.error),
+      });
+    }
+
+    const schoolId = req.user?.schoolId;
+
+    if (!schoolId) {
+      return res.status(403).json({ error: "Ecole non spécifiée" });
+    }
+
     const data = CreateEquipementSchema.parse(req.body);
     const user = {
-      schoolId: req.user?.schoolId || "",
+      schoolId,
       userId: req.user?.id || "",
       role: req.user?.role || "",
     };
 
-    const equipement = await equipementService.createEquipement(data, user);
+    const equipement = await equipementService.createEquipement(
+      parsed.data,
+      user,
+    );
     res.status(201).json(equipement);
   } catch (error: any) {
     console.error("Erreur createEquipement ", error);
-    return res.status(500).json({
+    return res.status(400).json({
       error: error.message || "Erreur lors de la création de l'équipement.",
     });
   }

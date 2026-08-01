@@ -102,7 +102,7 @@ export function useEquipements() {
  */
 export function useEquipement(equipementId: string | undefined) {
   return useQuery<Equipement>({
-    queryKey: ["equipement", equipementId],
+    queryKey: ["equipements", equipementId],
     queryFn: async () => {
       const { data } = await api.get(
         `/api/logistique/equipements/${equipementId}`,

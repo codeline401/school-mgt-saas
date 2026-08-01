@@ -265,9 +265,9 @@ export type TypeEmprunteur = (typeof TypeEmprunteur)[keyof typeof TypeEmprunteur
 
 export const StatutPret = {
   EN_COURS: 'EN_COURS',
-  RETORUNE: 'RETORUNE',
+  RETOURNE: 'RETOURNE',
   EN_RETARD: 'EN_RETARD',
-  PREDU: 'PREDU'
+  PERDU: 'PERDU'
 } as const
 
 export type StatutPret = (typeof StatutPret)[keyof typeof StatutPret]

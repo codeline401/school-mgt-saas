@@ -8,7 +8,7 @@ CREATE TYPE "EtatEquipement" AS ENUM ('NEUF', 'BON', 'MOYEN', 'MAUVAIS', 'HORS_S
 CREATE TYPE "TypeEmprunteur" AS ENUM ('PROF', 'ELEVE', 'PERSONNEL', 'EXTERNE');
 
 -- CreateEnum
-CREATE TYPE "StatutPret" AS ENUM ('EN_COURS', 'RETORUNE', 'EN_RETARD', 'PREDU');
+CREATE TYPE "StatutPret" AS ENUM ('EN_COURS', 'RETOURNE', 'EN_RETARD', 'PERDU');
 
 -- CreateTable
 CREATE TABLE "Equipement" (
@@ -53,7 +53,7 @@ CREATE TABLE "PretEquipement" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Equipement_numeroSerie_key" ON "Equipement"("numeroSerie");
+CREATE UNIQUE INDEX "Equipement_schoolId_numeroSerie_key" ON "Equipement"("schoolId", "numeroSerie");
 
 -- CreateIndex
 CREATE INDEX "Equipement_schoolId_idx" ON "Equipement"("schoolId");

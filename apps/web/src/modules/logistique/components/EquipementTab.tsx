@@ -116,9 +116,9 @@ function EquipementsTab() {
 
   const formatValeur = (valeur: number | null) => {
     if (valeur === null) return "-";
-    return new Intl.NumberFormat("fr-FR", {
+    return new Intl.NumberFormat("fr-MG", {
       style: "currency",
-      currency: "EUR",
+      currency: "MGA",
     }).format(valeur);
   };
 
