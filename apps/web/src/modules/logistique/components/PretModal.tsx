@@ -156,11 +156,11 @@ export default function PretModal({ equipement, onClose }: PretModalProps) {
         <form onSubmit={handleSubmit}>
           <div className="space-y-4">
             {/* Type d'emprunteur */}
-            <div className="form-control">
+            <fieldset className="fieldset">
               <label className="label">
-                <span className="label-text">
-                  Type d'emprunteur <span className="text-error">*</span>
-                </span>
+                <legend className="fieldset-legend required">
+                  Type d'emprunteur
+                </legend>
               </label>
               <select
                 name="emprunteurType"
@@ -175,14 +175,14 @@ export default function PretModal({ equipement, onClose }: PretModalProps) {
                   </option>
                 ))}
               </select>
-            </div>
+            </fieldset>
 
             {/* Nom de l'emprunteur */}
-            <div className="form-control">
+            <fieldset className="fieldset">
               <label className="label">
-                <span className="label-text">
-                  Nom de l'emprunteur <span className="text-error">*</span>
-                </span>
+                <legend className="fieldset-legend required">
+                  Nom de l'emprunteur
+                </legend>
               </label>
               <input
                 type="text"
@@ -200,16 +200,14 @@ export default function PretModal({ equipement, onClose }: PretModalProps) {
                   </span>
                 </label>
               )}
-            </div>
+            </fieldset>
 
             {/* Dates */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">
-                    Date de prêt <span className="text-error">*</span>
-                  </span>
-                </label>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend required">
+                  Date de prêt
+                </legend>
                 <input
                   type="date"
                   name="datePret"
@@ -225,14 +223,12 @@ export default function PretModal({ equipement, onClose }: PretModalProps) {
                     </span>
                   </label>
                 )}
-              </div>
+              </fieldset>
 
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">
-                    Retour prévu <span className="text-error">*</span>
-                  </span>
-                </label>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend required">
+                  Retour prévu
+                </legend>
                 <input
                   type="date"
                   name="dateRetourPrevue"
@@ -248,14 +244,12 @@ export default function PretModal({ equipement, onClose }: PretModalProps) {
                     </span>
                   </label>
                 )}
-              </div>
+              </fieldset>
             </div>
 
             {/* Motif */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Motif</span>
-              </label>
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend required">Motif</legend>
               <input
                 type="text"
                 name="motif"
@@ -265,13 +259,11 @@ export default function PretModal({ equipement, onClose }: PretModalProps) {
                 placeholder="Ex: Cours de sciences"
                 disabled={isLoading}
               />
-            </div>
+            </fieldset>
 
             {/* Observations */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Observations</span>
-              </label>
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend required">Observation</legend>
               <textarea
                 name="observations"
                 value={formData.observations}
@@ -280,7 +272,7 @@ export default function PretModal({ equipement, onClose }: PretModalProps) {
                 placeholder="Remarques éventuelles..."
                 disabled={isLoading}
               />
-            </div>
+            </fieldset>
 
             {/* Erreur globale */}
             {errors.submit && (
