@@ -227,3 +227,47 @@ export const TypeMouvement = {
 } as const
 
 export type TypeMouvement = (typeof TypeMouvement)[keyof typeof TypeMouvement]
+
+
+export const CategorieEquipement = {
+  AUDIOVISUEL: 'AUDIOVISUEL',
+  INFORMATIQUE: 'INFORMATIQUE',
+  SPORT: 'SPORT',
+  LABORATOIRE: 'LABORATOIRE',
+  MOBILIER: 'MOBILIER',
+  OUTILLAGE: 'OUTILLAGE',
+  AUTRE: 'AUTRE'
+} as const
+
+export type CategorieEquipement = (typeof CategorieEquipement)[keyof typeof CategorieEquipement]
+
+
+export const EtatEquipement = {
+  NEUF: 'NEUF',
+  BON: 'BON',
+  MOYEN: 'MOYEN',
+  MAUVAIS: 'MAUVAIS',
+  HORS_SERVICE: 'HORS_SERVICE'
+} as const
+
+export type EtatEquipement = (typeof EtatEquipement)[keyof typeof EtatEquipement]
+
+
+export const TypeEmprunteur = {
+  PROF: 'PROF',
+  ELEVE: 'ELEVE',
+  PERSONNEL: 'PERSONNEL',
+  EXTERNE: 'EXTERNE'
+} as const
+
+export type TypeEmprunteur = (typeof TypeEmprunteur)[keyof typeof TypeEmprunteur]
+
+
+export const StatutPret = {
+  EN_COURS: 'EN_COURS',
+  RETOURNE: 'RETOURNE',
+  EN_RETARD: 'EN_RETARD',
+  PERDU: 'PERDU'
+} as const
+
+export type StatutPret = (typeof StatutPret)[keyof typeof StatutPret]

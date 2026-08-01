@@ -421,7 +421,9 @@ export const ModelName = {
   Salle: 'Salle',
   ReservationSalle: 'ReservationSalle',
   ArticleStock: 'ArticleStock',
-  MouvementStock: 'MouvementStock'
+  MouvementStock: 'MouvementStock',
+  Equipement: 'Equipement',
+  PretEquipement: 'PretEquipement'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -437,7 +439,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock"
+    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3253,6 +3255,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Equipement: {
+      payload: Prisma.$EquipementPayload<ExtArgs>
+      fields: Prisma.EquipementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EquipementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EquipementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EquipementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EquipementPayload>
+        }
+        findFirst: {
+          args: Prisma.EquipementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EquipementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EquipementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EquipementPayload>
+        }
+        findMany: {
+          args: Prisma.EquipementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EquipementPayload>[]
+        }
+        create: {
+          args: Prisma.EquipementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EquipementPayload>
+        }
+        createMany: {
+          args: Prisma.EquipementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EquipementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EquipementPayload>[]
+        }
+        delete: {
+          args: Prisma.EquipementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EquipementPayload>
+        }
+        update: {
+          args: Prisma.EquipementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EquipementPayload>
+        }
+        deleteMany: {
+          args: Prisma.EquipementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EquipementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EquipementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EquipementPayload>[]
+        }
+        upsert: {
+          args: Prisma.EquipementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EquipementPayload>
+        }
+        aggregate: {
+          args: Prisma.EquipementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEquipement>
+        }
+        groupBy: {
+          args: Prisma.EquipementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EquipementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EquipementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EquipementCountAggregateOutputType> | number
+        }
+      }
+    }
+    PretEquipement: {
+      payload: Prisma.$PretEquipementPayload<ExtArgs>
+      fields: Prisma.PretEquipementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PretEquipementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PretEquipementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PretEquipementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PretEquipementPayload>
+        }
+        findFirst: {
+          args: Prisma.PretEquipementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PretEquipementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PretEquipementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PretEquipementPayload>
+        }
+        findMany: {
+          args: Prisma.PretEquipementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PretEquipementPayload>[]
+        }
+        create: {
+          args: Prisma.PretEquipementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PretEquipementPayload>
+        }
+        createMany: {
+          args: Prisma.PretEquipementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PretEquipementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PretEquipementPayload>[]
+        }
+        delete: {
+          args: Prisma.PretEquipementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PretEquipementPayload>
+        }
+        update: {
+          args: Prisma.PretEquipementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PretEquipementPayload>
+        }
+        deleteMany: {
+          args: Prisma.PretEquipementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PretEquipementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PretEquipementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PretEquipementPayload>[]
+        }
+        upsert: {
+          args: Prisma.PretEquipementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PretEquipementPayload>
+        }
+        aggregate: {
+          args: Prisma.PretEquipementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePretEquipement>
+        }
+        groupBy: {
+          args: Prisma.PretEquipementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PretEquipementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PretEquipementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PretEquipementCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3880,6 +4030,48 @@ export const MouvementStockScalarFieldEnum = {
 export type MouvementStockScalarFieldEnum = (typeof MouvementStockScalarFieldEnum)[keyof typeof MouvementStockScalarFieldEnum]
 
 
+export const EquipementScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  reference: 'reference',
+  numeroSerie: 'numeroSerie',
+  categorie: 'categorie',
+  etat: 'etat',
+  description: 'description',
+  valeur: 'valeur',
+  dateAcquisition: 'dateAcquisition',
+  emplacement: 'emplacement',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EquipementScalarFieldEnum = (typeof EquipementScalarFieldEnum)[keyof typeof EquipementScalarFieldEnum]
+
+
+export const PretEquipementScalarFieldEnum = {
+  id: 'id',
+  equipementId: 'equipementId',
+  emprunteurType: 'emprunteurType',
+  emprunteurNom: 'emprunteurNom',
+  emprunteurId: 'emprunteurId',
+  datePret: 'datePret',
+  dateRetourPrevue: 'dateRetourPrevue',
+  dateRetourEffective: 'dateRetourEffective',
+  statut: 'statut',
+  motif: 'motif',
+  observations: 'observations',
+  etatRetour: 'etatRetour',
+  pretParId: 'pretParId',
+  retourParId: 'retourParId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PretEquipementScalarFieldEnum = (typeof PretEquipementScalarFieldEnum)[keyof typeof PretEquipementScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4318,6 +4510,62 @@ export type EnumTypeMouvementFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
 export type ListEnumTypeMouvementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeMouvement[]'>
     
 
+
+/**
+ * Reference to a field of type 'CategorieEquipement'
+ */
+export type EnumCategorieEquipementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CategorieEquipement'>
+    
+
+
+/**
+ * Reference to a field of type 'CategorieEquipement[]'
+ */
+export type ListEnumCategorieEquipementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CategorieEquipement[]'>
+    
+
+
+/**
+ * Reference to a field of type 'EtatEquipement'
+ */
+export type EnumEtatEquipementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EtatEquipement'>
+    
+
+
+/**
+ * Reference to a field of type 'EtatEquipement[]'
+ */
+export type ListEnumEtatEquipementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EtatEquipement[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeEmprunteur'
+ */
+export type EnumTypeEmprunteurFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeEmprunteur'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeEmprunteur[]'
+ */
+export type ListEnumTypeEmprunteurFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeEmprunteur[]'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutPret'
+ */
+export type EnumStatutPretFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutPret'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutPret[]'
+ */
+export type ListEnumStatutPretFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutPret[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -4466,6 +4714,8 @@ export type GlobalOmitConfig = {
   reservationSalle?: Prisma.ReservationSalleOmit
   articleStock?: Prisma.ArticleStockOmit
   mouvementStock?: Prisma.MouvementStockOmit
+  equipement?: Prisma.EquipementOmit
+  pretEquipement?: Prisma.PretEquipementOmit
 }
 
 /* Types for Logging */

@@ -51,6 +51,8 @@ model User {
   signature                     Signature?
   reservationSalles             ReservationSalle[]
   mouvementStocks               MouvementStock[]
+  pretPar                       PretEquipement[]      @relation("PretEffectue")
+  retournePar                   PretEquipement[]      @relation("RetourEffectue")
 }
 
 // Modele SAAS
@@ -101,6 +103,8 @@ model School {
   reservationSalles ReservationSalle[]
   articleStocks     ArticleStock[]
   mouvementStocks   MouvementStock[]
+  equipements       Equipement[]
+  pretEquipements   PretEquipement[]
 }
 
 model Classe {
@@ -1110,4 +1114,112 @@ model MouvementStock {
   @@index([articleId])
   @@index([schoolId, type])
   @@index([schoolId, createdAt])
+}
+
+// =============================================
+// MODULE LOGISTIQUE - EQUIPEMENTS
+// =============================================
+model Equipement {
+  id              String              @id @default(uuid())
+  nom             String
+  reference       String?
+  numeroSerie     String?             @unique
+  categorie       CategorieEquipement
+  etat            EtatEquipement
+  description     String?
+  valeur          Float?
+  dateAcquisition DateTime?
+  emplacement     String?
+
+  // Relations
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  prets PretEquipement[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId])
+  @@index([categorie])
+  @@index([etat])
+}
+
+// Modèle pour prêts d'équipements
+model PretEquipement {
+  id String @id @default(uuid())
+
+  // Equipement prêté
+  equipementId String
+  equipement   Equipement @relation(fields: [equipementId], references: [id], onDelete: Cascade)
+
+  // Emprunter (peut être prof, élève, ou externe)
+  emprunteurType TypeEmprunteur
+  emprunteurNom  String
+  emprunteurId   String? // Id du user si c'est un staff
+
+  // Dates
+  datePret            DateTime
+  dateRetourPrevue    DateTime
+  dateRetourEffective DateTime?
+
+  // Statut
+  statut StatutPret @default(EN_COURS)
+
+  // statut
+  motif        String?
+  observations String?
+  etatRetour   EtatEquipement?
+
+  // Qui a enregistré le prêt
+  pretParId String
+  pretPar   User   @relation("PretEffectue", fields: [pretParId], references: [id])
+
+  // Qui a enregistré le retour
+  retourParId String?
+  retourPar   User?   @relation("RetourEffectue", fields: [retourParId], references: [id])
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([equipementId])
+  @@index([schoolId])
+  @@index([statut])
+  @@index([datePret])
+}
+
+// Enumérations
+enum CategorieEquipement {
+  AUDIOVISUEL // Vidéoprojecteur, encientes, micros etc
+  INFORMATIQUE // Ordinateurs, tablettes, imprimantes, clé USB
+  SPORT // Ballons, filets, équipement sprotifs
+  LABORATOIRE // Matériel scientifique
+  MOBILIER // Tables, chaises mobiles
+  OUTILLAGE // Tournevis etc
+  AUTRE
+}
+
+enum EtatEquipement {
+  NEUF
+  BON
+  MOYEN
+  MAUVAIS
+  HORS_SERVICE
+}
+
+enum TypeEmprunteur {
+  PROF
+  ELEVE
+  PERSONNEL
+  EXTERNE
+}
+
+enum StatutPret {
+  EN_COURS
+  RETOURNE
+  EN_RETARD
+  PERDU
 }

@@ -325,6 +325,7 @@ export type ArticleStockOrderByWithRelationInput = {
 
 export type ArticleStockWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  schoolId_nom?: Prisma.ArticleStockSchoolIdNomCompoundUniqueInput
   AND?: Prisma.ArticleStockWhereInput | Prisma.ArticleStockWhereInput[]
   OR?: Prisma.ArticleStockWhereInput[]
   NOT?: Prisma.ArticleStockWhereInput | Prisma.ArticleStockWhereInput[]
@@ -343,7 +344,7 @@ export type ArticleStockWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"ArticleStock"> | Date | string
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   mouvements?: Prisma.MouvementStockListRelationFilter
-}, "id">
+}, "id" | "schoolId_nom">
 
 export type ArticleStockOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -517,6 +518,11 @@ export type ArticleStockListRelationFilter = {
 
 export type ArticleStockOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ArticleStockSchoolIdNomCompoundUniqueInput = {
+  schoolId: string
+  nom: string
 }
 
 export type ArticleStockCountOrderByAggregateInput = {
