@@ -91,7 +91,7 @@ function ProfesseursPage() {
       if (values.specialites.trim())
         body.specialites = values.specialites.trim();
       if (values.classeIds.length) body.classeIds = values.classeIds;
-      if (values.matieresIds.length) body.matieresIds = values.matieresIds;
+      if (values.matieresIds.length) body.matiereIds = values.matieresIds;
 
       const { data } = await api.post("/api/profils/profs", body);
       return data;

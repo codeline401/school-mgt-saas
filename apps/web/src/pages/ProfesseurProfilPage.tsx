@@ -137,7 +137,7 @@ export default function ProfesseurProfilPage() {
   const selectedMatiereId =
     preferredMatiereId || matieresDeClasseSelectionnee[0]?.id || "";
   const selectedMatiere = matieresDeClasseSelectionnee.find(
-    (m) => m.id === selectedClasseId,
+    (m) => m.id === selectedMatiereId,
   );
 
   const openModal = () => {
@@ -308,14 +308,7 @@ export default function ProfesseurProfilPage() {
                   {prof.specialites}
                 </p>
               )}
-              <select
-                className="select select-sm select-bordered"
-                value={selectedClasseId}
-                onChange={(e) => {
-                  setPreferredClasseId(e.target.value);
-                  setPreferredMatiereId(""); // réinitialiser la matière
-                }}
-              />
+
               <div className="flex flex-wrap gap-1 mt-2">
                 {prof.classes.map((c) => (
                   <span key={c.id} className="badge badge-outline badge-sm">
