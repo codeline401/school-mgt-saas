@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { authenticate, authorizeRoles } from "../middlewares/authMiddleware.js";
 import {
+  getAllMatieres,
   createClasseMatiere,
   deleteClasseMatiere,
   getClasseMatieres,
@@ -10,7 +11,14 @@ import { Role } from "../generated/prisma/enums.js";
 
 const router = Router({ mergeParams: true }); // Permet d'accéder aux paramètres de la route parente (classeId)
 
-router.get("/", authenticate, getClasseMatieres); // Route pour récupérer les matières d'une classe spécifique
+router.get("/", authenticate, (req, res) => {
+  // Si classeId existe dans les params, on récupère les matières de cette classe
+  // Sinon, on récupère toutes les matières de l'école
+  if (req.params.classeId) {
+    return getClasseMatieres(req, res);
+  }
+  return getAllMatieres(req, res);
+}); // Route pour récupérer les matières d'une classe spécifique ou toutes les matières
 router.post(
   "/",
   authenticate,

@@ -49,6 +49,7 @@ export const createProfesseurSchema = z.object({
   adresse: z.string().trim().optional(),
   specialites: z.string().trim().optional(), // ex: "Mathématiques, Physique"
   classeIds: z.array(z.string().uuid("ID de classe invalide")).optional(),
+  matiereIds: z.array(z.string().uuid("ID de matière invalide")).optional(),
 });
 
 // Schéma de mise à jour du profil d'un PROFESSEUR
@@ -65,6 +66,7 @@ export const updateProfesseurProfilSchema = z.object({
   specialites: z.string().trim().optional(), // ex: "Mathématiques, Physique"
   // liste des IDs de classe à assigner (remplace la liste existante)
   classeIds: z.array(z.string().uuid("ID de classe invalide")).optional(),
+  matiereIds: z.array(z.string().uuid("ID de matière invalide")).optional(),
 });
 
 export type UpdateEleveProfilInput = z.infer<typeof updateEleveProfilSchema>;

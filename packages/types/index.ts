@@ -38,6 +38,7 @@ export interface Professeur extends BaseEntity {
   nom: string;
   prenom: string;
   classeIds: string[]; // IDs des classes que le professeur enseigne
+  matiereIds: string[]; // IDs des matières que le professeur enseigne
 }
 
 // Une école est le tenant principal du Saas

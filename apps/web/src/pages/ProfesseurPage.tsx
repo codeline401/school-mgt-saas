@@ -5,7 +5,7 @@ import { Users } from "lucide-react";
 import toast from "react-hot-toast";
 import { api, getApiError } from "../lib/api";
 import { useAuthStore } from "../store/authStore";
-import type { Professeur, Classe } from "@school-mgt/types";
+import type { Professeur, Classe, Matiere } from "@school-mgt/types";
 
 type ProfWithClasses = Omit<Professeur, "classeIds"> & {
   classes: Classe[];
@@ -20,6 +20,7 @@ type CreateProfForm = {
   adresse: string;
   specialites: string;
   classeIds: string[];
+  matieresIds: string[];
 };
 
 const EMPTY_FORM: CreateProfForm = {
@@ -30,6 +31,7 @@ const EMPTY_FORM: CreateProfForm = {
   adresse: "",
   specialites: "",
   classeIds: [],
+  matieresIds: [],
 };
 
 function ProfesseursPage() {
@@ -67,6 +69,15 @@ function ProfesseursPage() {
     enabled: showCreateForm,
   });
 
+  const { data: matieresDisponibles = [] } = useQuery<Matiere[]>({
+    queryKey: ["matieres"],
+    queryFn: async () => {
+      const { data } = await api.get("/api/matieres");
+      return data;
+    },
+    enabled: showCreateForm,
+  });
+
   const createMutation = useMutation({
     mutationFn: async (values: CreateProfForm) => {
       const body: Record<string, unknown> = {
@@ -77,8 +88,10 @@ function ProfesseursPage() {
 
       if (values.telephone.trim()) body.telephone = values.telephone.trim();
       if (values.adresse.trim()) body.adresse = values.adresse.trim();
-      if (values.specialites.trim()) body.specialites = values.specialites.trim();
+      if (values.specialites.trim())
+        body.specialites = values.specialites.trim();
       if (values.classeIds.length) body.classeIds = values.classeIds;
+      if (values.matieresIds.length) body.matiereIds = values.matieresIds;
 
       const { data } = await api.post("/api/profils/profs", body);
       return data;
@@ -90,7 +103,9 @@ function ProfesseursPage() {
       queryClient.invalidateQueries({ queryKey: ["professeurs"] });
     },
     onError: (err) => {
-      toast.error(getApiError(err, "Erreur lors de la création du professeur."));
+      toast.error(
+        getApiError(err, "Erreur lors de la création du professeur."),
+      );
     },
   });
 
@@ -104,11 +119,30 @@ function ProfesseursPage() {
   const handleClasseToggle = (classeId: string) => {
     setForm((prev) => {
       const exists = prev.classeIds.includes(classeId);
+      const classeIds = exists
+        ? prev.classeIds.filter((id) => id !== classeId)
+        : [...prev.classeIds, classeId];
+
+      // Si on décoche une classe, retirer aussi ses matières
+      const matieresIds = exists
+        ? prev.matieresIds.filter((mid) => {
+            const matiere = matieresDisponibles.find((m) => m.id === mid);
+            return matiere?.classeId !== classeId;
+          })
+        : prev.matieresIds;
+
+      return { ...prev, classeIds, matieresIds };
+    });
+  };
+
+  const handleMatiereToggle = (matiereId: string) => {
+    setForm((prev) => {
+      const exists = prev.matieresIds.includes(matiereId);
       return {
         ...prev,
-        classeIds: exists
-          ? prev.classeIds.filter((id) => id !== classeId)
-          : [...prev.classeIds, classeId],
+        matieresIds: exists
+          ? prev.matieresIds.filter((id) => id !== matiereId)
+          : [...prev.matieresIds, matiereId],
       };
     });
   };
@@ -260,7 +294,10 @@ function ProfesseursPage() {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                     {classes?.map((c) => (
-                      <label key={c.id} className="label cursor-pointer justify-start gap-2">
+                      <label
+                        key={c.id}
+                        className="label cursor-pointer justify-start gap-2"
+                      >
                         <input
                           type="checkbox"
                           className="checkbox checkbox-sm"
@@ -270,6 +307,49 @@ function ProfesseursPage() {
                         <span className="label-text">{c.nom}</span>
                       </label>
                     ))}
+                  </div>
+                )}
+              </fieldset>
+
+              {/* Matières enseignées */}
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">Matières enseignées</legend>
+                {form.classeIds.length === 0 ? (
+                  <p className="text-base-content/40 text-sm">
+                    Sélectionnez au moins une classe pour choisir des matières.
+                  </p>
+                ) : (
+                  <div className="max-h-40 overflow-y-auto space-y-2 border border-base-300 rounded p-2">
+                    {form.classeIds.map((classeId) => {
+                      const classe = classes?.find((c) => c.id === classeId);
+                      const matieresDeCetteClasse = matieresDisponibles.filter(
+                        (m) => m.classeId === classeId,
+                      );
+                      if (matieresDeCetteClasse.length === 0) return null;
+                      return (
+                        <div key={classeId}>
+                          <p className="text-xs font-semibold text-base-content/50 mb-1">
+                            {classe?.nom ?? "Classe"}
+                          </p>
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 pl-2">
+                            {matieresDeCetteClasse.map((m) => (
+                              <label
+                                key={m.id}
+                                className="label cursor-pointer justify-start gap-2"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="checkbox checkbox-sm"
+                                  checked={form.matieresIds.includes(m.id)}
+                                  onChange={() => handleMatiereToggle(m.id)}
+                                />
+                                <span className="label-text">{m.nom}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </fieldset>
@@ -331,7 +411,10 @@ function ProfesseursPage() {
               ) : (professeurs?.length ?? 0) === 0 ? (
                 <tr>
                   <td colSpan={3} className="text-center py-12">
-                    <Users size={36} className="mx-auto mb-3 text-base-content/30" />
+                    <Users
+                      size={36}
+                      className="mx-auto mb-3 text-base-content/30"
+                    />
                     <p className="text-base-content/50 font-medium">
                       Aucun professeur enregistré
                     </p>

@@ -15,7 +15,7 @@ import {
 import { api, getApiError } from "../lib/api";
 import PhotoUpload from "../components/PhotoUpload";
 import { useAuthStore } from "../store/authStore";
-import type { ProfesseurProfil, Classe } from "@school-mgt/types";
+import type { ProfesseurProfil, Classe, Matiere } from "@school-mgt/types";
 import CahierTexteTab from "../components/prof/CahierTexteTab";
 import QuizTab from "../components/prof/QuizTab";
 import EmploiDuTempsTab from "../components/prof/EmploiDuTempsTab";
@@ -63,6 +63,7 @@ type EditForm = {
   photoUrl: string;
   specialites: string;
   classeIds: string[];
+  matieresIds: string[];
 };
 
 export default function ProfesseurProfilPage() {
@@ -97,6 +98,16 @@ export default function ProfesseurProfilPage() {
     enabled: canEdit,
   });
 
+  // Toutes les matières de l'école, chacune rattachée à une classe (m.classeId)
+  const { data: matieresDisponibles = [] } = useQuery<Matiere[]>({
+    queryKey: ["matieres"],
+    queryFn: async () => {
+      const { data } = await api.get("/api/matieres");
+      return data;
+    },
+    enabled: canEdit,
+  });
+
   const [form, setForm] = useState<EditForm>({
     nom: "",
     prenom: "",
@@ -106,14 +117,28 @@ export default function ProfesseurProfilPage() {
     photoUrl: "",
     specialites: "",
     classeIds: [],
+    matieresIds: [],
   });
   const [activeTab, setActiveTab] = useState<
     "profil" | "cahier-texte" | "quiz" | "emploi-du-temps" | "notes"
   >("profil");
   const [preferredClasseId, setPreferredClasseId] = useState<string>("");
+  const [preferredMatiereId, setPreferredMatiereId] = useState<string>("");
   // Derives the active class: if the user hasn't explicitly picked one yet,
   // fall back to the first class from the prof data.
   const selectedClasseId = preferredClasseId || prof?.classes[0]?.id || "";
+
+  // Matières disponibles pour la classe célectionnée
+  const matieresDeClasseSelectionnee =
+    prof?.matieres.filter((matiere) => matiere.classeId === selectedClasseId) ??
+    [];
+
+  // Matière sélectionnée : préférée ou première de la liste
+  const selectedMatiereId =
+    preferredMatiereId || matieresDeClasseSelectionnee[0]?.id || "";
+  const selectedMatiere = matieresDeClasseSelectionnee.find(
+    (m) => m.id === selectedMatiereId,
+  );
 
   const openModal = () => {
     if (!prof) return;
@@ -128,6 +153,7 @@ export default function ProfesseurProfilPage() {
       photoUrl: prof.photoUrl ?? "",
       specialites: prof.specialites ?? "",
       classeIds: prof.classes.map((c) => c.id),
+      matieresIds: prof.matieres.map((m) => m.id),
     });
     modalRef.current?.showModal();
   };
@@ -147,8 +173,9 @@ export default function ProfesseurProfilPage() {
       if (f.adresse.trim()) body.adresse = f.adresse.trim();
       if (f.photoUrl.trim()) body.photoUrl = f.photoUrl.trim();
       if (f.specialites.trim()) body.specialites = f.specialites.trim();
-      // Always send classeIds: empty array removes all classes
+      // Always send classeIds / matieresIds: empty array removes all
       body.classeIds = f.classeIds;
+      body.matieresIds = f.matieresIds;
 
       const { data } = await api.put(`/api/profils/profs/${id}`, body);
       return data;
@@ -168,11 +195,31 @@ export default function ProfesseurProfilPage() {
   };
 
   const toggleClasse = (classeId: string, checked: boolean) => {
+    setForm((prev) => {
+      const classeIds = checked
+        ? [...prev.classeIds, classeId]
+        : prev.classeIds.filter((cid) => cid !== classeId);
+
+      // Une matière appartient à une seule classe : si on décoche une classe,
+      // on retire aussi les matières de cette classe pour ne pas garder une
+      // sélection orpheline / invalide côté backend.
+      const matieresIds = checked
+        ? prev.matieresIds
+        : prev.matieresIds.filter((mid) => {
+            const matiere = matieresDisponibles.find((m) => m.id === mid);
+            return matiere?.classeId !== classeId;
+          });
+
+      return { ...prev, classeIds, matieresIds };
+    });
+  };
+
+  const toggleMatiere = (matiereId: string, checked: boolean) => {
     setForm((prev) => ({
       ...prev,
-      classeIds: checked
-        ? [...prev.classeIds, classeId]
-        : prev.classeIds.filter((id) => id !== classeId),
+      matieresIds: checked
+        ? [...prev.matieresIds, matiereId]
+        : prev.matieresIds.filter((mid) => mid !== matiereId),
     }));
   };
 
@@ -206,6 +253,12 @@ export default function ProfesseurProfilPage() {
       </div>
     );
   }
+
+  // Matières visibles dans le formulaire : uniquement celles rattachées
+  // à une classe actuellement cochée.
+  const matieresSelectionnables = matieresDisponibles.filter((m) =>
+    form.classeIds.includes(m.classeId),
+  );
 
   return (
     <div className="space-y-6">
@@ -255,6 +308,7 @@ export default function ProfesseurProfilPage() {
                   {prof.specialites}
                 </p>
               )}
+
               <div className="flex flex-wrap gap-1 mt-2">
                 {prof.classes.map((c) => (
                   <span key={c.id} className="badge badge-outline badge-sm">
@@ -272,28 +326,62 @@ export default function ProfesseurProfilPage() {
         </div>
       </div>
 
-      {/* Sélecteur de classe (visible pour les onglets pédagogiques) */}
+      {/* Sélecteurs de classe et matière */}
       {activeTab !== "profil" && activeTab !== "emploi-du-temps" && (
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-sm text-base-content/50">Classe :</span>
-          {prof.classes.length === 0 ? (
-            <span className="text-sm text-base-content/40">
-              Aucune classe assignée
-            </span>
-          ) : prof.classes.length === 1 ? (
-            <span className="text-sm font-medium">{prof.classes[0].nom}</span>
-          ) : (
-            <select
-              className="select select-sm select-bordered"
-              value={selectedClasseId}
-              onChange={(e) => setPreferredClasseId(e.target.value)}
-            >
-              {prof.classes.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.nom}
-                </option>
-              ))}
-            </select>
+        <div className="flex items-center gap-4 mb-2">
+          {/* Sélecteur de classe */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-base-content/50">Classe :</span>
+            {prof.classes.length === 0 ? (
+              <span className="text-sm text-base-content/40">
+                Aucune classe assignée
+              </span>
+            ) : prof.classes.length === 1 ? (
+              <span className="text-sm font-medium">{prof.classes[0].nom}</span>
+            ) : (
+              <select
+                className="select select-sm select-bordered"
+                value={selectedClasseId}
+                onChange={(e) => {
+                  setPreferredClasseId(e.target.value);
+                  setPreferredMatiereId(""); // Réinitialiser la matière
+                }}
+              >
+                {prof.classes.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.nom}
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
+
+          {/* Sélecteur de matière */}
+          {selectedClasseId && (
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-base-content/50">Matière :</span>
+              {matieresDeClasseSelectionnee.length === 0 ? (
+                <span className="text-sm text-base-content/40">
+                  Aucune matière assignée
+                </span>
+              ) : matieresDeClasseSelectionnee.length === 1 ? (
+                <span className="text-sm font-medium">
+                  {matieresDeClasseSelectionnee[0].nom}
+                </span>
+              ) : (
+                <select
+                  className="select select-sm select-bordered"
+                  value={selectedMatiereId}
+                  onChange={(e) => setPreferredMatiereId(e.target.value)}
+                >
+                  {matieresDeClasseSelectionnee.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.nom}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
           )}
         </div>
       )}
@@ -568,7 +656,9 @@ export default function ProfesseurProfilPage() {
             {/* Photo de profil */}
             <PhotoUpload
               value={form.photoUrl}
-              onChange={(url) => setForm((prev) => ({ ...prev, photoUrl: url }))}
+              onChange={(url) =>
+                setForm((prev) => ({ ...prev, photoUrl: url }))
+              }
             />
 
             <fieldset className="fieldset">
@@ -594,6 +684,56 @@ export default function ProfesseurProfilPage() {
                   </label>
                 ))}
               </div>
+            </fieldset>
+
+            {/* Matières : dépendent des classes cochées ci-dessus */}
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Matières enseignées</legend>
+              {form.classeIds.length === 0 ? (
+                <p className="text-base-content/40 text-sm">
+                  Sélectionnez au moins une classe pour choisir des matières.
+                </p>
+              ) : matieresSelectionnables.length === 0 ? (
+                <p className="text-base-content/40 text-sm">
+                  Aucune matière disponible pour les classes sélectionnées.
+                </p>
+              ) : (
+                <div className="max-h-40 overflow-y-auto space-y-2 border border-base-300 rounded p-2">
+                  {form.classeIds.map((classeId) => {
+                    const classe = classes.find((c) => c.id === classeId);
+                    const matieresDeCetteClasse =
+                      matieresSelectionnables.filter(
+                        (m) => m.classeId === classeId,
+                      );
+                    if (matieresDeCetteClasse.length === 0) return null;
+                    return (
+                      <div key={classeId}>
+                        <p className="text-xs font-semibold text-base-content/50 mb-1">
+                          {classe?.nom ?? "Classe"}
+                        </p>
+                        <div className="space-y-1 pl-2">
+                          {matieresDeCetteClasse.map((m) => (
+                            <label
+                              key={m.id}
+                              className="flex items-center gap-2 cursor-pointer"
+                            >
+                              <input
+                                type="checkbox"
+                                className="checkbox checkbox-sm"
+                                checked={form.matieresIds.includes(m.id)}
+                                onChange={(e) =>
+                                  toggleMatiere(m.id, e.target.checked)
+                                }
+                              />
+                              <span className="text-sm">{m.nom}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </fieldset>
 
             <div className="modal-action">
@@ -624,13 +764,10 @@ export default function ProfesseurProfilPage() {
       </dialog>
 
       {activeTab === "cahier-texte" &&
-        (selectedClasseId ? (
+        (selectedClasseId && selectedMatiere ? (
           <CahierTexteTab
             classeId={selectedClasseId}
-            matieres={
-              prof.matieres?.filter((m) => m.classeId === selectedClasseId) ??
-              []
-            }
+            matieres={[selectedMatiere]} // Une seule matière
             canWrite={
               user?.role === "PROF" ||
               user?.role === "ADMIN" ||
@@ -639,18 +776,15 @@ export default function ProfesseurProfilPage() {
           />
         ) : (
           <p className="text-center text-base-content/50 py-8">
-            Aucune classe assignée.
+            Aucune classe ou matière assignée.
           </p>
         ))}
 
       {activeTab === "quiz" &&
-        (selectedClasseId ? (
+        (selectedClasseId && selectedMatiere ? (
           <QuizTab
             classeId={selectedClasseId}
-            matieres={
-              prof.matieres?.filter((m) => m.classeId === selectedClasseId) ??
-              []
-            }
+            matieres={[selectedMatiere]} // Une seule matière
             canWrite={
               user?.role === "PROF" ||
               user?.role === "ADMIN" ||
@@ -659,7 +793,7 @@ export default function ProfesseurProfilPage() {
           />
         ) : (
           <p className="text-center text-base-content/50 py-8">
-            Aucune classe assignée.
+            Aucune classe ou matière assignée.
           </p>
         ))}
 
@@ -668,13 +802,10 @@ export default function ProfesseurProfilPage() {
       )}
 
       {activeTab === "notes" &&
-        (selectedClasseId ? (
+        (selectedClasseId && selectedMatiere ? (
           <NotesTab
             classeId={selectedClasseId}
-            matieres={
-              prof.matieres?.filter((m) => m.classeId === selectedClasseId) ??
-              []
-            }
+            matieres={[selectedMatiere]} // Une seule matière
             canWrite={
               user?.role === "PROF" ||
               user?.role === "ADMIN" ||
@@ -683,7 +814,7 @@ export default function ProfesseurProfilPage() {
           />
         ) : (
           <p className="text-center text-base-content/50 py-8">
-            Aucune classe assignée.
+            Aucune classe ou matière assignée.
           </p>
         ))}
     </div>

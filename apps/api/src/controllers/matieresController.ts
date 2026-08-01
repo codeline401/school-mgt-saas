@@ -17,6 +17,58 @@ function isAuthorizhedForSchool(
 }
 
 /**
+ * GET /api/matieres
+ * Récupère toutes les matières de l'école de l'utilisateur.
+ */
+export const getAllMatieres = async (req: Request, res: Response) => {
+  try {
+    const schoolId = req.user?.schoolId;
+
+    if (!schoolId) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
+
+    const matieres = await prisma.matiere.findMany({
+      where: { classe: { schoolId } },
+      include: {
+        classe: {
+          select: {
+            id: true,
+            nom: true,
+          },
+        },
+      },
+      orderBy: [{ classe: { nom: "asc" } }, { nom: "asc" }],
+    });
+
+    // Un PROF ne voit que les matières qu'il enseigne
+    if (req.user!.role === "PROF") {
+      const profMatieres = await prisma.matiere.findMany({
+        where: {
+          classe: { schoolId },
+          profs: { some: { userId: req.user!.id } },
+        },
+        include: {
+          classe: {
+            select: {
+              id: true,
+              nom: true,
+            },
+          },
+        },
+        orderBy: [{ classe: { nom: "asc" } }, { nom: "asc" }],
+      });
+      return res.status(200).json(profMatieres);
+    }
+
+    res.status(200).json(matieres);
+  } catch (err) {
+    console.error("Erreur lors de la récupération des matières :", err);
+    res.status(500).json({ error: "Une erreur est survenue." });
+  }
+};
+
+/**
  * GET /api/classes/:classeId/matieres
  * Récupère les matières d'une classe spécifique.
  * Seuls les utilisateurs rattachés à l'école de la classe ou les SUDO_ADMIN peuvent accéder à cette ressource.

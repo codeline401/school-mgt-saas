@@ -470,6 +470,16 @@ export const createProfesseur = async (req: Request, res: Response) => {
       });
     }
 
+    const school = await prisma.school.findUnique({
+      where: { id: schoolId },
+    });
+
+    if (!school) {
+      return res.status(400).json({
+        error: "L'école associée à l'utilisateur n'existe pas.",
+      });
+    }
+
     const validatedData = createProfesseurSchema.parse(req.body); // Validation des données d'entrée
     const hashedPassword = await bcrypt.hash(
       `tempMDP${validatedData.prenom.toLowerCase()}1234!@futurecole`,
@@ -517,6 +527,11 @@ export const createProfesseur = async (req: Request, res: Response) => {
           ...(validatedData.classeIds?.length && {
             classes: {
               connect: validatedData.classeIds?.map((id) => ({ id })),
+            },
+          }),
+          ...(validatedData.matiereIds?.length && {
+            matieres: {
+              connect: validatedData.matiereIds?.map((id) => ({ id })),
             },
           }),
         },
