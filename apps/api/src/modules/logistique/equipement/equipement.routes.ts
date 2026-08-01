@@ -5,10 +5,11 @@ import {
   updateEquipement,
   deleteEquipement,
   createPret,
-  retournerPret,
   getPrets,
   getEquipementsEnRetard,
-} from "./inventaire.controller.js";
+  retournerEquipementPrete,
+  getStatistiques,
+} from "./equipement.controller.js";
 import {
   authenticate,
   authorizeRoles,
@@ -49,10 +50,17 @@ router.post(
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
   createPret,
 );
-router.put(
+router.post(
   "/prets/:id/retour",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
-  retournerPret,
+  retournerEquipementPrete,
+);
+
+// Statistiques
+router.get(
+  "/statistiques",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  getStatistiques,
 );
 
 // Alertes de retard

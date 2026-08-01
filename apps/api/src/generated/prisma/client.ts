@@ -231,3 +231,13 @@ export type ArticleStock = Prisma.ArticleStockModel
  * 
  */
 export type MouvementStock = Prisma.MouvementStockModel
+/**
+ * Model Equipement
+ * 
+ */
+export type Equipement = Prisma.EquipementModel
+/**
+ * Model PretEquipement
+ * 
+ */
+export type PretEquipement = Prisma.PretEquipementModel

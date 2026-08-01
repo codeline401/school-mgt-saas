@@ -88,7 +88,9 @@ export const ModelName = {
   Salle: 'Salle',
   ReservationSalle: 'ReservationSalle',
   ArticleStock: 'ArticleStock',
-  MouvementStock: 'MouvementStock'
+  MouvementStock: 'MouvementStock',
+  Equipement: 'Equipement',
+  PretEquipement: 'PretEquipement'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -693,6 +695,48 @@ export const MouvementStockScalarFieldEnum = {
 } as const
 
 export type MouvementStockScalarFieldEnum = (typeof MouvementStockScalarFieldEnum)[keyof typeof MouvementStockScalarFieldEnum]
+
+
+export const EquipementScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  reference: 'reference',
+  numeroSerie: 'numeroSerie',
+  categorie: 'categorie',
+  etat: 'etat',
+  description: 'description',
+  valeur: 'valeur',
+  dateAcquisition: 'dateAcquisition',
+  emplacement: 'emplacement',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EquipementScalarFieldEnum = (typeof EquipementScalarFieldEnum)[keyof typeof EquipementScalarFieldEnum]
+
+
+export const PretEquipementScalarFieldEnum = {
+  id: 'id',
+  equipementId: 'equipementId',
+  emprunteurType: 'emprunteurType',
+  emprunteurNom: 'emprunteurNom',
+  emprunteurId: 'emprunteurId',
+  datePret: 'datePret',
+  dateRetourPrevue: 'dateRetourPrevue',
+  dateRetourEffective: 'dateRetourEffective',
+  statut: 'statut',
+  motif: 'motif',
+  observations: 'observations',
+  etatRetour: 'etatRetour',
+  pretParId: 'pretParId',
+  retourParId: 'retourParId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PretEquipementScalarFieldEnum = (typeof PretEquipementScalarFieldEnum)[keyof typeof PretEquipementScalarFieldEnum]
 
 
 export const SortOrder = {
