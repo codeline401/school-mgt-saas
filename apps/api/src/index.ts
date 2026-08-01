@@ -33,6 +33,7 @@ import programmeRoutes from "./modules/cahierDeTexte/programme.realise/programme
 import documentRoutes from "./modules/cahierDeTexte/document.pedagogique/document.routes.js";
 import logistiqueRoutes from "./modules/logistique/logistique.routes.js"; // Importation des routes pour la logistique
 import articleStockRoutes from "./modules/logistique/stocks/stocks.routes.js"; // Importation des routes pour la gestion des articles en stock
+import matieresRoutes from "./routes/matieresRoute.js"; // Importation des routes pour les matières
 
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
@@ -45,6 +46,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/schools", schoolRoutes);
 app.use("/api/classes", classesRoutes);
 app.use("/api/profils", profilsRoutes);
+app.use("/api/matieres", matieresRoutes); // Ajout des routes pour les matières
 app.use("/api/devoirs-donnes", devoirsRoutes); // Ajout des routes pour les devoirs
 app.use("/api/programme-realise", programmeRoutes); // Ajout des routes pour le programme réalisé
 app.use("/api/documents", documentRoutes); // Ajout des routes pour les documents pédagogiques
