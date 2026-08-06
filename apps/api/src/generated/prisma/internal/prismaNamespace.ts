@@ -423,7 +423,9 @@ export const ModelName = {
   ArticleStock: 'ArticleStock',
   MouvementStock: 'MouvementStock',
   Equipement: 'Equipement',
-  PretEquipement: 'PretEquipement'
+  PretEquipement: 'PretEquipement',
+  TicketMaintenance: 'TicketMaintenance',
+  InterventionMaintenance: 'InterventionMaintenance'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -439,7 +441,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement"
+    modelProps: "user" | "school" | "classe" | "eleve" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3403,6 +3405,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TicketMaintenance: {
+      payload: Prisma.$TicketMaintenancePayload<ExtArgs>
+      fields: Prisma.TicketMaintenanceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TicketMaintenanceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketMaintenancePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TicketMaintenanceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketMaintenancePayload>
+        }
+        findFirst: {
+          args: Prisma.TicketMaintenanceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketMaintenancePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TicketMaintenanceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketMaintenancePayload>
+        }
+        findMany: {
+          args: Prisma.TicketMaintenanceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketMaintenancePayload>[]
+        }
+        create: {
+          args: Prisma.TicketMaintenanceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketMaintenancePayload>
+        }
+        createMany: {
+          args: Prisma.TicketMaintenanceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TicketMaintenanceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketMaintenancePayload>[]
+        }
+        delete: {
+          args: Prisma.TicketMaintenanceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketMaintenancePayload>
+        }
+        update: {
+          args: Prisma.TicketMaintenanceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketMaintenancePayload>
+        }
+        deleteMany: {
+          args: Prisma.TicketMaintenanceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TicketMaintenanceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TicketMaintenanceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketMaintenancePayload>[]
+        }
+        upsert: {
+          args: Prisma.TicketMaintenanceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketMaintenancePayload>
+        }
+        aggregate: {
+          args: Prisma.TicketMaintenanceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTicketMaintenance>
+        }
+        groupBy: {
+          args: Prisma.TicketMaintenanceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketMaintenanceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TicketMaintenanceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketMaintenanceCountAggregateOutputType> | number
+        }
+      }
+    }
+    InterventionMaintenance: {
+      payload: Prisma.$InterventionMaintenancePayload<ExtArgs>
+      fields: Prisma.InterventionMaintenanceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InterventionMaintenanceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterventionMaintenancePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InterventionMaintenanceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterventionMaintenancePayload>
+        }
+        findFirst: {
+          args: Prisma.InterventionMaintenanceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterventionMaintenancePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InterventionMaintenanceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterventionMaintenancePayload>
+        }
+        findMany: {
+          args: Prisma.InterventionMaintenanceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterventionMaintenancePayload>[]
+        }
+        create: {
+          args: Prisma.InterventionMaintenanceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterventionMaintenancePayload>
+        }
+        createMany: {
+          args: Prisma.InterventionMaintenanceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InterventionMaintenanceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterventionMaintenancePayload>[]
+        }
+        delete: {
+          args: Prisma.InterventionMaintenanceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterventionMaintenancePayload>
+        }
+        update: {
+          args: Prisma.InterventionMaintenanceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterventionMaintenancePayload>
+        }
+        deleteMany: {
+          args: Prisma.InterventionMaintenanceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InterventionMaintenanceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InterventionMaintenanceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterventionMaintenancePayload>[]
+        }
+        upsert: {
+          args: Prisma.InterventionMaintenanceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterventionMaintenancePayload>
+        }
+        aggregate: {
+          args: Prisma.InterventionMaintenanceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInterventionMaintenance>
+        }
+        groupBy: {
+          args: Prisma.InterventionMaintenanceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InterventionMaintenanceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InterventionMaintenanceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InterventionMaintenanceCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4072,6 +4222,48 @@ export const PretEquipementScalarFieldEnum = {
 export type PretEquipementScalarFieldEnum = (typeof PretEquipementScalarFieldEnum)[keyof typeof PretEquipementScalarFieldEnum]
 
 
+export const TicketMaintenanceScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  description: 'description',
+  type: 'type',
+  priorite: 'priorite',
+  statut: 'statut',
+  localisationId: 'localisationId',
+  typeLocalisation: 'typeLocalisation',
+  localisationNom: 'localisationNom',
+  dateOuverture: 'dateOuverture',
+  dateResolution: 'dateResolution',
+  creeParId: 'creeParId',
+  assigneAId: 'assigneAId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketMaintenanceScalarFieldEnum = (typeof TicketMaintenanceScalarFieldEnum)[keyof typeof TicketMaintenanceScalarFieldEnum]
+
+
+export const InterventionMaintenanceScalarFieldEnum = {
+  id: 'id',
+  ticketId: 'ticketId',
+  dateDebut: 'dateDebut',
+  dateFin: 'dateFin',
+  technicienId: 'technicienId',
+  description: 'description',
+  observations: 'observations',
+  statut: 'statut',
+  cout: 'cout',
+  piecesUtilisees: 'piecesUtilisees',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type InterventionMaintenanceScalarFieldEnum = (typeof InterventionMaintenanceScalarFieldEnum)[keyof typeof InterventionMaintenanceScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4566,6 +4758,76 @@ export type EnumStatutPretFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
 export type ListEnumStatutPretFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutPret[]'>
     
 
+
+/**
+ * Reference to a field of type 'TypeTicket'
+ */
+export type EnumTypeTicketFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeTicket'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeTicket[]'
+ */
+export type ListEnumTypeTicketFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeTicket[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PrioriteTicket'
+ */
+export type EnumPrioriteTicketFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PrioriteTicket'>
+    
+
+
+/**
+ * Reference to a field of type 'PrioriteTicket[]'
+ */
+export type ListEnumPrioriteTicketFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PrioriteTicket[]'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutTicket'
+ */
+export type EnumStatutTicketFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutTicket'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutTicket[]'
+ */
+export type ListEnumStatutTicketFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutTicket[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeLocalisation'
+ */
+export type EnumTypeLocalisationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeLocalisation'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeLocalisation[]'
+ */
+export type ListEnumTypeLocalisationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeLocalisation[]'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutIntervention'
+ */
+export type EnumStatutInterventionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutIntervention'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutIntervention[]'
+ */
+export type ListEnumStatutInterventionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutIntervention[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -4716,6 +4978,8 @@ export type GlobalOmitConfig = {
   mouvementStock?: Prisma.MouvementStockOmit
   equipement?: Prisma.EquipementOmit
   pretEquipement?: Prisma.PretEquipementOmit
+  ticketMaintenance?: Prisma.TicketMaintenanceOmit
+  interventionMaintenance?: Prisma.InterventionMaintenanceOmit
 }
 
 /* Types for Logging */

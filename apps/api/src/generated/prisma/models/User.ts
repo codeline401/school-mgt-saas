@@ -248,6 +248,10 @@ export type UserWhereInput = {
   mouvementStocks?: Prisma.MouvementStockListRelationFilter
   pretPar?: Prisma.PretEquipementListRelationFilter
   retournePar?: Prisma.PretEquipementListRelationFilter
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceListRelationFilter
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceListRelationFilter
+  interventionMaintenances?: Prisma.InterventionMaintenanceListRelationFilter
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -280,6 +284,10 @@ export type UserOrderByWithRelationInput = {
   mouvementStocks?: Prisma.MouvementStockOrderByRelationAggregateInput
   pretPar?: Prisma.PretEquipementOrderByRelationAggregateInput
   retournePar?: Prisma.PretEquipementOrderByRelationAggregateInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceOrderByRelationAggregateInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceOrderByRelationAggregateInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceOrderByRelationAggregateInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -315,6 +323,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   mouvementStocks?: Prisma.MouvementStockListRelationFilter
   pretPar?: Prisma.PretEquipementListRelationFilter
   retournePar?: Prisma.PretEquipementListRelationFilter
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceListRelationFilter
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceListRelationFilter
+  interventionMaintenances?: Prisma.InterventionMaintenanceListRelationFilter
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -380,6 +392,10 @@ export type UserCreateInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -411,6 +427,10 @@ export type UserUncheckedCreateInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUpdateInput = {
@@ -442,6 +462,10 @@ export type UserUpdateInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -473,6 +497,10 @@ export type UserUncheckedUpdateInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -886,6 +914,66 @@ export type UserUpdateOneWithoutRetourneParNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRetourneParInput, Prisma.UserUpdateWithoutRetourneParInput>, Prisma.UserUncheckedUpdateWithoutRetourneParInput>
 }
 
+export type UserCreateNestedOneWithoutTicketMaintenancesCreeInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketMaintenancesCreeInput, Prisma.UserUncheckedCreateWithoutTicketMaintenancesCreeInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketMaintenancesCreeInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutTicketMaintenancesAssigneeInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketMaintenancesAssigneeInput, Prisma.UserUncheckedCreateWithoutTicketMaintenancesAssigneeInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketMaintenancesAssigneeInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTicketMaintenancesCreeNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketMaintenancesCreeInput, Prisma.UserUncheckedCreateWithoutTicketMaintenancesCreeInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketMaintenancesCreeInput
+  upsert?: Prisma.UserUpsertWithoutTicketMaintenancesCreeInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTicketMaintenancesCreeInput, Prisma.UserUpdateWithoutTicketMaintenancesCreeInput>, Prisma.UserUncheckedUpdateWithoutTicketMaintenancesCreeInput>
+}
+
+export type UserUpdateOneWithoutTicketMaintenancesAssigneeNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketMaintenancesAssigneeInput, Prisma.UserUncheckedCreateWithoutTicketMaintenancesAssigneeInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketMaintenancesAssigneeInput
+  upsert?: Prisma.UserUpsertWithoutTicketMaintenancesAssigneeInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTicketMaintenancesAssigneeInput, Prisma.UserUpdateWithoutTicketMaintenancesAssigneeInput>, Prisma.UserUncheckedUpdateWithoutTicketMaintenancesAssigneeInput>
+}
+
+export type UserCreateNestedOneWithoutInterventionMaintenancesTechnicianInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInterventionMaintenancesTechnicianInput, Prisma.UserUncheckedCreateWithoutInterventionMaintenancesTechnicianInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInterventionMaintenancesTechnicianInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutInterventionMaintenancesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInterventionMaintenancesInput, Prisma.UserUncheckedCreateWithoutInterventionMaintenancesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInterventionMaintenancesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutInterventionMaintenancesTechnicianNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInterventionMaintenancesTechnicianInput, Prisma.UserUncheckedCreateWithoutInterventionMaintenancesTechnicianInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInterventionMaintenancesTechnicianInput
+  upsert?: Prisma.UserUpsertWithoutInterventionMaintenancesTechnicianInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInterventionMaintenancesTechnicianInput, Prisma.UserUpdateWithoutInterventionMaintenancesTechnicianInput>, Prisma.UserUncheckedUpdateWithoutInterventionMaintenancesTechnicianInput>
+}
+
+export type UserUpdateOneWithoutInterventionMaintenancesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInterventionMaintenancesInput, Prisma.UserUncheckedCreateWithoutInterventionMaintenancesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInterventionMaintenancesInput
+  upsert?: Prisma.UserUpsertWithoutInterventionMaintenancesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInterventionMaintenancesInput, Prisma.UserUpdateWithoutInterventionMaintenancesInput>, Prisma.UserUncheckedUpdateWithoutInterventionMaintenancesInput>
+}
+
 export type UserCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -914,6 +1002,10 @@ export type UserCreateWithoutSchoolInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutSchoolInput = {
@@ -944,6 +1036,10 @@ export type UserUncheckedCreateWithoutSchoolInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutSchoolInput = {
@@ -1017,6 +1113,10 @@ export type UserCreateWithoutProfesseurInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutProfesseurInput = {
@@ -1047,6 +1147,10 @@ export type UserUncheckedCreateWithoutProfesseurInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutProfesseurInput = {
@@ -1093,6 +1197,10 @@ export type UserUpdateWithoutProfesseurInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfesseurInput = {
@@ -1123,6 +1231,10 @@ export type UserUncheckedUpdateWithoutProfesseurInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutParentInput = {
@@ -1153,6 +1265,10 @@ export type UserCreateWithoutParentInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutParentInput = {
@@ -1183,6 +1299,10 @@ export type UserUncheckedCreateWithoutParentInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutParentInput = {
@@ -1229,6 +1349,10 @@ export type UserUpdateWithoutParentInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParentInput = {
@@ -1259,6 +1383,10 @@ export type UserUncheckedUpdateWithoutParentInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutContratsInput = {
@@ -1289,6 +1417,10 @@ export type UserCreateWithoutContratsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutContratsInput = {
@@ -1319,6 +1451,10 @@ export type UserUncheckedCreateWithoutContratsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutContratsInput = {
@@ -1365,6 +1501,10 @@ export type UserUpdateWithoutContratsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutContratsInput = {
@@ -1395,6 +1535,10 @@ export type UserUncheckedUpdateWithoutContratsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutRemplacementsInput = {
@@ -1425,6 +1569,10 @@ export type UserCreateWithoutRemplacementsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutRemplacementsInput = {
@@ -1455,6 +1603,10 @@ export type UserUncheckedCreateWithoutRemplacementsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutRemplacementsInput = {
@@ -1501,6 +1653,10 @@ export type UserUpdateWithoutRemplacementsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRemplacementsInput = {
@@ -1531,6 +1687,10 @@ export type UserUncheckedUpdateWithoutRemplacementsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutNotesInput = {
@@ -1561,6 +1721,10 @@ export type UserCreateWithoutNotesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutNotesInput = {
@@ -1591,6 +1755,10 @@ export type UserUncheckedCreateWithoutNotesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutNotesInput = {
@@ -1637,6 +1805,10 @@ export type UserUpdateWithoutNotesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesInput = {
@@ -1667,6 +1839,10 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutDocumentsInput = {
@@ -1697,6 +1873,10 @@ export type UserCreateWithoutDocumentsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutDocumentsInput = {
@@ -1727,6 +1907,10 @@ export type UserUncheckedCreateWithoutDocumentsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutDocumentsInput = {
@@ -1773,6 +1957,10 @@ export type UserUpdateWithoutDocumentsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDocumentsInput = {
@@ -1803,6 +1991,10 @@ export type UserUncheckedUpdateWithoutDocumentsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -1833,6 +2025,10 @@ export type UserCreateWithoutNotificationsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -1863,6 +2059,10 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -1909,6 +2109,10 @@ export type UserUpdateWithoutNotificationsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -1939,6 +2143,10 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutDeliberationSessionsInput = {
@@ -1969,6 +2177,10 @@ export type UserCreateWithoutDeliberationSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutDeliberationSessionsInput = {
@@ -1999,6 +2211,10 @@ export type UserUncheckedCreateWithoutDeliberationSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutDeliberationSessionsInput = {
@@ -2034,6 +2250,10 @@ export type UserCreateWithoutDeliberationSessionsValidéesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutDeliberationSessionsValidéesInput = {
@@ -2064,6 +2284,10 @@ export type UserUncheckedCreateWithoutDeliberationSessionsValidéesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutDeliberationSessionsValidéesInput = {
@@ -2110,6 +2334,10 @@ export type UserUpdateWithoutDeliberationSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeliberationSessionsInput = {
@@ -2140,6 +2368,10 @@ export type UserUncheckedUpdateWithoutDeliberationSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUpsertWithoutDeliberationSessionsValidéesInput = {
@@ -2181,6 +2413,10 @@ export type UserUpdateWithoutDeliberationSessionsValidéesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput = {
@@ -2211,6 +2447,10 @@ export type UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutExamensCreesInput = {
@@ -2241,6 +2481,10 @@ export type UserCreateWithoutExamensCreesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutExamensCreesInput = {
@@ -2271,6 +2515,10 @@ export type UserUncheckedCreateWithoutExamensCreesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutExamensCreesInput = {
@@ -2317,6 +2565,10 @@ export type UserUpdateWithoutExamensCreesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamensCreesInput = {
@@ -2347,6 +2599,10 @@ export type UserUncheckedUpdateWithoutExamensCreesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutExamenSurveillancesInput = {
@@ -2377,6 +2633,10 @@ export type UserCreateWithoutExamenSurveillancesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutExamenSurveillancesInput = {
@@ -2407,6 +2667,10 @@ export type UserUncheckedCreateWithoutExamenSurveillancesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutExamenSurveillancesInput = {
@@ -2453,6 +2717,10 @@ export type UserUpdateWithoutExamenSurveillancesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamenSurveillancesInput = {
@@ -2483,6 +2751,10 @@ export type UserUncheckedUpdateWithoutExamenSurveillancesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutExamenIncidentsInput = {
@@ -2513,6 +2785,10 @@ export type UserCreateWithoutExamenIncidentsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutExamenIncidentsInput = {
@@ -2543,6 +2819,10 @@ export type UserUncheckedCreateWithoutExamenIncidentsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutExamenIncidentsInput = {
@@ -2589,6 +2869,10 @@ export type UserUpdateWithoutExamenIncidentsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamenIncidentsInput = {
@@ -2619,6 +2903,10 @@ export type UserUncheckedUpdateWithoutExamenIncidentsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutSignatureInput = {
@@ -2649,6 +2937,10 @@ export type UserCreateWithoutSignatureInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutSignatureInput = {
@@ -2679,6 +2971,10 @@ export type UserUncheckedCreateWithoutSignatureInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutSignatureInput = {
@@ -2725,6 +3021,10 @@ export type UserUpdateWithoutSignatureInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSignatureInput = {
@@ -2755,6 +3055,10 @@ export type UserUncheckedUpdateWithoutSignatureInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutReservationSallesInput = {
@@ -2785,6 +3089,10 @@ export type UserCreateWithoutReservationSallesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutReservationSallesInput = {
@@ -2815,6 +3123,10 @@ export type UserUncheckedCreateWithoutReservationSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutReservationSallesInput = {
@@ -2861,6 +3173,10 @@ export type UserUpdateWithoutReservationSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReservationSallesInput = {
@@ -2891,6 +3207,10 @@ export type UserUncheckedUpdateWithoutReservationSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutMouvementStocksInput = {
@@ -2921,6 +3241,10 @@ export type UserCreateWithoutMouvementStocksInput = {
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutMouvementStocksInput = {
@@ -2951,6 +3275,10 @@ export type UserUncheckedCreateWithoutMouvementStocksInput = {
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutMouvementStocksInput = {
@@ -2997,6 +3325,10 @@ export type UserUpdateWithoutMouvementStocksInput = {
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMouvementStocksInput = {
@@ -3027,6 +3359,10 @@ export type UserUncheckedUpdateWithoutMouvementStocksInput = {
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateWithoutPretParInput = {
@@ -3057,6 +3393,10 @@ export type UserCreateWithoutPretParInput = {
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutPretParInput = {
@@ -3087,6 +3427,10 @@ export type UserUncheckedCreateWithoutPretParInput = {
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutPretParInput = {
@@ -3122,6 +3466,10 @@ export type UserCreateWithoutRetourneParInput = {
   reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserUncheckedCreateWithoutRetourneParInput = {
@@ -3152,6 +3500,10 @@ export type UserUncheckedCreateWithoutRetourneParInput = {
   reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
   pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
 }
 
 export type UserCreateOrConnectWithoutRetourneParInput = {
@@ -3198,6 +3550,10 @@ export type UserUpdateWithoutPretParInput = {
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPretParInput = {
@@ -3228,6 +3584,10 @@ export type UserUncheckedUpdateWithoutPretParInput = {
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUpsertWithoutRetourneParInput = {
@@ -3269,6 +3629,10 @@ export type UserUpdateWithoutRetourneParInput = {
   reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRetourneParInput = {
@@ -3299,6 +3663,618 @@ export type UserUncheckedUpdateWithoutRetourneParInput = {
   reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
+}
+
+export type UserCreateWithoutTicketMaintenancesCreeInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  school?: Prisma.SchoolCreateNestedOneWithoutUsersInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
+}
+
+export type UserUncheckedCreateWithoutTicketMaintenancesCreeInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  schoolId?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
+}
+
+export type UserCreateOrConnectWithoutTicketMaintenancesCreeInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketMaintenancesCreeInput, Prisma.UserUncheckedCreateWithoutTicketMaintenancesCreeInput>
+}
+
+export type UserCreateWithoutTicketMaintenancesAssigneeInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  school?: Prisma.SchoolCreateNestedOneWithoutUsersInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
+}
+
+export type UserUncheckedCreateWithoutTicketMaintenancesAssigneeInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  schoolId?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
+}
+
+export type UserCreateOrConnectWithoutTicketMaintenancesAssigneeInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketMaintenancesAssigneeInput, Prisma.UserUncheckedCreateWithoutTicketMaintenancesAssigneeInput>
+}
+
+export type UserUpsertWithoutTicketMaintenancesCreeInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTicketMaintenancesCreeInput, Prisma.UserUncheckedUpdateWithoutTicketMaintenancesCreeInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketMaintenancesCreeInput, Prisma.UserUncheckedCreateWithoutTicketMaintenancesCreeInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTicketMaintenancesCreeInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTicketMaintenancesCreeInput, Prisma.UserUncheckedUpdateWithoutTicketMaintenancesCreeInput>
+}
+
+export type UserUpdateWithoutTicketMaintenancesCreeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneWithoutUsersNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTicketMaintenancesCreeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
+}
+
+export type UserUpsertWithoutTicketMaintenancesAssigneeInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTicketMaintenancesAssigneeInput, Prisma.UserUncheckedUpdateWithoutTicketMaintenancesAssigneeInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketMaintenancesAssigneeInput, Prisma.UserUncheckedCreateWithoutTicketMaintenancesAssigneeInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTicketMaintenancesAssigneeInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTicketMaintenancesAssigneeInput, Prisma.UserUncheckedUpdateWithoutTicketMaintenancesAssigneeInput>
+}
+
+export type UserUpdateWithoutTicketMaintenancesAssigneeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneWithoutUsersNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTicketMaintenancesAssigneeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
+}
+
+export type UserCreateWithoutInterventionMaintenancesTechnicianInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  school?: Prisma.SchoolCreateNestedOneWithoutUsersInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutInterventionMaintenancesTechnicianInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  schoolId?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutInterventionMaintenancesTechnicianInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutInterventionMaintenancesTechnicianInput, Prisma.UserUncheckedCreateWithoutInterventionMaintenancesTechnicianInput>
+}
+
+export type UserCreateWithoutInterventionMaintenancesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  school?: Prisma.SchoolCreateNestedOneWithoutUsersInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
+}
+
+export type UserUncheckedCreateWithoutInterventionMaintenancesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  schoolId?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
+}
+
+export type UserCreateOrConnectWithoutInterventionMaintenancesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutInterventionMaintenancesInput, Prisma.UserUncheckedCreateWithoutInterventionMaintenancesInput>
+}
+
+export type UserUpsertWithoutInterventionMaintenancesTechnicianInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutInterventionMaintenancesTechnicianInput, Prisma.UserUncheckedUpdateWithoutInterventionMaintenancesTechnicianInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutInterventionMaintenancesTechnicianInput, Prisma.UserUncheckedCreateWithoutInterventionMaintenancesTechnicianInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutInterventionMaintenancesTechnicianInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutInterventionMaintenancesTechnicianInput, Prisma.UserUncheckedUpdateWithoutInterventionMaintenancesTechnicianInput>
+}
+
+export type UserUpdateWithoutInterventionMaintenancesTechnicianInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneWithoutUsersNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutInterventionMaintenancesTechnicianInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutInterventionMaintenancesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutInterventionMaintenancesInput, Prisma.UserUncheckedUpdateWithoutInterventionMaintenancesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutInterventionMaintenancesInput, Prisma.UserUncheckedCreateWithoutInterventionMaintenancesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutInterventionMaintenancesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutInterventionMaintenancesInput, Prisma.UserUncheckedUpdateWithoutInterventionMaintenancesInput>
+}
+
+export type UserUpdateWithoutInterventionMaintenancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneWithoutUsersNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
+}
+
+export type UserUncheckedUpdateWithoutInterventionMaintenancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserCreateManySchoolInput = {
@@ -3342,6 +4318,10 @@ export type UserUpdateWithoutSchoolInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSchoolInput = {
@@ -3372,6 +4352,10 @@ export type UserUncheckedUpdateWithoutSchoolInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
   pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
   retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutSchoolInput = {
@@ -3407,6 +4391,10 @@ export type UserCountOutputType = {
   mouvementStocks: number
   pretPar: number
   retournePar: number
+  ticketMaintenancesCree: number
+  ticketMaintenancesAssignee: number
+  interventionMaintenances: number
+  interventionMaintenancesTechnician: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3424,6 +4412,10 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   mouvementStocks?: boolean | UserCountOutputTypeCountMouvementStocksArgs
   pretPar?: boolean | UserCountOutputTypeCountPretParArgs
   retournePar?: boolean | UserCountOutputTypeCountRetourneParArgs
+  ticketMaintenancesCree?: boolean | UserCountOutputTypeCountTicketMaintenancesCreeArgs
+  ticketMaintenancesAssignee?: boolean | UserCountOutputTypeCountTicketMaintenancesAssigneeArgs
+  interventionMaintenances?: boolean | UserCountOutputTypeCountInterventionMaintenancesArgs
+  interventionMaintenancesTechnician?: boolean | UserCountOutputTypeCountInterventionMaintenancesTechnicianArgs
 }
 
 /**
@@ -3534,6 +4526,34 @@ export type UserCountOutputTypeCountRetourneParArgs<ExtArgs extends runtime.Type
   where?: Prisma.PretEquipementWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTicketMaintenancesCreeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketMaintenanceWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTicketMaintenancesAssigneeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketMaintenanceWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountInterventionMaintenancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InterventionMaintenanceWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountInterventionMaintenancesTechnicianArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InterventionMaintenanceWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3565,6 +4585,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   mouvementStocks?: boolean | Prisma.User$mouvementStocksArgs<ExtArgs>
   pretPar?: boolean | Prisma.User$pretParArgs<ExtArgs>
   retournePar?: boolean | Prisma.User$retourneParArgs<ExtArgs>
+  ticketMaintenancesCree?: boolean | Prisma.User$ticketMaintenancesCreeArgs<ExtArgs>
+  ticketMaintenancesAssignee?: boolean | Prisma.User$ticketMaintenancesAssigneeArgs<ExtArgs>
+  interventionMaintenances?: boolean | Prisma.User$interventionMaintenancesArgs<ExtArgs>
+  interventionMaintenancesTechnician?: boolean | Prisma.User$interventionMaintenancesTechnicianArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3632,6 +4656,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   mouvementStocks?: boolean | Prisma.User$mouvementStocksArgs<ExtArgs>
   pretPar?: boolean | Prisma.User$pretParArgs<ExtArgs>
   retournePar?: boolean | Prisma.User$retourneParArgs<ExtArgs>
+  ticketMaintenancesCree?: boolean | Prisma.User$ticketMaintenancesCreeArgs<ExtArgs>
+  ticketMaintenancesAssignee?: boolean | Prisma.User$ticketMaintenancesAssigneeArgs<ExtArgs>
+  interventionMaintenances?: boolean | Prisma.User$interventionMaintenancesArgs<ExtArgs>
+  interventionMaintenancesTechnician?: boolean | Prisma.User$interventionMaintenancesTechnicianArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3662,6 +4690,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     mouvementStocks: Prisma.$MouvementStockPayload<ExtArgs>[]
     pretPar: Prisma.$PretEquipementPayload<ExtArgs>[]
     retournePar: Prisma.$PretEquipementPayload<ExtArgs>[]
+    ticketMaintenancesCree: Prisma.$TicketMaintenancePayload<ExtArgs>[]
+    ticketMaintenancesAssignee: Prisma.$TicketMaintenancePayload<ExtArgs>[]
+    interventionMaintenances: Prisma.$InterventionMaintenancePayload<ExtArgs>[]
+    interventionMaintenancesTechnician: Prisma.$InterventionMaintenancePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4087,6 +5119,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   mouvementStocks<T extends Prisma.User$mouvementStocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mouvementStocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MouvementStockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pretPar<T extends Prisma.User$pretParArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pretParArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PretEquipementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   retournePar<T extends Prisma.User$retourneParArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$retourneParArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PretEquipementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketMaintenancesCree<T extends Prisma.User$ticketMaintenancesCreeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketMaintenancesCreeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketMaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketMaintenancesAssignee<T extends Prisma.User$ticketMaintenancesAssigneeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketMaintenancesAssigneeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketMaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  interventionMaintenances<T extends Prisma.User$interventionMaintenancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$interventionMaintenancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterventionMaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  interventionMaintenancesTechnician<T extends Prisma.User$interventionMaintenancesTechnicianArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$interventionMaintenancesTechnicianArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterventionMaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4937,6 +5973,102 @@ export type User$retourneParArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.PretEquipementScalarFieldEnum | Prisma.PretEquipementScalarFieldEnum[]
+}
+
+/**
+ * User.ticketMaintenancesCree
+ */
+export type User$ticketMaintenancesCreeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TicketMaintenance
+   */
+  select?: Prisma.TicketMaintenanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TicketMaintenance
+   */
+  omit?: Prisma.TicketMaintenanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketMaintenanceInclude<ExtArgs> | null
+  where?: Prisma.TicketMaintenanceWhereInput
+  orderBy?: Prisma.TicketMaintenanceOrderByWithRelationInput | Prisma.TicketMaintenanceOrderByWithRelationInput[]
+  cursor?: Prisma.TicketMaintenanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketMaintenanceScalarFieldEnum | Prisma.TicketMaintenanceScalarFieldEnum[]
+}
+
+/**
+ * User.ticketMaintenancesAssignee
+ */
+export type User$ticketMaintenancesAssigneeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TicketMaintenance
+   */
+  select?: Prisma.TicketMaintenanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TicketMaintenance
+   */
+  omit?: Prisma.TicketMaintenanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketMaintenanceInclude<ExtArgs> | null
+  where?: Prisma.TicketMaintenanceWhereInput
+  orderBy?: Prisma.TicketMaintenanceOrderByWithRelationInput | Prisma.TicketMaintenanceOrderByWithRelationInput[]
+  cursor?: Prisma.TicketMaintenanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketMaintenanceScalarFieldEnum | Prisma.TicketMaintenanceScalarFieldEnum[]
+}
+
+/**
+ * User.interventionMaintenances
+ */
+export type User$interventionMaintenancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InterventionMaintenance
+   */
+  select?: Prisma.InterventionMaintenanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InterventionMaintenance
+   */
+  omit?: Prisma.InterventionMaintenanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InterventionMaintenanceInclude<ExtArgs> | null
+  where?: Prisma.InterventionMaintenanceWhereInput
+  orderBy?: Prisma.InterventionMaintenanceOrderByWithRelationInput | Prisma.InterventionMaintenanceOrderByWithRelationInput[]
+  cursor?: Prisma.InterventionMaintenanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InterventionMaintenanceScalarFieldEnum | Prisma.InterventionMaintenanceScalarFieldEnum[]
+}
+
+/**
+ * User.interventionMaintenancesTechnician
+ */
+export type User$interventionMaintenancesTechnicianArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InterventionMaintenance
+   */
+  select?: Prisma.InterventionMaintenanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InterventionMaintenance
+   */
+  omit?: Prisma.InterventionMaintenanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InterventionMaintenanceInclude<ExtArgs> | null
+  where?: Prisma.InterventionMaintenanceWhereInput
+  orderBy?: Prisma.InterventionMaintenanceOrderByWithRelationInput | Prisma.InterventionMaintenanceOrderByWithRelationInput[]
+  cursor?: Prisma.InterventionMaintenanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InterventionMaintenanceScalarFieldEnum | Prisma.InterventionMaintenanceScalarFieldEnum[]
 }
 
 /**

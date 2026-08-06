@@ -1,11 +1,14 @@
 import { Router } from "express";
 import {
   getTickets,
+  getTicketById,
   createTicket,
   updateTicket,
-  assignerTicket,
-  cloturerTicket,
-  ajouterIntervention,
+  deleteTicket,
+  getInterventions,
+  createIntervention,
+  updateIntervention,
+  deleteIntervention,
   getStatistiques,
 } from "./maintenance.controller.js";
 import {
@@ -19,37 +22,63 @@ const router = Router();
 // Toutes les routes nécessitent une authentification
 router.use(authenticate);
 
-// Gestion des tickets
+// ─── TICKETS ──────────────────────────────────────────────────
 router.get(
-  "/",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
+  "/tickets",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
   getTickets,
 );
+
+router.get(
+  "/tickets/:id",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
+  getTicketById,
+);
+
 router.post(
-  "/",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
+  "/tickets",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.USER),
   createTicket,
 );
-router.put("/:id", authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN), updateTicket);
 
-// Actions spécifiques sur les tickets
-router.put(
-  "/:id/assigner",
+router.patch(
+  "/tickets/:id",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
-  assignerTicket,
+  updateTicket,
 );
-router.put(
-  "/:id/cloturer",
+
+router.delete(
+  "/tickets/:id",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
-  cloturerTicket,
+  deleteTicket,
 );
+
+// ─── INTERVENTIONS ────────────────────────────────────────────
+router.get(
+  "/interventions",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  getInterventions,
+);
+
 router.post(
-  "/:id/interventions",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
-  ajouterIntervention,
+  "/interventions",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  createIntervention,
 );
 
-// Statistiques
+router.patch(
+  "/interventions/:id",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  updateIntervention,
+);
+
+router.delete(
+  "/interventions/:id",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  deleteIntervention,
+);
+
+// ─── STATISTIQUES ─────────────────────────────────────────────
 router.get(
   "/statistiques",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),

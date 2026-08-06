@@ -271,3 +271,57 @@ export const StatutPret = {
 } as const
 
 export type StatutPret = (typeof StatutPret)[keyof typeof StatutPret]
+
+
+export const TypeTicket = {
+  EQUIPEMENT: 'EQUIPEMENT',
+  BATIMENT: 'BATIMENT',
+  SALLE: 'SALLE',
+  RESEAU: 'RESEAU',
+  PLOMBERIE: 'PLOMBERIE',
+  ELECTRICITE: 'ELECTRICITE',
+  MOBILIER: 'MOBILIER',
+  AUTRE: 'AUTRE'
+} as const
+
+export type TypeTicket = (typeof TypeTicket)[keyof typeof TypeTicket]
+
+
+export const PrioriteTicket = {
+  BASSE: 'BASSE',
+  NORMALE: 'NORMALE',
+  HAUTE: 'HAUTE',
+  URGENTE: 'URGENTE'
+} as const
+
+export type PrioriteTicket = (typeof PrioriteTicket)[keyof typeof PrioriteTicket]
+
+
+export const StatutTicket = {
+  OUVERT: 'OUVERT',
+  EN_COURS: 'EN_COURS',
+  RESOLU: 'RESOLU',
+  FERME: 'FERME',
+  ANNULE: 'ANNULE'
+} as const
+
+export type StatutTicket = (typeof StatutTicket)[keyof typeof StatutTicket]
+
+
+export const TypeLocalisation = {
+  SALLE: 'SALLE',
+  BATIMENT: 'BATIMENT',
+  EQUIPEMENT: 'EQUIPEMENT'
+} as const
+
+export type TypeLocalisation = (typeof TypeLocalisation)[keyof typeof TypeLocalisation]
+
+
+export const StatutIntervention = {
+  PLANIFIEE: 'PLANIFIEE',
+  EN_COURS: 'EN_COURS',
+  TERMINEE: 'TERMINEE',
+  ANNULEE: 'ANNULEE'
+} as const
+
+export type StatutIntervention = (typeof StatutIntervention)[keyof typeof StatutIntervention]

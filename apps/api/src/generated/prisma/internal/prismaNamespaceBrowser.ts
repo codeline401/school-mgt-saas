@@ -90,7 +90,9 @@ export const ModelName = {
   ArticleStock: 'ArticleStock',
   MouvementStock: 'MouvementStock',
   Equipement: 'Equipement',
-  PretEquipement: 'PretEquipement'
+  PretEquipement: 'PretEquipement',
+  TicketMaintenance: 'TicketMaintenance',
+  InterventionMaintenance: 'InterventionMaintenance'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -737,6 +739,48 @@ export const PretEquipementScalarFieldEnum = {
 } as const
 
 export type PretEquipementScalarFieldEnum = (typeof PretEquipementScalarFieldEnum)[keyof typeof PretEquipementScalarFieldEnum]
+
+
+export const TicketMaintenanceScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  description: 'description',
+  type: 'type',
+  priorite: 'priorite',
+  statut: 'statut',
+  localisationId: 'localisationId',
+  typeLocalisation: 'typeLocalisation',
+  localisationNom: 'localisationNom',
+  dateOuverture: 'dateOuverture',
+  dateResolution: 'dateResolution',
+  creeParId: 'creeParId',
+  assigneAId: 'assigneAId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketMaintenanceScalarFieldEnum = (typeof TicketMaintenanceScalarFieldEnum)[keyof typeof TicketMaintenanceScalarFieldEnum]
+
+
+export const InterventionMaintenanceScalarFieldEnum = {
+  id: 'id',
+  ticketId: 'ticketId',
+  dateDebut: 'dateDebut',
+  dateFin: 'dateFin',
+  technicienId: 'technicienId',
+  description: 'description',
+  observations: 'observations',
+  statut: 'statut',
+  cout: 'cout',
+  piecesUtilisees: 'piecesUtilisees',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type InterventionMaintenanceScalarFieldEnum = (typeof InterventionMaintenanceScalarFieldEnum)[keyof typeof InterventionMaintenanceScalarFieldEnum]
 
 
 export const SortOrder = {
