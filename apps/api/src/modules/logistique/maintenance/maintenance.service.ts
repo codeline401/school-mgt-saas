@@ -1,3 +1,4 @@
+import { Prisma } from "../../../generated/prisma/client.js";
 import { prisma } from "../../../lib/prisma.js";
 import {
   CreateInterventionInput,
@@ -230,8 +231,8 @@ export class MaintenanceService {
   /**
    * Récupérer toutes les interventions
    */
-  async getInterventions(schoolId: string, ticketId: string) {
-    const where: any = { schoolId };
+  async getInterventions(schoolId: string, ticketId?: string) {
+    const where: Prisma.InterventionMaintenanceWhereInput = { schoolId };
 
     if (ticketId) {
       where.ticketId = ticketId;
@@ -412,7 +413,7 @@ export class MaintenanceService {
       ticketsResolus,
       interventionsEnCours,
       interventionsTerminees,
-      coutTotal: coutTotal._sum.cout || 0,
+      coutTotal: Number(coutTotal._sum.cout ?? 0),
       tempsMoyenResolution: Math.round(tempsMoyenResolution * 10) / 10, // Arrondi à 1 décimale
       ticketsParPriorite: ticketsParPriorite.map((t) => ({
         priorite: t.priorite,

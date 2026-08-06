@@ -13,6 +13,13 @@ import { ZodError } from "zod";
  * TICKETS DE MAINTENANCE
  */
 
+const requireUserContext = (req: Request) => {
+  const schoolId = req.user?.schoolId;
+  const userId = req.user?.id;
+  if (!schoolId || !userId) return null;
+  return { schoolId, userId, role: req.user?.role ?? "" };
+};
+
 export const getTickets = async (req: Request, res: Response) => {
   try {
     const schoolId = req.user?.schoolId;
@@ -55,11 +62,10 @@ export const getTicketById = async (req: Request, res: Response) => {
 export const createTicket = async (req: Request, res: Response) => {
   try {
     const data = CreateTicketMaintenanceSchema.parse(req.body);
-    const user = {
-      schoolId: req.user?.schoolId || "",
-      userId: req.user?.id || "",
-      role: req.user?.role || "",
-    };
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
     const ticket = await maintenanceService.createTicket(data, user);
     res.status(201).json(ticket);
@@ -83,16 +89,16 @@ export const updateTicket = async (req: Request, res: Response) => {
     );
 
     // Si type est présent, on s'assure qu'il est en majuscules
-    if (typeof cleanBody.type === "string")
-      [(cleanBody.type = cleanBody.type.toUpperCase())];
+    if (typeof cleanBody.type === "string") {
+      cleanBody.type = cleanBody.type.toUpperCase();
+    }
 
     // Validation avec Zod avec les données nettoyées
-    const data = UpdateTicketMaintenanceSchema.parse(req.body);
-    const user = {
-      schoolId: req.user?.schoolId || "",
-      userId: req.user?.id || "",
-      role: req.user?.role || "",
-    };
+    const data = UpdateTicketMaintenanceSchema.parse(cleanBody);
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
     const ticket = await maintenanceService.updateTicket(id, data, user);
     res.json(ticket);
@@ -101,7 +107,7 @@ export const updateTicket = async (req: Request, res: Response) => {
 
     if (error instanceof ZodError) {
       return res.status(400).json({
-        error: "Données invalides nes correspondant pas au format attendu",
+        error: "Données invalides ne correspondant pas au format attendu",
         details: error.issues,
       });
     }
@@ -115,11 +121,10 @@ export const updateTicket = async (req: Request, res: Response) => {
 export const deleteTicket = async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
-    const user = {
-      schoolId: req.user?.schoolId || "",
-      userId: req.user?.id || "",
-      role: req.user?.role || "",
-    };
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
     await maintenanceService.deleteTicket(id, user);
     res.status(204).send();
@@ -161,11 +166,10 @@ export const getInterventions = async (req: Request, res: Response) => {
 export const createIntervention = async (req: Request, res: Response) => {
   try {
     const data = CreateInterventionSchema.parse(req.body);
-    const user = {
-      schoolId: req.user?.schoolId || "",
-      userId: req.user?.id || "",
-      role: req.user?.role || "",
-    };
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
     const intervention = await maintenanceService.createIntervention(
       data,
@@ -184,11 +188,10 @@ export const updateIntervention = async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
     const data = UpdateInterventionSchema.parse(req.body);
-    const user = {
-      schoolId: req.user?.schoolId || "",
-      userId: req.user?.id || "",
-      role: req.user?.role || "",
-    };
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
     const intervention = await maintenanceService.updateIntervention(
       id,
@@ -207,11 +210,10 @@ export const updateIntervention = async (req: Request, res: Response) => {
 export const deleteIntervention = async (req: Request, res: Response) => {
   try {
     const { id } = req.params as { id: string };
-    const user = {
-      schoolId: req.user?.schoolId || "",
-      userId: req.user?.id || "",
-      role: req.user?.role || "",
-    };
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
     await maintenanceService.deleteIntervention(id, user);
     res.status(204).send();

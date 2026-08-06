@@ -9,6 +9,12 @@ import {
   type StatutIntervention,
 } from "../hooks/useMaintenance";
 
+const toLocalInputValue = (value: string) => {
+  const d = new Date(value);
+  const offsetMs = d.getTimezoneOffset() * 60_000;
+  return new Date(d.getTime() - offsetMs).toISOString().slice(0, 16);
+};
+
 interface InterventionModalProps {
   intervention: InterventionMaintenance | null;
   ticketId?: string;
@@ -52,10 +58,10 @@ export default function InterventionModal({
       setFormData({
         ticketId: intervention.ticketId,
         dateDebut: intervention.dateDebut
-          ? new Date(intervention.dateDebut).toISOString().slice(0, 16)
+          ? toLocalInputValue(intervention.dateDebut)
           : "",
         dateFin: intervention.dateFin
-          ? new Date(intervention.dateFin).toISOString().slice(0, 16)
+          ? toLocalInputValue(intervention.dateFin)
           : "",
         technicienId: intervention.technicienId,
         description: intervention.description || "",
@@ -226,7 +232,7 @@ export default function InterventionModal({
               </fieldset>
 
               <fieldset className="fieldset">
-                <legend className="fieldset-legend required">Date Fin</legend>
+                <legend className="fieldset-legend">Date Fin</legend>
                 <input
                   type="datetime-local"
                   name="dateFin"
@@ -263,7 +269,7 @@ export default function InterventionModal({
             </div>
             {/* Description */}
             <fieldset className="fieldset">
-              <legend className="fieldset-legend required">
+              <legend className="fieldset-legend">
                 Description du travail
               </legend>
               <textarea
@@ -278,7 +284,7 @@ export default function InterventionModal({
             {/* Coût et pièces */}
             <div className="grid grid-cols-2 gap-4">
               <fieldset className="fieldset">
-                <legend className="fieldset-legend required">Coût (MGA)</legend>
+                <legend className="fieldset-legend">Coût (MGA)</legend>
                 <input
                   type="number"
                   name="cout"
@@ -300,9 +306,7 @@ export default function InterventionModal({
               </fieldset>
 
               <fieldset className="form-control">
-                <legend className="fieldset-legend required">
-                  Pièces utilisées
-                </legend>
+                <legend className="fieldset-legend">Pièces utilisées</legend>
                 <input
                   type="text"
                   name="piecesUtilisees"

@@ -72,8 +72,12 @@ export default function TicketsMaintenanceTab() {
 
   const handleDelete = async () => {
     if (!ticketToDelete) return;
-    await deleteMutation.mutateAsync(ticketToDelete);
-    setTicketToDelete(null);
+    try {
+      await deleteMutation.mutateAsync(ticketToDelete);
+      setTicketToDelete(null);
+    } catch (error) {
+      console.error("Erreur lors de la suppression du ticket:", error);
+    }
   };
 
   const handleCloseModal = () => {
@@ -266,6 +270,7 @@ export default function TicketsMaintenanceTab() {
           message="Êtes-vous sûr de vouloir supprimer ce ticket ? Cette action est irréversible."
           onConfirm={handleDelete}
           onCancel={() => setTicketToDelete(null)}
+          isLoading={deleteMutation.isPending}
           confirmLabel="Supprimer"
           cancelLabel="Annuler"
         />

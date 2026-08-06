@@ -6,7 +6,6 @@ import {
   BarChart3,
   ClipboardList,
 } from "lucide-react";
-import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
 import TicketsMaintenanceTab from "./components/TicketMaintenanceTab";
 import TicketMaintenanceModal from "./components/TicketMaintenanceModal";
 import InterventionsTab from "./components/InterventionTab";

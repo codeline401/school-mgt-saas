@@ -281,7 +281,7 @@ export default function InterventionsTab() {
                                       ).toLocaleDateString("fr-FR")}
                                     </span>
                                   )}
-                                  {intervention.cout && (
+                                  {intervention.cout != null && (
                                     <span className="font-medium">
                                       Coût:{" "}
                                       {new Intl.NumberFormat("fr-MG", {

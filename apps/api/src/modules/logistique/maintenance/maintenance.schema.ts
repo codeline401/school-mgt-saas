@@ -70,17 +70,27 @@ export const TicketMaintenanceFiltersSchema = z.object({
 
 // ─── Schémas pour les interventions ──────────────────────────────
 
-export const CreateInterventionSchema = z.object({
-  ticketId: z.string().uuid("ID du ticket invalide"),
-  dateDebut: z.string().datetime("Date de début invalide"),
-  dateFin: z.string().datetime().optional(),
-  technicienId: z.string().uuid("ID du technicien invalide"),
-  description: z.string().optional(),
-  observations: z.string().optional(),
-  cout: z.number().nonnegative().optional(),
-  piecesUtilisees: z.string().optional(),
-  statut: StatutInterventionEnum.default("PLANIFIEE"),
-});
+export const CreateInterventionSchema = z
+  .object({
+    ticketId: z.string().uuid("ID du ticket invalide"),
+    dateDebut: z.string().datetime("Date de début invalide"),
+    dateFin: z.string().datetime().optional(),
+    technicienId: z.string().uuid("ID du technicien invalide"),
+    description: z.string().optional(),
+    observations: z.string().optional(),
+    cout: z
+      .number()
+      .nonnegative()
+      .max(99_999_999.99)
+      .multipleOf(0.01)
+      .optional(),
+    piecesUtilisees: z.string().optional(),
+    statut: StatutInterventionEnum.default("PLANIFIEE"),
+  })
+  .refine((v) => !v.dateFin || new Date(v.dateFin) >= new Date(v.dateDebut), {
+    path: ["dateFin"],
+    error: "La date de fin doit suivre la date de début",
+  });
 
 export const UpdateInterventionSchema = z.object({
   dateDebut: z.string().datetime().optional(),

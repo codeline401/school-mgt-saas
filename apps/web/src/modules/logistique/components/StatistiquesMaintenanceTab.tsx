@@ -317,7 +317,7 @@ export default function StatistiquesMaintenanceTab() {
                     </td>
                   </tr>
                 ) : (
-                  stats.ticketsParType
+                  [...stats.ticketsParType]
                     .sort((a, b) => b.count - a.count)
                     .map((item) => {
                       const percentage =

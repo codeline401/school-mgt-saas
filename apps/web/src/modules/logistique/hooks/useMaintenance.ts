@@ -319,6 +319,7 @@ export function useDeleteIntervention() {
       queryClient.invalidateQueries({
         queryKey: ["interventions-maintenance"],
       });
+      queryClient.invalidateQueries({ queryKey: ["tickets-maintenance"] });
       queryClient.invalidateQueries({ queryKey: ["statistiques-maintenance"] });
     },
   });
