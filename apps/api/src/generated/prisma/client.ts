@@ -241,3 +241,13 @@ export type Equipement = Prisma.EquipementModel
  * 
  */
 export type PretEquipement = Prisma.PretEquipementModel
+/**
+ * Model TicketMaintenance
+ * 
+ */
+export type TicketMaintenance = Prisma.TicketMaintenanceModel
+/**
+ * Model InterventionMaintenance
+ * 
+ */
+export type InterventionMaintenance = Prisma.InterventionMaintenanceModel

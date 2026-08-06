@@ -2,12 +2,14 @@ import { useState } from "react";
 import {
   Wrench,
   PlusIcon,
-  AlertCircle,
   CheckCircle,
   BarChart3,
   ClipboardList,
 } from "lucide-react";
-import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
+import TicketsMaintenanceTab from "./components/TicketMaintenanceTab";
+import TicketMaintenanceModal from "./components/TicketMaintenanceModal";
+import InterventionsTab from "./components/InterventionTab";
+import StatistiquesMaintenanceTab from "./components/StatistiquesMaintenanceTab";
 
 type SubTab = "tickets" | "interventions" | "statistiques";
 
@@ -19,6 +21,22 @@ type SubTab = "tickets" | "interventions" | "statistiques";
 
 function MaintenanceTab() {
   const [activeSubTab, setActiveSubTab] = useState<SubTab>("tickets");
+  const [isTicketMaintenanceModal, setIsTicketMaintenanceModal] =
+    useState(false);
+
+  /**
+   * Ouvre le modal de création de ticket de maintenance
+   */
+  const handleOpenTicketMaintenanceModal = () => {
+    setIsTicketMaintenanceModal(true);
+  };
+
+  /**
+   * Ferme ne modal de création de ticket de maintenance
+   */
+  const handleCloseTicketMaintenanceModal = () => {
+    setIsTicketMaintenanceModal(false);
+  };
 
   return (
     <div>
@@ -33,7 +51,10 @@ function MaintenanceTab() {
             </p>
           </div>
         </div>
-        <button className="btn btn-primary btn-sm gap-2">
+        <button
+          className="btn btn-primary btn-sm gap-2"
+          onClick={handleOpenTicketMaintenanceModal}
+        >
           <PlusIcon size={16} />
           Créer un ticket
         </button>
@@ -68,27 +89,16 @@ function MaintenanceTab() {
       </div>
 
       {/* Contenu des sous-onglets */}
-      {activeSubTab === "tickets" && (
-        <DevelopmentPlaceholder
-          icon={AlertCircle}
-          title="Tickets de maintenance"
-          description="Gestion des demandes d'intervention avec priorités et statuts."
-        />
-      )}
+      {activeSubTab === "tickets" && <TicketsMaintenanceTab />}
 
-      {activeSubTab === "interventions" && (
-        <DevelopmentPlaceholder
-          icon={CheckCircle}
-          title="Suivi des interventions"
-          description="Assignation, suivi et clôture des interventions de maintenance."
-        />
-      )}
+      {activeSubTab === "interventions" && <InterventionsTab />}
 
-      {activeSubTab === "statistiques" && (
-        <DevelopmentPlaceholder
-          icon={BarChart3}
-          title="Rapports & Statistiques"
-          description="Temps moyen de résolution, performance et analyse des pannes récurrentes."
+      {activeSubTab === "statistiques" && <StatistiquesMaintenanceTab />}
+
+      {isTicketMaintenanceModal && (
+        <TicketMaintenanceModal
+          ticket={null}
+          onClose={handleCloseTicketMaintenanceModal}
         />
       )}
     </div>

@@ -275,6 +275,8 @@ export type SchoolWhereInput = {
   mouvementStocks?: Prisma.MouvementStockListRelationFilter
   equipements?: Prisma.EquipementListRelationFilter
   pretEquipements?: Prisma.PretEquipementListRelationFilter
+  ticketMaintenances?: Prisma.TicketMaintenanceListRelationFilter
+  interventionMaintenances?: Prisma.InterventionMaintenanceListRelationFilter
 }
 
 export type SchoolOrderByWithRelationInput = {
@@ -320,6 +322,8 @@ export type SchoolOrderByWithRelationInput = {
   mouvementStocks?: Prisma.MouvementStockOrderByRelationAggregateInput
   equipements?: Prisma.EquipementOrderByRelationAggregateInput
   pretEquipements?: Prisma.PretEquipementOrderByRelationAggregateInput
+  ticketMaintenances?: Prisma.TicketMaintenanceOrderByRelationAggregateInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceOrderByRelationAggregateInput
 }
 
 export type SchoolWhereUniqueInput = Prisma.AtLeast<{
@@ -368,6 +372,8 @@ export type SchoolWhereUniqueInput = Prisma.AtLeast<{
   mouvementStocks?: Prisma.MouvementStockListRelationFilter
   equipements?: Prisma.EquipementListRelationFilter
   pretEquipements?: Prisma.PretEquipementListRelationFilter
+  ticketMaintenances?: Prisma.TicketMaintenanceListRelationFilter
+  interventionMaintenances?: Prisma.InterventionMaintenanceListRelationFilter
 }, "id" | "tenantKey" | "inviteCode">
 
 export type SchoolOrderByWithAggregationInput = {
@@ -451,6 +457,8 @@ export type SchoolCreateInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateInput = {
@@ -496,6 +504,8 @@ export type SchoolUncheckedCreateInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUpdateInput = {
@@ -541,6 +551,8 @@ export type SchoolUpdateInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateInput = {
@@ -586,6 +598,8 @@ export type SchoolUncheckedUpdateInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateManyInput = {
@@ -1106,6 +1120,34 @@ export type SchoolUpdateOneRequiredWithoutPretEquipementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutPretEquipementsInput, Prisma.SchoolUpdateWithoutPretEquipementsInput>, Prisma.SchoolUncheckedUpdateWithoutPretEquipementsInput>
 }
 
+export type SchoolCreateNestedOneWithoutTicketMaintenancesInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutTicketMaintenancesInput, Prisma.SchoolUncheckedCreateWithoutTicketMaintenancesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutTicketMaintenancesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutTicketMaintenancesNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutTicketMaintenancesInput, Prisma.SchoolUncheckedCreateWithoutTicketMaintenancesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutTicketMaintenancesInput
+  upsert?: Prisma.SchoolUpsertWithoutTicketMaintenancesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutTicketMaintenancesInput, Prisma.SchoolUpdateWithoutTicketMaintenancesInput>, Prisma.SchoolUncheckedUpdateWithoutTicketMaintenancesInput>
+}
+
+export type SchoolCreateNestedOneWithoutInterventionMaintenancesInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutInterventionMaintenancesInput, Prisma.SchoolUncheckedCreateWithoutInterventionMaintenancesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutInterventionMaintenancesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutInterventionMaintenancesNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutInterventionMaintenancesInput, Prisma.SchoolUncheckedCreateWithoutInterventionMaintenancesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutInterventionMaintenancesInput
+  upsert?: Prisma.SchoolUpsertWithoutInterventionMaintenancesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutInterventionMaintenancesInput, Prisma.SchoolUpdateWithoutInterventionMaintenancesInput>, Prisma.SchoolUncheckedUpdateWithoutInterventionMaintenancesInput>
+}
+
 export type SchoolCreateWithoutUsersInput = {
   id?: string
   nom: string
@@ -1148,6 +1190,8 @@ export type SchoolCreateWithoutUsersInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutUsersInput = {
@@ -1192,6 +1236,8 @@ export type SchoolUncheckedCreateWithoutUsersInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutUsersInput = {
@@ -1252,6 +1298,8 @@ export type SchoolUpdateWithoutUsersInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutUsersInput = {
@@ -1296,6 +1344,8 @@ export type SchoolUncheckedUpdateWithoutUsersInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutClassesInput = {
@@ -1340,6 +1390,8 @@ export type SchoolCreateWithoutClassesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutClassesInput = {
@@ -1384,6 +1436,8 @@ export type SchoolUncheckedCreateWithoutClassesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutClassesInput = {
@@ -1444,6 +1498,8 @@ export type SchoolUpdateWithoutClassesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutClassesInput = {
@@ -1488,6 +1544,8 @@ export type SchoolUncheckedUpdateWithoutClassesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutElevesInput = {
@@ -1532,6 +1590,8 @@ export type SchoolCreateWithoutElevesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutElevesInput = {
@@ -1576,6 +1636,8 @@ export type SchoolUncheckedCreateWithoutElevesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutElevesInput = {
@@ -1636,6 +1698,8 @@ export type SchoolUpdateWithoutElevesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutElevesInput = {
@@ -1680,6 +1744,8 @@ export type SchoolUncheckedUpdateWithoutElevesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutProfsInput = {
@@ -1724,6 +1790,8 @@ export type SchoolCreateWithoutProfsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutProfsInput = {
@@ -1768,6 +1836,8 @@ export type SchoolUncheckedCreateWithoutProfsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutProfsInput = {
@@ -1828,6 +1898,8 @@ export type SchoolUpdateWithoutProfsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutProfsInput = {
@@ -1872,6 +1944,8 @@ export type SchoolUncheckedUpdateWithoutProfsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutParentsInput = {
@@ -1916,6 +1990,8 @@ export type SchoolCreateWithoutParentsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutParentsInput = {
@@ -1960,6 +2036,8 @@ export type SchoolUncheckedCreateWithoutParentsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutParentsInput = {
@@ -2020,6 +2098,8 @@ export type SchoolUpdateWithoutParentsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutParentsInput = {
@@ -2064,6 +2144,8 @@ export type SchoolUncheckedUpdateWithoutParentsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutDossierAdmissionsInput = {
@@ -2108,6 +2190,8 @@ export type SchoolCreateWithoutDossierAdmissionsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutDossierAdmissionsInput = {
@@ -2152,6 +2236,8 @@ export type SchoolUncheckedCreateWithoutDossierAdmissionsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutDossierAdmissionsInput = {
@@ -2212,6 +2298,8 @@ export type SchoolUpdateWithoutDossierAdmissionsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutDossierAdmissionsInput = {
@@ -2256,6 +2344,8 @@ export type SchoolUncheckedUpdateWithoutDossierAdmissionsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutContratsInput = {
@@ -2300,6 +2390,8 @@ export type SchoolCreateWithoutContratsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutContratsInput = {
@@ -2344,6 +2436,8 @@ export type SchoolUncheckedCreateWithoutContratsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutContratsInput = {
@@ -2404,6 +2498,8 @@ export type SchoolUpdateWithoutContratsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutContratsInput = {
@@ -2448,6 +2544,8 @@ export type SchoolUncheckedUpdateWithoutContratsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutRemplacementsInput = {
@@ -2492,6 +2590,8 @@ export type SchoolCreateWithoutRemplacementsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutRemplacementsInput = {
@@ -2536,6 +2636,8 @@ export type SchoolUncheckedCreateWithoutRemplacementsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutRemplacementsInput = {
@@ -2596,6 +2698,8 @@ export type SchoolUpdateWithoutRemplacementsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutRemplacementsInput = {
@@ -2640,6 +2744,8 @@ export type SchoolUncheckedUpdateWithoutRemplacementsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutMatieresInput = {
@@ -2684,6 +2790,8 @@ export type SchoolCreateWithoutMatieresInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutMatieresInput = {
@@ -2728,6 +2836,8 @@ export type SchoolUncheckedCreateWithoutMatieresInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutMatieresInput = {
@@ -2788,6 +2898,8 @@ export type SchoolUpdateWithoutMatieresInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutMatieresInput = {
@@ -2832,6 +2944,8 @@ export type SchoolUncheckedUpdateWithoutMatieresInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutPeriodesInput = {
@@ -2876,6 +2990,8 @@ export type SchoolCreateWithoutPeriodesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutPeriodesInput = {
@@ -2920,6 +3036,8 @@ export type SchoolUncheckedCreateWithoutPeriodesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutPeriodesInput = {
@@ -2980,6 +3098,8 @@ export type SchoolUpdateWithoutPeriodesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutPeriodesInput = {
@@ -3024,6 +3144,8 @@ export type SchoolUncheckedUpdateWithoutPeriodesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutNotesInput = {
@@ -3068,6 +3190,8 @@ export type SchoolCreateWithoutNotesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutNotesInput = {
@@ -3112,6 +3236,8 @@ export type SchoolUncheckedCreateWithoutNotesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutNotesInput = {
@@ -3172,6 +3298,8 @@ export type SchoolUpdateWithoutNotesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutNotesInput = {
@@ -3216,6 +3344,8 @@ export type SchoolUncheckedUpdateWithoutNotesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutDocumentsInput = {
@@ -3260,6 +3390,8 @@ export type SchoolCreateWithoutDocumentsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutDocumentsInput = {
@@ -3304,6 +3436,8 @@ export type SchoolUncheckedCreateWithoutDocumentsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutDocumentsInput = {
@@ -3364,6 +3498,8 @@ export type SchoolUpdateWithoutDocumentsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutDocumentsInput = {
@@ -3408,6 +3544,8 @@ export type SchoolUncheckedUpdateWithoutDocumentsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutCreneauHorairesInput = {
@@ -3452,6 +3590,8 @@ export type SchoolCreateWithoutCreneauHorairesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutCreneauHorairesInput = {
@@ -3496,6 +3636,8 @@ export type SchoolUncheckedCreateWithoutCreneauHorairesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutCreneauHorairesInput = {
@@ -3556,6 +3698,8 @@ export type SchoolUpdateWithoutCreneauHorairesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutCreneauHorairesInput = {
@@ -3600,6 +3744,8 @@ export type SchoolUncheckedUpdateWithoutCreneauHorairesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutAppelsInput = {
@@ -3644,6 +3790,8 @@ export type SchoolCreateWithoutAppelsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutAppelsInput = {
@@ -3688,6 +3836,8 @@ export type SchoolUncheckedCreateWithoutAppelsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutAppelsInput = {
@@ -3748,6 +3898,8 @@ export type SchoolUpdateWithoutAppelsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutAppelsInput = {
@@ -3792,6 +3944,8 @@ export type SchoolUncheckedUpdateWithoutAppelsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutNotificationsInput = {
@@ -3836,6 +3990,8 @@ export type SchoolCreateWithoutNotificationsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutNotificationsInput = {
@@ -3880,6 +4036,8 @@ export type SchoolUncheckedCreateWithoutNotificationsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutNotificationsInput = {
@@ -3940,6 +4098,8 @@ export type SchoolUpdateWithoutNotificationsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutNotificationsInput = {
@@ -3984,6 +4144,8 @@ export type SchoolUncheckedUpdateWithoutNotificationsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutCahierTextesInput = {
@@ -4028,6 +4190,8 @@ export type SchoolCreateWithoutCahierTextesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutCahierTextesInput = {
@@ -4072,6 +4236,8 @@ export type SchoolUncheckedCreateWithoutCahierTextesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutCahierTextesInput = {
@@ -4132,6 +4298,8 @@ export type SchoolUpdateWithoutCahierTextesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutCahierTextesInput = {
@@ -4176,6 +4344,8 @@ export type SchoolUncheckedUpdateWithoutCahierTextesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutQuizzesInput = {
@@ -4220,6 +4390,8 @@ export type SchoolCreateWithoutQuizzesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutQuizzesInput = {
@@ -4264,6 +4436,8 @@ export type SchoolUncheckedCreateWithoutQuizzesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutQuizzesInput = {
@@ -4324,6 +4498,8 @@ export type SchoolUpdateWithoutQuizzesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutQuizzesInput = {
@@ -4368,6 +4544,8 @@ export type SchoolUncheckedUpdateWithoutQuizzesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutBulletinTemplateInput = {
@@ -4412,6 +4590,8 @@ export type SchoolCreateWithoutBulletinTemplateInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutBulletinTemplateInput = {
@@ -4456,6 +4636,8 @@ export type SchoolUncheckedCreateWithoutBulletinTemplateInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutBulletinTemplateInput = {
@@ -4516,6 +4698,8 @@ export type SchoolUpdateWithoutBulletinTemplateInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutBulletinTemplateInput = {
@@ -4560,6 +4744,8 @@ export type SchoolUncheckedUpdateWithoutBulletinTemplateInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutDeliberationSessionsInput = {
@@ -4604,6 +4790,8 @@ export type SchoolCreateWithoutDeliberationSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutDeliberationSessionsInput = {
@@ -4648,6 +4836,8 @@ export type SchoolUncheckedCreateWithoutDeliberationSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutDeliberationSessionsInput = {
@@ -4708,6 +4898,8 @@ export type SchoolUpdateWithoutDeliberationSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutDeliberationSessionsInput = {
@@ -4752,6 +4944,8 @@ export type SchoolUncheckedUpdateWithoutDeliberationSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutExamenSallesInput = {
@@ -4796,6 +4990,8 @@ export type SchoolCreateWithoutExamenSallesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutExamenSallesInput = {
@@ -4840,6 +5036,8 @@ export type SchoolUncheckedCreateWithoutExamenSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutExamenSallesInput = {
@@ -4900,6 +5098,8 @@ export type SchoolUpdateWithoutExamenSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutExamenSallesInput = {
@@ -4944,6 +5144,8 @@ export type SchoolUncheckedUpdateWithoutExamenSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutExamenSessionsInput = {
@@ -4988,6 +5190,8 @@ export type SchoolCreateWithoutExamenSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutExamenSessionsInput = {
@@ -5032,6 +5236,8 @@ export type SchoolUncheckedCreateWithoutExamenSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutExamenSessionsInput = {
@@ -5092,6 +5298,8 @@ export type SchoolUpdateWithoutExamenSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutExamenSessionsInput = {
@@ -5136,6 +5344,8 @@ export type SchoolUncheckedUpdateWithoutExamenSessionsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutChapitresInput = {
@@ -5180,6 +5390,8 @@ export type SchoolCreateWithoutChapitresInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutChapitresInput = {
@@ -5224,6 +5436,8 @@ export type SchoolUncheckedCreateWithoutChapitresInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutChapitresInput = {
@@ -5284,6 +5498,8 @@ export type SchoolUpdateWithoutChapitresInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutChapitresInput = {
@@ -5328,6 +5544,8 @@ export type SchoolUncheckedUpdateWithoutChapitresInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutBatimentsInput = {
@@ -5372,6 +5590,8 @@ export type SchoolCreateWithoutBatimentsInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutBatimentsInput = {
@@ -5416,6 +5636,8 @@ export type SchoolUncheckedCreateWithoutBatimentsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutBatimentsInput = {
@@ -5476,6 +5698,8 @@ export type SchoolUpdateWithoutBatimentsInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutBatimentsInput = {
@@ -5520,6 +5744,8 @@ export type SchoolUncheckedUpdateWithoutBatimentsInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutSallesInput = {
@@ -5564,6 +5790,8 @@ export type SchoolCreateWithoutSallesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutSallesInput = {
@@ -5608,6 +5836,8 @@ export type SchoolUncheckedCreateWithoutSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutSallesInput = {
@@ -5668,6 +5898,8 @@ export type SchoolUpdateWithoutSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutSallesInput = {
@@ -5712,6 +5944,8 @@ export type SchoolUncheckedUpdateWithoutSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutReservationSallesInput = {
@@ -5756,6 +5990,8 @@ export type SchoolCreateWithoutReservationSallesInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutReservationSallesInput = {
@@ -5800,6 +6036,8 @@ export type SchoolUncheckedCreateWithoutReservationSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutReservationSallesInput = {
@@ -5860,6 +6098,8 @@ export type SchoolUpdateWithoutReservationSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutReservationSallesInput = {
@@ -5904,6 +6144,8 @@ export type SchoolUncheckedUpdateWithoutReservationSallesInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutArticleStocksInput = {
@@ -5948,6 +6190,8 @@ export type SchoolCreateWithoutArticleStocksInput = {
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutArticleStocksInput = {
@@ -5992,6 +6236,8 @@ export type SchoolUncheckedCreateWithoutArticleStocksInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutArticleStocksInput = {
@@ -6052,6 +6298,8 @@ export type SchoolUpdateWithoutArticleStocksInput = {
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutArticleStocksInput = {
@@ -6096,6 +6344,8 @@ export type SchoolUncheckedUpdateWithoutArticleStocksInput = {
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutMouvementStocksInput = {
@@ -6140,6 +6390,8 @@ export type SchoolCreateWithoutMouvementStocksInput = {
   articleStocks?: Prisma.ArticleStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutMouvementStocksInput = {
@@ -6184,6 +6436,8 @@ export type SchoolUncheckedCreateWithoutMouvementStocksInput = {
   articleStocks?: Prisma.ArticleStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutMouvementStocksInput = {
@@ -6244,6 +6498,8 @@ export type SchoolUpdateWithoutMouvementStocksInput = {
   articleStocks?: Prisma.ArticleStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutMouvementStocksInput = {
@@ -6288,6 +6544,8 @@ export type SchoolUncheckedUpdateWithoutMouvementStocksInput = {
   articleStocks?: Prisma.ArticleStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutEquipementsInput = {
@@ -6332,6 +6590,8 @@ export type SchoolCreateWithoutEquipementsInput = {
   articleStocks?: Prisma.ArticleStockCreateNestedManyWithoutSchoolInput
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutEquipementsInput = {
@@ -6376,6 +6636,8 @@ export type SchoolUncheckedCreateWithoutEquipementsInput = {
   articleStocks?: Prisma.ArticleStockUncheckedCreateNestedManyWithoutSchoolInput
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutEquipementsInput = {
@@ -6436,6 +6698,8 @@ export type SchoolUpdateWithoutEquipementsInput = {
   articleStocks?: Prisma.ArticleStockUpdateManyWithoutSchoolNestedInput
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutEquipementsInput = {
@@ -6480,6 +6744,8 @@ export type SchoolUncheckedUpdateWithoutEquipementsInput = {
   articleStocks?: Prisma.ArticleStockUncheckedUpdateManyWithoutSchoolNestedInput
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutPretEquipementsInput = {
@@ -6524,6 +6790,8 @@ export type SchoolCreateWithoutPretEquipementsInput = {
   articleStocks?: Prisma.ArticleStockCreateNestedManyWithoutSchoolInput
   mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutPretEquipementsInput = {
@@ -6568,6 +6836,8 @@ export type SchoolUncheckedCreateWithoutPretEquipementsInput = {
   articleStocks?: Prisma.ArticleStockUncheckedCreateNestedManyWithoutSchoolInput
   mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
   equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutPretEquipementsInput = {
@@ -6628,6 +6898,8 @@ export type SchoolUpdateWithoutPretEquipementsInput = {
   articleStocks?: Prisma.ArticleStockUpdateManyWithoutSchoolNestedInput
   mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutPretEquipementsInput = {
@@ -6672,6 +6944,408 @@ export type SchoolUncheckedUpdateWithoutPretEquipementsInput = {
   articleStocks?: Prisma.ArticleStockUncheckedUpdateManyWithoutSchoolNestedInput
   mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
   equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutTicketMaintenancesInput = {
+  id?: string
+  nom: string
+  tenantKey?: string
+  inviteCode?: string
+  adresse?: string | null
+  telephone?: string | null
+  email?: string | null
+  logoUrl?: string | null
+  devise?: string | null
+  slogan?: string | null
+  siteWeb?: string | null
+  numAutorisation?: string | null
+  createdAt?: Date | string
+  classes?: Prisma.ClasseCreateNestedManyWithoutSchoolInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutSchoolInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  dossierAdmissions?: Prisma.DossierAdmissionCreateNestedManyWithoutSchoolInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutSchoolInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutSchoolInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutSchoolInput
+  notes?: Prisma.NoteCreateNestedManyWithoutSchoolInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutSchoolInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutSchoolInput
+  appels?: Prisma.AppelCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutSchoolInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutSchoolInput
+  bulletinTemplate?: Prisma.BulletinTemplateCreateNestedOneWithoutSchoolInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutSchoolInput
+  examenSalles?: Prisma.ExamenSalleCreateNestedManyWithoutSchoolInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
+  periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
+  chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutSchoolInput
+  articleStocks?: Prisma.ArticleStockCreateNestedManyWithoutSchoolInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
+  pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutTicketMaintenancesInput = {
+  id?: string
+  nom: string
+  tenantKey?: string
+  inviteCode?: string
+  adresse?: string | null
+  telephone?: string | null
+  email?: string | null
+  logoUrl?: string | null
+  devise?: string | null
+  slogan?: string | null
+  siteWeb?: string | null
+  numAutorisation?: string | null
+  createdAt?: Date | string
+  classes?: Prisma.ClasseUncheckedCreateNestedManyWithoutSchoolInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutSchoolInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  dossierAdmissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutSchoolInput
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutSchoolInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutSchoolInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutSchoolInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutSchoolInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutSchoolInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutSchoolInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutSchoolInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutSchoolInput
+  bulletinTemplate?: Prisma.BulletinTemplateUncheckedCreateNestedOneWithoutSchoolInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutSchoolInput
+  examenSalles?: Prisma.ExamenSalleUncheckedCreateNestedManyWithoutSchoolInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
+  periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
+  chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutSchoolInput
+  articleStocks?: Prisma.ArticleStockUncheckedCreateNestedManyWithoutSchoolInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
+  pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutTicketMaintenancesInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutTicketMaintenancesInput, Prisma.SchoolUncheckedCreateWithoutTicketMaintenancesInput>
+}
+
+export type SchoolUpsertWithoutTicketMaintenancesInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutTicketMaintenancesInput, Prisma.SchoolUncheckedUpdateWithoutTicketMaintenancesInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutTicketMaintenancesInput, Prisma.SchoolUncheckedCreateWithoutTicketMaintenancesInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutTicketMaintenancesInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutTicketMaintenancesInput, Prisma.SchoolUncheckedUpdateWithoutTicketMaintenancesInput>
+}
+
+export type SchoolUpdateWithoutTicketMaintenancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantKey?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  devise?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteWeb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numAutorisation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.ClasseUpdateManyWithoutSchoolNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutSchoolNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  dossierAdmissions?: Prisma.DossierAdmissionUpdateManyWithoutSchoolNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutSchoolNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutSchoolNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutSchoolNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutSchoolNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutSchoolNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutSchoolNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  cahierTextes?: Prisma.CahierTexteUpdateManyWithoutSchoolNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutSchoolNestedInput
+  bulletinTemplate?: Prisma.BulletinTemplateUpdateOneWithoutSchoolNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutSchoolNestedInput
+  examenSalles?: Prisma.ExamenSalleUpdateManyWithoutSchoolNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
+  periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
+  chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutSchoolNestedInput
+  articleStocks?: Prisma.ArticleStockUpdateManyWithoutSchoolNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
+  pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutTicketMaintenancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantKey?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  devise?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteWeb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numAutorisation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.ClasseUncheckedUpdateManyWithoutSchoolNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutSchoolNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  dossierAdmissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutSchoolNestedInput
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutSchoolNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutSchoolNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutSchoolNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutSchoolNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutSchoolNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutSchoolNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutSchoolNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutSchoolNestedInput
+  bulletinTemplate?: Prisma.BulletinTemplateUncheckedUpdateOneWithoutSchoolNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutSchoolNestedInput
+  examenSalles?: Prisma.ExamenSalleUncheckedUpdateManyWithoutSchoolNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
+  periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
+  chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutSchoolNestedInput
+  articleStocks?: Prisma.ArticleStockUncheckedUpdateManyWithoutSchoolNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutInterventionMaintenancesInput = {
+  id?: string
+  nom: string
+  tenantKey?: string
+  inviteCode?: string
+  adresse?: string | null
+  telephone?: string | null
+  email?: string | null
+  logoUrl?: string | null
+  devise?: string | null
+  slogan?: string | null
+  siteWeb?: string | null
+  numAutorisation?: string | null
+  createdAt?: Date | string
+  classes?: Prisma.ClasseCreateNestedManyWithoutSchoolInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutSchoolInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  dossierAdmissions?: Prisma.DossierAdmissionCreateNestedManyWithoutSchoolInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutSchoolInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutSchoolInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutSchoolInput
+  notes?: Prisma.NoteCreateNestedManyWithoutSchoolInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutSchoolInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutSchoolInput
+  appels?: Prisma.AppelCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutSchoolInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutSchoolInput
+  bulletinTemplate?: Prisma.BulletinTemplateCreateNestedOneWithoutSchoolInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutSchoolInput
+  examenSalles?: Prisma.ExamenSalleCreateNestedManyWithoutSchoolInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutSchoolInput
+  periodes?: Prisma.PeriodeCreateNestedManyWithoutSchoolInput
+  chapitres?: Prisma.ChapitreCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleCreateNestedManyWithoutSchoolInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutSchoolInput
+  articleStocks?: Prisma.ArticleStockCreateNestedManyWithoutSchoolInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutSchoolInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutSchoolInput
+  pretEquipements?: Prisma.PretEquipementCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutInterventionMaintenancesInput = {
+  id?: string
+  nom: string
+  tenantKey?: string
+  inviteCode?: string
+  adresse?: string | null
+  telephone?: string | null
+  email?: string | null
+  logoUrl?: string | null
+  devise?: string | null
+  slogan?: string | null
+  siteWeb?: string | null
+  numAutorisation?: string | null
+  createdAt?: Date | string
+  classes?: Prisma.ClasseUncheckedCreateNestedManyWithoutSchoolInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutSchoolInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  dossierAdmissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutSchoolInput
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutSchoolInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutSchoolInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutSchoolInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutSchoolInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutSchoolInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutSchoolInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutSchoolInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutSchoolInput
+  bulletinTemplate?: Prisma.BulletinTemplateUncheckedCreateNestedOneWithoutSchoolInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutSchoolInput
+  examenSalles?: Prisma.ExamenSalleUncheckedCreateNestedManyWithoutSchoolInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutSchoolInput
+  periodes?: Prisma.PeriodeUncheckedCreateNestedManyWithoutSchoolInput
+  chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutSchoolInput
+  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutSchoolInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutSchoolInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutSchoolInput
+  articleStocks?: Prisma.ArticleStockUncheckedCreateNestedManyWithoutSchoolInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutSchoolInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutSchoolInput
+  pretEquipements?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutSchoolInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutInterventionMaintenancesInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutInterventionMaintenancesInput, Prisma.SchoolUncheckedCreateWithoutInterventionMaintenancesInput>
+}
+
+export type SchoolUpsertWithoutInterventionMaintenancesInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutInterventionMaintenancesInput, Prisma.SchoolUncheckedUpdateWithoutInterventionMaintenancesInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutInterventionMaintenancesInput, Prisma.SchoolUncheckedCreateWithoutInterventionMaintenancesInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutInterventionMaintenancesInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutInterventionMaintenancesInput, Prisma.SchoolUncheckedUpdateWithoutInterventionMaintenancesInput>
+}
+
+export type SchoolUpdateWithoutInterventionMaintenancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantKey?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  devise?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteWeb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numAutorisation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.ClasseUpdateManyWithoutSchoolNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutSchoolNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  dossierAdmissions?: Prisma.DossierAdmissionUpdateManyWithoutSchoolNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutSchoolNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutSchoolNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutSchoolNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutSchoolNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutSchoolNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutSchoolNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  cahierTextes?: Prisma.CahierTexteUpdateManyWithoutSchoolNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutSchoolNestedInput
+  bulletinTemplate?: Prisma.BulletinTemplateUpdateOneWithoutSchoolNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutSchoolNestedInput
+  examenSalles?: Prisma.ExamenSalleUpdateManyWithoutSchoolNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutSchoolNestedInput
+  periodes?: Prisma.PeriodeUpdateManyWithoutSchoolNestedInput
+  chapitres?: Prisma.ChapitreUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutSchoolNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutSchoolNestedInput
+  articleStocks?: Prisma.ArticleStockUpdateManyWithoutSchoolNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutSchoolNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutSchoolNestedInput
+  pretEquipements?: Prisma.PretEquipementUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutInterventionMaintenancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantKey?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  devise?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteWeb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numAutorisation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.ClasseUncheckedUpdateManyWithoutSchoolNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutSchoolNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  dossierAdmissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutSchoolNestedInput
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutSchoolNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutSchoolNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutSchoolNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutSchoolNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutSchoolNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutSchoolNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutSchoolNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutSchoolNestedInput
+  bulletinTemplate?: Prisma.BulletinTemplateUncheckedUpdateOneWithoutSchoolNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutSchoolNestedInput
+  examenSalles?: Prisma.ExamenSalleUncheckedUpdateManyWithoutSchoolNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutSchoolNestedInput
+  periodes?: Prisma.PeriodeUncheckedUpdateManyWithoutSchoolNestedInput
+  chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutSchoolNestedInput
+  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutSchoolNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutSchoolNestedInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutSchoolNestedInput
+  articleStocks?: Prisma.ArticleStockUncheckedUpdateManyWithoutSchoolNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutSchoolNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  pretEquipements?: Prisma.PretEquipementUncheckedUpdateManyWithoutSchoolNestedInput
+  ticketMaintenances?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 
@@ -6708,6 +7382,8 @@ export type SchoolCountOutputType = {
   mouvementStocks: number
   equipements: number
   pretEquipements: number
+  ticketMaintenances: number
+  interventionMaintenances: number
 }
 
 export type SchoolCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6739,6 +7415,8 @@ export type SchoolCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   mouvementStocks?: boolean | SchoolCountOutputTypeCountMouvementStocksArgs
   equipements?: boolean | SchoolCountOutputTypeCountEquipementsArgs
   pretEquipements?: boolean | SchoolCountOutputTypeCountPretEquipementsArgs
+  ticketMaintenances?: boolean | SchoolCountOutputTypeCountTicketMaintenancesArgs
+  interventionMaintenances?: boolean | SchoolCountOutputTypeCountInterventionMaintenancesArgs
 }
 
 /**
@@ -6947,6 +7625,20 @@ export type SchoolCountOutputTypeCountPretEquipementsArgs<ExtArgs extends runtim
   where?: Prisma.PretEquipementWhereInput
 }
 
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountTicketMaintenancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketMaintenanceWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountInterventionMaintenancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InterventionMaintenanceWhereInput
+}
+
 
 export type SchoolSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -6991,6 +7683,8 @@ export type SchoolSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   mouvementStocks?: boolean | Prisma.School$mouvementStocksArgs<ExtArgs>
   equipements?: boolean | Prisma.School$equipementsArgs<ExtArgs>
   pretEquipements?: boolean | Prisma.School$pretEquipementsArgs<ExtArgs>
+  ticketMaintenances?: boolean | Prisma.School$ticketMaintenancesArgs<ExtArgs>
+  interventionMaintenances?: boolean | Prisma.School$interventionMaintenancesArgs<ExtArgs>
   _count?: boolean | Prisma.SchoolCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["school"]>
 
@@ -7073,6 +7767,8 @@ export type SchoolInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   mouvementStocks?: boolean | Prisma.School$mouvementStocksArgs<ExtArgs>
   equipements?: boolean | Prisma.School$equipementsArgs<ExtArgs>
   pretEquipements?: boolean | Prisma.School$pretEquipementsArgs<ExtArgs>
+  ticketMaintenances?: boolean | Prisma.School$ticketMaintenancesArgs<ExtArgs>
+  interventionMaintenances?: boolean | Prisma.School$interventionMaintenancesArgs<ExtArgs>
   _count?: boolean | Prisma.SchoolCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SchoolIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -7110,6 +7806,8 @@ export type $SchoolPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     mouvementStocks: Prisma.$MouvementStockPayload<ExtArgs>[]
     equipements: Prisma.$EquipementPayload<ExtArgs>[]
     pretEquipements: Prisma.$PretEquipementPayload<ExtArgs>[]
+    ticketMaintenances: Prisma.$TicketMaintenancePayload<ExtArgs>[]
+    interventionMaintenances: Prisma.$InterventionMaintenancePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -7548,6 +8246,8 @@ export interface Prisma__SchoolClient<T, Null = never, ExtArgs extends runtime.T
   mouvementStocks<T extends Prisma.School$mouvementStocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$mouvementStocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MouvementStockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   equipements<T extends Prisma.School$equipementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$equipementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pretEquipements<T extends Prisma.School$pretEquipementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$pretEquipementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PretEquipementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketMaintenances<T extends Prisma.School$ticketMaintenancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$ticketMaintenancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketMaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  interventionMaintenances<T extends Prisma.School$interventionMaintenancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$interventionMaintenancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterventionMaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8671,6 +9371,54 @@ export type School$pretEquipementsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.PretEquipementScalarFieldEnum | Prisma.PretEquipementScalarFieldEnum[]
+}
+
+/**
+ * School.ticketMaintenances
+ */
+export type School$ticketMaintenancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TicketMaintenance
+   */
+  select?: Prisma.TicketMaintenanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TicketMaintenance
+   */
+  omit?: Prisma.TicketMaintenanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketMaintenanceInclude<ExtArgs> | null
+  where?: Prisma.TicketMaintenanceWhereInput
+  orderBy?: Prisma.TicketMaintenanceOrderByWithRelationInput | Prisma.TicketMaintenanceOrderByWithRelationInput[]
+  cursor?: Prisma.TicketMaintenanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketMaintenanceScalarFieldEnum | Prisma.TicketMaintenanceScalarFieldEnum[]
+}
+
+/**
+ * School.interventionMaintenances
+ */
+export type School$interventionMaintenancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InterventionMaintenance
+   */
+  select?: Prisma.InterventionMaintenanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InterventionMaintenance
+   */
+  omit?: Prisma.InterventionMaintenanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InterventionMaintenanceInclude<ExtArgs> | null
+  where?: Prisma.InterventionMaintenanceWhereInput
+  orderBy?: Prisma.InterventionMaintenanceOrderByWithRelationInput | Prisma.InterventionMaintenanceOrderByWithRelationInput[]
+  cursor?: Prisma.InterventionMaintenanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InterventionMaintenanceScalarFieldEnum | Prisma.InterventionMaintenanceScalarFieldEnum[]
 }
 
 /**

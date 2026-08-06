@@ -840,6 +840,91 @@ export type EnumEtatEquipementNullableWithAggregatesFilter<$PrismaModel = never>
   _max?: Prisma.NestedEnumEtatEquipementNullableFilter<$PrismaModel>
 }
 
+export type EnumTypeTicketFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeTicket | Prisma.EnumTypeTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeTicket[] | Prisma.ListEnumTypeTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeTicket[] | Prisma.ListEnumTypeTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeTicketFilter<$PrismaModel> | $Enums.TypeTicket
+}
+
+export type EnumPrioriteTicketFilter<$PrismaModel = never> = {
+  equals?: $Enums.PrioriteTicket | Prisma.EnumPrioriteTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.PrioriteTicket[] | Prisma.ListEnumPrioriteTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PrioriteTicket[] | Prisma.ListEnumPrioriteTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPrioriteTicketFilter<$PrismaModel> | $Enums.PrioriteTicket
+}
+
+export type EnumStatutTicketFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutTicket | Prisma.EnumStatutTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutTicket[] | Prisma.ListEnumStatutTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutTicket[] | Prisma.ListEnumStatutTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutTicketFilter<$PrismaModel> | $Enums.StatutTicket
+}
+
+export type EnumTypeLocalisationNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeLocalisation | Prisma.EnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TypeLocalisation[] | Prisma.ListEnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TypeLocalisation[] | Prisma.ListEnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTypeLocalisationNullableFilter<$PrismaModel> | $Enums.TypeLocalisation | null
+}
+
+export type EnumTypeTicketWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeTicket | Prisma.EnumTypeTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeTicket[] | Prisma.ListEnumTypeTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeTicket[] | Prisma.ListEnumTypeTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeTicketWithAggregatesFilter<$PrismaModel> | $Enums.TypeTicket
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeTicketFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeTicketFilter<$PrismaModel>
+}
+
+export type EnumPrioriteTicketWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PrioriteTicket | Prisma.EnumPrioriteTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.PrioriteTicket[] | Prisma.ListEnumPrioriteTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PrioriteTicket[] | Prisma.ListEnumPrioriteTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPrioriteTicketWithAggregatesFilter<$PrismaModel> | $Enums.PrioriteTicket
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPrioriteTicketFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPrioriteTicketFilter<$PrismaModel>
+}
+
+export type EnumStatutTicketWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutTicket | Prisma.EnumStatutTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutTicket[] | Prisma.ListEnumStatutTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutTicket[] | Prisma.ListEnumStatutTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutTicketWithAggregatesFilter<$PrismaModel> | $Enums.StatutTicket
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutTicketFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutTicketFilter<$PrismaModel>
+}
+
+export type EnumTypeLocalisationNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeLocalisation | Prisma.EnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TypeLocalisation[] | Prisma.ListEnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TypeLocalisation[] | Prisma.ListEnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTypeLocalisationNullableWithAggregatesFilter<$PrismaModel> | $Enums.TypeLocalisation | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeLocalisationNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeLocalisationNullableFilter<$PrismaModel>
+}
+
+export type EnumStatutInterventionFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutIntervention | Prisma.EnumStatutInterventionFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutIntervention[] | Prisma.ListEnumStatutInterventionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutIntervention[] | Prisma.ListEnumStatutInterventionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutInterventionFilter<$PrismaModel> | $Enums.StatutIntervention
+}
+
+export type EnumStatutInterventionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutIntervention | Prisma.EnumStatutInterventionFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutIntervention[] | Prisma.ListEnumStatutInterventionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutIntervention[] | Prisma.ListEnumStatutInterventionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutInterventionWithAggregatesFilter<$PrismaModel> | $Enums.StatutIntervention
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutInterventionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutInterventionFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1612,6 +1697,91 @@ export type NestedEnumEtatEquipementNullableWithAggregatesFilter<$PrismaModel = 
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumEtatEquipementNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumEtatEquipementNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumTypeTicketFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeTicket | Prisma.EnumTypeTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeTicket[] | Prisma.ListEnumTypeTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeTicket[] | Prisma.ListEnumTypeTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeTicketFilter<$PrismaModel> | $Enums.TypeTicket
+}
+
+export type NestedEnumPrioriteTicketFilter<$PrismaModel = never> = {
+  equals?: $Enums.PrioriteTicket | Prisma.EnumPrioriteTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.PrioriteTicket[] | Prisma.ListEnumPrioriteTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PrioriteTicket[] | Prisma.ListEnumPrioriteTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPrioriteTicketFilter<$PrismaModel> | $Enums.PrioriteTicket
+}
+
+export type NestedEnumStatutTicketFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutTicket | Prisma.EnumStatutTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutTicket[] | Prisma.ListEnumStatutTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutTicket[] | Prisma.ListEnumStatutTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutTicketFilter<$PrismaModel> | $Enums.StatutTicket
+}
+
+export type NestedEnumTypeLocalisationNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeLocalisation | Prisma.EnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TypeLocalisation[] | Prisma.ListEnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TypeLocalisation[] | Prisma.ListEnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTypeLocalisationNullableFilter<$PrismaModel> | $Enums.TypeLocalisation | null
+}
+
+export type NestedEnumTypeTicketWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeTicket | Prisma.EnumTypeTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeTicket[] | Prisma.ListEnumTypeTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeTicket[] | Prisma.ListEnumTypeTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeTicketWithAggregatesFilter<$PrismaModel> | $Enums.TypeTicket
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeTicketFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeTicketFilter<$PrismaModel>
+}
+
+export type NestedEnumPrioriteTicketWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PrioriteTicket | Prisma.EnumPrioriteTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.PrioriteTicket[] | Prisma.ListEnumPrioriteTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PrioriteTicket[] | Prisma.ListEnumPrioriteTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPrioriteTicketWithAggregatesFilter<$PrismaModel> | $Enums.PrioriteTicket
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPrioriteTicketFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPrioriteTicketFilter<$PrismaModel>
+}
+
+export type NestedEnumStatutTicketWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutTicket | Prisma.EnumStatutTicketFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutTicket[] | Prisma.ListEnumStatutTicketFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutTicket[] | Prisma.ListEnumStatutTicketFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutTicketWithAggregatesFilter<$PrismaModel> | $Enums.StatutTicket
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutTicketFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutTicketFilter<$PrismaModel>
+}
+
+export type NestedEnumTypeLocalisationNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeLocalisation | Prisma.EnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TypeLocalisation[] | Prisma.ListEnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TypeLocalisation[] | Prisma.ListEnumTypeLocalisationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTypeLocalisationNullableWithAggregatesFilter<$PrismaModel> | $Enums.TypeLocalisation | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeLocalisationNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeLocalisationNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumStatutInterventionFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutIntervention | Prisma.EnumStatutInterventionFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutIntervention[] | Prisma.ListEnumStatutInterventionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutIntervention[] | Prisma.ListEnumStatutInterventionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutInterventionFilter<$PrismaModel> | $Enums.StatutIntervention
+}
+
+export type NestedEnumStatutInterventionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutIntervention | Prisma.EnumStatutInterventionFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutIntervention[] | Prisma.ListEnumStatutInterventionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutIntervention[] | Prisma.ListEnumStatutInterventionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutInterventionWithAggregatesFilter<$PrismaModel> | $Enums.StatutIntervention
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutInterventionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutInterventionFilter<$PrismaModel>
 }
 
 

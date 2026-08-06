@@ -1,149 +1,248 @@
 import { Request, Response } from "express";
-import { MaintenanceService } from "./maintenance.service.js";
-
-const service = new MaintenanceService();
+import { maintenanceService } from "./maintenance.service.js";
+import {
+  CreateTicketMaintenanceSchema,
+  UpdateTicketMaintenanceSchema,
+  TicketMaintenanceFiltersSchema,
+  CreateInterventionSchema,
+  UpdateInterventionSchema,
+} from "./maintenance.schema.js";
+import { ZodError } from "zod";
 
 /**
- * TODO: Récupérer tous les tickets de maintenance
+ * TICKETS DE MAINTENANCE
  */
+
+const requireUserContext = (req: Request) => {
+  const schoolId = req.user?.schoolId;
+  const userId = req.user?.id;
+  if (!schoolId || !userId) return null;
+  return { schoolId, userId, role: req.user?.role ?? "" };
+};
+
 export const getTickets = async (req: Request, res: Response) => {
   try {
-    const { schoolId } = req.user!;
+    const schoolId = req.user?.schoolId;
 
-    // TODO: Parser les filtres (statut, priorité, type)
-    // TODO: Appel au service
-    // const tickets = await service.getTickets(schoolId!, req.query);
+    if (!schoolId) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
-    return res.status(200).json({ message: "Not implemented" });
+    const filters = TicketMaintenanceFiltersSchema.parse(req.query);
+    const tickets = await maintenanceService.getTickets(schoolId, filters);
+
+    res.json(tickets);
   } catch (error: any) {
-    console.error(error);
+    console.error("Erreur getTickets:", error);
     return res
-      .status(500)
+      .status(400)
       .json({ error: "Erreur lors de la récupération des tickets." });
   }
 };
 
-/**
- * TODO: Créer un nouveau ticket
- */
+export const getTicketById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params as { id: string };
+    const schoolId = req.user?.schoolId;
+
+    if (!schoolId) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
+
+    const ticket = await maintenanceService.getTicketById(id, schoolId);
+    res.json(ticket);
+  } catch (error: any) {
+    console.error("Erreur getTicketById:", error);
+    return res.status(400).json({
+      error: error.message || "Erreur lors de la récupération du ticket",
+    });
+  }
+};
+
 export const createTicket = async (req: Request, res: Response) => {
   try {
-    const { schoolId, role } = req.user!;
+    const data = CreateTicketMaintenanceSchema.parse(req.body);
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
-    // TODO: Validation Zod (titre, description, priorité, type, localId ou equipementId)
-    // TODO: Appel au service
-    // const ticket = await service.createTicket(req.body, schoolId!, { schoolId, role });
-
-    return res.status(201).json({ message: "Not implemented" });
+    const ticket = await maintenanceService.createTicket(data, user);
+    res.status(201).json(ticket);
   } catch (error: any) {
-    console.error(error);
+    console.error("Erreur createTicket:", error);
     return res
-      .status(500)
-      .json({ error: "Erreur lors de la création du ticket." });
+      .status(400)
+      .json({ error: error.message || "Erreur lors de la création du ticket" });
   }
 };
 
-/**
- * TODO: Mettre à jour un ticket
- */
 export const updateTicket = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const { schoolId, role } = req.user!;
+    const { id } = req.params as { id: string };
 
-    // TODO: Validation des données
-    // TODO: Appel au service
-    // const ticket = await service.updateTicket(id, req.body, { schoolId, role });
+    // Nettoyage : suppression des clés ayant pour valeur "" ou null
+    const cleanBody = Object.fromEntries(
+      Object.entries(req.body).filter(
+        ([_, value]) => value !== "" && value !== null,
+      ),
+    );
 
-    return res.status(200).json({ message: "Not implemented" });
+    // Si type est présent, on s'assure qu'il est en majuscules
+    if (typeof cleanBody.type === "string") {
+      cleanBody.type = cleanBody.type.toUpperCase();
+    }
+
+    // Validation avec Zod avec les données nettoyées
+    const data = UpdateTicketMaintenanceSchema.parse(cleanBody);
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
+
+    const ticket = await maintenanceService.updateTicket(id, data, user);
+    res.json(ticket);
   } catch (error: any) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ error: "Erreur lors de la mise à jour du ticket." });
+    console.error("Erreur updateTicket:", error);
+
+    if (error instanceof ZodError) {
+      return res.status(400).json({
+        error: "Données invalides ne correspondant pas au format attendu",
+        details: error.issues,
+      });
+    }
+
+    return res.status(400).json({
+      error: error.message || "Erreur lors de la mise à jour du ticket",
+    });
   }
 };
 
-/**
- * TODO: Assigner un ticket à un intervenant
- */
-export const assignerTicket = async (req: Request, res: Response) => {
+export const deleteTicket = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const { intervenantId } = req.body;
-    const { schoolId, role } = req.user!;
+    const { id } = req.params as { id: string };
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
-    // TODO: Validation de l'intervenantId
-    // TODO: Appel au service
-    // const ticket = await service.assignerTicket(id, intervenantId, { schoolId, role });
-
-    return res.status(200).json({ message: "Not implemented" });
+    await maintenanceService.deleteTicket(id, user);
+    res.status(204).send();
   } catch (error: any) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ error: "Erreur lors de l'assignation du ticket." });
+    console.error("Erreur deleteTicket:", error);
+    return res.status(400).json({
+      error: error.message || "Erreur lors de la suppression du ticket",
+    });
   }
 };
 
 /**
- * TODO: Clôturer un ticket
+ * INTERVENTIONS
  */
-export const cloturerTicket = async (req: Request, res: Response) => {
+
+export const getInterventions = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const { schoolId, role } = req.user!;
+    const schoolId = req.user?.schoolId;
+    const { ticketId } = req.query;
 
-    // TODO: Validation des données de clôture
-    // TODO: Appel au service
-    // const ticket = await service.cloturerTicket(id, req.body, { schoolId, role });
+    if (!schoolId) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
-    return res.status(200).json({ message: "Not implemented" });
+    const interventions = await maintenanceService.getInterventions(
+      schoolId,
+      ticketId as string,
+    );
+
+    res.json(interventions);
   } catch (error: any) {
-    console.error(error);
+    console.error("Erreur getInterventions:", error);
     return res
-      .status(500)
-      .json({ error: "Erreur lors de la clôture du ticket." });
+      .status(400)
+      .json({ error: "Erreur lors de la récupération des interventions." });
   }
 };
 
-/**
- * TODO: Ajouter une intervention à un ticket
- */
-export const ajouterIntervention = async (req: Request, res: Response) => {
+export const createIntervention = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const { schoolId, role } = req.user!;
+    const data = CreateInterventionSchema.parse(req.body);
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
-    // TODO: Validation des données (commentaire, durée, pièces)
-    // TODO: Appel au service
-    // const intervention = await service.ajouterIntervention(id, req.body, { schoolId, role });
-
-    return res.status(201).json({ message: "Not implemented" });
+    const intervention = await maintenanceService.createIntervention(
+      data,
+      user,
+    );
+    res.status(201).json(intervention);
   } catch (error: any) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ error: "Erreur lors de l'ajout de l'intervention." });
+    console.error("Erreur createIntervention:", error);
+    return res.status(400).json({
+      error: error.message || "Erreur lors de la création de l'intervention",
+    });
+  }
+};
+
+export const updateIntervention = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params as { id: string };
+    const data = UpdateInterventionSchema.parse(req.body);
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
+
+    const intervention = await maintenanceService.updateIntervention(
+      id,
+      data,
+      user,
+    );
+    res.json(intervention);
+  } catch (error: any) {
+    console.error("Erreur updateIntervention:", error);
+    return res.status(400).json({
+      error: error.message || "Erreur lors de la mise à jour de l'intervention",
+    });
+  }
+};
+
+export const deleteIntervention = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params as { id: string };
+    const user = requireUserContext(req);
+    if (!user) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
+
+    await maintenanceService.deleteIntervention(id, user);
+    res.status(204).send();
+  } catch (error: any) {
+    console.error("Erreur deleteIntervention:", error);
+    return res.status(400).json({
+      error: error.message || "Erreur lors de la suppression de l'intervention",
+    });
   }
 };
 
 /**
- * TODO: Récupérer les statistiques de maintenance
+ * STATISTIQUES
  */
+
 export const getStatistiques = async (req: Request, res: Response) => {
   try {
-    const { schoolId } = req.user!;
+    const schoolId = req.user?.schoolId;
 
-    // TODO: Parser la période (query param)
-    // TODO: Appel au service
-    // const stats = await service.getStatistiques(schoolId!, req.query.periode);
+    if (!schoolId) {
+      return res.status(403).json({ error: "École non spécifiée" });
+    }
 
-    return res.status(200).json({ message: "Not implemented" });
+    const stats = await maintenanceService.getStatistiques(schoolId);
+    res.json(stats);
   } catch (error: any) {
-    console.error(error);
+    console.error("Erreur getStatistiques:", error);
     return res
-      .status(500)
+      .status(400)
       .json({ error: "Erreur lors de la récupération des statistiques." });
   }
 };
