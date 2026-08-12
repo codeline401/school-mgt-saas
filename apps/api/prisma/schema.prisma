@@ -57,6 +57,8 @@ model User {
   ticketMaintenancesAssignee         TicketMaintenance[]       @relation("TicketAssigne")
   interventionMaintenances           InterventionMaintenance[]
   interventionMaintenancesTechnician InterventionMaintenance[] @relation("InterventionsTechnician")
+  sortieScolaires                    SortieScolaire[]          @relation("SortiesOrganisees")
+  participantSorties                 ParticipantSortie[]       @relation("SortiesAccompagnees")
 }
 
 // Modele SAAS
@@ -111,6 +113,13 @@ model School {
   pretEquipements          PretEquipement[]
   ticketMaintenances       TicketMaintenance[]
   interventionMaintenances InterventionMaintenance[]
+  vehicules                Vehicule[]
+  chauffeurs               Chauffeur[]
+  routes                   Route[]
+  affectationTransports    AffectationTransport[]
+  sortieScolaires          SortieScolaire[]
+  participantSorties       ParticipantSortie[]
+  autorisationParents      AutorisationParent[]
 }
 
 model Classe {
@@ -139,6 +148,7 @@ model Classe {
   examenSessions       ExamenSession[]
   chapitres            Chapitre[]
   salles               Salle[]
+  sortieScolaires      SortieScolaire[]
 
   @@unique([schoolId, nom])
   @@index([professeurPrincipalId])
@@ -167,6 +177,9 @@ model Eleve {
   presences             Presence[]
   soumissions           Soumission[]
   deliberationDecisions DeliberationDecision[]
+  affectationTransports AffectationTransport[]
+  participantSorties    ParticipantSortie[]
+  autorisationParents   AutorisationParent[]
 
   @@unique([schoolId, nom, prenom])
   @@index([schoolId])
@@ -221,8 +234,9 @@ model Parent {
 
   eleves Eleve[]
 
-  userId String? @unique
-  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId              String?              @unique
+  user                User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
+  autorisationParents AutorisationParent[]
 
   @@index([schoolId])
 }
@@ -1346,4 +1360,350 @@ enum StatutIntervention {
   EN_COURS
   TERMINEE
   ANNULEE
+}
+
+// ===========================================
+// MODULE LOGISTIQUE - TRANSPORT SCOLAIRE
+// ===========================================
+
+// Véhicule de transport
+model Vehicule {
+  id              String         @id @default(uuid())
+  nom             String // Ex: "Bus 1", "Minibus 2"
+  immatriculation String // Ex: "1234 TCD"
+  typeVehicule    TypeVehicule
+  capacite        Int // Nombre de places assises
+  marque          String?
+  modele          String?
+  annee           Int?
+  statut          StatutVehicule @default(ACTIF)
+
+  // Maintenance
+  derniereRevision  DateTime?
+  prochaineRevision DateTime?
+  kilometrage       Int?
+
+  // Assurance
+  numeroAssurance         String?
+  dateExpirationAssurance DateTime?
+
+  // relation
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  routes Route[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId])
+  @@index([statut])
+}
+
+model Chauffeur {
+  id                   String          @id @default(uuid())
+  nom                  String
+  prenom               String
+  telephone            String
+  numeroPermis         String          @unique
+  typePermis           String // B, C, D, etc.
+  dateExpirationPermis DateTime?
+  statut               StatutChauffeur @default(ACTIF)
+
+  // Informations supplémentaires
+  adresse       String?
+  dateNaissance DateTime?
+  dateEmbauche  DateTime?
+
+  // relation
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  routes Route[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId])
+  @@index([statut])
+}
+
+model Route {
+  id        String      @id @default(uuid())
+  nom       String // Ex: "Route A", "Route B"
+  typeRoute TypeRoute
+  statut    StatutRoute @default(ACTIVE)
+
+  // Horaires
+  heureDepart  DateTime  @db.Time()
+  heureArrivee DateTime? @db.Time()
+
+  // véhicule et chauffeur
+  vehiculeId String
+  vehicule   Vehicule @relation(fields: [vehiculeId], references: [id])
+
+  chauffeurId String
+  chauffeur   Chauffeur @relation(fields: [chauffeurId], references: [id])
+
+  // Jours de la semaine pour cette route
+  joursActifs String // JSON array ["LUNDI", "MARDI", "JEUDI"]
+
+  // Arrêts (JSON array)
+  arrets String? @db.Text // [{"nom":"Arrêt 1","adresse":"...","ordre":1}, ...]
+
+  // relations
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  affectations AffectationTransport[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId])
+  @@index([statut])
+  @@index([vehiculeId])
+  @@index([chauffeurId])
+}
+
+// affectation des élèves au routes
+model AffectationTransport {
+  id String @id @default(uuid())
+
+  // élève
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  // route
+  routeId String
+  route   Route  @relation(fields: [routeId], references: [id], onDelete: Cascade)
+
+  // Détails
+  arretMontee   String? // Nom de l'arrêt de montée
+  arretDescente String? // Nom de l'arrêt de descente
+  statut        StatutAffectation @default(ACTIVE)
+
+  // Date de validité
+  dateDebut DateTime  @default(now())
+  dateFin   DateTime?
+
+  // relations
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([eleveId, routeId]) // un élève ne peut être affecté qu'une fois à une route
+  @@index([schoolId])
+  @@index([routeId])
+  @@index([eleveId])
+  @@index([statut])
+}
+
+// Enumérations Transport
+enum TypeVehicule {
+  BUS
+  MINIBUS
+  VOITURE
+  VAN
+}
+
+enum StatutVehicule {
+  ACTIF
+  MAINTENANCE
+  HORS_SERVICE
+  VENDU
+}
+
+enum StatutChauffeur {
+  ACTIF
+  CONGE
+  SUSPENDU
+  INACTIF
+}
+
+enum TypeRoute {
+  ALLER // Domicile -> École
+  RETOUR // École -> Domicile
+  ALLER_RETOUR // Aller et retour
+  SORTIE
+}
+
+enum StatutRoute {
+  ACTIVE
+  SUSPENDUE
+  ANNULEE
+}
+
+enum StatutAffectation {
+  ACTIVE
+  SUSPENDUE
+  TERMINEE
+}
+
+// ===========================================
+// MODULE LOGISTIQUE - SORTIES SCOLAIRES
+// ===========================================
+
+// Sorties scolaires
+model SortieScolaire {
+  id          String       @id @default(uuid())
+  titre       String
+  description String?      @db.Text
+  type        TypeSortie
+  statut      StatutSortie @default(PLANIFIEE)
+
+  // Date et lieu
+  dateDebut   DateTime
+  dateFin     DateTime
+  lieu        String
+  adresseLieu String?
+
+  // organisation
+  classeId String? // Optionnel si toute l'école
+  classe   Classe? @relation(fields: [classeId], references: [id])
+
+  organisateurId String // User qui organise la sortie
+  organisateur   User   @relation("SortiesOrganisees", fields: [organisateurId], references: [id])
+
+  // Budget
+  coutParEleve Decimal? @db.Decimal(10, 2)
+  budgetTotal  Decimal? @db.Decimal(10, 2)
+
+  // Informations pratiques
+  moyenTransport   String? // Ex: "Bus", "Minibus", "Marche"
+  equipementRequis String? @db.Text // Ex: "Chaussures de sport", "Maillot de bain"
+  consignes        String? @db.Text // Ex: "Apporter un pique-nique", "Rendez-vous à 8h00 devant l'école"
+
+  // Dates limites
+  dateLimiteInscription         DateTime?
+  dateLimiteAutorisationParents DateTime?
+
+  // relations
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  participants  ParticipantSortie[]
+  autorisations AutorisationParent[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId])
+  @@index([classeId])
+  @@index([dateDebut])
+  @@index([statut])
+}
+
+model ParticipantSortie {
+  id String @id @default(uuid())
+
+  // Sortie
+  sortieId String
+  sortie   SortieScolaire @relation(fields: [sortieId], references: [id], onDelete: Cascade)
+
+  // Participant
+  typeParticipant TypeParticipant
+
+  // Si élève
+  eleveId String?
+  eleve   Eleve?  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  // Si accompagnateur (prof, parent, autre)
+  accompagnateurId String?
+  accompagnateur   User?   @relation("SortiesAccompagnees", fields: [accompagnateurId], references: [id])
+
+  // Statut
+  statut StatutParticipant @default(INSCRIT)
+
+  // Paiement
+  montantPaye  Decimal?  @db.Decimal(10, 2)
+  datePaiement DateTime?
+
+  // Notes
+  observations String?
+
+  // relations
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([sortieId, eleveId]) // un élève ne peut s'inscrire qu'un fois
+  @@index([schoolId])
+  @@index([sortieId])
+  @@index([eleveId])
+  @@index([statut])
+}
+
+model AutorisationParent {
+  id String @id @default(uuid())
+
+  // sortie
+  sortieId String
+  sortie   SortieScolaire @relation(fields: [sortieId], references: [id], onDelete: Cascade)
+
+  // elève
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  // Parent
+  parentId String
+  parent   Parent @relation(fields: [parentId], references: [id])
+
+  // autorisation
+  autorise         Boolean
+  dateAutorisation DateTime @default(now())
+  observation      String?
+  signatureUrl     String? // URL de la signature
+
+  // Contacts d'urgence spécifiques
+  contactUrgence String?
+  telUrgence     String?
+
+  // relations
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([sortieId, eleveId, parentId])
+  @@index([schoolId])
+  @@index([sortieId])
+  @@index([eleveId])
+  @@index([parentId])
+}
+
+// ENumérations Sorties
+enum TypeSortie {
+  PEDAGOGIQUE // Visite musée, entreprise, etc.
+  SPORTIVE // Compétition, journée sport
+  CULTURELLE // Théâtre, concert, cinéma
+  EXCURSION // Sortie Nature, randonnée
+  VOYAGE // Voyage scolaire plusieurs jours
+  AUTRE
+}
+
+enum StatutSortie {
+  PLANIFIEE
+  CONFIRMEE
+  EN_COURS
+  TERMINEE
+  ANNULEE
+}
+
+enum TypeParticipant {
+  ELEVE
+  ACCOMPAGNATEUR
+}
+
+enum StatutParticipant {
+  INSCRIT
+  CONFIRME
+  ANNULE
+  ABSENT
+  PRESENT
 }

@@ -13,6 +13,10 @@ export interface Eleve extends BaseEntity {
   classeId: string; // ID de la classe à laquelle l'élève appartient
 }
 
+export interface User extends BaseEntity {
+  role: string; // ex: "ADMIN", "PROF", "PARENT", "ELEVE"
+}
+
 // Une classe contient plusieurs élèves
 // N.B. le modèle Prisma Classe n'a pas createdAt/updatedAt
 export interface Classe {

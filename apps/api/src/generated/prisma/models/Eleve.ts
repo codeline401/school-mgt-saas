@@ -246,6 +246,9 @@ export type EleveWhereInput = {
   presences?: Prisma.PresenceListRelationFilter
   soumissions?: Prisma.SoumissionListRelationFilter
   deliberationDecisions?: Prisma.DeliberationDecisionListRelationFilter
+  affectationTransports?: Prisma.AffectationTransportListRelationFilter
+  participantSorties?: Prisma.ParticipantSortieListRelationFilter
+  autorisationParents?: Prisma.AutorisationParentListRelationFilter
 }
 
 export type EleveOrderByWithRelationInput = {
@@ -269,6 +272,9 @@ export type EleveOrderByWithRelationInput = {
   presences?: Prisma.PresenceOrderByRelationAggregateInput
   soumissions?: Prisma.SoumissionOrderByRelationAggregateInput
   deliberationDecisions?: Prisma.DeliberationDecisionOrderByRelationAggregateInput
+  affectationTransports?: Prisma.AffectationTransportOrderByRelationAggregateInput
+  participantSorties?: Prisma.ParticipantSortieOrderByRelationAggregateInput
+  autorisationParents?: Prisma.AutorisationParentOrderByRelationAggregateInput
 }
 
 export type EleveWhereUniqueInput = Prisma.AtLeast<{
@@ -296,6 +302,9 @@ export type EleveWhereUniqueInput = Prisma.AtLeast<{
   presences?: Prisma.PresenceListRelationFilter
   soumissions?: Prisma.SoumissionListRelationFilter
   deliberationDecisions?: Prisma.DeliberationDecisionListRelationFilter
+  affectationTransports?: Prisma.AffectationTransportListRelationFilter
+  participantSorties?: Prisma.ParticipantSortieListRelationFilter
+  autorisationParents?: Prisma.AutorisationParentListRelationFilter
 }, "id" | "schoolId_nom_prenom">
 
 export type EleveOrderByWithAggregationInput = {
@@ -352,6 +361,9 @@ export type EleveCreateInput = {
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateInput = {
@@ -372,6 +384,9 @@ export type EleveUncheckedCreateInput = {
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUpdateInput = {
@@ -392,6 +407,9 @@ export type EleveUpdateInput = {
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateInput = {
@@ -412,6 +430,9 @@ export type EleveUncheckedUpdateInput = {
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateManyInput = {
@@ -725,6 +746,50 @@ export type EleveUpdateOneRequiredWithoutDeliberationDecisionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutDeliberationDecisionsInput, Prisma.EleveUpdateWithoutDeliberationDecisionsInput>, Prisma.EleveUncheckedUpdateWithoutDeliberationDecisionsInput>
 }
 
+export type EleveCreateNestedOneWithoutAffectationTransportsInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutAffectationTransportsInput, Prisma.EleveUncheckedCreateWithoutAffectationTransportsInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutAffectationTransportsInput
+  connect?: Prisma.EleveWhereUniqueInput
+}
+
+export type EleveUpdateOneRequiredWithoutAffectationTransportsNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutAffectationTransportsInput, Prisma.EleveUncheckedCreateWithoutAffectationTransportsInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutAffectationTransportsInput
+  upsert?: Prisma.EleveUpsertWithoutAffectationTransportsInput
+  connect?: Prisma.EleveWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutAffectationTransportsInput, Prisma.EleveUpdateWithoutAffectationTransportsInput>, Prisma.EleveUncheckedUpdateWithoutAffectationTransportsInput>
+}
+
+export type EleveCreateNestedOneWithoutParticipantSortiesInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutParticipantSortiesInput, Prisma.EleveUncheckedCreateWithoutParticipantSortiesInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutParticipantSortiesInput
+  connect?: Prisma.EleveWhereUniqueInput
+}
+
+export type EleveUpdateOneWithoutParticipantSortiesNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutParticipantSortiesInput, Prisma.EleveUncheckedCreateWithoutParticipantSortiesInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutParticipantSortiesInput
+  upsert?: Prisma.EleveUpsertWithoutParticipantSortiesInput
+  disconnect?: Prisma.EleveWhereInput | boolean
+  delete?: Prisma.EleveWhereInput | boolean
+  connect?: Prisma.EleveWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutParticipantSortiesInput, Prisma.EleveUpdateWithoutParticipantSortiesInput>, Prisma.EleveUncheckedUpdateWithoutParticipantSortiesInput>
+}
+
+export type EleveCreateNestedOneWithoutAutorisationParentsInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutAutorisationParentsInput, Prisma.EleveUncheckedCreateWithoutAutorisationParentsInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutAutorisationParentsInput
+  connect?: Prisma.EleveWhereUniqueInput
+}
+
+export type EleveUpdateOneRequiredWithoutAutorisationParentsNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutAutorisationParentsInput, Prisma.EleveUncheckedCreateWithoutAutorisationParentsInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutAutorisationParentsInput
+  upsert?: Prisma.EleveUpsertWithoutAutorisationParentsInput
+  connect?: Prisma.EleveWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutAutorisationParentsInput, Prisma.EleveUpdateWithoutAutorisationParentsInput>, Prisma.EleveUncheckedUpdateWithoutAutorisationParentsInput>
+}
+
 export type EleveCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -742,6 +807,9 @@ export type EleveCreateWithoutSchoolInput = {
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutSchoolInput = {
@@ -761,6 +829,9 @@ export type EleveUncheckedCreateWithoutSchoolInput = {
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutSchoolInput = {
@@ -824,6 +895,9 @@ export type EleveCreateWithoutClasseInput = {
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutClasseInput = {
@@ -843,6 +917,9 @@ export type EleveUncheckedCreateWithoutClasseInput = {
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutClasseInput = {
@@ -888,6 +965,9 @@ export type EleveCreateWithoutParentInput = {
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutParentInput = {
@@ -907,6 +987,9 @@ export type EleveUncheckedCreateWithoutParentInput = {
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutParentInput = {
@@ -952,6 +1035,9 @@ export type EleveCreateWithoutAdmissionsInput = {
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutAdmissionsInput = {
@@ -971,6 +1057,9 @@ export type EleveUncheckedCreateWithoutAdmissionsInput = {
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutAdmissionsInput = {
@@ -1006,6 +1095,9 @@ export type EleveUpdateWithoutAdmissionsInput = {
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutAdmissionsInput = {
@@ -1025,6 +1117,9 @@ export type EleveUncheckedUpdateWithoutAdmissionsInput = {
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutNotesInput = {
@@ -1044,6 +1139,9 @@ export type EleveCreateWithoutNotesInput = {
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutNotesInput = {
@@ -1063,6 +1161,9 @@ export type EleveUncheckedCreateWithoutNotesInput = {
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutNotesInput = {
@@ -1098,6 +1199,9 @@ export type EleveUpdateWithoutNotesInput = {
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutNotesInput = {
@@ -1117,6 +1221,9 @@ export type EleveUncheckedUpdateWithoutNotesInput = {
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutPresencesInput = {
@@ -1136,6 +1243,9 @@ export type EleveCreateWithoutPresencesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutPresencesInput = {
@@ -1155,6 +1265,9 @@ export type EleveUncheckedCreateWithoutPresencesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutPresencesInput = {
@@ -1190,6 +1303,9 @@ export type EleveUpdateWithoutPresencesInput = {
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutPresencesInput = {
@@ -1209,6 +1325,9 @@ export type EleveUncheckedUpdateWithoutPresencesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutSoumissionsInput = {
@@ -1228,6 +1347,9 @@ export type EleveCreateWithoutSoumissionsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutSoumissionsInput = {
@@ -1247,6 +1369,9 @@ export type EleveUncheckedCreateWithoutSoumissionsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutSoumissionsInput = {
@@ -1282,6 +1407,9 @@ export type EleveUpdateWithoutSoumissionsInput = {
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutSoumissionsInput = {
@@ -1301,6 +1429,9 @@ export type EleveUncheckedUpdateWithoutSoumissionsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutDeliberationDecisionsInput = {
@@ -1320,6 +1451,9 @@ export type EleveCreateWithoutDeliberationDecisionsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutDeliberationDecisionsInput = {
@@ -1339,6 +1473,9 @@ export type EleveUncheckedCreateWithoutDeliberationDecisionsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutDeliberationDecisionsInput = {
@@ -1374,6 +1511,9 @@ export type EleveUpdateWithoutDeliberationDecisionsInput = {
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutDeliberationDecisionsInput = {
@@ -1393,6 +1533,321 @@ export type EleveUncheckedUpdateWithoutDeliberationDecisionsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveCreateWithoutAffectationTransportsInput = {
+  id?: string
+  nom: string
+  prenom: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dateNaissance?: Date | string | null
+  telephone?: string | null
+  adresse?: string | null
+  photoUrl?: string | null
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+}
+
+export type EleveUncheckedCreateWithoutAffectationTransportsInput = {
+  id?: string
+  nom: string
+  prenom: string
+  schoolId: string
+  classeId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dateNaissance?: Date | string | null
+  telephone?: string | null
+  adresse?: string | null
+  photoUrl?: string | null
+  parentId?: string | null
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutAffectationTransportsInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutAffectationTransportsInput, Prisma.EleveUncheckedCreateWithoutAffectationTransportsInput>
+}
+
+export type EleveUpsertWithoutAffectationTransportsInput = {
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutAffectationTransportsInput, Prisma.EleveUncheckedUpdateWithoutAffectationTransportsInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutAffectationTransportsInput, Prisma.EleveUncheckedCreateWithoutAffectationTransportsInput>
+  where?: Prisma.EleveWhereInput
+}
+
+export type EleveUpdateToOneWithWhereWithoutAffectationTransportsInput = {
+  where?: Prisma.EleveWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutAffectationTransportsInput, Prisma.EleveUncheckedUpdateWithoutAffectationTransportsInput>
+}
+
+export type EleveUpdateWithoutAffectationTransportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutAffectationTransportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveCreateWithoutParticipantSortiesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dateNaissance?: Date | string | null
+  telephone?: string | null
+  adresse?: string | null
+  photoUrl?: string | null
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+}
+
+export type EleveUncheckedCreateWithoutParticipantSortiesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  schoolId: string
+  classeId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dateNaissance?: Date | string | null
+  telephone?: string | null
+  adresse?: string | null
+  photoUrl?: string | null
+  parentId?: string | null
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutParticipantSortiesInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutParticipantSortiesInput, Prisma.EleveUncheckedCreateWithoutParticipantSortiesInput>
+}
+
+export type EleveUpsertWithoutParticipantSortiesInput = {
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutParticipantSortiesInput, Prisma.EleveUncheckedUpdateWithoutParticipantSortiesInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutParticipantSortiesInput, Prisma.EleveUncheckedCreateWithoutParticipantSortiesInput>
+  where?: Prisma.EleveWhereInput
+}
+
+export type EleveUpdateToOneWithWhereWithoutParticipantSortiesInput = {
+  where?: Prisma.EleveWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutParticipantSortiesInput, Prisma.EleveUncheckedUpdateWithoutParticipantSortiesInput>
+}
+
+export type EleveUpdateWithoutParticipantSortiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutParticipantSortiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveCreateWithoutAutorisationParentsInput = {
+  id?: string
+  nom: string
+  prenom: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dateNaissance?: Date | string | null
+  telephone?: string | null
+  adresse?: string | null
+  photoUrl?: string | null
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+}
+
+export type EleveUncheckedCreateWithoutAutorisationParentsInput = {
+  id?: string
+  nom: string
+  prenom: string
+  schoolId: string
+  classeId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dateNaissance?: Date | string | null
+  telephone?: string | null
+  adresse?: string | null
+  photoUrl?: string | null
+  parentId?: string | null
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutAutorisationParentsInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutAutorisationParentsInput, Prisma.EleveUncheckedCreateWithoutAutorisationParentsInput>
+}
+
+export type EleveUpsertWithoutAutorisationParentsInput = {
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutAutorisationParentsInput, Prisma.EleveUncheckedUpdateWithoutAutorisationParentsInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutAutorisationParentsInput, Prisma.EleveUncheckedCreateWithoutAutorisationParentsInput>
+  where?: Prisma.EleveWhereInput
+}
+
+export type EleveUpdateToOneWithWhereWithoutAutorisationParentsInput = {
+  where?: Prisma.EleveWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutAutorisationParentsInput, Prisma.EleveUncheckedUpdateWithoutAutorisationParentsInput>
+}
+
+export type EleveUpdateWithoutAutorisationParentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutAutorisationParentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateManySchoolInput = {
@@ -1426,6 +1881,9 @@ export type EleveUpdateWithoutSchoolInput = {
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutSchoolInput = {
@@ -1445,6 +1903,9 @@ export type EleveUncheckedUpdateWithoutSchoolInput = {
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutSchoolInput = {
@@ -1492,6 +1953,9 @@ export type EleveUpdateWithoutClasseInput = {
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutClasseInput = {
@@ -1511,6 +1975,9 @@ export type EleveUncheckedUpdateWithoutClasseInput = {
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutClasseInput = {
@@ -1558,6 +2025,9 @@ export type EleveUpdateWithoutParentInput = {
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutParentInput = {
@@ -1577,6 +2047,9 @@ export type EleveUncheckedUpdateWithoutParentInput = {
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutParentInput = {
@@ -1604,6 +2077,9 @@ export type EleveCountOutputType = {
   presences: number
   soumissions: number
   deliberationDecisions: number
+  affectationTransports: number
+  participantSorties: number
+  autorisationParents: number
 }
 
 export type EleveCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1612,6 +2088,9 @@ export type EleveCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   presences?: boolean | EleveCountOutputTypeCountPresencesArgs
   soumissions?: boolean | EleveCountOutputTypeCountSoumissionsArgs
   deliberationDecisions?: boolean | EleveCountOutputTypeCountDeliberationDecisionsArgs
+  affectationTransports?: boolean | EleveCountOutputTypeCountAffectationTransportsArgs
+  participantSorties?: boolean | EleveCountOutputTypeCountParticipantSortiesArgs
+  autorisationParents?: boolean | EleveCountOutputTypeCountAutorisationParentsArgs
 }
 
 /**
@@ -1659,6 +2138,27 @@ export type EleveCountOutputTypeCountDeliberationDecisionsArgs<ExtArgs extends r
   where?: Prisma.DeliberationDecisionWhereInput
 }
 
+/**
+ * EleveCountOutputType without action
+ */
+export type EleveCountOutputTypeCountAffectationTransportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AffectationTransportWhereInput
+}
+
+/**
+ * EleveCountOutputType without action
+ */
+export type EleveCountOutputTypeCountParticipantSortiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ParticipantSortieWhereInput
+}
+
+/**
+ * EleveCountOutputType without action
+ */
+export type EleveCountOutputTypeCountAutorisationParentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AutorisationParentWhereInput
+}
+
 
 export type EleveSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1681,6 +2181,9 @@ export type EleveSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   presences?: boolean | Prisma.Eleve$presencesArgs<ExtArgs>
   soumissions?: boolean | Prisma.Eleve$soumissionsArgs<ExtArgs>
   deliberationDecisions?: boolean | Prisma.Eleve$deliberationDecisionsArgs<ExtArgs>
+  affectationTransports?: boolean | Prisma.Eleve$affectationTransportsArgs<ExtArgs>
+  participantSorties?: boolean | Prisma.Eleve$participantSortiesArgs<ExtArgs>
+  autorisationParents?: boolean | Prisma.Eleve$autorisationParentsArgs<ExtArgs>
   _count?: boolean | Prisma.EleveCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["eleve"]>
 
@@ -1745,6 +2248,9 @@ export type EleveInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   presences?: boolean | Prisma.Eleve$presencesArgs<ExtArgs>
   soumissions?: boolean | Prisma.Eleve$soumissionsArgs<ExtArgs>
   deliberationDecisions?: boolean | Prisma.Eleve$deliberationDecisionsArgs<ExtArgs>
+  affectationTransports?: boolean | Prisma.Eleve$affectationTransportsArgs<ExtArgs>
+  participantSorties?: boolean | Prisma.Eleve$participantSortiesArgs<ExtArgs>
+  autorisationParents?: boolean | Prisma.Eleve$autorisationParentsArgs<ExtArgs>
   _count?: boolean | Prisma.EleveCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EleveIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1769,6 +2275,9 @@ export type $ElevePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     presences: Prisma.$PresencePayload<ExtArgs>[]
     soumissions: Prisma.$SoumissionPayload<ExtArgs>[]
     deliberationDecisions: Prisma.$DeliberationDecisionPayload<ExtArgs>[]
+    affectationTransports: Prisma.$AffectationTransportPayload<ExtArgs>[]
+    participantSorties: Prisma.$ParticipantSortiePayload<ExtArgs>[]
+    autorisationParents: Prisma.$AutorisationParentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2185,6 +2694,9 @@ export interface Prisma__EleveClient<T, Null = never, ExtArgs extends runtime.Ty
   presences<T extends Prisma.Eleve$presencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$presencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   soumissions<T extends Prisma.Eleve$soumissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$soumissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SoumissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deliberationDecisions<T extends Prisma.Eleve$deliberationDecisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$deliberationDecisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeliberationDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  affectationTransports<T extends Prisma.Eleve$affectationTransportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$affectationTransportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AffectationTransportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  participantSorties<T extends Prisma.Eleve$participantSortiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$participantSortiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParticipantSortiePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  autorisationParents<T extends Prisma.Eleve$autorisationParentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$autorisationParentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutorisationParentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2763,6 +3275,78 @@ export type Eleve$deliberationDecisionsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.DeliberationDecisionScalarFieldEnum | Prisma.DeliberationDecisionScalarFieldEnum[]
+}
+
+/**
+ * Eleve.affectationTransports
+ */
+export type Eleve$affectationTransportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AffectationTransport
+   */
+  select?: Prisma.AffectationTransportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AffectationTransport
+   */
+  omit?: Prisma.AffectationTransportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AffectationTransportInclude<ExtArgs> | null
+  where?: Prisma.AffectationTransportWhereInput
+  orderBy?: Prisma.AffectationTransportOrderByWithRelationInput | Prisma.AffectationTransportOrderByWithRelationInput[]
+  cursor?: Prisma.AffectationTransportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AffectationTransportScalarFieldEnum | Prisma.AffectationTransportScalarFieldEnum[]
+}
+
+/**
+ * Eleve.participantSorties
+ */
+export type Eleve$participantSortiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ParticipantSortie
+   */
+  select?: Prisma.ParticipantSortieSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ParticipantSortie
+   */
+  omit?: Prisma.ParticipantSortieOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ParticipantSortieInclude<ExtArgs> | null
+  where?: Prisma.ParticipantSortieWhereInput
+  orderBy?: Prisma.ParticipantSortieOrderByWithRelationInput | Prisma.ParticipantSortieOrderByWithRelationInput[]
+  cursor?: Prisma.ParticipantSortieWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ParticipantSortieScalarFieldEnum | Prisma.ParticipantSortieScalarFieldEnum[]
+}
+
+/**
+ * Eleve.autorisationParents
+ */
+export type Eleve$autorisationParentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AutorisationParent
+   */
+  select?: Prisma.AutorisationParentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AutorisationParent
+   */
+  omit?: Prisma.AutorisationParentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AutorisationParentInclude<ExtArgs> | null
+  where?: Prisma.AutorisationParentWhereInput
+  orderBy?: Prisma.AutorisationParentOrderByWithRelationInput | Prisma.AutorisationParentOrderByWithRelationInput[]
+  cursor?: Prisma.AutorisationParentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AutorisationParentScalarFieldEnum | Prisma.AutorisationParentScalarFieldEnum[]
 }
 
 /**

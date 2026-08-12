@@ -251,3 +251,38 @@ export type TicketMaintenance = Prisma.TicketMaintenanceModel
  * 
  */
 export type InterventionMaintenance = Prisma.InterventionMaintenanceModel
+/**
+ * Model Vehicule
+ * 
+ */
+export type Vehicule = Prisma.VehiculeModel
+/**
+ * Model Chauffeur
+ * 
+ */
+export type Chauffeur = Prisma.ChauffeurModel
+/**
+ * Model Route
+ * 
+ */
+export type Route = Prisma.RouteModel
+/**
+ * Model AffectationTransport
+ * 
+ */
+export type AffectationTransport = Prisma.AffectationTransportModel
+/**
+ * Model SortieScolaire
+ * 
+ */
+export type SortieScolaire = Prisma.SortieScolaireModel
+/**
+ * Model ParticipantSortie
+ * 
+ */
+export type ParticipantSortie = Prisma.ParticipantSortieModel
+/**
+ * Model AutorisationParent
+ * 
+ */
+export type AutorisationParent = Prisma.AutorisationParentModel

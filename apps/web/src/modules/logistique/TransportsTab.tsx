@@ -1,115 +1,61 @@
 import { useState } from "react";
-import { Bus, PlusIcon, MapPin, Calendar, Users, Route } from "lucide-react";
-import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
+import { Bus, Users, Route as RouteIcon, UserCheck } from "lucide-react";
+import VehiculesTab from "./components/VehiculesTab";
+import ChauffeursTab from "./components/ChauffeurTab";
+import RoutesTab from "./components/RoutesTab";
+import AffectationsTab from "./components/AffectationTab";
 
-type SubTab = "flotte" | "circuits" | "sorties" | "chauffeurs";
+type TabType = "vehicules" | "chauffeurs" | "routes" | "affectations";
 
-/**
- * COMPOSANT TRANSPORTS TAB
- *
- * Gestion des transports scolaires et sorties pédagogiques
- */
-
-function TransportsTab() {
-  const [activeSubTab, setActiveSubTab] = useState<SubTab>("flotte");
+export default function TransportTab() {
+  const [activeTab, setActiveTab] = useState<TabType>("vehicules");
 
   return (
-    <div>
-      {/* En-tête de l'onglet */}
-      <div className="flex justify-between items-center mb-6">
-        <div className="flex items-center gap-3">
-          <Bus size={28} className="text-primary" />
-          <div>
-            <h2 className="text-xl font-bold">
-              Transports & Sorties Scolaires
-            </h2>
-            <p className="text-sm text-base-content/60">
-              Gestion de la flotte, circuits et événements
-            </p>
-          </div>
-        </div>
-        <div className="flex gap-2">
-          <button className="btn btn-outline btn-sm gap-2">
-            <Calendar size={16} />
-            Planifier sortie
-          </button>
-          <button className="btn btn-primary btn-sm gap-2">
-            <PlusIcon size={16} />
-            Ajouter véhicule
-          </button>
-        </div>
+    <div className="space-y-6">
+      {/* En-tête avec tabs */}
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold">Transport Scolaire</h2>
       </div>
 
-      {/* Sous-onglets */}
-      <div role="tablist" className="tabs tabs-bordered mb-6">
+      {/* Tabs Navigation */}
+      <div className="tabs tabs-boxed bg-base-200 p-1">
         <button
-          role="tab"
-          className={`tab ${activeSubTab === "flotte" ? "tab-active" : ""}`}
-          onClick={() => setActiveSubTab("flotte")}
+          className={`tab gap-2 ${activeTab === "vehicules" ? "tab-active" : ""}`}
+          onClick={() => setActiveTab("vehicules")}
         >
-          <Bus size={16} className="mr-2" />
-          Flotte de véhicules
+          <Bus size={18} />
+          Véhicules
         </button>
         <button
-          role="tab"
-          className={`tab ${activeSubTab === "circuits" ? "tab-active" : ""}`}
-          onClick={() => setActiveSubTab("circuits")}
+          className={`tab gap-2 ${activeTab === "chauffeurs" ? "tab-active" : ""}`}
+          onClick={() => setActiveTab("chauffeurs")}
         >
-          <Route size={16} className="mr-2" />
-          Circuits & Trajets
+          <Users size={18} />
+          Chauffeurs
         </button>
         <button
-          role="tab"
-          className={`tab ${activeSubTab === "sorties" ? "tab-active" : ""}`}
-          onClick={() => setActiveSubTab("sorties")}
+          className={`tab gap-2 ${activeTab === "routes" ? "tab-active" : ""}`}
+          onClick={() => setActiveTab("routes")}
         >
-          <MapPin size={16} className="mr-2" />
-          Sorties scolaires
+          <RouteIcon size={18} />
+          Routes
         </button>
         <button
-          role="tab"
-          className={`tab ${activeSubTab === "chauffeurs" ? "tab-active" : ""}`}
-          onClick={() => setActiveSubTab("chauffeurs")}
+          className={`tab gap-2 ${activeTab === "affectations" ? "tab-active" : ""}`}
+          onClick={() => setActiveTab("affectations")}
         >
-          <Users size={16} className="mr-2" />
-          Chauffeurs & Personnel
+          <UserCheck size={18} />
+          Affectations
         </button>
       </div>
 
-      {/* Contenu des sous-onglets */}
-      {activeSubTab === "flotte" && (
-        <DevelopmentPlaceholder
-          icon={Bus}
-          title="Flotte de véhicules"
-          description="Gestion des véhicules avec assurances, contrôles techniques et historique de maintenance."
-        />
-      )}
-
-      {activeSubTab === "circuits" && (
-        <DevelopmentPlaceholder
-          icon={Route}
-          title="Circuits & Trajets"
-          description="Planification des circuits quotidiens, arrêts et horaires de ramassage scolaire."
-        />
-      )}
-
-      {activeSubTab === "sorties" && (
-        <DevelopmentPlaceholder
-          icon={MapPin}
-          title="Sorties scolaires"
-          description="Organisation des sorties pédagogiques, voyages scolaires et événements externes."
-        />
-      )}
-
-      {activeSubTab === "chauffeurs" && (
-        <DevelopmentPlaceholder
-          icon={Users}
-          title="Chauffeurs & Personnel"
-          description="Gestion du personnel de transport avec planning, formations et habilitations."
-        />
-      )}
+      {/* Contenu des tabs */}
+      <div className="mt-6">
+        {activeTab === "vehicules" && <VehiculesTab />}
+        {activeTab === "chauffeurs" && <ChauffeursTab />}
+        {activeTab === "routes" && <RoutesTab />}
+        {activeTab === "affectations" && <AffectationsTab />}
+      </div>
     </div>
   );
 }
-
-export default TransportsTab;
