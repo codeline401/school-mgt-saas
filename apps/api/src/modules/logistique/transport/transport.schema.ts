@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+const isoDateString = z
+  .string()
+  .refine((value) => !Number.isNaN(Date.parse(value)), {
+    message: "La date doit être au format ISO valide.",
+  });
+
 // ==========================================
 // VEHICULE SCHEMAS
 // ==========================================
@@ -12,11 +18,11 @@ export const CreateVehiculeSchema = z.object({
   marque: z.string().optional(),
   modele: z.string().optional(),
   annee: z.number().int().optional(),
-  derniereRevision: z.string().nullish(),
-  prochaineRevision: z.string().nullish(),
+  derniereRevision: isoDateString.nullish(),
+  prochaineRevision: isoDateString.nullish(),
   kilometrage: z.number().int().nonnegative().optional(),
   numeroAssurance: z.string().optional(),
-  dateExpirationAssurance: z.string().nullish(),
+  dateExpirationAssurance: isoDateString.nullish(),
 });
 
 export const UpdateVehiculeSchema = z.object({
@@ -28,11 +34,11 @@ export const UpdateVehiculeSchema = z.object({
   modele: z.string().optional(),
   annee: z.number().int().optional(),
   statut: z.enum(["ACTIF", "MAINTENANCE", "HORS_SERVICE", "VENDU"]).optional(),
-  derniereRevision: z.string().nullish(),
-  prochaineRevision: z.string().nullish(),
+  derniereRevision: isoDateString.nullish(),
+  prochaineRevision: isoDateString.nullish(),
   kilometrage: z.number().int().nonnegative().optional(),
   numeroAssurance: z.string().optional(),
-  dateExpirationAssurance: z.string().nullish(),
+  dateExpirationAssurance: isoDateString.nullish(),
 });
 
 export const VehiculeFiltersSchema = z.object({
@@ -50,10 +56,10 @@ export const CreateChauffeurSchema = z.object({
   telephone: z.string().min(1, "Le téléphone est requis"),
   numeroPermis: z.string().min(1, "Le numéro de permis est requis"),
   typePermis: z.string().min(1, "Le type de permis est requis"),
-  dateExpirationPermis: z.string().nullish(),
+  dateExpirationPermis: isoDateString.nullish(),
   adresse: z.string().optional(),
-  dateNaissance: z.string().optional(),
-  dateEmbauche: z.string().optional(),
+  dateNaissance: isoDateString.optional(),
+  dateEmbauche: isoDateString.optional(),
 });
 
 export const UpdateChauffeurSchema = z.object({
@@ -62,11 +68,11 @@ export const UpdateChauffeurSchema = z.object({
   telephone: z.string().min(1).optional(),
   numeroPermis: z.string().min(1).optional(),
   typePermis: z.string().min(1).optional(),
-  dateExpirationPermis: z.string().nullish(),
+  dateExpirationPermis: isoDateString.nullish(),
   statut: z.enum(["ACTIF", "CONGE", "SUSPENDU", "INACTIF"]).optional(),
   adresse: z.string().optional(),
-  dateNaissance: z.string().optional(),
-  dateEmbauche: z.string().optional(),
+  dateNaissance: isoDateString.optional(),
+  dateEmbauche: isoDateString.optional(),
 });
 
 export const ChauffeurFiltersSchema = z.object({
@@ -125,8 +131,8 @@ export const CreateAffectationSchema = z.object({
   routeId: z.string().uuid("ID route invalide"),
   arretMontee: z.string().optional(),
   arretDescente: z.string().optional(),
-  dateDebut: z.string().optional(),
-  dateFin: z.string().optional(),
+  dateDebut: isoDateString.optional(),
+  dateFin: isoDateString.optional(),
 });
 
 export const UpdateAffectationSchema = z.object({
@@ -134,8 +140,8 @@ export const UpdateAffectationSchema = z.object({
   arretMontee: z.string().optional(),
   arretDescente: z.string().optional(),
   statut: z.enum(["ACTIVE", "SUSPENDUE", "TERMINEE"]).optional(),
-  dateDebut: z.string().optional(),
-  dateFin: z.string().optional(),
+  dateDebut: isoDateString.optional(),
+  dateFin: isoDateString.optional(),
 });
 
 export const AffectationFiltersSchema = z.object({

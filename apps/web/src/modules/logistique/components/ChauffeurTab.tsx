@@ -150,10 +150,10 @@ export default function ChauffeursTab() {
                         </div>
                       </td>
                       <td>
-                        {chauffeur.expirationPermis ? (
+                        {chauffeur.dateExpirationPermis ? (
                           <div className="text-sm">
                             {new Date(
-                              chauffeur.expirationPermis,
+                              chauffeur.dateExpirationPermis,
                             ).toLocaleDateString("fr-FR")}
                           </div>
                         ) : (

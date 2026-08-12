@@ -279,13 +279,14 @@ export type ChauffeurOrderByWithRelationInput = {
 
 export type ChauffeurWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  numeroPermis?: string
+  schoolId_numeroPermis?: Prisma.ChauffeurSchoolIdNumeroPermisCompoundUniqueInput
   AND?: Prisma.ChauffeurWhereInput | Prisma.ChauffeurWhereInput[]
   OR?: Prisma.ChauffeurWhereInput[]
   NOT?: Prisma.ChauffeurWhereInput | Prisma.ChauffeurWhereInput[]
   nom?: Prisma.StringFilter<"Chauffeur"> | string
   prenom?: Prisma.StringFilter<"Chauffeur"> | string
   telephone?: Prisma.StringFilter<"Chauffeur"> | string
+  numeroPermis?: Prisma.StringFilter<"Chauffeur"> | string
   typePermis?: Prisma.StringFilter<"Chauffeur"> | string
   dateExpirationPermis?: Prisma.DateTimeNullableFilter<"Chauffeur"> | Date | string | null
   statut?: Prisma.EnumStatutChauffeurFilter<"Chauffeur"> | $Enums.StatutChauffeur
@@ -297,7 +298,7 @@ export type ChauffeurWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Chauffeur"> | Date | string
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   routes?: Prisma.RouteListRelationFilter
-}, "id" | "numeroPermis">
+}, "id" | "schoolId_numeroPermis">
 
 export type ChauffeurOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -469,6 +470,11 @@ export type ChauffeurListRelationFilter = {
 
 export type ChauffeurOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ChauffeurSchoolIdNumeroPermisCompoundUniqueInput = {
+  schoolId: string
+  numeroPermis: string
 }
 
 export type ChauffeurCountOrderByAggregateInput = {

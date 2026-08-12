@@ -1396,6 +1396,7 @@ model Vehicule {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([schoolId, immatriculation])
   @@index([schoolId])
   @@index([statut])
 }
@@ -1405,7 +1406,7 @@ model Chauffeur {
   nom                  String
   prenom               String
   telephone            String
-  numeroPermis         String          @unique
+  numeroPermis         String
   typePermis           String // B, C, D, etc.
   dateExpirationPermis DateTime?
   statut               StatutChauffeur @default(ACTIF)
@@ -1424,6 +1425,7 @@ model Chauffeur {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([schoolId, numeroPermis])
   @@index([schoolId])
   @@index([statut])
 }

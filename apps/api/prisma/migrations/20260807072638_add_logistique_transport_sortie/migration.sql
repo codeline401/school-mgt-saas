@@ -172,13 +172,16 @@ CREATE TABLE "AutorisationParent" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Vehicule_schoolId_immatriculation_key" ON "Vehicule"("schoolId", "immatriculation");
+
+-- CreateIndex
 CREATE INDEX "Vehicule_schoolId_idx" ON "Vehicule"("schoolId");
 
 -- CreateIndex
 CREATE INDEX "Vehicule_statut_idx" ON "Vehicule"("statut");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Chauffeur_numeroPermis_key" ON "Chauffeur"("numeroPermis");
+CREATE UNIQUE INDEX "Chauffeur_schoolId_numeroPermis_key" ON "Chauffeur"("schoolId", "numeroPermis");
 
 -- CreateIndex
 CREATE INDEX "Chauffeur_schoolId_idx" ON "Chauffeur"("schoolId");

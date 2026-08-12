@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+const isoDateString = z
+  .string()
+  .refine((value) => !Number.isNaN(Date.parse(value)), {
+    message: "La date doit être au format ISO valide.",
+  });
+
 // ==========================================
 // SORTIE SCOLAIRE SCHEMAS
 // ==========================================
@@ -15,8 +21,8 @@ export const CreateSortieSchema = z.object({
     "VOYAGE",
     "AUTRE",
   ]),
-  dateDebut: z.string(),
-  dateFin: z.string(),
+  dateDebut: isoDateString,
+  dateFin: isoDateString,
   lieu: z.string().min(1, "Le lieu est requis"),
   adresseLieu: z.string().optional(),
   classeId: z.string().uuid().optional(),
@@ -25,8 +31,8 @@ export const CreateSortieSchema = z.object({
   moyenTransport: z.string().optional(),
   equipementRequis: z.string().optional(),
   consignes: z.string().optional(),
-  dateLimiteInscription: z.string().optional(),
-  dateLimiteAutorisation: z.string().optional(),
+  dateLimiteInscription: isoDateString.optional(),
+  dateLimiteAutorisationParents: isoDateString.optional(),
 });
 
 export const UpdateSortieSchema = z.object({
@@ -45,8 +51,8 @@ export const UpdateSortieSchema = z.object({
   statut: z
     .enum(["PLANIFIEE", "CONFIRMEE", "EN_COURS", "TERMINEE", "ANNULEE"])
     .optional(),
-  dateDebut: z.string().optional(),
-  dateFin: z.string().optional(),
+  dateDebut: isoDateString.optional(),
+  dateFin: isoDateString.optional(),
   lieu: z.string().min(1).optional(),
   adresseLieu: z.string().optional(),
   classeId: z.string().uuid().optional(),
@@ -55,8 +61,8 @@ export const UpdateSortieSchema = z.object({
   moyenTransport: z.string().optional(),
   equipementRequis: z.string().optional(),
   consignes: z.string().optional(),
-  dateLimiteInscription: z.string().optional(),
-  dateLimiteAutorisation: z.string().optional(),
+  dateLimiteInscription: isoDateString.optional(),
+  dateLimiteAutorisationParents: isoDateString.optional(),
 });
 
 export const SortieFiltersSchema = z.object({

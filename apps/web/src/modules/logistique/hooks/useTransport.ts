@@ -45,7 +45,7 @@ export interface Chauffeur {
   telephone: string;
   numeroPermis: string;
   typePermis: string;
-  expirationPermis?: string;
+  dateExpirationPermis?: string;
   statut: StatutChauffeur;
   adresse?: string;
   dateNaissance?: string;
@@ -69,7 +69,7 @@ export interface Route {
   vehicule: {
     id: string;
     nom: string;
-    numeroPlaque: string;
+    immatriculation: string;
     capacite: number;
   };
   chauffeurId: string;
@@ -108,7 +108,7 @@ export interface AffectationTransport {
     heureDepart: string;
     vehicule: {
       nom: string;
-      numeroPlaque: string;
+      immatriculation: string;
     };
     chauffeur: {
       nom: string;
@@ -173,7 +173,7 @@ export interface UpdateChauffeurInput {
   telephone?: string;
   numeroPermis?: string;
   typePermis?: string;
-  expirationPermis?: string;
+  dateExpirationPermis?: string;
   statut?: StatutChauffeur;
   adresse?: string;
   dateNaissance?: string;

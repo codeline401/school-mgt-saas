@@ -348,6 +348,7 @@ export type VehiculeOrderByWithRelationInput = {
 
 export type VehiculeWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  schoolId_immatriculation?: Prisma.VehiculeSchoolIdImmatriculationCompoundUniqueInput
   AND?: Prisma.VehiculeWhereInput | Prisma.VehiculeWhereInput[]
   OR?: Prisma.VehiculeWhereInput[]
   NOT?: Prisma.VehiculeWhereInput | Prisma.VehiculeWhereInput[]
@@ -369,7 +370,7 @@ export type VehiculeWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Vehicule"> | Date | string
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   routes?: Prisma.RouteListRelationFilter
-}, "id">
+}, "id" | "schoolId_immatriculation">
 
 export type VehiculeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -570,6 +571,11 @@ export type VehiculeListRelationFilter = {
 
 export type VehiculeOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type VehiculeSchoolIdImmatriculationCompoundUniqueInput = {
+  schoolId: string
+  immatriculation: string
 }
 
 export type VehiculeCountOrderByAggregateInput = {

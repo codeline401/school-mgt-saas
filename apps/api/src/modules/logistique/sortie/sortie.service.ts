@@ -192,8 +192,8 @@ export class SortieService {
         dateLimiteInscription: data.dateLimiteInscription
           ? new Date(data.dateLimiteInscription)
           : undefined,
-        dateLimiteAutorisation: data.dateLimiteAutorisation
-          ? new Date(data.dateLimiteAutorisation)
+        dateLimiteAutorisationParents: data.dateLimiteAutorisationParents
+          ? new Date(data.dateLimiteAutorisationParents)
           : undefined,
         organisateurId: user.userId,
         schoolId: user.schoolId,
@@ -276,8 +276,8 @@ export class SortieService {
         dateLimiteInscription: data.dateLimiteInscription
           ? new Date(data.dateLimiteInscription)
           : undefined,
-        dateLimiteAutorisation: data.dateLimiteAutorisation
-          ? new Date(data.dateLimiteAutorisation)
+        dateLimiteAutorisationParents: data.dateLimiteAutorisationParents
+          ? new Date(data.dateLimiteAutorisationParents)
           : undefined,
       },
       include: {

@@ -178,7 +178,7 @@ export default function RoutesTab() {
                             {route.vehicule.nom}
                           </div>
                           <div className="text-xs text-base-content/60">
-                            {route.vehicule.numeroPlaque} •{" "}
+                            {route.vehicule.immatriculation} •{" "}
                             {route.vehicule.capacite} places
                           </div>
                         </div>

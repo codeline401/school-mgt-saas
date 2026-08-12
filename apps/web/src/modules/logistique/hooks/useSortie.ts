@@ -60,7 +60,7 @@ export interface SortieScolaire {
   equipementRequis?: string;
   consignes?: string;
   dateLimiteInscription?: string;
-  dateLimiteAutorisation?: string;
+  dateLimiteAutorisationParents?: string;
   participants?: ParticipantSortie[];
   autorisations?: AutorisationParent[];
   _count?: {
@@ -169,7 +169,7 @@ export interface CreateSortieInput {
   equipementRequis?: string;
   consignes?: string;
   dateLimiteInscription?: string;
-  dateLimiteAutorisation?: string;
+  dateLimiteAutorisationParents?: string;
 }
 
 export interface UpdateSortieInput {
@@ -188,7 +188,7 @@ export interface UpdateSortieInput {
   equipementRequis?: string;
   consignes?: string;
   dateLimiteInscription?: string;
-  dateLimiteAutorisation?: string;
+  dateLimiteAutorisationParents?: string;
 }
 
 export interface CreateParticipantInput {
@@ -356,6 +356,9 @@ export const useCreateParticipant = () => {
       queryClient.invalidateQueries({
         queryKey: ["sortie", variables.sortieId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["statistiques-sortie", variables.sortieId],
+      });
     },
   });
 };
@@ -371,9 +374,15 @@ export const useUpdateParticipant = (participantId: string) => {
       );
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["participants"] });
       queryClient.invalidateQueries({ queryKey: ["sorties"] });
+      if (data?.sortieId) {
+        queryClient.invalidateQueries({ queryKey: ["sortie", data.sortieId] });
+        queryClient.invalidateQueries({
+          queryKey: ["statistiques-sortie", data.sortieId],
+        });
+      }
     },
   });
 };
@@ -388,9 +397,15 @@ export const useDeleteParticipant = () => {
       );
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["participants"] });
       queryClient.invalidateQueries({ queryKey: ["sorties"] });
+      if (data?.sortieId) {
+        queryClient.invalidateQueries({ queryKey: ["sortie", data.sortieId] });
+        queryClient.invalidateQueries({
+          queryKey: ["statistiques-sortie", data.sortieId],
+        });
+      }
     },
   });
 };
@@ -432,6 +447,9 @@ export const useCreateAutorisation = () => {
       queryClient.invalidateQueries({
         queryKey: ["sortie", variables.sortieId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["statistiques-sortie", variables.sortieId],
+      });
     },
   });
 };
@@ -447,9 +465,15 @@ export const useUpdateAutorisation = (autorisationId: string) => {
       );
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["autorisations"] });
       queryClient.invalidateQueries({ queryKey: ["sorties"] });
+      if (data?.sortieId) {
+        queryClient.invalidateQueries({ queryKey: ["sortie", data.sortieId] });
+        queryClient.invalidateQueries({
+          queryKey: ["statistiques-sortie", data.sortieId],
+        });
+      }
     },
   });
 };
@@ -464,9 +488,15 @@ export const useDeleteAutorisation = () => {
       );
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["autorisations"] });
       queryClient.invalidateQueries({ queryKey: ["sorties"] });
+      if (data?.sortieId) {
+        queryClient.invalidateQueries({ queryKey: ["sortie", data.sortieId] });
+        queryClient.invalidateQueries({
+          queryKey: ["statistiques-sortie", data.sortieId],
+        });
+      }
     },
   });
 };
