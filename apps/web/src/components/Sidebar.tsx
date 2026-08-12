@@ -10,6 +10,7 @@ import {
   Calendar,
   ChevronDown,
   ChevronRight,
+  ClipboardCheck,
   ClipboardList,
   CreditCard,
   DollarSign,
@@ -74,11 +75,53 @@ const MENU: MenuEntry[] = [
     roles: null,
   },
   {
+    icon: GraduationCap,
+    label: "Gestion d’Élève",
+    roles: null,
+    children: [
+      {
+        icon: UserCircle,
+        label: "Informations",
+        path: "/eleves/informations",
+        roles: null,
+      },
+      {
+        icon: Wallet,
+        label: "Écolage",
+        path: "/eleves/ecolage",
+        roles: null,
+      },
+      {
+        icon: Calendar,
+        label: "Absences & retards",
+        path: "/eleves/absences",
+        roles: null,
+      },
+      {
+        icon: BookOpen,
+        label: "Parcours & évaluations",
+        path: "/eleves/parcours",
+        roles: null,
+      },
+      {
+        icon: ClipboardCheck,
+        label: "Vie scolaire",
+        path: "/eleves/vie-scolaire",
+        roles: null,
+      },
+      {
+        icon: FileText,
+        label: "Dossiers & documents",
+        path: "/eleves/documents",
+        roles: null,
+      },
+    ],
+  },
+  {
     icon: BookOpen,
     label: "Gestion Pédagogique",
     roles: null,
     children: [
-      { icon: GraduationCap, label: "Élèves", path: "/eleves", roles: null },
       { icon: BookOpen, label: "Classes", path: "/classes", roles: null },
       {
         icon: Users,

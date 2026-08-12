@@ -16,6 +16,7 @@ import MonProfilProfPage from "./pages/MonProfilProfPage";
 import NotesExamensPage from "./pages/NotesExamensPage";
 import CahierTextePage from "./pages/CahierTextePage";
 import ParametresPage from "./pages/ParametresPage";
+import GestionElevesPage from "./modules/eleves/GestionElevesPage";
 import LocauxTab from "./modules/logistique/LocauxTab";
 import StocksTab from "./modules/logistique/StocksTab";
 import InventaireTab from "./modules/logistique/InventaireTab";
@@ -66,6 +67,12 @@ function App() {
             >
               <Route path="/eleves" element={<ElevesPage />} />
               <Route path="/eleves/:id" element={<EleveProfilPage />} />
+              <Route path="/eleves/informations" element={<GestionElevesPage />} />
+              <Route path="/eleves/ecolage" element={<GestionElevesPage />} />
+              <Route path="/eleves/absences" element={<GestionElevesPage />} />
+              <Route path="/eleves/parcours" element={<GestionElevesPage />} />
+              <Route path="/eleves/vie-scolaire" element={<GestionElevesPage />} />
+              <Route path="/eleves/documents" element={<GestionElevesPage />} />
               <Route
                 path="/professeurs/:id"
                 element={<ProfesseurProfilPage />}
