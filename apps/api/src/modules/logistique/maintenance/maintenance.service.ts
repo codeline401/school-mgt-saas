@@ -16,7 +16,7 @@ interface UserContext {
 
 export class MaintenanceService {
   /**
-   * TODO: Récupérer tous les tickets de maintenance
+   * Récupère tous les tickets de maintenance d'une école, avec filtres optionnels.
    * @param schoolId - ID de l'école
    * @param filters - Filtres (statut, priorité, type)
    * @returns Liste des tickets
@@ -308,7 +308,7 @@ export class MaintenanceService {
   }
 
   /**
-   * TODO: Assigner un ticket à un intervenant
+   * Assigner un ticket à un intervenant
    * @param ticketId - ID du ticket
    * @param intervenantId - ID de l'intervenant
    */
@@ -317,22 +317,84 @@ export class MaintenanceService {
     intervenantId: string,
     currentUser: UserContext,
   ) {
-    // TODO: Vérifier les permissions (ADMIN, SUDO_ADMIN)
-    // TODO: Assigner le ticket
-    // TODO: Mettre à jour le statut à 'EN_COURS'
-    throw new Error("Not implemented");
+    const technicien = await prisma.user.findFirst({
+      where: {
+        id: intervenantId,
+        schoolId: currentUser.schoolId,
+      },
+    });
+
+    if (!technicien) {
+      throw new Error("Intervenant introuvable pour cette école");
+    }
+
+    const update = await prisma.ticketMaintenance.updateMany({
+      where: {
+        id: ticketId,
+        schoolId: currentUser.schoolId,
+        statut: "OUVERT",
+      },
+      data: {
+        assigneAId: intervenantId,
+        statut: "EN_COURS",
+      },
+    });
+
+    if (update.count === 0) {
+      throw new Error("Conflit: le ticket n'est pas ouvert ou n'existe pas.");
+    }
+
+    return await prisma.ticketMaintenance.findFirst({
+      where: { id: ticketId, schoolId: currentUser.schoolId },
+      include: {
+        creePar: {
+          select: { nom: true, prenom: true, email: true },
+        },
+        assigneA: {
+          select: { nom: true, prenom: true, email: true },
+        },
+      },
+    });
   }
 
   /**
-   * TODO: Clôturer un ticket
+   * Clôturer un ticket
    * @param ticketId - ID du ticket
-   * @param data - Données de clôture (commentaire final, coût intervention, etc.)
+   * @param data - Données de clôture
    */
   async cloturerTicket(ticketId: string, data: any, currentUser: UserContext) {
-    // TODO: Vérifier que le ticket est résolu
-    // TODO: Mettre à jour le statut à 'CLOTURE'
-    // TODO: Enregistrer la date de clôture
-    throw new Error("Not implemented");
+    const update = await prisma.ticketMaintenance.updateMany({
+      where: {
+        id: ticketId,
+        schoolId: currentUser.schoolId,
+        statut: { in: ["RESOLU", "FERME"] },
+      },
+      data: {
+        statut: "FERME",
+        dateResolution: data?.dateResolution
+          ? new Date(data.dateResolution)
+          : new Date(),
+        description: data?.description ?? undefined,
+      },
+    });
+
+    if (update.count === 0) {
+      throw new Error(
+        "Conflit: le ticket doit être marqué comme résolu ou fermé avant clôture.",
+      );
+    }
+
+    return await prisma.ticketMaintenance.findFirst({
+      where: { id: ticketId, schoolId: currentUser.schoolId },
+      include: {
+        creePar: {
+          select: { nom: true, prenom: true, email: true },
+        },
+        assigneA: {
+          select: { nom: true, prenom: true, email: true },
+        },
+      },
+    });
   }
 
   /**

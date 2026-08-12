@@ -325,3 +325,103 @@ export const StatutIntervention = {
 } as const
 
 export type StatutIntervention = (typeof StatutIntervention)[keyof typeof StatutIntervention]
+
+
+export const TypeVehicule = {
+  BUS: 'BUS',
+  MINIBUS: 'MINIBUS',
+  VOITURE: 'VOITURE',
+  VAN: 'VAN'
+} as const
+
+export type TypeVehicule = (typeof TypeVehicule)[keyof typeof TypeVehicule]
+
+
+export const StatutVehicule = {
+  ACTIF: 'ACTIF',
+  MAINTENANCE: 'MAINTENANCE',
+  HORS_SERVICE: 'HORS_SERVICE',
+  VENDU: 'VENDU'
+} as const
+
+export type StatutVehicule = (typeof StatutVehicule)[keyof typeof StatutVehicule]
+
+
+export const StatutChauffeur = {
+  ACTIF: 'ACTIF',
+  CONGE: 'CONGE',
+  SUSPENDU: 'SUSPENDU',
+  INACTIF: 'INACTIF'
+} as const
+
+export type StatutChauffeur = (typeof StatutChauffeur)[keyof typeof StatutChauffeur]
+
+
+export const TypeRoute = {
+  ALLER: 'ALLER',
+  RETOUR: 'RETOUR',
+  ALLER_RETOUR: 'ALLER_RETOUR',
+  SORTIE: 'SORTIE'
+} as const
+
+export type TypeRoute = (typeof TypeRoute)[keyof typeof TypeRoute]
+
+
+export const StatutRoute = {
+  ACTIVE: 'ACTIVE',
+  SUSPENDUE: 'SUSPENDUE',
+  ANNULEE: 'ANNULEE'
+} as const
+
+export type StatutRoute = (typeof StatutRoute)[keyof typeof StatutRoute]
+
+
+export const StatutAffectation = {
+  ACTIVE: 'ACTIVE',
+  SUSPENDUE: 'SUSPENDUE',
+  TERMINEE: 'TERMINEE'
+} as const
+
+export type StatutAffectation = (typeof StatutAffectation)[keyof typeof StatutAffectation]
+
+
+export const TypeSortie = {
+  PEDAGOGIQUE: 'PEDAGOGIQUE',
+  SPORTIVE: 'SPORTIVE',
+  CULTURELLE: 'CULTURELLE',
+  EXCURSION: 'EXCURSION',
+  VOYAGE: 'VOYAGE',
+  AUTRE: 'AUTRE'
+} as const
+
+export type TypeSortie = (typeof TypeSortie)[keyof typeof TypeSortie]
+
+
+export const StatutSortie = {
+  PLANIFIEE: 'PLANIFIEE',
+  CONFIRMEE: 'CONFIRMEE',
+  EN_COURS: 'EN_COURS',
+  TERMINEE: 'TERMINEE',
+  ANNULEE: 'ANNULEE'
+} as const
+
+export type StatutSortie = (typeof StatutSortie)[keyof typeof StatutSortie]
+
+
+export const TypeParticipant = {
+  ELEVE: 'ELEVE',
+  ACCOMPAGNATEUR: 'ACCOMPAGNATEUR'
+} as const
+
+export type TypeParticipant = (typeof TypeParticipant)[keyof typeof TypeParticipant]
+
+
+export const StatutParticipant = {
+  INSCRIT: 'INSCRIT',
+  CONFIRME: 'CONFIRME',
+  ANNULE: 'ANNULE',
+  ABSENT: 'ABSENT',
+  PRESENT: 'PRESENT'
+} as const
+
+export type StatutParticipant = (typeof StatutParticipant)[keyof typeof StatutParticipant]

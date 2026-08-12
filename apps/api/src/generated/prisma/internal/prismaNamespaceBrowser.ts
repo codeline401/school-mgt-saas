@@ -92,7 +92,14 @@ export const ModelName = {
   Equipement: 'Equipement',
   PretEquipement: 'PretEquipement',
   TicketMaintenance: 'TicketMaintenance',
-  InterventionMaintenance: 'InterventionMaintenance'
+  InterventionMaintenance: 'InterventionMaintenance',
+  Vehicule: 'Vehicule',
+  Chauffeur: 'Chauffeur',
+  Route: 'Route',
+  AffectationTransport: 'AffectationTransport',
+  SortieScolaire: 'SortieScolaire',
+  ParticipantSortie: 'ParticipantSortie',
+  AutorisationParent: 'AutorisationParent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -781,6 +788,149 @@ export const InterventionMaintenanceScalarFieldEnum = {
 } as const
 
 export type InterventionMaintenanceScalarFieldEnum = (typeof InterventionMaintenanceScalarFieldEnum)[keyof typeof InterventionMaintenanceScalarFieldEnum]
+
+
+export const VehiculeScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  immatriculation: 'immatriculation',
+  typeVehicule: 'typeVehicule',
+  capacite: 'capacite',
+  marque: 'marque',
+  modele: 'modele',
+  annee: 'annee',
+  statut: 'statut',
+  derniereRevision: 'derniereRevision',
+  prochaineRevision: 'prochaineRevision',
+  kilometrage: 'kilometrage',
+  numeroAssurance: 'numeroAssurance',
+  dateExpirationAssurance: 'dateExpirationAssurance',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VehiculeScalarFieldEnum = (typeof VehiculeScalarFieldEnum)[keyof typeof VehiculeScalarFieldEnum]
+
+
+export const ChauffeurScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  prenom: 'prenom',
+  telephone: 'telephone',
+  numeroPermis: 'numeroPermis',
+  typePermis: 'typePermis',
+  dateExpirationPermis: 'dateExpirationPermis',
+  statut: 'statut',
+  adresse: 'adresse',
+  dateNaissance: 'dateNaissance',
+  dateEmbauche: 'dateEmbauche',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChauffeurScalarFieldEnum = (typeof ChauffeurScalarFieldEnum)[keyof typeof ChauffeurScalarFieldEnum]
+
+
+export const RouteScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  typeRoute: 'typeRoute',
+  statut: 'statut',
+  heureDepart: 'heureDepart',
+  heureArrivee: 'heureArrivee',
+  vehiculeId: 'vehiculeId',
+  chauffeurId: 'chauffeurId',
+  joursActifs: 'joursActifs',
+  arrets: 'arrets',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RouteScalarFieldEnum = (typeof RouteScalarFieldEnum)[keyof typeof RouteScalarFieldEnum]
+
+
+export const AffectationTransportScalarFieldEnum = {
+  id: 'id',
+  eleveId: 'eleveId',
+  routeId: 'routeId',
+  arretMontee: 'arretMontee',
+  arretDescente: 'arretDescente',
+  statut: 'statut',
+  dateDebut: 'dateDebut',
+  dateFin: 'dateFin',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AffectationTransportScalarFieldEnum = (typeof AffectationTransportScalarFieldEnum)[keyof typeof AffectationTransportScalarFieldEnum]
+
+
+export const SortieScolaireScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  description: 'description',
+  type: 'type',
+  statut: 'statut',
+  dateDebut: 'dateDebut',
+  dateFin: 'dateFin',
+  lieu: 'lieu',
+  adresseLieu: 'adresseLieu',
+  classeId: 'classeId',
+  organisateurId: 'organisateurId',
+  coutParEleve: 'coutParEleve',
+  budgetTotal: 'budgetTotal',
+  moyenTransport: 'moyenTransport',
+  equipementRequis: 'equipementRequis',
+  consignes: 'consignes',
+  dateLimiteInscription: 'dateLimiteInscription',
+  dateLimiteAutorisationParents: 'dateLimiteAutorisationParents',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SortieScolaireScalarFieldEnum = (typeof SortieScolaireScalarFieldEnum)[keyof typeof SortieScolaireScalarFieldEnum]
+
+
+export const ParticipantSortieScalarFieldEnum = {
+  id: 'id',
+  sortieId: 'sortieId',
+  typeParticipant: 'typeParticipant',
+  eleveId: 'eleveId',
+  accompagnateurId: 'accompagnateurId',
+  statut: 'statut',
+  montantPaye: 'montantPaye',
+  datePaiement: 'datePaiement',
+  observations: 'observations',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ParticipantSortieScalarFieldEnum = (typeof ParticipantSortieScalarFieldEnum)[keyof typeof ParticipantSortieScalarFieldEnum]
+
+
+export const AutorisationParentScalarFieldEnum = {
+  id: 'id',
+  sortieId: 'sortieId',
+  eleveId: 'eleveId',
+  parentId: 'parentId',
+  autorise: 'autorise',
+  dateAutorisation: 'dateAutorisation',
+  observation: 'observation',
+  signatureUrl: 'signatureUrl',
+  contactUrgence: 'contactUrgence',
+  telUrgence: 'telUrgence',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AutorisationParentScalarFieldEnum = (typeof AutorisationParentScalarFieldEnum)[keyof typeof AutorisationParentScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -251,16 +251,20 @@ export const getStatistiques = async (req: Request, res: Response) => {
 };
 
 /**
- * TODO: Récupérer les équipements en retard de retour
+ * Récupère les équipements actuellement en retard de retour pour l'école.
  */
 export const getEquipementsEnRetard = async (req: Request, res: Response) => {
   try {
-    const { schoolId } = req.user!;
+    const schoolId = req.user?.schoolId;
 
-    // TODO: Appel au service
-    // const equipements = await service.getEquipementsEnRetard(schoolId!);
+    if (!schoolId) {
+      return res.status(403).json({ error: "Ecole non spécifiée" });
+    }
 
-    return res.status(200).json({ message: "Not implemented" });
+    const equipements =
+      await equipementService.getEquipementsEnRetard(schoolId);
+
+    return res.status(200).json(equipements);
   } catch (error: any) {
     console.error(error);
     return res.status(500).json({
