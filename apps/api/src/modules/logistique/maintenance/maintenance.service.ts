@@ -317,14 +317,6 @@ export class MaintenanceService {
     intervenantId: string,
     currentUser: UserContext,
   ) {
-    const ticket = await prisma.ticketMaintenance.findFirst({
-      where: { id: ticketId, schoolId: currentUser.schoolId },
-    });
-
-    if (!ticket) {
-      throw new Error("Ticket introuvable");
-    }
-
     const technicien = await prisma.user.findFirst({
       where: {
         id: intervenantId,
@@ -336,12 +328,24 @@ export class MaintenanceService {
       throw new Error("Intervenant introuvable pour cette école");
     }
 
-    return await prisma.ticketMaintenance.update({
-      where: { id: ticketId },
+    const update = await prisma.ticketMaintenance.updateMany({
+      where: {
+        id: ticketId,
+        schoolId: currentUser.schoolId,
+        statut: "OUVERT",
+      },
       data: {
         assigneAId: intervenantId,
-        statut: ticket.statut === "OUVERT" ? "EN_COURS" : ticket.statut,
+        statut: "EN_COURS",
       },
+    });
+
+    if (update.count === 0) {
+      throw new Error("Conflit: le ticket n'est pas ouvert ou n'existe pas.");
+    }
+
+    return await prisma.ticketMaintenance.findFirst({
+      where: { id: ticketId, schoolId: currentUser.schoolId },
       include: {
         creePar: {
           select: { nom: true, prenom: true, email: true },
@@ -359,27 +363,29 @@ export class MaintenanceService {
    * @param data - Données de clôture
    */
   async cloturerTicket(ticketId: string, data: any, currentUser: UserContext) {
-    const ticket = await prisma.ticketMaintenance.findFirst({
-      where: { id: ticketId, schoolId: currentUser.schoolId },
+    const update = await prisma.ticketMaintenance.updateMany({
+      where: {
+        id: ticketId,
+        schoolId: currentUser.schoolId,
+        statut: { in: ["RESOLU", "FERME"] },
+      },
+      data: {
+        statut: "FERME",
+        dateResolution: data?.dateResolution
+          ? new Date(data.dateResolution)
+          : new Date(),
+        description: data?.description ?? undefined,
+      },
     });
 
-    if (!ticket) {
-      throw new Error("Ticket introuvable");
-    }
-
-    if (ticket.statut !== "RESOLU" && ticket.statut !== "FERME") {
+    if (update.count === 0) {
       throw new Error(
-        "Le ticket doit d'abord être marqué comme résolu avant d'être clôturé.",
+        "Conflit: le ticket doit être marqué comme résolu ou fermé avant clôture.",
       );
     }
 
-    return await prisma.ticketMaintenance.update({
-      where: { id: ticketId },
-      data: {
-        statut: "FERME",
-        dateResolution: ticket.dateResolution ?? new Date(),
-        description: data?.description ?? ticket.description,
-      },
+    return await prisma.ticketMaintenance.findFirst({
+      where: { id: ticketId, schoolId: currentUser.schoolId },
       include: {
         creePar: {
           select: { nom: true, prenom: true, email: true },

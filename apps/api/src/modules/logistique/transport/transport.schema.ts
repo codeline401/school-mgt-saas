@@ -1,10 +1,49 @@
 import { z } from "zod";
 
-const isoDateString = z
-  .string()
-  .refine((value) => !Number.isNaN(Date.parse(value)), {
-    message: "La date doit être au format ISO valide.",
-  });
+const isoDateString = z.iso.date({
+  message: "La date doit être au format ISO valide.",
+});
+
+const nullableDateInput = z.preprocess(
+  (value) => (value === "" ? null : value),
+  z.union([isoDateString, z.null()]),
+);
+
+const routeDaySchema = z.enum([
+  "LUNDI",
+  "MARDI",
+  "MERCREDI",
+  "JEUDI",
+  "VENDREDI",
+  "SAMEDI",
+  "DIMANCHE",
+]);
+
+const routeStopSchema = z.object({
+  nom: z.string().min(1, "Le nom de l'arrêt est requis"),
+  adresse: z.string().optional(),
+  heure: z
+    .string()
+    .regex(/^\d{2}:\d{2}$/, "Format HH:mm requis")
+    .optional(),
+  ordre: z.number().int().nonnegative("L'ordre doit être positif"),
+});
+
+const jsonArrayString = <T extends z.ZodTypeAny>(itemSchema: T) =>
+  z.string().refine(
+    (value) => {
+      try {
+        const parsed = JSON.parse(value);
+        if (!Array.isArray(parsed)) return false;
+        return parsed.every((entry) => itemSchema.safeParse(entry).success);
+      } catch {
+        return false;
+      }
+    },
+    {
+      message: "Le JSON doit être un tableau valide.",
+    },
+  );
 
 // ==========================================
 // VEHICULE SCHEMAS
@@ -18,11 +57,11 @@ export const CreateVehiculeSchema = z.object({
   marque: z.string().optional(),
   modele: z.string().optional(),
   annee: z.number().int().optional(),
-  derniereRevision: isoDateString.nullish(),
-  prochaineRevision: isoDateString.nullish(),
+  derniereRevision: nullableDateInput.optional(),
+  prochaineRevision: nullableDateInput.optional(),
   kilometrage: z.number().int().nonnegative().optional(),
   numeroAssurance: z.string().optional(),
-  dateExpirationAssurance: isoDateString.nullish(),
+  dateExpirationAssurance: nullableDateInput.optional(),
 });
 
 export const UpdateVehiculeSchema = z.object({
@@ -34,11 +73,11 @@ export const UpdateVehiculeSchema = z.object({
   modele: z.string().optional(),
   annee: z.number().int().optional(),
   statut: z.enum(["ACTIF", "MAINTENANCE", "HORS_SERVICE", "VENDU"]).optional(),
-  derniereRevision: isoDateString.nullish(),
-  prochaineRevision: isoDateString.nullish(),
+  derniereRevision: nullableDateInput.optional(),
+  prochaineRevision: nullableDateInput.optional(),
   kilometrage: z.number().int().nonnegative().optional(),
   numeroAssurance: z.string().optional(),
-  dateExpirationAssurance: isoDateString.nullish(),
+  dateExpirationAssurance: nullableDateInput.optional(),
 });
 
 export const VehiculeFiltersSchema = z.object({
@@ -56,7 +95,7 @@ export const CreateChauffeurSchema = z.object({
   telephone: z.string().min(1, "Le téléphone est requis"),
   numeroPermis: z.string().min(1, "Le numéro de permis est requis"),
   typePermis: z.string().min(1, "Le type de permis est requis"),
-  dateExpirationPermis: isoDateString.nullish(),
+  dateExpirationPermis: nullableDateInput.optional(),
   adresse: z.string().optional(),
   dateNaissance: isoDateString.optional(),
   dateEmbauche: isoDateString.optional(),
@@ -68,7 +107,7 @@ export const UpdateChauffeurSchema = z.object({
   telephone: z.string().min(1).optional(),
   numeroPermis: z.string().min(1).optional(),
   typePermis: z.string().min(1).optional(),
-  dateExpirationPermis: isoDateString.nullish(),
+  dateExpirationPermis: nullableDateInput.optional(),
   statut: z.enum(["ACTIF", "CONGE", "SUSPENDU", "INACTIF"]).optional(),
   adresse: z.string().optional(),
   dateNaissance: isoDateString.optional(),
@@ -93,8 +132,8 @@ export const CreateRouteSchema = z.object({
     .optional(),
   vehiculeId: z.string().uuid("ID véhicule invalide"),
   chauffeurId: z.string().uuid("ID chauffeur invalide"),
-  joursActifs: z.string(), // JSON: ["LUNDI", "MARDI", etc.]
-  arrets: z.string().optional(), // JSON: [{nom, heure, ordre}, ...]
+  joursActifs: jsonArrayString(routeDaySchema),
+  arrets: jsonArrayString(routeStopSchema).optional(),
 });
 
 export const UpdateRouteSchema = z.object({
@@ -111,8 +150,8 @@ export const UpdateRouteSchema = z.object({
     .optional(),
   vehiculeId: z.string().uuid().optional(),
   chauffeurId: z.string().uuid().optional(),
-  joursActifs: z.string().optional(),
-  arrets: z.string().optional(),
+  joursActifs: jsonArrayString(routeDaySchema).optional(),
+  arrets: jsonArrayString(routeStopSchema).optional(),
 });
 
 export const RouteFiltersSchema = z.object({
@@ -126,14 +165,25 @@ export const RouteFiltersSchema = z.object({
 // AFFECTATION SCHEMAS
 // ==========================================
 
-export const CreateAffectationSchema = z.object({
-  eleveId: z.string().uuid("ID élève invalide"),
-  routeId: z.string().uuid("ID route invalide"),
-  arretMontee: z.string().optional(),
-  arretDescente: z.string().optional(),
-  dateDebut: isoDateString.optional(),
-  dateFin: isoDateString.optional(),
-});
+export const CreateAffectationSchema = z
+  .object({
+    eleveId: z.string().uuid("ID élève invalide"),
+    routeId: z.string().uuid("ID route invalide"),
+    arretMontee: z.string().optional(),
+    arretDescente: z.string().optional(),
+    dateDebut: isoDateString.optional(),
+    dateFin: isoDateString.optional(),
+  })
+  .refine(
+    (data) =>
+      !data.dateDebut ||
+      !data.dateFin ||
+      new Date(data.dateFin) >= new Date(data.dateDebut),
+    {
+      message: "La date de fin ne peut pas être antérieure à la date de début.",
+      path: ["dateFin"],
+    },
+  );
 
 export const UpdateAffectationSchema = z.object({
   routeId: z.string().uuid().optional(),

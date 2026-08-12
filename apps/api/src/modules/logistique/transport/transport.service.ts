@@ -110,15 +110,24 @@ export class TransportService {
     return await prisma.vehicule.create({
       data: {
         ...data,
-        derniereRevision: data.derniereRevision
-          ? new Date(data.derniereRevision)
-          : null,
-        prochaineRevision: data.prochaineRevision
-          ? new Date(data.prochaineRevision)
-          : null,
-        dateExpirationAssurance: data.dateExpirationAssurance
-          ? new Date(data.dateExpirationAssurance)
-          : null,
+        derniereRevision:
+          data.derniereRevision === undefined
+            ? undefined
+            : data.derniereRevision === null
+              ? null
+              : new Date(data.derniereRevision),
+        prochaineRevision:
+          data.prochaineRevision === undefined
+            ? undefined
+            : data.prochaineRevision === null
+              ? null
+              : new Date(data.prochaineRevision),
+        dateExpirationAssurance:
+          data.dateExpirationAssurance === undefined
+            ? undefined
+            : data.dateExpirationAssurance === null
+              ? null
+              : new Date(data.dateExpirationAssurance),
         schoolId: user.schoolId,
       },
     });
@@ -168,15 +177,24 @@ export class TransportService {
       where: { id: vehiculeId },
       data: {
         ...data,
-        derniereRevision: data.derniereRevision
-          ? new Date(data.derniereRevision)
-          : null,
-        prochaineRevision: data.prochaineRevision
-          ? new Date(data.prochaineRevision)
-          : null,
-        dateExpirationAssurance: data.dateExpirationAssurance
-          ? new Date(data.dateExpirationAssurance)
-          : null,
+        derniereRevision:
+          data.derniereRevision === undefined
+            ? undefined
+            : data.derniereRevision === null
+              ? null
+              : new Date(data.derniereRevision),
+        prochaineRevision:
+          data.prochaineRevision === undefined
+            ? undefined
+            : data.prochaineRevision === null
+              ? null
+              : new Date(data.prochaineRevision),
+        dateExpirationAssurance:
+          data.dateExpirationAssurance === undefined
+            ? undefined
+            : data.dateExpirationAssurance === null
+              ? null
+              : new Date(data.dateExpirationAssurance),
       },
     });
   }
@@ -303,15 +321,24 @@ export class TransportService {
     return await prisma.chauffeur.create({
       data: {
         ...data,
-        dateExpirationPermis: data.dateExpirationPermis
-          ? new Date(data.dateExpirationPermis)
-          : undefined,
-        dateNaissance: data.dateNaissance
-          ? new Date(data.dateNaissance)
-          : undefined,
-        dateEmbauche: data.dateEmbauche
-          ? new Date(data.dateEmbauche)
-          : undefined,
+        dateExpirationPermis:
+          data.dateExpirationPermis === undefined
+            ? undefined
+            : data.dateExpirationPermis === null
+              ? null
+              : new Date(data.dateExpirationPermis),
+        dateNaissance:
+          data.dateNaissance === undefined
+            ? undefined
+            : data.dateNaissance === null
+              ? null
+              : new Date(data.dateNaissance),
+        dateEmbauche:
+          data.dateEmbauche === undefined
+            ? undefined
+            : data.dateEmbauche === null
+              ? null
+              : new Date(data.dateEmbauche),
         schoolId: user.schoolId,
       },
     });
@@ -355,15 +382,24 @@ export class TransportService {
       where: { id: chauffeurId },
       data: {
         ...data,
-        dateExpirationPermis: data.dateExpirationPermis
-          ? new Date(data.dateExpirationPermis)
-          : undefined,
-        dateNaissance: data.dateNaissance
-          ? new Date(data.dateNaissance)
-          : undefined,
-        dateEmbauche: data.dateEmbauche
-          ? new Date(data.dateEmbauche)
-          : undefined,
+        dateExpirationPermis:
+          data.dateExpirationPermis === undefined
+            ? undefined
+            : data.dateExpirationPermis === null
+              ? null
+              : new Date(data.dateExpirationPermis),
+        dateNaissance:
+          data.dateNaissance === undefined
+            ? undefined
+            : data.dateNaissance === null
+              ? null
+              : new Date(data.dateNaissance),
+        dateEmbauche:
+          data.dateEmbauche === undefined
+            ? undefined
+            : data.dateEmbauche === null
+              ? null
+              : new Date(data.dateEmbauche),
       },
     });
   }
@@ -761,11 +797,25 @@ export class TransportService {
       throw new Error("L'élève est déjà affecté à cette route.");
     }
 
+    const dateDebut = data.dateDebut ? new Date(data.dateDebut) : new Date();
+    const dateFin =
+      data.dateFin === undefined
+        ? undefined
+        : data.dateFin
+          ? new Date(data.dateFin)
+          : null;
+
+    if (dateFin && dateFin < dateDebut) {
+      throw new Error(
+        "La date de fin ne peut pas être antérieure à la date de début.",
+      );
+    }
+
     return await prisma.affectationTransport.create({
       data: {
         ...data,
-        dateDebut: data.dateDebut ? new Date(data.dateDebut) : new Date(),
-        dateFin: data.dateFin ? new Date(data.dateFin) : undefined,
+        dateDebut,
+        dateFin,
         schoolId: user.schoolId,
       },
       include: {
@@ -817,12 +867,33 @@ export class TransportService {
       }
     }
 
+    const mergedDateDebut = data.dateDebut
+      ? new Date(data.dateDebut)
+      : affectation.dateDebut;
+    const mergedDateFin =
+      data.dateFin === undefined
+        ? affectation.dateFin
+        : data.dateFin === null
+          ? null
+          : new Date(data.dateFin);
+
+    if (mergedDateFin && mergedDateFin < mergedDateDebut) {
+      throw new Error(
+        "La date de fin ne peut pas être antérieure à la date de début.",
+      );
+    }
+
     return await prisma.affectationTransport.update({
       where: { id: affectationId },
       data: {
         ...data,
         dateDebut: data.dateDebut ? new Date(data.dateDebut) : undefined,
-        dateFin: data.dateFin ? new Date(data.dateFin) : undefined,
+        dateFin:
+          data.dateFin === undefined
+            ? undefined
+            : data.dateFin === null
+              ? null
+              : new Date(data.dateFin),
       },
       include: {
         eleve: {
