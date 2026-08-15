@@ -76,7 +76,7 @@ export const createProfessionEleveSchema = professionEleveSchema.omit({
 export const historiqueClasseSchema = z.object({
   id: z.string().uuid().optional(),
   eleveId: z.string().uuid(),
-  classeId: z.string().uuid(),
+  classeId: z.string().uuid().nullish(),
   anneeScolaire: z.string().regex(/^\d{4}-\d{4}$/, {
     message:
       "L'année scolaire doit être au format : AAAA-AAAA (exemple : 2026-2027)",

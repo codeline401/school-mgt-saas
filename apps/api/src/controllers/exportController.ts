@@ -172,7 +172,7 @@ export const exportController = {
       const eleve = await prisma.eleve.findFirst({
         where: {
           id: eleveId,
-          classe: { schoolId: req.user!.schoolId as string },
+          schoolId: req.user!.schoolId as string,
         },
         include: {
           classe: {
@@ -381,7 +381,7 @@ export const exportController = {
       const eleve = await prisma.eleve.findFirst({
         where: {
           id: eleveId,
-          classe: { schoolId: req.user!.schoolId as string },
+          schoolId: req.user!.schoolId as string,
         },
         include: {
           classe: {

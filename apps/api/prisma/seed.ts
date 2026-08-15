@@ -151,15 +151,21 @@ async function main() {
   });
 
   // ── D. Création des élèves ────────────────────────────────────────────────
-  // L'unicité sur Eleve est (schoolId, nom, prenom, dateNaissance) ;
-  // comme plusieurs dossiers peuvent avoir une date inconnue/null, on préfère
-  // vérifier l'existence avec école + nom + prénom au lieu d'un upsert direct.
+  // On génère le matricule par école, comme dans la logique de création métier,
+  // pour éviter les collisions entre écoles et conserver un identifiant cohérent.
+  const lastMatricule = await prisma.eleve.findFirst({
+    where: { schoolId: school.id },
+    orderBy: { matricule: "desc" },
+    select: { matricule: true },
+  });
+  const baseMatricule = lastMatricule?.matricule ?? 0;
+
   const elevesData = [
     { nom: "Randria", prenom: "Jean Jacques", classeId: classe6A.id },
     { nom: "Sitraka", prenom: "Jean Dauphin", classeId: classe6A.id },
     { nom: "Soa", prenom: "Jean De Dieu", classeId: classe5B.id },
   ];
-  for (const e of elevesData) {
+  for (const [index, e] of elevesData.entries()) {
     const existingEleve = await prisma.eleve.findFirst({
       where: {
         schoolId: school.id,
@@ -172,6 +178,7 @@ async function main() {
       await prisma.eleve.create({
         data: {
           ...e,
+          matricule: baseMatricule + index + 1,
           schoolId: school.id,
         },
       });

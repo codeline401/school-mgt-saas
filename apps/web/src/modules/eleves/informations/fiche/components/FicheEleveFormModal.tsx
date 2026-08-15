@@ -67,6 +67,37 @@ interface FormState {
   remarque: string;
 }
 
+const defaultFormState: FormState = {
+  nom: "",
+  prenom: "",
+  genre: "",
+  dateNaissance: "",
+  lieuNaissance: "",
+  telephone: "",
+  photoUrl: "",
+  nationalite: "",
+  classeId: "",
+  ecoleOrigine: "",
+  dateInscription: "",
+  statut: "ACTIF",
+  situationFinAnnee: "EN_COURS",
+  parentId: "",
+  responsableId: "",
+  situationFamiliale: "",
+  isRelationContact: false,
+  relationName: "",
+  relationTelephone: "",
+  adresseFokontany: "",
+  adresseLogement: "",
+  adresseVille: "",
+  adresseRegion: "",
+  adressePays: "",
+  professionTitre: "",
+  professionLieu: "",
+  professionSecteur: "",
+  remarque: "",
+};
+
 // ═══════════════════════════════════════════════════════════════════
 // COMPONENT PRINCIPAL
 // ═══════════════════════════════════════════════════════════════════
@@ -103,36 +134,7 @@ export default function FicheEleveFormModal({
   // ─────────────────────────────────────────────────────────────────
   // État du formulaire
   // ─────────────────────────────────────────────────────────────────
-  const [form, setForm] = useState<FormState>({
-    nom: "",
-    prenom: "",
-    genre: "",
-    dateNaissance: "",
-    lieuNaissance: "",
-    telephone: "",
-    photoUrl: "",
-    nationalite: "",
-    classeId: "",
-    ecoleOrigine: "",
-    dateInscription: "",
-    statut: "ACTIF",
-    situationFinAnnee: "EN_COURS",
-    parentId: "",
-    responsableId: "",
-    situationFamiliale: "",
-    isRelationContact: false,
-    relationName: "",
-    relationTelephone: "",
-    adresseFokontany: "",
-    adresseLogement: "",
-    adresseVille: "",
-    adresseRegion: "",
-    adressePays: "",
-    professionTitre: "",
-    professionLieu: "",
-    professionSecteur: "",
-    remarque: "",
-  });
+  const [form, setForm] = useState<FormState>(defaultFormState);
 
   // ─────────────────────────────────────────────────────────────────
   // Initialisation du formulaire en mode édition
@@ -141,7 +143,9 @@ export default function FicheEleveFormModal({
   // ─────────────────────────────────────────────────────────────────
 
   useEffect(() => {
-    if (eleve && isOpen) {
+    if (!isOpen) return;
+
+    if (eleve) {
       setForm({
         nom: eleve.nom || "",
         prenom: eleve.prenom || "",
@@ -176,7 +180,10 @@ export default function FicheEleveFormModal({
         professionSecteur: eleve.professionEleve?.secteur || "",
         remarque: eleve.remarque || "",
       });
+      return;
     }
+
+    setForm(defaultFormState);
   }, [eleve, isOpen]);
 
   // ─────────────────────────────────────────────────────────────────

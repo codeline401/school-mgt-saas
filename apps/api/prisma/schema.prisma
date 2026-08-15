@@ -1821,8 +1821,8 @@ model HistoriqueClasse {
   eleveId String
   eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
 
-  classeId String
-  classe   Classe @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  classeId String?
+  classe   Classe? @relation(fields: [classeId], references: [id], onDelete: SetNull)
 
   anneeScolaire String
 

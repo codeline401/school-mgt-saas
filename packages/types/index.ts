@@ -781,7 +781,7 @@ export interface HistoriqueClasse {
 export interface DroitInscription {
   id: string;
   anneeScolaire: string;
-  montant: number;
+  montant: string;
   eleveId: string;
   classeId?: string | null;
   schoolId: string;
@@ -793,7 +793,7 @@ export interface Ecolage {
   id: string;
   anneeScolaire: string;
   mois: number;
-  montant: number;
+  montant: string;
   eleveId: string;
   classeId?: string | null;
   schoolId: string;

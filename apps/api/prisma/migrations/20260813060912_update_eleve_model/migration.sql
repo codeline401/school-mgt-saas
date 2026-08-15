@@ -49,7 +49,7 @@ ALTER COLUMN "classeId" DROP NOT NULL;
 CREATE TABLE "HistoriqueClasse" (
     "id" TEXT NOT NULL,
     "eleveId" TEXT NOT NULL,
-    "classeId" TEXT NOT NULL,
+    "classeId" TEXT,
     "anneeScolaire" TEXT NOT NULL,
     "statutFinAnnee" "StatutFinAnnee" DEFAULT 'EN_COURS',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -119,6 +119,9 @@ CREATE UNIQUE INDEX "Eleve_schoolId_matricule_key" ON "Eleve"("schoolId", "matri
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Eleve_schoolId_nom_prenom_dateNaissance_key" ON "Eleve"("schoolId", "nom", "prenom", "dateNaissance");
+CREATE UNIQUE INDEX "Eleve_schoolId_nom_prenom_dateNaissance_null_partial_key"
+    ON "Eleve"("schoolId", "nom", "prenom")
+    WHERE "dateNaissance" IS NULL;
 
 -- AddForeignKey
 ALTER TABLE "Eleve" ADD CONSTRAINT "Eleve_schoolId_fkey" FOREIGN KEY ("schoolId") REFERENCES "School"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -130,7 +133,7 @@ ALTER TABLE "Eleve" ADD CONSTRAINT "Eleve_classeId_fkey" FOREIGN KEY ("classeId"
 ALTER TABLE "HistoriqueClasse" ADD CONSTRAINT "HistoriqueClasse_eleveId_fkey" FOREIGN KEY ("eleveId") REFERENCES "Eleve"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "HistoriqueClasse" ADD CONSTRAINT "HistoriqueClasse_classeId_fkey" FOREIGN KEY ("classeId") REFERENCES "Classe"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "HistoriqueClasse" ADD CONSTRAINT "HistoriqueClasse_classeId_fkey" FOREIGN KEY ("classeId") REFERENCES "Classe"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Adresse" ADD CONSTRAINT "Adresse_eleveId_fkey" FOREIGN KEY ("eleveId") REFERENCES "Eleve"("id") ON DELETE CASCADE ON UPDATE CASCADE;
