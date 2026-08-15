@@ -33,11 +33,6 @@ export type School = Prisma.SchoolModel
  */
 export type Classe = Prisma.ClasseModel
 /**
- * Model Eleve
- * 
- */
-export type Eleve = Prisma.EleveModel
-/**
  * Model Professeur
  * 
  */
@@ -262,3 +257,33 @@ export type ParticipantSortie = Prisma.ParticipantSortieModel
  * 
  */
 export type AutorisationParent = Prisma.AutorisationParentModel
+/**
+ * Model Eleve
+ * 
+ */
+export type Eleve = Prisma.EleveModel
+/**
+ * Model HistoriqueClasse
+ * 
+ */
+export type HistoriqueClasse = Prisma.HistoriqueClasseModel
+/**
+ * Model Adresse
+ * 
+ */
+export type Adresse = Prisma.AdresseModel
+/**
+ * Model ProfessionEleve
+ * 
+ */
+export type ProfessionEleve = Prisma.ProfessionEleveModel
+/**
+ * Model DroitInscription
+ * 
+ */
+export type DroitInscription = Prisma.DroitInscriptionModel
+/**
+ * Model Ecolage
+ * 
+ */
+export type Ecolage = Prisma.EcolageModel

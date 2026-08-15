@@ -409,48 +409,6 @@ export type SoumissionScalarRelationFilter = {
   isNot?: Prisma.SoumissionWhereInput
 }
 
-export type SoumissionCreateNestedManyWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput> | Prisma.SoumissionCreateWithoutEleveInput[] | Prisma.SoumissionUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.SoumissionCreateOrConnectWithoutEleveInput | Prisma.SoumissionCreateOrConnectWithoutEleveInput[]
-  createMany?: Prisma.SoumissionCreateManyEleveInputEnvelope
-  connect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
-}
-
-export type SoumissionUncheckedCreateNestedManyWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput> | Prisma.SoumissionCreateWithoutEleveInput[] | Prisma.SoumissionUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.SoumissionCreateOrConnectWithoutEleveInput | Prisma.SoumissionCreateOrConnectWithoutEleveInput[]
-  createMany?: Prisma.SoumissionCreateManyEleveInputEnvelope
-  connect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
-}
-
-export type SoumissionUpdateManyWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput> | Prisma.SoumissionCreateWithoutEleveInput[] | Prisma.SoumissionUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.SoumissionCreateOrConnectWithoutEleveInput | Prisma.SoumissionCreateOrConnectWithoutEleveInput[]
-  upsert?: Prisma.SoumissionUpsertWithWhereUniqueWithoutEleveInput | Prisma.SoumissionUpsertWithWhereUniqueWithoutEleveInput[]
-  createMany?: Prisma.SoumissionCreateManyEleveInputEnvelope
-  set?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
-  disconnect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
-  delete?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
-  connect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
-  update?: Prisma.SoumissionUpdateWithWhereUniqueWithoutEleveInput | Prisma.SoumissionUpdateWithWhereUniqueWithoutEleveInput[]
-  updateMany?: Prisma.SoumissionUpdateManyWithWhereWithoutEleveInput | Prisma.SoumissionUpdateManyWithWhereWithoutEleveInput[]
-  deleteMany?: Prisma.SoumissionScalarWhereInput | Prisma.SoumissionScalarWhereInput[]
-}
-
-export type SoumissionUncheckedUpdateManyWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput> | Prisma.SoumissionCreateWithoutEleveInput[] | Prisma.SoumissionUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.SoumissionCreateOrConnectWithoutEleveInput | Prisma.SoumissionCreateOrConnectWithoutEleveInput[]
-  upsert?: Prisma.SoumissionUpsertWithWhereUniqueWithoutEleveInput | Prisma.SoumissionUpsertWithWhereUniqueWithoutEleveInput[]
-  createMany?: Prisma.SoumissionCreateManyEleveInputEnvelope
-  set?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
-  disconnect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
-  delete?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
-  connect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
-  update?: Prisma.SoumissionUpdateWithWhereUniqueWithoutEleveInput | Prisma.SoumissionUpdateWithWhereUniqueWithoutEleveInput[]
-  updateMany?: Prisma.SoumissionUpdateManyWithWhereWithoutEleveInput | Prisma.SoumissionUpdateManyWithWhereWithoutEleveInput[]
-  deleteMany?: Prisma.SoumissionScalarWhereInput | Prisma.SoumissionScalarWhereInput[]
-}
-
 export type SoumissionCreateNestedManyWithoutQuizInput = {
   create?: Prisma.XOR<Prisma.SoumissionCreateWithoutQuizInput, Prisma.SoumissionUncheckedCreateWithoutQuizInput> | Prisma.SoumissionCreateWithoutQuizInput[] | Prisma.SoumissionUncheckedCreateWithoutQuizInput[]
   connectOrCreate?: Prisma.SoumissionCreateOrConnectWithoutQuizInput | Prisma.SoumissionCreateOrConnectWithoutQuizInput[]
@@ -515,60 +473,46 @@ export type SoumissionUpdateOneRequiredWithoutReponsesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SoumissionUpdateToOneWithWhereWithoutReponsesInput, Prisma.SoumissionUpdateWithoutReponsesInput>, Prisma.SoumissionUncheckedUpdateWithoutReponsesInput>
 }
 
-export type SoumissionCreateWithoutEleveInput = {
-  id?: string
-  score?: number | null
-  total: number
-  soumisAt?: Date | string
-  quiz: Prisma.QuizCreateNestedOneWithoutSoumissionsInput
-  reponses?: Prisma.ReponseCreateNestedManyWithoutSoumissionInput
+export type SoumissionCreateNestedManyWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput> | Prisma.SoumissionCreateWithoutEleveInput[] | Prisma.SoumissionUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.SoumissionCreateOrConnectWithoutEleveInput | Prisma.SoumissionCreateOrConnectWithoutEleveInput[]
+  createMany?: Prisma.SoumissionCreateManyEleveInputEnvelope
+  connect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
 }
 
-export type SoumissionUncheckedCreateWithoutEleveInput = {
-  id?: string
-  quizId: string
-  score?: number | null
-  total: number
-  soumisAt?: Date | string
-  reponses?: Prisma.ReponseUncheckedCreateNestedManyWithoutSoumissionInput
+export type SoumissionUncheckedCreateNestedManyWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput> | Prisma.SoumissionCreateWithoutEleveInput[] | Prisma.SoumissionUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.SoumissionCreateOrConnectWithoutEleveInput | Prisma.SoumissionCreateOrConnectWithoutEleveInput[]
+  createMany?: Prisma.SoumissionCreateManyEleveInputEnvelope
+  connect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
 }
 
-export type SoumissionCreateOrConnectWithoutEleveInput = {
-  where: Prisma.SoumissionWhereUniqueInput
-  create: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput>
+export type SoumissionUpdateManyWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput> | Prisma.SoumissionCreateWithoutEleveInput[] | Prisma.SoumissionUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.SoumissionCreateOrConnectWithoutEleveInput | Prisma.SoumissionCreateOrConnectWithoutEleveInput[]
+  upsert?: Prisma.SoumissionUpsertWithWhereUniqueWithoutEleveInput | Prisma.SoumissionUpsertWithWhereUniqueWithoutEleveInput[]
+  createMany?: Prisma.SoumissionCreateManyEleveInputEnvelope
+  set?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
+  disconnect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
+  delete?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
+  connect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
+  update?: Prisma.SoumissionUpdateWithWhereUniqueWithoutEleveInput | Prisma.SoumissionUpdateWithWhereUniqueWithoutEleveInput[]
+  updateMany?: Prisma.SoumissionUpdateManyWithWhereWithoutEleveInput | Prisma.SoumissionUpdateManyWithWhereWithoutEleveInput[]
+  deleteMany?: Prisma.SoumissionScalarWhereInput | Prisma.SoumissionScalarWhereInput[]
 }
 
-export type SoumissionCreateManyEleveInputEnvelope = {
-  data: Prisma.SoumissionCreateManyEleveInput | Prisma.SoumissionCreateManyEleveInput[]
-  skipDuplicates?: boolean
-}
-
-export type SoumissionUpsertWithWhereUniqueWithoutEleveInput = {
-  where: Prisma.SoumissionWhereUniqueInput
-  update: Prisma.XOR<Prisma.SoumissionUpdateWithoutEleveInput, Prisma.SoumissionUncheckedUpdateWithoutEleveInput>
-  create: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput>
-}
-
-export type SoumissionUpdateWithWhereUniqueWithoutEleveInput = {
-  where: Prisma.SoumissionWhereUniqueInput
-  data: Prisma.XOR<Prisma.SoumissionUpdateWithoutEleveInput, Prisma.SoumissionUncheckedUpdateWithoutEleveInput>
-}
-
-export type SoumissionUpdateManyWithWhereWithoutEleveInput = {
-  where: Prisma.SoumissionScalarWhereInput
-  data: Prisma.XOR<Prisma.SoumissionUpdateManyMutationInput, Prisma.SoumissionUncheckedUpdateManyWithoutEleveInput>
-}
-
-export type SoumissionScalarWhereInput = {
-  AND?: Prisma.SoumissionScalarWhereInput | Prisma.SoumissionScalarWhereInput[]
-  OR?: Prisma.SoumissionScalarWhereInput[]
-  NOT?: Prisma.SoumissionScalarWhereInput | Prisma.SoumissionScalarWhereInput[]
-  id?: Prisma.StringFilter<"Soumission"> | string
-  quizId?: Prisma.StringFilter<"Soumission"> | string
-  eleveId?: Prisma.StringFilter<"Soumission"> | string
-  score?: Prisma.FloatNullableFilter<"Soumission"> | number | null
-  total?: Prisma.IntFilter<"Soumission"> | number
-  soumisAt?: Prisma.DateTimeFilter<"Soumission"> | Date | string
+export type SoumissionUncheckedUpdateManyWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput> | Prisma.SoumissionCreateWithoutEleveInput[] | Prisma.SoumissionUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.SoumissionCreateOrConnectWithoutEleveInput | Prisma.SoumissionCreateOrConnectWithoutEleveInput[]
+  upsert?: Prisma.SoumissionUpsertWithWhereUniqueWithoutEleveInput | Prisma.SoumissionUpsertWithWhereUniqueWithoutEleveInput[]
+  createMany?: Prisma.SoumissionCreateManyEleveInputEnvelope
+  set?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
+  disconnect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
+  delete?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
+  connect?: Prisma.SoumissionWhereUniqueInput | Prisma.SoumissionWhereUniqueInput[]
+  update?: Prisma.SoumissionUpdateWithWhereUniqueWithoutEleveInput | Prisma.SoumissionUpdateWithWhereUniqueWithoutEleveInput[]
+  updateMany?: Prisma.SoumissionUpdateManyWithWhereWithoutEleveInput | Prisma.SoumissionUpdateManyWithWhereWithoutEleveInput[]
+  deleteMany?: Prisma.SoumissionScalarWhereInput | Prisma.SoumissionScalarWhereInput[]
 }
 
 export type SoumissionCreateWithoutQuizInput = {
@@ -613,6 +557,18 @@ export type SoumissionUpdateWithWhereUniqueWithoutQuizInput = {
 export type SoumissionUpdateManyWithWhereWithoutQuizInput = {
   where: Prisma.SoumissionScalarWhereInput
   data: Prisma.XOR<Prisma.SoumissionUpdateManyMutationInput, Prisma.SoumissionUncheckedUpdateManyWithoutQuizInput>
+}
+
+export type SoumissionScalarWhereInput = {
+  AND?: Prisma.SoumissionScalarWhereInput | Prisma.SoumissionScalarWhereInput[]
+  OR?: Prisma.SoumissionScalarWhereInput[]
+  NOT?: Prisma.SoumissionScalarWhereInput | Prisma.SoumissionScalarWhereInput[]
+  id?: Prisma.StringFilter<"Soumission"> | string
+  quizId?: Prisma.StringFilter<"Soumission"> | string
+  eleveId?: Prisma.StringFilter<"Soumission"> | string
+  score?: Prisma.FloatNullableFilter<"Soumission"> | number | null
+  total?: Prisma.IntFilter<"Soumission"> | number
+  soumisAt?: Prisma.DateTimeFilter<"Soumission"> | Date | string
 }
 
 export type SoumissionCreateWithoutReponsesInput = {
@@ -667,38 +623,48 @@ export type SoumissionUncheckedUpdateWithoutReponsesInput = {
   soumisAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type SoumissionCreateManyEleveInput = {
+export type SoumissionCreateWithoutEleveInput = {
+  id?: string
+  score?: number | null
+  total: number
+  soumisAt?: Date | string
+  quiz: Prisma.QuizCreateNestedOneWithoutSoumissionsInput
+  reponses?: Prisma.ReponseCreateNestedManyWithoutSoumissionInput
+}
+
+export type SoumissionUncheckedCreateWithoutEleveInput = {
   id?: string
   quizId: string
   score?: number | null
   total: number
   soumisAt?: Date | string
+  reponses?: Prisma.ReponseUncheckedCreateNestedManyWithoutSoumissionInput
 }
 
-export type SoumissionUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  score?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  total?: Prisma.IntFieldUpdateOperationsInput | number
-  soumisAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quiz?: Prisma.QuizUpdateOneRequiredWithoutSoumissionsNestedInput
-  reponses?: Prisma.ReponseUpdateManyWithoutSoumissionNestedInput
+export type SoumissionCreateOrConnectWithoutEleveInput = {
+  where: Prisma.SoumissionWhereUniqueInput
+  create: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput>
 }
 
-export type SoumissionUncheckedUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quizId?: Prisma.StringFieldUpdateOperationsInput | string
-  score?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  total?: Prisma.IntFieldUpdateOperationsInput | number
-  soumisAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  reponses?: Prisma.ReponseUncheckedUpdateManyWithoutSoumissionNestedInput
+export type SoumissionCreateManyEleveInputEnvelope = {
+  data: Prisma.SoumissionCreateManyEleveInput | Prisma.SoumissionCreateManyEleveInput[]
+  skipDuplicates?: boolean
 }
 
-export type SoumissionUncheckedUpdateManyWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quizId?: Prisma.StringFieldUpdateOperationsInput | string
-  score?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  total?: Prisma.IntFieldUpdateOperationsInput | number
-  soumisAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type SoumissionUpsertWithWhereUniqueWithoutEleveInput = {
+  where: Prisma.SoumissionWhereUniqueInput
+  update: Prisma.XOR<Prisma.SoumissionUpdateWithoutEleveInput, Prisma.SoumissionUncheckedUpdateWithoutEleveInput>
+  create: Prisma.XOR<Prisma.SoumissionCreateWithoutEleveInput, Prisma.SoumissionUncheckedCreateWithoutEleveInput>
+}
+
+export type SoumissionUpdateWithWhereUniqueWithoutEleveInput = {
+  where: Prisma.SoumissionWhereUniqueInput
+  data: Prisma.XOR<Prisma.SoumissionUpdateWithoutEleveInput, Prisma.SoumissionUncheckedUpdateWithoutEleveInput>
+}
+
+export type SoumissionUpdateManyWithWhereWithoutEleveInput = {
+  where: Prisma.SoumissionScalarWhereInput
+  data: Prisma.XOR<Prisma.SoumissionUpdateManyMutationInput, Prisma.SoumissionUncheckedUpdateManyWithoutEleveInput>
 }
 
 export type SoumissionCreateManyQuizInput = {
@@ -730,6 +696,40 @@ export type SoumissionUncheckedUpdateWithoutQuizInput = {
 export type SoumissionUncheckedUpdateManyWithoutQuizInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total?: Prisma.IntFieldUpdateOperationsInput | number
+  soumisAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SoumissionCreateManyEleveInput = {
+  id?: string
+  quizId: string
+  score?: number | null
+  total: number
+  soumisAt?: Date | string
+}
+
+export type SoumissionUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total?: Prisma.IntFieldUpdateOperationsInput | number
+  soumisAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  quiz?: Prisma.QuizUpdateOneRequiredWithoutSoumissionsNestedInput
+  reponses?: Prisma.ReponseUpdateManyWithoutSoumissionNestedInput
+}
+
+export type SoumissionUncheckedUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  quizId?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total?: Prisma.IntFieldUpdateOperationsInput | number
+  soumisAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reponses?: Prisma.ReponseUncheckedUpdateManyWithoutSoumissionNestedInput
+}
+
+export type SoumissionUncheckedUpdateManyWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  quizId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total?: Prisma.IntFieldUpdateOperationsInput | number
   soumisAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string

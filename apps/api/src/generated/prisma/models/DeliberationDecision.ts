@@ -413,48 +413,6 @@ export type DeliberationDecisionMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type DeliberationDecisionCreateNestedManyWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput> | Prisma.DeliberationDecisionCreateWithoutEleveInput[] | Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput | Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput[]
-  createMany?: Prisma.DeliberationDecisionCreateManyEleveInputEnvelope
-  connect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
-}
-
-export type DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput> | Prisma.DeliberationDecisionCreateWithoutEleveInput[] | Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput | Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput[]
-  createMany?: Prisma.DeliberationDecisionCreateManyEleveInputEnvelope
-  connect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
-}
-
-export type DeliberationDecisionUpdateManyWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput> | Prisma.DeliberationDecisionCreateWithoutEleveInput[] | Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput | Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput[]
-  upsert?: Prisma.DeliberationDecisionUpsertWithWhereUniqueWithoutEleveInput | Prisma.DeliberationDecisionUpsertWithWhereUniqueWithoutEleveInput[]
-  createMany?: Prisma.DeliberationDecisionCreateManyEleveInputEnvelope
-  set?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
-  disconnect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
-  delete?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
-  connect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
-  update?: Prisma.DeliberationDecisionUpdateWithWhereUniqueWithoutEleveInput | Prisma.DeliberationDecisionUpdateWithWhereUniqueWithoutEleveInput[]
-  updateMany?: Prisma.DeliberationDecisionUpdateManyWithWhereWithoutEleveInput | Prisma.DeliberationDecisionUpdateManyWithWhereWithoutEleveInput[]
-  deleteMany?: Prisma.DeliberationDecisionScalarWhereInput | Prisma.DeliberationDecisionScalarWhereInput[]
-}
-
-export type DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput> | Prisma.DeliberationDecisionCreateWithoutEleveInput[] | Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput | Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput[]
-  upsert?: Prisma.DeliberationDecisionUpsertWithWhereUniqueWithoutEleveInput | Prisma.DeliberationDecisionUpsertWithWhereUniqueWithoutEleveInput[]
-  createMany?: Prisma.DeliberationDecisionCreateManyEleveInputEnvelope
-  set?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
-  disconnect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
-  delete?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
-  connect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
-  update?: Prisma.DeliberationDecisionUpdateWithWhereUniqueWithoutEleveInput | Prisma.DeliberationDecisionUpdateWithWhereUniqueWithoutEleveInput[]
-  updateMany?: Prisma.DeliberationDecisionUpdateManyWithWhereWithoutEleveInput | Prisma.DeliberationDecisionUpdateManyWithWhereWithoutEleveInput[]
-  deleteMany?: Prisma.DeliberationDecisionScalarWhereInput | Prisma.DeliberationDecisionScalarWhereInput[]
-}
-
 export type DeliberationDecisionCreateNestedManyWithoutSessionInput = {
   create?: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutSessionInput, Prisma.DeliberationDecisionUncheckedCreateWithoutSessionInput> | Prisma.DeliberationDecisionCreateWithoutSessionInput[] | Prisma.DeliberationDecisionUncheckedCreateWithoutSessionInput[]
   connectOrCreate?: Prisma.DeliberationDecisionCreateOrConnectWithoutSessionInput | Prisma.DeliberationDecisionCreateOrConnectWithoutSessionInput[]
@@ -509,67 +467,46 @@ export type EnumAvertissementDeliberationFieldUpdateOperationsInput = {
   set?: $Enums.AvertissementDeliberation
 }
 
-export type DeliberationDecisionCreateWithoutEleveInput = {
-  id?: string
-  decision: $Enums.DecisionPassage
-  mention?: $Enums.MentionDeliberation
-  avertissement?: $Enums.AvertissementDeliberation
-  commentaire?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  session: Prisma.DeliberationSessionCreateNestedOneWithoutDecisionsInput
+export type DeliberationDecisionCreateNestedManyWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput> | Prisma.DeliberationDecisionCreateWithoutEleveInput[] | Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput | Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput[]
+  createMany?: Prisma.DeliberationDecisionCreateManyEleveInputEnvelope
+  connect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
 }
 
-export type DeliberationDecisionUncheckedCreateWithoutEleveInput = {
-  id?: string
-  sessionId: string
-  decision: $Enums.DecisionPassage
-  mention?: $Enums.MentionDeliberation
-  avertissement?: $Enums.AvertissementDeliberation
-  commentaire?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
+export type DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput> | Prisma.DeliberationDecisionCreateWithoutEleveInput[] | Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput | Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput[]
+  createMany?: Prisma.DeliberationDecisionCreateManyEleveInputEnvelope
+  connect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
 }
 
-export type DeliberationDecisionCreateOrConnectWithoutEleveInput = {
-  where: Prisma.DeliberationDecisionWhereUniqueInput
-  create: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput>
+export type DeliberationDecisionUpdateManyWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput> | Prisma.DeliberationDecisionCreateWithoutEleveInput[] | Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput | Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput[]
+  upsert?: Prisma.DeliberationDecisionUpsertWithWhereUniqueWithoutEleveInput | Prisma.DeliberationDecisionUpsertWithWhereUniqueWithoutEleveInput[]
+  createMany?: Prisma.DeliberationDecisionCreateManyEleveInputEnvelope
+  set?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
+  disconnect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
+  delete?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
+  connect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
+  update?: Prisma.DeliberationDecisionUpdateWithWhereUniqueWithoutEleveInput | Prisma.DeliberationDecisionUpdateWithWhereUniqueWithoutEleveInput[]
+  updateMany?: Prisma.DeliberationDecisionUpdateManyWithWhereWithoutEleveInput | Prisma.DeliberationDecisionUpdateManyWithWhereWithoutEleveInput[]
+  deleteMany?: Prisma.DeliberationDecisionScalarWhereInput | Prisma.DeliberationDecisionScalarWhereInput[]
 }
 
-export type DeliberationDecisionCreateManyEleveInputEnvelope = {
-  data: Prisma.DeliberationDecisionCreateManyEleveInput | Prisma.DeliberationDecisionCreateManyEleveInput[]
-  skipDuplicates?: boolean
-}
-
-export type DeliberationDecisionUpsertWithWhereUniqueWithoutEleveInput = {
-  where: Prisma.DeliberationDecisionWhereUniqueInput
-  update: Prisma.XOR<Prisma.DeliberationDecisionUpdateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedUpdateWithoutEleveInput>
-  create: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput>
-}
-
-export type DeliberationDecisionUpdateWithWhereUniqueWithoutEleveInput = {
-  where: Prisma.DeliberationDecisionWhereUniqueInput
-  data: Prisma.XOR<Prisma.DeliberationDecisionUpdateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedUpdateWithoutEleveInput>
-}
-
-export type DeliberationDecisionUpdateManyWithWhereWithoutEleveInput = {
-  where: Prisma.DeliberationDecisionScalarWhereInput
-  data: Prisma.XOR<Prisma.DeliberationDecisionUpdateManyMutationInput, Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveInput>
-}
-
-export type DeliberationDecisionScalarWhereInput = {
-  AND?: Prisma.DeliberationDecisionScalarWhereInput | Prisma.DeliberationDecisionScalarWhereInput[]
-  OR?: Prisma.DeliberationDecisionScalarWhereInput[]
-  NOT?: Prisma.DeliberationDecisionScalarWhereInput | Prisma.DeliberationDecisionScalarWhereInput[]
-  id?: Prisma.StringFilter<"DeliberationDecision"> | string
-  sessionId?: Prisma.StringFilter<"DeliberationDecision"> | string
-  eleveId?: Prisma.StringFilter<"DeliberationDecision"> | string
-  decision?: Prisma.EnumDecisionPassageFilter<"DeliberationDecision"> | $Enums.DecisionPassage
-  mention?: Prisma.EnumMentionDeliberationFilter<"DeliberationDecision"> | $Enums.MentionDeliberation
-  avertissement?: Prisma.EnumAvertissementDeliberationFilter<"DeliberationDecision"> | $Enums.AvertissementDeliberation
-  commentaire?: Prisma.StringNullableFilter<"DeliberationDecision"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"DeliberationDecision"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"DeliberationDecision"> | Date | string
+export type DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput> | Prisma.DeliberationDecisionCreateWithoutEleveInput[] | Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput | Prisma.DeliberationDecisionCreateOrConnectWithoutEleveInput[]
+  upsert?: Prisma.DeliberationDecisionUpsertWithWhereUniqueWithoutEleveInput | Prisma.DeliberationDecisionUpsertWithWhereUniqueWithoutEleveInput[]
+  createMany?: Prisma.DeliberationDecisionCreateManyEleveInputEnvelope
+  set?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
+  disconnect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
+  delete?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
+  connect?: Prisma.DeliberationDecisionWhereUniqueInput | Prisma.DeliberationDecisionWhereUniqueInput[]
+  update?: Prisma.DeliberationDecisionUpdateWithWhereUniqueWithoutEleveInput | Prisma.DeliberationDecisionUpdateWithWhereUniqueWithoutEleveInput[]
+  updateMany?: Prisma.DeliberationDecisionUpdateManyWithWhereWithoutEleveInput | Prisma.DeliberationDecisionUpdateManyWithWhereWithoutEleveInput[]
+  deleteMany?: Prisma.DeliberationDecisionScalarWhereInput | Prisma.DeliberationDecisionScalarWhereInput[]
 }
 
 export type DeliberationDecisionCreateWithoutSessionInput = {
@@ -620,7 +557,33 @@ export type DeliberationDecisionUpdateManyWithWhereWithoutSessionInput = {
   data: Prisma.XOR<Prisma.DeliberationDecisionUpdateManyMutationInput, Prisma.DeliberationDecisionUncheckedUpdateManyWithoutSessionInput>
 }
 
-export type DeliberationDecisionCreateManyEleveInput = {
+export type DeliberationDecisionScalarWhereInput = {
+  AND?: Prisma.DeliberationDecisionScalarWhereInput | Prisma.DeliberationDecisionScalarWhereInput[]
+  OR?: Prisma.DeliberationDecisionScalarWhereInput[]
+  NOT?: Prisma.DeliberationDecisionScalarWhereInput | Prisma.DeliberationDecisionScalarWhereInput[]
+  id?: Prisma.StringFilter<"DeliberationDecision"> | string
+  sessionId?: Prisma.StringFilter<"DeliberationDecision"> | string
+  eleveId?: Prisma.StringFilter<"DeliberationDecision"> | string
+  decision?: Prisma.EnumDecisionPassageFilter<"DeliberationDecision"> | $Enums.DecisionPassage
+  mention?: Prisma.EnumMentionDeliberationFilter<"DeliberationDecision"> | $Enums.MentionDeliberation
+  avertissement?: Prisma.EnumAvertissementDeliberationFilter<"DeliberationDecision"> | $Enums.AvertissementDeliberation
+  commentaire?: Prisma.StringNullableFilter<"DeliberationDecision"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"DeliberationDecision"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"DeliberationDecision"> | Date | string
+}
+
+export type DeliberationDecisionCreateWithoutEleveInput = {
+  id?: string
+  decision: $Enums.DecisionPassage
+  mention?: $Enums.MentionDeliberation
+  avertissement?: $Enums.AvertissementDeliberation
+  commentaire?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  session: Prisma.DeliberationSessionCreateNestedOneWithoutDecisionsInput
+}
+
+export type DeliberationDecisionUncheckedCreateWithoutEleveInput = {
   id?: string
   sessionId: string
   decision: $Enums.DecisionPassage
@@ -631,37 +594,30 @@ export type DeliberationDecisionCreateManyEleveInput = {
   updatedAt?: Date | string
 }
 
-export type DeliberationDecisionUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  decision?: Prisma.EnumDecisionPassageFieldUpdateOperationsInput | $Enums.DecisionPassage
-  mention?: Prisma.EnumMentionDeliberationFieldUpdateOperationsInput | $Enums.MentionDeliberation
-  avertissement?: Prisma.EnumAvertissementDeliberationFieldUpdateOperationsInput | $Enums.AvertissementDeliberation
-  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.DeliberationSessionUpdateOneRequiredWithoutDecisionsNestedInput
+export type DeliberationDecisionCreateOrConnectWithoutEleveInput = {
+  where: Prisma.DeliberationDecisionWhereUniqueInput
+  create: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput>
 }
 
-export type DeliberationDecisionUncheckedUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  sessionId?: Prisma.StringFieldUpdateOperationsInput | string
-  decision?: Prisma.EnumDecisionPassageFieldUpdateOperationsInput | $Enums.DecisionPassage
-  mention?: Prisma.EnumMentionDeliberationFieldUpdateOperationsInput | $Enums.MentionDeliberation
-  avertissement?: Prisma.EnumAvertissementDeliberationFieldUpdateOperationsInput | $Enums.AvertissementDeliberation
-  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type DeliberationDecisionCreateManyEleveInputEnvelope = {
+  data: Prisma.DeliberationDecisionCreateManyEleveInput | Prisma.DeliberationDecisionCreateManyEleveInput[]
+  skipDuplicates?: boolean
 }
 
-export type DeliberationDecisionUncheckedUpdateManyWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  sessionId?: Prisma.StringFieldUpdateOperationsInput | string
-  decision?: Prisma.EnumDecisionPassageFieldUpdateOperationsInput | $Enums.DecisionPassage
-  mention?: Prisma.EnumMentionDeliberationFieldUpdateOperationsInput | $Enums.MentionDeliberation
-  avertissement?: Prisma.EnumAvertissementDeliberationFieldUpdateOperationsInput | $Enums.AvertissementDeliberation
-  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type DeliberationDecisionUpsertWithWhereUniqueWithoutEleveInput = {
+  where: Prisma.DeliberationDecisionWhereUniqueInput
+  update: Prisma.XOR<Prisma.DeliberationDecisionUpdateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedUpdateWithoutEleveInput>
+  create: Prisma.XOR<Prisma.DeliberationDecisionCreateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedCreateWithoutEleveInput>
+}
+
+export type DeliberationDecisionUpdateWithWhereUniqueWithoutEleveInput = {
+  where: Prisma.DeliberationDecisionWhereUniqueInput
+  data: Prisma.XOR<Prisma.DeliberationDecisionUpdateWithoutEleveInput, Prisma.DeliberationDecisionUncheckedUpdateWithoutEleveInput>
+}
+
+export type DeliberationDecisionUpdateManyWithWhereWithoutEleveInput = {
+  where: Prisma.DeliberationDecisionScalarWhereInput
+  data: Prisma.XOR<Prisma.DeliberationDecisionUpdateManyMutationInput, Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveInput>
 }
 
 export type DeliberationDecisionCreateManySessionInput = {
@@ -700,6 +656,50 @@ export type DeliberationDecisionUncheckedUpdateWithoutSessionInput = {
 export type DeliberationDecisionUncheckedUpdateManyWithoutSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
+  decision?: Prisma.EnumDecisionPassageFieldUpdateOperationsInput | $Enums.DecisionPassage
+  mention?: Prisma.EnumMentionDeliberationFieldUpdateOperationsInput | $Enums.MentionDeliberation
+  avertissement?: Prisma.EnumAvertissementDeliberationFieldUpdateOperationsInput | $Enums.AvertissementDeliberation
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DeliberationDecisionCreateManyEleveInput = {
+  id?: string
+  sessionId: string
+  decision: $Enums.DecisionPassage
+  mention?: $Enums.MentionDeliberation
+  avertissement?: $Enums.AvertissementDeliberation
+  commentaire?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DeliberationDecisionUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  decision?: Prisma.EnumDecisionPassageFieldUpdateOperationsInput | $Enums.DecisionPassage
+  mention?: Prisma.EnumMentionDeliberationFieldUpdateOperationsInput | $Enums.MentionDeliberation
+  avertissement?: Prisma.EnumAvertissementDeliberationFieldUpdateOperationsInput | $Enums.AvertissementDeliberation
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  session?: Prisma.DeliberationSessionUpdateOneRequiredWithoutDecisionsNestedInput
+}
+
+export type DeliberationDecisionUncheckedUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionId?: Prisma.StringFieldUpdateOperationsInput | string
+  decision?: Prisma.EnumDecisionPassageFieldUpdateOperationsInput | $Enums.DecisionPassage
+  mention?: Prisma.EnumMentionDeliberationFieldUpdateOperationsInput | $Enums.MentionDeliberation
+  avertissement?: Prisma.EnumAvertissementDeliberationFieldUpdateOperationsInput | $Enums.AvertissementDeliberation
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DeliberationDecisionUncheckedUpdateManyWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumDecisionPassageFieldUpdateOperationsInput | $Enums.DecisionPassage
   mention?: Prisma.EnumMentionDeliberationFieldUpdateOperationsInput | $Enums.MentionDeliberation
   avertissement?: Prisma.EnumAvertissementDeliberationFieldUpdateOperationsInput | $Enums.AvertissementDeliberation

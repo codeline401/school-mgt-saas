@@ -5,14 +5,6 @@ import { fileURLToPath } from "url";
 import multer from "multer";
 import { prisma } from "./lib/prisma.js";
 
-import {
-  getAllEleves,
-  createEleve,
-  getAllProfesseurs,
-  deleteEleve,
-  importEleves,
-} from "./controllers/elevesController.js"; // Importation du contrôleur pour les élèves
-
 import { getAdminDevoirs } from "./modules/cahierDeTexte/devoirs/devoir.controller.js"; // Importation du contrôleur pour les devoirs
 
 import authRoutes from "./routes/authRoutes.js"; // Importation des routes d'authentification
@@ -35,6 +27,9 @@ import logistiqueRoutes from "./modules/logistique/logistique.routes.js"; // Imp
 import articleStockRoutes from "./modules/logistique/stocks/stocks.routes.js"; // Importation des routes pour la gestion des articles en stock
 import matieresRoutes from "./routes/matieresRoute.js"; // Importation des routes pour les matières
 
+// gestion eleves
+import elevesRoutes from "./modules/eleves/eleves.routes.js"; // Importation des routes pour la gestion des élèves
+
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -53,16 +48,12 @@ app.use("/api/documents", documentRoutes); // Ajout des routes pour les document
 app.use("/api/logistique", logistiqueRoutes); // Ajout des routes pour la logistique (locaux, stocks, inventaire, maintenance)
 app.use("/api/stocks", articleStockRoutes); // Ajout des routes pour la gestion des articles en stock
 
+app.use("/api/eleves", elevesRoutes); // Ajout des routes pour la gestion des élèves
+
 app.use("/api/export", exportRoute);
 app.use("/api/periodes", periodeRoute);
 app.use("/api/signature", signatureRoute);
 app.use("/api", inscriptionRoutes); // Ajout des routes pour l'inscription et la réinscription (doit être après les routes spécifiques)
-
-app.get("/api/eleves", authenticate, getAllEleves);
-app.post("/api/eleves/import", authenticate, importEleves);
-app.post("/api/eleves", authenticate, createEleve);
-app.delete("/api/eleves/:id", authenticate, deleteEleve);
-app.get("/api/professeurs", authenticate, getAllProfesseurs);
 
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/bulletin-template", bulletinTemplateRoute);

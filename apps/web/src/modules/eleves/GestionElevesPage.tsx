@@ -20,6 +20,8 @@ import {
   Wallet,
 } from "lucide-react";
 import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
+import FicheElevePage from "./informations/fiche/pages/FicheElevePage";
+import FicheEleveFormModal from "./informations/fiche/components/FicheEleveFormModal";
 
 type MainTab =
   | "informations"
@@ -152,6 +154,7 @@ function GestionElevesPage() {
     useState<VieScolaireSubTab>("discipline");
   const [activeDocumentSubTab, setActiveDocumentSubTab] =
     useState<DocumentSubTab>("pieces");
+  const [isCreateEleveModalOpen, setIsCreateEleveModalOpen] = useState(false);
 
   useEffect(() => {
     const tab = PATH_TO_TAB[location.pathname];
@@ -168,13 +171,7 @@ function GestionElevesPage() {
   const renderInformationContent = () => {
     switch (activeInfoSubTab) {
       case "fiche":
-        return (
-          <DevelopmentPlaceholder
-            icon={UserRound}
-            title="Fiche élève"
-            description="Données personnelles, classe, scolarité, statut administratif et informations générales."
-          />
-        );
+        return <FicheElevePage />;
       case "responsables":
         return (
           <DevelopmentPlaceholder
@@ -448,195 +445,206 @@ function GestionElevesPage() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <GraduationCap size={28} className="text-primary" />
+    <>
+      <FicheEleveFormModal
+        isOpen={isCreateEleveModalOpen}
+        onClose={() => setIsCreateEleveModalOpen(false)}
+      />
+
+      <div>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <GraduationCap size={28} className="text-primary" />
+            <div>
+              <h2 className="text-xl font-bold">Gestion d’élève</h2>
+              <p className="text-sm text-base-content/60">
+                Suivi administratif, financier et scolaire des élèves
+              </p>
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+            <button className="btn btn-outline btn-sm gap-2">
+              <FileText size={16} />
+              Exporter
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary btn-sm gap-2"
+              onClick={() => setIsCreateEleveModalOpen(true)}
+            >
+              <UserRound size={16} />
+              Nouvel élève
+            </button>
+          </div>
+        </div>
+
+        <div role="tablist" className="tabs tabs-bordered mb-6">
+          <button
+            role="tab"
+            className={`tab ${activeSubTab === "informations" ? "tab-active" : ""}`}
+            onClick={() => handleTabChange("informations")}
+          >
+            <UserRound size={16} className="mr-2" />
+            Informations
+          </button>
+          <button
+            role="tab"
+            className={`tab ${activeSubTab === "ecolage" ? "tab-active" : ""}`}
+            onClick={() => handleTabChange("ecolage")}
+          >
+            <Wallet size={16} className="mr-2" />
+            Écolage
+          </button>
+          <button
+            role="tab"
+            className={`tab ${activeSubTab === "absences" ? "tab-active" : ""}`}
+            onClick={() => handleTabChange("absences")}
+          >
+            <Calendar size={16} className="mr-2" />
+            Absences & retards
+          </button>
+          <button
+            role="tab"
+            className={`tab ${activeSubTab === "parcours" ? "tab-active" : ""}`}
+            onClick={() => handleTabChange("parcours")}
+          >
+            <BookOpen size={16} className="mr-2" />
+            Parcours & évaluations
+          </button>
+          <button
+            role="tab"
+            className={`tab ${activeSubTab === "vie-scolaire" ? "tab-active" : ""}`}
+            onClick={() => handleTabChange("vie-scolaire")}
+          >
+            <ClipboardCheck size={16} className="mr-2" />
+            Vie scolaire
+          </button>
+          <button
+            role="tab"
+            className={`tab ${activeSubTab === "documents" ? "tab-active" : ""}`}
+            onClick={() => handleTabChange("documents")}
+          >
+            <FileText size={16} className="mr-2" />
+            Dossiers & documents
+          </button>
+        </div>
+
+        {activeSubTab === "informations" && (
           <div>
-            <h2 className="text-xl font-bold">Gestion d’élève</h2>
-            <p className="text-sm text-base-content/60">
-              Suivi administratif, financier et scolaire des élèves
-            </p>
+            <div role="tablist" className="tabs tabs-boxed mb-6">
+              {informationTabs.map(({ value, label, icon: Icon }) => (
+                <button
+                  key={value}
+                  role="tab"
+                  className={`tab ${activeInfoSubTab === value ? "tab-active" : ""}`}
+                  onClick={() => setActiveInfoSubTab(value)}
+                >
+                  <Icon size={16} className="mr-2" />
+                  {label}
+                </button>
+              ))}
+            </div>
+            {renderInformationContent()}
           </div>
-        </div>
+        )}
 
-        <div className="flex gap-2">
-          <button className="btn btn-outline btn-sm gap-2">
-            <FileText size={16} />
-            Exporter
-          </button>
-          <button className="btn btn-primary btn-sm gap-2">
-            <UserRound size={16} />
-            Nouvel élève
-          </button>
-        </div>
+        {activeSubTab === "ecolage" && (
+          <div>
+            <div role="tablist" className="tabs tabs-boxed mb-6">
+              {ecolageTabs.map(({ value, label, icon: Icon }) => (
+                <button
+                  key={value}
+                  role="tab"
+                  className={`tab ${activeEcolageSubTab === value ? "tab-active" : ""}`}
+                  onClick={() => setActiveEcolageSubTab(value)}
+                >
+                  <Icon size={16} className="mr-2" />
+                  {label}
+                </button>
+              ))}
+            </div>
+            {renderEcolageContent()}
+          </div>
+        )}
+
+        {activeSubTab === "absences" && (
+          <div>
+            <div role="tablist" className="tabs tabs-boxed mb-6">
+              {absenceTabs.map(({ value, label, icon: Icon }) => (
+                <button
+                  key={value}
+                  role="tab"
+                  className={`tab ${activeAbsenceSubTab === value ? "tab-active" : ""}`}
+                  onClick={() => setActiveAbsenceSubTab(value)}
+                >
+                  <Icon size={16} className="mr-2" />
+                  {label}
+                </button>
+              ))}
+            </div>
+            {renderAbsenceContent()}
+          </div>
+        )}
+
+        {activeSubTab === "parcours" && (
+          <div>
+            <div role="tablist" className="tabs tabs-boxed mb-6">
+              {parcoursTabs.map(({ value, label, icon: Icon }) => (
+                <button
+                  key={value}
+                  role="tab"
+                  className={`tab ${activeParcoursSubTab === value ? "tab-active" : ""}`}
+                  onClick={() => setActiveParcoursSubTab(value)}
+                >
+                  <Icon size={16} className="mr-2" />
+                  {label}
+                </button>
+              ))}
+            </div>
+            {renderParcoursContent()}
+          </div>
+        )}
+
+        {activeSubTab === "vie-scolaire" && (
+          <div>
+            <div role="tablist" className="tabs tabs-boxed mb-6">
+              {vieScolaireTabs.map(({ value, label, icon: Icon }) => (
+                <button
+                  key={value}
+                  role="tab"
+                  className={`tab ${activeVieScolaireSubTab === value ? "tab-active" : ""}`}
+                  onClick={() => setActiveVieScolaireSubTab(value)}
+                >
+                  <Icon size={16} className="mr-2" />
+                  {label}
+                </button>
+              ))}
+            </div>
+            {renderVieScolaireContent()}
+          </div>
+        )}
+
+        {activeSubTab === "documents" && (
+          <div>
+            <div role="tablist" className="tabs tabs-boxed mb-6">
+              {documentTabs.map(({ value, label, icon: Icon }) => (
+                <button
+                  key={value}
+                  role="tab"
+                  className={`tab ${activeDocumentSubTab === value ? "tab-active" : ""}`}
+                  onClick={() => setActiveDocumentSubTab(value)}
+                >
+                  <Icon size={16} className="mr-2" />
+                  {label}
+                </button>
+              ))}
+            </div>
+            {renderDocumentContent()}
+          </div>
+        )}
       </div>
-
-      <div role="tablist" className="tabs tabs-bordered mb-6">
-        <button
-          role="tab"
-          className={`tab ${activeSubTab === "informations" ? "tab-active" : ""}`}
-          onClick={() => handleTabChange("informations")}
-        >
-          <UserRound size={16} className="mr-2" />
-          Informations
-        </button>
-        <button
-          role="tab"
-          className={`tab ${activeSubTab === "ecolage" ? "tab-active" : ""}`}
-          onClick={() => handleTabChange("ecolage")}
-        >
-          <Wallet size={16} className="mr-2" />
-          Écolage
-        </button>
-        <button
-          role="tab"
-          className={`tab ${activeSubTab === "absences" ? "tab-active" : ""}`}
-          onClick={() => handleTabChange("absences")}
-        >
-          <Calendar size={16} className="mr-2" />
-          Absences & retards
-        </button>
-        <button
-          role="tab"
-          className={`tab ${activeSubTab === "parcours" ? "tab-active" : ""}`}
-          onClick={() => handleTabChange("parcours")}
-        >
-          <BookOpen size={16} className="mr-2" />
-          Parcours & évaluations
-        </button>
-        <button
-          role="tab"
-          className={`tab ${activeSubTab === "vie-scolaire" ? "tab-active" : ""}`}
-          onClick={() => handleTabChange("vie-scolaire")}
-        >
-          <ClipboardCheck size={16} className="mr-2" />
-          Vie scolaire
-        </button>
-        <button
-          role="tab"
-          className={`tab ${activeSubTab === "documents" ? "tab-active" : ""}`}
-          onClick={() => handleTabChange("documents")}
-        >
-          <FileText size={16} className="mr-2" />
-          Dossiers & documents
-        </button>
-      </div>
-
-      {activeSubTab === "informations" && (
-        <div>
-          <div role="tablist" className="tabs tabs-boxed mb-6">
-            {informationTabs.map(({ value, label, icon: Icon }) => (
-              <button
-                key={value}
-                role="tab"
-                className={`tab ${activeInfoSubTab === value ? "tab-active" : ""}`}
-                onClick={() => setActiveInfoSubTab(value)}
-              >
-                <Icon size={16} className="mr-2" />
-                {label}
-              </button>
-            ))}
-          </div>
-          {renderInformationContent()}
-        </div>
-      )}
-
-      {activeSubTab === "ecolage" && (
-        <div>
-          <div role="tablist" className="tabs tabs-boxed mb-6">
-            {ecolageTabs.map(({ value, label, icon: Icon }) => (
-              <button
-                key={value}
-                role="tab"
-                className={`tab ${activeEcolageSubTab === value ? "tab-active" : ""}`}
-                onClick={() => setActiveEcolageSubTab(value)}
-              >
-                <Icon size={16} className="mr-2" />
-                {label}
-              </button>
-            ))}
-          </div>
-          {renderEcolageContent()}
-        </div>
-      )}
-
-      {activeSubTab === "absences" && (
-        <div>
-          <div role="tablist" className="tabs tabs-boxed mb-6">
-            {absenceTabs.map(({ value, label, icon: Icon }) => (
-              <button
-                key={value}
-                role="tab"
-                className={`tab ${activeAbsenceSubTab === value ? "tab-active" : ""}`}
-                onClick={() => setActiveAbsenceSubTab(value)}
-              >
-                <Icon size={16} className="mr-2" />
-                {label}
-              </button>
-            ))}
-          </div>
-          {renderAbsenceContent()}
-        </div>
-      )}
-
-      {activeSubTab === "parcours" && (
-        <div>
-          <div role="tablist" className="tabs tabs-boxed mb-6">
-            {parcoursTabs.map(({ value, label, icon: Icon }) => (
-              <button
-                key={value}
-                role="tab"
-                className={`tab ${activeParcoursSubTab === value ? "tab-active" : ""}`}
-                onClick={() => setActiveParcoursSubTab(value)}
-              >
-                <Icon size={16} className="mr-2" />
-                {label}
-              </button>
-            ))}
-          </div>
-          {renderParcoursContent()}
-        </div>
-      )}
-
-      {activeSubTab === "vie-scolaire" && (
-        <div>
-          <div role="tablist" className="tabs tabs-boxed mb-6">
-            {vieScolaireTabs.map(({ value, label, icon: Icon }) => (
-              <button
-                key={value}
-                role="tab"
-                className={`tab ${activeVieScolaireSubTab === value ? "tab-active" : ""}`}
-                onClick={() => setActiveVieScolaireSubTab(value)}
-              >
-                <Icon size={16} className="mr-2" />
-                {label}
-              </button>
-            ))}
-          </div>
-          {renderVieScolaireContent()}
-        </div>
-      )}
-
-      {activeSubTab === "documents" && (
-        <div>
-          <div role="tablist" className="tabs tabs-boxed mb-6">
-            {documentTabs.map(({ value, label, icon: Icon }) => (
-              <button
-                key={value}
-                role="tab"
-                className={`tab ${activeDocumentSubTab === value ? "tab-active" : ""}`}
-                onClick={() => setActiveDocumentSubTab(value)}
-              >
-                <Icon size={16} className="mr-2" />
-                {label}
-              </button>
-            ))}
-          </div>
-          {renderDocumentContent()}
-        </div>
-      )}
-    </div>
+    </>
   );
 }
 

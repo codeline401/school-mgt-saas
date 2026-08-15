@@ -2,6 +2,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+import { queryClient } from "../lib/queryClient";
+
 // définition de la structure d'un utilisateur connecté
 interface User {
   id: string;
@@ -28,8 +30,16 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: null,
       token: null,
-      setAuth: (user, token) => set({ user, token }), // met à jour le store avec les données de l'utilisateur et le token
-      logout: () => set({ user: null, token: null }), // réinitialise le store lors de la déconnexion
+      setAuth: (user, token) => {
+        // Nettoie les données des requêtes précédemment chargées avant
+        // de charger le compte d'un autre établissement.
+        queryClient.clear();
+        set({ user, token });
+      },
+      logout: () => {
+        queryClient.clear();
+        set({ user: null, token: null });
+      },
     }),
     {
       name: "auth-storage-school-mgt", // nom de la clé dans le localStorage

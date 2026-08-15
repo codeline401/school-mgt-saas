@@ -187,6 +187,11 @@ export const exportController = {
         return;
       }
 
+      if (!eleve.classeId || !eleve.classe) {
+        res.status(400).json({ error: "L'élève n'est pas affecté à une classe" });
+        return;
+      }
+
       const periode = await prisma.periode.findFirst({
         where: { id: periodeId, schoolId: req.user!.schoolId as string },
       });
@@ -267,14 +272,23 @@ export const exportController = {
 
       // FIX : prof principal désigné via Classe.professeurPrincipalId,
       // au lieu d'un professeur arbitraire parmi ceux affectés à la classe.
-      const classeAvecPrincipal = await prisma.classe.findUnique({
+      const classeAvecPrincipal = (await prisma.classe.findUnique({
         where: { id: eleve.classeId },
         include: {
           professeurPrincipal: {
             include: { user: { include: { signature: true } } },
           },
         },
-      });
+      })) as {
+        professeurPrincipal?: {
+          user?: {
+            signature?: {
+              filePath: string;
+              mimeType: string;
+            } | null;
+          } | null;
+        } | null;
+      } | null;
       const profPrincipal = classeAvecPrincipal?.professeurPrincipal ?? null;
 
       // FIX (typo + async) : signatureToDataUrl, awaited
@@ -379,6 +393,10 @@ export const exportController = {
       });
       if (!eleve) {
         res.status(404).json({ error: "Élève introuvable" });
+        return;
+      }
+      if (!eleve.classeId || !eleve.classe) {
+        res.status(400).json({ error: "L'élève n'est pas affecté à une classe" });
         return;
       }
       const periode = await prisma.periode.findFirst({

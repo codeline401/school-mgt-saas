@@ -59,6 +59,8 @@ model User {
   interventionMaintenancesTechnician InterventionMaintenance[] @relation("InterventionsTechnician")
   sortieScolaires                    SortieScolaire[]          @relation("SortiesOrganisees")
   participantSorties                 ParticipantSortie[]       @relation("SortiesAccompagnees")
+  eleves                             Eleve[]
+  userDeleting                       Eleve[]                   @relation("EleveDeletedBy")
 }
 
 // Modele SAAS
@@ -120,6 +122,8 @@ model School {
   sortieScolaires          SortieScolaire[]
   participantSorties       ParticipantSortie[]
   autorisationParents      AutorisationParent[]
+  droitInscriptions        DroitInscription[]
+  ecolages                 Ecolage[]
 }
 
 model Classe {
@@ -149,42 +153,12 @@ model Classe {
   chapitres            Chapitre[]
   salles               Salle[]
   sortieScolaires      SortieScolaire[]
+  historiqueClasses    HistoriqueClasse[]
+  droitInscriptions    DroitInscription[]
+  ecolages             Ecolage[]
 
   @@unique([schoolId, nom])
   @@index([professeurPrincipalId])
-}
-
-model Eleve {
-  id       String @id @default(uuid())
-  nom      String
-  prenom   String
-  schoolId String
-  school   School @relation(fields: [schoolId], references: [id])
-  classeId String
-  classe   Classe @relation(fields: [classeId], references: [id])
-
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  dateNaissance DateTime?
-  telephone     String?
-  adresse       String?
-  photoUrl      String?
-  parentId      String?
-
-  admissions            DossierAdmission[]
-  parent                Parent?                @relation(fields: [parentId], references: [id])
-  notes                 Note[]
-  presences             Presence[]
-  soumissions           Soumission[]
-  deliberationDecisions DeliberationDecision[]
-  affectationTransports AffectationTransport[]
-  participantSorties    ParticipantSortie[]
-  autorisationParents   AutorisationParent[]
-
-  @@unique([schoolId, nom, prenom])
-  @@index([schoolId])
-  @@index([classeId])
-  @@index([parentId])
 }
 
 model Professeur {
@@ -232,11 +206,13 @@ model Parent {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  eleves Eleve[]
+  elevesEnfants Eleve[]
 
   userId              String?              @unique
   user                User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
   autorisationParents AutorisationParent[]
+  adresses            Adresse[]
+  eleves              Eleve[]              @relation("ResponsableFrais")
 
   @@index([schoolId])
 }
@@ -1708,4 +1684,250 @@ enum StatutParticipant {
   ANNULE
   ABSENT
   PRESENT
+}
+
+// ===========================================
+// MODULE ELEVE
+// ===========================================
+enum StatutEleve {
+  ACTIF
+  INACTIF
+  INSCRIT
+  SUSPENDU
+  DIPLOME
+  ABANDON
+}
+
+enum Genre {
+  MASCULIN
+  FEMININ
+}
+
+enum StatutFinAnnee {
+  EN_COURS
+  ADMIS
+  REDOUBLE
+  RENVOYE
+  REORIENTE
+  QUITTE
+}
+
+model Eleve {
+  id String @id @default(uuid())
+
+  // 🔧 FIX: autoincrement() génère une séquence GLOBALE, pas par école.
+  matricule Int
+
+  nom    String
+  prenom String
+  genre  Genre?
+
+  // Informations personnelles
+  dateNaissance DateTime?
+  lieuNaissance String?
+  telephone     String?
+  photoUrl      String?
+
+  // situation à la fin d'année
+  situationFinAnnee StatutFinAnnee? @default(EN_COURS)
+
+  // situation familiale
+  situationFamiliale SituationFamiliale?
+
+  // inscription
+  dateInscription DateTime? @default(now())
+  ecoleOrigine    String?
+
+  // nationalité
+  nationalite String?
+
+  // adresse
+  adresse Adresse?
+
+  // profession
+  professionEleve ProfessionEleve?
+
+  // 🔧 FIX: responsableId est maintenant une vraie relation Prisma
+  responsableId String?
+  responsable   Parent? @relation("ResponsableFrais", fields: [responsableId], references: [id], onDelete: SetNull)
+
+  // Statut opérationnel de l'élève
+  statut StatutEleve @default(ACTIF)
+
+  // relation, si quelqu'un est en relation avec l'élève et peut être contacté
+  isRelationContact Boolean @default(false)
+  relationName      String?
+  relationTelephone String?
+
+  // remarque sur l'élève
+  remarque String?
+
+  // Relation école
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  // Classe actuelle (optionnelle si l'élève est inscrit mais pas encore affecté)
+  classeId String?
+  classe   Classe? @relation(fields: [classeId], references: [id], onDelete: SetNull)
+
+  // Historique des classes parcourues
+  historiqueClasses HistoriqueClasse[]
+
+  // Relations familiales (Parent principal)
+  parentId String?
+  parent   Parent? @relation(fields: [parentId], references: [id], onDelete: SetNull)
+
+  // Traçabilité & Soft Delete
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  // 🔧 FIX: deletedById devient une vraie relation vers l'utilisateur/admin
+  deletedById String?
+  deletedBy   User?   @relation("EleveDeletedBy", fields: [deletedById], references: [id], onDelete: SetNull)
+
+  // Relations fonctionnelles
+  admissions            DossierAdmission[]
+  notes                 Note[]
+  presences             Presence[]
+  soumissions           Soumission[]
+  deliberationDecisions DeliberationDecision[]
+  affectationTransports AffectationTransport[]
+  participantSorties    ParticipantSortie[]
+  autorisationParents   AutorisationParent[]
+  ecolages              Ecolage[]
+  droitInscriptions     DroitInscription[]
+  user                  User?                  @relation(fields: [userId], references: [id])
+  userId                String?
+
+  // Contraintes & Index
+  @@unique([schoolId, matricule])
+  // 🔧 FIX: cette contrainte ne bloque pas les doublons quand dateNaissance
+  // est NULL (NULL != NULL en SQL). Garde-la comme filet de sécurité pour
+  // les cas où la date est connue, mais ajoute une vérification applicative
+  // (nom + prénom + schoolId) pour les élèves sans date de naissance.
+  @@unique([schoolId, nom, prenom, dateNaissance])
+  @@index([schoolId])
+  @@index([classeId])
+  @@index([parentId])
+  @@index([responsableId])
+  @@index([deletedById])
+  @@index([statut])
+}
+
+model HistoriqueClasse {
+  id String @id @default(uuid())
+
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  classeId String
+  classe   Classe @relation(fields: [classeId], references: [id], onDelete: Cascade)
+
+  anneeScolaire String
+
+  statutFinAnnee StatutFinAnnee? @default(EN_COURS)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([eleveId, anneeScolaire])
+  @@index([eleveId])
+  @@index([classeId])
+}
+
+enum SituationFamiliale {
+  CELIBATAIRE
+  MARIE
+  DIVORCE
+  AUTRE
+}
+
+model Adresse {
+  id String @id @default(uuid())
+
+  fokontany String?
+  logement  String?
+  ville     String?
+  region    String?
+  pays      String?
+
+  eleveId String? @unique
+  eleve   Eleve?  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  parentId String? @unique
+  parent   Parent? @relation(fields: [parentId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([eleveId])
+  @@index([parentId])
+}
+
+model ProfessionEleve {
+  id String @id @default(uuid())
+
+  titre   String?
+  lieu    String?
+  secteur String?
+
+  eleveId String @unique
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DroitInscription {
+  id            String  @id @default(uuid())
+  anneeScolaire String
+  montant       Decimal @db.Decimal(10, 2)
+
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  classeId String?
+  classe   Classe? @relation(fields: [classeId], references: [id], onDelete: SetNull)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  // 🔧 FIX: ajout de la traçabilité manquante
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 🔧 FIX: empêche de créer 2x le même droit d'inscription pour
+  // le même élève sur la même année scolaire
+  @@unique([eleveId, anneeScolaire])
+  @@index([eleveId])
+  @@index([schoolId])
+  @@index([classeId])
+}
+
+model Ecolage {
+  id            String  @id @default(uuid())
+  anneeScolaire String
+  mois          Int // 1 à 12 pour janvier à décembre
+  montant       Decimal @db.Decimal(10, 2)
+
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  classeId String?
+  classe   Classe? @relation(fields: [classeId], references: [id], onDelete: SetNull)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  // 🔧 FIX: ajout de la traçabilité manquante
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 🔧 FIX: si l'écolage est mensuel/trimestriel, adapte cette contrainte
+  // (ajoute un champ "periode" ou "mois" et inclus-le dans le @@unique)
+  @@unique([eleveId, anneeScolaire, mois])
+  @@index([eleveId])
+  @@index([schoolId])
+  @@index([classeId])
 }

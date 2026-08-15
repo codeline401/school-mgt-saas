@@ -54,7 +54,6 @@ export const ModelName = {
   User: 'User',
   School: 'School',
   Classe: 'Classe',
-  Eleve: 'Eleve',
   Professeur: 'Professeur',
   Parent: 'Parent',
   DossierAdmission: 'DossierAdmission',
@@ -99,7 +98,13 @@ export const ModelName = {
   AffectationTransport: 'AffectationTransport',
   SortieScolaire: 'SortieScolaire',
   ParticipantSortie: 'ParticipantSortie',
-  AutorisationParent: 'AutorisationParent'
+  AutorisationParent: 'AutorisationParent',
+  Eleve: 'Eleve',
+  HistoriqueClasse: 'HistoriqueClasse',
+  Adresse: 'Adresse',
+  ProfessionEleve: 'ProfessionEleve',
+  DroitInscription: 'DroitInscription',
+  Ecolage: 'Ecolage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -164,24 +169,6 @@ export const ClasseScalarFieldEnum = {
 } as const
 
 export type ClasseScalarFieldEnum = (typeof ClasseScalarFieldEnum)[keyof typeof ClasseScalarFieldEnum]
-
-
-export const EleveScalarFieldEnum = {
-  id: 'id',
-  nom: 'nom',
-  prenom: 'prenom',
-  schoolId: 'schoolId',
-  classeId: 'classeId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  dateNaissance: 'dateNaissance',
-  telephone: 'telephone',
-  adresse: 'adresse',
-  photoUrl: 'photoUrl',
-  parentId: 'parentId'
-} as const
-
-export type EleveScalarFieldEnum = (typeof EleveScalarFieldEnum)[keyof typeof EleveScalarFieldEnum]
 
 
 export const ProfesseurScalarFieldEnum = {
@@ -931,6 +918,111 @@ export const AutorisationParentScalarFieldEnum = {
 } as const
 
 export type AutorisationParentScalarFieldEnum = (typeof AutorisationParentScalarFieldEnum)[keyof typeof AutorisationParentScalarFieldEnum]
+
+
+export const EleveScalarFieldEnum = {
+  id: 'id',
+  matricule: 'matricule',
+  nom: 'nom',
+  prenom: 'prenom',
+  genre: 'genre',
+  dateNaissance: 'dateNaissance',
+  lieuNaissance: 'lieuNaissance',
+  telephone: 'telephone',
+  photoUrl: 'photoUrl',
+  situationFinAnnee: 'situationFinAnnee',
+  situationFamiliale: 'situationFamiliale',
+  dateInscription: 'dateInscription',
+  ecoleOrigine: 'ecoleOrigine',
+  nationalite: 'nationalite',
+  responsableId: 'responsableId',
+  statut: 'statut',
+  isRelationContact: 'isRelationContact',
+  relationName: 'relationName',
+  relationTelephone: 'relationTelephone',
+  remarque: 'remarque',
+  schoolId: 'schoolId',
+  classeId: 'classeId',
+  parentId: 'parentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  deletedById: 'deletedById',
+  userId: 'userId'
+} as const
+
+export type EleveScalarFieldEnum = (typeof EleveScalarFieldEnum)[keyof typeof EleveScalarFieldEnum]
+
+
+export const HistoriqueClasseScalarFieldEnum = {
+  id: 'id',
+  eleveId: 'eleveId',
+  classeId: 'classeId',
+  anneeScolaire: 'anneeScolaire',
+  statutFinAnnee: 'statutFinAnnee',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type HistoriqueClasseScalarFieldEnum = (typeof HistoriqueClasseScalarFieldEnum)[keyof typeof HistoriqueClasseScalarFieldEnum]
+
+
+export const AdresseScalarFieldEnum = {
+  id: 'id',
+  fokontany: 'fokontany',
+  logement: 'logement',
+  ville: 'ville',
+  region: 'region',
+  pays: 'pays',
+  eleveId: 'eleveId',
+  parentId: 'parentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdresseScalarFieldEnum = (typeof AdresseScalarFieldEnum)[keyof typeof AdresseScalarFieldEnum]
+
+
+export const ProfessionEleveScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  lieu: 'lieu',
+  secteur: 'secteur',
+  eleveId: 'eleveId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProfessionEleveScalarFieldEnum = (typeof ProfessionEleveScalarFieldEnum)[keyof typeof ProfessionEleveScalarFieldEnum]
+
+
+export const DroitInscriptionScalarFieldEnum = {
+  id: 'id',
+  anneeScolaire: 'anneeScolaire',
+  montant: 'montant',
+  eleveId: 'eleveId',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DroitInscriptionScalarFieldEnum = (typeof DroitInscriptionScalarFieldEnum)[keyof typeof DroitInscriptionScalarFieldEnum]
+
+
+export const EcolageScalarFieldEnum = {
+  id: 'id',
+  anneeScolaire: 'anneeScolaire',
+  mois: 'mois',
+  montant: 'montant',
+  eleveId: 'eleveId',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EcolageScalarFieldEnum = (typeof EcolageScalarFieldEnum)[keyof typeof EcolageScalarFieldEnum]
 
 
 export const SortOrder = {

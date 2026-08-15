@@ -325,48 +325,6 @@ export type PresenceMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type PresenceCreateNestedManyWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput> | Prisma.PresenceCreateWithoutEleveInput[] | Prisma.PresenceUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutEleveInput | Prisma.PresenceCreateOrConnectWithoutEleveInput[]
-  createMany?: Prisma.PresenceCreateManyEleveInputEnvelope
-  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
-}
-
-export type PresenceUncheckedCreateNestedManyWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput> | Prisma.PresenceCreateWithoutEleveInput[] | Prisma.PresenceUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutEleveInput | Prisma.PresenceCreateOrConnectWithoutEleveInput[]
-  createMany?: Prisma.PresenceCreateManyEleveInputEnvelope
-  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
-}
-
-export type PresenceUpdateManyWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput> | Prisma.PresenceCreateWithoutEleveInput[] | Prisma.PresenceUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutEleveInput | Prisma.PresenceCreateOrConnectWithoutEleveInput[]
-  upsert?: Prisma.PresenceUpsertWithWhereUniqueWithoutEleveInput | Prisma.PresenceUpsertWithWhereUniqueWithoutEleveInput[]
-  createMany?: Prisma.PresenceCreateManyEleveInputEnvelope
-  set?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
-  disconnect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
-  delete?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
-  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
-  update?: Prisma.PresenceUpdateWithWhereUniqueWithoutEleveInput | Prisma.PresenceUpdateWithWhereUniqueWithoutEleveInput[]
-  updateMany?: Prisma.PresenceUpdateManyWithWhereWithoutEleveInput | Prisma.PresenceUpdateManyWithWhereWithoutEleveInput[]
-  deleteMany?: Prisma.PresenceScalarWhereInput | Prisma.PresenceScalarWhereInput[]
-}
-
-export type PresenceUncheckedUpdateManyWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput> | Prisma.PresenceCreateWithoutEleveInput[] | Prisma.PresenceUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutEleveInput | Prisma.PresenceCreateOrConnectWithoutEleveInput[]
-  upsert?: Prisma.PresenceUpsertWithWhereUniqueWithoutEleveInput | Prisma.PresenceUpsertWithWhereUniqueWithoutEleveInput[]
-  createMany?: Prisma.PresenceCreateManyEleveInputEnvelope
-  set?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
-  disconnect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
-  delete?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
-  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
-  update?: Prisma.PresenceUpdateWithWhereUniqueWithoutEleveInput | Prisma.PresenceUpdateWithWhereUniqueWithoutEleveInput[]
-  updateMany?: Prisma.PresenceUpdateManyWithWhereWithoutEleveInput | Prisma.PresenceUpdateManyWithWhereWithoutEleveInput[]
-  deleteMany?: Prisma.PresenceScalarWhereInput | Prisma.PresenceScalarWhereInput[]
-}
-
 export type PresenceCreateNestedManyWithoutAppelInput = {
   create?: Prisma.XOR<Prisma.PresenceCreateWithoutAppelInput, Prisma.PresenceUncheckedCreateWithoutAppelInput> | Prisma.PresenceCreateWithoutAppelInput[] | Prisma.PresenceUncheckedCreateWithoutAppelInput[]
   connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutAppelInput | Prisma.PresenceCreateOrConnectWithoutAppelInput[]
@@ -413,55 +371,46 @@ export type EnumStatutPresenceFieldUpdateOperationsInput = {
   set?: $Enums.StatutPresence
 }
 
-export type PresenceCreateWithoutEleveInput = {
-  id?: string
-  statut: $Enums.StatutPresence
-  updatedAt?: Date | string
-  appel: Prisma.AppelCreateNestedOneWithoutPresencesInput
+export type PresenceCreateNestedManyWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput> | Prisma.PresenceCreateWithoutEleveInput[] | Prisma.PresenceUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutEleveInput | Prisma.PresenceCreateOrConnectWithoutEleveInput[]
+  createMany?: Prisma.PresenceCreateManyEleveInputEnvelope
+  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
 }
 
-export type PresenceUncheckedCreateWithoutEleveInput = {
-  id?: string
-  appelId: string
-  statut: $Enums.StatutPresence
-  updatedAt?: Date | string
+export type PresenceUncheckedCreateNestedManyWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput> | Prisma.PresenceCreateWithoutEleveInput[] | Prisma.PresenceUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutEleveInput | Prisma.PresenceCreateOrConnectWithoutEleveInput[]
+  createMany?: Prisma.PresenceCreateManyEleveInputEnvelope
+  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
 }
 
-export type PresenceCreateOrConnectWithoutEleveInput = {
-  where: Prisma.PresenceWhereUniqueInput
-  create: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput>
+export type PresenceUpdateManyWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput> | Prisma.PresenceCreateWithoutEleveInput[] | Prisma.PresenceUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutEleveInput | Prisma.PresenceCreateOrConnectWithoutEleveInput[]
+  upsert?: Prisma.PresenceUpsertWithWhereUniqueWithoutEleveInput | Prisma.PresenceUpsertWithWhereUniqueWithoutEleveInput[]
+  createMany?: Prisma.PresenceCreateManyEleveInputEnvelope
+  set?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  disconnect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  delete?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  update?: Prisma.PresenceUpdateWithWhereUniqueWithoutEleveInput | Prisma.PresenceUpdateWithWhereUniqueWithoutEleveInput[]
+  updateMany?: Prisma.PresenceUpdateManyWithWhereWithoutEleveInput | Prisma.PresenceUpdateManyWithWhereWithoutEleveInput[]
+  deleteMany?: Prisma.PresenceScalarWhereInput | Prisma.PresenceScalarWhereInput[]
 }
 
-export type PresenceCreateManyEleveInputEnvelope = {
-  data: Prisma.PresenceCreateManyEleveInput | Prisma.PresenceCreateManyEleveInput[]
-  skipDuplicates?: boolean
-}
-
-export type PresenceUpsertWithWhereUniqueWithoutEleveInput = {
-  where: Prisma.PresenceWhereUniqueInput
-  update: Prisma.XOR<Prisma.PresenceUpdateWithoutEleveInput, Prisma.PresenceUncheckedUpdateWithoutEleveInput>
-  create: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput>
-}
-
-export type PresenceUpdateWithWhereUniqueWithoutEleveInput = {
-  where: Prisma.PresenceWhereUniqueInput
-  data: Prisma.XOR<Prisma.PresenceUpdateWithoutEleveInput, Prisma.PresenceUncheckedUpdateWithoutEleveInput>
-}
-
-export type PresenceUpdateManyWithWhereWithoutEleveInput = {
-  where: Prisma.PresenceScalarWhereInput
-  data: Prisma.XOR<Prisma.PresenceUpdateManyMutationInput, Prisma.PresenceUncheckedUpdateManyWithoutEleveInput>
-}
-
-export type PresenceScalarWhereInput = {
-  AND?: Prisma.PresenceScalarWhereInput | Prisma.PresenceScalarWhereInput[]
-  OR?: Prisma.PresenceScalarWhereInput[]
-  NOT?: Prisma.PresenceScalarWhereInput | Prisma.PresenceScalarWhereInput[]
-  id?: Prisma.StringFilter<"Presence"> | string
-  appelId?: Prisma.StringFilter<"Presence"> | string
-  eleveId?: Prisma.StringFilter<"Presence"> | string
-  statut?: Prisma.EnumStatutPresenceFilter<"Presence"> | $Enums.StatutPresence
-  updatedAt?: Prisma.DateTimeFilter<"Presence"> | Date | string
+export type PresenceUncheckedUpdateManyWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput> | Prisma.PresenceCreateWithoutEleveInput[] | Prisma.PresenceUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutEleveInput | Prisma.PresenceCreateOrConnectWithoutEleveInput[]
+  upsert?: Prisma.PresenceUpsertWithWhereUniqueWithoutEleveInput | Prisma.PresenceUpsertWithWhereUniqueWithoutEleveInput[]
+  createMany?: Prisma.PresenceCreateManyEleveInputEnvelope
+  set?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  disconnect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  delete?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  update?: Prisma.PresenceUpdateWithWhereUniqueWithoutEleveInput | Prisma.PresenceUpdateWithWhereUniqueWithoutEleveInput[]
+  updateMany?: Prisma.PresenceUpdateManyWithWhereWithoutEleveInput | Prisma.PresenceUpdateManyWithWhereWithoutEleveInput[]
+  deleteMany?: Prisma.PresenceScalarWhereInput | Prisma.PresenceScalarWhereInput[]
 }
 
 export type PresenceCreateWithoutAppelInput = {
@@ -504,32 +453,55 @@ export type PresenceUpdateManyWithWhereWithoutAppelInput = {
   data: Prisma.XOR<Prisma.PresenceUpdateManyMutationInput, Prisma.PresenceUncheckedUpdateManyWithoutAppelInput>
 }
 
-export type PresenceCreateManyEleveInput = {
+export type PresenceScalarWhereInput = {
+  AND?: Prisma.PresenceScalarWhereInput | Prisma.PresenceScalarWhereInput[]
+  OR?: Prisma.PresenceScalarWhereInput[]
+  NOT?: Prisma.PresenceScalarWhereInput | Prisma.PresenceScalarWhereInput[]
+  id?: Prisma.StringFilter<"Presence"> | string
+  appelId?: Prisma.StringFilter<"Presence"> | string
+  eleveId?: Prisma.StringFilter<"Presence"> | string
+  statut?: Prisma.EnumStatutPresenceFilter<"Presence"> | $Enums.StatutPresence
+  updatedAt?: Prisma.DateTimeFilter<"Presence"> | Date | string
+}
+
+export type PresenceCreateWithoutEleveInput = {
+  id?: string
+  statut: $Enums.StatutPresence
+  updatedAt?: Date | string
+  appel: Prisma.AppelCreateNestedOneWithoutPresencesInput
+}
+
+export type PresenceUncheckedCreateWithoutEleveInput = {
   id?: string
   appelId: string
   statut: $Enums.StatutPresence
   updatedAt?: Date | string
 }
 
-export type PresenceUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  appel?: Prisma.AppelUpdateOneRequiredWithoutPresencesNestedInput
+export type PresenceCreateOrConnectWithoutEleveInput = {
+  where: Prisma.PresenceWhereUniqueInput
+  create: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput>
 }
 
-export type PresenceUncheckedUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  appelId?: Prisma.StringFieldUpdateOperationsInput | string
-  statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type PresenceCreateManyEleveInputEnvelope = {
+  data: Prisma.PresenceCreateManyEleveInput | Prisma.PresenceCreateManyEleveInput[]
+  skipDuplicates?: boolean
 }
 
-export type PresenceUncheckedUpdateManyWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  appelId?: Prisma.StringFieldUpdateOperationsInput | string
-  statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type PresenceUpsertWithWhereUniqueWithoutEleveInput = {
+  where: Prisma.PresenceWhereUniqueInput
+  update: Prisma.XOR<Prisma.PresenceUpdateWithoutEleveInput, Prisma.PresenceUncheckedUpdateWithoutEleveInput>
+  create: Prisma.XOR<Prisma.PresenceCreateWithoutEleveInput, Prisma.PresenceUncheckedCreateWithoutEleveInput>
+}
+
+export type PresenceUpdateWithWhereUniqueWithoutEleveInput = {
+  where: Prisma.PresenceWhereUniqueInput
+  data: Prisma.XOR<Prisma.PresenceUpdateWithoutEleveInput, Prisma.PresenceUncheckedUpdateWithoutEleveInput>
+}
+
+export type PresenceUpdateManyWithWhereWithoutEleveInput = {
+  where: Prisma.PresenceScalarWhereInput
+  data: Prisma.XOR<Prisma.PresenceUpdateManyMutationInput, Prisma.PresenceUncheckedUpdateManyWithoutEleveInput>
 }
 
 export type PresenceCreateManyAppelInput = {
@@ -556,6 +528,34 @@ export type PresenceUncheckedUpdateWithoutAppelInput = {
 export type PresenceUncheckedUpdateManyWithoutAppelInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
+  statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PresenceCreateManyEleveInput = {
+  id?: string
+  appelId: string
+  statut: $Enums.StatutPresence
+  updatedAt?: Date | string
+}
+
+export type PresenceUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appel?: Prisma.AppelUpdateOneRequiredWithoutPresencesNestedInput
+}
+
+export type PresenceUncheckedUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  appelId?: Prisma.StringFieldUpdateOperationsInput | string
+  statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PresenceUncheckedUpdateManyWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  appelId?: Prisma.StringFieldUpdateOperationsInput | string
   statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }

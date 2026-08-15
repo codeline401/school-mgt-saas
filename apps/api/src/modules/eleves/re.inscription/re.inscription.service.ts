@@ -35,8 +35,17 @@ export class InscriptionService {
       throw new Error("INVALID_CLASSE_SCHOOL_MISMATCH");
     }
 
+    const dernierEleve = await prisma.eleve.findFirst({
+      where: { schoolId: targetSchoolId },
+      orderBy: { matricule: "desc" },
+      select: { matricule: true },
+    });
+
+    const prochainMatricule = (dernierEleve?.matricule ?? 0) + 1;
+
     return await prisma.eleve.create({
       data: {
+        matricule: prochainMatricule,
         nom: data.nom,
         prenom: data.prenom,
         dateNaissance: data.dateNaissance ? new Date(data.dateNaissance) : null,
