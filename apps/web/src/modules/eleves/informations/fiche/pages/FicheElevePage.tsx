@@ -50,12 +50,14 @@ function formatDate(date?: string | null): string {
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: Formater les montants
 // ═══════════════════════════════════════════════════════════════════
-function formatMontant(montant: number): string {
+function formatMontant(montant: number | string | null | undefined): string {
+  const parsed = Number(montant ?? 0);
+
   return new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency: "MGA",
     minimumFractionDigits: 0,
-  }).format(montant);
+  }).format(Number.isFinite(parsed) ? parsed : 0);
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -683,9 +685,10 @@ export default function FicheElevePage() {
                   </thead>
                   <tbody>
                     {ecolages.map((ecolage: (typeof ecolages)[number]) => {
+                      const moisNumber = Number(ecolage.mois ?? 0);
                       const moisNom = new Date(
                         2024,
-                        ecolage.mois - 1,
+                        Number.isFinite(moisNumber) ? moisNumber - 1 : 0,
                       ).toLocaleDateString("fr-FR", { month: "long" });
                       return (
                         <tr key={ecolage.id}>
