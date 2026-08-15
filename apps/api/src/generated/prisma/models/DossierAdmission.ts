@@ -603,6 +603,10 @@ export type DossierAdmissionUncheckedUpdateManyWithoutSchoolNestedInput = {
   deleteMany?: Prisma.DossierAdmissionScalarWhereInput | Prisma.DossierAdmissionScalarWhereInput[]
 }
 
+export type EnumStatutAdmissionFieldUpdateOperationsInput = {
+  set?: $Enums.StatutAdmission
+}
+
 export type DossierAdmissionCreateNestedManyWithoutEleveInput = {
   create?: Prisma.XOR<Prisma.DossierAdmissionCreateWithoutEleveInput, Prisma.DossierAdmissionUncheckedCreateWithoutEleveInput> | Prisma.DossierAdmissionCreateWithoutEleveInput[] | Prisma.DossierAdmissionUncheckedCreateWithoutEleveInput[]
   connectOrCreate?: Prisma.DossierAdmissionCreateOrConnectWithoutEleveInput | Prisma.DossierAdmissionCreateOrConnectWithoutEleveInput[]
@@ -643,10 +647,6 @@ export type DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput = {
   update?: Prisma.DossierAdmissionUpdateWithWhereUniqueWithoutEleveInput | Prisma.DossierAdmissionUpdateWithWhereUniqueWithoutEleveInput[]
   updateMany?: Prisma.DossierAdmissionUpdateManyWithWhereWithoutEleveInput | Prisma.DossierAdmissionUpdateManyWithWhereWithoutEleveInput[]
   deleteMany?: Prisma.DossierAdmissionScalarWhereInput | Prisma.DossierAdmissionScalarWhereInput[]
-}
-
-export type EnumStatutAdmissionFieldUpdateOperationsInput = {
-  set?: $Enums.StatutAdmission
 }
 
 export type DossierAdmissionCreateWithoutSchoolInput = {

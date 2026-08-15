@@ -67,6 +67,10 @@ function App() {
             >
               <Route path="/eleves" element={<ElevesPage />} />
               <Route path="/eleves/:id" element={<EleveProfilPage />} />
+              <Route
+                path="/eleves/informations/:id"
+                element={<GestionElevesPage />}
+              />
               <Route path="/eleves/informations" element={<GestionElevesPage />} />
               <Route path="/eleves/ecolage" element={<GestionElevesPage />} />
               <Route path="/eleves/absences" element={<GestionElevesPage />} />

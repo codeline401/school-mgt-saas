@@ -425,3 +425,45 @@ export const StatutParticipant = {
 } as const
 
 export type StatutParticipant = (typeof StatutParticipant)[keyof typeof StatutParticipant]
+
+
+export const StatutEleve = {
+  ACTIF: 'ACTIF',
+  INACTIF: 'INACTIF',
+  INSCRIT: 'INSCRIT',
+  SUSPENDU: 'SUSPENDU',
+  DIPLOME: 'DIPLOME',
+  ABANDON: 'ABANDON'
+} as const
+
+export type StatutEleve = (typeof StatutEleve)[keyof typeof StatutEleve]
+
+
+export const Genre = {
+  MASCULIN: 'MASCULIN',
+  FEMININ: 'FEMININ'
+} as const
+
+export type Genre = (typeof Genre)[keyof typeof Genre]
+
+
+export const StatutFinAnnee = {
+  EN_COURS: 'EN_COURS',
+  ADMIS: 'ADMIS',
+  REDOUBLE: 'REDOUBLE',
+  RENVOYE: 'RENVOYE',
+  REORIENTE: 'REORIENTE',
+  QUITTE: 'QUITTE'
+} as const
+
+export type StatutFinAnnee = (typeof StatutFinAnnee)[keyof typeof StatutFinAnnee]
+
+
+export const SituationFamiliale = {
+  CELIBATAIRE: 'CELIBATAIRE',
+  MARIE: 'MARIE',
+  DIVORCE: 'DIVORCE',
+  AUTRE: 'AUTRE'
+} as const
+
+export type SituationFamiliale = (typeof SituationFamiliale)[keyof typeof SituationFamiliale]

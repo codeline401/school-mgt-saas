@@ -20,100 +20,214 @@ export type EleveModel = runtime.Types.Result.DefaultSelection<Prisma.$ElevePayl
 
 export type AggregateEleve = {
   _count: EleveCountAggregateOutputType | null
+  _avg: EleveAvgAggregateOutputType | null
+  _sum: EleveSumAggregateOutputType | null
   _min: EleveMinAggregateOutputType | null
   _max: EleveMaxAggregateOutputType | null
 }
 
+export type EleveAvgAggregateOutputType = {
+  matricule: number | null
+}
+
+export type EleveSumAggregateOutputType = {
+  matricule: number | null
+}
+
 export type EleveMinAggregateOutputType = {
   id: string | null
+  matricule: number | null
   nom: string | null
   prenom: string | null
+  genre: $Enums.Genre | null
+  dateNaissance: Date | null
+  lieuNaissance: string | null
+  telephone: string | null
+  photoUrl: string | null
+  situationFinAnnee: $Enums.StatutFinAnnee | null
+  situationFamiliale: $Enums.SituationFamiliale | null
+  dateInscription: Date | null
+  ecoleOrigine: string | null
+  nationalite: string | null
+  responsableId: string | null
+  statut: $Enums.StatutEleve | null
+  isRelationContact: boolean | null
+  relationName: string | null
+  relationTelephone: string | null
+  remarque: string | null
   schoolId: string | null
   classeId: string | null
+  parentId: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  dateNaissance: Date | null
-  telephone: string | null
-  adresse: string | null
-  photoUrl: string | null
-  parentId: string | null
+  deletedAt: Date | null
+  deletedById: string | null
+  userId: string | null
 }
 
 export type EleveMaxAggregateOutputType = {
   id: string | null
+  matricule: number | null
   nom: string | null
   prenom: string | null
+  genre: $Enums.Genre | null
+  dateNaissance: Date | null
+  lieuNaissance: string | null
+  telephone: string | null
+  photoUrl: string | null
+  situationFinAnnee: $Enums.StatutFinAnnee | null
+  situationFamiliale: $Enums.SituationFamiliale | null
+  dateInscription: Date | null
+  ecoleOrigine: string | null
+  nationalite: string | null
+  responsableId: string | null
+  statut: $Enums.StatutEleve | null
+  isRelationContact: boolean | null
+  relationName: string | null
+  relationTelephone: string | null
+  remarque: string | null
   schoolId: string | null
   classeId: string | null
+  parentId: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  dateNaissance: Date | null
-  telephone: string | null
-  adresse: string | null
-  photoUrl: string | null
-  parentId: string | null
+  deletedAt: Date | null
+  deletedById: string | null
+  userId: string | null
 }
 
 export type EleveCountAggregateOutputType = {
   id: number
+  matricule: number
   nom: number
   prenom: number
+  genre: number
+  dateNaissance: number
+  lieuNaissance: number
+  telephone: number
+  photoUrl: number
+  situationFinAnnee: number
+  situationFamiliale: number
+  dateInscription: number
+  ecoleOrigine: number
+  nationalite: number
+  responsableId: number
+  statut: number
+  isRelationContact: number
+  relationName: number
+  relationTelephone: number
+  remarque: number
   schoolId: number
   classeId: number
+  parentId: number
   createdAt: number
   updatedAt: number
-  dateNaissance: number
-  telephone: number
-  adresse: number
-  photoUrl: number
-  parentId: number
+  deletedAt: number
+  deletedById: number
+  userId: number
   _all: number
 }
 
 
+export type EleveAvgAggregateInputType = {
+  matricule?: true
+}
+
+export type EleveSumAggregateInputType = {
+  matricule?: true
+}
+
 export type EleveMinAggregateInputType = {
   id?: true
+  matricule?: true
   nom?: true
   prenom?: true
+  genre?: true
+  dateNaissance?: true
+  lieuNaissance?: true
+  telephone?: true
+  photoUrl?: true
+  situationFinAnnee?: true
+  situationFamiliale?: true
+  dateInscription?: true
+  ecoleOrigine?: true
+  nationalite?: true
+  responsableId?: true
+  statut?: true
+  isRelationContact?: true
+  relationName?: true
+  relationTelephone?: true
+  remarque?: true
   schoolId?: true
   classeId?: true
+  parentId?: true
   createdAt?: true
   updatedAt?: true
-  dateNaissance?: true
-  telephone?: true
-  adresse?: true
-  photoUrl?: true
-  parentId?: true
+  deletedAt?: true
+  deletedById?: true
+  userId?: true
 }
 
 export type EleveMaxAggregateInputType = {
   id?: true
+  matricule?: true
   nom?: true
   prenom?: true
+  genre?: true
+  dateNaissance?: true
+  lieuNaissance?: true
+  telephone?: true
+  photoUrl?: true
+  situationFinAnnee?: true
+  situationFamiliale?: true
+  dateInscription?: true
+  ecoleOrigine?: true
+  nationalite?: true
+  responsableId?: true
+  statut?: true
+  isRelationContact?: true
+  relationName?: true
+  relationTelephone?: true
+  remarque?: true
   schoolId?: true
   classeId?: true
+  parentId?: true
   createdAt?: true
   updatedAt?: true
-  dateNaissance?: true
-  telephone?: true
-  adresse?: true
-  photoUrl?: true
-  parentId?: true
+  deletedAt?: true
+  deletedById?: true
+  userId?: true
 }
 
 export type EleveCountAggregateInputType = {
   id?: true
+  matricule?: true
   nom?: true
   prenom?: true
+  genre?: true
+  dateNaissance?: true
+  lieuNaissance?: true
+  telephone?: true
+  photoUrl?: true
+  situationFinAnnee?: true
+  situationFamiliale?: true
+  dateInscription?: true
+  ecoleOrigine?: true
+  nationalite?: true
+  responsableId?: true
+  statut?: true
+  isRelationContact?: true
+  relationName?: true
+  relationTelephone?: true
+  remarque?: true
   schoolId?: true
   classeId?: true
+  parentId?: true
   createdAt?: true
   updatedAt?: true
-  dateNaissance?: true
-  telephone?: true
-  adresse?: true
-  photoUrl?: true
-  parentId?: true
+  deletedAt?: true
+  deletedById?: true
+  userId?: true
   _all?: true
 }
 
@@ -155,6 +269,18 @@ export type EleveAggregateArgs<ExtArgs extends runtime.Types.Extensions.Internal
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: EleveAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: EleveSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: EleveMinAggregateInputType
@@ -185,24 +311,44 @@ export type EleveGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   _count?: EleveCountAggregateInputType | true
+  _avg?: EleveAvgAggregateInputType
+  _sum?: EleveSumAggregateInputType
   _min?: EleveMinAggregateInputType
   _max?: EleveMaxAggregateInputType
 }
 
 export type EleveGroupByOutputType = {
   id: string
+  matricule: number
   nom: string
   prenom: string
+  genre: $Enums.Genre | null
+  dateNaissance: Date | null
+  lieuNaissance: string | null
+  telephone: string | null
+  photoUrl: string | null
+  situationFinAnnee: $Enums.StatutFinAnnee | null
+  situationFamiliale: $Enums.SituationFamiliale | null
+  dateInscription: Date | null
+  ecoleOrigine: string | null
+  nationalite: string | null
+  responsableId: string | null
+  statut: $Enums.StatutEleve
+  isRelationContact: boolean
+  relationName: string | null
+  relationTelephone: string | null
+  remarque: string | null
   schoolId: string
-  classeId: string
+  classeId: string | null
+  parentId: string | null
   createdAt: Date
   updatedAt: Date
-  dateNaissance: Date | null
-  telephone: string | null
-  adresse: string | null
-  photoUrl: string | null
-  parentId: string | null
+  deletedAt: Date | null
+  deletedById: string | null
+  userId: string | null
   _count: EleveCountAggregateOutputType | null
+  _avg: EleveAvgAggregateOutputType | null
+  _sum: EleveSumAggregateOutputType | null
   _min: EleveMinAggregateOutputType | null
   _max: EleveMaxAggregateOutputType | null
 }
@@ -227,21 +373,42 @@ export type EleveWhereInput = {
   OR?: Prisma.EleveWhereInput[]
   NOT?: Prisma.EleveWhereInput | Prisma.EleveWhereInput[]
   id?: Prisma.StringFilter<"Eleve"> | string
+  matricule?: Prisma.IntFilter<"Eleve"> | number
   nom?: Prisma.StringFilter<"Eleve"> | string
   prenom?: Prisma.StringFilter<"Eleve"> | string
+  genre?: Prisma.EnumGenreNullableFilter<"Eleve"> | $Enums.Genre | null
+  dateNaissance?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
+  lieuNaissance?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  telephone?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  photoUrl?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  situationFinAnnee?: Prisma.EnumStatutFinAnneeNullableFilter<"Eleve"> | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.EnumSituationFamilialeNullableFilter<"Eleve"> | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
+  ecoleOrigine?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  nationalite?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  responsableId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  statut?: Prisma.EnumStatutEleveFilter<"Eleve"> | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFilter<"Eleve"> | boolean
+  relationName?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  relationTelephone?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  remarque?: Prisma.StringNullableFilter<"Eleve"> | string | null
   schoolId?: Prisma.StringFilter<"Eleve"> | string
-  classeId?: Prisma.StringFilter<"Eleve"> | string
+  classeId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  parentId?: Prisma.StringNullableFilter<"Eleve"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Eleve"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Eleve"> | Date | string
-  dateNaissance?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
-  telephone?: Prisma.StringNullableFilter<"Eleve"> | string | null
-  adresse?: Prisma.StringNullableFilter<"Eleve"> | string | null
-  photoUrl?: Prisma.StringNullableFilter<"Eleve"> | string | null
-  parentId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
+  deletedById?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  userId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  adresse?: Prisma.XOR<Prisma.AdresseNullableScalarRelationFilter, Prisma.AdresseWhereInput> | null
+  professionEleve?: Prisma.XOR<Prisma.ProfessionEleveNullableScalarRelationFilter, Prisma.ProfessionEleveWhereInput> | null
+  responsable?: Prisma.XOR<Prisma.ParentNullableScalarRelationFilter, Prisma.ParentWhereInput> | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
-  classe?: Prisma.XOR<Prisma.ClasseScalarRelationFilter, Prisma.ClasseWhereInput>
-  admissions?: Prisma.DossierAdmissionListRelationFilter
+  classe?: Prisma.XOR<Prisma.ClasseNullableScalarRelationFilter, Prisma.ClasseWhereInput> | null
+  historiqueClasses?: Prisma.HistoriqueClasseListRelationFilter
   parent?: Prisma.XOR<Prisma.ParentNullableScalarRelationFilter, Prisma.ParentWhereInput> | null
+  deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  admissions?: Prisma.DossierAdmissionListRelationFilter
   notes?: Prisma.NoteListRelationFilter
   presences?: Prisma.PresenceListRelationFilter
   soumissions?: Prisma.SoumissionListRelationFilter
@@ -249,25 +416,49 @@ export type EleveWhereInput = {
   affectationTransports?: Prisma.AffectationTransportListRelationFilter
   participantSorties?: Prisma.ParticipantSortieListRelationFilter
   autorisationParents?: Prisma.AutorisationParentListRelationFilter
+  ecolages?: Prisma.EcolageListRelationFilter
+  droitInscriptions?: Prisma.DroitInscriptionListRelationFilter
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type EleveOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  matricule?: Prisma.SortOrder
   nom?: Prisma.SortOrder
   prenom?: Prisma.SortOrder
+  genre?: Prisma.SortOrderInput | Prisma.SortOrder
+  dateNaissance?: Prisma.SortOrderInput | Prisma.SortOrder
+  lieuNaissance?: Prisma.SortOrderInput | Prisma.SortOrder
+  telephone?: Prisma.SortOrderInput | Prisma.SortOrder
+  photoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  situationFinAnnee?: Prisma.SortOrderInput | Prisma.SortOrder
+  situationFamiliale?: Prisma.SortOrderInput | Prisma.SortOrder
+  dateInscription?: Prisma.SortOrderInput | Prisma.SortOrder
+  ecoleOrigine?: Prisma.SortOrderInput | Prisma.SortOrder
+  nationalite?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsableId?: Prisma.SortOrderInput | Prisma.SortOrder
+  statut?: Prisma.SortOrder
+  isRelationContact?: Prisma.SortOrder
+  relationName?: Prisma.SortOrderInput | Prisma.SortOrder
+  relationTelephone?: Prisma.SortOrderInput | Prisma.SortOrder
+  remarque?: Prisma.SortOrderInput | Prisma.SortOrder
   schoolId?: Prisma.SortOrder
-  classeId?: Prisma.SortOrder
+  classeId?: Prisma.SortOrderInput | Prisma.SortOrder
+  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  dateNaissance?: Prisma.SortOrderInput | Prisma.SortOrder
-  telephone?: Prisma.SortOrderInput | Prisma.SortOrder
-  adresse?: Prisma.SortOrderInput | Prisma.SortOrder
-  photoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  adresse?: Prisma.AdresseOrderByWithRelationInput
+  professionEleve?: Prisma.ProfessionEleveOrderByWithRelationInput
+  responsable?: Prisma.ParentOrderByWithRelationInput
   school?: Prisma.SchoolOrderByWithRelationInput
   classe?: Prisma.ClasseOrderByWithRelationInput
-  admissions?: Prisma.DossierAdmissionOrderByRelationAggregateInput
+  historiqueClasses?: Prisma.HistoriqueClasseOrderByRelationAggregateInput
   parent?: Prisma.ParentOrderByWithRelationInput
+  deletedBy?: Prisma.UserOrderByWithRelationInput
+  admissions?: Prisma.DossierAdmissionOrderByRelationAggregateInput
   notes?: Prisma.NoteOrderByRelationAggregateInput
   presences?: Prisma.PresenceOrderByRelationAggregateInput
   soumissions?: Prisma.SoumissionOrderByRelationAggregateInput
@@ -275,29 +466,55 @@ export type EleveOrderByWithRelationInput = {
   affectationTransports?: Prisma.AffectationTransportOrderByRelationAggregateInput
   participantSorties?: Prisma.ParticipantSortieOrderByRelationAggregateInput
   autorisationParents?: Prisma.AutorisationParentOrderByRelationAggregateInput
+  ecolages?: Prisma.EcolageOrderByRelationAggregateInput
+  droitInscriptions?: Prisma.DroitInscriptionOrderByRelationAggregateInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type EleveWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  schoolId_matricule?: Prisma.EleveSchoolIdMatriculeCompoundUniqueInput
+  schoolId_nom_prenom_dateNaissance?: Prisma.EleveSchoolIdNomPrenomDateNaissanceCompoundUniqueInput
   schoolId_nom_prenom?: Prisma.EleveSchoolIdNomPrenomCompoundUniqueInput
   AND?: Prisma.EleveWhereInput | Prisma.EleveWhereInput[]
   OR?: Prisma.EleveWhereInput[]
   NOT?: Prisma.EleveWhereInput | Prisma.EleveWhereInput[]
+  matricule?: Prisma.IntFilter<"Eleve"> | number
   nom?: Prisma.StringFilter<"Eleve"> | string
   prenom?: Prisma.StringFilter<"Eleve"> | string
+  genre?: Prisma.EnumGenreNullableFilter<"Eleve"> | $Enums.Genre | null
+  dateNaissance?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
+  lieuNaissance?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  telephone?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  photoUrl?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  situationFinAnnee?: Prisma.EnumStatutFinAnneeNullableFilter<"Eleve"> | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.EnumSituationFamilialeNullableFilter<"Eleve"> | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
+  ecoleOrigine?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  nationalite?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  responsableId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  statut?: Prisma.EnumStatutEleveFilter<"Eleve"> | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFilter<"Eleve"> | boolean
+  relationName?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  relationTelephone?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  remarque?: Prisma.StringNullableFilter<"Eleve"> | string | null
   schoolId?: Prisma.StringFilter<"Eleve"> | string
-  classeId?: Prisma.StringFilter<"Eleve"> | string
+  classeId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  parentId?: Prisma.StringNullableFilter<"Eleve"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Eleve"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Eleve"> | Date | string
-  dateNaissance?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
-  telephone?: Prisma.StringNullableFilter<"Eleve"> | string | null
-  adresse?: Prisma.StringNullableFilter<"Eleve"> | string | null
-  photoUrl?: Prisma.StringNullableFilter<"Eleve"> | string | null
-  parentId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
+  deletedById?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  userId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  adresse?: Prisma.XOR<Prisma.AdresseNullableScalarRelationFilter, Prisma.AdresseWhereInput> | null
+  professionEleve?: Prisma.XOR<Prisma.ProfessionEleveNullableScalarRelationFilter, Prisma.ProfessionEleveWhereInput> | null
+  responsable?: Prisma.XOR<Prisma.ParentNullableScalarRelationFilter, Prisma.ParentWhereInput> | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
-  classe?: Prisma.XOR<Prisma.ClasseScalarRelationFilter, Prisma.ClasseWhereInput>
-  admissions?: Prisma.DossierAdmissionListRelationFilter
+  classe?: Prisma.XOR<Prisma.ClasseNullableScalarRelationFilter, Prisma.ClasseWhereInput> | null
+  historiqueClasses?: Prisma.HistoriqueClasseListRelationFilter
   parent?: Prisma.XOR<Prisma.ParentNullableScalarRelationFilter, Prisma.ParentWhereInput> | null
+  deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  admissions?: Prisma.DossierAdmissionListRelationFilter
   notes?: Prisma.NoteListRelationFilter
   presences?: Prisma.PresenceListRelationFilter
   soumissions?: Prisma.SoumissionListRelationFilter
@@ -305,24 +522,45 @@ export type EleveWhereUniqueInput = Prisma.AtLeast<{
   affectationTransports?: Prisma.AffectationTransportListRelationFilter
   participantSorties?: Prisma.ParticipantSortieListRelationFilter
   autorisationParents?: Prisma.AutorisationParentListRelationFilter
-}, "id" | "schoolId_nom_prenom">
+  ecolages?: Prisma.EcolageListRelationFilter
+  droitInscriptions?: Prisma.DroitInscriptionListRelationFilter
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+}, "id" | "schoolId_matricule" | "schoolId_nom_prenom_dateNaissance" | "schoolId_nom_prenom">
 
 export type EleveOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  matricule?: Prisma.SortOrder
   nom?: Prisma.SortOrder
   prenom?: Prisma.SortOrder
+  genre?: Prisma.SortOrderInput | Prisma.SortOrder
+  dateNaissance?: Prisma.SortOrderInput | Prisma.SortOrder
+  lieuNaissance?: Prisma.SortOrderInput | Prisma.SortOrder
+  telephone?: Prisma.SortOrderInput | Prisma.SortOrder
+  photoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  situationFinAnnee?: Prisma.SortOrderInput | Prisma.SortOrder
+  situationFamiliale?: Prisma.SortOrderInput | Prisma.SortOrder
+  dateInscription?: Prisma.SortOrderInput | Prisma.SortOrder
+  ecoleOrigine?: Prisma.SortOrderInput | Prisma.SortOrder
+  nationalite?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsableId?: Prisma.SortOrderInput | Prisma.SortOrder
+  statut?: Prisma.SortOrder
+  isRelationContact?: Prisma.SortOrder
+  relationName?: Prisma.SortOrderInput | Prisma.SortOrder
+  relationTelephone?: Prisma.SortOrderInput | Prisma.SortOrder
+  remarque?: Prisma.SortOrderInput | Prisma.SortOrder
   schoolId?: Prisma.SortOrder
-  classeId?: Prisma.SortOrder
+  classeId?: Prisma.SortOrderInput | Prisma.SortOrder
+  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  dateNaissance?: Prisma.SortOrderInput | Prisma.SortOrder
-  telephone?: Prisma.SortOrderInput | Prisma.SortOrder
-  adresse?: Prisma.SortOrderInput | Prisma.SortOrder
-  photoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.EleveCountOrderByAggregateInput
+  _avg?: Prisma.EleveAvgOrderByAggregateInput
   _max?: Prisma.EleveMaxOrderByAggregateInput
   _min?: Prisma.EleveMinOrderByAggregateInput
+  _sum?: Prisma.EleveSumOrderByAggregateInput
 }
 
 export type EleveScalarWhereWithAggregatesInput = {
@@ -330,33 +568,67 @@ export type EleveScalarWhereWithAggregatesInput = {
   OR?: Prisma.EleveScalarWhereWithAggregatesInput[]
   NOT?: Prisma.EleveScalarWhereWithAggregatesInput | Prisma.EleveScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Eleve"> | string
+  matricule?: Prisma.IntWithAggregatesFilter<"Eleve"> | number
   nom?: Prisma.StringWithAggregatesFilter<"Eleve"> | string
   prenom?: Prisma.StringWithAggregatesFilter<"Eleve"> | string
+  genre?: Prisma.EnumGenreNullableWithAggregatesFilter<"Eleve"> | $Enums.Genre | null
+  dateNaissance?: Prisma.DateTimeNullableWithAggregatesFilter<"Eleve"> | Date | string | null
+  lieuNaissance?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
+  telephone?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
+  photoUrl?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
+  situationFinAnnee?: Prisma.EnumStatutFinAnneeNullableWithAggregatesFilter<"Eleve"> | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.EnumSituationFamilialeNullableWithAggregatesFilter<"Eleve"> | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.DateTimeNullableWithAggregatesFilter<"Eleve"> | Date | string | null
+  ecoleOrigine?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
+  nationalite?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
+  responsableId?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
+  statut?: Prisma.EnumStatutEleveWithAggregatesFilter<"Eleve"> | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolWithAggregatesFilter<"Eleve"> | boolean
+  relationName?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
+  relationTelephone?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
+  remarque?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
   schoolId?: Prisma.StringWithAggregatesFilter<"Eleve"> | string
-  classeId?: Prisma.StringWithAggregatesFilter<"Eleve"> | string
+  classeId?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
+  parentId?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Eleve"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Eleve"> | Date | string
-  dateNaissance?: Prisma.DateTimeNullableWithAggregatesFilter<"Eleve"> | Date | string | null
-  telephone?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
-  adresse?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
-  photoUrl?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
-  parentId?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Eleve"> | Date | string | null
+  deletedById?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
+  userId?: Prisma.StringNullableWithAggregatesFilter<"Eleve"> | string | null
 }
 
 export type EleveCreateInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
   school: Prisma.SchoolCreateNestedOneWithoutElevesInput
-  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
-  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
@@ -364,21 +636,43 @@ export type EleveCreateInput = {
   affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
 }
 
 export type EleveUncheckedCreateInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
@@ -387,22 +681,42 @@ export type EleveUncheckedCreateInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
-  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
@@ -410,21 +724,43 @@ export type EleveUpdateInput = {
   affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
@@ -433,48 +769,95 @@ export type EleveUncheckedUpdateInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateManyInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
 }
 
 export type EleveUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EleveUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EleveListRelationFilter = {
@@ -487,57 +870,6 @@ export type EleveOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type EleveSchoolIdNomPrenomCompoundUniqueInput = {
-  schoolId: string
-  nom: string
-  prenom: string
-}
-
-export type EleveCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  nom?: Prisma.SortOrder
-  prenom?: Prisma.SortOrder
-  schoolId?: Prisma.SortOrder
-  classeId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-  dateNaissance?: Prisma.SortOrder
-  telephone?: Prisma.SortOrder
-  adresse?: Prisma.SortOrder
-  photoUrl?: Prisma.SortOrder
-  parentId?: Prisma.SortOrder
-}
-
-export type EleveMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  nom?: Prisma.SortOrder
-  prenom?: Prisma.SortOrder
-  schoolId?: Prisma.SortOrder
-  classeId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-  dateNaissance?: Prisma.SortOrder
-  telephone?: Prisma.SortOrder
-  adresse?: Prisma.SortOrder
-  photoUrl?: Prisma.SortOrder
-  parentId?: Prisma.SortOrder
-}
-
-export type EleveMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  nom?: Prisma.SortOrder
-  prenom?: Prisma.SortOrder
-  schoolId?: Prisma.SortOrder
-  classeId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-  dateNaissance?: Prisma.SortOrder
-  telephone?: Prisma.SortOrder
-  adresse?: Prisma.SortOrder
-  photoUrl?: Prisma.SortOrder
-  parentId?: Prisma.SortOrder
-}
-
 export type EleveNullableScalarRelationFilter = {
   is?: Prisma.EleveWhereInput | null
   isNot?: Prisma.EleveWhereInput | null
@@ -546,6 +878,209 @@ export type EleveNullableScalarRelationFilter = {
 export type EleveScalarRelationFilter = {
   is?: Prisma.EleveWhereInput
   isNot?: Prisma.EleveWhereInput
+}
+
+export type EleveSchoolIdMatriculeCompoundUniqueInput = {
+  schoolId: string
+  matricule: number
+}
+
+export type EleveSchoolIdNomPrenomDateNaissanceCompoundUniqueInput = {
+  schoolId: string
+  nom: string
+  prenom: string
+  dateNaissance: Date | string
+}
+
+export type EleveSchoolIdNomPrenomCompoundUniqueInput = {
+  schoolId: string
+  nom: string
+  prenom: string
+}
+
+export type EleveCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  matricule?: Prisma.SortOrder
+  nom?: Prisma.SortOrder
+  prenom?: Prisma.SortOrder
+  genre?: Prisma.SortOrder
+  dateNaissance?: Prisma.SortOrder
+  lieuNaissance?: Prisma.SortOrder
+  telephone?: Prisma.SortOrder
+  photoUrl?: Prisma.SortOrder
+  situationFinAnnee?: Prisma.SortOrder
+  situationFamiliale?: Prisma.SortOrder
+  dateInscription?: Prisma.SortOrder
+  ecoleOrigine?: Prisma.SortOrder
+  nationalite?: Prisma.SortOrder
+  responsableId?: Prisma.SortOrder
+  statut?: Prisma.SortOrder
+  isRelationContact?: Prisma.SortOrder
+  relationName?: Prisma.SortOrder
+  relationTelephone?: Prisma.SortOrder
+  remarque?: Prisma.SortOrder
+  schoolId?: Prisma.SortOrder
+  classeId?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+}
+
+export type EleveAvgOrderByAggregateInput = {
+  matricule?: Prisma.SortOrder
+}
+
+export type EleveMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  matricule?: Prisma.SortOrder
+  nom?: Prisma.SortOrder
+  prenom?: Prisma.SortOrder
+  genre?: Prisma.SortOrder
+  dateNaissance?: Prisma.SortOrder
+  lieuNaissance?: Prisma.SortOrder
+  telephone?: Prisma.SortOrder
+  photoUrl?: Prisma.SortOrder
+  situationFinAnnee?: Prisma.SortOrder
+  situationFamiliale?: Prisma.SortOrder
+  dateInscription?: Prisma.SortOrder
+  ecoleOrigine?: Prisma.SortOrder
+  nationalite?: Prisma.SortOrder
+  responsableId?: Prisma.SortOrder
+  statut?: Prisma.SortOrder
+  isRelationContact?: Prisma.SortOrder
+  relationName?: Prisma.SortOrder
+  relationTelephone?: Prisma.SortOrder
+  remarque?: Prisma.SortOrder
+  schoolId?: Prisma.SortOrder
+  classeId?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+}
+
+export type EleveMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  matricule?: Prisma.SortOrder
+  nom?: Prisma.SortOrder
+  prenom?: Prisma.SortOrder
+  genre?: Prisma.SortOrder
+  dateNaissance?: Prisma.SortOrder
+  lieuNaissance?: Prisma.SortOrder
+  telephone?: Prisma.SortOrder
+  photoUrl?: Prisma.SortOrder
+  situationFinAnnee?: Prisma.SortOrder
+  situationFamiliale?: Prisma.SortOrder
+  dateInscription?: Prisma.SortOrder
+  ecoleOrigine?: Prisma.SortOrder
+  nationalite?: Prisma.SortOrder
+  responsableId?: Prisma.SortOrder
+  statut?: Prisma.SortOrder
+  isRelationContact?: Prisma.SortOrder
+  relationName?: Prisma.SortOrder
+  relationTelephone?: Prisma.SortOrder
+  remarque?: Prisma.SortOrder
+  schoolId?: Prisma.SortOrder
+  classeId?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+}
+
+export type EleveSumOrderByAggregateInput = {
+  matricule?: Prisma.SortOrder
+}
+
+export type EleveCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutUserInput, Prisma.EleveUncheckedCreateWithoutUserInput> | Prisma.EleveCreateWithoutUserInput[] | Prisma.EleveUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutUserInput | Prisma.EleveCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.EleveCreateManyUserInputEnvelope
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+}
+
+export type EleveCreateNestedManyWithoutDeletedByInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutDeletedByInput, Prisma.EleveUncheckedCreateWithoutDeletedByInput> | Prisma.EleveCreateWithoutDeletedByInput[] | Prisma.EleveUncheckedCreateWithoutDeletedByInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutDeletedByInput | Prisma.EleveCreateOrConnectWithoutDeletedByInput[]
+  createMany?: Prisma.EleveCreateManyDeletedByInputEnvelope
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+}
+
+export type EleveUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutUserInput, Prisma.EleveUncheckedCreateWithoutUserInput> | Prisma.EleveCreateWithoutUserInput[] | Prisma.EleveUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutUserInput | Prisma.EleveCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.EleveCreateManyUserInputEnvelope
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+}
+
+export type EleveUncheckedCreateNestedManyWithoutDeletedByInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutDeletedByInput, Prisma.EleveUncheckedCreateWithoutDeletedByInput> | Prisma.EleveCreateWithoutDeletedByInput[] | Prisma.EleveUncheckedCreateWithoutDeletedByInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutDeletedByInput | Prisma.EleveCreateOrConnectWithoutDeletedByInput[]
+  createMany?: Prisma.EleveCreateManyDeletedByInputEnvelope
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+}
+
+export type EleveUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutUserInput, Prisma.EleveUncheckedCreateWithoutUserInput> | Prisma.EleveCreateWithoutUserInput[] | Prisma.EleveUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutUserInput | Prisma.EleveCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.EleveUpsertWithWhereUniqueWithoutUserInput | Prisma.EleveUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.EleveCreateManyUserInputEnvelope
+  set?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  disconnect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  delete?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  update?: Prisma.EleveUpdateWithWhereUniqueWithoutUserInput | Prisma.EleveUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.EleveUpdateManyWithWhereWithoutUserInput | Prisma.EleveUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
+}
+
+export type EleveUpdateManyWithoutDeletedByNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutDeletedByInput, Prisma.EleveUncheckedCreateWithoutDeletedByInput> | Prisma.EleveCreateWithoutDeletedByInput[] | Prisma.EleveUncheckedCreateWithoutDeletedByInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutDeletedByInput | Prisma.EleveCreateOrConnectWithoutDeletedByInput[]
+  upsert?: Prisma.EleveUpsertWithWhereUniqueWithoutDeletedByInput | Prisma.EleveUpsertWithWhereUniqueWithoutDeletedByInput[]
+  createMany?: Prisma.EleveCreateManyDeletedByInputEnvelope
+  set?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  disconnect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  delete?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  update?: Prisma.EleveUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.EleveUpdateWithWhereUniqueWithoutDeletedByInput[]
+  updateMany?: Prisma.EleveUpdateManyWithWhereWithoutDeletedByInput | Prisma.EleveUpdateManyWithWhereWithoutDeletedByInput[]
+  deleteMany?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
+}
+
+export type EleveUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutUserInput, Prisma.EleveUncheckedCreateWithoutUserInput> | Prisma.EleveCreateWithoutUserInput[] | Prisma.EleveUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutUserInput | Prisma.EleveCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.EleveUpsertWithWhereUniqueWithoutUserInput | Prisma.EleveUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.EleveCreateManyUserInputEnvelope
+  set?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  disconnect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  delete?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  update?: Prisma.EleveUpdateWithWhereUniqueWithoutUserInput | Prisma.EleveUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.EleveUpdateManyWithWhereWithoutUserInput | Prisma.EleveUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
+}
+
+export type EleveUncheckedUpdateManyWithoutDeletedByNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutDeletedByInput, Prisma.EleveUncheckedCreateWithoutDeletedByInput> | Prisma.EleveCreateWithoutDeletedByInput[] | Prisma.EleveUncheckedCreateWithoutDeletedByInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutDeletedByInput | Prisma.EleveCreateOrConnectWithoutDeletedByInput[]
+  upsert?: Prisma.EleveUpsertWithWhereUniqueWithoutDeletedByInput | Prisma.EleveUpsertWithWhereUniqueWithoutDeletedByInput[]
+  createMany?: Prisma.EleveCreateManyDeletedByInputEnvelope
+  set?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  disconnect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  delete?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  update?: Prisma.EleveUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.EleveUpdateWithWhereUniqueWithoutDeletedByInput[]
+  updateMany?: Prisma.EleveUpdateManyWithWhereWithoutDeletedByInput | Prisma.EleveUpdateManyWithWhereWithoutDeletedByInput[]
+  deleteMany?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
 }
 
 export type EleveCreateNestedManyWithoutSchoolInput = {
@@ -639,10 +1174,24 @@ export type EleveCreateNestedManyWithoutParentInput = {
   connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
 }
 
+export type EleveCreateNestedManyWithoutResponsableInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutResponsableInput, Prisma.EleveUncheckedCreateWithoutResponsableInput> | Prisma.EleveCreateWithoutResponsableInput[] | Prisma.EleveUncheckedCreateWithoutResponsableInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutResponsableInput | Prisma.EleveCreateOrConnectWithoutResponsableInput[]
+  createMany?: Prisma.EleveCreateManyResponsableInputEnvelope
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+}
+
 export type EleveUncheckedCreateNestedManyWithoutParentInput = {
   create?: Prisma.XOR<Prisma.EleveCreateWithoutParentInput, Prisma.EleveUncheckedCreateWithoutParentInput> | Prisma.EleveCreateWithoutParentInput[] | Prisma.EleveUncheckedCreateWithoutParentInput[]
   connectOrCreate?: Prisma.EleveCreateOrConnectWithoutParentInput | Prisma.EleveCreateOrConnectWithoutParentInput[]
   createMany?: Prisma.EleveCreateManyParentInputEnvelope
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+}
+
+export type EleveUncheckedCreateNestedManyWithoutResponsableInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutResponsableInput, Prisma.EleveUncheckedCreateWithoutResponsableInput> | Prisma.EleveCreateWithoutResponsableInput[] | Prisma.EleveUncheckedCreateWithoutResponsableInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutResponsableInput | Prisma.EleveCreateOrConnectWithoutResponsableInput[]
+  createMany?: Prisma.EleveCreateManyResponsableInputEnvelope
   connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
 }
 
@@ -660,6 +1209,20 @@ export type EleveUpdateManyWithoutParentNestedInput = {
   deleteMany?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
 }
 
+export type EleveUpdateManyWithoutResponsableNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutResponsableInput, Prisma.EleveUncheckedCreateWithoutResponsableInput> | Prisma.EleveCreateWithoutResponsableInput[] | Prisma.EleveUncheckedCreateWithoutResponsableInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutResponsableInput | Prisma.EleveCreateOrConnectWithoutResponsableInput[]
+  upsert?: Prisma.EleveUpsertWithWhereUniqueWithoutResponsableInput | Prisma.EleveUpsertWithWhereUniqueWithoutResponsableInput[]
+  createMany?: Prisma.EleveCreateManyResponsableInputEnvelope
+  set?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  disconnect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  delete?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  update?: Prisma.EleveUpdateWithWhereUniqueWithoutResponsableInput | Prisma.EleveUpdateWithWhereUniqueWithoutResponsableInput[]
+  updateMany?: Prisma.EleveUpdateManyWithWhereWithoutResponsableInput | Prisma.EleveUpdateManyWithWhereWithoutResponsableInput[]
+  deleteMany?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
+}
+
 export type EleveUncheckedUpdateManyWithoutParentNestedInput = {
   create?: Prisma.XOR<Prisma.EleveCreateWithoutParentInput, Prisma.EleveUncheckedCreateWithoutParentInput> | Prisma.EleveCreateWithoutParentInput[] | Prisma.EleveUncheckedCreateWithoutParentInput[]
   connectOrCreate?: Prisma.EleveCreateOrConnectWithoutParentInput | Prisma.EleveCreateOrConnectWithoutParentInput[]
@@ -671,6 +1234,20 @@ export type EleveUncheckedUpdateManyWithoutParentNestedInput = {
   connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
   update?: Prisma.EleveUpdateWithWhereUniqueWithoutParentInput | Prisma.EleveUpdateWithWhereUniqueWithoutParentInput[]
   updateMany?: Prisma.EleveUpdateManyWithWhereWithoutParentInput | Prisma.EleveUpdateManyWithWhereWithoutParentInput[]
+  deleteMany?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
+}
+
+export type EleveUncheckedUpdateManyWithoutResponsableNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutResponsableInput, Prisma.EleveUncheckedCreateWithoutResponsableInput> | Prisma.EleveCreateWithoutResponsableInput[] | Prisma.EleveUncheckedCreateWithoutResponsableInput[]
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutResponsableInput | Prisma.EleveCreateOrConnectWithoutResponsableInput[]
+  upsert?: Prisma.EleveUpsertWithWhereUniqueWithoutResponsableInput | Prisma.EleveUpsertWithWhereUniqueWithoutResponsableInput[]
+  createMany?: Prisma.EleveCreateManyResponsableInputEnvelope
+  set?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  disconnect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  delete?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  connect?: Prisma.EleveWhereUniqueInput | Prisma.EleveWhereUniqueInput[]
+  update?: Prisma.EleveUpdateWithWhereUniqueWithoutResponsableInput | Prisma.EleveUpdateWithWhereUniqueWithoutResponsableInput[]
+  updateMany?: Prisma.EleveUpdateManyWithWhereWithoutResponsableInput | Prisma.EleveUpdateManyWithWhereWithoutResponsableInput[]
   deleteMany?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
 }
 
@@ -790,19 +1367,126 @@ export type EleveUpdateOneRequiredWithoutAutorisationParentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutAutorisationParentsInput, Prisma.EleveUpdateWithoutAutorisationParentsInput>, Prisma.EleveUncheckedUpdateWithoutAutorisationParentsInput>
 }
 
-export type EleveCreateWithoutSchoolInput = {
+export type NullableEnumGenreFieldUpdateOperationsInput = {
+  set?: $Enums.Genre | null
+}
+
+export type NullableEnumStatutFinAnneeFieldUpdateOperationsInput = {
+  set?: $Enums.StatutFinAnnee | null
+}
+
+export type NullableEnumSituationFamilialeFieldUpdateOperationsInput = {
+  set?: $Enums.SituationFamiliale | null
+}
+
+export type EnumStatutEleveFieldUpdateOperationsInput = {
+  set?: $Enums.StatutEleve
+}
+
+export type EleveCreateNestedOneWithoutHistoriqueClassesInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutHistoriqueClassesInput, Prisma.EleveUncheckedCreateWithoutHistoriqueClassesInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutHistoriqueClassesInput
+  connect?: Prisma.EleveWhereUniqueInput
+}
+
+export type EleveUpdateOneRequiredWithoutHistoriqueClassesNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutHistoriqueClassesInput, Prisma.EleveUncheckedCreateWithoutHistoriqueClassesInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutHistoriqueClassesInput
+  upsert?: Prisma.EleveUpsertWithoutHistoriqueClassesInput
+  connect?: Prisma.EleveWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutHistoriqueClassesInput, Prisma.EleveUpdateWithoutHistoriqueClassesInput>, Prisma.EleveUncheckedUpdateWithoutHistoriqueClassesInput>
+}
+
+export type EleveCreateNestedOneWithoutAdresseInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutAdresseInput, Prisma.EleveUncheckedCreateWithoutAdresseInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutAdresseInput
+  connect?: Prisma.EleveWhereUniqueInput
+}
+
+export type EleveUpdateOneWithoutAdresseNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutAdresseInput, Prisma.EleveUncheckedCreateWithoutAdresseInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutAdresseInput
+  upsert?: Prisma.EleveUpsertWithoutAdresseInput
+  disconnect?: Prisma.EleveWhereInput | boolean
+  delete?: Prisma.EleveWhereInput | boolean
+  connect?: Prisma.EleveWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutAdresseInput, Prisma.EleveUpdateWithoutAdresseInput>, Prisma.EleveUncheckedUpdateWithoutAdresseInput>
+}
+
+export type EleveCreateNestedOneWithoutProfessionEleveInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutProfessionEleveInput, Prisma.EleveUncheckedCreateWithoutProfessionEleveInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutProfessionEleveInput
+  connect?: Prisma.EleveWhereUniqueInput
+}
+
+export type EleveUpdateOneRequiredWithoutProfessionEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutProfessionEleveInput, Prisma.EleveUncheckedCreateWithoutProfessionEleveInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutProfessionEleveInput
+  upsert?: Prisma.EleveUpsertWithoutProfessionEleveInput
+  connect?: Prisma.EleveWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutProfessionEleveInput, Prisma.EleveUpdateWithoutProfessionEleveInput>, Prisma.EleveUncheckedUpdateWithoutProfessionEleveInput>
+}
+
+export type EleveCreateNestedOneWithoutDroitInscriptionsInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutDroitInscriptionsInput, Prisma.EleveUncheckedCreateWithoutDroitInscriptionsInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutDroitInscriptionsInput
+  connect?: Prisma.EleveWhereUniqueInput
+}
+
+export type EleveUpdateOneRequiredWithoutDroitInscriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutDroitInscriptionsInput, Prisma.EleveUncheckedCreateWithoutDroitInscriptionsInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutDroitInscriptionsInput
+  upsert?: Prisma.EleveUpsertWithoutDroitInscriptionsInput
+  connect?: Prisma.EleveWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutDroitInscriptionsInput, Prisma.EleveUpdateWithoutDroitInscriptionsInput>, Prisma.EleveUncheckedUpdateWithoutDroitInscriptionsInput>
+}
+
+export type EleveCreateNestedOneWithoutEcolagesInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutEcolagesInput, Prisma.EleveUncheckedCreateWithoutEcolagesInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutEcolagesInput
+  connect?: Prisma.EleveWhereUniqueInput
+}
+
+export type EleveUpdateOneRequiredWithoutEcolagesNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutEcolagesInput, Prisma.EleveUncheckedCreateWithoutEcolagesInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutEcolagesInput
+  upsert?: Prisma.EleveUpsertWithoutEcolagesInput
+  connect?: Prisma.EleveWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutEcolagesInput, Prisma.EleveUpdateWithoutEcolagesInput>, Prisma.EleveUncheckedUpdateWithoutEcolagesInput>
+}
+
+export type EleveCreateWithoutUserInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
-  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
@@ -810,20 +1494,41 @@ export type EleveCreateWithoutSchoolInput = {
   affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
 }
 
-export type EleveUncheckedCreateWithoutSchoolInput = {
+export type EleveUncheckedCreateWithoutUserInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
-  classeId: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
@@ -832,6 +1537,266 @@ export type EleveUncheckedCreateWithoutSchoolInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutUserInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutUserInput, Prisma.EleveUncheckedCreateWithoutUserInput>
+}
+
+export type EleveCreateManyUserInputEnvelope = {
+  data: Prisma.EleveCreateManyUserInput | Prisma.EleveCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type EleveCreateWithoutDeletedByInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
+}
+
+export type EleveUncheckedCreateWithoutDeletedByInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutDeletedByInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutDeletedByInput, Prisma.EleveUncheckedCreateWithoutDeletedByInput>
+}
+
+export type EleveCreateManyDeletedByInputEnvelope = {
+  data: Prisma.EleveCreateManyDeletedByInput | Prisma.EleveCreateManyDeletedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type EleveUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.EleveWhereUniqueInput
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutUserInput, Prisma.EleveUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutUserInput, Prisma.EleveUncheckedCreateWithoutUserInput>
+}
+
+export type EleveUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.EleveWhereUniqueInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutUserInput, Prisma.EleveUncheckedUpdateWithoutUserInput>
+}
+
+export type EleveUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.EleveScalarWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateManyMutationInput, Prisma.EleveUncheckedUpdateManyWithoutUserInput>
+}
+
+export type EleveScalarWhereInput = {
+  AND?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
+  OR?: Prisma.EleveScalarWhereInput[]
+  NOT?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
+  id?: Prisma.StringFilter<"Eleve"> | string
+  matricule?: Prisma.IntFilter<"Eleve"> | number
+  nom?: Prisma.StringFilter<"Eleve"> | string
+  prenom?: Prisma.StringFilter<"Eleve"> | string
+  genre?: Prisma.EnumGenreNullableFilter<"Eleve"> | $Enums.Genre | null
+  dateNaissance?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
+  lieuNaissance?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  telephone?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  photoUrl?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  situationFinAnnee?: Prisma.EnumStatutFinAnneeNullableFilter<"Eleve"> | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.EnumSituationFamilialeNullableFilter<"Eleve"> | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
+  ecoleOrigine?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  nationalite?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  responsableId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  statut?: Prisma.EnumStatutEleveFilter<"Eleve"> | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFilter<"Eleve"> | boolean
+  relationName?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  relationTelephone?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  remarque?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  schoolId?: Prisma.StringFilter<"Eleve"> | string
+  classeId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  parentId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Eleve"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Eleve"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
+  deletedById?: Prisma.StringNullableFilter<"Eleve"> | string | null
+  userId?: Prisma.StringNullableFilter<"Eleve"> | string | null
+}
+
+export type EleveUpsertWithWhereUniqueWithoutDeletedByInput = {
+  where: Prisma.EleveWhereUniqueInput
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutDeletedByInput, Prisma.EleveUncheckedUpdateWithoutDeletedByInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutDeletedByInput, Prisma.EleveUncheckedCreateWithoutDeletedByInput>
+}
+
+export type EleveUpdateWithWhereUniqueWithoutDeletedByInput = {
+  where: Prisma.EleveWhereUniqueInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutDeletedByInput, Prisma.EleveUncheckedUpdateWithoutDeletedByInput>
+}
+
+export type EleveUpdateManyWithWhereWithoutDeletedByInput = {
+  where: Prisma.EleveScalarWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateManyMutationInput, Prisma.EleveUncheckedUpdateManyWithoutDeletedByInput>
+}
+
+export type EleveCreateWithoutSchoolInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
+}
+
+export type EleveUncheckedCreateWithoutSchoolInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutSchoolInput = {
@@ -860,37 +1825,37 @@ export type EleveUpdateManyWithWhereWithoutSchoolInput = {
   data: Prisma.XOR<Prisma.EleveUpdateManyMutationInput, Prisma.EleveUncheckedUpdateManyWithoutSchoolInput>
 }
 
-export type EleveScalarWhereInput = {
-  AND?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
-  OR?: Prisma.EleveScalarWhereInput[]
-  NOT?: Prisma.EleveScalarWhereInput | Prisma.EleveScalarWhereInput[]
-  id?: Prisma.StringFilter<"Eleve"> | string
-  nom?: Prisma.StringFilter<"Eleve"> | string
-  prenom?: Prisma.StringFilter<"Eleve"> | string
-  schoolId?: Prisma.StringFilter<"Eleve"> | string
-  classeId?: Prisma.StringFilter<"Eleve"> | string
-  createdAt?: Prisma.DateTimeFilter<"Eleve"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Eleve"> | Date | string
-  dateNaissance?: Prisma.DateTimeNullableFilter<"Eleve"> | Date | string | null
-  telephone?: Prisma.StringNullableFilter<"Eleve"> | string | null
-  adresse?: Prisma.StringNullableFilter<"Eleve"> | string | null
-  photoUrl?: Prisma.StringNullableFilter<"Eleve"> | string | null
-  parentId?: Prisma.StringNullableFilter<"Eleve"> | string | null
-}
-
 export type EleveCreateWithoutClasseInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
   school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
-  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
@@ -898,20 +1863,42 @@ export type EleveCreateWithoutClasseInput = {
   affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
 }
 
 export type EleveUncheckedCreateWithoutClasseInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
@@ -920,6 +1907,8 @@ export type EleveUncheckedCreateWithoutClasseInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutClasseInput = {
@@ -950,16 +1939,34 @@ export type EleveUpdateManyWithWhereWithoutClasseInput = {
 
 export type EleveCreateWithoutParentInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
   school: Prisma.SchoolCreateNestedOneWithoutElevesInput
-  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
@@ -968,20 +1975,42 @@ export type EleveCreateWithoutParentInput = {
   affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
 }
 
 export type EleveUncheckedCreateWithoutParentInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
@@ -990,6 +2019,8 @@ export type EleveUncheckedCreateWithoutParentInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutParentInput = {
@@ -999,6 +2030,102 @@ export type EleveCreateOrConnectWithoutParentInput = {
 
 export type EleveCreateManyParentInputEnvelope = {
   data: Prisma.EleveCreateManyParentInput | Prisma.EleveCreateManyParentInput[]
+  skipDuplicates?: boolean
+}
+
+export type EleveCreateWithoutResponsableInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
+}
+
+export type EleveUncheckedCreateWithoutResponsableInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutResponsableInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutResponsableInput, Prisma.EleveUncheckedCreateWithoutResponsableInput>
+}
+
+export type EleveCreateManyResponsableInputEnvelope = {
+  data: Prisma.EleveCreateManyResponsableInput | Prisma.EleveCreateManyResponsableInput[]
   skipDuplicates?: boolean
 }
 
@@ -1018,19 +2145,53 @@ export type EleveUpdateManyWithWhereWithoutParentInput = {
   data: Prisma.XOR<Prisma.EleveUpdateManyMutationInput, Prisma.EleveUncheckedUpdateManyWithoutParentInput>
 }
 
+export type EleveUpsertWithWhereUniqueWithoutResponsableInput = {
+  where: Prisma.EleveWhereUniqueInput
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutResponsableInput, Prisma.EleveUncheckedUpdateWithoutResponsableInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutResponsableInput, Prisma.EleveUncheckedCreateWithoutResponsableInput>
+}
+
+export type EleveUpdateWithWhereUniqueWithoutResponsableInput = {
+  where: Prisma.EleveWhereUniqueInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutResponsableInput, Prisma.EleveUncheckedUpdateWithoutResponsableInput>
+}
+
+export type EleveUpdateManyWithWhereWithoutResponsableInput = {
+  where: Prisma.EleveScalarWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateManyMutationInput, Prisma.EleveUncheckedUpdateManyWithoutResponsableInput>
+}
+
 export type EleveCreateWithoutAdmissionsInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
   school: Prisma.SchoolCreateNestedOneWithoutElevesInput
-  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
-  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
@@ -1038,21 +2199,43 @@ export type EleveCreateWithoutAdmissionsInput = {
   affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
 }
 
 export type EleveUncheckedCreateWithoutAdmissionsInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
@@ -1060,6 +2243,8 @@ export type EleveUncheckedCreateWithoutAdmissionsInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutAdmissionsInput = {
@@ -1080,17 +2265,35 @@ export type EleveUpdateToOneWithWhereWithoutAdmissionsInput = {
 
 export type EleveUpdateWithoutAdmissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
-  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
@@ -1098,21 +2301,43 @@ export type EleveUpdateWithoutAdmissionsInput = {
   affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutAdmissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
@@ -1120,43 +2345,85 @@ export type EleveUncheckedUpdateWithoutAdmissionsInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutNotesInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
   school: Prisma.SchoolCreateNestedOneWithoutElevesInput
-  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
-  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
   affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
 }
 
 export type EleveUncheckedCreateWithoutNotesInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
@@ -1164,6 +2431,8 @@ export type EleveUncheckedCreateWithoutNotesInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutNotesInput = {
@@ -1184,39 +2453,79 @@ export type EleveUpdateToOneWithWhereWithoutNotesInput = {
 
 export type EleveUpdateWithoutNotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
-  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
   affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutNotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
@@ -1224,43 +2533,85 @@ export type EleveUncheckedUpdateWithoutNotesInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutPresencesInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
   school: Prisma.SchoolCreateNestedOneWithoutElevesInput
-  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
-  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
   affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
 }
 
 export type EleveUncheckedCreateWithoutPresencesInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
@@ -1268,6 +2619,8 @@ export type EleveUncheckedCreateWithoutPresencesInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutPresencesInput = {
@@ -1288,39 +2641,79 @@ export type EleveUpdateToOneWithWhereWithoutPresencesInput = {
 
 export type EleveUpdateWithoutPresencesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
-  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
   affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutPresencesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
@@ -1328,43 +2721,85 @@ export type EleveUncheckedUpdateWithoutPresencesInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutSoumissionsInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
   school: Prisma.SchoolCreateNestedOneWithoutElevesInput
-  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
-  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
   affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
 }
 
 export type EleveUncheckedCreateWithoutSoumissionsInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
@@ -1372,6 +2807,8 @@ export type EleveUncheckedCreateWithoutSoumissionsInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutSoumissionsInput = {
@@ -1392,39 +2829,79 @@ export type EleveUpdateToOneWithWhereWithoutSoumissionsInput = {
 
 export type EleveUpdateWithoutSoumissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
-  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
   affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutSoumissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
@@ -1432,43 +2909,85 @@ export type EleveUncheckedUpdateWithoutSoumissionsInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutDeliberationDecisionsInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
   school: Prisma.SchoolCreateNestedOneWithoutElevesInput
-  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
-  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
 }
 
 export type EleveUncheckedCreateWithoutDeliberationDecisionsInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
@@ -1476,6 +2995,8 @@ export type EleveUncheckedCreateWithoutDeliberationDecisionsInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutDeliberationDecisionsInput = {
@@ -1496,39 +3017,79 @@ export type EleveUpdateToOneWithWhereWithoutDeliberationDecisionsInput = {
 
 export type EleveUpdateWithoutDeliberationDecisionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
-  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutDeliberationDecisionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
@@ -1536,43 +3097,85 @@ export type EleveUncheckedUpdateWithoutDeliberationDecisionsInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutAffectationTransportsInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
   school: Prisma.SchoolCreateNestedOneWithoutElevesInput
-  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
-  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
 }
 
 export type EleveUncheckedCreateWithoutAffectationTransportsInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
@@ -1580,6 +3183,8 @@ export type EleveUncheckedCreateWithoutAffectationTransportsInput = {
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutAffectationTransportsInput = {
@@ -1600,39 +3205,79 @@ export type EleveUpdateToOneWithWhereWithoutAffectationTransportsInput = {
 
 export type EleveUpdateWithoutAffectationTransportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
-  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutAffectationTransportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
@@ -1640,43 +3285,85 @@ export type EleveUncheckedUpdateWithoutAffectationTransportsInput = {
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutParticipantSortiesInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
   school: Prisma.SchoolCreateNestedOneWithoutElevesInput
-  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
-  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
   affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
 }
 
 export type EleveUncheckedCreateWithoutParticipantSortiesInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
@@ -1684,6 +3371,8 @@ export type EleveUncheckedCreateWithoutParticipantSortiesInput = {
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
   affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutParticipantSortiesInput = {
@@ -1704,39 +3393,79 @@ export type EleveUpdateToOneWithWhereWithoutParticipantSortiesInput = {
 
 export type EleveUpdateWithoutParticipantSortiesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
-  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
   affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutParticipantSortiesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
@@ -1744,43 +3473,85 @@ export type EleveUncheckedUpdateWithoutParticipantSortiesInput = {
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
   affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutAutorisationParentsInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
   school: Prisma.SchoolCreateNestedOneWithoutElevesInput
-  classe: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
   admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
-  parent?: Prisma.ParentCreateNestedOneWithoutElevesInput
   notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
   soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
   deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
   affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
 }
 
 export type EleveUncheckedCreateWithoutAutorisationParentsInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
   admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
   presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
@@ -1788,6 +3559,8 @@ export type EleveUncheckedCreateWithoutAutorisationParentsInput = {
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
   affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
   participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutAutorisationParentsInput = {
@@ -1808,39 +3581,79 @@ export type EleveUpdateToOneWithWhereWithoutAutorisationParentsInput = {
 
 export type EleveUpdateWithoutAutorisationParentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
-  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
   deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
   affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutAutorisationParentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
@@ -1848,35 +3661,1303 @@ export type EleveUncheckedUpdateWithoutAutorisationParentsInput = {
   deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
   affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveCreateWithoutHistoriqueClassesInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
+}
+
+export type EleveUncheckedCreateWithoutHistoriqueClassesInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutHistoriqueClassesInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutHistoriqueClassesInput, Prisma.EleveUncheckedCreateWithoutHistoriqueClassesInput>
+}
+
+export type EleveUpsertWithoutHistoriqueClassesInput = {
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutHistoriqueClassesInput, Prisma.EleveUncheckedUpdateWithoutHistoriqueClassesInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutHistoriqueClassesInput, Prisma.EleveUncheckedCreateWithoutHistoriqueClassesInput>
+  where?: Prisma.EleveWhereInput
+}
+
+export type EleveUpdateToOneWithWhereWithoutHistoriqueClassesInput = {
+  where?: Prisma.EleveWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutHistoriqueClassesInput, Prisma.EleveUncheckedUpdateWithoutHistoriqueClassesInput>
+}
+
+export type EleveUpdateWithoutHistoriqueClassesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutHistoriqueClassesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveCreateWithoutAdresseInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
+}
+
+export type EleveUncheckedCreateWithoutAdresseInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutAdresseInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutAdresseInput, Prisma.EleveUncheckedCreateWithoutAdresseInput>
+}
+
+export type EleveUpsertWithoutAdresseInput = {
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutAdresseInput, Prisma.EleveUncheckedUpdateWithoutAdresseInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutAdresseInput, Prisma.EleveUncheckedCreateWithoutAdresseInput>
+  where?: Prisma.EleveWhereInput
+}
+
+export type EleveUpdateToOneWithWhereWithoutAdresseInput = {
+  where?: Prisma.EleveWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutAdresseInput, Prisma.EleveUncheckedUpdateWithoutAdresseInput>
+}
+
+export type EleveUpdateWithoutAdresseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutAdresseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveCreateWithoutProfessionEleveInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
+}
+
+export type EleveUncheckedCreateWithoutProfessionEleveInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutProfessionEleveInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutProfessionEleveInput, Prisma.EleveUncheckedCreateWithoutProfessionEleveInput>
+}
+
+export type EleveUpsertWithoutProfessionEleveInput = {
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutProfessionEleveInput, Prisma.EleveUncheckedUpdateWithoutProfessionEleveInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutProfessionEleveInput, Prisma.EleveUncheckedCreateWithoutProfessionEleveInput>
+  where?: Prisma.EleveWhereInput
+}
+
+export type EleveUpdateToOneWithWhereWithoutProfessionEleveInput = {
+  where?: Prisma.EleveWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutProfessionEleveInput, Prisma.EleveUncheckedUpdateWithoutProfessionEleveInput>
+}
+
+export type EleveUpdateWithoutProfessionEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutProfessionEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveCreateWithoutDroitInscriptionsInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
+}
+
+export type EleveUncheckedCreateWithoutDroitInscriptionsInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutDroitInscriptionsInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutDroitInscriptionsInput, Prisma.EleveUncheckedCreateWithoutDroitInscriptionsInput>
+}
+
+export type EleveUpsertWithoutDroitInscriptionsInput = {
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutDroitInscriptionsInput, Prisma.EleveUncheckedUpdateWithoutDroitInscriptionsInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutDroitInscriptionsInput, Prisma.EleveUncheckedCreateWithoutDroitInscriptionsInput>
+  where?: Prisma.EleveWhereInput
+}
+
+export type EleveUpdateToOneWithWhereWithoutDroitInscriptionsInput = {
+  where?: Prisma.EleveWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutDroitInscriptionsInput, Prisma.EleveUncheckedUpdateWithoutDroitInscriptionsInput>
+}
+
+export type EleveUpdateWithoutDroitInscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutDroitInscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveCreateWithoutEcolagesInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
+}
+
+export type EleveUncheckedCreateWithoutEcolagesInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutEcolagesInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutEcolagesInput, Prisma.EleveUncheckedCreateWithoutEcolagesInput>
+}
+
+export type EleveUpsertWithoutEcolagesInput = {
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutEcolagesInput, Prisma.EleveUncheckedUpdateWithoutEcolagesInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutEcolagesInput, Prisma.EleveUncheckedCreateWithoutEcolagesInput>
+  where?: Prisma.EleveWhereInput
+}
+
+export type EleveUpdateToOneWithWhereWithoutEcolagesInput = {
+  where?: Prisma.EleveWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutEcolagesInput, Prisma.EleveUncheckedUpdateWithoutEcolagesInput>
+}
+
+export type EleveUpdateWithoutEcolagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutEcolagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveCreateManyUserInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+}
+
+export type EleveCreateManyDeletedByInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  userId?: string | null
+}
+
+export type EleveUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type EleveUpdateWithoutDeletedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutDeletedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveUncheckedUpdateManyWithoutDeletedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EleveCreateManySchoolInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
-  classeId: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  classeId?: string | null
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
 }
 
 export type EleveUpdateWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
-  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
@@ -1884,20 +4965,42 @@ export type EleveUpdateWithoutSchoolInput = {
   affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
@@ -1906,49 +5009,101 @@ export type EleveUncheckedUpdateWithoutSchoolInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EleveCreateManyClasseInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
+  parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  dateNaissance?: Date | string | null
-  telephone?: string | null
-  adresse?: string | null
-  photoUrl?: string | null
-  parentId?: string | null
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
 }
 
 export type EleveUpdateWithoutClasseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
-  parent?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
   soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
@@ -1956,20 +5111,42 @@ export type EleveUpdateWithoutClasseInput = {
   affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutClasseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
@@ -1978,48 +5155,130 @@ export type EleveUncheckedUpdateWithoutClasseInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutClasseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EleveCreateManyParentInput = {
   id?: string
+  matricule: number
   nom: string
   prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
   schoolId: string
-  classeId: string
+  classeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+}
+
+export type EleveCreateManyResponsableInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
   dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
   telephone?: string | null
-  adresse?: string | null
   photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
 }
 
 export type EleveUpdateWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
   admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
@@ -2028,20 +5287,42 @@ export type EleveUpdateWithoutParentInput = {
   affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
   admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
   presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
@@ -2050,20 +5331,154 @@ export type EleveUncheckedUpdateWithoutParentInput = {
   affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
   participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type EleveUpdateWithoutResponsableInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
   dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutResponsableInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveUncheckedUpdateManyWithoutResponsableInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -2072,6 +5487,7 @@ export type EleveUncheckedUpdateManyWithoutParentInput = {
  */
 
 export type EleveCountOutputType = {
+  historiqueClasses: number
   admissions: number
   notes: number
   presences: number
@@ -2080,9 +5496,12 @@ export type EleveCountOutputType = {
   affectationTransports: number
   participantSorties: number
   autorisationParents: number
+  ecolages: number
+  droitInscriptions: number
 }
 
 export type EleveCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  historiqueClasses?: boolean | EleveCountOutputTypeCountHistoriqueClassesArgs
   admissions?: boolean | EleveCountOutputTypeCountAdmissionsArgs
   notes?: boolean | EleveCountOutputTypeCountNotesArgs
   presences?: boolean | EleveCountOutputTypeCountPresencesArgs
@@ -2091,6 +5510,8 @@ export type EleveCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   affectationTransports?: boolean | EleveCountOutputTypeCountAffectationTransportsArgs
   participantSorties?: boolean | EleveCountOutputTypeCountParticipantSortiesArgs
   autorisationParents?: boolean | EleveCountOutputTypeCountAutorisationParentsArgs
+  ecolages?: boolean | EleveCountOutputTypeCountEcolagesArgs
+  droitInscriptions?: boolean | EleveCountOutputTypeCountDroitInscriptionsArgs
 }
 
 /**
@@ -2101,6 +5522,13 @@ export type EleveCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
    * Select specific fields to fetch from the EleveCountOutputType
    */
   select?: Prisma.EleveCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EleveCountOutputType without action
+ */
+export type EleveCountOutputTypeCountHistoriqueClassesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HistoriqueClasseWhereInput
 }
 
 /**
@@ -2159,24 +5587,59 @@ export type EleveCountOutputTypeCountAutorisationParentsArgs<ExtArgs extends run
   where?: Prisma.AutorisationParentWhereInput
 }
 
+/**
+ * EleveCountOutputType without action
+ */
+export type EleveCountOutputTypeCountEcolagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EcolageWhereInput
+}
+
+/**
+ * EleveCountOutputType without action
+ */
+export type EleveCountOutputTypeCountDroitInscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DroitInscriptionWhereInput
+}
+
 
 export type EleveSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  matricule?: boolean
   nom?: boolean
   prenom?: boolean
+  genre?: boolean
+  dateNaissance?: boolean
+  lieuNaissance?: boolean
+  telephone?: boolean
+  photoUrl?: boolean
+  situationFinAnnee?: boolean
+  situationFamiliale?: boolean
+  dateInscription?: boolean
+  ecoleOrigine?: boolean
+  nationalite?: boolean
+  responsableId?: boolean
+  statut?: boolean
+  isRelationContact?: boolean
+  relationName?: boolean
+  relationTelephone?: boolean
+  remarque?: boolean
   schoolId?: boolean
   classeId?: boolean
+  parentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  dateNaissance?: boolean
-  telephone?: boolean
-  adresse?: boolean
-  photoUrl?: boolean
-  parentId?: boolean
+  deletedAt?: boolean
+  deletedById?: boolean
+  userId?: boolean
+  adresse?: boolean | Prisma.Eleve$adresseArgs<ExtArgs>
+  professionEleve?: boolean | Prisma.Eleve$professionEleveArgs<ExtArgs>
+  responsable?: boolean | Prisma.Eleve$responsableArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
-  admissions?: boolean | Prisma.Eleve$admissionsArgs<ExtArgs>
+  classe?: boolean | Prisma.Eleve$classeArgs<ExtArgs>
+  historiqueClasses?: boolean | Prisma.Eleve$historiqueClassesArgs<ExtArgs>
   parent?: boolean | Prisma.Eleve$parentArgs<ExtArgs>
+  deletedBy?: boolean | Prisma.Eleve$deletedByArgs<ExtArgs>
+  admissions?: boolean | Prisma.Eleve$admissionsArgs<ExtArgs>
   notes?: boolean | Prisma.Eleve$notesArgs<ExtArgs>
   presences?: boolean | Prisma.Eleve$presencesArgs<ExtArgs>
   soumissions?: boolean | Prisma.Eleve$soumissionsArgs<ExtArgs>
@@ -2184,66 +5647,128 @@ export type EleveSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   affectationTransports?: boolean | Prisma.Eleve$affectationTransportsArgs<ExtArgs>
   participantSorties?: boolean | Prisma.Eleve$participantSortiesArgs<ExtArgs>
   autorisationParents?: boolean | Prisma.Eleve$autorisationParentsArgs<ExtArgs>
+  ecolages?: boolean | Prisma.Eleve$ecolagesArgs<ExtArgs>
+  droitInscriptions?: boolean | Prisma.Eleve$droitInscriptionsArgs<ExtArgs>
+  user?: boolean | Prisma.Eleve$userArgs<ExtArgs>
   _count?: boolean | Prisma.EleveCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["eleve"]>
 
 export type EleveSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  matricule?: boolean
   nom?: boolean
   prenom?: boolean
+  genre?: boolean
+  dateNaissance?: boolean
+  lieuNaissance?: boolean
+  telephone?: boolean
+  photoUrl?: boolean
+  situationFinAnnee?: boolean
+  situationFamiliale?: boolean
+  dateInscription?: boolean
+  ecoleOrigine?: boolean
+  nationalite?: boolean
+  responsableId?: boolean
+  statut?: boolean
+  isRelationContact?: boolean
+  relationName?: boolean
+  relationTelephone?: boolean
+  remarque?: boolean
   schoolId?: boolean
   classeId?: boolean
+  parentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  dateNaissance?: boolean
-  telephone?: boolean
-  adresse?: boolean
-  photoUrl?: boolean
-  parentId?: boolean
+  deletedAt?: boolean
+  deletedById?: boolean
+  userId?: boolean
+  responsable?: boolean | Prisma.Eleve$responsableArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
+  classe?: boolean | Prisma.Eleve$classeArgs<ExtArgs>
   parent?: boolean | Prisma.Eleve$parentArgs<ExtArgs>
+  deletedBy?: boolean | Prisma.Eleve$deletedByArgs<ExtArgs>
+  user?: boolean | Prisma.Eleve$userArgs<ExtArgs>
 }, ExtArgs["result"]["eleve"]>
 
 export type EleveSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  matricule?: boolean
   nom?: boolean
   prenom?: boolean
+  genre?: boolean
+  dateNaissance?: boolean
+  lieuNaissance?: boolean
+  telephone?: boolean
+  photoUrl?: boolean
+  situationFinAnnee?: boolean
+  situationFamiliale?: boolean
+  dateInscription?: boolean
+  ecoleOrigine?: boolean
+  nationalite?: boolean
+  responsableId?: boolean
+  statut?: boolean
+  isRelationContact?: boolean
+  relationName?: boolean
+  relationTelephone?: boolean
+  remarque?: boolean
   schoolId?: boolean
   classeId?: boolean
+  parentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  dateNaissance?: boolean
-  telephone?: boolean
-  adresse?: boolean
-  photoUrl?: boolean
-  parentId?: boolean
+  deletedAt?: boolean
+  deletedById?: boolean
+  userId?: boolean
+  responsable?: boolean | Prisma.Eleve$responsableArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
+  classe?: boolean | Prisma.Eleve$classeArgs<ExtArgs>
   parent?: boolean | Prisma.Eleve$parentArgs<ExtArgs>
+  deletedBy?: boolean | Prisma.Eleve$deletedByArgs<ExtArgs>
+  user?: boolean | Prisma.Eleve$userArgs<ExtArgs>
 }, ExtArgs["result"]["eleve"]>
 
 export type EleveSelectScalar = {
   id?: boolean
+  matricule?: boolean
   nom?: boolean
   prenom?: boolean
+  genre?: boolean
+  dateNaissance?: boolean
+  lieuNaissance?: boolean
+  telephone?: boolean
+  photoUrl?: boolean
+  situationFinAnnee?: boolean
+  situationFamiliale?: boolean
+  dateInscription?: boolean
+  ecoleOrigine?: boolean
+  nationalite?: boolean
+  responsableId?: boolean
+  statut?: boolean
+  isRelationContact?: boolean
+  relationName?: boolean
+  relationTelephone?: boolean
+  remarque?: boolean
   schoolId?: boolean
   classeId?: boolean
+  parentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  dateNaissance?: boolean
-  telephone?: boolean
-  adresse?: boolean
-  photoUrl?: boolean
-  parentId?: boolean
+  deletedAt?: boolean
+  deletedById?: boolean
+  userId?: boolean
 }
 
-export type EleveOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nom" | "prenom" | "schoolId" | "classeId" | "createdAt" | "updatedAt" | "dateNaissance" | "telephone" | "adresse" | "photoUrl" | "parentId", ExtArgs["result"]["eleve"]>
+export type EleveOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "matricule" | "nom" | "prenom" | "genre" | "dateNaissance" | "lieuNaissance" | "telephone" | "photoUrl" | "situationFinAnnee" | "situationFamiliale" | "dateInscription" | "ecoleOrigine" | "nationalite" | "responsableId" | "statut" | "isRelationContact" | "relationName" | "relationTelephone" | "remarque" | "schoolId" | "classeId" | "parentId" | "createdAt" | "updatedAt" | "deletedAt" | "deletedById" | "userId", ExtArgs["result"]["eleve"]>
 export type EleveInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  adresse?: boolean | Prisma.Eleve$adresseArgs<ExtArgs>
+  professionEleve?: boolean | Prisma.Eleve$professionEleveArgs<ExtArgs>
+  responsable?: boolean | Prisma.Eleve$responsableArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
-  admissions?: boolean | Prisma.Eleve$admissionsArgs<ExtArgs>
+  classe?: boolean | Prisma.Eleve$classeArgs<ExtArgs>
+  historiqueClasses?: boolean | Prisma.Eleve$historiqueClassesArgs<ExtArgs>
   parent?: boolean | Prisma.Eleve$parentArgs<ExtArgs>
+  deletedBy?: boolean | Prisma.Eleve$deletedByArgs<ExtArgs>
+  admissions?: boolean | Prisma.Eleve$admissionsArgs<ExtArgs>
   notes?: boolean | Prisma.Eleve$notesArgs<ExtArgs>
   presences?: boolean | Prisma.Eleve$presencesArgs<ExtArgs>
   soumissions?: boolean | Prisma.Eleve$soumissionsArgs<ExtArgs>
@@ -2251,26 +5776,40 @@ export type EleveInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   affectationTransports?: boolean | Prisma.Eleve$affectationTransportsArgs<ExtArgs>
   participantSorties?: boolean | Prisma.Eleve$participantSortiesArgs<ExtArgs>
   autorisationParents?: boolean | Prisma.Eleve$autorisationParentsArgs<ExtArgs>
+  ecolages?: boolean | Prisma.Eleve$ecolagesArgs<ExtArgs>
+  droitInscriptions?: boolean | Prisma.Eleve$droitInscriptionsArgs<ExtArgs>
+  user?: boolean | Prisma.Eleve$userArgs<ExtArgs>
   _count?: boolean | Prisma.EleveCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EleveIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  responsable?: boolean | Prisma.Eleve$responsableArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
+  classe?: boolean | Prisma.Eleve$classeArgs<ExtArgs>
   parent?: boolean | Prisma.Eleve$parentArgs<ExtArgs>
+  deletedBy?: boolean | Prisma.Eleve$deletedByArgs<ExtArgs>
+  user?: boolean | Prisma.Eleve$userArgs<ExtArgs>
 }
 export type EleveIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  responsable?: boolean | Prisma.Eleve$responsableArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
+  classe?: boolean | Prisma.Eleve$classeArgs<ExtArgs>
   parent?: boolean | Prisma.Eleve$parentArgs<ExtArgs>
+  deletedBy?: boolean | Prisma.Eleve$deletedByArgs<ExtArgs>
+  user?: boolean | Prisma.Eleve$userArgs<ExtArgs>
 }
 
 export type $ElevePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Eleve"
   objects: {
+    adresse: Prisma.$AdressePayload<ExtArgs> | null
+    professionEleve: Prisma.$ProfessionElevePayload<ExtArgs> | null
+    responsable: Prisma.$ParentPayload<ExtArgs> | null
     school: Prisma.$SchoolPayload<ExtArgs>
-    classe: Prisma.$ClassePayload<ExtArgs>
-    admissions: Prisma.$DossierAdmissionPayload<ExtArgs>[]
+    classe: Prisma.$ClassePayload<ExtArgs> | null
+    historiqueClasses: Prisma.$HistoriqueClassePayload<ExtArgs>[]
     parent: Prisma.$ParentPayload<ExtArgs> | null
+    deletedBy: Prisma.$UserPayload<ExtArgs> | null
+    admissions: Prisma.$DossierAdmissionPayload<ExtArgs>[]
     notes: Prisma.$NotePayload<ExtArgs>[]
     presences: Prisma.$PresencePayload<ExtArgs>[]
     soumissions: Prisma.$SoumissionPayload<ExtArgs>[]
@@ -2278,20 +5817,39 @@ export type $ElevePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     affectationTransports: Prisma.$AffectationTransportPayload<ExtArgs>[]
     participantSorties: Prisma.$ParticipantSortiePayload<ExtArgs>[]
     autorisationParents: Prisma.$AutorisationParentPayload<ExtArgs>[]
+    ecolages: Prisma.$EcolagePayload<ExtArgs>[]
+    droitInscriptions: Prisma.$DroitInscriptionPayload<ExtArgs>[]
+    user: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    matricule: number
     nom: string
     prenom: string
+    genre: $Enums.Genre | null
+    dateNaissance: Date | null
+    lieuNaissance: string | null
+    telephone: string | null
+    photoUrl: string | null
+    situationFinAnnee: $Enums.StatutFinAnnee | null
+    situationFamiliale: $Enums.SituationFamiliale | null
+    dateInscription: Date | null
+    ecoleOrigine: string | null
+    nationalite: string | null
+    responsableId: string | null
+    statut: $Enums.StatutEleve
+    isRelationContact: boolean
+    relationName: string | null
+    relationTelephone: string | null
+    remarque: string | null
     schoolId: string
-    classeId: string
+    classeId: string | null
+    parentId: string | null
     createdAt: Date
     updatedAt: Date
-    dateNaissance: Date | null
-    telephone: string | null
-    adresse: string | null
-    photoUrl: string | null
-    parentId: string | null
+    deletedAt: Date | null
+    deletedById: string | null
+    userId: string | null
   }, ExtArgs["result"]["eleve"]>
   composites: {}
 }
@@ -2686,10 +6244,15 @@ readonly fields: EleveFieldRefs;
  */
 export interface Prisma__EleveClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  adresse<T extends Prisma.Eleve$adresseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$adresseArgs<ExtArgs>>): Prisma.Prisma__AdresseClient<runtime.Types.Result.GetResult<Prisma.$AdressePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  professionEleve<T extends Prisma.Eleve$professionEleveArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$professionEleveArgs<ExtArgs>>): Prisma.Prisma__ProfessionEleveClient<runtime.Types.Result.GetResult<Prisma.$ProfessionElevePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  responsable<T extends Prisma.Eleve$responsableArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$responsableArgs<ExtArgs>>): Prisma.Prisma__ParentClient<runtime.Types.Result.GetResult<Prisma.$ParentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  classe<T extends Prisma.ClasseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClasseDefaultArgs<ExtArgs>>): Prisma.Prisma__ClasseClient<runtime.Types.Result.GetResult<Prisma.$ClassePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  admissions<T extends Prisma.Eleve$admissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$admissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DossierAdmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  classe<T extends Prisma.Eleve$classeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$classeArgs<ExtArgs>>): Prisma.Prisma__ClasseClient<runtime.Types.Result.GetResult<Prisma.$ClassePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  historiqueClasses<T extends Prisma.Eleve$historiqueClassesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$historiqueClassesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HistoriqueClassePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   parent<T extends Prisma.Eleve$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$parentArgs<ExtArgs>>): Prisma.Prisma__ParentClient<runtime.Types.Result.GetResult<Prisma.$ParentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  deletedBy<T extends Prisma.Eleve$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  admissions<T extends Prisma.Eleve$admissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$admissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DossierAdmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notes<T extends Prisma.Eleve$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   presences<T extends Prisma.Eleve$presencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$presencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   soumissions<T extends Prisma.Eleve$soumissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$soumissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SoumissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2697,6 +6260,9 @@ export interface Prisma__EleveClient<T, Null = never, ExtArgs extends runtime.Ty
   affectationTransports<T extends Prisma.Eleve$affectationTransportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$affectationTransportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AffectationTransportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   participantSorties<T extends Prisma.Eleve$participantSortiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$participantSortiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParticipantSortiePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   autorisationParents<T extends Prisma.Eleve$autorisationParentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$autorisationParentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutorisationParentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ecolages<T extends Prisma.Eleve$ecolagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$ecolagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EcolagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  droitInscriptions<T extends Prisma.Eleve$droitInscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$droitInscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DroitInscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user<T extends Prisma.Eleve$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2727,17 +6293,33 @@ export interface Prisma__EleveClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface EleveFieldRefs {
   readonly id: Prisma.FieldRef<"Eleve", 'String'>
+  readonly matricule: Prisma.FieldRef<"Eleve", 'Int'>
   readonly nom: Prisma.FieldRef<"Eleve", 'String'>
   readonly prenom: Prisma.FieldRef<"Eleve", 'String'>
+  readonly genre: Prisma.FieldRef<"Eleve", 'Genre'>
+  readonly dateNaissance: Prisma.FieldRef<"Eleve", 'DateTime'>
+  readonly lieuNaissance: Prisma.FieldRef<"Eleve", 'String'>
+  readonly telephone: Prisma.FieldRef<"Eleve", 'String'>
+  readonly photoUrl: Prisma.FieldRef<"Eleve", 'String'>
+  readonly situationFinAnnee: Prisma.FieldRef<"Eleve", 'StatutFinAnnee'>
+  readonly situationFamiliale: Prisma.FieldRef<"Eleve", 'SituationFamiliale'>
+  readonly dateInscription: Prisma.FieldRef<"Eleve", 'DateTime'>
+  readonly ecoleOrigine: Prisma.FieldRef<"Eleve", 'String'>
+  readonly nationalite: Prisma.FieldRef<"Eleve", 'String'>
+  readonly responsableId: Prisma.FieldRef<"Eleve", 'String'>
+  readonly statut: Prisma.FieldRef<"Eleve", 'StatutEleve'>
+  readonly isRelationContact: Prisma.FieldRef<"Eleve", 'Boolean'>
+  readonly relationName: Prisma.FieldRef<"Eleve", 'String'>
+  readonly relationTelephone: Prisma.FieldRef<"Eleve", 'String'>
+  readonly remarque: Prisma.FieldRef<"Eleve", 'String'>
   readonly schoolId: Prisma.FieldRef<"Eleve", 'String'>
   readonly classeId: Prisma.FieldRef<"Eleve", 'String'>
+  readonly parentId: Prisma.FieldRef<"Eleve", 'String'>
   readonly createdAt: Prisma.FieldRef<"Eleve", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Eleve", 'DateTime'>
-  readonly dateNaissance: Prisma.FieldRef<"Eleve", 'DateTime'>
-  readonly telephone: Prisma.FieldRef<"Eleve", 'String'>
-  readonly adresse: Prisma.FieldRef<"Eleve", 'String'>
-  readonly photoUrl: Prisma.FieldRef<"Eleve", 'String'>
-  readonly parentId: Prisma.FieldRef<"Eleve", 'String'>
+  readonly deletedAt: Prisma.FieldRef<"Eleve", 'DateTime'>
+  readonly deletedById: Prisma.FieldRef<"Eleve", 'String'>
+  readonly userId: Prisma.FieldRef<"Eleve", 'String'>
 }
     
 
@@ -3139,6 +6721,144 @@ export type EleveDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Eleve.adresse
+ */
+export type Eleve$adresseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Adresse
+   */
+  select?: Prisma.AdresseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Adresse
+   */
+  omit?: Prisma.AdresseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdresseInclude<ExtArgs> | null
+  where?: Prisma.AdresseWhereInput
+}
+
+/**
+ * Eleve.professionEleve
+ */
+export type Eleve$professionEleveArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProfessionEleve
+   */
+  select?: Prisma.ProfessionEleveSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProfessionEleve
+   */
+  omit?: Prisma.ProfessionEleveOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProfessionEleveInclude<ExtArgs> | null
+  where?: Prisma.ProfessionEleveWhereInput
+}
+
+/**
+ * Eleve.responsable
+ */
+export type Eleve$responsableArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Parent
+   */
+  select?: Prisma.ParentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Parent
+   */
+  omit?: Prisma.ParentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ParentInclude<ExtArgs> | null
+  where?: Prisma.ParentWhereInput
+}
+
+/**
+ * Eleve.classe
+ */
+export type Eleve$classeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Classe
+   */
+  select?: Prisma.ClasseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Classe
+   */
+  omit?: Prisma.ClasseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClasseInclude<ExtArgs> | null
+  where?: Prisma.ClasseWhereInput
+}
+
+/**
+ * Eleve.historiqueClasses
+ */
+export type Eleve$historiqueClassesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HistoriqueClasse
+   */
+  select?: Prisma.HistoriqueClasseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HistoriqueClasse
+   */
+  omit?: Prisma.HistoriqueClasseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HistoriqueClasseInclude<ExtArgs> | null
+  where?: Prisma.HistoriqueClasseWhereInput
+  orderBy?: Prisma.HistoriqueClasseOrderByWithRelationInput | Prisma.HistoriqueClasseOrderByWithRelationInput[]
+  cursor?: Prisma.HistoriqueClasseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HistoriqueClasseScalarFieldEnum | Prisma.HistoriqueClasseScalarFieldEnum[]
+}
+
+/**
+ * Eleve.parent
+ */
+export type Eleve$parentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Parent
+   */
+  select?: Prisma.ParentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Parent
+   */
+  omit?: Prisma.ParentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ParentInclude<ExtArgs> | null
+  where?: Prisma.ParentWhereInput
+}
+
+/**
+ * Eleve.deletedBy
+ */
+export type Eleve$deletedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
  * Eleve.admissions
  */
 export type Eleve$admissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3160,25 +6880,6 @@ export type Eleve$admissionsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.DossierAdmissionScalarFieldEnum | Prisma.DossierAdmissionScalarFieldEnum[]
-}
-
-/**
- * Eleve.parent
- */
-export type Eleve$parentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Parent
-   */
-  select?: Prisma.ParentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Parent
-   */
-  omit?: Prisma.ParentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ParentInclude<ExtArgs> | null
-  where?: Prisma.ParentWhereInput
 }
 
 /**
@@ -3347,6 +7048,73 @@ export type Eleve$autorisationParentsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.AutorisationParentScalarFieldEnum | Prisma.AutorisationParentScalarFieldEnum[]
+}
+
+/**
+ * Eleve.ecolages
+ */
+export type Eleve$ecolagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ecolage
+   */
+  select?: Prisma.EcolageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ecolage
+   */
+  omit?: Prisma.EcolageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EcolageInclude<ExtArgs> | null
+  where?: Prisma.EcolageWhereInput
+  orderBy?: Prisma.EcolageOrderByWithRelationInput | Prisma.EcolageOrderByWithRelationInput[]
+  cursor?: Prisma.EcolageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EcolageScalarFieldEnum | Prisma.EcolageScalarFieldEnum[]
+}
+
+/**
+ * Eleve.droitInscriptions
+ */
+export type Eleve$droitInscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DroitInscription
+   */
+  select?: Prisma.DroitInscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DroitInscription
+   */
+  omit?: Prisma.DroitInscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DroitInscriptionInclude<ExtArgs> | null
+  where?: Prisma.DroitInscriptionWhereInput
+  orderBy?: Prisma.DroitInscriptionOrderByWithRelationInput | Prisma.DroitInscriptionOrderByWithRelationInput[]
+  cursor?: Prisma.DroitInscriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DroitInscriptionScalarFieldEnum | Prisma.DroitInscriptionScalarFieldEnum[]
+}
+
+/**
+ * Eleve.user
+ */
+export type Eleve$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

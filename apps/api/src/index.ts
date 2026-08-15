@@ -1,17 +1,10 @@
 import express, { NextFunction, Request, Response } from "express"; // Importation d'Express pour créer le serveur API
 import cors from "cors"; // Importation de CORS pour gérer les requêtes cross-origin
+import helmet from "helmet";
 import path from "path";
 import { fileURLToPath } from "url";
 import multer from "multer";
 import { prisma } from "./lib/prisma.js";
-
-import {
-  getAllEleves,
-  createEleve,
-  getAllProfesseurs,
-  deleteEleve,
-  importEleves,
-} from "./controllers/elevesController.js"; // Importation du contrôleur pour les élèves
 
 import { getAdminDevoirs } from "./modules/cahierDeTexte/devoirs/devoir.controller.js"; // Importation du contrôleur pour les devoirs
 
@@ -35,11 +28,15 @@ import logistiqueRoutes from "./modules/logistique/logistique.routes.js"; // Imp
 import articleStockRoutes from "./modules/logistique/stocks/stocks.routes.js"; // Importation des routes pour la gestion des articles en stock
 import matieresRoutes from "./routes/matieresRoute.js"; // Importation des routes pour les matières
 
+// gestion eleves
+import elevesRoutes from "./modules/eleves/eleves.routes.js"; // Importation des routes pour la gestion des élèves
+
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 app.use(cors()); // Utilisation de CORS pour permettre les requêtes cross-origin
+app.use(helmet());
 app.use(express.json()); // Middleware pour parser les requêtes JSON
 
 app.use("/api/auth", authRoutes);
@@ -53,16 +50,45 @@ app.use("/api/documents", documentRoutes); // Ajout des routes pour les document
 app.use("/api/logistique", logistiqueRoutes); // Ajout des routes pour la logistique (locaux, stocks, inventaire, maintenance)
 app.use("/api/stocks", articleStockRoutes); // Ajout des routes pour la gestion des articles en stock
 
+app.use("/api/eleves", elevesRoutes); // Ajout des routes pour la gestion des élèves
+
+app.get(
+  "/api/professeurs",
+  authenticate,
+  async (req: Request, res: Response) => {
+    if (
+      req.user?.role !== "SUDO_ADMIN" &&
+      req.user?.role !== "ADMIN" &&
+      req.user?.role !== "PROF"
+    ) {
+      return res.status(403).json({ error: "Accès refusé" });
+    }
+
+    if (req.user?.role !== "SUDO_ADMIN" && !req.user?.schoolId) {
+      return res
+        .status(400)
+        .json({ error: "Aucune école associée à l'utilisateur." });
+    }
+
+    const where =
+      req.user?.role === "SUDO_ADMIN" || req.user?.role === "ADMIN"
+        ? req.user.schoolId ? { schoolId: req.user.schoolId } : {}
+        : { schoolId: req.user.schoolId!, userId: req.user.id };
+
+    const professeurs = await prisma.professeur.findMany({
+      where,
+      include: { classes: true, matieres: true },
+      orderBy: { nom: "asc" },
+    });
+
+    return res.status(200).json(professeurs);
+  },
+);
+
 app.use("/api/export", exportRoute);
 app.use("/api/periodes", periodeRoute);
 app.use("/api/signature", signatureRoute);
 app.use("/api", inscriptionRoutes); // Ajout des routes pour l'inscription et la réinscription (doit être après les routes spécifiques)
-
-app.get("/api/eleves", authenticate, getAllEleves);
-app.post("/api/eleves/import", authenticate, importEleves);
-app.post("/api/eleves", authenticate, createEleve);
-app.delete("/api/eleves/:id", authenticate, deleteEleve);
-app.get("/api/professeurs", authenticate, getAllProfesseurs);
 
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/bulletin-template", bulletinTemplateRoute);

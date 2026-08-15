@@ -501,48 +501,6 @@ export type AffectationTransportUncheckedUpdateManyWithoutSchoolNestedInput = {
   deleteMany?: Prisma.AffectationTransportScalarWhereInput | Prisma.AffectationTransportScalarWhereInput[]
 }
 
-export type AffectationTransportCreateNestedManyWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput> | Prisma.AffectationTransportCreateWithoutEleveInput[] | Prisma.AffectationTransportUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.AffectationTransportCreateOrConnectWithoutEleveInput | Prisma.AffectationTransportCreateOrConnectWithoutEleveInput[]
-  createMany?: Prisma.AffectationTransportCreateManyEleveInputEnvelope
-  connect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
-}
-
-export type AffectationTransportUncheckedCreateNestedManyWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput> | Prisma.AffectationTransportCreateWithoutEleveInput[] | Prisma.AffectationTransportUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.AffectationTransportCreateOrConnectWithoutEleveInput | Prisma.AffectationTransportCreateOrConnectWithoutEleveInput[]
-  createMany?: Prisma.AffectationTransportCreateManyEleveInputEnvelope
-  connect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
-}
-
-export type AffectationTransportUpdateManyWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput> | Prisma.AffectationTransportCreateWithoutEleveInput[] | Prisma.AffectationTransportUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.AffectationTransportCreateOrConnectWithoutEleveInput | Prisma.AffectationTransportCreateOrConnectWithoutEleveInput[]
-  upsert?: Prisma.AffectationTransportUpsertWithWhereUniqueWithoutEleveInput | Prisma.AffectationTransportUpsertWithWhereUniqueWithoutEleveInput[]
-  createMany?: Prisma.AffectationTransportCreateManyEleveInputEnvelope
-  set?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
-  disconnect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
-  delete?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
-  connect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
-  update?: Prisma.AffectationTransportUpdateWithWhereUniqueWithoutEleveInput | Prisma.AffectationTransportUpdateWithWhereUniqueWithoutEleveInput[]
-  updateMany?: Prisma.AffectationTransportUpdateManyWithWhereWithoutEleveInput | Prisma.AffectationTransportUpdateManyWithWhereWithoutEleveInput[]
-  deleteMany?: Prisma.AffectationTransportScalarWhereInput | Prisma.AffectationTransportScalarWhereInput[]
-}
-
-export type AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput> | Prisma.AffectationTransportCreateWithoutEleveInput[] | Prisma.AffectationTransportUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.AffectationTransportCreateOrConnectWithoutEleveInput | Prisma.AffectationTransportCreateOrConnectWithoutEleveInput[]
-  upsert?: Prisma.AffectationTransportUpsertWithWhereUniqueWithoutEleveInput | Prisma.AffectationTransportUpsertWithWhereUniqueWithoutEleveInput[]
-  createMany?: Prisma.AffectationTransportCreateManyEleveInputEnvelope
-  set?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
-  disconnect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
-  delete?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
-  connect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
-  update?: Prisma.AffectationTransportUpdateWithWhereUniqueWithoutEleveInput | Prisma.AffectationTransportUpdateWithWhereUniqueWithoutEleveInput[]
-  updateMany?: Prisma.AffectationTransportUpdateManyWithWhereWithoutEleveInput | Prisma.AffectationTransportUpdateManyWithWhereWithoutEleveInput[]
-  deleteMany?: Prisma.AffectationTransportScalarWhereInput | Prisma.AffectationTransportScalarWhereInput[]
-}
-
 export type AffectationTransportCreateNestedManyWithoutRouteInput = {
   create?: Prisma.XOR<Prisma.AffectationTransportCreateWithoutRouteInput, Prisma.AffectationTransportUncheckedCreateWithoutRouteInput> | Prisma.AffectationTransportCreateWithoutRouteInput[] | Prisma.AffectationTransportUncheckedCreateWithoutRouteInput[]
   connectOrCreate?: Prisma.AffectationTransportCreateOrConnectWithoutRouteInput | Prisma.AffectationTransportCreateOrConnectWithoutRouteInput[]
@@ -587,6 +545,48 @@ export type AffectationTransportUncheckedUpdateManyWithoutRouteNestedInput = {
 
 export type EnumStatutAffectationFieldUpdateOperationsInput = {
   set?: $Enums.StatutAffectation
+}
+
+export type AffectationTransportCreateNestedManyWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput> | Prisma.AffectationTransportCreateWithoutEleveInput[] | Prisma.AffectationTransportUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.AffectationTransportCreateOrConnectWithoutEleveInput | Prisma.AffectationTransportCreateOrConnectWithoutEleveInput[]
+  createMany?: Prisma.AffectationTransportCreateManyEleveInputEnvelope
+  connect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
+}
+
+export type AffectationTransportUncheckedCreateNestedManyWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput> | Prisma.AffectationTransportCreateWithoutEleveInput[] | Prisma.AffectationTransportUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.AffectationTransportCreateOrConnectWithoutEleveInput | Prisma.AffectationTransportCreateOrConnectWithoutEleveInput[]
+  createMany?: Prisma.AffectationTransportCreateManyEleveInputEnvelope
+  connect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
+}
+
+export type AffectationTransportUpdateManyWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput> | Prisma.AffectationTransportCreateWithoutEleveInput[] | Prisma.AffectationTransportUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.AffectationTransportCreateOrConnectWithoutEleveInput | Prisma.AffectationTransportCreateOrConnectWithoutEleveInput[]
+  upsert?: Prisma.AffectationTransportUpsertWithWhereUniqueWithoutEleveInput | Prisma.AffectationTransportUpsertWithWhereUniqueWithoutEleveInput[]
+  createMany?: Prisma.AffectationTransportCreateManyEleveInputEnvelope
+  set?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
+  disconnect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
+  delete?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
+  connect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
+  update?: Prisma.AffectationTransportUpdateWithWhereUniqueWithoutEleveInput | Prisma.AffectationTransportUpdateWithWhereUniqueWithoutEleveInput[]
+  updateMany?: Prisma.AffectationTransportUpdateManyWithWhereWithoutEleveInput | Prisma.AffectationTransportUpdateManyWithWhereWithoutEleveInput[]
+  deleteMany?: Prisma.AffectationTransportScalarWhereInput | Prisma.AffectationTransportScalarWhereInput[]
+}
+
+export type AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput> | Prisma.AffectationTransportCreateWithoutEleveInput[] | Prisma.AffectationTransportUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.AffectationTransportCreateOrConnectWithoutEleveInput | Prisma.AffectationTransportCreateOrConnectWithoutEleveInput[]
+  upsert?: Prisma.AffectationTransportUpsertWithWhereUniqueWithoutEleveInput | Prisma.AffectationTransportUpsertWithWhereUniqueWithoutEleveInput[]
+  createMany?: Prisma.AffectationTransportCreateManyEleveInputEnvelope
+  set?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
+  disconnect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
+  delete?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
+  connect?: Prisma.AffectationTransportWhereUniqueInput | Prisma.AffectationTransportWhereUniqueInput[]
+  update?: Prisma.AffectationTransportUpdateWithWhereUniqueWithoutEleveInput | Prisma.AffectationTransportUpdateWithWhereUniqueWithoutEleveInput[]
+  updateMany?: Prisma.AffectationTransportUpdateManyWithWhereWithoutEleveInput | Prisma.AffectationTransportUpdateManyWithWhereWithoutEleveInput[]
+  deleteMany?: Prisma.AffectationTransportScalarWhereInput | Prisma.AffectationTransportScalarWhereInput[]
 }
 
 export type AffectationTransportCreateWithoutSchoolInput = {
@@ -658,58 +658,6 @@ export type AffectationTransportScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"AffectationTransport"> | Date | string
 }
 
-export type AffectationTransportCreateWithoutEleveInput = {
-  id?: string
-  arretMontee?: string | null
-  arretDescente?: string | null
-  statut?: $Enums.StatutAffectation
-  dateDebut?: Date | string
-  dateFin?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  route: Prisma.RouteCreateNestedOneWithoutAffectationsInput
-  school: Prisma.SchoolCreateNestedOneWithoutAffectationTransportsInput
-}
-
-export type AffectationTransportUncheckedCreateWithoutEleveInput = {
-  id?: string
-  routeId: string
-  arretMontee?: string | null
-  arretDescente?: string | null
-  statut?: $Enums.StatutAffectation
-  dateDebut?: Date | string
-  dateFin?: Date | string | null
-  schoolId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type AffectationTransportCreateOrConnectWithoutEleveInput = {
-  where: Prisma.AffectationTransportWhereUniqueInput
-  create: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput>
-}
-
-export type AffectationTransportCreateManyEleveInputEnvelope = {
-  data: Prisma.AffectationTransportCreateManyEleveInput | Prisma.AffectationTransportCreateManyEleveInput[]
-  skipDuplicates?: boolean
-}
-
-export type AffectationTransportUpsertWithWhereUniqueWithoutEleveInput = {
-  where: Prisma.AffectationTransportWhereUniqueInput
-  update: Prisma.XOR<Prisma.AffectationTransportUpdateWithoutEleveInput, Prisma.AffectationTransportUncheckedUpdateWithoutEleveInput>
-  create: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput>
-}
-
-export type AffectationTransportUpdateWithWhereUniqueWithoutEleveInput = {
-  where: Prisma.AffectationTransportWhereUniqueInput
-  data: Prisma.XOR<Prisma.AffectationTransportUpdateWithoutEleveInput, Prisma.AffectationTransportUncheckedUpdateWithoutEleveInput>
-}
-
-export type AffectationTransportUpdateManyWithWhereWithoutEleveInput = {
-  where: Prisma.AffectationTransportScalarWhereInput
-  data: Prisma.XOR<Prisma.AffectationTransportUpdateManyMutationInput, Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveInput>
-}
-
 export type AffectationTransportCreateWithoutRouteInput = {
   id?: string
   arretMontee?: string | null
@@ -760,6 +708,58 @@ export type AffectationTransportUpdateWithWhereUniqueWithoutRouteInput = {
 export type AffectationTransportUpdateManyWithWhereWithoutRouteInput = {
   where: Prisma.AffectationTransportScalarWhereInput
   data: Prisma.XOR<Prisma.AffectationTransportUpdateManyMutationInput, Prisma.AffectationTransportUncheckedUpdateManyWithoutRouteInput>
+}
+
+export type AffectationTransportCreateWithoutEleveInput = {
+  id?: string
+  arretMontee?: string | null
+  arretDescente?: string | null
+  statut?: $Enums.StatutAffectation
+  dateDebut?: Date | string
+  dateFin?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  route: Prisma.RouteCreateNestedOneWithoutAffectationsInput
+  school: Prisma.SchoolCreateNestedOneWithoutAffectationTransportsInput
+}
+
+export type AffectationTransportUncheckedCreateWithoutEleveInput = {
+  id?: string
+  routeId: string
+  arretMontee?: string | null
+  arretDescente?: string | null
+  statut?: $Enums.StatutAffectation
+  dateDebut?: Date | string
+  dateFin?: Date | string | null
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AffectationTransportCreateOrConnectWithoutEleveInput = {
+  where: Prisma.AffectationTransportWhereUniqueInput
+  create: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput>
+}
+
+export type AffectationTransportCreateManyEleveInputEnvelope = {
+  data: Prisma.AffectationTransportCreateManyEleveInput | Prisma.AffectationTransportCreateManyEleveInput[]
+  skipDuplicates?: boolean
+}
+
+export type AffectationTransportUpsertWithWhereUniqueWithoutEleveInput = {
+  where: Prisma.AffectationTransportWhereUniqueInput
+  update: Prisma.XOR<Prisma.AffectationTransportUpdateWithoutEleveInput, Prisma.AffectationTransportUncheckedUpdateWithoutEleveInput>
+  create: Prisma.XOR<Prisma.AffectationTransportCreateWithoutEleveInput, Prisma.AffectationTransportUncheckedCreateWithoutEleveInput>
+}
+
+export type AffectationTransportUpdateWithWhereUniqueWithoutEleveInput = {
+  where: Prisma.AffectationTransportWhereUniqueInput
+  data: Prisma.XOR<Prisma.AffectationTransportUpdateWithoutEleveInput, Prisma.AffectationTransportUncheckedUpdateWithoutEleveInput>
+}
+
+export type AffectationTransportUpdateManyWithWhereWithoutEleveInput = {
+  where: Prisma.AffectationTransportScalarWhereInput
+  data: Prisma.XOR<Prisma.AffectationTransportUpdateManyMutationInput, Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveInput>
 }
 
 export type AffectationTransportCreateManySchoolInput = {
@@ -814,58 +814,6 @@ export type AffectationTransportUncheckedUpdateManyWithoutSchoolInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type AffectationTransportCreateManyEleveInput = {
-  id?: string
-  routeId: string
-  arretMontee?: string | null
-  arretDescente?: string | null
-  statut?: $Enums.StatutAffectation
-  dateDebut?: Date | string
-  dateFin?: Date | string | null
-  schoolId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type AffectationTransportUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  arretMontee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  arretDescente?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statut?: Prisma.EnumStatutAffectationFieldUpdateOperationsInput | $Enums.StatutAffectation
-  dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  route?: Prisma.RouteUpdateOneRequiredWithoutAffectationsNestedInput
-  school?: Prisma.SchoolUpdateOneRequiredWithoutAffectationTransportsNestedInput
-}
-
-export type AffectationTransportUncheckedUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  routeId?: Prisma.StringFieldUpdateOperationsInput | string
-  arretMontee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  arretDescente?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statut?: Prisma.EnumStatutAffectationFieldUpdateOperationsInput | $Enums.StatutAffectation
-  dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type AffectationTransportUncheckedUpdateManyWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  routeId?: Prisma.StringFieldUpdateOperationsInput | string
-  arretMontee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  arretDescente?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statut?: Prisma.EnumStatutAffectationFieldUpdateOperationsInput | $Enums.StatutAffectation
-  dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type AffectationTransportCreateManyRouteInput = {
   id?: string
   eleveId: string
@@ -908,6 +856,58 @@ export type AffectationTransportUncheckedUpdateWithoutRouteInput = {
 export type AffectationTransportUncheckedUpdateManyWithoutRouteInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
+  arretMontee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arretDescente?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutAffectationFieldUpdateOperationsInput | $Enums.StatutAffectation
+  dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AffectationTransportCreateManyEleveInput = {
+  id?: string
+  routeId: string
+  arretMontee?: string | null
+  arretDescente?: string | null
+  statut?: $Enums.StatutAffectation
+  dateDebut?: Date | string
+  dateFin?: Date | string | null
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AffectationTransportUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  arretMontee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arretDescente?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutAffectationFieldUpdateOperationsInput | $Enums.StatutAffectation
+  dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  route?: Prisma.RouteUpdateOneRequiredWithoutAffectationsNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutAffectationTransportsNestedInput
+}
+
+export type AffectationTransportUncheckedUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
+  arretMontee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arretDescente?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutAffectationFieldUpdateOperationsInput | $Enums.StatutAffectation
+  dateDebut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateFin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AffectationTransportUncheckedUpdateManyWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  routeId?: Prisma.StringFieldUpdateOperationsInput | string
   arretMontee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   arretDescente?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statut?: Prisma.EnumStatutAffectationFieldUpdateOperationsInput | $Enums.StatutAffectation

@@ -83,6 +83,38 @@ async function main() {
   });
   console.log(`ADMIN créé : ${adminUser.email}`);
 
+  // ── ARIELATRA : nouvelle école sans données supplémentaires ─────────────────────────────────────
+  const arielatraPassword = await bcrypt.hash(
+    resolvePassword("ARIELATRA_ADMIN_PASSWORD"),
+    12,
+  );
+
+  const arielatraSchool = await prisma.school.upsert({
+    where: { tenantKey: "arielatra" },
+    update: {},
+    create: {
+      nom: "ARIELATRA",
+      tenantKey: "arielatra",
+    },
+  });
+  console.log(
+    `École ARIELATRA créée : ${arielatraSchool.nom} (${arielatraSchool.id})`,
+  );
+
+  const arielatraAdmin = await prisma.user.upsert({
+    where: { email: "rivo@school.local" },
+    update: { password: arielatraPassword, schoolId: arielatraSchool.id },
+    create: {
+      email: "rivo@school.local",
+      password: arielatraPassword,
+      nom: "RIVO",
+      prenom: "Admin",
+      role: "ADMIN",
+      schoolId: arielatraSchool.id,
+    },
+  });
+  console.log(`ADMIN ARIELATRA créé : ${arielatraAdmin.email}`);
+
   // Compte PROF : peut se connecter et saisir des notes
   const profPassword = await bcrypt.hash(resolvePassword("PROF_PASSWORD"), 12);
   const profUser = await prisma.user.upsert({
@@ -119,31 +151,49 @@ async function main() {
   });
 
   // ── D. Création des élèves ────────────────────────────────────────────────
-  // createMany ne supporte pas l'upsert, on itère pour être idempotent
+  // On génère le matricule par école, comme dans la logique de création métier,
+  // pour éviter les collisions entre écoles et conserver un identifiant cohérent.
+  const lastMatricule = await prisma.eleve.findFirst({
+    where: { schoolId: school.id },
+    orderBy: { matricule: "desc" },
+    select: { matricule: true },
+  });
+  const baseMatricule = lastMatricule?.matricule ?? 0;
+
   const elevesData = [
     { nom: "Randria", prenom: "Jean Jacques", classeId: classe6A.id },
     { nom: "Sitraka", prenom: "Jean Dauphin", classeId: classe6A.id },
     { nom: "Soa", prenom: "Jean De Dieu", classeId: classe5B.id },
   ];
-  for (const e of elevesData) {
-    await prisma.eleve.upsert({
+  for (const [index, e] of elevesData.entries()) {
+    const existingEleve = await prisma.eleve.findFirst({
       where: {
-        schoolId_nom_prenom: {
-          schoolId: school.id,
-          nom: e.nom,
-          prenom: e.prenom,
-        },
+        schoolId: school.id,
+        nom: e.nom,
+        prenom: e.prenom,
       },
-      update: {},
-      create: { ...e, schoolId: school.id },
     });
+
+    if (!existingEleve) {
+      await prisma.eleve.create({
+        data: {
+          ...e,
+          matricule: baseMatricule + index + 1,
+          schoolId: school.id,
+        },
+      });
+    }
   }
 
   // ── E. Création des matières ───────────────────────────────────────────────
   const matieresMath = await prisma.matiere.upsert({
     where: { classeId_nom: { classeId: classe6A.id, nom: "Mathématiques" } },
     update: {},
-    create: { nom: "Mathématiques", classeId: classe6A.id, schoolId: school.id },
+    create: {
+      nom: "Mathématiques",
+      classeId: classe6A.id,
+      schoolId: school.id,
+    },
   });
   const matieresPhysique = await prisma.matiere.upsert({
     where: { classeId_nom: { classeId: classe6A.id, nom: "Physique" } },

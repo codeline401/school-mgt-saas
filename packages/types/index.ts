@@ -739,3 +739,213 @@ export const DEFAULT_EXPORT_OPTIONS: ExportOptions = {
   includeGraphs: false,
   primaryColor: null,
 };
+
+// ═══════════════════════════════════════════════════════════════════
+// TYPES FICHE ÉLÈVE COMPLÈTE
+// ═══════════════════════════════════════════════════════════════════
+
+export interface Adresse {
+  id: string;
+  fokontany?: string | null;
+  logement?: string | null;
+  ville?: string | null;
+  region?: string | null;
+  pays?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProfessionEleve {
+  id: string;
+  titre?: string | null;
+  lieu?: string | null;
+  secteur?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface HistoriqueClasse {
+  id: string;
+  eleveId: string;
+  classeId: string | null;
+  anneeScolaire: string;
+  statutFinAnnee?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  classe: {
+    id: string;
+    nom: string;
+  } | null;
+}
+
+export interface DroitInscription {
+  id: string;
+  anneeScolaire: string;
+  montant: string;
+  eleveId: string;
+  classeId?: string | null;
+  schoolId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Ecolage {
+  id: string;
+  anneeScolaire: string;
+  mois: number;
+  montant: string;
+  eleveId: string;
+  classeId?: string | null;
+  schoolId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FicheEleveComplete extends BaseEntity {
+  matricule: number;
+  nom: string;
+  prenom: string;
+  genre?: "MASCULIN" | "FEMININ" | null;
+  dateNaissance?: string | null;
+  lieuNaissance?: string | null;
+  telephone?: string | null;
+  photoUrl?: string | null;
+  situationFamiliale?: "CELIBATAIRE" | "MARIE" | "DIVORCE" | "AUTRE" | null;
+  situationFinAnnee?:
+    | "EN_COURS"
+    | "ADMIS"
+    | "REDOUBLE"
+    | "RENVOYE"
+    | "REORIENTE"
+    | "QUITTE"
+    | null;
+  nationalite?: string | null;
+  dateInscription?: string | null;
+  ecoleOrigine?: string | null;
+  responsableId?: string | null;
+  classeId?: string | null;
+  parentId?: string | null;
+  statut: "ACTIF" | "INACTIF" | "INSCRIT" | "SUSPENDU" | "DIPLOME" | "ABANDON";
+  isRelationContact: boolean;
+  relationName?: string | null;
+  relationTelephone?: string | null;
+  remarque?: string | null;
+  deletedAt?: string | null;
+  deletedById?: string | null;
+
+  // Relations
+  school: {
+    id: string;
+    nom: string;
+    email?: string | null;
+    telephone?: string | null;
+    adresse?: string | null;
+    logoUrl?: string | null;
+  };
+  classe?: {
+    id: string;
+    nom: string;
+    schoolId: string;
+    professeurPrincipalId?: string | null;
+    professeurPrincipal?: {
+      id: string;
+      nom: string;
+      prenom: string;
+    } | null;
+  } | null;
+  parent?: {
+    id: string;
+    nom: string;
+    prenom: string;
+    email?: string | null;
+    telephone?: string | null;
+    adresse?: string | null;
+  } | null;
+  responsable?: {
+    id: string;
+    nom: string;
+    prenom: string;
+    email?: string | null;
+    telephone?: string | null;
+  } | null;
+  adresse?: Adresse | null;
+  professionEleve?: ProfessionEleve | null;
+  historiqueClasses: HistoriqueClasse[];
+  admissions: DossierAdmission[];
+  droitInscriptions: DroitInscription[];
+  ecolages: Ecolage[];
+  notes: Array<{
+    id: string;
+    note: string;
+    coefficient: number;
+    matiere: {
+      id: string;
+      nom: string;
+    };
+    periode: {
+      id: string;
+      nom: string;
+    } | null;
+  }>;
+  presences: Array<{
+    id: string;
+    date: string;
+    statut: string;
+  }>;
+  user?: {
+    id: string;
+    email: string;
+    role: string;
+    telephone?: string | null;
+    photoUrl?: string | null;
+  } | null;
+
+  // Champs calculés
+  age?: number | null;
+  fullName: string;
+}
+
+// Payload pour créer/modifier un élève
+export interface CreateEleveInput {
+  nom: string;
+  prenom: string;
+  genre?: "MASCULIN" | "FEMININ" | null;
+  dateNaissance?: string | null;
+  lieuNaissance?: string | null;
+  telephone?: string | null;
+  photoUrl?: string | null;
+  situationFamiliale?: "CELIBATAIRE" | "MARIE" | "DIVORCE" | "AUTRE" | null;
+  situationFinAnnee?:
+    | "EN_COURS"
+    | "ADMIS"
+    | "REDOUBLE"
+    | "RENVOYE"
+    | "REORIENTE"
+    | "QUITTE"
+    | null;
+  nationalite?: string | null;
+  dateInscription?: string | null;
+  ecoleOrigine?: string | null;
+  responsableId?: string | null;
+  classeId?: string | null;
+  parentId?: string | null;
+  statut?: "ACTIF" | "INACTIF" | "INSCRIT" | "SUSPENDU" | "DIPLOME" | "ABANDON";
+  isRelationContact?: boolean;
+  relationName?: string | null;
+  relationTelephone?: string | null;
+  remarque?: string | null;
+  adresse?: {
+    fokontany?: string | null;
+    logement?: string | null;
+    ville?: string | null;
+    region?: string | null;
+    pays?: string | null;
+  };
+  professionEleve?: {
+    titre?: string | null;
+    lieu?: string | null;
+    secteur?: string | null;
+  };
+}
+
+export type UpdateEleveInput = Partial<CreateEleveInput>;

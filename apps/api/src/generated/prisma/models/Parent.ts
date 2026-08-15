@@ -223,9 +223,11 @@ export type ParentWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Parent"> | Date | string
   userId?: Prisma.StringNullableFilter<"Parent"> | string | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
-  eleves?: Prisma.EleveListRelationFilter
+  elevesEnfants?: Prisma.EleveListRelationFilter
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   autorisationParents?: Prisma.AutorisationParentListRelationFilter
+  adresses?: Prisma.AdresseListRelationFilter
+  eleves?: Prisma.EleveListRelationFilter
 }
 
 export type ParentOrderByWithRelationInput = {
@@ -240,9 +242,11 @@ export type ParentOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   school?: Prisma.SchoolOrderByWithRelationInput
-  eleves?: Prisma.EleveOrderByRelationAggregateInput
+  elevesEnfants?: Prisma.EleveOrderByRelationAggregateInput
   user?: Prisma.UserOrderByWithRelationInput
   autorisationParents?: Prisma.AutorisationParentOrderByRelationAggregateInput
+  adresses?: Prisma.AdresseOrderByRelationAggregateInput
+  eleves?: Prisma.EleveOrderByRelationAggregateInput
 }
 
 export type ParentWhereUniqueInput = Prisma.AtLeast<{
@@ -260,9 +264,11 @@ export type ParentWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Parent"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Parent"> | Date | string
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
-  eleves?: Prisma.EleveListRelationFilter
+  elevesEnfants?: Prisma.EleveListRelationFilter
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   autorisationParents?: Prisma.AutorisationParentListRelationFilter
+  adresses?: Prisma.AdresseListRelationFilter
+  eleves?: Prisma.EleveListRelationFilter
 }, "id" | "userId">
 
 export type ParentOrderByWithAggregationInput = {
@@ -307,9 +313,11 @@ export type ParentCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   school: Prisma.SchoolCreateNestedOneWithoutParentsInput
-  eleves?: Prisma.EleveCreateNestedManyWithoutParentInput
+  elevesEnfants?: Prisma.EleveCreateNestedManyWithoutParentInput
   user?: Prisma.UserCreateNestedOneWithoutParentInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
 }
 
 export type ParentUncheckedCreateInput = {
@@ -323,8 +331,10 @@ export type ParentUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userId?: string | null
-  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
+  elevesEnfants?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
 }
 
 export type ParentUpdateInput = {
@@ -337,9 +347,11 @@ export type ParentUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   school?: Prisma.SchoolUpdateOneRequiredWithoutParentsNestedInput
-  eleves?: Prisma.EleveUpdateManyWithoutParentNestedInput
+  elevesEnfants?: Prisma.EleveUpdateManyWithoutParentNestedInput
   user?: Prisma.UserUpdateOneWithoutParentNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
 }
 
 export type ParentUncheckedUpdateInput = {
@@ -353,8 +365,10 @@ export type ParentUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eleves?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
+  elevesEnfants?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
 }
 
 export type ParentCreateManyInput = {
@@ -527,22 +541,6 @@ export type ParentUncheckedUpdateManyWithoutSchoolNestedInput = {
   deleteMany?: Prisma.ParentScalarWhereInput | Prisma.ParentScalarWhereInput[]
 }
 
-export type ParentCreateNestedOneWithoutElevesInput = {
-  create?: Prisma.XOR<Prisma.ParentCreateWithoutElevesInput, Prisma.ParentUncheckedCreateWithoutElevesInput>
-  connectOrCreate?: Prisma.ParentCreateOrConnectWithoutElevesInput
-  connect?: Prisma.ParentWhereUniqueInput
-}
-
-export type ParentUpdateOneWithoutElevesNestedInput = {
-  create?: Prisma.XOR<Prisma.ParentCreateWithoutElevesInput, Prisma.ParentUncheckedCreateWithoutElevesInput>
-  connectOrCreate?: Prisma.ParentCreateOrConnectWithoutElevesInput
-  upsert?: Prisma.ParentUpsertWithoutElevesInput
-  disconnect?: Prisma.ParentWhereInput | boolean
-  delete?: Prisma.ParentWhereInput | boolean
-  connect?: Prisma.ParentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ParentUpdateToOneWithWhereWithoutElevesInput, Prisma.ParentUpdateWithoutElevesInput>, Prisma.ParentUncheckedUpdateWithoutElevesInput>
-}
-
 export type ParentCreateNestedOneWithoutAutorisationParentsInput = {
   create?: Prisma.XOR<Prisma.ParentCreateWithoutAutorisationParentsInput, Prisma.ParentUncheckedCreateWithoutAutorisationParentsInput>
   connectOrCreate?: Prisma.ParentCreateOrConnectWithoutAutorisationParentsInput
@@ -557,6 +555,54 @@ export type ParentUpdateOneRequiredWithoutAutorisationParentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ParentUpdateToOneWithWhereWithoutAutorisationParentsInput, Prisma.ParentUpdateWithoutAutorisationParentsInput>, Prisma.ParentUncheckedUpdateWithoutAutorisationParentsInput>
 }
 
+export type ParentCreateNestedOneWithoutElevesInput = {
+  create?: Prisma.XOR<Prisma.ParentCreateWithoutElevesInput, Prisma.ParentUncheckedCreateWithoutElevesInput>
+  connectOrCreate?: Prisma.ParentCreateOrConnectWithoutElevesInput
+  connect?: Prisma.ParentWhereUniqueInput
+}
+
+export type ParentCreateNestedOneWithoutElevesEnfantsInput = {
+  create?: Prisma.XOR<Prisma.ParentCreateWithoutElevesEnfantsInput, Prisma.ParentUncheckedCreateWithoutElevesEnfantsInput>
+  connectOrCreate?: Prisma.ParentCreateOrConnectWithoutElevesEnfantsInput
+  connect?: Prisma.ParentWhereUniqueInput
+}
+
+export type ParentUpdateOneWithoutElevesNestedInput = {
+  create?: Prisma.XOR<Prisma.ParentCreateWithoutElevesInput, Prisma.ParentUncheckedCreateWithoutElevesInput>
+  connectOrCreate?: Prisma.ParentCreateOrConnectWithoutElevesInput
+  upsert?: Prisma.ParentUpsertWithoutElevesInput
+  disconnect?: Prisma.ParentWhereInput | boolean
+  delete?: Prisma.ParentWhereInput | boolean
+  connect?: Prisma.ParentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ParentUpdateToOneWithWhereWithoutElevesInput, Prisma.ParentUpdateWithoutElevesInput>, Prisma.ParentUncheckedUpdateWithoutElevesInput>
+}
+
+export type ParentUpdateOneWithoutElevesEnfantsNestedInput = {
+  create?: Prisma.XOR<Prisma.ParentCreateWithoutElevesEnfantsInput, Prisma.ParentUncheckedCreateWithoutElevesEnfantsInput>
+  connectOrCreate?: Prisma.ParentCreateOrConnectWithoutElevesEnfantsInput
+  upsert?: Prisma.ParentUpsertWithoutElevesEnfantsInput
+  disconnect?: Prisma.ParentWhereInput | boolean
+  delete?: Prisma.ParentWhereInput | boolean
+  connect?: Prisma.ParentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ParentUpdateToOneWithWhereWithoutElevesEnfantsInput, Prisma.ParentUpdateWithoutElevesEnfantsInput>, Prisma.ParentUncheckedUpdateWithoutElevesEnfantsInput>
+}
+
+export type ParentCreateNestedOneWithoutAdressesInput = {
+  create?: Prisma.XOR<Prisma.ParentCreateWithoutAdressesInput, Prisma.ParentUncheckedCreateWithoutAdressesInput>
+  connectOrCreate?: Prisma.ParentCreateOrConnectWithoutAdressesInput
+  connect?: Prisma.ParentWhereUniqueInput
+}
+
+export type ParentUpdateOneWithoutAdressesNestedInput = {
+  create?: Prisma.XOR<Prisma.ParentCreateWithoutAdressesInput, Prisma.ParentUncheckedCreateWithoutAdressesInput>
+  connectOrCreate?: Prisma.ParentCreateOrConnectWithoutAdressesInput
+  upsert?: Prisma.ParentUpsertWithoutAdressesInput
+  disconnect?: Prisma.ParentWhereInput | boolean
+  delete?: Prisma.ParentWhereInput | boolean
+  connect?: Prisma.ParentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ParentUpdateToOneWithWhereWithoutAdressesInput, Prisma.ParentUpdateWithoutAdressesInput>, Prisma.ParentUncheckedUpdateWithoutAdressesInput>
+}
+
 export type ParentCreateWithoutUserInput = {
   id?: string
   nom: string
@@ -567,8 +613,10 @@ export type ParentCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   school: Prisma.SchoolCreateNestedOneWithoutParentsInput
-  eleves?: Prisma.EleveCreateNestedManyWithoutParentInput
+  elevesEnfants?: Prisma.EleveCreateNestedManyWithoutParentInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
 }
 
 export type ParentUncheckedCreateWithoutUserInput = {
@@ -581,8 +629,10 @@ export type ParentUncheckedCreateWithoutUserInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
+  elevesEnfants?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
 }
 
 export type ParentCreateOrConnectWithoutUserInput = {
@@ -611,8 +661,10 @@ export type ParentUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   school?: Prisma.SchoolUpdateOneRequiredWithoutParentsNestedInput
-  eleves?: Prisma.EleveUpdateManyWithoutParentNestedInput
+  elevesEnfants?: Prisma.EleveUpdateManyWithoutParentNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
 }
 
 export type ParentUncheckedUpdateWithoutUserInput = {
@@ -625,8 +677,10 @@ export type ParentUncheckedUpdateWithoutUserInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  eleves?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
+  elevesEnfants?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
 }
 
 export type ParentCreateWithoutSchoolInput = {
@@ -638,9 +692,11 @@ export type ParentCreateWithoutSchoolInput = {
   adresse?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  eleves?: Prisma.EleveCreateNestedManyWithoutParentInput
+  elevesEnfants?: Prisma.EleveCreateNestedManyWithoutParentInput
   user?: Prisma.UserCreateNestedOneWithoutParentInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
 }
 
 export type ParentUncheckedCreateWithoutSchoolInput = {
@@ -653,8 +709,10 @@ export type ParentUncheckedCreateWithoutSchoolInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userId?: string | null
-  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
+  elevesEnfants?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
 }
 
 export type ParentCreateOrConnectWithoutSchoolInput = {
@@ -699,78 +757,6 @@ export type ParentScalarWhereInput = {
   userId?: Prisma.StringNullableFilter<"Parent"> | string | null
 }
 
-export type ParentCreateWithoutElevesInput = {
-  id?: string
-  nom: string
-  prenom: string
-  email?: string | null
-  telephone?: string | null
-  adresse?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  school: Prisma.SchoolCreateNestedOneWithoutParentsInput
-  user?: Prisma.UserCreateNestedOneWithoutParentInput
-  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
-}
-
-export type ParentUncheckedCreateWithoutElevesInput = {
-  id?: string
-  nom: string
-  prenom: string
-  email?: string | null
-  telephone?: string | null
-  adresse?: string | null
-  schoolId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  userId?: string | null
-  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
-}
-
-export type ParentCreateOrConnectWithoutElevesInput = {
-  where: Prisma.ParentWhereUniqueInput
-  create: Prisma.XOR<Prisma.ParentCreateWithoutElevesInput, Prisma.ParentUncheckedCreateWithoutElevesInput>
-}
-
-export type ParentUpsertWithoutElevesInput = {
-  update: Prisma.XOR<Prisma.ParentUpdateWithoutElevesInput, Prisma.ParentUncheckedUpdateWithoutElevesInput>
-  create: Prisma.XOR<Prisma.ParentCreateWithoutElevesInput, Prisma.ParentUncheckedCreateWithoutElevesInput>
-  where?: Prisma.ParentWhereInput
-}
-
-export type ParentUpdateToOneWithWhereWithoutElevesInput = {
-  where?: Prisma.ParentWhereInput
-  data: Prisma.XOR<Prisma.ParentUpdateWithoutElevesInput, Prisma.ParentUncheckedUpdateWithoutElevesInput>
-}
-
-export type ParentUpdateWithoutElevesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  prenom?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  school?: Prisma.SchoolUpdateOneRequiredWithoutParentsNestedInput
-  user?: Prisma.UserUpdateOneWithoutParentNestedInput
-  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
-}
-
-export type ParentUncheckedUpdateWithoutElevesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  prenom?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
-}
-
 export type ParentCreateWithoutAutorisationParentsInput = {
   id?: string
   nom: string
@@ -781,8 +767,10 @@ export type ParentCreateWithoutAutorisationParentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   school: Prisma.SchoolCreateNestedOneWithoutParentsInput
-  eleves?: Prisma.EleveCreateNestedManyWithoutParentInput
+  elevesEnfants?: Prisma.EleveCreateNestedManyWithoutParentInput
   user?: Prisma.UserCreateNestedOneWithoutParentInput
+  adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
 }
 
 export type ParentUncheckedCreateWithoutAutorisationParentsInput = {
@@ -796,7 +784,9 @@ export type ParentUncheckedCreateWithoutAutorisationParentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userId?: string | null
-  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
+  elevesEnfants?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
 }
 
 export type ParentCreateOrConnectWithoutAutorisationParentsInput = {
@@ -825,8 +815,10 @@ export type ParentUpdateWithoutAutorisationParentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   school?: Prisma.SchoolUpdateOneRequiredWithoutParentsNestedInput
-  eleves?: Prisma.EleveUpdateManyWithoutParentNestedInput
+  elevesEnfants?: Prisma.EleveUpdateManyWithoutParentNestedInput
   user?: Prisma.UserUpdateOneWithoutParentNestedInput
+  adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
 }
 
 export type ParentUncheckedUpdateWithoutAutorisationParentsInput = {
@@ -840,7 +832,249 @@ export type ParentUncheckedUpdateWithoutAutorisationParentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eleves?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
+  elevesEnfants?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
+}
+
+export type ParentCreateWithoutElevesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutParentsInput
+  elevesEnfants?: Prisma.EleveCreateNestedManyWithoutParentInput
+  user?: Prisma.UserCreateNestedOneWithoutParentInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
+}
+
+export type ParentUncheckedCreateWithoutElevesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId?: string | null
+  elevesEnfants?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
+}
+
+export type ParentCreateOrConnectWithoutElevesInput = {
+  where: Prisma.ParentWhereUniqueInput
+  create: Prisma.XOR<Prisma.ParentCreateWithoutElevesInput, Prisma.ParentUncheckedCreateWithoutElevesInput>
+}
+
+export type ParentCreateWithoutElevesEnfantsInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutParentsInput
+  user?: Prisma.UserCreateNestedOneWithoutParentInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
+}
+
+export type ParentUncheckedCreateWithoutElevesEnfantsInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId?: string | null
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
+}
+
+export type ParentCreateOrConnectWithoutElevesEnfantsInput = {
+  where: Prisma.ParentWhereUniqueInput
+  create: Prisma.XOR<Prisma.ParentCreateWithoutElevesEnfantsInput, Prisma.ParentUncheckedCreateWithoutElevesEnfantsInput>
+}
+
+export type ParentUpsertWithoutElevesInput = {
+  update: Prisma.XOR<Prisma.ParentUpdateWithoutElevesInput, Prisma.ParentUncheckedUpdateWithoutElevesInput>
+  create: Prisma.XOR<Prisma.ParentCreateWithoutElevesInput, Prisma.ParentUncheckedCreateWithoutElevesInput>
+  where?: Prisma.ParentWhereInput
+}
+
+export type ParentUpdateToOneWithWhereWithoutElevesInput = {
+  where?: Prisma.ParentWhereInput
+  data: Prisma.XOR<Prisma.ParentUpdateWithoutElevesInput, Prisma.ParentUncheckedUpdateWithoutElevesInput>
+}
+
+export type ParentUpdateWithoutElevesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutParentsNestedInput
+  elevesEnfants?: Prisma.EleveUpdateManyWithoutParentNestedInput
+  user?: Prisma.UserUpdateOneWithoutParentNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
+}
+
+export type ParentUncheckedUpdateWithoutElevesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elevesEnfants?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
+}
+
+export type ParentUpsertWithoutElevesEnfantsInput = {
+  update: Prisma.XOR<Prisma.ParentUpdateWithoutElevesEnfantsInput, Prisma.ParentUncheckedUpdateWithoutElevesEnfantsInput>
+  create: Prisma.XOR<Prisma.ParentCreateWithoutElevesEnfantsInput, Prisma.ParentUncheckedCreateWithoutElevesEnfantsInput>
+  where?: Prisma.ParentWhereInput
+}
+
+export type ParentUpdateToOneWithWhereWithoutElevesEnfantsInput = {
+  where?: Prisma.ParentWhereInput
+  data: Prisma.XOR<Prisma.ParentUpdateWithoutElevesEnfantsInput, Prisma.ParentUncheckedUpdateWithoutElevesEnfantsInput>
+}
+
+export type ParentUpdateWithoutElevesEnfantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutParentsNestedInput
+  user?: Prisma.UserUpdateOneWithoutParentNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
+}
+
+export type ParentUncheckedUpdateWithoutElevesEnfantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
+}
+
+export type ParentCreateWithoutAdressesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutParentsInput
+  elevesEnfants?: Prisma.EleveCreateNestedManyWithoutParentInput
+  user?: Prisma.UserCreateNestedOneWithoutParentInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
+}
+
+export type ParentUncheckedCreateWithoutAdressesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId?: string | null
+  elevesEnfants?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
+}
+
+export type ParentCreateOrConnectWithoutAdressesInput = {
+  where: Prisma.ParentWhereUniqueInput
+  create: Prisma.XOR<Prisma.ParentCreateWithoutAdressesInput, Prisma.ParentUncheckedCreateWithoutAdressesInput>
+}
+
+export type ParentUpsertWithoutAdressesInput = {
+  update: Prisma.XOR<Prisma.ParentUpdateWithoutAdressesInput, Prisma.ParentUncheckedUpdateWithoutAdressesInput>
+  create: Prisma.XOR<Prisma.ParentCreateWithoutAdressesInput, Prisma.ParentUncheckedCreateWithoutAdressesInput>
+  where?: Prisma.ParentWhereInput
+}
+
+export type ParentUpdateToOneWithWhereWithoutAdressesInput = {
+  where?: Prisma.ParentWhereInput
+  data: Prisma.XOR<Prisma.ParentUpdateWithoutAdressesInput, Prisma.ParentUncheckedUpdateWithoutAdressesInput>
+}
+
+export type ParentUpdateWithoutAdressesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutParentsNestedInput
+  elevesEnfants?: Prisma.EleveUpdateManyWithoutParentNestedInput
+  user?: Prisma.UserUpdateOneWithoutParentNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
+}
+
+export type ParentUncheckedUpdateWithoutAdressesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elevesEnfants?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
 }
 
 export type ParentCreateManySchoolInput = {
@@ -864,9 +1098,11 @@ export type ParentUpdateWithoutSchoolInput = {
   adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  eleves?: Prisma.EleveUpdateManyWithoutParentNestedInput
+  elevesEnfants?: Prisma.EleveUpdateManyWithoutParentNestedInput
   user?: Prisma.UserUpdateOneWithoutParentNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
 }
 
 export type ParentUncheckedUpdateWithoutSchoolInput = {
@@ -879,8 +1115,10 @@ export type ParentUncheckedUpdateWithoutSchoolInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eleves?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
+  elevesEnfants?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
 }
 
 export type ParentUncheckedUpdateManyWithoutSchoolInput = {
@@ -901,13 +1139,17 @@ export type ParentUncheckedUpdateManyWithoutSchoolInput = {
  */
 
 export type ParentCountOutputType = {
-  eleves: number
+  elevesEnfants: number
   autorisationParents: number
+  adresses: number
+  eleves: number
 }
 
 export type ParentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  eleves?: boolean | ParentCountOutputTypeCountElevesArgs
+  elevesEnfants?: boolean | ParentCountOutputTypeCountElevesEnfantsArgs
   autorisationParents?: boolean | ParentCountOutputTypeCountAutorisationParentsArgs
+  adresses?: boolean | ParentCountOutputTypeCountAdressesArgs
+  eleves?: boolean | ParentCountOutputTypeCountElevesArgs
 }
 
 /**
@@ -923,7 +1165,7 @@ export type ParentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * ParentCountOutputType without action
  */
-export type ParentCountOutputTypeCountElevesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ParentCountOutputTypeCountElevesEnfantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EleveWhereInput
 }
 
@@ -932,6 +1174,20 @@ export type ParentCountOutputTypeCountElevesArgs<ExtArgs extends runtime.Types.E
  */
 export type ParentCountOutputTypeCountAutorisationParentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AutorisationParentWhereInput
+}
+
+/**
+ * ParentCountOutputType without action
+ */
+export type ParentCountOutputTypeCountAdressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AdresseWhereInput
+}
+
+/**
+ * ParentCountOutputType without action
+ */
+export type ParentCountOutputTypeCountElevesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EleveWhereInput
 }
 
 
@@ -947,9 +1203,11 @@ export type ParentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   userId?: boolean
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
-  eleves?: boolean | Prisma.Parent$elevesArgs<ExtArgs>
+  elevesEnfants?: boolean | Prisma.Parent$elevesEnfantsArgs<ExtArgs>
   user?: boolean | Prisma.Parent$userArgs<ExtArgs>
   autorisationParents?: boolean | Prisma.Parent$autorisationParentsArgs<ExtArgs>
+  adresses?: boolean | Prisma.Parent$adressesArgs<ExtArgs>
+  eleves?: boolean | Prisma.Parent$elevesArgs<ExtArgs>
   _count?: boolean | Prisma.ParentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["parent"]>
 
@@ -999,9 +1257,11 @@ export type ParentSelectScalar = {
 export type ParentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nom" | "prenom" | "email" | "telephone" | "adresse" | "schoolId" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["parent"]>
 export type ParentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
-  eleves?: boolean | Prisma.Parent$elevesArgs<ExtArgs>
+  elevesEnfants?: boolean | Prisma.Parent$elevesEnfantsArgs<ExtArgs>
   user?: boolean | Prisma.Parent$userArgs<ExtArgs>
   autorisationParents?: boolean | Prisma.Parent$autorisationParentsArgs<ExtArgs>
+  adresses?: boolean | Prisma.Parent$adressesArgs<ExtArgs>
+  eleves?: boolean | Prisma.Parent$elevesArgs<ExtArgs>
   _count?: boolean | Prisma.ParentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ParentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1017,9 +1277,11 @@ export type $ParentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Parent"
   objects: {
     school: Prisma.$SchoolPayload<ExtArgs>
-    eleves: Prisma.$ElevePayload<ExtArgs>[]
+    elevesEnfants: Prisma.$ElevePayload<ExtArgs>[]
     user: Prisma.$UserPayload<ExtArgs> | null
     autorisationParents: Prisma.$AutorisationParentPayload<ExtArgs>[]
+    adresses: Prisma.$AdressePayload<ExtArgs>[]
+    eleves: Prisma.$ElevePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1427,9 +1689,11 @@ readonly fields: ParentFieldRefs;
 export interface Prisma__ParentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  eleves<T extends Prisma.Parent$elevesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Parent$elevesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ElevePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  elevesEnfants<T extends Prisma.Parent$elevesEnfantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Parent$elevesEnfantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ElevePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.Parent$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Parent$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   autorisationParents<T extends Prisma.Parent$autorisationParentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Parent$autorisationParentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutorisationParentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  adresses<T extends Prisma.Parent$adressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Parent$adressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdressePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  eleves<T extends Prisma.Parent$elevesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Parent$elevesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ElevePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1870,9 +2134,9 @@ export type ParentDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Parent.eleves
+ * Parent.elevesEnfants
  */
-export type Parent$elevesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Parent$elevesEnfantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Eleve
    */
@@ -1934,6 +2198,54 @@ export type Parent$autorisationParentsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.AutorisationParentScalarFieldEnum | Prisma.AutorisationParentScalarFieldEnum[]
+}
+
+/**
+ * Parent.adresses
+ */
+export type Parent$adressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Adresse
+   */
+  select?: Prisma.AdresseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Adresse
+   */
+  omit?: Prisma.AdresseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdresseInclude<ExtArgs> | null
+  where?: Prisma.AdresseWhereInput
+  orderBy?: Prisma.AdresseOrderByWithRelationInput | Prisma.AdresseOrderByWithRelationInput[]
+  cursor?: Prisma.AdresseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AdresseScalarFieldEnum | Prisma.AdresseScalarFieldEnum[]
+}
+
+/**
+ * Parent.eleves
+ */
+export type Parent$elevesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Eleve
+   */
+  select?: Prisma.EleveSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Eleve
+   */
+  omit?: Prisma.EleveOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EleveInclude<ExtArgs> | null
+  where?: Prisma.EleveWhereInput
+  orderBy?: Prisma.EleveOrderByWithRelationInput | Prisma.EleveOrderByWithRelationInput[]
+  cursor?: Prisma.EleveWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EleveScalarFieldEnum | Prisma.EleveScalarFieldEnum[]
 }
 
 /**

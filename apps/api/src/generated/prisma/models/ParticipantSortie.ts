@@ -611,48 +611,6 @@ export type ParticipantSortieUncheckedUpdateManyWithoutSchoolNestedInput = {
   deleteMany?: Prisma.ParticipantSortieScalarWhereInput | Prisma.ParticipantSortieScalarWhereInput[]
 }
 
-export type ParticipantSortieCreateNestedManyWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput> | Prisma.ParticipantSortieCreateWithoutEleveInput[] | Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput | Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput[]
-  createMany?: Prisma.ParticipantSortieCreateManyEleveInputEnvelope
-  connect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
-}
-
-export type ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput> | Prisma.ParticipantSortieCreateWithoutEleveInput[] | Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput | Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput[]
-  createMany?: Prisma.ParticipantSortieCreateManyEleveInputEnvelope
-  connect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
-}
-
-export type ParticipantSortieUpdateManyWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput> | Prisma.ParticipantSortieCreateWithoutEleveInput[] | Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput | Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput[]
-  upsert?: Prisma.ParticipantSortieUpsertWithWhereUniqueWithoutEleveInput | Prisma.ParticipantSortieUpsertWithWhereUniqueWithoutEleveInput[]
-  createMany?: Prisma.ParticipantSortieCreateManyEleveInputEnvelope
-  set?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
-  disconnect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
-  delete?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
-  connect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
-  update?: Prisma.ParticipantSortieUpdateWithWhereUniqueWithoutEleveInput | Prisma.ParticipantSortieUpdateWithWhereUniqueWithoutEleveInput[]
-  updateMany?: Prisma.ParticipantSortieUpdateManyWithWhereWithoutEleveInput | Prisma.ParticipantSortieUpdateManyWithWhereWithoutEleveInput[]
-  deleteMany?: Prisma.ParticipantSortieScalarWhereInput | Prisma.ParticipantSortieScalarWhereInput[]
-}
-
-export type ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput> | Prisma.ParticipantSortieCreateWithoutEleveInput[] | Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput[]
-  connectOrCreate?: Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput | Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput[]
-  upsert?: Prisma.ParticipantSortieUpsertWithWhereUniqueWithoutEleveInput | Prisma.ParticipantSortieUpsertWithWhereUniqueWithoutEleveInput[]
-  createMany?: Prisma.ParticipantSortieCreateManyEleveInputEnvelope
-  set?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
-  disconnect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
-  delete?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
-  connect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
-  update?: Prisma.ParticipantSortieUpdateWithWhereUniqueWithoutEleveInput | Prisma.ParticipantSortieUpdateWithWhereUniqueWithoutEleveInput[]
-  updateMany?: Prisma.ParticipantSortieUpdateManyWithWhereWithoutEleveInput | Prisma.ParticipantSortieUpdateManyWithWhereWithoutEleveInput[]
-  deleteMany?: Prisma.ParticipantSortieScalarWhereInput | Prisma.ParticipantSortieScalarWhereInput[]
-}
-
 export type ParticipantSortieCreateNestedManyWithoutSortieInput = {
   create?: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutSortieInput, Prisma.ParticipantSortieUncheckedCreateWithoutSortieInput> | Prisma.ParticipantSortieCreateWithoutSortieInput[] | Prisma.ParticipantSortieUncheckedCreateWithoutSortieInput[]
   connectOrCreate?: Prisma.ParticipantSortieCreateOrConnectWithoutSortieInput | Prisma.ParticipantSortieCreateOrConnectWithoutSortieInput[]
@@ -701,6 +659,48 @@ export type EnumTypeParticipantFieldUpdateOperationsInput = {
 
 export type EnumStatutParticipantFieldUpdateOperationsInput = {
   set?: $Enums.StatutParticipant
+}
+
+export type ParticipantSortieCreateNestedManyWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput> | Prisma.ParticipantSortieCreateWithoutEleveInput[] | Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput | Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput[]
+  createMany?: Prisma.ParticipantSortieCreateManyEleveInputEnvelope
+  connect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
+}
+
+export type ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput> | Prisma.ParticipantSortieCreateWithoutEleveInput[] | Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput | Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput[]
+  createMany?: Prisma.ParticipantSortieCreateManyEleveInputEnvelope
+  connect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
+}
+
+export type ParticipantSortieUpdateManyWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput> | Prisma.ParticipantSortieCreateWithoutEleveInput[] | Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput | Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput[]
+  upsert?: Prisma.ParticipantSortieUpsertWithWhereUniqueWithoutEleveInput | Prisma.ParticipantSortieUpsertWithWhereUniqueWithoutEleveInput[]
+  createMany?: Prisma.ParticipantSortieCreateManyEleveInputEnvelope
+  set?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
+  disconnect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
+  delete?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
+  connect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
+  update?: Prisma.ParticipantSortieUpdateWithWhereUniqueWithoutEleveInput | Prisma.ParticipantSortieUpdateWithWhereUniqueWithoutEleveInput[]
+  updateMany?: Prisma.ParticipantSortieUpdateManyWithWhereWithoutEleveInput | Prisma.ParticipantSortieUpdateManyWithWhereWithoutEleveInput[]
+  deleteMany?: Prisma.ParticipantSortieScalarWhereInput | Prisma.ParticipantSortieScalarWhereInput[]
+}
+
+export type ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput> | Prisma.ParticipantSortieCreateWithoutEleveInput[] | Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput[]
+  connectOrCreate?: Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput | Prisma.ParticipantSortieCreateOrConnectWithoutEleveInput[]
+  upsert?: Prisma.ParticipantSortieUpsertWithWhereUniqueWithoutEleveInput | Prisma.ParticipantSortieUpsertWithWhereUniqueWithoutEleveInput[]
+  createMany?: Prisma.ParticipantSortieCreateManyEleveInputEnvelope
+  set?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
+  disconnect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
+  delete?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
+  connect?: Prisma.ParticipantSortieWhereUniqueInput | Prisma.ParticipantSortieWhereUniqueInput[]
+  update?: Prisma.ParticipantSortieUpdateWithWhereUniqueWithoutEleveInput | Prisma.ParticipantSortieUpdateWithWhereUniqueWithoutEleveInput[]
+  updateMany?: Prisma.ParticipantSortieUpdateManyWithWhereWithoutEleveInput | Prisma.ParticipantSortieUpdateManyWithWhereWithoutEleveInput[]
+  deleteMany?: Prisma.ParticipantSortieScalarWhereInput | Prisma.ParticipantSortieScalarWhereInput[]
 }
 
 export type ParticipantSortieCreateWithoutAccompagnateurInput = {
@@ -829,60 +829,6 @@ export type ParticipantSortieUpdateManyWithWhereWithoutSchoolInput = {
   data: Prisma.XOR<Prisma.ParticipantSortieUpdateManyMutationInput, Prisma.ParticipantSortieUncheckedUpdateManyWithoutSchoolInput>
 }
 
-export type ParticipantSortieCreateWithoutEleveInput = {
-  id?: string
-  typeParticipant: $Enums.TypeParticipant
-  statut?: $Enums.StatutParticipant
-  montantPaye?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  datePaiement?: Date | string | null
-  observations?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sortie: Prisma.SortieScolaireCreateNestedOneWithoutParticipantsInput
-  accompagnateur?: Prisma.UserCreateNestedOneWithoutParticipantSortiesInput
-  school: Prisma.SchoolCreateNestedOneWithoutParticipantSortiesInput
-}
-
-export type ParticipantSortieUncheckedCreateWithoutEleveInput = {
-  id?: string
-  sortieId: string
-  typeParticipant: $Enums.TypeParticipant
-  accompagnateurId?: string | null
-  statut?: $Enums.StatutParticipant
-  montantPaye?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  datePaiement?: Date | string | null
-  observations?: string | null
-  schoolId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type ParticipantSortieCreateOrConnectWithoutEleveInput = {
-  where: Prisma.ParticipantSortieWhereUniqueInput
-  create: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput>
-}
-
-export type ParticipantSortieCreateManyEleveInputEnvelope = {
-  data: Prisma.ParticipantSortieCreateManyEleveInput | Prisma.ParticipantSortieCreateManyEleveInput[]
-  skipDuplicates?: boolean
-}
-
-export type ParticipantSortieUpsertWithWhereUniqueWithoutEleveInput = {
-  where: Prisma.ParticipantSortieWhereUniqueInput
-  update: Prisma.XOR<Prisma.ParticipantSortieUpdateWithoutEleveInput, Prisma.ParticipantSortieUncheckedUpdateWithoutEleveInput>
-  create: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput>
-}
-
-export type ParticipantSortieUpdateWithWhereUniqueWithoutEleveInput = {
-  where: Prisma.ParticipantSortieWhereUniqueInput
-  data: Prisma.XOR<Prisma.ParticipantSortieUpdateWithoutEleveInput, Prisma.ParticipantSortieUncheckedUpdateWithoutEleveInput>
-}
-
-export type ParticipantSortieUpdateManyWithWhereWithoutEleveInput = {
-  where: Prisma.ParticipantSortieScalarWhereInput
-  data: Prisma.XOR<Prisma.ParticipantSortieUpdateManyMutationInput, Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveInput>
-}
-
 export type ParticipantSortieCreateWithoutSortieInput = {
   id?: string
   typeParticipant: $Enums.TypeParticipant
@@ -935,6 +881,60 @@ export type ParticipantSortieUpdateWithWhereUniqueWithoutSortieInput = {
 export type ParticipantSortieUpdateManyWithWhereWithoutSortieInput = {
   where: Prisma.ParticipantSortieScalarWhereInput
   data: Prisma.XOR<Prisma.ParticipantSortieUpdateManyMutationInput, Prisma.ParticipantSortieUncheckedUpdateManyWithoutSortieInput>
+}
+
+export type ParticipantSortieCreateWithoutEleveInput = {
+  id?: string
+  typeParticipant: $Enums.TypeParticipant
+  statut?: $Enums.StatutParticipant
+  montantPaye?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  datePaiement?: Date | string | null
+  observations?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sortie: Prisma.SortieScolaireCreateNestedOneWithoutParticipantsInput
+  accompagnateur?: Prisma.UserCreateNestedOneWithoutParticipantSortiesInput
+  school: Prisma.SchoolCreateNestedOneWithoutParticipantSortiesInput
+}
+
+export type ParticipantSortieUncheckedCreateWithoutEleveInput = {
+  id?: string
+  sortieId: string
+  typeParticipant: $Enums.TypeParticipant
+  accompagnateurId?: string | null
+  statut?: $Enums.StatutParticipant
+  montantPaye?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  datePaiement?: Date | string | null
+  observations?: string | null
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ParticipantSortieCreateOrConnectWithoutEleveInput = {
+  where: Prisma.ParticipantSortieWhereUniqueInput
+  create: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput>
+}
+
+export type ParticipantSortieCreateManyEleveInputEnvelope = {
+  data: Prisma.ParticipantSortieCreateManyEleveInput | Prisma.ParticipantSortieCreateManyEleveInput[]
+  skipDuplicates?: boolean
+}
+
+export type ParticipantSortieUpsertWithWhereUniqueWithoutEleveInput = {
+  where: Prisma.ParticipantSortieWhereUniqueInput
+  update: Prisma.XOR<Prisma.ParticipantSortieUpdateWithoutEleveInput, Prisma.ParticipantSortieUncheckedUpdateWithoutEleveInput>
+  create: Prisma.XOR<Prisma.ParticipantSortieCreateWithoutEleveInput, Prisma.ParticipantSortieUncheckedCreateWithoutEleveInput>
+}
+
+export type ParticipantSortieUpdateWithWhereUniqueWithoutEleveInput = {
+  where: Prisma.ParticipantSortieWhereUniqueInput
+  data: Prisma.XOR<Prisma.ParticipantSortieUpdateWithoutEleveInput, Prisma.ParticipantSortieUncheckedUpdateWithoutEleveInput>
+}
+
+export type ParticipantSortieUpdateManyWithWhereWithoutEleveInput = {
+  where: Prisma.ParticipantSortieScalarWhereInput
+  data: Prisma.XOR<Prisma.ParticipantSortieUpdateManyMutationInput, Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveInput>
 }
 
 export type ParticipantSortieCreateManyAccompagnateurInput = {
@@ -1049,62 +1049,6 @@ export type ParticipantSortieUncheckedUpdateManyWithoutSchoolInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ParticipantSortieCreateManyEleveInput = {
-  id?: string
-  sortieId: string
-  typeParticipant: $Enums.TypeParticipant
-  accompagnateurId?: string | null
-  statut?: $Enums.StatutParticipant
-  montantPaye?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  datePaiement?: Date | string | null
-  observations?: string | null
-  schoolId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type ParticipantSortieUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  typeParticipant?: Prisma.EnumTypeParticipantFieldUpdateOperationsInput | $Enums.TypeParticipant
-  statut?: Prisma.EnumStatutParticipantFieldUpdateOperationsInput | $Enums.StatutParticipant
-  montantPaye?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  datePaiement?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sortie?: Prisma.SortieScolaireUpdateOneRequiredWithoutParticipantsNestedInput
-  accompagnateur?: Prisma.UserUpdateOneWithoutParticipantSortiesNestedInput
-  school?: Prisma.SchoolUpdateOneRequiredWithoutParticipantSortiesNestedInput
-}
-
-export type ParticipantSortieUncheckedUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  sortieId?: Prisma.StringFieldUpdateOperationsInput | string
-  typeParticipant?: Prisma.EnumTypeParticipantFieldUpdateOperationsInput | $Enums.TypeParticipant
-  accompagnateurId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statut?: Prisma.EnumStatutParticipantFieldUpdateOperationsInput | $Enums.StatutParticipant
-  montantPaye?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  datePaiement?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type ParticipantSortieUncheckedUpdateManyWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  sortieId?: Prisma.StringFieldUpdateOperationsInput | string
-  typeParticipant?: Prisma.EnumTypeParticipantFieldUpdateOperationsInput | $Enums.TypeParticipant
-  accompagnateurId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statut?: Prisma.EnumStatutParticipantFieldUpdateOperationsInput | $Enums.StatutParticipant
-  montantPaye?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  datePaiement?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type ParticipantSortieCreateManySortieInput = {
   id?: string
   typeParticipant: $Enums.TypeParticipant
@@ -1151,6 +1095,62 @@ export type ParticipantSortieUncheckedUpdateManyWithoutSortieInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   typeParticipant?: Prisma.EnumTypeParticipantFieldUpdateOperationsInput | $Enums.TypeParticipant
   eleveId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accompagnateurId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutParticipantFieldUpdateOperationsInput | $Enums.StatutParticipant
+  montantPaye?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  datePaiement?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ParticipantSortieCreateManyEleveInput = {
+  id?: string
+  sortieId: string
+  typeParticipant: $Enums.TypeParticipant
+  accompagnateurId?: string | null
+  statut?: $Enums.StatutParticipant
+  montantPaye?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  datePaiement?: Date | string | null
+  observations?: string | null
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ParticipantSortieUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  typeParticipant?: Prisma.EnumTypeParticipantFieldUpdateOperationsInput | $Enums.TypeParticipant
+  statut?: Prisma.EnumStatutParticipantFieldUpdateOperationsInput | $Enums.StatutParticipant
+  montantPaye?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  datePaiement?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sortie?: Prisma.SortieScolaireUpdateOneRequiredWithoutParticipantsNestedInput
+  accompagnateur?: Prisma.UserUpdateOneWithoutParticipantSortiesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutParticipantSortiesNestedInput
+}
+
+export type ParticipantSortieUncheckedUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sortieId?: Prisma.StringFieldUpdateOperationsInput | string
+  typeParticipant?: Prisma.EnumTypeParticipantFieldUpdateOperationsInput | $Enums.TypeParticipant
+  accompagnateurId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutParticipantFieldUpdateOperationsInput | $Enums.StatutParticipant
+  montantPaye?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  datePaiement?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ParticipantSortieUncheckedUpdateManyWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sortieId?: Prisma.StringFieldUpdateOperationsInput | string
+  typeParticipant?: Prisma.EnumTypeParticipantFieldUpdateOperationsInput | $Enums.TypeParticipant
   accompagnateurId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statut?: Prisma.EnumStatutParticipantFieldUpdateOperationsInput | $Enums.StatutParticipant
   montantPaye?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
