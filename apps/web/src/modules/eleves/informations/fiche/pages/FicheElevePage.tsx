@@ -609,7 +609,9 @@ export default function FicheElevePage() {
                   (hist: (typeof historiqueClasses)[number]) => (
                     <tr key={hist.id}>
                       <td className="font-mono">{hist.anneeScolaire}</td>
-                      <td className="font-semibold">{hist.classe.nom}</td>
+                      <td className="font-semibold">
+                        {hist.classe?.nom ?? "—"}
+                      </td>
                       <td>
                         <span className="badge badge-sm badge-ghost">
                           {hist.statutFinAnnee || "EN_COURS"}
