@@ -767,7 +767,7 @@ export interface ProfessionEleve {
 export interface HistoriqueClasse {
   id: string;
   eleveId: string;
-  classeId: string;
+  classeId: string | null;
   anneeScolaire: string;
   statutFinAnnee?: string | null;
   createdAt: string;
@@ -775,7 +775,7 @@ export interface HistoriqueClasse {
   classe: {
     id: string;
     nom: string;
-  };
+  } | null;
 }
 
 export interface DroitInscription {
@@ -876,7 +876,7 @@ export interface FicheEleveComplete extends BaseEntity {
   ecolages: Ecolage[];
   notes: Array<{
     id: string;
-    valeur: number;
+    note: string;
     coefficient: number;
     matiere: {
       id: string;
@@ -885,7 +885,8 @@ export interface FicheEleveComplete extends BaseEntity {
     periode: {
       id: string;
       nom: string;
-    };
+      nullable?: boolean;
+    } | null;
   }>;
   presences: Array<{
     id: string;
@@ -927,7 +928,6 @@ export interface CreateEleveInput {
   dateInscription?: string | null;
   ecoleOrigine?: string | null;
   responsableId?: string | null;
-  schoolId?: string;
   classeId?: string | null;
   parentId?: string | null;
   statut?: "ACTIF" | "INACTIF" | "INSCRIT" | "SUSPENDU" | "DIPLOME" | "ABANDON";

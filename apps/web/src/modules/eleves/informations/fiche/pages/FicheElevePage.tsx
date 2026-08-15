@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import {
   ArrowLeft,
@@ -129,22 +129,11 @@ export default function FicheElevePage() {
   // États locaux
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [selectedId, setSelectedId] = useState<string | null>(id ?? null);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    if (id) {
-      setSelectedId(id);
-      return;
-    }
-
-    setSelectedId(null);
-  }, [id]);
-
-  const activeEleveId = id ?? selectedId ?? undefined;
+  const activeEleveId = id ?? undefined;
 
   const resetSelection = () => {
-    setSelectedId(null);
     setSearch("");
   };
 
@@ -175,7 +164,6 @@ export default function FicheElevePage() {
   }, [allEleves, search]);
 
   const handleSelectEleve = (eleveId: string) => {
-    setSelectedId(eleveId);
     setSearch("");
     navigate(`/eleves/informations/${eleveId}`);
   };
@@ -728,6 +716,7 @@ export default function FicheElevePage() {
       {/* Modal de modification */}
       {showEditModal && (
         <FicheEleveFormModal
+          key={eleve?.id ?? "new-eleve-form"}
           eleve={eleve}
           isOpen={showEditModal}
           onClose={() => setShowEditModal(false)}

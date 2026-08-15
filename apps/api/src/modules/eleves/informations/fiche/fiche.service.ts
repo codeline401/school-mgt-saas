@@ -2,9 +2,28 @@ import { prisma } from "../../../../lib/prisma.js";
 import { CreateEleveInput, UpdateEleveInput } from "./fiche.schema.js";
 
 interface UserContext {
-  schoolId: string;
+  schoolId: string | null;
   role: string;
 }
+
+const assertUserSchoolAccess = (user: UserContext, schoolId: string | null) => {
+  if (user.role === "SUDO_ADMIN") return;
+  if (!user.schoolId) {
+    throw new Error("Accès refusé : aucune école associée à votre compte");
+  }
+  if (schoolId && user.schoolId !== schoolId) {
+    throw new Error("Accès refusé : l'élève n'appartient pas à votre école");
+  }
+};
+
+const validateContactRelation = (data: {
+  isRelationContact?: boolean | null;
+  relationName?: string | null;
+  relationTelephone?: string | null;
+}) => {
+  if (!data.isRelationContact) return true;
+  return !!(data.relationName?.trim() && data.relationTelephone?.trim());
+};
 
 export class FicheEleveService {
   /**
@@ -14,11 +33,15 @@ export class FicheEleveService {
   static async getFicheElevesBySchool(user: UserContext) {
     const isSudoAdmin = user.role === "SUDO_ADMIN";
 
+    if (!isSudoAdmin && !user.schoolId) {
+      return [];
+    }
+
     const eleves = await prisma.eleve.findMany({
       where: isSudoAdmin
         ? { deletedAt: null }
         : {
-            schoolId: user.schoolId,
+            schoolId: user.schoolId!,
             deletedAt: null,
           },
       select: {
@@ -47,11 +70,8 @@ export class FicheEleveService {
    * Inclut toutes les relations nécessaires pour l'affichage au front
    */
   static async getFicheEleveById(eleveId: string, user: UserContext) {
-    // NOTE: the generated Prisma types in this project do not reliably preserve
-    // the relation payload for this specific query in TypeScript, so we force the
-    // shape at the fetch boundary and normalize values before returning.
     const eleve = (await prisma.eleve.findUnique({
-      where: { id: eleveId },
+      where: { id: eleveId, deletedAt: null },
       include: {
         school: {
           select: {
@@ -118,10 +138,7 @@ export class FicheEleveService {
           },
         },
         ecolages: {
-          orderBy: [
-            { anneeScolaire: "desc" },
-            { mois: "desc" },
-          ],
+          orderBy: [{ anneeScolaire: "desc" }, { mois: "desc" }],
         },
         droitInscriptions: {
           orderBy: {
@@ -156,23 +173,21 @@ export class FicheEleveService {
       throw new Error("Élève non trouvé");
     }
 
-    // vérification multi-tenant : l'utilisateur doit appartenir à la même école que l'élève
-    if (user.role !== "SUDO_ADMIN" && user.schoolId !== eleve.schoolId) {
-      throw new Error("Accès refusé : l'élève n'appartient pas à votre école");
-    }
+    assertUserSchoolAccess(user, eleve.schoolId);
 
-    // sécurité supplémentaire : les élèves supprimés restent masqués dans les listes,
-    // mais la fiche détaillée est autorisée uniquement à l'école du demandeur.
-    if (user.role !== "SUDO_ADMIN" && !user.schoolId) {
-      throw new Error("Accès refusé : aucune école associée à votre compte");
-    }
-
-    // calcul de l'âge si date de naissance disponible
     const age = eleve.dateNaissance
-      ? Math.floor(
-          (Date.now() - new Date(eleve.dateNaissance).getTime()) /
-            (1000 * 60 * 60 * 24 * 365.25),
-        )
+      ? (() => {
+          const birth = new Date(eleve.dateNaissance);
+          const now = new Date();
+          let ageValue = now.getFullYear() - birth.getFullYear();
+          const hadBirthdayThisYear =
+            now.getMonth() > birth.getMonth() ||
+            (now.getMonth() === birth.getMonth() &&
+              now.getDate() >= birth.getDate());
+
+          if (!hadBirthdayThisYear) ageValue -= 1;
+          return ageValue;
+        })()
       : null;
 
     return {
@@ -191,64 +206,61 @@ export class FicheEleveService {
    * Crée un nouvel élève avec toutes ses relations
    */
   static async createFicheEleve(data: CreateEleveInput, user: UserContext) {
-    // vérification multi-tenant : l'utilisateur doit appartenir à la même école que l'élève
-    if (user.role !== "SUDO_ADMIN" && user.schoolId !== data.schoolId) {
+    const targetSchoolId = data.schoolId ?? user.schoolId;
+
+    if (!targetSchoolId) {
+      throw new Error("L'utilisateur n'a pas d'école associée");
+    }
+
+    if (user.role !== "SUDO_ADMIN" && user.schoolId !== targetSchoolId) {
       throw new Error(
         "Accès refusé : vous ne pouvez pas créer un élève pour cette école",
       );
     }
 
-    // vérifier que la classe appartient à la bonne école si fournie
     if (data.classeId) {
       const classe = await prisma.classe.findUnique({
         where: { id: data.classeId },
         select: { schoolId: true },
       });
 
-      if (!classe) {
-        throw new Error("Classe non trouvée");
-      }
-
-      if (classe.schoolId !== data.schoolId) {
+      if (!classe) throw new Error("Classe non trouvée");
+      if (classe.schoolId !== targetSchoolId) {
         throw new Error(
           "Accès refusé : la classe n'appartient pas à la même école que l'élève",
         );
       }
     }
 
-    // vérifier que le parent appartient à la bonne école si fourni
     if (data.parentId) {
       const parent = await prisma.parent.findUnique({
         where: { id: data.parentId },
         select: { schoolId: true },
       });
 
-      if (!parent) {
-        throw new Error("Parent non trouvé");
-      }
-      if (parent.schoolId !== data.schoolId) {
+      if (!parent) throw new Error("Parent non trouvé");
+      if (parent.schoolId !== targetSchoolId) {
         throw new Error(
           "Accès refusé : le parent n'appartient pas à la même école que l'élève",
         );
       }
     }
 
-    // Récupère le prochain matricule pour cette école
-    const lastEleve = await prisma.eleve.findFirst({
-      where: { schoolId: user.schoolId },
-      orderBy: { matricule: "desc" },
-      select: { matricule: true },
+    const nextMatricule = await prisma.$transaction(async (tx) => {
+      const lastEleve = await tx.eleve.findFirst({
+        where: { schoolId: targetSchoolId, deletedAt: null },
+        orderBy: { matricule: "desc" },
+        select: { matricule: true },
+      });
+      return (lastEleve?.matricule ?? 0) + 1;
     });
 
-    const nextMatricule = (lastEleve?.matricule || 0) + 1; // Si aucun élève n'existe encore, on commence à 1
-
-    // créer l'élève avec ses relations optionnelles (adresse, profession)
     return prisma.eleve.create({
       data: {
         nom: data.nom,
         prenom: data.prenom,
         matricule: nextMatricule,
-        schoolId: user.schoolId,
+        schoolId: targetSchoolId,
         genre: data.genre,
         dateNaissance: data.dateNaissance ? new Date(data.dateNaissance) : null,
         lieuNaissance: data.lieuNaissance,
@@ -312,24 +324,20 @@ export class FicheEleveService {
     data: UpdateEleveInput,
     user: UserContext,
   ) {
-    // vérifier que l'élève existe et appartient à l'école de l'utilisateur
     const existingEleve = await prisma.eleve.findUnique({
       where: { id: eleveId },
-      select: { schoolId: true },
+      include: {
+        adresse: true,
+        professionEleve: true,
+      },
     });
 
-    if (!existingEleve) {
-      throw new Error("Élève non trouvé");
-    }
+    if (!existingEleve) throw new Error("Élève non trouvé");
+    if (existingEleve.deletedAt)
+      throw new Error("Élève supprimé : impossible de le modifier");
 
-    if (
-      user.role !== "SUDO_ADMIN" &&
-      user.schoolId !== existingEleve.schoolId
-    ) {
-      throw new Error("Accès refusé : l'élève n'appartient pas à votre école");
-    }
+    assertUserSchoolAccess(user, existingEleve.schoolId);
 
-    // vérifier la classe si fournie
     if (data.classeId) {
       const classe = await prisma.classe.findUnique({
         where: { id: data.classeId },
@@ -343,7 +351,6 @@ export class FicheEleveService {
       }
     }
 
-    // vérifier le parent si fourni
     if (data.parentId) {
       const parent = await prisma.parent.findUnique({
         where: { id: data.parentId },
@@ -357,7 +364,60 @@ export class FicheEleveService {
       }
     }
 
-    // Mise à jour de l'élève
+    const mergedValues = {
+      ...existingEleve,
+      ...data,
+      isRelationContact:
+        data.isRelationContact ?? existingEleve.isRelationContact,
+      relationName: data.relationName ?? existingEleve.relationName,
+      relationTelephone:
+        data.relationTelephone ?? existingEleve.relationTelephone,
+    };
+
+    if (!validateContactRelation(mergedValues)) {
+      throw new Error(
+        "Le nom et le téléphone du contact sont requis si 'isRelationContact' est activé",
+      );
+    }
+
+    const adressePayload = data.adresse
+      ? {
+          upsert: {
+            create: {
+              fokontany: data.adresse.fokontany ?? null,
+              logement: data.adresse.logement ?? null,
+              ville: data.adresse.ville ?? null,
+              region: data.adresse.region ?? null,
+              pays: data.adresse.pays ?? null,
+            },
+            update: {
+              fokontany: data.adresse.fokontany ?? null,
+              logement: data.adresse.logement ?? null,
+              ville: data.adresse.ville ?? null,
+              region: data.adresse.region ?? null,
+              pays: data.adresse.pays ?? null,
+            },
+          },
+        }
+      : undefined;
+
+    const professionPayload = data.professionEleve
+      ? {
+          upsert: {
+            create: {
+              titre: data.professionEleve.titre ?? null,
+              lieu: data.professionEleve.lieu ?? null,
+              secteur: data.professionEleve.secteur ?? null,
+            },
+            update: {
+              titre: data.professionEleve.titre ?? null,
+              lieu: data.professionEleve.lieu ?? null,
+              secteur: data.professionEleve.secteur ?? null,
+            },
+          },
+        }
+      : undefined;
+
     return prisma.eleve.update({
       where: { id: eleveId },
       data: {
@@ -402,6 +462,8 @@ export class FicheEleveService {
           relationTelephone: data.relationTelephone,
         }),
         ...(data.remarque !== undefined && { remarque: data.remarque }),
+        ...(adressePayload ? { adresse: adressePayload } : {}),
+        ...(professionPayload ? { professionEleve: professionPayload } : {}),
       },
       include: {
         classe: true,
@@ -423,19 +485,13 @@ export class FicheEleveService {
   ) {
     const existingEleve = await prisma.eleve.findUnique({
       where: { id: eleveId },
-      select: { schoolId: true },
+      select: { schoolId: true, deletedAt: true },
     });
 
-    if (!existingEleve) {
-      throw new Error("Élève non trouvé");
-    }
+    if (!existingEleve) throw new Error("Élève non trouvé");
+    if (existingEleve.deletedAt) return existingEleve;
 
-    if (
-      user.role !== "SUDO_ADMIN" &&
-      user.schoolId !== existingEleve.schoolId
-    ) {
-      throw new Error("Accès refusé : l'élève n'appartient pas à votre école");
-    }
+    assertUserSchoolAccess(user, existingEleve.schoolId);
 
     return prisma.eleve.update({
       where: { id: eleveId },
@@ -455,21 +511,19 @@ export class FicheEleveService {
       select: { schoolId: true, deletedAt: true },
     });
 
-    if (!existingEleve) {
-      throw new Error("Élève non trouvé");
-    }
-
-    if (!existingEleve.deletedAt) {
-      throw new Error(
-        "Élève n'est pas ou n'a jamais été supprimé, la restauration n'est pas nécessaire",
-      );
-    }
+    if (!existingEleve) throw new Error("Élève non trouvé");
 
     if (
       user.role !== "SUDO_ADMIN" &&
       user.schoolId !== existingEleve.schoolId
     ) {
       throw new Error("Accès refusé : l'élève n'appartient pas à votre école");
+    }
+
+    if (!existingEleve.deletedAt) {
+      throw new Error(
+        "Élève n'est pas ou n'a jamais été supprimé, la restauration n'est pas nécessaire",
+      );
     }
 
     return prisma.eleve.update({

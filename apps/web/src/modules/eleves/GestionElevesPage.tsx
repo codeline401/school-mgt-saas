@@ -447,6 +447,9 @@ function GestionElevesPage() {
   return (
     <>
       <FicheEleveFormModal
+        key={
+          isCreateEleveModalOpen ? "create-eleve-modal" : "closed-eleve-modal"
+        }
         isOpen={isCreateEleveModalOpen}
         onClose={() => setIsCreateEleveModalOpen(false)}
       />

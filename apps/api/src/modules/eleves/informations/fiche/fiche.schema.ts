@@ -133,7 +133,9 @@ export const baseEleveShape = z.object({
 
   dateInscription: z.coerce
     .date()
-    .max(new Date(), "La date d'inscription ne peut pas être future")
+    .refine((value) => value <= new Date(), {
+      message: "La date d'inscription ne peut pas être future",
+    })
     .optional(),
   ecoleOrigine: z.string().trim().max(200).nullish(),
 
@@ -153,7 +155,9 @@ export const baseEleveShape = z.object({
 
   dateNaissance: z.coerce
     .date()
-    .max(new Date(), "La date de naissance ne peut pas être future")
+    .refine((value) => value <= new Date(), {
+      message: "La date de naissance ne peut pas être future",
+    })
     .nullish(),
   lieuNaissance: z.string().trim().max(150).nullish(),
   telephone: z.string().trim().max(30).nullish(),
@@ -247,7 +251,17 @@ export const ficheEleveResponseSchema = baseEleveShape.extend({
 export type FicheEleveResponse = z.infer<typeof ficheEleveResponseSchema>;
 
 // .partial() s'applique maintenant correctement sur l'objet brut avant le .refine()
-export const updateEleveSchema = baseCreateShape.partial();
+export const updateEleveSchema = baseCreateShape.partial().refine(
+  (data) => {
+    if (!data.isRelationContact) return true;
+    return !!(data.relationName || data.relationTelephone);
+  },
+  {
+    message:
+      "Le nom et le téléphone du contact sont requis si 'isRelationContact' est activé",
+    path: ["relationName"],
+  },
+);
 
 // ------------------------------------
 // TYPE inférés pour TS

@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express"; // Importation d'Express pour créer le serveur API
 import cors from "cors"; // Importation de CORS pour gérer les requêtes cross-origin
+import helmet from "helmet";
 import path from "path";
 import { fileURLToPath } from "url";
 import multer from "multer";
@@ -35,6 +36,7 @@ const PORT = process.env.PORT || 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 app.use(cors()); // Utilisation de CORS pour permettre les requêtes cross-origin
+app.use(helmet());
 app.use(express.json()); // Middleware pour parser les requêtes JSON
 
 app.use("/api/auth", authRoutes);
@@ -49,6 +51,39 @@ app.use("/api/logistique", logistiqueRoutes); // Ajout des routes pour la logist
 app.use("/api/stocks", articleStockRoutes); // Ajout des routes pour la gestion des articles en stock
 
 app.use("/api/eleves", elevesRoutes); // Ajout des routes pour la gestion des élèves
+
+app.get(
+  "/api/professeurs",
+  authenticate,
+  async (req: Request, res: Response) => {
+    if (
+      req.user?.role !== "SUDO_ADMIN" &&
+      req.user?.role !== "ADMIN" &&
+      req.user?.role !== "PROF"
+    ) {
+      return res.status(403).json({ error: "Accès refusé" });
+    }
+
+    const where =
+      req.user?.role === "SUDO_ADMIN" || req.user?.role === "ADMIN"
+        ? { schoolId: req.user.schoolId ?? undefined }
+        : { schoolId: req.user.schoolId, id: req.user.id };
+
+    if (req.user?.role !== "SUDO_ADMIN" && !req.user?.schoolId) {
+      return res
+        .status(400)
+        .json({ error: "Aucune école associée à l'utilisateur." });
+    }
+
+    const professeurs = await prisma.professeur.findMany({
+      where: Object.keys(where).length ? (where as any) : {},
+      include: { classes: true, matieres: true },
+      orderBy: { nom: "asc" },
+    });
+
+    return res.status(200).json(professeurs);
+  },
+);
 
 app.use("/api/export", exportRoute);
 app.use("/api/periodes", periodeRoute);

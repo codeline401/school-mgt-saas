@@ -18,7 +18,47 @@ interface FicheEleveFormModalProps {
   eleve?: FicheEleveComplete; // Si fourni, mode édition, sinon mode création
   isOpen: boolean;
   onClose: () => void;
+  formKey?: string;
 }
+
+const buildFormState = (eleve?: FicheEleveComplete): FormState => {
+  if (!eleve) return defaultFormState;
+
+  return {
+    nom: eleve.nom || "",
+    prenom: eleve.prenom || "",
+    genre: eleve.genre || "",
+    dateNaissance: eleve.dateNaissance
+      ? new Date(eleve.dateNaissance).toISOString().split("T")[0]
+      : "",
+    lieuNaissance: eleve.lieuNaissance || "",
+    telephone: eleve.telephone || "",
+    photoUrl: eleve.photoUrl || "",
+    nationalite: eleve.nationalite || "",
+    classeId: eleve.classeId || "",
+    ecoleOrigine: eleve.ecoleOrigine || "",
+    dateInscription: eleve.dateInscription
+      ? new Date(eleve.dateInscription).toISOString().split("T")[0]
+      : "",
+    statut: eleve.statut || "ACTIF",
+    situationFinAnnee: eleve.situationFinAnnee || "EN_COURS",
+    parentId: eleve.parentId || "",
+    responsableId: eleve.responsableId || "",
+    situationFamiliale: eleve.situationFamiliale || "",
+    isRelationContact: eleve.isRelationContact || false,
+    relationName: eleve.relationName || "",
+    relationTelephone: eleve.relationTelephone || "",
+    adresseFokontany: eleve.adresse?.fokontany || "",
+    adresseLogement: eleve.adresse?.logement || "",
+    adresseVille: eleve.adresse?.ville || "",
+    adresseRegion: eleve.adresse?.region || "",
+    adressePays: eleve.adresse?.pays || "",
+    professionTitre: eleve.professionEleve?.titre || "",
+    professionLieu: eleve.professionEleve?.lieu || "",
+    professionSecteur: eleve.professionEleve?.secteur || "",
+    remarque: eleve.remarque || "",
+  };
+};
 
 // ═══════════════════════════════════════════════════════════════════
 // TYPE DU FORMULAIRE (tout en string pour les inputs)
@@ -105,6 +145,7 @@ export default function FicheEleveFormModal({
   eleve,
   isOpen,
   onClose,
+  formKey,
 }: FicheEleveFormModalProps) {
   const isEditMode = !!eleve;
 
@@ -134,56 +175,11 @@ export default function FicheEleveFormModal({
   // ─────────────────────────────────────────────────────────────────
   // État du formulaire
   // ─────────────────────────────────────────────────────────────────
-  const [form, setForm] = useState<FormState>(defaultFormState);
-
-  // ─────────────────────────────────────────────────────────────────
-  // Initialisation du formulaire en mode édition
-  // Note: setState dans useEffect est acceptable ici car il s'agit d'une
-  // initialisation contrôlée par les props (eleve, isOpen)
-  // ─────────────────────────────────────────────────────────────────
+  const [form, setForm] = useState<FormState>(() => buildFormState(eleve));
 
   useEffect(() => {
     if (!isOpen) return;
-
-    if (eleve) {
-      setForm({
-        nom: eleve.nom || "",
-        prenom: eleve.prenom || "",
-        genre: eleve.genre || "",
-        dateNaissance: eleve.dateNaissance
-          ? new Date(eleve.dateNaissance).toISOString().split("T")[0]
-          : "",
-        lieuNaissance: eleve.lieuNaissance || "",
-        telephone: eleve.telephone || "",
-        photoUrl: eleve.photoUrl || "",
-        nationalite: eleve.nationalite || "",
-        classeId: eleve.classeId || "",
-        ecoleOrigine: eleve.ecoleOrigine || "",
-        dateInscription: eleve.dateInscription
-          ? new Date(eleve.dateInscription).toISOString().split("T")[0]
-          : "",
-        statut: eleve.statut || "ACTIF",
-        situationFinAnnee: eleve.situationFinAnnee || "EN_COURS",
-        parentId: eleve.parentId || "",
-        responsableId: eleve.responsableId || "",
-        situationFamiliale: eleve.situationFamiliale || "",
-        isRelationContact: eleve.isRelationContact || false,
-        relationName: eleve.relationName || "",
-        relationTelephone: eleve.relationTelephone || "",
-        adresseFokontany: eleve.adresse?.fokontany || "",
-        adresseLogement: eleve.adresse?.logement || "",
-        adresseVille: eleve.adresse?.ville || "",
-        adresseRegion: eleve.adresse?.region || "",
-        adressePays: eleve.adresse?.pays || "",
-        professionTitre: eleve.professionEleve?.titre || "",
-        professionLieu: eleve.professionEleve?.lieu || "",
-        professionSecteur: eleve.professionEleve?.secteur || "",
-        remarque: eleve.remarque || "",
-      });
-      return;
-    }
-
-    setForm(defaultFormState);
+    setForm(buildFormState(eleve));
   }, [eleve, isOpen]);
 
   // ─────────────────────────────────────────────────────────────────
@@ -306,13 +302,18 @@ export default function FicheEleveFormModal({
   // RENDU
   // ═══════════════════════════════════════════════════════════════
   return (
-    <dialog className="modal modal-open">
+    <dialog
+      key={formKey}
+      className="modal modal-open"
+      aria-modal="true"
+      aria-labelledby="fiche-eleve-modal-title"
+    >
       <div className="modal-box max-w-4xl max-h-[90vh] overflow-y-auto">
         {/* ─────────────────────────────────────────────────────────── */}
         {/* EN-TÊTE */}
         {/* ─────────────────────────────────────────────────────────── */}
         <div className="flex items-center justify-between mb-6">
-          <h3 className="font-bold text-lg">
+          <h3 id="fiche-eleve-modal-title" className="font-bold text-lg">
             {isEditMode ? `Modifier ${eleve.fullName}` : "Nouvel élève"}
           </h3>
           <button

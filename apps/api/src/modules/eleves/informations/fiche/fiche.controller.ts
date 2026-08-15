@@ -3,6 +3,80 @@ import { FicheEleveService } from "./fiche.service.js";
 import { ZodError } from "zod";
 import { createEleveSchema, updateEleveSchema } from "./fiche.schema.js";
 
+export class FicheError extends Error {
+  status = 500;
+
+  constructor(message: string, status = 500) {
+    super(message);
+    this.name = "FicheError";
+    this.status = status;
+  }
+}
+
+export class FicheValidationError extends FicheError {
+  constructor(message: string) {
+    super(message, 400);
+    this.name = "FicheValidationError";
+  }
+}
+
+export class FicheNotFoundError extends FicheError {
+  constructor(message: string) {
+    super(message, 404);
+    this.name = "FicheNotFoundError";
+  }
+}
+
+export class FicheForbiddenError extends FicheError {
+  constructor(message: string) {
+    super(message, 403);
+    this.name = "FicheForbiddenError";
+  }
+}
+
+export class FicheConflictError extends FicheError {
+  constructor(message: string) {
+    super(message, 409);
+    this.name = "FicheConflictError";
+  }
+}
+
+const sendFicheError = (
+  res: Response,
+  error: unknown,
+  fallback: string,
+): Response => {
+  if (error instanceof ZodError) {
+    return res
+      .status(400)
+      .json({ message: "Données invalides", details: error.issues });
+  }
+
+  if (error instanceof FicheValidationError) {
+    return res.status(400).json({ message: error.message });
+  }
+
+  if (error instanceof FicheNotFoundError) {
+    return res.status(404).json({ message: error.message });
+  }
+
+  if (error instanceof FicheForbiddenError) {
+    return res.status(403).json({ message: error.message });
+  }
+
+  if (error instanceof FicheConflictError) {
+    return res.status(409).json({ message: error.message });
+  }
+
+  if (error instanceof Error) {
+    console.error("Erreur fiche élève:", error);
+    return res.status(500).json({ message: fallback });
+  }
+
+  console.error("Erreur fiche élève inconnue:", error);
+  return res.status(500).json({ message: fallback });
+};
+
 /**
  * GET /api/eleves/informations/fiche
  * Récupère la liste des élèves accessibles pour la recherche dans la fiche
@@ -37,7 +111,7 @@ export const getAllFicheEleves = async (req: Request, res: Response) => {
 };
 
 /**
- * GET /api/eleves/:id
+ * GET /api/eleves/informations/fiche/:id
  * Récupère la fiche complète d'un élève par son ID
  */
 export const getFicheEleve = async (req: Request, res: Response) => {
@@ -55,15 +129,11 @@ export const getFicheEleve = async (req: Request, res: Response) => {
 
     return res.status(200).json(eleve);
   } catch (error) {
-    if (error instanceof Error) {
-      return res.status(500).json({ message: error.message });
-    }
-
-    console.error("Erreur lors de la récupération de la fiche élève:", error);
-    return res.status(500).json({
-      message:
-        "Erreur interne du serveur lors de la récupération de la fiche élève",
-    });
+    return sendFicheError(
+      res,
+      error,
+      "Erreur interne du serveur lors de la récupération de la fiche élève",
+    );
   }
 };
 
@@ -105,18 +175,11 @@ export const createFicheEleve = async (req: Request, res: Response) => {
 
     return res.status(201).json(nouvelEleve);
   } catch (error) {
-    if (error instanceof ZodError) {
-      return res.status(400).json({ error: error.issues });
-    }
-    if (error instanceof Error) {
-      return res.status(500).json({ message: error.message });
-    }
-
-    console.error("Erreur lors de la création de la fiche élève:", error);
-    return res.status(500).json({
-      message:
-        "Erreur interne du serveur lors de la création de la fiche élève",
-    });
+    return sendFicheError(
+      res,
+      error,
+      "Erreur interne du serveur lors de la création de la fiche élève",
+    );
   }
 };
 
@@ -155,18 +218,11 @@ export const updateFicheEleve = async (req: Request, res: Response) => {
 
     return res.status(200).json(eleveModifie);
   } catch (error) {
-    if (error instanceof ZodError) {
-      return res.status(400).json({ error: error.issues });
-    }
-    if (error instanceof Error) {
-      return res.status(500).json({ message: error.message });
-    }
-
-    console.error("Erreur lors de la mise à jour de la fiche élève:", error);
-    return res.status(500).json({
-      message:
-        "Erreur interne du serveur lors de la mise à jour de la fiche élève",
-    });
+    return sendFicheError(
+      res,
+      error,
+      "Erreur interne du serveur lors de la mise à jour de la fiche élève",
+    );
   }
 };
 
@@ -199,14 +255,11 @@ export const deleteFicheEleve = async (req: Request, res: Response) => {
 
     return res.status(200).json({ message: "Élève supprimé avec succès" });
   } catch (error) {
-    if (error instanceof Error) {
-      return res.status(500).json({ message: error.message });
-    }
-    console.error("Erreur lors de la suppression de la fiche élève:", error);
-    return res.status(500).json({
-      message:
-        "Erreur interne du serveur lors de la suppression de la fiche élève",
-    });
+    return sendFicheError(
+      res,
+      error,
+      "Erreur interne du serveur lors de la suppression de la fiche élève",
+    );
   }
 };
 
@@ -241,13 +294,10 @@ export const restoreFicheEleve = async (req: Request, res: Response) => {
       eleve: eleveRestored,
     });
   } catch (error) {
-    if (error instanceof Error) {
-      return res.status(500).json({ message: error.message });
-    }
-    console.error("Erreur lors de la restauration de la fiche élève:", error);
-    return res.status(500).json({
-      message:
-        "Erreur interne du serveur lors de la restauration de la fiche élève",
-    });
+    return sendFicheError(
+      res,
+      error,
+      "Erreur interne du serveur lors de la restauration de la fiche élève",
+    );
   }
 };

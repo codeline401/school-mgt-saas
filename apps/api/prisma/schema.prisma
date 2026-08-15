@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider        = "prisma-client"
+  previewFeatures = ["partialIndexes"]
+  output          = "../src/generated/prisma"
 }
 
 datasource db {
@@ -1801,13 +1802,11 @@ model Eleve {
   userId                String?
 
   // Contraintes & Index
-  @@unique([schoolId, matricule])
-  // 🔧 FIX: cette contrainte ne bloque pas les doublons quand dateNaissance
-  // est NULL (NULL != NULL en SQL). Garde-la comme filet de sécurité pour
-  // les cas où la date est connue, mais ajoute une vérification applicative
-  // (nom + prénom + schoolId) pour les élèves sans date de naissance.
-  @@unique([schoolId, nom, prenom, dateNaissance])
+  @@unique([schoolId, matricule], where: "deletedAt IS NULL")
+  @@unique([schoolId, nom, prenom, dateNaissance], where: "deletedAt IS NULL")
+  @@unique([schoolId, nom, prenom], where: "deletedAt IS NULL AND dateNaissance IS NULL")
   @@index([schoolId])
+  @@index([schoolId, deletedAt])
   @@index([classeId])
   @@index([parentId])
   @@index([responsableId])
