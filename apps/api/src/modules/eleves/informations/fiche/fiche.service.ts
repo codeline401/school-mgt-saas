@@ -1,3 +1,4 @@
+import { Prisma } from "../../../../generated/prisma/client.js";
 import { prisma } from "../../../../lib/prisma.js";
 import { CreateEleveInput, UpdateEleveInput } from "./fiche.schema.js";
 
@@ -24,6 +25,102 @@ const validateContactRelation = (data: {
   if (!data.isRelationContact) return true;
   return !!(data.relationName?.trim() && data.relationTelephone?.trim());
 };
+
+const ficheInclude = {
+  school: {
+    select: {
+      id: true,
+      nom: true,
+      email: true,
+      telephone: true,
+      adresse: true,
+      logoUrl: true,
+    },
+  },
+  classe: {
+    select: {
+      id: true,
+      nom: true,
+      schoolId: true,
+      professeurPrincipalId: true,
+      professeurPrincipal: {
+        select: {
+          id: true,
+          nom: true,
+          prenom: true,
+        },
+      },
+    },
+  },
+  parent: {
+    select: {
+      id: true,
+      nom: true,
+      prenom: true,
+      email: true,
+      telephone: true,
+      adresse: true,
+    },
+  },
+  responsable: {
+    select: {
+      id: true,
+      nom: true,
+      prenom: true,
+      email: true,
+      telephone: true,
+    },
+  },
+  adresse: true,
+  professionEleve: true,
+  historiqueClasses: {
+    include: {
+      classe: {
+        select: {
+          id: true,
+          nom: true,
+        },
+      },
+    },
+    orderBy: {
+      anneeScolaire: "desc",
+    },
+  },
+  admissions: {
+    orderBy: {
+      createdAt: "desc",
+    },
+  },
+  ecolages: {
+    orderBy: [{ anneeScolaire: "desc" as const }, { mois: "desc" as const }],
+  },
+  droitInscriptions: {
+    orderBy: {
+      anneeScolaire: "desc",
+    },
+  },
+  notes: {
+    include: {
+      matiere: {
+        select: {
+          id: true,
+          nom: true,
+        },
+      },
+      periode: {
+        select: {
+          id: true,
+          nom: true,
+        },
+      },
+    },
+  },
+  presences: {
+    orderBy: {
+      updatedAt: "desc",
+    },
+  },
+} satisfies Prisma.EleveInclude;
 
 export class FicheEleveService {
   /**
@@ -70,104 +167,10 @@ export class FicheEleveService {
    * Inclut toutes les relations nécessaires pour l'affichage au front
    */
   static async getFicheEleveById(eleveId: string, user: UserContext) {
-    const eleve = (await prisma.eleve.findUnique({
+    const eleve = await prisma.eleve.findUnique({
       where: { id: eleveId, deletedAt: null },
-      include: {
-        school: {
-          select: {
-            id: true,
-            nom: true,
-            email: true,
-            telephone: true,
-            adresse: true,
-            logoUrl: true,
-          },
-        },
-        classe: {
-          select: {
-            id: true,
-            nom: true,
-            schoolId: true,
-            professeurPrincipalId: true,
-            professeurPrincipal: {
-              select: {
-                id: true,
-                nom: true,
-                prenom: true,
-              },
-            },
-          },
-        },
-        parent: {
-          select: {
-            id: true,
-            nom: true,
-            prenom: true,
-            email: true,
-            telephone: true,
-            adresse: true,
-          },
-        },
-        responsable: {
-          select: {
-            id: true,
-            nom: true,
-            prenom: true,
-            email: true,
-            telephone: true,
-          },
-        },
-        adresse: true,
-        professionEleve: true,
-        historiqueClasses: {
-          include: {
-            classe: {
-              select: {
-                id: true,
-                nom: true,
-              },
-            },
-          },
-          orderBy: {
-            anneeScolaire: "desc",
-          },
-        },
-        admissions: {
-          orderBy: {
-            createdAt: "desc",
-          },
-        },
-        ecolages: {
-          orderBy: [{ anneeScolaire: "desc" }, { mois: "desc" }],
-        },
-        droitInscriptions: {
-          orderBy: {
-            anneeScolaire: "desc",
-          },
-        },
-        notes: {
-          include: {
-            matiere: {
-              select: {
-                id: true,
-                nom: true,
-              },
-            },
-            periode: {
-              select: {
-                id: true,
-                nom: true,
-              },
-            },
-          },
-        },
-        presences: {
-          orderBy: {
-            updatedAt: "desc",
-          },
-        },
-      },
-    })) as any;
+      include: ficheInclude,
+    });
 
     if (!eleve) {
       throw new Error("Élève non trouvé");
@@ -246,73 +249,76 @@ export class FicheEleveService {
       }
     }
 
-    const nextMatricule = await prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx) => {
       const lastEleve = await tx.eleve.findFirst({
-        where: { schoolId: targetSchoolId, deletedAt: null },
+        where: { schoolId: targetSchoolId },
         orderBy: { matricule: "desc" },
         select: { matricule: true },
       });
-      return (lastEleve?.matricule ?? 0) + 1;
-    });
 
-    return prisma.eleve.create({
-      data: {
-        nom: data.nom,
-        prenom: data.prenom,
-        matricule: nextMatricule,
-        schoolId: targetSchoolId,
-        genre: data.genre,
-        dateNaissance: data.dateNaissance ? new Date(data.dateNaissance) : null,
-        lieuNaissance: data.lieuNaissance,
-        telephone: data.telephone,
-        photoUrl: data.photoUrl,
-        situationFamiliale: data.situationFamiliale,
-        situationFinAnnee: data.situationFinAnnee,
-        nationalite: data.nationalite,
-        dateInscription: data.dateInscription
-          ? new Date(data.dateInscription)
-          : null,
-        ecoleOrigine: data.ecoleOrigine,
-        responsableId: data.responsableId,
-        classeId: data.classeId,
-        parentId: data.parentId,
-        statut: data.statut || "ACTIF",
-        isRelationContact: data.isRelationContact || false,
-        relationName: data.relationName,
-        relationTelephone: data.relationTelephone,
-        remarque: data.remarque,
-        // relation nested create si fournie
-        ...(data.adresse
-          ? {
-              adresse: {
-                create: {
-                  fokontany: data.adresse.fokontany,
-                  logement: data.adresse.logement,
-                  ville: data.adresse.ville,
-                  region: data.adresse.region,
-                  pays: data.adresse.pays,
+      const nextMatricule = (lastEleve?.matricule ?? 0) + 1;
+
+      return tx.eleve.create({
+        data: {
+          nom: data.nom,
+          prenom: data.prenom,
+          matricule: nextMatricule,
+          schoolId: targetSchoolId,
+          genre: data.genre,
+          dateNaissance: data.dateNaissance
+            ? new Date(data.dateNaissance)
+            : null,
+          lieuNaissance: data.lieuNaissance,
+          telephone: data.telephone,
+          photoUrl: data.photoUrl,
+          situationFamiliale: data.situationFamiliale,
+          situationFinAnnee: data.situationFinAnnee,
+          nationalite: data.nationalite,
+          dateInscription: data.dateInscription
+            ? new Date(data.dateInscription)
+            : null,
+          ecoleOrigine: data.ecoleOrigine,
+          responsableId: data.responsableId,
+          classeId: data.classeId,
+          parentId: data.parentId,
+          statut: data.statut || "ACTIF",
+          isRelationContact: data.isRelationContact || false,
+          relationName: data.relationName,
+          relationTelephone: data.relationTelephone,
+          remarque: data.remarque,
+          // relation nested create si fournie
+          ...(data.adresse
+            ? {
+                adresse: {
+                  create: {
+                    fokontany: data.adresse.fokontany,
+                    logement: data.adresse.logement,
+                    ville: data.adresse.ville,
+                    region: data.adresse.region,
+                    pays: data.adresse.pays,
+                  },
                 },
-              },
-            }
-          : {}),
-        ...(data.professionEleve
-          ? {
-              professionEleve: {
-                create: {
-                  titre: data.professionEleve.titre,
-                  lieu: data.professionEleve.lieu,
-                  secteur: data.professionEleve.secteur,
+              }
+            : {}),
+          ...(data.professionEleve
+            ? {
+                professionEleve: {
+                  create: {
+                    titre: data.professionEleve.titre,
+                    lieu: data.professionEleve.lieu,
+                    secteur: data.professionEleve.secteur,
+                  },
                 },
-              },
-            }
-          : {}),
-      },
-      include: {
-        classe: true,
-        parent: true,
-        adresse: true,
-        professionEleve: true,
-      },
+              }
+            : {}),
+        },
+        include: {
+          classe: true,
+          parent: true,
+          adresse: true,
+          professionEleve: true,
+        },
+      });
     });
   }
 
@@ -429,6 +435,11 @@ export class FicheEleveService {
             ? new Date(data.dateNaissance)
             : null,
         }),
+        ...(data.dateInscription !== undefined && {
+          dateInscription: data.dateInscription
+            ? new Date(data.dateInscription)
+            : null,
+        }),
         ...(data.lieuNaissance !== undefined && {
           lieuNaissance: data.lieuNaissance,
         }),
@@ -489,9 +500,9 @@ export class FicheEleveService {
     });
 
     if (!existingEleve) throw new Error("Élève non trouvé");
-    if (existingEleve.deletedAt) return existingEleve;
 
     assertUserSchoolAccess(user, existingEleve.schoolId);
+    if (existingEleve.deletedAt) return existingEleve;
 
     return prisma.eleve.update({
       where: { id: eleveId },

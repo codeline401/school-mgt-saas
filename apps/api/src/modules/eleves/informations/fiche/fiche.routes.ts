@@ -19,7 +19,7 @@ const router = Router();
 router.use(authenticate);
 
 /**
- * POST /api/eleves/fiche
+ * POST /api/eleves/informations/fiche
  * Crée un nouvel élève
  * Accessible par: ADMIN, SUDO_ADMIN
  */
@@ -30,7 +30,7 @@ router.post(
 );
 
 /**
- * GET /api/eleves/fiche
+ * GET /api/eleves/informations/fiche
  * Récupère la liste des élèves de l'école pour la recherche/selection.
  * Accessible par: ADMIN, SUDO_ADMIN, PROF
  */
@@ -41,7 +41,7 @@ router.get(
 );
 
 /**
- * GET /api/eleves/fiche/:id
+ * GET /api/eleves/informations/fiche/:id
  * Récupère la fiche complète d'un élève
  * Accessible par: ADMIN, SUDO_ADMIN, PROF
  */
@@ -52,7 +52,7 @@ router.get(
 );
 
 /**
- * PUT /api/eleves/fiche/:id
+ * PUT /api/eleves/informations/fiche/:id
  * Met à jour la fiche d'un élève
  * Accessible par: ADMIN, SUDO_ADMIN
  */
@@ -63,7 +63,7 @@ router.put(
 );
 
 /**
- * DELETE /api/eleves/fiche/:id
+ * DELETE /api/eleves/informations/fiche/:id
  * Suppression logique d'un élève (soft delete)
  * Accessible par: ADMIN, SUDO_ADMIN
  */
@@ -74,7 +74,7 @@ router.delete(
 );
 
 /**
- * PATCH /api/eleves/fiche/:id/restore
+ * PATCH /api/eleves/informations/fiche/:id/restore
  * Restaure un élève supprimé
  * Accessible par: ADMIN, SUDO_ADMIN
  */

@@ -1802,9 +1802,9 @@ model Eleve {
   userId                String?
 
   // Contraintes & Index
-  @@unique([schoolId, matricule], where: "deletedAt IS NULL")
-  @@unique([schoolId, nom, prenom, dateNaissance], where: "deletedAt IS NULL")
-  @@unique([schoolId, nom, prenom], where: "deletedAt IS NULL AND dateNaissance IS NULL")
+  @@unique([schoolId, matricule])
+  @@unique([schoolId, nom, prenom, dateNaissance])
+  @@unique([schoolId, nom, prenom])
   @@index([schoolId])
   @@index([schoolId, deletedAt])
   @@index([classeId])

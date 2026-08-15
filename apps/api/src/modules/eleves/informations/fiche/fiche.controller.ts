@@ -96,17 +96,11 @@ export const getAllFicheEleves = async (req: Request, res: Response) => {
 
     return res.status(200).json(eleves);
   } catch (error) {
-    if (error instanceof Error) {
-      return res.status(500).json({ message: error.message });
-    }
-
-    console.error(
-      "Erreur lors de la récupération de la liste des élèves:",
+    return sendFicheError(
+      res,
       error,
+      "Erreur interne du serveur lors de la récupération des élèves",
     );
-    return res.status(500).json({
-      message: "Erreur interne du serveur lors de la récupération des élèves",
-    });
   }
 };
 
@@ -199,7 +193,7 @@ export const updateFicheEleve = async (req: Request, res: Response) => {
 
     if (role !== "SUDO_ADMIN" && role !== "ADMIN") {
       return res.status(403).json({
-        error:
+        message:
           "Accès refusé : Seuls les administrateurs peuvent mettre à jour des élèves",
       });
     }
@@ -242,7 +236,7 @@ export const deleteFicheEleve = async (req: Request, res: Response) => {
 
     if (role !== "SUDO_ADMIN" && role !== "ADMIN") {
       return res.status(403).json({
-        error:
+        message:
           "Accès refusé : Seuls les administrateurs peuvent supprimer des élèves",
       });
     }
@@ -279,7 +273,7 @@ export const restoreFicheEleve = async (req: Request, res: Response) => {
 
     if (role !== "SUDO_ADMIN" && role !== "ADMIN") {
       return res.status(403).json({
-        error:
+        message:
           "Accès refusé : Seuls les administrateurs peuvent restaurer des élèves",
       });
     }

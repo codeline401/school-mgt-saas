@@ -885,7 +885,6 @@ export interface FicheEleveComplete extends BaseEntity {
     periode: {
       id: string;
       nom: string;
-      nullable?: boolean;
     } | null;
   }>;
   presences: Array<{

@@ -69,6 +69,7 @@ export const professionEleveSchema = z.object({
 
 export const createProfessionEleveSchema = professionEleveSchema.omit({
   id: true,
+  eleveId: true,
   createdAt: true,
   updatedAt: true,
 });
@@ -140,7 +141,7 @@ export const baseEleveShape = z.object({
   ecoleOrigine: z.string().trim().max(200).nullish(),
 
   responsableId: z.string().uuid().nullish(),
-  schoolId: z.string().uuid("ID école invalide"),
+  schoolId: z.string().uuid("ID école invalide").optional(),
   classeId: z.string().uuid("ID classe invalide").nullish(),
   parentId: z.string().uuid("ID parent invalide").nullish(),
 
@@ -204,10 +205,9 @@ const baseCreateShape = baseEleveShape
     deletedById: true,
   })
   .extend({
+    schoolId: z.string().uuid("ID école invalide").optional(),
     adresse: createAdresseSchema.omit({ eleveId: true }).optional(),
-    professionEleve: createProfessionEleveSchema
-      .omit({ eleveId: true })
-      .optional(),
+    professionEleve: createProfessionEleveSchema.optional(),
   });
 
 export const createEleveSchema = baseCreateShape.refine(
@@ -251,17 +251,9 @@ export const ficheEleveResponseSchema = baseEleveShape.extend({
 export type FicheEleveResponse = z.infer<typeof ficheEleveResponseSchema>;
 
 // .partial() s'applique maintenant correctement sur l'objet brut avant le .refine()
-export const updateEleveSchema = baseCreateShape.partial().refine(
-  (data) => {
-    if (!data.isRelationContact) return true;
-    return !!(data.relationName || data.relationTelephone);
-  },
-  {
-    message:
-      "Le nom et le téléphone du contact sont requis si 'isRelationContact' est activé",
-    path: ["relationName"],
-  },
-);
+export const updateEleveSchema = baseCreateShape
+  .partial()
+  .refine(validateContactRelation, contactRefineOptions);
 
 // ------------------------------------
 // TYPE inférés pour TS

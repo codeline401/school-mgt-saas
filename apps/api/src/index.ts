@@ -64,19 +64,19 @@ app.get(
       return res.status(403).json({ error: "Accès refusé" });
     }
 
-    const where =
-      req.user?.role === "SUDO_ADMIN" || req.user?.role === "ADMIN"
-        ? { schoolId: req.user.schoolId ?? undefined }
-        : { schoolId: req.user.schoolId, id: req.user.id };
-
     if (req.user?.role !== "SUDO_ADMIN" && !req.user?.schoolId) {
       return res
         .status(400)
         .json({ error: "Aucune école associée à l'utilisateur." });
     }
 
+    const where =
+      req.user?.role === "SUDO_ADMIN" || req.user?.role === "ADMIN"
+        ? req.user.schoolId ? { schoolId: req.user.schoolId } : {}
+        : { schoolId: req.user.schoolId!, userId: req.user.id };
+
     const professeurs = await prisma.professeur.findMany({
-      where: Object.keys(where).length ? (where as any) : {},
+      where,
       include: { classes: true, matieres: true },
       orderBy: { nom: "asc" },
     });

@@ -792,10 +792,12 @@ export type ClasseCreateNestedOneWithoutHistoriqueClassesInput = {
   connect?: Prisma.ClasseWhereUniqueInput
 }
 
-export type ClasseUpdateOneRequiredWithoutHistoriqueClassesNestedInput = {
+export type ClasseUpdateOneWithoutHistoriqueClassesNestedInput = {
   create?: Prisma.XOR<Prisma.ClasseCreateWithoutHistoriqueClassesInput, Prisma.ClasseUncheckedCreateWithoutHistoriqueClassesInput>
   connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutHistoriqueClassesInput
   upsert?: Prisma.ClasseUpsertWithoutHistoriqueClassesInput
+  disconnect?: Prisma.ClasseWhereInput | boolean
+  delete?: Prisma.ClasseWhereInput | boolean
   connect?: Prisma.ClasseWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClasseUpdateToOneWithWhereWithoutHistoriqueClassesInput, Prisma.ClasseUpdateWithoutHistoriqueClassesInput>, Prisma.ClasseUncheckedUpdateWithoutHistoriqueClassesInput>
 }

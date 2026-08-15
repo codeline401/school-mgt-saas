@@ -162,7 +162,7 @@ export type HistoriqueClasseGroupByArgs<ExtArgs extends runtime.Types.Extensions
 export type HistoriqueClasseGroupByOutputType = {
   id: string
   eleveId: string
-  classeId: string
+  classeId: string | null
   anneeScolaire: string
   statutFinAnnee: $Enums.StatutFinAnnee | null
   createdAt: Date
@@ -193,19 +193,19 @@ export type HistoriqueClasseWhereInput = {
   NOT?: Prisma.HistoriqueClasseWhereInput | Prisma.HistoriqueClasseWhereInput[]
   id?: Prisma.StringFilter<"HistoriqueClasse"> | string
   eleveId?: Prisma.StringFilter<"HistoriqueClasse"> | string
-  classeId?: Prisma.StringFilter<"HistoriqueClasse"> | string
+  classeId?: Prisma.StringNullableFilter<"HistoriqueClasse"> | string | null
   anneeScolaire?: Prisma.StringFilter<"HistoriqueClasse"> | string
   statutFinAnnee?: Prisma.EnumStatutFinAnneeNullableFilter<"HistoriqueClasse"> | $Enums.StatutFinAnnee | null
   createdAt?: Prisma.DateTimeFilter<"HistoriqueClasse"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HistoriqueClasse"> | Date | string
   eleve?: Prisma.XOR<Prisma.EleveScalarRelationFilter, Prisma.EleveWhereInput>
-  classe?: Prisma.XOR<Prisma.ClasseScalarRelationFilter, Prisma.ClasseWhereInput>
+  classe?: Prisma.XOR<Prisma.ClasseNullableScalarRelationFilter, Prisma.ClasseWhereInput> | null
 }
 
 export type HistoriqueClasseOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   eleveId?: Prisma.SortOrder
-  classeId?: Prisma.SortOrder
+  classeId?: Prisma.SortOrderInput | Prisma.SortOrder
   anneeScolaire?: Prisma.SortOrder
   statutFinAnnee?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -221,19 +221,19 @@ export type HistoriqueClasseWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.HistoriqueClasseWhereInput[]
   NOT?: Prisma.HistoriqueClasseWhereInput | Prisma.HistoriqueClasseWhereInput[]
   eleveId?: Prisma.StringFilter<"HistoriqueClasse"> | string
-  classeId?: Prisma.StringFilter<"HistoriqueClasse"> | string
+  classeId?: Prisma.StringNullableFilter<"HistoriqueClasse"> | string | null
   anneeScolaire?: Prisma.StringFilter<"HistoriqueClasse"> | string
   statutFinAnnee?: Prisma.EnumStatutFinAnneeNullableFilter<"HistoriqueClasse"> | $Enums.StatutFinAnnee | null
   createdAt?: Prisma.DateTimeFilter<"HistoriqueClasse"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HistoriqueClasse"> | Date | string
   eleve?: Prisma.XOR<Prisma.EleveScalarRelationFilter, Prisma.EleveWhereInput>
-  classe?: Prisma.XOR<Prisma.ClasseScalarRelationFilter, Prisma.ClasseWhereInput>
+  classe?: Prisma.XOR<Prisma.ClasseNullableScalarRelationFilter, Prisma.ClasseWhereInput> | null
 }, "id" | "eleveId_anneeScolaire">
 
 export type HistoriqueClasseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   eleveId?: Prisma.SortOrder
-  classeId?: Prisma.SortOrder
+  classeId?: Prisma.SortOrderInput | Prisma.SortOrder
   anneeScolaire?: Prisma.SortOrder
   statutFinAnnee?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -249,7 +249,7 @@ export type HistoriqueClasseScalarWhereWithAggregatesInput = {
   NOT?: Prisma.HistoriqueClasseScalarWhereWithAggregatesInput | Prisma.HistoriqueClasseScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"HistoriqueClasse"> | string
   eleveId?: Prisma.StringWithAggregatesFilter<"HistoriqueClasse"> | string
-  classeId?: Prisma.StringWithAggregatesFilter<"HistoriqueClasse"> | string
+  classeId?: Prisma.StringNullableWithAggregatesFilter<"HistoriqueClasse"> | string | null
   anneeScolaire?: Prisma.StringWithAggregatesFilter<"HistoriqueClasse"> | string
   statutFinAnnee?: Prisma.EnumStatutFinAnneeNullableWithAggregatesFilter<"HistoriqueClasse"> | $Enums.StatutFinAnnee | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"HistoriqueClasse"> | Date | string
@@ -263,13 +263,13 @@ export type HistoriqueClasseCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   eleve: Prisma.EleveCreateNestedOneWithoutHistoriqueClassesInput
-  classe: Prisma.ClasseCreateNestedOneWithoutHistoriqueClassesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutHistoriqueClassesInput
 }
 
 export type HistoriqueClasseUncheckedCreateInput = {
   id?: string
   eleveId: string
-  classeId: string
+  classeId?: string | null
   anneeScolaire: string
   statutFinAnnee?: $Enums.StatutFinAnnee | null
   createdAt?: Date | string
@@ -283,13 +283,13 @@ export type HistoriqueClasseUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eleve?: Prisma.EleveUpdateOneRequiredWithoutHistoriqueClassesNestedInput
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutHistoriqueClassesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutHistoriqueClassesNestedInput
 }
 
 export type HistoriqueClasseUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
   statutFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -299,7 +299,7 @@ export type HistoriqueClasseUncheckedUpdateInput = {
 export type HistoriqueClasseCreateManyInput = {
   id?: string
   eleveId: string
-  classeId: string
+  classeId?: string | null
   anneeScolaire: string
   statutFinAnnee?: $Enums.StatutFinAnnee | null
   createdAt?: Date | string
@@ -317,7 +317,7 @@ export type HistoriqueClasseUpdateManyMutationInput = {
 export type HistoriqueClasseUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
   statutFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -503,7 +503,7 @@ export type HistoriqueClasseScalarWhereInput = {
   NOT?: Prisma.HistoriqueClasseScalarWhereInput | Prisma.HistoriqueClasseScalarWhereInput[]
   id?: Prisma.StringFilter<"HistoriqueClasse"> | string
   eleveId?: Prisma.StringFilter<"HistoriqueClasse"> | string
-  classeId?: Prisma.StringFilter<"HistoriqueClasse"> | string
+  classeId?: Prisma.StringNullableFilter<"HistoriqueClasse"> | string | null
   anneeScolaire?: Prisma.StringFilter<"HistoriqueClasse"> | string
   statutFinAnnee?: Prisma.EnumStatutFinAnneeNullableFilter<"HistoriqueClasse"> | $Enums.StatutFinAnnee | null
   createdAt?: Prisma.DateTimeFilter<"HistoriqueClasse"> | Date | string
@@ -516,12 +516,12 @@ export type HistoriqueClasseCreateWithoutEleveInput = {
   statutFinAnnee?: $Enums.StatutFinAnnee | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  classe: Prisma.ClasseCreateNestedOneWithoutHistoriqueClassesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutHistoriqueClassesInput
 }
 
 export type HistoriqueClasseUncheckedCreateWithoutEleveInput = {
   id?: string
-  classeId: string
+  classeId?: string | null
   anneeScolaire: string
   statutFinAnnee?: $Enums.StatutFinAnnee | null
   createdAt?: Date | string
@@ -592,7 +592,7 @@ export type HistoriqueClasseUncheckedUpdateManyWithoutClasseInput = {
 
 export type HistoriqueClasseCreateManyEleveInput = {
   id?: string
-  classeId: string
+  classeId?: string | null
   anneeScolaire: string
   statutFinAnnee?: $Enums.StatutFinAnnee | null
   createdAt?: Date | string
@@ -605,12 +605,12 @@ export type HistoriqueClasseUpdateWithoutEleveInput = {
   statutFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  classe?: Prisma.ClasseUpdateOneRequiredWithoutHistoriqueClassesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutHistoriqueClassesNestedInput
 }
 
 export type HistoriqueClasseUncheckedUpdateWithoutEleveInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
   statutFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -619,7 +619,7 @@ export type HistoriqueClasseUncheckedUpdateWithoutEleveInput = {
 
 export type HistoriqueClasseUncheckedUpdateManyWithoutEleveInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
   statutFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -637,7 +637,7 @@ export type HistoriqueClasseSelect<ExtArgs extends runtime.Types.Extensions.Inte
   createdAt?: boolean
   updatedAt?: boolean
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
+  classe?: boolean | Prisma.HistoriqueClasse$classeArgs<ExtArgs>
 }, ExtArgs["result"]["historiqueClasse"]>
 
 export type HistoriqueClasseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -649,7 +649,7 @@ export type HistoriqueClasseSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   createdAt?: boolean
   updatedAt?: boolean
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
+  classe?: boolean | Prisma.HistoriqueClasse$classeArgs<ExtArgs>
 }, ExtArgs["result"]["historiqueClasse"]>
 
 export type HistoriqueClasseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -661,7 +661,7 @@ export type HistoriqueClasseSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   createdAt?: boolean
   updatedAt?: boolean
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
+  classe?: boolean | Prisma.HistoriqueClasse$classeArgs<ExtArgs>
 }, ExtArgs["result"]["historiqueClasse"]>
 
 export type HistoriqueClasseSelectScalar = {
@@ -677,27 +677,27 @@ export type HistoriqueClasseSelectScalar = {
 export type HistoriqueClasseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eleveId" | "classeId" | "anneeScolaire" | "statutFinAnnee" | "createdAt" | "updatedAt", ExtArgs["result"]["historiqueClasse"]>
 export type HistoriqueClasseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
+  classe?: boolean | Prisma.HistoriqueClasse$classeArgs<ExtArgs>
 }
 export type HistoriqueClasseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
+  classe?: boolean | Prisma.HistoriqueClasse$classeArgs<ExtArgs>
 }
 export type HistoriqueClasseIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
-  classe?: boolean | Prisma.ClasseDefaultArgs<ExtArgs>
+  classe?: boolean | Prisma.HistoriqueClasse$classeArgs<ExtArgs>
 }
 
 export type $HistoriqueClassePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "HistoriqueClasse"
   objects: {
     eleve: Prisma.$ElevePayload<ExtArgs>
-    classe: Prisma.$ClassePayload<ExtArgs>
+    classe: Prisma.$ClassePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     eleveId: string
-    classeId: string
+    classeId: string | null
     anneeScolaire: string
     statutFinAnnee: $Enums.StatutFinAnnee | null
     createdAt: Date
@@ -1097,7 +1097,7 @@ readonly fields: HistoriqueClasseFieldRefs;
 export interface Prisma__HistoriqueClasseClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   eleve<T extends Prisma.EleveDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EleveDefaultArgs<ExtArgs>>): Prisma.Prisma__EleveClient<runtime.Types.Result.GetResult<Prisma.$ElevePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  classe<T extends Prisma.ClasseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClasseDefaultArgs<ExtArgs>>): Prisma.Prisma__ClasseClient<runtime.Types.Result.GetResult<Prisma.$ClassePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  classe<T extends Prisma.HistoriqueClasse$classeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HistoriqueClasse$classeArgs<ExtArgs>>): Prisma.Prisma__ClasseClient<runtime.Types.Result.GetResult<Prisma.$ClassePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1532,6 +1532,25 @@ export type HistoriqueClasseDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many HistoriqueClasses to delete.
    */
   limit?: number
+}
+
+/**
+ * HistoriqueClasse.classe
+ */
+export type HistoriqueClasse$classeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Classe
+   */
+  select?: Prisma.ClasseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Classe
+   */
+  omit?: Prisma.ClasseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClasseInclude<ExtArgs> | null
+  where?: Prisma.ClasseWhereInput
 }
 
 /**
