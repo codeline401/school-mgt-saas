@@ -88,6 +88,7 @@ export class ResponsableService {
       where: isSudoAdmin ? {} : { schoolId: user.schoolId! }, // If SUDO_ADMIN, fetch all; otherwise, filter by user's schoolId
       include: {
         affiliations: {
+          where: { eleve: { deletedAt: null } },
           include: {
             eleve: {
               select: {
@@ -176,6 +177,7 @@ export class ResponsableService {
           responsableId: responsable.id,
           eleveId,
         })),
+        skipDuplicates: true,
       });
 
       // Le premier élève affilié devient le parent principal si non défini

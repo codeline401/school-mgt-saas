@@ -35,9 +35,6 @@ CREATE UNIQUE INDEX "ResponsableEleve_responsableId_eleveId_key" ON "Responsable
 -- CreateIndex
 CREATE INDEX "Eleve_schoolId_deletedAt_idx" ON "Eleve"("schoolId", "deletedAt");
 
--- CreateIndex
-CREATE UNIQUE INDEX "Eleve_schoolId_nom_prenom_key" ON "Eleve"("schoolId", "nom", "prenom");
-
 -- AddForeignKey
 ALTER TABLE "ResponsableEleve" ADD CONSTRAINT "ResponsableEleve_responsableId_fkey" FOREIGN KEY ("responsableId") REFERENCES "Parent"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 

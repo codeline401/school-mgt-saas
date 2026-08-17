@@ -1781,7 +1781,6 @@ model Eleve {
   // Contraintes & Index
   @@unique([schoolId, matricule])
   @@unique([schoolId, nom, prenom, dateNaissance])
-  @@unique([schoolId, nom, prenom])
   @@index([schoolId])
   @@index([schoolId, deletedAt])
   @@index([classeId])

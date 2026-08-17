@@ -1,4 +1,4 @@
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import {
   Edit2,
   Mail,
@@ -126,6 +126,18 @@ export default function ResponsablesPage() {
         : [...current.eleveIds, eleveId],
     }));
   };
+
+  const formDialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = formDialogRef.current;
+    if (!dialog) return;
+    if (showForm) {
+      dialog.showModal();
+    } else {
+      dialog.close();
+    }
+  }, [showForm]);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -295,17 +307,19 @@ export default function ResponsablesPage() {
                   </td>
                   <td>{responsable.affiliations.length}</td>
                   <td>
-                    <button
-                      type="button"
-                      className="btn btn-ghost btn-sm btn-square"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        openEdit(responsable);
-                      }}
-                      aria-label={`Modifier ${responsable.prenom} ${responsable.nom}`}
-                    >
-                      <Edit2 size={16} />
-                    </button>
+                    {canManage && (
+                      <button
+                        type="button"
+                        className="btn btn-ghost btn-sm btn-square"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          openEdit(responsable);
+                        }}
+                        aria-label={`Modifier ${responsable.prenom} ${responsable.nom}`}
+                      >
+                        <Edit2 size={16} />
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -450,7 +464,11 @@ export default function ResponsablesPage() {
       </aside>
 
       {showForm && (
-        <dialog className="modal modal-open" aria-modal="true">
+        <dialog
+          ref={formDialogRef}
+          className="modal"
+          onClose={() => setShowForm(false)}
+        >
           <div className="modal-box max-w-3xl">
             <div className="mb-5 flex items-center justify-between">
               <h3 className="text-lg font-bold">
@@ -607,6 +625,7 @@ export default function ResponsablesPage() {
                     createMutation.isPending ||
                     updateMutation.isPending ||
                     affilierMutation.isPending ||
+                    retirerMutation.isPending ||
                     (!selectedResponsable && form.eleveIds.length === 0)
                   }
                 >
