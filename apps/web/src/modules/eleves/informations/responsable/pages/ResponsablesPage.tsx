@@ -64,8 +64,9 @@ function buildFormState(responsable?: Responsable): FormState {
 export default function ResponsablesPage() {
   const user = useAuthStore((state) => state.user);
   const [search, setSearch] = useState("");
-  const [selectedResponsable, setSelectedResponsable] =
-    useState<Responsable | null>(null);
+  const [selectedResponsableId, setSelectedResponsableId] = useState<
+    string | null
+  >(null);
   const [showForm, setShowForm] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [form, setForm] = useState<FormState>(emptyForm);
@@ -97,14 +98,22 @@ export default function ResponsablesPage() {
     });
   }, [responsables, search]);
 
+  const selectedResponsable = useMemo(
+    () =>
+      responsables.find(
+        (responsable) => responsable.id === selectedResponsableId,
+      ) ?? null,
+    [responsables, selectedResponsableId],
+  );
+
   const openCreate = () => {
-    setSelectedResponsable(null);
+    setSelectedResponsableId(null);
     setForm(emptyForm);
     setShowForm(true);
   };
 
   const openEdit = (responsable: Responsable) => {
-    setSelectedResponsable(responsable);
+    setSelectedResponsableId(responsable.id);
     setForm(buildFormState(responsable));
     setShowForm(true);
   };
@@ -158,12 +167,25 @@ export default function ResponsablesPage() {
           eleveIds: newEleveIds,
         });
       }
+
+      const removedEleveIds = existingIds.filter(
+        // Find the IDs that were removed from the form
+        (eleveId) => !payload.eleveIds.includes(eleveId),
+      );
+
+      for (const eleveId of removedEleveIds) {
+        // Remove the affiliations for the removed IDs
+        await retirerMutation.mutateAsync({
+          responsableId: selectedResponsable.id,
+          eleveId,
+        });
+      }
     } else {
       await createMutation.mutateAsync(payload);
     }
 
     setShowForm(false);
-    setSelectedResponsable(null);
+    setSelectedResponsableId(null);
     setForm(emptyForm);
   };
 
@@ -172,7 +194,7 @@ export default function ResponsablesPage() {
 
     await deleteMutation.mutateAsync(selectedResponsable.id);
     setShowDelete(false);
-    setSelectedResponsable(null);
+    setSelectedResponsableId(null);
   };
 
   const handleRemoveEleve = async (eleveId: string) => {
@@ -250,7 +272,7 @@ export default function ResponsablesPage() {
                 <tr
                   key={responsable.id}
                   className="cursor-pointer hover"
-                  onClick={() => setSelectedResponsable(responsable)}
+                  onClick={() => setSelectedResponsableId(responsable.id)}
                 >
                   <td>
                     <div className="font-semibold">
@@ -326,7 +348,7 @@ export default function ResponsablesPage() {
               <button
                 type="button"
                 className="btn btn-ghost btn-sm btn-square"
-                onClick={() => setSelectedResponsable(null)}
+                onClick={() => setSelectedResponsableId(null)}
                 aria-label="Fermer le détail"
               >
                 <X size={18} />

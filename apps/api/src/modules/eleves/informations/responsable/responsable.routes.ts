@@ -20,7 +20,7 @@ router.use(authenticate);
 
 /**
  * GET /api/eleves/informations/responsables
- * Accessible par: ADMIN, SUDO_ADMIN, PROF
+ * Accessible par: ADMIN, SUDO_ADMIN
  */
 router.get(
   "/responsables",
@@ -30,7 +30,7 @@ router.get(
 
 /**
  * GET /api/eleves/informations/responsables/:id
- * Accessible par: ADMIN, SUDO_ADMIN, PROF
+ * Accessible par: ADMIN, SUDO_ADMIN
  */
 router.get(
   "/responsables/:id",

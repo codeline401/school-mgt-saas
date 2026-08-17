@@ -11,7 +11,7 @@ export interface EleveResume {
   id: string;
   nom: string;
   prenom: string;
-  matricule: string;
+  matricule: number;
 }
 
 export interface ResponsableAffiliation {
@@ -122,6 +122,7 @@ export function useUpdateResponsable() {
       queryClient.invalidateQueries({
         queryKey: ["responsables", variables.id],
       });
+      queryClient.invalidateQueries({ queryKey: ["fiche-eleves"] }); // code review
       toast.success("Responsable mis à jour avec succès");
     },
     onError: (error) => {

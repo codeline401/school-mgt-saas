@@ -2,6 +2,7 @@ import { Response, Request } from "express";
 import { ZodError } from "zod";
 import { ResponsableService } from "./responsable.service.js";
 import {
+  affilierEleveSchema,
   createResponsableSchema,
   updateResponsableSchema,
 } from "./responsable.schema.js";
@@ -19,15 +20,23 @@ const sendResponsableError = (
   if (error instanceof Error) {
     // Les messages métiers (aceeès refusé, non trouvé, conflit) sont volontairement
     // renoyés tels quels : ils sont écrits pour être lsibles côté client.
-    const status = error.message.startsWith("Accès refusé")
-      ? 403
-      : error.message.includes("Non trouvé")
-        ? 404
-        : error.message.includes("qu'un seul responsable")
-          ? 409
-          : 400;
+    const message = error.message;
 
-    return res.status(status).json({ message: error.message });
+    if (message.startsWith("Accès refusé")) {
+      return res.status(403).json({ message });
+    }
+    if (/non trouvé/i.test(message)) {
+      return res.status(404).json({ message });
+    }
+    if (message.includes("qu'un seul responsable")) {
+      return res.status(409).json({ message });
+    }
+    if (message.startsWith("Un ou plusieurs élèves")) {
+      return res.status(400).json({ message });
+    }
+
+    console.error("Erreur sur le service responsable:", error);
+    return res.status(500).json({ message: fallback });
   }
 
   console.error("Erreur sur le service responsable inconnu:", error);
@@ -162,7 +171,7 @@ export const affilierElevesAuResponsable = async (
     }
 
     const { role, schoolId } = req.user as { role: string; schoolId: string };
-    const { eleveIds } = req.body as { eleveIds: string[] }; // Liste des IDs des élèves à affilier
+    const { eleveIds } = affilierEleveSchema.parse(req.body);
 
     const responsable = await ResponsableService.affilierEleves(id, eleveIds, {
       schoolId,
@@ -171,7 +180,7 @@ export const affilierElevesAuResponsable = async (
 
     return res.status(200).json(responsable);
   } catch (error) {
-    sendResponsableError(
+    return sendResponsableError(
       res,
       error,
       "Erreur interne du serveur lors de l'affiliation des élèves au responsable",

@@ -10,13 +10,13 @@ export const typeResponsableEnum = z.enum([
 export const createResponsableSchema = z.object({
   nom: z
     .string()
-    .min(1, "Le nom est requis")
     .trim()
+    .min(1, "Le nom est requis")
     .max(100, "Le nom ne peut pas dépasser 100 caractères"),
   prenom: z
     .string()
-    .min(1, "Le prénom est requis")
     .trim()
+    .min(1, "Le prénom est requis")
     .max(100, "Le prénom ne peut pas dépasser 100 caractères"),
   type: typeResponsableEnum.default("PARENT"),
   email: z.string().trim().email("Email invalide").nullish(),
@@ -28,8 +28,9 @@ export const createResponsableSchema = z.object({
 });
 
 export const updateResponsableSchema = createResponsableSchema
-  .omit({ eleveIds: true })
-  .partial();
+  .omit({ eleveIds: true }) // On ne peut pas mettre à jour les affiliations via ce schéma, elles sont gérées séparément
+  .partial() // Toutes les propriétés sont optionnelles pour la mise à jour
+  .extend({ type: typeResponsableEnum.optional() }); // Le type peut être mis à jour mais reste optionnel
 
 export const affilierEleveSchema = z.object({
   eleveIds: z

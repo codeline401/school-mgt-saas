@@ -1,3 +1,4 @@
+import { Prisma } from "../../../../generated/prisma/client.js";
 import { prisma } from "../../../../lib/prisma.js";
 import {
   CreateResponsableInput,
@@ -24,13 +25,14 @@ const assertUserSchoolAccess = (user: UserContext, schoolId: string) => {
 };
 
 const validateElevesForAffiliation = async (
+  client: Prisma.TransactionClient,
   eleveIds: string[],
   schoolId: string,
   excludeResponsableId?: string,
 ) => {
   const uniqueIds = [...new Set(eleveIds)]; // Remove duplicates
 
-  const eleves = await prisma.eleve.findMany({
+  const eleves = await client.eleve.findMany({
     where: { id: { in: uniqueIds }, deletedAt: null }, // Ensure we only fetch non-deleted students
     select: {
       id: true,
@@ -154,9 +156,9 @@ export class ResponsableService {
 
     const schoolId = user.schoolId;
 
-    await validateElevesForAffiliation(data.eleveIds, schoolId); // Validate the students before creating the responsable
-
     return prisma.$transaction(async (tx) => {
+      await validateElevesForAffiliation(tx, data.eleveIds, schoolId);
+
       const responsable = await tx.parent.create({
         data: {
           nom: data.nom,
@@ -255,15 +257,18 @@ export class ResponsableService {
 
     assertUserSchoolAccess(user, resoponsable.schoolId); // Ensure the user has access to the school of the responsable
 
-    await validateElevesForAffiliation(
-      eleveIds,
-      resoponsable.schoolId,
-      responsableId,
-    ); // Validate the students before affiliating
+    await prisma.$transaction(async (tx) => {
+      await validateElevesForAffiliation(
+        tx,
+        eleveIds,
+        resoponsable.schoolId,
+        responsableId,
+      );
 
-    await prisma.responsableEleve.createMany({
-      data: eleveIds.map((eleveId) => ({ responsableId, eleveId })),
-      skipDuplicates: true, // Skip if the affiliation already exists
+      await tx.responsableEleve.createMany({
+        data: eleveIds.map((eleveId) => ({ responsableId, eleveId })),
+        skipDuplicates: true, // Skip if the affiliation already exists
+      });
     });
 
     return this.getResponsableById(responsableId, user); // Return the updated responsable with affiliations
