@@ -548,48 +548,6 @@ export type AutorisationParentUncheckedUpdateManyWithoutSchoolNestedInput = {
   deleteMany?: Prisma.AutorisationParentScalarWhereInput | Prisma.AutorisationParentScalarWhereInput[]
 }
 
-export type AutorisationParentCreateNestedManyWithoutParentInput = {
-  create?: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput> | Prisma.AutorisationParentCreateWithoutParentInput[] | Prisma.AutorisationParentUncheckedCreateWithoutParentInput[]
-  connectOrCreate?: Prisma.AutorisationParentCreateOrConnectWithoutParentInput | Prisma.AutorisationParentCreateOrConnectWithoutParentInput[]
-  createMany?: Prisma.AutorisationParentCreateManyParentInputEnvelope
-  connect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
-}
-
-export type AutorisationParentUncheckedCreateNestedManyWithoutParentInput = {
-  create?: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput> | Prisma.AutorisationParentCreateWithoutParentInput[] | Prisma.AutorisationParentUncheckedCreateWithoutParentInput[]
-  connectOrCreate?: Prisma.AutorisationParentCreateOrConnectWithoutParentInput | Prisma.AutorisationParentCreateOrConnectWithoutParentInput[]
-  createMany?: Prisma.AutorisationParentCreateManyParentInputEnvelope
-  connect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
-}
-
-export type AutorisationParentUpdateManyWithoutParentNestedInput = {
-  create?: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput> | Prisma.AutorisationParentCreateWithoutParentInput[] | Prisma.AutorisationParentUncheckedCreateWithoutParentInput[]
-  connectOrCreate?: Prisma.AutorisationParentCreateOrConnectWithoutParentInput | Prisma.AutorisationParentCreateOrConnectWithoutParentInput[]
-  upsert?: Prisma.AutorisationParentUpsertWithWhereUniqueWithoutParentInput | Prisma.AutorisationParentUpsertWithWhereUniqueWithoutParentInput[]
-  createMany?: Prisma.AutorisationParentCreateManyParentInputEnvelope
-  set?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
-  disconnect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
-  delete?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
-  connect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
-  update?: Prisma.AutorisationParentUpdateWithWhereUniqueWithoutParentInput | Prisma.AutorisationParentUpdateWithWhereUniqueWithoutParentInput[]
-  updateMany?: Prisma.AutorisationParentUpdateManyWithWhereWithoutParentInput | Prisma.AutorisationParentUpdateManyWithWhereWithoutParentInput[]
-  deleteMany?: Prisma.AutorisationParentScalarWhereInput | Prisma.AutorisationParentScalarWhereInput[]
-}
-
-export type AutorisationParentUncheckedUpdateManyWithoutParentNestedInput = {
-  create?: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput> | Prisma.AutorisationParentCreateWithoutParentInput[] | Prisma.AutorisationParentUncheckedCreateWithoutParentInput[]
-  connectOrCreate?: Prisma.AutorisationParentCreateOrConnectWithoutParentInput | Prisma.AutorisationParentCreateOrConnectWithoutParentInput[]
-  upsert?: Prisma.AutorisationParentUpsertWithWhereUniqueWithoutParentInput | Prisma.AutorisationParentUpsertWithWhereUniqueWithoutParentInput[]
-  createMany?: Prisma.AutorisationParentCreateManyParentInputEnvelope
-  set?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
-  disconnect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
-  delete?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
-  connect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
-  update?: Prisma.AutorisationParentUpdateWithWhereUniqueWithoutParentInput | Prisma.AutorisationParentUpdateWithWhereUniqueWithoutParentInput[]
-  updateMany?: Prisma.AutorisationParentUpdateManyWithWhereWithoutParentInput | Prisma.AutorisationParentUpdateManyWithWhereWithoutParentInput[]
-  deleteMany?: Prisma.AutorisationParentScalarWhereInput | Prisma.AutorisationParentScalarWhereInput[]
-}
-
 export type AutorisationParentCreateNestedManyWithoutSortieInput = {
   create?: Prisma.XOR<Prisma.AutorisationParentCreateWithoutSortieInput, Prisma.AutorisationParentUncheckedCreateWithoutSortieInput> | Prisma.AutorisationParentCreateWithoutSortieInput[] | Prisma.AutorisationParentUncheckedCreateWithoutSortieInput[]
   connectOrCreate?: Prisma.AutorisationParentCreateOrConnectWithoutSortieInput | Prisma.AutorisationParentCreateOrConnectWithoutSortieInput[]
@@ -674,6 +632,48 @@ export type AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput = {
   deleteMany?: Prisma.AutorisationParentScalarWhereInput | Prisma.AutorisationParentScalarWhereInput[]
 }
 
+export type AutorisationParentCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput> | Prisma.AutorisationParentCreateWithoutParentInput[] | Prisma.AutorisationParentUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.AutorisationParentCreateOrConnectWithoutParentInput | Prisma.AutorisationParentCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.AutorisationParentCreateManyParentInputEnvelope
+  connect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
+}
+
+export type AutorisationParentUncheckedCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput> | Prisma.AutorisationParentCreateWithoutParentInput[] | Prisma.AutorisationParentUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.AutorisationParentCreateOrConnectWithoutParentInput | Prisma.AutorisationParentCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.AutorisationParentCreateManyParentInputEnvelope
+  connect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
+}
+
+export type AutorisationParentUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput> | Prisma.AutorisationParentCreateWithoutParentInput[] | Prisma.AutorisationParentUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.AutorisationParentCreateOrConnectWithoutParentInput | Prisma.AutorisationParentCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.AutorisationParentUpsertWithWhereUniqueWithoutParentInput | Prisma.AutorisationParentUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.AutorisationParentCreateManyParentInputEnvelope
+  set?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
+  disconnect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
+  delete?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
+  connect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
+  update?: Prisma.AutorisationParentUpdateWithWhereUniqueWithoutParentInput | Prisma.AutorisationParentUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.AutorisationParentUpdateManyWithWhereWithoutParentInput | Prisma.AutorisationParentUpdateManyWithWhereWithoutParentInput[]
+  deleteMany?: Prisma.AutorisationParentScalarWhereInput | Prisma.AutorisationParentScalarWhereInput[]
+}
+
+export type AutorisationParentUncheckedUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput> | Prisma.AutorisationParentCreateWithoutParentInput[] | Prisma.AutorisationParentUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.AutorisationParentCreateOrConnectWithoutParentInput | Prisma.AutorisationParentCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.AutorisationParentUpsertWithWhereUniqueWithoutParentInput | Prisma.AutorisationParentUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.AutorisationParentCreateManyParentInputEnvelope
+  set?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
+  disconnect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
+  delete?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
+  connect?: Prisma.AutorisationParentWhereUniqueInput | Prisma.AutorisationParentWhereUniqueInput[]
+  update?: Prisma.AutorisationParentUpdateWithWhereUniqueWithoutParentInput | Prisma.AutorisationParentUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.AutorisationParentUpdateManyWithWhereWithoutParentInput | Prisma.AutorisationParentUpdateManyWithWhereWithoutParentInput[]
+  deleteMany?: Prisma.AutorisationParentScalarWhereInput | Prisma.AutorisationParentScalarWhereInput[]
+}
+
 export type AutorisationParentCreateWithoutSchoolInput = {
   id?: string
   autorise: boolean
@@ -747,62 +747,6 @@ export type AutorisationParentScalarWhereInput = {
   schoolId?: Prisma.StringFilter<"AutorisationParent"> | string
   createdAt?: Prisma.DateTimeFilter<"AutorisationParent"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AutorisationParent"> | Date | string
-}
-
-export type AutorisationParentCreateWithoutParentInput = {
-  id?: string
-  autorise: boolean
-  dateAutorisation?: Date | string
-  observation?: string | null
-  signatureUrl?: string | null
-  contactUrgence?: string | null
-  telUrgence?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sortie: Prisma.SortieScolaireCreateNestedOneWithoutAutorisationsInput
-  eleve: Prisma.EleveCreateNestedOneWithoutAutorisationParentsInput
-  school: Prisma.SchoolCreateNestedOneWithoutAutorisationParentsInput
-}
-
-export type AutorisationParentUncheckedCreateWithoutParentInput = {
-  id?: string
-  sortieId: string
-  eleveId: string
-  autorise: boolean
-  dateAutorisation?: Date | string
-  observation?: string | null
-  signatureUrl?: string | null
-  contactUrgence?: string | null
-  telUrgence?: string | null
-  schoolId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type AutorisationParentCreateOrConnectWithoutParentInput = {
-  where: Prisma.AutorisationParentWhereUniqueInput
-  create: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput>
-}
-
-export type AutorisationParentCreateManyParentInputEnvelope = {
-  data: Prisma.AutorisationParentCreateManyParentInput | Prisma.AutorisationParentCreateManyParentInput[]
-  skipDuplicates?: boolean
-}
-
-export type AutorisationParentUpsertWithWhereUniqueWithoutParentInput = {
-  where: Prisma.AutorisationParentWhereUniqueInput
-  update: Prisma.XOR<Prisma.AutorisationParentUpdateWithoutParentInput, Prisma.AutorisationParentUncheckedUpdateWithoutParentInput>
-  create: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput>
-}
-
-export type AutorisationParentUpdateWithWhereUniqueWithoutParentInput = {
-  where: Prisma.AutorisationParentWhereUniqueInput
-  data: Prisma.XOR<Prisma.AutorisationParentUpdateWithoutParentInput, Prisma.AutorisationParentUncheckedUpdateWithoutParentInput>
-}
-
-export type AutorisationParentUpdateManyWithWhereWithoutParentInput = {
-  where: Prisma.AutorisationParentScalarWhereInput
-  data: Prisma.XOR<Prisma.AutorisationParentUpdateManyMutationInput, Prisma.AutorisationParentUncheckedUpdateManyWithoutParentInput>
 }
 
 export type AutorisationParentCreateWithoutSortieInput = {
@@ -917,6 +861,62 @@ export type AutorisationParentUpdateManyWithWhereWithoutEleveInput = {
   data: Prisma.XOR<Prisma.AutorisationParentUpdateManyMutationInput, Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveInput>
 }
 
+export type AutorisationParentCreateWithoutParentInput = {
+  id?: string
+  autorise: boolean
+  dateAutorisation?: Date | string
+  observation?: string | null
+  signatureUrl?: string | null
+  contactUrgence?: string | null
+  telUrgence?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sortie: Prisma.SortieScolaireCreateNestedOneWithoutAutorisationsInput
+  eleve: Prisma.EleveCreateNestedOneWithoutAutorisationParentsInput
+  school: Prisma.SchoolCreateNestedOneWithoutAutorisationParentsInput
+}
+
+export type AutorisationParentUncheckedCreateWithoutParentInput = {
+  id?: string
+  sortieId: string
+  eleveId: string
+  autorise: boolean
+  dateAutorisation?: Date | string
+  observation?: string | null
+  signatureUrl?: string | null
+  contactUrgence?: string | null
+  telUrgence?: string | null
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AutorisationParentCreateOrConnectWithoutParentInput = {
+  where: Prisma.AutorisationParentWhereUniqueInput
+  create: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput>
+}
+
+export type AutorisationParentCreateManyParentInputEnvelope = {
+  data: Prisma.AutorisationParentCreateManyParentInput | Prisma.AutorisationParentCreateManyParentInput[]
+  skipDuplicates?: boolean
+}
+
+export type AutorisationParentUpsertWithWhereUniqueWithoutParentInput = {
+  where: Prisma.AutorisationParentWhereUniqueInput
+  update: Prisma.XOR<Prisma.AutorisationParentUpdateWithoutParentInput, Prisma.AutorisationParentUncheckedUpdateWithoutParentInput>
+  create: Prisma.XOR<Prisma.AutorisationParentCreateWithoutParentInput, Prisma.AutorisationParentUncheckedCreateWithoutParentInput>
+}
+
+export type AutorisationParentUpdateWithWhereUniqueWithoutParentInput = {
+  where: Prisma.AutorisationParentWhereUniqueInput
+  data: Prisma.XOR<Prisma.AutorisationParentUpdateWithoutParentInput, Prisma.AutorisationParentUncheckedUpdateWithoutParentInput>
+}
+
+export type AutorisationParentUpdateManyWithWhereWithoutParentInput = {
+  where: Prisma.AutorisationParentScalarWhereInput
+  data: Prisma.XOR<Prisma.AutorisationParentUpdateManyMutationInput, Prisma.AutorisationParentUncheckedUpdateManyWithoutParentInput>
+}
+
 export type AutorisationParentCreateManySchoolInput = {
   id?: string
   sortieId: string
@@ -973,66 +973,6 @@ export type AutorisationParentUncheckedUpdateManyWithoutSchoolInput = {
   signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type AutorisationParentCreateManyParentInput = {
-  id?: string
-  sortieId: string
-  eleveId: string
-  autorise: boolean
-  dateAutorisation?: Date | string
-  observation?: string | null
-  signatureUrl?: string | null
-  contactUrgence?: string | null
-  telUrgence?: string | null
-  schoolId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type AutorisationParentUpdateWithoutParentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  autorise?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  dateAutorisation?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  observation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sortie?: Prisma.SortieScolaireUpdateOneRequiredWithoutAutorisationsNestedInput
-  eleve?: Prisma.EleveUpdateOneRequiredWithoutAutorisationParentsNestedInput
-  school?: Prisma.SchoolUpdateOneRequiredWithoutAutorisationParentsNestedInput
-}
-
-export type AutorisationParentUncheckedUpdateWithoutParentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  sortieId?: Prisma.StringFieldUpdateOperationsInput | string
-  eleveId?: Prisma.StringFieldUpdateOperationsInput | string
-  autorise?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  dateAutorisation?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  observation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type AutorisationParentUncheckedUpdateManyWithoutParentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  sortieId?: Prisma.StringFieldUpdateOperationsInput | string
-  eleveId?: Prisma.StringFieldUpdateOperationsInput | string
-  autorise?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  dateAutorisation?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  observation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1146,6 +1086,66 @@ export type AutorisationParentUncheckedUpdateManyWithoutEleveInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sortieId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.StringFieldUpdateOperationsInput | string
+  autorise?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateAutorisation?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AutorisationParentCreateManyParentInput = {
+  id?: string
+  sortieId: string
+  eleveId: string
+  autorise: boolean
+  dateAutorisation?: Date | string
+  observation?: string | null
+  signatureUrl?: string | null
+  contactUrgence?: string | null
+  telUrgence?: string | null
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AutorisationParentUpdateWithoutParentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  autorise?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateAutorisation?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sortie?: Prisma.SortieScolaireUpdateOneRequiredWithoutAutorisationsNestedInput
+  eleve?: Prisma.EleveUpdateOneRequiredWithoutAutorisationParentsNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutAutorisationParentsNestedInput
+}
+
+export type AutorisationParentUncheckedUpdateWithoutParentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sortieId?: Prisma.StringFieldUpdateOperationsInput | string
+  eleveId?: Prisma.StringFieldUpdateOperationsInput | string
+  autorise?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateAutorisation?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telUrgence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AutorisationParentUncheckedUpdateManyWithoutParentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sortieId?: Prisma.StringFieldUpdateOperationsInput | string
+  eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   autorise?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateAutorisation?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   observation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null

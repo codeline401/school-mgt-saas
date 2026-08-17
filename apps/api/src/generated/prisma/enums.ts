@@ -467,3 +467,11 @@ export const SituationFamiliale = {
 } as const
 
 export type SituationFamiliale = (typeof SituationFamiliale)[keyof typeof SituationFamiliale]
+
+
+export const TypeResponsable = {
+  PARENT: 'PARENT',
+  TUTEUR: 'TUTEUR'
+} as const
+
+export type TypeResponsable = (typeof TypeResponsable)[keyof typeof TypeResponsable]

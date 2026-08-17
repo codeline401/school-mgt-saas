@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import ficheRoutes from "./informations/fiche/fiche.routes.js";
+import responsableRoutes from "./informations/responsable/responsable.routes.js";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ const router = Router();
  */
 
 router.use("/informations", ficheRoutes);
+router.use("/informations", responsableRoutes);
 
 export default router;

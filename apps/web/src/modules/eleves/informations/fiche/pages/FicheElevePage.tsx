@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   Edit2,
@@ -509,47 +509,52 @@ export default function FicheElevePage() {
         )}
 
         {/* SECTION: Parent responsable */}
-        <SectionCard
-          title="Parent responsable"
-          icon={<Users size={18} />}
-          action={
-            eleve.parent && (
-              <Link
-                to={`/parents/${eleve.parent.id}`}
-                className="btn btn-ghost btn-xs gap-1"
-              >
-                Voir la fiche
-                <ArrowLeft size={12} className="rotate-180" />
-              </Link>
-            )
-          }
-        >
-          {eleve.parent ? (
-            <div className="space-y-1">
-              <InfoRow
-                icon={<User size={14} />}
-                label="Nom complet"
-                value={`${eleve.parent.nom} ${eleve.parent.prenom}`}
-              />
-              <InfoRow
-                icon={<Phone size={14} />}
-                label="Téléphone"
-                value={eleve.parent.telephone}
-              />
-              <InfoRow
-                icon={<Mail size={14} />}
-                label="Email"
-                value={eleve.parent.email}
-              />
-              <InfoRow
-                icon={<MapPin size={14} />}
-                label="Adresse"
-                value={eleve.parent.adresse}
-              />
+        <SectionCard title="Responsables légaux" icon={<Users size={18} />}>
+          {eleve.responsableEleves.length > 0 ? (
+            <div className="space-y-4">
+              {eleve.responsableEleves.map(({ id, responsable }) => (
+                <div
+                  key={id}
+                  className="border-b border-base-200 pb-4 last:border-b-0 last:pb-0"
+                >
+                  <div className="mb-2 flex items-center justify-between gap-3">
+                    <span className="font-semibold">
+                      {responsable.prenom} {responsable.nom}
+                    </span>
+                    <span
+                      className={`badge badge-sm ${
+                        responsable.type === "TUTEUR"
+                          ? "badge-secondary"
+                          : "badge-primary"
+                      }`}
+                    >
+                      {responsable.type === "TUTEUR" ? "Tuteur" : "Parent"}
+                    </span>
+                  </div>
+
+                  <div className="space-y-1">
+                    <InfoRow
+                      icon={<Phone size={14} />}
+                      label="Téléphone"
+                      value={responsable.telephone}
+                    />
+                    <InfoRow
+                      icon={<Mail size={14} />}
+                      label="Email"
+                      value={responsable.email}
+                    />
+                    <InfoRow
+                      icon={<MapPin size={14} />}
+                      label="Adresse"
+                      value={responsable.adresse}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           ) : (
             <p className="text-base-content/40 text-sm">
-              Aucun parent enregistré
+              Aucun responsable enregistré
             </p>
           )}
         </SectionCard>

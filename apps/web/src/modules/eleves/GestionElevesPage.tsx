@@ -22,6 +22,7 @@ import {
 import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
 import FicheElevePage from "./informations/fiche/pages/FicheElevePage";
 import FicheEleveFormModal from "./informations/fiche/components/FicheEleveFormModal";
+import ResponsablesPage from "./informations/responsable/pages/ResponsablesPage";
 
 type MainTab =
   | "informations"
@@ -173,13 +174,7 @@ function GestionElevesPage() {
       case "fiche":
         return <FicheElevePage />;
       case "responsables":
-        return (
-          <DevelopmentPlaceholder
-            icon={Users}
-            title="Responsables légaux"
-            description="Suivi des parents, contacts, autorisations, rôles familiaux et coordonnées de référence."
-          />
-        );
+        return <ResponsablesPage />;
       case "classe":
         return (
           <DevelopmentPlaceholder
