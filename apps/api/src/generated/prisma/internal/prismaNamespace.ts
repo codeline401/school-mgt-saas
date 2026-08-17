@@ -388,7 +388,6 @@ export const ModelName = {
   School: 'School',
   Classe: 'Classe',
   Professeur: 'Professeur',
-  Parent: 'Parent',
   DossierAdmission: 'DossierAdmission',
   Contrat: 'Contrat',
   Remplacement: 'Remplacement',
@@ -437,7 +436,9 @@ export const ModelName = {
   Adresse: 'Adresse',
   ProfessionEleve: 'ProfessionEleve',
   DroitInscription: 'DroitInscription',
-  Ecolage: 'Ecolage'
+  Ecolage: 'Ecolage',
+  Parent: 'Parent',
+  ResponsableEleve: 'ResponsableEleve'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -453,7 +454,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "professeur" | "parent" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage"
+    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "parent" | "responsableEleve"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -750,80 +751,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProfesseurCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProfesseurCountAggregateOutputType> | number
-        }
-      }
-    }
-    Parent: {
-      payload: Prisma.$ParentPayload<ExtArgs>
-      fields: Prisma.ParentFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ParentFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ParentFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
-        }
-        findFirst: {
-          args: Prisma.ParentFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ParentFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
-        }
-        findMany: {
-          args: Prisma.ParentFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>[]
-        }
-        create: {
-          args: Prisma.ParentCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
-        }
-        createMany: {
-          args: Prisma.ParentCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ParentCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>[]
-        }
-        delete: {
-          args: Prisma.ParentDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
-        }
-        update: {
-          args: Prisma.ParentUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
-        }
-        deleteMany: {
-          args: Prisma.ParentDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ParentUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ParentUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>[]
-        }
-        upsert: {
-          args: Prisma.ParentUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
-        }
-        aggregate: {
-          args: Prisma.ParentAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateParent>
-        }
-        groupBy: {
-          args: Prisma.ParentGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ParentGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ParentCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ParentCountAggregateOutputType> | number
         }
       }
     }
@@ -4453,6 +4380,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Parent: {
+      payload: Prisma.$ParentPayload<ExtArgs>
+      fields: Prisma.ParentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ParentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ParentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
+        }
+        findFirst: {
+          args: Prisma.ParentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ParentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
+        }
+        findMany: {
+          args: Prisma.ParentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>[]
+        }
+        create: {
+          args: Prisma.ParentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
+        }
+        createMany: {
+          args: Prisma.ParentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ParentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>[]
+        }
+        delete: {
+          args: Prisma.ParentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
+        }
+        update: {
+          args: Prisma.ParentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
+        }
+        deleteMany: {
+          args: Prisma.ParentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ParentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ParentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>[]
+        }
+        upsert: {
+          args: Prisma.ParentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParentPayload>
+        }
+        aggregate: {
+          args: Prisma.ParentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateParent>
+        }
+        groupBy: {
+          args: Prisma.ParentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ParentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ParentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ParentCountAggregateOutputType> | number
+        }
+      }
+    }
+    ResponsableEleve: {
+      payload: Prisma.$ResponsableElevePayload<ExtArgs>
+      fields: Prisma.ResponsableEleveFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ResponsableEleveFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsableElevePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ResponsableEleveFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsableElevePayload>
+        }
+        findFirst: {
+          args: Prisma.ResponsableEleveFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsableElevePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ResponsableEleveFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsableElevePayload>
+        }
+        findMany: {
+          args: Prisma.ResponsableEleveFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsableElevePayload>[]
+        }
+        create: {
+          args: Prisma.ResponsableEleveCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsableElevePayload>
+        }
+        createMany: {
+          args: Prisma.ResponsableEleveCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ResponsableEleveCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsableElevePayload>[]
+        }
+        delete: {
+          args: Prisma.ResponsableEleveDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsableElevePayload>
+        }
+        update: {
+          args: Prisma.ResponsableEleveUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsableElevePayload>
+        }
+        deleteMany: {
+          args: Prisma.ResponsableEleveDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ResponsableEleveUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ResponsableEleveUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsableElevePayload>[]
+        }
+        upsert: {
+          args: Prisma.ResponsableEleveUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsableElevePayload>
+        }
+        aggregate: {
+          args: Prisma.ResponsableEleveAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateResponsableEleve>
+        }
+        groupBy: {
+          args: Prisma.ResponsableEleveGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ResponsableEleveGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ResponsableEleveCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ResponsableEleveCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4556,22 +4631,6 @@ export const ProfesseurScalarFieldEnum = {
 } as const
 
 export type ProfesseurScalarFieldEnum = (typeof ProfesseurScalarFieldEnum)[keyof typeof ProfesseurScalarFieldEnum]
-
-
-export const ParentScalarFieldEnum = {
-  id: 'id',
-  nom: 'nom',
-  prenom: 'prenom',
-  email: 'email',
-  telephone: 'telephone',
-  adresse: 'adresse',
-  schoolId: 'schoolId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
-} as const
-
-export type ParentScalarFieldEnum = (typeof ParentScalarFieldEnum)[keyof typeof ParentScalarFieldEnum]
 
 
 export const DossierAdmissionScalarFieldEnum = {
@@ -5394,6 +5453,33 @@ export const EcolageScalarFieldEnum = {
 export type EcolageScalarFieldEnum = (typeof EcolageScalarFieldEnum)[keyof typeof EcolageScalarFieldEnum]
 
 
+export const ParentScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  prenom: 'prenom',
+  email: 'email',
+  telephone: 'telephone',
+  adresse: 'adresse',
+  schoolId: 'schoolId',
+  type: 'type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type ParentScalarFieldEnum = (typeof ParentScalarFieldEnum)[keyof typeof ParentScalarFieldEnum]
+
+
+export const ResponsableEleveScalarFieldEnum = {
+  id: 'id',
+  responsableId: 'responsableId',
+  eleveId: 'eleveId',
+  createdAt: 'createdAt'
+} as const
+
+export type ResponsableEleveScalarFieldEnum = (typeof ResponsableEleveScalarFieldEnum)[keyof typeof ResponsableEleveScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -6154,6 +6240,20 @@ export type EnumStatutEleveFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
 export type ListEnumStatutEleveFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutEleve[]'>
     
 
+
+/**
+ * Reference to a field of type 'TypeResponsable'
+ */
+export type EnumTypeResponsableFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeResponsable'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeResponsable[]'
+ */
+export type ListEnumTypeResponsableFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeResponsable[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -6268,7 +6368,6 @@ export type GlobalOmitConfig = {
   school?: Prisma.SchoolOmit
   classe?: Prisma.ClasseOmit
   professeur?: Prisma.ProfesseurOmit
-  parent?: Prisma.ParentOmit
   dossierAdmission?: Prisma.DossierAdmissionOmit
   contrat?: Prisma.ContratOmit
   remplacement?: Prisma.RemplacementOmit
@@ -6318,6 +6417,8 @@ export type GlobalOmitConfig = {
   professionEleve?: Prisma.ProfessionEleveOmit
   droitInscription?: Prisma.DroitInscriptionOmit
   ecolage?: Prisma.EcolageOmit
+  parent?: Prisma.ParentOmit
+  responsableEleve?: Prisma.ResponsableEleveOmit
 }
 
 /* Types for Logging */

@@ -380,16 +380,6 @@ export type AdresseUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type AdresseListRelationFilter = {
-  every?: Prisma.AdresseWhereInput
-  some?: Prisma.AdresseWhereInput
-  none?: Prisma.AdresseWhereInput
-}
-
-export type AdresseOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type AdresseNullableScalarRelationFilter = {
   is?: Prisma.AdresseWhereInput | null
   isNot?: Prisma.AdresseWhereInput | null
@@ -434,6 +424,48 @@ export type AdresseMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type AdresseListRelationFilter = {
+  every?: Prisma.AdresseWhereInput
+  some?: Prisma.AdresseWhereInput
+  none?: Prisma.AdresseWhereInput
+}
+
+export type AdresseOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type AdresseCreateNestedOneWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
+  connectOrCreate?: Prisma.AdresseCreateOrConnectWithoutEleveInput
+  connect?: Prisma.AdresseWhereUniqueInput
+}
+
+export type AdresseUncheckedCreateNestedOneWithoutEleveInput = {
+  create?: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
+  connectOrCreate?: Prisma.AdresseCreateOrConnectWithoutEleveInput
+  connect?: Prisma.AdresseWhereUniqueInput
+}
+
+export type AdresseUpdateOneWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
+  connectOrCreate?: Prisma.AdresseCreateOrConnectWithoutEleveInput
+  upsert?: Prisma.AdresseUpsertWithoutEleveInput
+  disconnect?: Prisma.AdresseWhereInput | boolean
+  delete?: Prisma.AdresseWhereInput | boolean
+  connect?: Prisma.AdresseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AdresseUpdateToOneWithWhereWithoutEleveInput, Prisma.AdresseUpdateWithoutEleveInput>, Prisma.AdresseUncheckedUpdateWithoutEleveInput>
+}
+
+export type AdresseUncheckedUpdateOneWithoutEleveNestedInput = {
+  create?: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
+  connectOrCreate?: Prisma.AdresseCreateOrConnectWithoutEleveInput
+  upsert?: Prisma.AdresseUpsertWithoutEleveInput
+  disconnect?: Prisma.AdresseWhereInput | boolean
+  delete?: Prisma.AdresseWhereInput | boolean
+  connect?: Prisma.AdresseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AdresseUpdateToOneWithWhereWithoutEleveInput, Prisma.AdresseUpdateWithoutEleveInput>, Prisma.AdresseUncheckedUpdateWithoutEleveInput>
+}
+
 export type AdresseCreateNestedManyWithoutParentInput = {
   create?: Prisma.XOR<Prisma.AdresseCreateWithoutParentInput, Prisma.AdresseUncheckedCreateWithoutParentInput> | Prisma.AdresseCreateWithoutParentInput[] | Prisma.AdresseUncheckedCreateWithoutParentInput[]
   connectOrCreate?: Prisma.AdresseCreateOrConnectWithoutParentInput | Prisma.AdresseCreateOrConnectWithoutParentInput[]
@@ -476,36 +508,68 @@ export type AdresseUncheckedUpdateManyWithoutParentNestedInput = {
   deleteMany?: Prisma.AdresseScalarWhereInput | Prisma.AdresseScalarWhereInput[]
 }
 
-export type AdresseCreateNestedOneWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
-  connectOrCreate?: Prisma.AdresseCreateOrConnectWithoutEleveInput
-  connect?: Prisma.AdresseWhereUniqueInput
+export type AdresseCreateWithoutEleveInput = {
+  id?: string
+  fokontany?: string | null
+  logement?: string | null
+  ville?: string | null
+  region?: string | null
+  pays?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parent?: Prisma.ParentCreateNestedOneWithoutAdressesInput
 }
 
-export type AdresseUncheckedCreateNestedOneWithoutEleveInput = {
-  create?: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
-  connectOrCreate?: Prisma.AdresseCreateOrConnectWithoutEleveInput
-  connect?: Prisma.AdresseWhereUniqueInput
+export type AdresseUncheckedCreateWithoutEleveInput = {
+  id?: string
+  fokontany?: string | null
+  logement?: string | null
+  ville?: string | null
+  region?: string | null
+  pays?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
-export type AdresseUpdateOneWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
-  connectOrCreate?: Prisma.AdresseCreateOrConnectWithoutEleveInput
-  upsert?: Prisma.AdresseUpsertWithoutEleveInput
-  disconnect?: Prisma.AdresseWhereInput | boolean
-  delete?: Prisma.AdresseWhereInput | boolean
-  connect?: Prisma.AdresseWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AdresseUpdateToOneWithWhereWithoutEleveInput, Prisma.AdresseUpdateWithoutEleveInput>, Prisma.AdresseUncheckedUpdateWithoutEleveInput>
+export type AdresseCreateOrConnectWithoutEleveInput = {
+  where: Prisma.AdresseWhereUniqueInput
+  create: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
 }
 
-export type AdresseUncheckedUpdateOneWithoutEleveNestedInput = {
-  create?: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
-  connectOrCreate?: Prisma.AdresseCreateOrConnectWithoutEleveInput
-  upsert?: Prisma.AdresseUpsertWithoutEleveInput
-  disconnect?: Prisma.AdresseWhereInput | boolean
-  delete?: Prisma.AdresseWhereInput | boolean
-  connect?: Prisma.AdresseWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AdresseUpdateToOneWithWhereWithoutEleveInput, Prisma.AdresseUpdateWithoutEleveInput>, Prisma.AdresseUncheckedUpdateWithoutEleveInput>
+export type AdresseUpsertWithoutEleveInput = {
+  update: Prisma.XOR<Prisma.AdresseUpdateWithoutEleveInput, Prisma.AdresseUncheckedUpdateWithoutEleveInput>
+  create: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
+  where?: Prisma.AdresseWhereInput
+}
+
+export type AdresseUpdateToOneWithWhereWithoutEleveInput = {
+  where?: Prisma.AdresseWhereInput
+  data: Prisma.XOR<Prisma.AdresseUpdateWithoutEleveInput, Prisma.AdresseUncheckedUpdateWithoutEleveInput>
+}
+
+export type AdresseUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fokontany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ville?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pays?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parent?: Prisma.ParentUpdateOneWithoutAdressesNestedInput
+}
+
+export type AdresseUncheckedUpdateWithoutEleveInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fokontany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ville?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pays?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AdresseCreateWithoutParentInput = {
@@ -572,70 +636,6 @@ export type AdresseScalarWhereInput = {
   parentId?: Prisma.StringNullableFilter<"Adresse"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Adresse"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Adresse"> | Date | string
-}
-
-export type AdresseCreateWithoutEleveInput = {
-  id?: string
-  fokontany?: string | null
-  logement?: string | null
-  ville?: string | null
-  region?: string | null
-  pays?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  parent?: Prisma.ParentCreateNestedOneWithoutAdressesInput
-}
-
-export type AdresseUncheckedCreateWithoutEleveInput = {
-  id?: string
-  fokontany?: string | null
-  logement?: string | null
-  ville?: string | null
-  region?: string | null
-  pays?: string | null
-  parentId?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type AdresseCreateOrConnectWithoutEleveInput = {
-  where: Prisma.AdresseWhereUniqueInput
-  create: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
-}
-
-export type AdresseUpsertWithoutEleveInput = {
-  update: Prisma.XOR<Prisma.AdresseUpdateWithoutEleveInput, Prisma.AdresseUncheckedUpdateWithoutEleveInput>
-  create: Prisma.XOR<Prisma.AdresseCreateWithoutEleveInput, Prisma.AdresseUncheckedCreateWithoutEleveInput>
-  where?: Prisma.AdresseWhereInput
-}
-
-export type AdresseUpdateToOneWithWhereWithoutEleveInput = {
-  where?: Prisma.AdresseWhereInput
-  data: Prisma.XOR<Prisma.AdresseUpdateWithoutEleveInput, Prisma.AdresseUncheckedUpdateWithoutEleveInput>
-}
-
-export type AdresseUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  fokontany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ville?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pays?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  parent?: Prisma.ParentUpdateOneWithoutAdressesNestedInput
-}
-
-export type AdresseUncheckedUpdateWithoutEleveInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  fokontany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ville?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pays?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AdresseCreateManyParentInput = {

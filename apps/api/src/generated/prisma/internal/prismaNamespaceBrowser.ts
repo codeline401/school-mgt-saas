@@ -55,7 +55,6 @@ export const ModelName = {
   School: 'School',
   Classe: 'Classe',
   Professeur: 'Professeur',
-  Parent: 'Parent',
   DossierAdmission: 'DossierAdmission',
   Contrat: 'Contrat',
   Remplacement: 'Remplacement',
@@ -104,7 +103,9 @@ export const ModelName = {
   Adresse: 'Adresse',
   ProfessionEleve: 'ProfessionEleve',
   DroitInscription: 'DroitInscription',
-  Ecolage: 'Ecolage'
+  Ecolage: 'Ecolage',
+  Parent: 'Parent',
+  ResponsableEleve: 'ResponsableEleve'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -187,22 +188,6 @@ export const ProfesseurScalarFieldEnum = {
 } as const
 
 export type ProfesseurScalarFieldEnum = (typeof ProfesseurScalarFieldEnum)[keyof typeof ProfesseurScalarFieldEnum]
-
-
-export const ParentScalarFieldEnum = {
-  id: 'id',
-  nom: 'nom',
-  prenom: 'prenom',
-  email: 'email',
-  telephone: 'telephone',
-  adresse: 'adresse',
-  schoolId: 'schoolId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
-} as const
-
-export type ParentScalarFieldEnum = (typeof ParentScalarFieldEnum)[keyof typeof ParentScalarFieldEnum]
 
 
 export const DossierAdmissionScalarFieldEnum = {
@@ -1023,6 +1008,33 @@ export const EcolageScalarFieldEnum = {
 } as const
 
 export type EcolageScalarFieldEnum = (typeof EcolageScalarFieldEnum)[keyof typeof EcolageScalarFieldEnum]
+
+
+export const ParentScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  prenom: 'prenom',
+  email: 'email',
+  telephone: 'telephone',
+  adresse: 'adresse',
+  schoolId: 'schoolId',
+  type: 'type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type ParentScalarFieldEnum = (typeof ParentScalarFieldEnum)[keyof typeof ParentScalarFieldEnum]
+
+
+export const ResponsableEleveScalarFieldEnum = {
+  id: 'id',
+  responsableId: 'responsableId',
+  eleveId: 'eleveId',
+  createdAt: 'createdAt'
+} as const
+
+export type ResponsableEleveScalarFieldEnum = (typeof ResponsableEleveScalarFieldEnum)[keyof typeof ResponsableEleveScalarFieldEnum]
 
 
 export const SortOrder = {

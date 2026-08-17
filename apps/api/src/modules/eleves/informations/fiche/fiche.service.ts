@@ -71,6 +71,24 @@ const ficheInclude = {
       telephone: true,
     },
   },
+  responsableEleves: {
+    include: {
+      responsable: {
+        select: {
+          id: true,
+          nom: true,
+          prenom: true,
+          type: true,
+          email: true,
+          telephone: true,
+          adresse: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "asc" as const,
+    },
+  },
   adresse: true,
   professionEleve: true,
   historiqueClasses: {

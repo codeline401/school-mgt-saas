@@ -62,11 +62,6 @@ export type Classe = Prisma.ClasseModel
  */
 export type Professeur = Prisma.ProfesseurModel
 /**
- * Model Parent
- * 
- */
-export type Parent = Prisma.ParentModel
-/**
  * Model DossierAdmission
  * 
  */
@@ -311,3 +306,13 @@ export type DroitInscription = Prisma.DroitInscriptionModel
  * 
  */
 export type Ecolage = Prisma.EcolageModel
+/**
+ * Model Parent
+ * 
+ */
+export type Parent = Prisma.ParentModel
+/**
+ * Model ResponsableEleve
+ * 
+ */
+export type ResponsableEleve = Prisma.ResponsableEleveModel

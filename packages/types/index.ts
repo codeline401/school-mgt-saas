@@ -868,6 +868,21 @@ export interface FicheEleveComplete extends BaseEntity {
     email?: string | null;
     telephone?: string | null;
   } | null;
+  responsableEleves: Array<{
+    id: string;
+    responsableId: string;
+    eleveId: string;
+    createdAt: string;
+    responsable: {
+      id: string;
+      nom: string;
+      prenom: string;
+      type: "PARENT" | "TUTEUR";
+      email?: string | null;
+      telephone?: string | null;
+      adresse?: string | null;
+    };
+  }>;
   adresse?: Adresse | null;
   professionEleve?: ProfessionEleve | null;
   historiqueClasses: HistoriqueClasse[];
