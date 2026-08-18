@@ -4,17 +4,21 @@
   - A unique constraint covering the columns `[schoolId,nom,prenom]` on the table `Eleve` will be added. If there are existing duplicate values, this will fail.
 
 */
--- CreateEnum
-CREATE TYPE "TypeResponsable" AS ENUM ('PARENT', 'TUTEUR');
+-- CreateEnum (sécurisé)
+DO $$ BEGIN
+    CREATE TYPE "TypeResponsable" AS ENUM ('PARENT', 'TUTEUR');
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
 
--- DropIndex
-DROP INDEX "Eleve_schoolId_nom_prenom_dateNaissance_null_partial_key";
+-- DropIndex (sécurisé)
+DROP INDEX IF EXISTS "Eleve_schoolId_nom_prenom_dateNaissance_null_partial_key";
 
 -- AlterTable
-ALTER TABLE "Parent" ADD COLUMN     "type" "TypeResponsable" NOT NULL DEFAULT 'PARENT';
+ALTER TABLE "Parent" ADD COLUMN IF NOT EXISTS "type" "TypeResponsable" NOT NULL DEFAULT 'PARENT';
 
 -- CreateTable
-CREATE TABLE "ResponsableEleve" (
+CREATE TABLE IF NOT EXISTS "ResponsableEleve" (
     "id" TEXT NOT NULL,
     "responsableId" TEXT NOT NULL,
     "eleveId" TEXT NOT NULL,
@@ -24,19 +28,21 @@ CREATE TABLE "ResponsableEleve" (
 );
 
 -- CreateIndex
-CREATE INDEX "ResponsableEleve_responsableId_idx" ON "ResponsableEleve"("responsableId");
+CREATE INDEX IF NOT EXISTS "ResponsableEleve_responsableId_idx" ON "ResponsableEleve"("responsableId");
 
 -- CreateIndex
-CREATE INDEX "ResponsableEleve_eleveId_idx" ON "ResponsableEleve"("eleveId");
+CREATE INDEX IF NOT EXISTS "ResponsableEleve_eleveId_idx" ON "ResponsableEleve"("eleveId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "ResponsableEleve_responsableId_eleveId_key" ON "ResponsableEleve"("responsableId", "eleveId");
+CREATE UNIQUE INDEX IF NOT EXISTS "ResponsableEleve_responsableId_eleveId_key" ON "ResponsableEleve"("responsableId", "eleveId");
 
 -- CreateIndex
-CREATE INDEX "Eleve_schoolId_deletedAt_idx" ON "Eleve"("schoolId", "deletedAt");
+CREATE INDEX IF NOT EXISTS "Eleve_schoolId_deletedAt_idx" ON "Eleve"("schoolId", "deletedAt");
 
 -- AddForeignKey
+ALTER TABLE "ResponsableEleve" DROP CONSTRAINT IF EXISTS "ResponsableEleve_responsableId_fkey";
 ALTER TABLE "ResponsableEleve" ADD CONSTRAINT "ResponsableEleve_responsableId_fkey" FOREIGN KEY ("responsableId") REFERENCES "Parent"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "ResponsableEleve" DROP CONSTRAINT IF EXISTS "ResponsableEleve_eleveId_fkey";
 ALTER TABLE "ResponsableEleve" ADD CONSTRAINT "ResponsableEleve_eleveId_fkey" FOREIGN KEY ("eleveId") REFERENCES "Eleve"("id") ON DELETE CASCADE ON UPDATE CASCADE;
