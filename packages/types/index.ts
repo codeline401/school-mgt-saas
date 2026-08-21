@@ -41,7 +41,7 @@ export interface Classe {
 export interface CreateClasseInput {
   nom: string;
   schoolId?: string; // Requis pour SUDO_ADMIN, optionnel pour ADMIN
-  niveauId?: string | null;
+  niveauId: string;
   sectionId?: string | null;
   optionId?: string | null;
 }
@@ -84,10 +84,36 @@ export interface CreateNiveauInput {
 }
 export interface CreateSectionInput {
   nom: string;
-  niveauId?: string;
+  niveauId: string;
 }
 export interface CreateOptionInput {
   nom: string;
+}
+
+export type TypeAffectation =
+  | "INSCRIPTION"
+  | "TRANSFERT"
+  | "PROMOTION"
+  | "REDOUBLEMENT"
+  | "RETRAIT";
+
+export interface CreateAffectationInput {
+  eleveId: string;
+  nouvelleClasseId?: string | null;
+  type: TypeAffectation;
+  motif?: string;
+  anneeScolaire: string;
+}
+
+export interface AffectationClasseRecord {
+  id: string;
+  type: TypeAffectation;
+  motif?: string | null;
+  anneeScolaire: string;
+  createdAt: string;
+  ancienneClasse?: { id: string; nom: string } | null;
+  nouvelleClasse?: { id: string; nom: string } | null;
+  effectuePar?: { id?: string; nom: string; prenom: string } | null;
 }
 
 // Un prof peut avoir PLUSIEURS classes

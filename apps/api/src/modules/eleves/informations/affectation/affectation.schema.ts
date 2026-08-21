@@ -19,7 +19,7 @@ export type UpdateNiveauInput = z.infer<typeof updateNiveauSchema>;
 // -------------------------------------------
 export const createSectionSchema = z.object({
   nom: z.string().min(1, "Le nom de la section est requis"),
-  niveauId: z.string().uuid().optional(),
+  niveauId: z.string().uuid(),
 });
 export type CreateSectionInput = z.infer<typeof createSectionSchema>;
 

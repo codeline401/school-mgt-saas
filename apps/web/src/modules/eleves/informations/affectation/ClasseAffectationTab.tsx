@@ -11,7 +11,12 @@ import {
   UserRound,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import type { Classe } from "@school-mgt/types";
+import type {
+  AffectationClasseRecord,
+  Classe,
+  CreateAffectationInput,
+  TypeAffectation,
+} from "@school-mgt/types";
 import { api, getApiError } from "../../../../lib/api";
 import { useAuthStore } from "../../../../store/authStore";
 import {
@@ -20,26 +25,13 @@ import {
   useFichesEleves,
 } from "../fiche/hooks/useFicheEleve";
 
-const TYPE_OPTIONS = [
+const TYPE_OPTIONS: Array<{ value: TypeAffectation; label: string }> = [
   { value: "INSCRIPTION", label: "Inscription initiale" },
   { value: "TRANSFERT", label: "Transfert" },
   { value: "PROMOTION", label: "Promotion" },
   { value: "REDOUBLEMENT", label: "Redoublement" },
   { value: "RETRAIT", label: "Retrait de la classe" },
-] as const;
-
-type AffectationType = (typeof TYPE_OPTIONS)[number]["value"];
-
-interface AffectationRecord {
-  id: string;
-  type: AffectationType;
-  motif?: string | null;
-  anneeScolaire: string;
-  createdAt: string;
-  ancienneClasse?: { id: string; nom: string } | null;
-  nouvelleClasse?: { id: string; nom: string } | null;
-  effectuePar?: { nom: string; prenom: string } | null;
-}
+];
 
 interface Props {
   eleveId?: string;
@@ -61,40 +53,31 @@ function formatDate(value: string) {
 }
 
 export default function ClasseAffectationTab({ eleveId }: Props) {
-  const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
-  const queryClient = useQueryClient();
   const canEdit = user?.role === "ADMIN" || user?.role === "SUDO_ADMIN";
-  const {
-    data: eleve,
-    isLoading: isLoadingEleve,
-    isError: isEleveError,
-    error: eleveError,
-  } = useFicheEleve(eleveId);
+
+  if (!canEdit) {
+    return (
+      <div className="alert alert-warning">
+        <span>
+          Seuls les administrateurs peuvent modifier la classe d&apos;un élève.
+        </span>
+      </div>
+    );
+  }
+
+  return eleveId ? (
+    <ClasseAffectationDetail eleveId={eleveId} canEdit={canEdit} />
+  ) : (
+    <ClasseAffectationSelector />
+  );
+}
+
+function ClasseAffectationSelector() {
+  const navigate = useNavigate();
   const { data: allEleves = [], isLoading: isLoadingEleves } =
     useFichesEleves();
   const [search, setSearch] = useState("");
-  const [type, setType] = useState<AffectationType>("INSCRIPTION");
-  const [classeId, setClasseId] = useState("");
-  const [anneeScolaire, setAnneeScolaire] = useState(currentSchoolYear());
-  const [motif, setMotif] = useState("");
-
-  const classesQuery = useQuery<Classe[]>({
-    queryKey: ["classes", "affectation-eleve"],
-    queryFn: async () => (await api.get<Classe[]>("/api/classes")).data,
-    enabled: !!eleveId,
-  });
-  const historyQuery = useQuery<AffectationRecord[]>({
-    queryKey: ["eleve-affectations", eleveId],
-    queryFn: async () =>
-      (
-        await api.get<AffectationRecord[]>(
-          `/api/eleves/${eleveId}/informations/affectations`,
-        )
-      ).data,
-    enabled: !!eleveId,
-  });
-
   const filteredEleves = useMemo(() => {
     const query = search.trim().toLowerCase();
     if (!query) return allEleves.slice(0, 12);
@@ -108,17 +91,111 @@ export default function ClasseAffectationTab({ eleveId }: Props) {
       .slice(0, 12);
   }, [allEleves, search]);
 
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-lg font-semibold flex items-center gap-2">
+          <School size={19} className="text-primary" />
+          Classe & affectation
+        </h2>
+        <p className="text-sm text-base-content/60 mt-1">
+          Sélectionnez un élève pour consulter ou modifier son affectation.
+        </p>
+      </div>
+      <div className="card bg-base-100 border border-base-200 shadow-sm">
+        <div className="card-body gap-4">
+          <input
+            className="input input-bordered w-full"
+            placeholder="Rechercher par nom, prénom ou matricule..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            autoFocus
+          />
+          {isLoadingEleves ? (
+            <div className="flex justify-center py-6">
+              <span className="loading loading-spinner loading-sm" />
+            </div>
+          ) : filteredEleves.length === 0 ? (
+            <p className="text-sm text-base-content/50 py-4">
+              Aucun élève trouvé.
+            </p>
+          ) : (
+            <div className="divide-y divide-base-200 border-y border-base-200">
+              {filteredEleves.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  className="w-full py-3 flex items-center justify-between gap-3 text-left hover:bg-base-200/60 px-2"
+                  onClick={() => navigate(`/eleves/informations/${item.id}`)}
+                >
+                  <span>
+                    <span className="block font-medium">
+                      {item.nom} {item.prenom}
+                    </span>
+                    <span className="block text-xs text-base-content/50">
+                      Matricule : {item.matricule}
+                    </span>
+                  </span>
+                  <span className="badge badge-ghost badge-sm">
+                    {item.classe?.nom ?? "Sans classe"}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ClasseAffectationDetail({
+  eleveId,
+  canEdit,
+}: {
+  eleveId: string;
+  canEdit: boolean;
+}) {
+  const queryClient = useQueryClient();
+  const {
+    data: eleve,
+    isLoading: isLoadingEleve,
+    isError: isEleveError,
+    error: eleveError,
+  } = useFicheEleve(eleveId, { enabled: !!eleveId && canEdit });
+  const [type, setType] = useState<TypeAffectation>("INSCRIPTION");
+  const [classeId, setClasseId] = useState("");
+  const [anneeScolaire, setAnneeScolaire] = useState(currentSchoolYear());
+  const [motif, setMotif] = useState("");
+
+  const classesQuery = useQuery<Classe[]>({
+    queryKey: ["classes", "affectation-eleve"],
+    queryFn: async () => (await api.get<Classe[]>("/api/classes")).data,
+    enabled: !!eleveId && canEdit,
+  });
+  const historyQuery = useQuery<AffectationClasseRecord[]>({
+    queryKey: ["eleve-affectations", eleveId],
+    queryFn: async () =>
+      (
+        await api.get<AffectationClasseRecord[]>(
+          `/api/classes/eleves/${eleveId}/informations/affectations`,
+        )
+      ).data,
+    enabled: !!eleveId && canEdit,
+  });
+
   const mutation = useMutation({
     mutationFn: async () => {
-      const { data } = await api.post<AffectationRecord>(
-        "/api/informations/affectations",
-        {
-          eleveId,
-          nouvelleClasseId: type === "RETRAIT" ? null : classeId,
-          type,
-          anneeScolaire: anneeScolaire.trim(),
-          motif: motif.trim() || undefined,
-        },
+      const payload: CreateAffectationInput = {
+        eleveId,
+        nouvelleClasseId: type === "RETRAIT" ? null : classeId,
+        type,
+        anneeScolaire: anneeScolaire.trim(),
+        motif: motif.trim() || undefined,
+      };
+      const { data } = await api.post<AffectationClasseRecord>(
+        "/api/classes/informations/affectations",
+        payload,
       );
       return data;
     },
@@ -141,75 +218,6 @@ export default function ClasseAffectationTab({ eleveId }: Props) {
       );
     },
   });
-
-  if (!canEdit) {
-    return (
-      <div className="alert alert-warning">
-        <span>
-          Seuls les administrateurs peuvent modifier la classe d&apos;un élève.
-        </span>
-      </div>
-    );
-  }
-
-  if (!eleveId) {
-    return (
-      <div className="space-y-4">
-        <div>
-          <h2 className="text-lg font-semibold flex items-center gap-2">
-            <School size={19} className="text-primary" />
-            Classe & affectation
-          </h2>
-          <p className="text-sm text-base-content/60 mt-1">
-            Sélectionnez un élève pour consulter ou modifier son affectation.
-          </p>
-        </div>
-        <div className="card bg-base-100 border border-base-200 shadow-sm">
-          <div className="card-body gap-4">
-            <input
-              className="input input-bordered w-full"
-              placeholder="Rechercher par nom, prénom ou matricule..."
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              autoFocus
-            />
-            {isLoadingEleves ? (
-              <div className="flex justify-center py-6">
-                <span className="loading loading-spinner loading-sm" />
-              </div>
-            ) : filteredEleves.length === 0 ? (
-              <p className="text-sm text-base-content/50 py-4">
-                Aucun élève trouvé.
-              </p>
-            ) : (
-              <div className="divide-y divide-base-200 border-y border-base-200">
-                {filteredEleves.map((item) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    className="w-full py-3 flex items-center justify-between gap-3 text-left hover:bg-base-200/60 px-2"
-                    onClick={() => navigate(`/eleves/informations/${item.id}`)}
-                  >
-                    <span>
-                      <span className="block font-medium">
-                        {item.nom} {item.prenom}
-                      </span>
-                      <span className="block text-xs text-base-content/50">
-                        Matricule : {item.matricule}
-                      </span>
-                    </span>
-                    <span className="badge badge-ghost badge-sm">
-                      {item.classe?.nom ?? "Sans classe"}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   if (isLoadingEleve) {
     return (
@@ -243,7 +251,7 @@ export default function ClasseAffectationTab({ eleveId }: Props) {
     (isWithdrawal || !!classeId) &&
     !mutation.isPending;
 
-  function handleTypeChange(nextType: AffectationType) {
+  function handleTypeChange(nextType: TypeAffectation) {
     setType(nextType);
     if (nextType === "RETRAIT") setClasseId("");
   }
@@ -310,7 +318,7 @@ export default function ClasseAffectationTab({ eleveId }: Props) {
                 className="select select-sm w-full"
                 value={type}
                 onChange={(event) =>
-                  handleTypeChange(event.target.value as AffectationType)
+                  handleTypeChange(event.target.value as TypeAffectation)
                 }
               >
                 {TYPE_OPTIONS.map((item) => (

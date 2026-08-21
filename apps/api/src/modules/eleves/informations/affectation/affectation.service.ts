@@ -71,7 +71,7 @@ export class NiveauService {
     if (!isSudoAdmin && !user.schoolId) return []; // Return empty array if user is not SUDO_ADMIN and has no schoolId
 
     return prisma.niveau.findMany({
-      where: isSudoAdmin ? {} : { schoolId: user.schoolId },
+      where: isSudoAdmin && !user.schoolId ? {} : { schoolId: user.schoolId },
       include: { section: true },
       orderBy: { ordre: "asc" },
     });
@@ -221,7 +221,7 @@ export class SectionService {
     if (!isSudoAdmin && !user.schoolId) return []; // Return empty array if user is not SUDO_ADMIN and has no schoolId
 
     return prisma.section.findMany({
-      where: isSudoAdmin ? {} : { schoolId: user.schoolId },
+      where: isSudoAdmin && !user.schoolId ? {} : { schoolId: user.schoolId },
       orderBy: { nom: "asc" }, // Order sections by name in ascending order
     });
   }
@@ -272,7 +272,7 @@ export class SectionService {
         select: { schoolId: true },
       });
 
-      if (!niveau && niveau!.schoolId !== schoolId) {
+      if (!niveau || niveau.schoolId !== schoolId) {
         throw new Error(
           "Le niveau spécifié n'existe pas ou n'appartient pas à l'école de l'utilisateur.",
         );
@@ -281,7 +281,7 @@ export class SectionService {
 
     try {
       return await prisma.section.create({
-        data: { nom: data.nom, niveauId: data.niveauId as string, schoolId },
+        data: { nom: data.nom, niveauId: data.niveauId ?? null, schoolId },
       });
     } catch (error) {
       if (isUniqueConstraintError(error)) {
@@ -391,7 +391,7 @@ export class OptionService {
     if (!isSudoAdmin && !user.schoolId) return []; // Return empty array if user is not SUDO_ADMIN and has no schoolId
 
     return prisma.option.findMany({
-      where: isSudoAdmin ? {} : { schoolId: user.schoolId },
+      where: isSudoAdmin && !user.schoolId ? {} : { schoolId: user.schoolId },
       orderBy: { nom: "asc" }, // Order options by name in ascending order
     });
   }
@@ -473,7 +473,7 @@ export class OptionService {
   static async deleteOption(optionId: string, user: UserContext) {
     const existingOption = await prisma.option.findUnique({
       where: { id: optionId },
-      select: { schoolId: true, classes: { select: { id: true } } },
+      select: { schoolId: true },
     });
     if (!existingOption) {
       throw new Error("Option non trouvée");

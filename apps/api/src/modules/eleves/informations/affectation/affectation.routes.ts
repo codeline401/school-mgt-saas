@@ -51,7 +51,7 @@ router.delete("/options/:id", deleteOption);
 // ================================================================
 // STRUCTURE DE CLASSE (rattacher niveau / section / options à une classe)
 // ================================================================
-router.put("/classes/:id/structure", assignClasseStructure);
+router.put("/:id/structure", assignClasseStructure);
 
 // ================================================================
 // AFFECTATION CLASSE (inscription / transfert / promotion / etc.)
@@ -60,10 +60,7 @@ router.get(
   "/eleves/:eleveId/informations/affectations",
   getAffectationsByEleve,
 );
-router.get(
-  "/classes/:classeId/informations/affectations",
-  getAffectationsByClasse,
-);
+router.get("/:classeId/informations/affectations", getAffectationsByClasse);
 router.post("/informations/affectations", creerAffectation);
 
 export default router;

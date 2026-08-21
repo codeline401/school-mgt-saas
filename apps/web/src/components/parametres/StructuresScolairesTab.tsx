@@ -210,7 +210,11 @@ export default function StructuresScolairesTab() {
             value={sectionNom}
             onChange={setSectionNom}
             onSubmit={() => {
-              if (!sectionNom.trim() || !sectionNiveauId) return;
+              if (!sectionNom.trim()) return;
+              if (!sectionNiveauId) {
+                toast.error("Sélectionnez un niveau pour cette section.");
+                return;
+              }
               createSectionMutation.mutate({
                 nom: sectionNom.trim(),
                 niveauId: sectionNiveauId,

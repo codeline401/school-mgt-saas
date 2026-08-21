@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api, getApiError } from "../lib/api";
 import { useAuthStore } from "../store/authStore";
@@ -29,6 +29,13 @@ function ClassesPage() {
 
   const isAdmin = user?.role === "ADMIN";
   const isSudoAdmin = user?.role === "SUDO_ADMIN";
+  const selectedSchoolId = isSudoAdmin ? schoolId : (user?.schoolId ?? "");
+
+  useEffect(() => {
+    setNiveauId("");
+    setSectionId("");
+    setOptionId("");
+  }, [selectedSchoolId]);
 
   // Charge la liste des écoles (pour SUDO_ADMIN uniquement)
   const { data: schools = [], isLoading: isLoadingSchools } = useQuery<
@@ -45,25 +52,40 @@ function ClassesPage() {
   const { data: niveaux = [], isLoading: isLoadingNiveaux } = useQuery<
     Niveau[]
   >({
-    queryKey: ["niveaux"],
-    queryFn: async () => (await api.get("/api/classes/niveaux")).data,
-    enabled: isAdmin || isSudoAdmin,
+    queryKey: ["niveaux", selectedSchoolId],
+    queryFn: async () =>
+      (
+        await api.get("/api/classes/niveaux", {
+          params: { schoolId: selectedSchoolId },
+        })
+      ).data,
+    enabled: (isAdmin || isSudoAdmin) && !!selectedSchoolId,
   });
 
   const { data: sections = [], isLoading: isLoadingSections } = useQuery<
     Section[]
   >({
-    queryKey: ["sections"],
-    queryFn: async () => (await api.get("/api/classes/sections")).data,
-    enabled: (isAdmin || isSudoAdmin) && !!niveauId,
+    queryKey: ["sections", selectedSchoolId, niveauId],
+    queryFn: async () =>
+      (
+        await api.get("/api/classes/sections", {
+          params: { schoolId: selectedSchoolId },
+        })
+      ).data,
+    enabled: (isAdmin || isSudoAdmin) && !!selectedSchoolId && !!niveauId,
   });
 
   const { data: options = [], isLoading: isLoadingOptions } = useQuery<
     Option[]
   >({
-    queryKey: ["options"],
-    queryFn: async () => (await api.get("/api/classes/options")).data,
-    enabled: isAdmin || isSudoAdmin,
+    queryKey: ["options", selectedSchoolId],
+    queryFn: async () =>
+      (
+        await api.get("/api/classes/options", {
+          params: { schoolId: selectedSchoolId },
+        })
+      ).data,
+    enabled: (isAdmin || isSudoAdmin) && !!selectedSchoolId,
   });
 
   // Charge la liste des classes de l'école
@@ -273,6 +295,9 @@ function ClassesPage() {
                   value={schoolId}
                   onChange={(e) => {
                     setSchoolId(e.target.value);
+                    setNiveauId("");
+                    setSectionId("");
+                    setOptionId("");
                     if (schoolIdError) setSchoolIdError(null);
                   }}
                   required

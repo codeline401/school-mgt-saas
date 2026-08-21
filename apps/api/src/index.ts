@@ -42,7 +42,6 @@ app.use(express.json()); // Middleware pour parser les requêtes JSON
 
 app.use("/api/auth", authRoutes);
 app.use("/api/schools", schoolRoutes);
-app.use("/api", authenticate, affectationRoutes); // Niveaux, sections, options et structure/affectation de classe
 app.use("/api/classes", authenticate, affectationRoutes); // Alias utilisé par le frontend pour la structure scolaire
 app.use("/api/classes", classesRoutes);
 app.use("/api/profils", profilsRoutes);
@@ -75,7 +74,9 @@ app.get(
 
     const where =
       req.user?.role === "SUDO_ADMIN" || req.user?.role === "ADMIN"
-        ? req.user.schoolId ? { schoolId: req.user.schoolId } : {}
+        ? req.user.schoolId
+          ? { schoolId: req.user.schoolId }
+          : {}
         : { schoolId: req.user.schoolId!, userId: req.user.id };
 
     const professeurs = await prisma.professeur.findMany({

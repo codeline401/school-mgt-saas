@@ -72,7 +72,14 @@ export const getAllNiveaux = async (req: Request, res: Response) => {
     }
 
     const { role, schoolId } = req.user as { role: string; schoolId: string };
-    const niveaux = await NiveauService.getNiveauBySchool({ schoolId, role });
+    const requestedSchoolId =
+      role === "SUDO_ADMIN" && typeof req.query.schoolId === "string"
+        ? req.query.schoolId
+        : schoolId;
+    const niveaux = await NiveauService.getNiveauBySchool({
+      schoolId: requestedSchoolId,
+      role,
+    });
 
     return res.status(200).json(niveaux);
   } catch (error) {
@@ -207,8 +214,12 @@ export const getAllSections = async (req: Request, res: Response) => {
     }
 
     const { role, schoolId } = req.user as { role: string; schoolId: string };
+    const requestedSchoolId =
+      role === "SUDO_ADMIN" && typeof req.query.schoolId === "string"
+        ? req.query.schoolId
+        : schoolId;
     const sections = await SectionService.getSectionsBySchool({
-      schoolId,
+      schoolId: requestedSchoolId,
       role,
     });
 
@@ -348,7 +359,14 @@ export const getAllOptions = async (req: Request, res: Response) => {
     }
 
     const { role, schoolId } = req.user as { role: string; schoolId: string };
-    const options = await OptionService.getOptionsBySchool({ schoolId, role });
+    const requestedSchoolId =
+      role === "SUDO_ADMIN" && typeof req.query.schoolId === "string"
+        ? req.query.schoolId
+        : schoolId;
+    const options = await OptionService.getOptionsBySchool({
+      schoolId: requestedSchoolId,
+      role,
+    });
 
     return res.status(200).json(options);
   } catch (error) {

@@ -27,7 +27,11 @@ function isAuthorizhedForSchool(
  */
 async function validateClasseStructure(
   schoolId: string,
-  data: { niveauId?: string | null; sectionId?: string | null; optionId?: string | null },
+  data: {
+    niveauId?: string | null;
+    sectionId?: string | null;
+    optionId?: string | null;
+  },
 ): Promise<string | null> {
   if (data.niveauId) {
     const niveau = await prisma.niveau.findUnique({
@@ -177,7 +181,10 @@ export const createClasse = async (req: Request, res: Response) => {
     }
 
     // 2. Validation de la structure pédagogique (niveau / section / option)
-    const structureError = await validateClasseStructure(schoolId, validatedData);
+    const structureError = await validateClasseStructure(
+      schoolId,
+      validatedData,
+    );
     if (structureError) {
       return res.status(400).json({ error: structureError });
     }
@@ -277,9 +284,24 @@ export const updateClasse = async (req: Request, res: Response) => {
       return res.status(403).json({ error: "Accès refusé à cette classe" });
     }
 
+    const effectiveStructure = {
+      niveauId:
+        validatedData.niveauId === undefined
+          ? existingClasse.niveauId
+          : validatedData.niveauId,
+      sectionId:
+        validatedData.sectionId === undefined
+          ? existingClasse.sectionId
+          : validatedData.sectionId,
+      optionId:
+        validatedData.optionId === undefined
+          ? existingClasse.optionId
+          : validatedData.optionId,
+    };
+
     const structureError = await validateClasseStructure(
       existingClasse.schoolId,
-      validatedData,
+      effectiveStructure,
     );
     if (structureError) {
       return res.status(400).json({ error: structureError });
