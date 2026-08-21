@@ -115,6 +115,40 @@ async function main() {
   });
   console.log(`ADMIN ARIELATRA créé : ${arielatraAdmin.email}`);
 
+  // ── CFPE Omega : école avec son seul compte administrateur ─────────────────
+  const omegaAdminPassword = await bcrypt.hash(
+    resolvePassword("OMEGA_ADMIN_PASSWORD"),
+    12,
+  );
+
+  const omegaSchool = await prisma.school.upsert({
+    where: { tenantKey: "cfpe-omega" },
+    update: {},
+    create: {
+      nom: "CFPE Omega",
+      tenantKey: "cfpe-omega",
+    },
+  });
+  console.log(`École CFPE Omega créée : ${omegaSchool.nom} (${omegaSchool.id})`);
+
+  const omegaAdmin = await prisma.user.upsert({
+    where: { email: "admin.omega@school.local" },
+    update: {
+      password: omegaAdminPassword,
+      schoolId: omegaSchool.id,
+      role: "ADMIN",
+    },
+    create: {
+      email: "admin.omega@school.local",
+      password: omegaAdminPassword,
+      nom: "OMEGA",
+      prenom: "Admin",
+      role: "ADMIN",
+      schoolId: omegaSchool.id,
+    },
+  });
+  console.log(`ADMIN CFPE Omega créé : ${omegaAdmin.email}`);
+
   // Compte PROF : peut se connecter et saisir des notes
   const profPassword = await bcrypt.hash(resolvePassword("PROF_PASSWORD"), 12);
   const profUser = await prisma.user.upsert({
