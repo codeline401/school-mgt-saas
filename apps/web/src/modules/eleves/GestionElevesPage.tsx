@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 import {
   BookOpen,
@@ -23,6 +23,7 @@ import DevelopmentPlaceholder from "../../components/common/DevelopmentPlacehold
 import FicheElevePage from "./informations/fiche/pages/FicheElevePage";
 import FicheEleveFormModal from "./informations/fiche/components/FicheEleveFormModal";
 import ResponsablesPage from "./informations/responsable/pages/ResponsablesPage";
+import ClasseAffectationTab from "./informations/affectation/ClasseAffectationTab";
 
 type MainTab =
   | "informations"
@@ -140,6 +141,7 @@ const documentTabs: TabItem<DocumentSubTab>[] = [
 function GestionElevesPage() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { id: eleveId } = useParams<{ id: string }>();
   const [activeSubTab, setActiveSubTab] = useState<MainTab>(
     PATH_TO_TAB[location.pathname] || "informations",
   );
@@ -176,13 +178,7 @@ function GestionElevesPage() {
       case "responsables":
         return <ResponsablesPage />;
       case "classe":
-        return (
-          <DevelopmentPlaceholder
-            icon={School}
-            title="Classe & affectation"
-            description="Affectation par classe, niveau, section, options et changement de classe."
-          />
-        );
+        return <ClasseAffectationTab eleveId={eleveId} />;
       case "urgence":
         return (
           <DevelopmentPlaceholder

@@ -24,6 +24,12 @@ export interface Classe {
   nom: string;
   schoolId: string;
   professeurPrincipalId?: string | null; // ID du prof principal de la classe (optionnel)
+  niveauId?: string | null;
+  sectionId?: string | null;
+  optionId?: string | null;
+  niveau?: Niveau | null;
+  section?: Section | null;
+  option?: Option | null;
   // Compteurs optionnels retournés par l'API (include _count)
   _count?: {
     eleves: number;
@@ -35,6 +41,53 @@ export interface Classe {
 export interface CreateClasseInput {
   nom: string;
   schoolId?: string; // Requis pour SUDO_ADMIN, optionnel pour ADMIN
+  niveauId?: string | null;
+  sectionId?: string | null;
+  optionId?: string | null;
+}
+
+// Payload envoyé pour mettre à jour une classe
+export interface UpdateClasseInput {
+  nom?: string;
+  niveauId?: string | null;
+  sectionId?: string | null;
+  optionId?: string | null;
+}
+
+// Niveau scolaire (ex: "6ème", "Terminale") — propre à une école
+export interface Niveau {
+  id: string;
+  nom: string;
+  ordre: number;
+  schoolId: string;
+}
+
+// Section rattachée (optionnellement) à un niveau (ex: "A", "Scientifique")
+export interface Section {
+  id: string;
+  nom: string;
+  niveauId: string;
+  schoolId: string;
+}
+
+// Option de classe (ex: "Musique", "Informatique")
+export interface Option {
+  id: string;
+  nom: string;
+  schoolId: string;
+}
+
+// Payloads de création/mise à jour de la structure pédagogique
+export interface CreateNiveauInput {
+  nom: string;
+  ordre?: number;
+}
+export interface CreateSectionInput {
+  nom: string;
+  niveauId?: string;
+}
+export interface CreateOptionInput {
+  nom: string;
 }
 
 // Un prof peut avoir PLUSIEURS classes

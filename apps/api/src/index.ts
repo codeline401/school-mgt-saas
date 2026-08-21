@@ -30,6 +30,7 @@ import matieresRoutes from "./routes/matieresRoute.js"; // Importation des route
 
 // gestion eleves
 import elevesRoutes from "./modules/eleves/eleves.routes.js"; // Importation des routes pour la gestion des élèves
+import affectationRoutes from "./modules/eleves/informations/affectation/affectation.routes.js"; // Niveaux, sections, options et affectations de classe
 
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
@@ -41,6 +42,8 @@ app.use(express.json()); // Middleware pour parser les requêtes JSON
 
 app.use("/api/auth", authRoutes);
 app.use("/api/schools", schoolRoutes);
+app.use("/api", authenticate, affectationRoutes); // Niveaux, sections, options et structure/affectation de classe
+app.use("/api/classes", authenticate, affectationRoutes); // Alias utilisé par le frontend pour la structure scolaire
 app.use("/api/classes", classesRoutes);
 app.use("/api/profils", profilsRoutes);
 app.use("/api/matieres", matieresRoutes); // Ajout des routes pour les matières

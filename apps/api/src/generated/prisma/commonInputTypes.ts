@@ -1180,6 +1180,23 @@ export type EnumTypeResponsableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumTypeResponsableFilter<$PrismaModel>
 }
 
+export type EnumTypeAffectationFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeAffectation | Prisma.EnumTypeAffectationFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeAffectation[] | Prisma.ListEnumTypeAffectationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeAffectation[] | Prisma.ListEnumTypeAffectationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeAffectationFilter<$PrismaModel> | $Enums.TypeAffectation
+}
+
+export type EnumTypeAffectationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeAffectation | Prisma.EnumTypeAffectationFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeAffectation[] | Prisma.ListEnumTypeAffectationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeAffectation[] | Prisma.ListEnumTypeAffectationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeAffectationWithAggregatesFilter<$PrismaModel> | $Enums.TypeAffectation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeAffectationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeAffectationFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -2292,6 +2309,23 @@ export type NestedEnumTypeResponsableWithAggregatesFilter<$PrismaModel = never> 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTypeResponsableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTypeResponsableFilter<$PrismaModel>
+}
+
+export type NestedEnumTypeAffectationFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeAffectation | Prisma.EnumTypeAffectationFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeAffectation[] | Prisma.ListEnumTypeAffectationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeAffectation[] | Prisma.ListEnumTypeAffectationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeAffectationFilter<$PrismaModel> | $Enums.TypeAffectation
+}
+
+export type NestedEnumTypeAffectationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeAffectation | Prisma.EnumTypeAffectationFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeAffectation[] | Prisma.ListEnumTypeAffectationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeAffectation[] | Prisma.ListEnumTypeAffectationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeAffectationWithAggregatesFilter<$PrismaModel> | $Enums.TypeAffectation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeAffectationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeAffectationFilter<$PrismaModel>
 }
 
 

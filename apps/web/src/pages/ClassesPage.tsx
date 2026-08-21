@@ -3,7 +3,14 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api, getApiError } from "../lib/api";
 import { useAuthStore } from "../store/authStore";
 import { BookOpen, Plus, Users, GraduationCap } from "lucide-react";
-import type { Classe, CreateClasseInput, School } from "@school-mgt/types";
+import type {
+  Classe,
+  CreateClasseInput,
+  Niveau,
+  Option,
+  School,
+  Section,
+} from "@school-mgt/types";
 import { Link } from "react-router-dom";
 
 function ClassesPage() {
@@ -13,23 +20,50 @@ function ClassesPage() {
 
   const [nom, setNom] = useState("");
   const [schoolId, setSchoolId] = useState("");
+  const [niveauId, setNiveauId] = useState("");
+  const [sectionId, setSectionId] = useState("");
+  const [optionId, setOptionId] = useState("");
   const [nomError, setNomError] = useState<string | null>(null);
   const [schoolIdError, setSchoolIdError] = useState<string | null>(null);
+  const [structureError, setStructureError] = useState<string | null>(null);
 
   const isAdmin = user?.role === "ADMIN";
   const isSudoAdmin = user?.role === "SUDO_ADMIN";
 
   // Charge la liste des écoles (pour SUDO_ADMIN uniquement)
-  const {
-    data: schools = [],
-    isLoading: isLoadingSchools,
-  } = useQuery<School[]>({
+  const { data: schools = [], isLoading: isLoadingSchools } = useQuery<
+    School[]
+  >({
     queryKey: ["schools"],
     queryFn: async () => {
       const { data } = await api.get("/api/schools");
       return data;
     },
     enabled: isSudoAdmin, // Charger seulement si SUDO_ADMIN
+  });
+
+  const { data: niveaux = [], isLoading: isLoadingNiveaux } = useQuery<
+    Niveau[]
+  >({
+    queryKey: ["niveaux"],
+    queryFn: async () => (await api.get("/api/classes/niveaux")).data,
+    enabled: isAdmin || isSudoAdmin,
+  });
+
+  const { data: sections = [], isLoading: isLoadingSections } = useQuery<
+    Section[]
+  >({
+    queryKey: ["sections"],
+    queryFn: async () => (await api.get("/api/classes/sections")).data,
+    enabled: (isAdmin || isSudoAdmin) && !!niveauId,
+  });
+
+  const { data: options = [], isLoading: isLoadingOptions } = useQuery<
+    Option[]
+  >({
+    queryKey: ["options"],
+    queryFn: async () => (await api.get("/api/classes/options")).data,
+    enabled: isAdmin || isSudoAdmin,
   });
 
   // Charge la liste des classes de l'école
@@ -61,35 +95,47 @@ function ClassesPage() {
     modalRef.current?.close();
     setNom("");
     setSchoolId("");
+    setNiveauId("");
+    setSectionId("");
+    setOptionId("");
     setNomError(null);
     setSchoolIdError(null);
+    setStructureError(null);
     createMutation.reset();
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = nom.trim();
-    
+
     // Validation du nom
     if (trimmed.length < 2) {
       setNomError("Le nom doit contenir au moins 2 caractères.");
       return;
     }
-    
+
     // Validation du schoolId pour SUDO_ADMIN
     if (isSudoAdmin && !schoolId) {
       setSchoolIdError("Veuillez sélectionner une école.");
       return;
     }
-    
+
+    if (!niveauId) {
+      setStructureError("Veuillez sélectionner un niveau.");
+      return;
+    }
+
     setNomError(null);
     setSchoolIdError(null);
-    
-    const payload: CreateClasseInput = { nom: trimmed };
+    setStructureError(null);
+
+    const payload: CreateClasseInput = { nom: trimmed, niveauId };
     if (isSudoAdmin && schoolId) {
       payload.schoolId = schoolId;
     }
-    
+    if (sectionId) payload.sectionId = sectionId;
+    if (optionId) payload.optionId = optionId;
+
     createMutation.mutate(payload);
   };
 
@@ -266,6 +312,77 @@ function ClassesPage() {
               {nomError && (
                 <p className="text-error text-sm mt-1">{nomError}</p>
               )}
+            </fieldset>
+
+            {structureError && (
+              <div role="alert" className="alert alert-error alert-soft">
+                <span>{structureError}</span>
+              </div>
+            )}
+
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Niveau</legend>
+              <select
+                className="select w-full"
+                value={niveauId}
+                onChange={(e) => {
+                  setNiveauId(e.target.value);
+                  setSectionId("");
+                  if (structureError) setStructureError(null);
+                }}
+                required
+              >
+                <option value="">Sélectionnez un niveau</option>
+                {isLoadingNiveaux ? (
+                  <option disabled>Chargement...</option>
+                ) : (
+                  niveaux.map((niveau) => (
+                    <option key={niveau.id} value={niveau.id}>
+                      {niveau.nom}
+                    </option>
+                  ))
+                )}
+              </select>
+            </fieldset>
+
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Section (optionnel)</legend>
+              <select
+                className="select w-full"
+                value={sectionId}
+                onChange={(e) => setSectionId(e.target.value)}
+                disabled={!niveauId || isLoadingSections}
+              >
+                <option value="">
+                  {niveauId
+                    ? "Aucune section"
+                    : "Sélectionnez d'abord un niveau"}
+                </option>
+                {sections
+                  .filter((section) => section.niveauId === niveauId)
+                  .map((section) => (
+                    <option key={section.id} value={section.id}>
+                      {section.nom}
+                    </option>
+                  ))}
+              </select>
+            </fieldset>
+
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Option (optionnel)</legend>
+              <select
+                className="select w-full"
+                value={optionId}
+                onChange={(e) => setOptionId(e.target.value)}
+                disabled={isLoadingOptions}
+              >
+                <option value="">Aucune option</option>
+                {options.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.nom}
+                  </option>
+                ))}
+              </select>
             </fieldset>
 
             <div className="modal-action">

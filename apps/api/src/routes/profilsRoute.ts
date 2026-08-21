@@ -4,6 +4,7 @@ import { Role } from "../generated/prisma/enums.js";
 import {
   getElevesProfil,
   getParentProfil,
+  getParents,
   getProfesseurProfil,
   getMyProfProfil,
   updateElevesProfil,
@@ -34,6 +35,11 @@ router.put(
 );
 
 // FICHE PARENTS
+router.get(
+  "/parents",
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
+  getParents,
+);
 router.get(
   "/parents/:id",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),

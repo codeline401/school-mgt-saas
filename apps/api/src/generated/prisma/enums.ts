@@ -475,3 +475,14 @@ export const TypeResponsable = {
 } as const
 
 export type TypeResponsable = (typeof TypeResponsable)[keyof typeof TypeResponsable]
+
+
+export const TypeAffectation = {
+  INSCRIPTION: 'INSCRIPTION',
+  TRANSFERT: 'TRANSFERT',
+  PROMOTION: 'PROMOTION',
+  REDOUBLEMENT: 'REDOUBLEMENT',
+  RETRAIT: 'RETRAIT'
+} as const
+
+export type TypeAffectation = (typeof TypeAffectation)[keyof typeof TypeAffectation]
