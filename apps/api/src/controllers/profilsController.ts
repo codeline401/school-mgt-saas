@@ -273,6 +273,37 @@ export const getParentProfil = async (req: Request, res: Response) => {
 };
 
 /**
+ * GET /api/profils/parents
+ * Retourne les parents disponibles dans l'école de l'utilisateur connecté.
+ */
+export const getParents = async (req: Request, res: Response) => {
+  try {
+    const { role, schoolId } = req.user!;
+
+    if (role !== "SUDO_ADMIN" && !schoolId) {
+      return res.status(403).json({ error: "Aucune école associée." });
+    }
+
+    const parents = await prisma.parent.findMany({
+      where: role === "SUDO_ADMIN" ? {} : { schoolId: schoolId! },
+      select: {
+        id: true,
+        nom: true,
+        prenom: true,
+        telephone: true,
+        email: true,
+      },
+      orderBy: [{ nom: "asc" }, { prenom: "asc" }],
+    });
+
+    return res.status(200).json(parents);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des parents :", error);
+    return res.status(500).json({ error: "Erreur serveur lors de la récupération des parents" });
+  }
+};
+
+/**
  * PUT /api/profils/parents/:id
  * Met à jour les coordonée d'un parent
  */

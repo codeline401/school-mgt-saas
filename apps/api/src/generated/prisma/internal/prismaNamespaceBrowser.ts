@@ -105,7 +105,11 @@ export const ModelName = {
   DroitInscription: 'DroitInscription',
   Ecolage: 'Ecolage',
   Parent: 'Parent',
-  ResponsableEleve: 'ResponsableEleve'
+  ResponsableEleve: 'ResponsableEleve',
+  Niveau: 'Niveau',
+  Section: 'Section',
+  Option: 'Option',
+  AffectationClasse: 'AffectationClasse'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -166,7 +170,10 @@ export const ClasseScalarFieldEnum = {
   schoolId: 'schoolId',
   professeurPrincipalId: 'professeurPrincipalId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  niveauId: 'niveauId',
+  sectionId: 'sectionId',
+  optionId: 'optionId'
 } as const
 
 export type ClasseScalarFieldEnum = (typeof ClasseScalarFieldEnum)[keyof typeof ClasseScalarFieldEnum]
@@ -1035,6 +1042,58 @@ export const ResponsableEleveScalarFieldEnum = {
 } as const
 
 export type ResponsableEleveScalarFieldEnum = (typeof ResponsableEleveScalarFieldEnum)[keyof typeof ResponsableEleveScalarFieldEnum]
+
+
+export const NiveauScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  ordre: 'ordre',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NiveauScalarFieldEnum = (typeof NiveauScalarFieldEnum)[keyof typeof NiveauScalarFieldEnum]
+
+
+export const SectionScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  niveauId: 'niveauId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SectionScalarFieldEnum = (typeof SectionScalarFieldEnum)[keyof typeof SectionScalarFieldEnum]
+
+
+export const OptionScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OptionScalarFieldEnum = (typeof OptionScalarFieldEnum)[keyof typeof OptionScalarFieldEnum]
+
+
+export const AffectationClasseScalarFieldEnum = {
+  id: 'id',
+  eleveId: 'eleveId',
+  ancienneClasseId: 'ancienneClasseId',
+  nouvelleClasseId: 'nouvelleClasseId',
+  type: 'type',
+  motif: 'motif',
+  anneeScolaire: 'anneeScolaire',
+  effectueParId: 'effectueParId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  userId: 'userId'
+} as const
+
+export type AffectationClasseScalarFieldEnum = (typeof AffectationClasseScalarFieldEnum)[keyof typeof AffectationClasseScalarFieldEnum]
 
 
 export const SortOrder = {

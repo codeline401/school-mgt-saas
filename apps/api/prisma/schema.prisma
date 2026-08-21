@@ -62,6 +62,8 @@ model User {
   participantSorties                 ParticipantSortie[]       @relation("SortiesAccompagnees")
   eleves                             Eleve[]
   userDeleting                       Eleve[]                   @relation("EleveDeletedBy")
+  affectationClassesEffectuePar      AffectationClasse[]       @relation("AffectationEffectue")
+  affectationClasses                 AffectationClasse[]
 }
 
 // Modele SAAS
@@ -125,6 +127,10 @@ model School {
   autorisationParents      AutorisationParent[]
   droitInscriptions        DroitInscription[]
   ecolages                 Ecolage[]
+  niveaus                  Niveau[]
+  sections                 Section[]
+  options                  Option[]
+  affectationClasses       AffectationClasse[]
 }
 
 model Classe {
@@ -141,22 +147,30 @@ model Classe {
   professeurPrincipalId String?
   professeurPrincipal   Professeur? @relation("ProfesseurPrincipalDe", fields: [professeurPrincipalId], references: [id], onDelete: SetNull)
 
-  createdAt            DateTime              @default(now())
-  updatedAt            DateTime              @updatedAt
-  notes                Note[]
-  documents            Document[]
-  creneauHoraires      CreneauHoraire[]
-  appels               Appel[]
-  cahierTextes         CahierTexte[]
-  quizzes              Quiz[]
-  deliberationSessions DeliberationSession[]
-  examenSessions       ExamenSession[]
-  chapitres            Chapitre[]
-  salles               Salle[]
-  sortieScolaires      SortieScolaire[]
-  historiqueClasses    HistoriqueClasse[]
-  droitInscriptions    DroitInscription[]
-  ecolages             Ecolage[]
+  createdAt                   DateTime              @default(now())
+  updatedAt                   DateTime              @updatedAt
+  notes                       Note[]
+  documents                   Document[]
+  creneauHoraires             CreneauHoraire[]
+  appels                      Appel[]
+  cahierTextes                CahierTexte[]
+  quizzes                     Quiz[]
+  deliberationSessions        DeliberationSession[]
+  examenSessions              ExamenSession[]
+  chapitres                   Chapitre[]
+  salles                      Salle[]
+  sortieScolaires             SortieScolaire[]
+  historiqueClasses           HistoriqueClasse[]
+  droitInscriptions           DroitInscription[]
+  ecolages                    Ecolage[]
+  niveau                      Niveau?               @relation(fields: [niveauId], references: [id])
+  niveauId                    String?
+  section                     Section?              @relation(fields: [sectionId], references: [id])
+  sectionId                   String?
+  option                      Option?               @relation(fields: [optionId], references: [id])
+  optionId                    String?
+  affectationNouvellesClasses AffectationClasse[]   @relation("NouvelleClasse")
+  affectationAnciennesClasses AffectationClasse[]   @relation("AncienneClasse")
 
   @@unique([schoolId, nom])
   @@index([professeurPrincipalId])
@@ -1777,6 +1791,7 @@ model Eleve {
   user                  User?                  @relation(fields: [userId], references: [id])
   userId                String?
   responsableEleves     ResponsableEleve[]
+  affectationClasses    AffectationClasse[]
 
   // Contraintes & Index
   @@unique([schoolId, matricule])
@@ -1958,4 +1973,100 @@ model ResponsableEleve {
   @@unique([responsableId, eleveId])
   @@index([responsableId])
   @@index([eleveId])
+}
+
+model Niveau {
+  id    String @id @default(uuid())
+  nom   String // Ex: "6ème", "Terminale"
+  ordre Int    @default(0) // pour trier l'affichage (6ème < 5ème ...)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  classes Classe[]
+  section Section[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([schoolId, nom])
+  @@index([schoolId])
+}
+
+model Section {
+  id  String @id @default(uuid())
+  nom String // Ex: "A", "Scientifique", "Littéraire", "OSE"
+
+  // Optionnel : une section peut être rattaché à un niveau précis
+  // (ex: "Scientifuque" n'existe qu'en Terminale) ou être libre.
+  niveauId String
+  niveau   Niveau @relation(fields: [niveauId], references: [id], onDelete: Cascade)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  classes Classe[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([schoolId, nom, niveauId])
+  @@index([schoolId])
+  @@index([niveauId])
+}
+
+model Option {
+  id  String @id @default(uuid())
+  nom String // Ex: "Mathématiques", "Physique", "Informatique", "Musique"
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  classe Classe[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([schoolId, nom])
+  @@index([schoolId])
+}
+
+enum TypeAffectation {
+  INSCRIPTION // Affectation initiale lors de l'inscription
+  TRANSFERT // Changement de classe ou de section
+  PROMOTION // Passage à la classe supérieure
+  REDOUBLEMENT // Redoublement dans la même classe
+  RETRAIT // Retrait de l'élève de la classe
+}
+
+model AffectationClasse {
+  id String @id @default(uuid())
+
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  ancienneClasseId String?
+  ancienneClasse   Classe? @relation("AncienneClasse", fields: [ancienneClasseId], references: [id], onDelete: SetNull)
+
+  nouvelleClasseId String?
+  nouvelleClasse   Classe? @relation("NouvelleClasse", fields: [nouvelleClasseId], references: [id], onDelete: SetNull)
+
+  type          TypeAffectation
+  motif         String?
+  anneeScolaire String
+
+  effectueParId String
+  effectuePar   User   @relation("AffectationEffectue", fields: [effectueParId], references: [id])
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+
+  @@index([eleveId])
+  @@index([schoolId])
+  @@index([nouvelleClasseId])
+  @@index([anneeScolaire])
 }

@@ -167,9 +167,10 @@ export default function FicheEleveFormModal({
   const { data: parents = [] } = useQuery<Parent[]>({
     queryKey: ["parents"],
     queryFn: async () => {
-      const { data } = await api.get("/api/parents");
+      const { data } = await api.get("/api/profils/parents");
       return data;
     },
+    enabled: isOpen,
   });
 
   // ─────────────────────────────────────────────────────────────────

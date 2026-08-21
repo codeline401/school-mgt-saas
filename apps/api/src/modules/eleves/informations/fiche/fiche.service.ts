@@ -165,6 +165,14 @@ export class FicheEleveService {
         prenom: true,
         matricule: true,
         statut: true,
+        classeId: true,
+        classe: {
+          select: {
+            id: true,
+            nom: true,
+            schoolId: true,
+          },
+        },
         schoolId: true,
         deletedAt: true,
         createdAt: true,

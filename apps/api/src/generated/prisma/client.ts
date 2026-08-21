@@ -316,3 +316,23 @@ export type Parent = Prisma.ParentModel
  * 
  */
 export type ResponsableEleve = Prisma.ResponsableEleveModel
+/**
+ * Model Niveau
+ * 
+ */
+export type Niveau = Prisma.NiveauModel
+/**
+ * Model Section
+ * 
+ */
+export type Section = Prisma.SectionModel
+/**
+ * Model Option
+ * 
+ */
+export type Option = Prisma.OptionModel
+/**
+ * Model AffectationClasse
+ * 
+ */
+export type AffectationClasse = Prisma.AffectationClasseModel

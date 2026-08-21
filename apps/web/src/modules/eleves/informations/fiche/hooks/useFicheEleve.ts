@@ -21,7 +21,10 @@ export const ficheEleveKeys = {
 // ═══════════════════════════════════════════════════════════════════
 // HOOK: Récupérer la fiche complète d'un élève
 // ═══════════════════════════════════════════════════════════════════
-export function useFicheEleve(eleveId: string | undefined) {
+export function useFicheEleve(
+  eleveId: string | undefined,
+  options?: { enabled?: boolean },
+) {
   return useQuery({
     queryKey: ficheEleveKeys.detail(eleveId!),
     queryFn: async () => {
@@ -30,7 +33,7 @@ export function useFicheEleve(eleveId: string | undefined) {
       );
       return data;
     },
-    enabled: !!eleveId,
+    enabled: !!eleveId && (options?.enabled ?? true),
     staleTime: 1000 * 60 * 5, // Cache pendant 5 minutes
   });
 }

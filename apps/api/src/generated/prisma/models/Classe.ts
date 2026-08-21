@@ -31,6 +31,9 @@ export type ClasseMinAggregateOutputType = {
   professeurPrincipalId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  niveauId: string | null
+  sectionId: string | null
+  optionId: string | null
 }
 
 export type ClasseMaxAggregateOutputType = {
@@ -40,6 +43,9 @@ export type ClasseMaxAggregateOutputType = {
   professeurPrincipalId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  niveauId: string | null
+  sectionId: string | null
+  optionId: string | null
 }
 
 export type ClasseCountAggregateOutputType = {
@@ -49,6 +55,9 @@ export type ClasseCountAggregateOutputType = {
   professeurPrincipalId: number
   createdAt: number
   updatedAt: number
+  niveauId: number
+  sectionId: number
+  optionId: number
   _all: number
 }
 
@@ -60,6 +69,9 @@ export type ClasseMinAggregateInputType = {
   professeurPrincipalId?: true
   createdAt?: true
   updatedAt?: true
+  niveauId?: true
+  sectionId?: true
+  optionId?: true
 }
 
 export type ClasseMaxAggregateInputType = {
@@ -69,6 +81,9 @@ export type ClasseMaxAggregateInputType = {
   professeurPrincipalId?: true
   createdAt?: true
   updatedAt?: true
+  niveauId?: true
+  sectionId?: true
+  optionId?: true
 }
 
 export type ClasseCountAggregateInputType = {
@@ -78,6 +93,9 @@ export type ClasseCountAggregateInputType = {
   professeurPrincipalId?: true
   createdAt?: true
   updatedAt?: true
+  niveauId?: true
+  sectionId?: true
+  optionId?: true
   _all?: true
 }
 
@@ -160,6 +178,9 @@ export type ClasseGroupByOutputType = {
   professeurPrincipalId: string | null
   createdAt: Date
   updatedAt: Date
+  niveauId: string | null
+  sectionId: string | null
+  optionId: string | null
   _count: ClasseCountAggregateOutputType | null
   _min: ClasseMinAggregateOutputType | null
   _max: ClasseMaxAggregateOutputType | null
@@ -190,6 +211,9 @@ export type ClasseWhereInput = {
   professeurPrincipalId?: Prisma.StringNullableFilter<"Classe"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Classe"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Classe"> | Date | string
+  niveauId?: Prisma.StringNullableFilter<"Classe"> | string | null
+  sectionId?: Prisma.StringNullableFilter<"Classe"> | string | null
+  optionId?: Prisma.StringNullableFilter<"Classe"> | string | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   eleves?: Prisma.EleveListRelationFilter
   profs?: Prisma.ProfesseurListRelationFilter
@@ -209,6 +233,11 @@ export type ClasseWhereInput = {
   historiqueClasses?: Prisma.HistoriqueClasseListRelationFilter
   droitInscriptions?: Prisma.DroitInscriptionListRelationFilter
   ecolages?: Prisma.EcolageListRelationFilter
+  niveau?: Prisma.XOR<Prisma.NiveauNullableScalarRelationFilter, Prisma.NiveauWhereInput> | null
+  section?: Prisma.XOR<Prisma.SectionNullableScalarRelationFilter, Prisma.SectionWhereInput> | null
+  option?: Prisma.XOR<Prisma.OptionNullableScalarRelationFilter, Prisma.OptionWhereInput> | null
+  affectationNouvellesClasses?: Prisma.AffectationClasseListRelationFilter
+  affectationAnciennesClasses?: Prisma.AffectationClasseListRelationFilter
 }
 
 export type ClasseOrderByWithRelationInput = {
@@ -218,6 +247,9 @@ export type ClasseOrderByWithRelationInput = {
   professeurPrincipalId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  niveauId?: Prisma.SortOrderInput | Prisma.SortOrder
+  sectionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  optionId?: Prisma.SortOrderInput | Prisma.SortOrder
   school?: Prisma.SchoolOrderByWithRelationInput
   eleves?: Prisma.EleveOrderByRelationAggregateInput
   profs?: Prisma.ProfesseurOrderByRelationAggregateInput
@@ -237,6 +269,11 @@ export type ClasseOrderByWithRelationInput = {
   historiqueClasses?: Prisma.HistoriqueClasseOrderByRelationAggregateInput
   droitInscriptions?: Prisma.DroitInscriptionOrderByRelationAggregateInput
   ecolages?: Prisma.EcolageOrderByRelationAggregateInput
+  niveau?: Prisma.NiveauOrderByWithRelationInput
+  section?: Prisma.SectionOrderByWithRelationInput
+  option?: Prisma.OptionOrderByWithRelationInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseOrderByRelationAggregateInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseOrderByRelationAggregateInput
 }
 
 export type ClasseWhereUniqueInput = Prisma.AtLeast<{
@@ -250,6 +287,9 @@ export type ClasseWhereUniqueInput = Prisma.AtLeast<{
   professeurPrincipalId?: Prisma.StringNullableFilter<"Classe"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Classe"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Classe"> | Date | string
+  niveauId?: Prisma.StringNullableFilter<"Classe"> | string | null
+  sectionId?: Prisma.StringNullableFilter<"Classe"> | string | null
+  optionId?: Prisma.StringNullableFilter<"Classe"> | string | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   eleves?: Prisma.EleveListRelationFilter
   profs?: Prisma.ProfesseurListRelationFilter
@@ -269,6 +309,11 @@ export type ClasseWhereUniqueInput = Prisma.AtLeast<{
   historiqueClasses?: Prisma.HistoriqueClasseListRelationFilter
   droitInscriptions?: Prisma.DroitInscriptionListRelationFilter
   ecolages?: Prisma.EcolageListRelationFilter
+  niveau?: Prisma.XOR<Prisma.NiveauNullableScalarRelationFilter, Prisma.NiveauWhereInput> | null
+  section?: Prisma.XOR<Prisma.SectionNullableScalarRelationFilter, Prisma.SectionWhereInput> | null
+  option?: Prisma.XOR<Prisma.OptionNullableScalarRelationFilter, Prisma.OptionWhereInput> | null
+  affectationNouvellesClasses?: Prisma.AffectationClasseListRelationFilter
+  affectationAnciennesClasses?: Prisma.AffectationClasseListRelationFilter
 }, "id" | "schoolId_nom">
 
 export type ClasseOrderByWithAggregationInput = {
@@ -278,6 +323,9 @@ export type ClasseOrderByWithAggregationInput = {
   professeurPrincipalId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  niveauId?: Prisma.SortOrderInput | Prisma.SortOrder
+  sectionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  optionId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ClasseCountOrderByAggregateInput
   _max?: Prisma.ClasseMaxOrderByAggregateInput
   _min?: Prisma.ClasseMinOrderByAggregateInput
@@ -293,6 +341,9 @@ export type ClasseScalarWhereWithAggregatesInput = {
   professeurPrincipalId?: Prisma.StringNullableWithAggregatesFilter<"Classe"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Classe"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Classe"> | Date | string
+  niveauId?: Prisma.StringNullableWithAggregatesFilter<"Classe"> | string | null
+  sectionId?: Prisma.StringNullableWithAggregatesFilter<"Classe"> | string | null
+  optionId?: Prisma.StringNullableWithAggregatesFilter<"Classe"> | string | null
 }
 
 export type ClasseCreateInput = {
@@ -319,6 +370,11 @@ export type ClasseCreateInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateInput = {
@@ -328,6 +384,9 @@ export type ClasseUncheckedCreateInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -345,6 +404,8 @@ export type ClasseUncheckedCreateInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUpdateInput = {
@@ -371,6 +432,11 @@ export type ClasseUpdateInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateInput = {
@@ -380,6 +446,9 @@ export type ClasseUncheckedUpdateInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -397,6 +466,8 @@ export type ClasseUncheckedUpdateInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateManyInput = {
@@ -406,6 +477,9 @@ export type ClasseCreateManyInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
 }
 
 export type ClasseUpdateManyMutationInput = {
@@ -422,6 +496,9 @@ export type ClasseUncheckedUpdateManyInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ClasseListRelationFilter = {
@@ -446,6 +523,9 @@ export type ClasseCountOrderByAggregateInput = {
   professeurPrincipalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  niveauId?: Prisma.SortOrder
+  sectionId?: Prisma.SortOrder
+  optionId?: Prisma.SortOrder
 }
 
 export type ClasseMaxOrderByAggregateInput = {
@@ -455,6 +535,9 @@ export type ClasseMaxOrderByAggregateInput = {
   professeurPrincipalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  niveauId?: Prisma.SortOrder
+  sectionId?: Prisma.SortOrder
+  optionId?: Prisma.SortOrder
 }
 
 export type ClasseMinOrderByAggregateInput = {
@@ -464,6 +547,9 @@ export type ClasseMinOrderByAggregateInput = {
   professeurPrincipalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  niveauId?: Prisma.SortOrder
+  sectionId?: Prisma.SortOrder
+  optionId?: Prisma.SortOrder
 }
 
 export type ClasseScalarRelationFilter = {
@@ -834,6 +920,164 @@ export type ClasseUpdateOneWithoutEcolagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClasseUpdateToOneWithWhereWithoutEcolagesInput, Prisma.ClasseUpdateWithoutEcolagesInput>, Prisma.ClasseUncheckedUpdateWithoutEcolagesInput>
 }
 
+export type ClasseCreateNestedManyWithoutNiveauInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutNiveauInput, Prisma.ClasseUncheckedCreateWithoutNiveauInput> | Prisma.ClasseCreateWithoutNiveauInput[] | Prisma.ClasseUncheckedCreateWithoutNiveauInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutNiveauInput | Prisma.ClasseCreateOrConnectWithoutNiveauInput[]
+  createMany?: Prisma.ClasseCreateManyNiveauInputEnvelope
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+}
+
+export type ClasseUncheckedCreateNestedManyWithoutNiveauInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutNiveauInput, Prisma.ClasseUncheckedCreateWithoutNiveauInput> | Prisma.ClasseCreateWithoutNiveauInput[] | Prisma.ClasseUncheckedCreateWithoutNiveauInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutNiveauInput | Prisma.ClasseCreateOrConnectWithoutNiveauInput[]
+  createMany?: Prisma.ClasseCreateManyNiveauInputEnvelope
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+}
+
+export type ClasseUpdateManyWithoutNiveauNestedInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutNiveauInput, Prisma.ClasseUncheckedCreateWithoutNiveauInput> | Prisma.ClasseCreateWithoutNiveauInput[] | Prisma.ClasseUncheckedCreateWithoutNiveauInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutNiveauInput | Prisma.ClasseCreateOrConnectWithoutNiveauInput[]
+  upsert?: Prisma.ClasseUpsertWithWhereUniqueWithoutNiveauInput | Prisma.ClasseUpsertWithWhereUniqueWithoutNiveauInput[]
+  createMany?: Prisma.ClasseCreateManyNiveauInputEnvelope
+  set?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  disconnect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  delete?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  update?: Prisma.ClasseUpdateWithWhereUniqueWithoutNiveauInput | Prisma.ClasseUpdateWithWhereUniqueWithoutNiveauInput[]
+  updateMany?: Prisma.ClasseUpdateManyWithWhereWithoutNiveauInput | Prisma.ClasseUpdateManyWithWhereWithoutNiveauInput[]
+  deleteMany?: Prisma.ClasseScalarWhereInput | Prisma.ClasseScalarWhereInput[]
+}
+
+export type ClasseUncheckedUpdateManyWithoutNiveauNestedInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutNiveauInput, Prisma.ClasseUncheckedCreateWithoutNiveauInput> | Prisma.ClasseCreateWithoutNiveauInput[] | Prisma.ClasseUncheckedCreateWithoutNiveauInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutNiveauInput | Prisma.ClasseCreateOrConnectWithoutNiveauInput[]
+  upsert?: Prisma.ClasseUpsertWithWhereUniqueWithoutNiveauInput | Prisma.ClasseUpsertWithWhereUniqueWithoutNiveauInput[]
+  createMany?: Prisma.ClasseCreateManyNiveauInputEnvelope
+  set?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  disconnect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  delete?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  update?: Prisma.ClasseUpdateWithWhereUniqueWithoutNiveauInput | Prisma.ClasseUpdateWithWhereUniqueWithoutNiveauInput[]
+  updateMany?: Prisma.ClasseUpdateManyWithWhereWithoutNiveauInput | Prisma.ClasseUpdateManyWithWhereWithoutNiveauInput[]
+  deleteMany?: Prisma.ClasseScalarWhereInput | Prisma.ClasseScalarWhereInput[]
+}
+
+export type ClasseCreateNestedManyWithoutSectionInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutSectionInput, Prisma.ClasseUncheckedCreateWithoutSectionInput> | Prisma.ClasseCreateWithoutSectionInput[] | Prisma.ClasseUncheckedCreateWithoutSectionInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutSectionInput | Prisma.ClasseCreateOrConnectWithoutSectionInput[]
+  createMany?: Prisma.ClasseCreateManySectionInputEnvelope
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+}
+
+export type ClasseUncheckedCreateNestedManyWithoutSectionInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutSectionInput, Prisma.ClasseUncheckedCreateWithoutSectionInput> | Prisma.ClasseCreateWithoutSectionInput[] | Prisma.ClasseUncheckedCreateWithoutSectionInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutSectionInput | Prisma.ClasseCreateOrConnectWithoutSectionInput[]
+  createMany?: Prisma.ClasseCreateManySectionInputEnvelope
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+}
+
+export type ClasseUpdateManyWithoutSectionNestedInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutSectionInput, Prisma.ClasseUncheckedCreateWithoutSectionInput> | Prisma.ClasseCreateWithoutSectionInput[] | Prisma.ClasseUncheckedCreateWithoutSectionInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutSectionInput | Prisma.ClasseCreateOrConnectWithoutSectionInput[]
+  upsert?: Prisma.ClasseUpsertWithWhereUniqueWithoutSectionInput | Prisma.ClasseUpsertWithWhereUniqueWithoutSectionInput[]
+  createMany?: Prisma.ClasseCreateManySectionInputEnvelope
+  set?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  disconnect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  delete?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  update?: Prisma.ClasseUpdateWithWhereUniqueWithoutSectionInput | Prisma.ClasseUpdateWithWhereUniqueWithoutSectionInput[]
+  updateMany?: Prisma.ClasseUpdateManyWithWhereWithoutSectionInput | Prisma.ClasseUpdateManyWithWhereWithoutSectionInput[]
+  deleteMany?: Prisma.ClasseScalarWhereInput | Prisma.ClasseScalarWhereInput[]
+}
+
+export type ClasseUncheckedUpdateManyWithoutSectionNestedInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutSectionInput, Prisma.ClasseUncheckedCreateWithoutSectionInput> | Prisma.ClasseCreateWithoutSectionInput[] | Prisma.ClasseUncheckedCreateWithoutSectionInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutSectionInput | Prisma.ClasseCreateOrConnectWithoutSectionInput[]
+  upsert?: Prisma.ClasseUpsertWithWhereUniqueWithoutSectionInput | Prisma.ClasseUpsertWithWhereUniqueWithoutSectionInput[]
+  createMany?: Prisma.ClasseCreateManySectionInputEnvelope
+  set?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  disconnect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  delete?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  update?: Prisma.ClasseUpdateWithWhereUniqueWithoutSectionInput | Prisma.ClasseUpdateWithWhereUniqueWithoutSectionInput[]
+  updateMany?: Prisma.ClasseUpdateManyWithWhereWithoutSectionInput | Prisma.ClasseUpdateManyWithWhereWithoutSectionInput[]
+  deleteMany?: Prisma.ClasseScalarWhereInput | Prisma.ClasseScalarWhereInput[]
+}
+
+export type ClasseCreateNestedManyWithoutOptionInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutOptionInput, Prisma.ClasseUncheckedCreateWithoutOptionInput> | Prisma.ClasseCreateWithoutOptionInput[] | Prisma.ClasseUncheckedCreateWithoutOptionInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutOptionInput | Prisma.ClasseCreateOrConnectWithoutOptionInput[]
+  createMany?: Prisma.ClasseCreateManyOptionInputEnvelope
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+}
+
+export type ClasseUncheckedCreateNestedManyWithoutOptionInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutOptionInput, Prisma.ClasseUncheckedCreateWithoutOptionInput> | Prisma.ClasseCreateWithoutOptionInput[] | Prisma.ClasseUncheckedCreateWithoutOptionInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutOptionInput | Prisma.ClasseCreateOrConnectWithoutOptionInput[]
+  createMany?: Prisma.ClasseCreateManyOptionInputEnvelope
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+}
+
+export type ClasseUpdateManyWithoutOptionNestedInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutOptionInput, Prisma.ClasseUncheckedCreateWithoutOptionInput> | Prisma.ClasseCreateWithoutOptionInput[] | Prisma.ClasseUncheckedCreateWithoutOptionInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutOptionInput | Prisma.ClasseCreateOrConnectWithoutOptionInput[]
+  upsert?: Prisma.ClasseUpsertWithWhereUniqueWithoutOptionInput | Prisma.ClasseUpsertWithWhereUniqueWithoutOptionInput[]
+  createMany?: Prisma.ClasseCreateManyOptionInputEnvelope
+  set?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  disconnect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  delete?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  update?: Prisma.ClasseUpdateWithWhereUniqueWithoutOptionInput | Prisma.ClasseUpdateWithWhereUniqueWithoutOptionInput[]
+  updateMany?: Prisma.ClasseUpdateManyWithWhereWithoutOptionInput | Prisma.ClasseUpdateManyWithWhereWithoutOptionInput[]
+  deleteMany?: Prisma.ClasseScalarWhereInput | Prisma.ClasseScalarWhereInput[]
+}
+
+export type ClasseUncheckedUpdateManyWithoutOptionNestedInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutOptionInput, Prisma.ClasseUncheckedCreateWithoutOptionInput> | Prisma.ClasseCreateWithoutOptionInput[] | Prisma.ClasseUncheckedCreateWithoutOptionInput[]
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutOptionInput | Prisma.ClasseCreateOrConnectWithoutOptionInput[]
+  upsert?: Prisma.ClasseUpsertWithWhereUniqueWithoutOptionInput | Prisma.ClasseUpsertWithWhereUniqueWithoutOptionInput[]
+  createMany?: Prisma.ClasseCreateManyOptionInputEnvelope
+  set?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  disconnect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  delete?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  connect?: Prisma.ClasseWhereUniqueInput | Prisma.ClasseWhereUniqueInput[]
+  update?: Prisma.ClasseUpdateWithWhereUniqueWithoutOptionInput | Prisma.ClasseUpdateWithWhereUniqueWithoutOptionInput[]
+  updateMany?: Prisma.ClasseUpdateManyWithWhereWithoutOptionInput | Prisma.ClasseUpdateManyWithWhereWithoutOptionInput[]
+  deleteMany?: Prisma.ClasseScalarWhereInput | Prisma.ClasseScalarWhereInput[]
+}
+
+export type ClasseCreateNestedOneWithoutAffectationAnciennesClassesInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutAffectationAnciennesClassesInput, Prisma.ClasseUncheckedCreateWithoutAffectationAnciennesClassesInput>
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutAffectationAnciennesClassesInput
+  connect?: Prisma.ClasseWhereUniqueInput
+}
+
+export type ClasseCreateNestedOneWithoutAffectationNouvellesClassesInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutAffectationNouvellesClassesInput, Prisma.ClasseUncheckedCreateWithoutAffectationNouvellesClassesInput>
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutAffectationNouvellesClassesInput
+  connect?: Prisma.ClasseWhereUniqueInput
+}
+
+export type ClasseUpdateOneWithoutAffectationAnciennesClassesNestedInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutAffectationAnciennesClassesInput, Prisma.ClasseUncheckedCreateWithoutAffectationAnciennesClassesInput>
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutAffectationAnciennesClassesInput
+  upsert?: Prisma.ClasseUpsertWithoutAffectationAnciennesClassesInput
+  disconnect?: Prisma.ClasseWhereInput | boolean
+  delete?: Prisma.ClasseWhereInput | boolean
+  connect?: Prisma.ClasseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClasseUpdateToOneWithWhereWithoutAffectationAnciennesClassesInput, Prisma.ClasseUpdateWithoutAffectationAnciennesClassesInput>, Prisma.ClasseUncheckedUpdateWithoutAffectationAnciennesClassesInput>
+}
+
+export type ClasseUpdateOneWithoutAffectationNouvellesClassesNestedInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutAffectationNouvellesClassesInput, Prisma.ClasseUncheckedCreateWithoutAffectationNouvellesClassesInput>
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutAffectationNouvellesClassesInput
+  upsert?: Prisma.ClasseUpsertWithoutAffectationNouvellesClassesInput
+  disconnect?: Prisma.ClasseWhereInput | boolean
+  delete?: Prisma.ClasseWhereInput | boolean
+  connect?: Prisma.ClasseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClasseUpdateToOneWithWhereWithoutAffectationNouvellesClassesInput, Prisma.ClasseUpdateWithoutAffectationNouvellesClassesInput>, Prisma.ClasseUncheckedUpdateWithoutAffectationNouvellesClassesInput>
+}
+
 export type ClasseCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -857,6 +1101,11 @@ export type ClasseCreateWithoutSchoolInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutSchoolInput = {
@@ -865,6 +1114,9 @@ export type ClasseUncheckedCreateWithoutSchoolInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -882,6 +1134,8 @@ export type ClasseUncheckedCreateWithoutSchoolInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutSchoolInput = {
@@ -920,6 +1174,9 @@ export type ClasseScalarWhereInput = {
   professeurPrincipalId?: Prisma.StringNullableFilter<"Classe"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Classe"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Classe"> | Date | string
+  niveauId?: Prisma.StringNullableFilter<"Classe"> | string | null
+  sectionId?: Prisma.StringNullableFilter<"Classe"> | string | null
+  optionId?: Prisma.StringNullableFilter<"Classe"> | string | null
 }
 
 export type ClasseCreateWithoutProfsInput = {
@@ -945,6 +1202,11 @@ export type ClasseCreateWithoutProfsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutProfsInput = {
@@ -954,6 +1216,9 @@ export type ClasseUncheckedCreateWithoutProfsInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
@@ -970,6 +1235,8 @@ export type ClasseUncheckedCreateWithoutProfsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutProfsInput = {
@@ -1000,6 +1267,11 @@ export type ClasseCreateWithoutProfesseurPrincipalInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutProfesseurPrincipalInput = {
@@ -1008,6 +1280,9 @@ export type ClasseUncheckedCreateWithoutProfesseurPrincipalInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -1025,6 +1300,8 @@ export type ClasseUncheckedCreateWithoutProfesseurPrincipalInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutProfesseurPrincipalInput = {
@@ -1092,6 +1369,11 @@ export type ClasseCreateWithoutMatieresInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutMatieresInput = {
@@ -1101,6 +1383,9 @@ export type ClasseUncheckedCreateWithoutMatieresInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
@@ -1117,6 +1402,8 @@ export type ClasseUncheckedCreateWithoutMatieresInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutMatieresInput = {
@@ -1158,6 +1445,11 @@ export type ClasseUpdateWithoutMatieresInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutMatieresInput = {
@@ -1167,6 +1459,9 @@ export type ClasseUncheckedUpdateWithoutMatieresInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
@@ -1183,6 +1478,8 @@ export type ClasseUncheckedUpdateWithoutMatieresInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutNotesInput = {
@@ -1208,6 +1505,11 @@ export type ClasseCreateWithoutNotesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutNotesInput = {
@@ -1217,6 +1519,9 @@ export type ClasseUncheckedCreateWithoutNotesInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -1233,6 +1538,8 @@ export type ClasseUncheckedCreateWithoutNotesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutNotesInput = {
@@ -1274,6 +1581,11 @@ export type ClasseUpdateWithoutNotesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutNotesInput = {
@@ -1283,6 +1595,9 @@ export type ClasseUncheckedUpdateWithoutNotesInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -1299,6 +1614,8 @@ export type ClasseUncheckedUpdateWithoutNotesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutDocumentsInput = {
@@ -1324,6 +1641,11 @@ export type ClasseCreateWithoutDocumentsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutDocumentsInput = {
@@ -1333,6 +1655,9 @@ export type ClasseUncheckedCreateWithoutDocumentsInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -1349,6 +1674,8 @@ export type ClasseUncheckedCreateWithoutDocumentsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutDocumentsInput = {
@@ -1390,6 +1717,11 @@ export type ClasseUpdateWithoutDocumentsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutDocumentsInput = {
@@ -1399,6 +1731,9 @@ export type ClasseUncheckedUpdateWithoutDocumentsInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -1415,6 +1750,8 @@ export type ClasseUncheckedUpdateWithoutDocumentsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutCreneauHorairesInput = {
@@ -1440,6 +1777,11 @@ export type ClasseCreateWithoutCreneauHorairesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutCreneauHorairesInput = {
@@ -1449,6 +1791,9 @@ export type ClasseUncheckedCreateWithoutCreneauHorairesInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -1465,6 +1810,8 @@ export type ClasseUncheckedCreateWithoutCreneauHorairesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutCreneauHorairesInput = {
@@ -1506,6 +1853,11 @@ export type ClasseUpdateWithoutCreneauHorairesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutCreneauHorairesInput = {
@@ -1515,6 +1867,9 @@ export type ClasseUncheckedUpdateWithoutCreneauHorairesInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -1531,6 +1886,8 @@ export type ClasseUncheckedUpdateWithoutCreneauHorairesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutAppelsInput = {
@@ -1556,6 +1913,11 @@ export type ClasseCreateWithoutAppelsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutAppelsInput = {
@@ -1565,6 +1927,9 @@ export type ClasseUncheckedCreateWithoutAppelsInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -1581,6 +1946,8 @@ export type ClasseUncheckedCreateWithoutAppelsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutAppelsInput = {
@@ -1622,6 +1989,11 @@ export type ClasseUpdateWithoutAppelsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutAppelsInput = {
@@ -1631,6 +2003,9 @@ export type ClasseUncheckedUpdateWithoutAppelsInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -1647,6 +2022,8 @@ export type ClasseUncheckedUpdateWithoutAppelsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutCahierTextesInput = {
@@ -1672,6 +2049,11 @@ export type ClasseCreateWithoutCahierTextesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutCahierTextesInput = {
@@ -1681,6 +2063,9 @@ export type ClasseUncheckedCreateWithoutCahierTextesInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -1697,6 +2082,8 @@ export type ClasseUncheckedCreateWithoutCahierTextesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutCahierTextesInput = {
@@ -1738,6 +2125,11 @@ export type ClasseUpdateWithoutCahierTextesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutCahierTextesInput = {
@@ -1747,6 +2139,9 @@ export type ClasseUncheckedUpdateWithoutCahierTextesInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -1763,6 +2158,8 @@ export type ClasseUncheckedUpdateWithoutCahierTextesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutQuizzesInput = {
@@ -1788,6 +2185,11 @@ export type ClasseCreateWithoutQuizzesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutQuizzesInput = {
@@ -1797,6 +2199,9 @@ export type ClasseUncheckedCreateWithoutQuizzesInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -1813,6 +2218,8 @@ export type ClasseUncheckedCreateWithoutQuizzesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutQuizzesInput = {
@@ -1854,6 +2261,11 @@ export type ClasseUpdateWithoutQuizzesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutQuizzesInput = {
@@ -1863,6 +2275,9 @@ export type ClasseUncheckedUpdateWithoutQuizzesInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -1879,6 +2294,8 @@ export type ClasseUncheckedUpdateWithoutQuizzesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutDeliberationSessionsInput = {
@@ -1904,6 +2321,11 @@ export type ClasseCreateWithoutDeliberationSessionsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutDeliberationSessionsInput = {
@@ -1913,6 +2335,9 @@ export type ClasseUncheckedCreateWithoutDeliberationSessionsInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -1929,6 +2354,8 @@ export type ClasseUncheckedCreateWithoutDeliberationSessionsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutDeliberationSessionsInput = {
@@ -1970,6 +2397,11 @@ export type ClasseUpdateWithoutDeliberationSessionsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutDeliberationSessionsInput = {
@@ -1979,6 +2411,9 @@ export type ClasseUncheckedUpdateWithoutDeliberationSessionsInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -1995,6 +2430,8 @@ export type ClasseUncheckedUpdateWithoutDeliberationSessionsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutExamenSessionsInput = {
@@ -2020,6 +2457,11 @@ export type ClasseCreateWithoutExamenSessionsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutExamenSessionsInput = {
@@ -2029,6 +2471,9 @@ export type ClasseUncheckedCreateWithoutExamenSessionsInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -2045,6 +2490,8 @@ export type ClasseUncheckedCreateWithoutExamenSessionsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutExamenSessionsInput = {
@@ -2086,6 +2533,11 @@ export type ClasseUpdateWithoutExamenSessionsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutExamenSessionsInput = {
@@ -2095,6 +2547,9 @@ export type ClasseUncheckedUpdateWithoutExamenSessionsInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -2111,6 +2566,8 @@ export type ClasseUncheckedUpdateWithoutExamenSessionsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutChapitresInput = {
@@ -2136,6 +2593,11 @@ export type ClasseCreateWithoutChapitresInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutChapitresInput = {
@@ -2145,6 +2607,9 @@ export type ClasseUncheckedCreateWithoutChapitresInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -2161,6 +2626,8 @@ export type ClasseUncheckedCreateWithoutChapitresInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutChapitresInput = {
@@ -2202,6 +2669,11 @@ export type ClasseUpdateWithoutChapitresInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutChapitresInput = {
@@ -2211,6 +2683,9 @@ export type ClasseUncheckedUpdateWithoutChapitresInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -2227,6 +2702,8 @@ export type ClasseUncheckedUpdateWithoutChapitresInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutSallesInput = {
@@ -2252,6 +2729,11 @@ export type ClasseCreateWithoutSallesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutSallesInput = {
@@ -2261,6 +2743,9 @@ export type ClasseUncheckedCreateWithoutSallesInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -2277,6 +2762,8 @@ export type ClasseUncheckedCreateWithoutSallesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutSallesInput = {
@@ -2318,6 +2805,11 @@ export type ClasseUpdateWithoutSallesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutSallesInput = {
@@ -2327,6 +2819,9 @@ export type ClasseUncheckedUpdateWithoutSallesInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -2343,6 +2838,8 @@ export type ClasseUncheckedUpdateWithoutSallesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutSortieScolairesInput = {
@@ -2368,6 +2865,11 @@ export type ClasseCreateWithoutSortieScolairesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutSortieScolairesInput = {
@@ -2377,6 +2879,9 @@ export type ClasseUncheckedCreateWithoutSortieScolairesInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -2393,6 +2898,8 @@ export type ClasseUncheckedCreateWithoutSortieScolairesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutSortieScolairesInput = {
@@ -2434,6 +2941,11 @@ export type ClasseUpdateWithoutSortieScolairesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutSortieScolairesInput = {
@@ -2443,6 +2955,9 @@ export type ClasseUncheckedUpdateWithoutSortieScolairesInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -2459,6 +2974,8 @@ export type ClasseUncheckedUpdateWithoutSortieScolairesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutElevesInput = {
@@ -2484,6 +3001,11 @@ export type ClasseCreateWithoutElevesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutElevesInput = {
@@ -2493,6 +3015,9 @@ export type ClasseUncheckedCreateWithoutElevesInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
@@ -2509,6 +3034,8 @@ export type ClasseUncheckedCreateWithoutElevesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutElevesInput = {
@@ -2550,6 +3077,11 @@ export type ClasseUpdateWithoutElevesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutElevesInput = {
@@ -2559,6 +3091,9 @@ export type ClasseUncheckedUpdateWithoutElevesInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
@@ -2575,6 +3110,8 @@ export type ClasseUncheckedUpdateWithoutElevesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutHistoriqueClassesInput = {
@@ -2600,6 +3137,11 @@ export type ClasseCreateWithoutHistoriqueClassesInput = {
   sortieScolaires?: Prisma.SortieScolaireCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutHistoriqueClassesInput = {
@@ -2609,6 +3151,9 @@ export type ClasseUncheckedCreateWithoutHistoriqueClassesInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -2625,6 +3170,8 @@ export type ClasseUncheckedCreateWithoutHistoriqueClassesInput = {
   sortieScolaires?: Prisma.SortieScolaireUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutHistoriqueClassesInput = {
@@ -2666,6 +3213,11 @@ export type ClasseUpdateWithoutHistoriqueClassesInput = {
   sortieScolaires?: Prisma.SortieScolaireUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutHistoriqueClassesInput = {
@@ -2675,6 +3227,9 @@ export type ClasseUncheckedUpdateWithoutHistoriqueClassesInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -2691,6 +3246,8 @@ export type ClasseUncheckedUpdateWithoutHistoriqueClassesInput = {
   sortieScolaires?: Prisma.SortieScolaireUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutDroitInscriptionsInput = {
@@ -2716,6 +3273,11 @@ export type ClasseCreateWithoutDroitInscriptionsInput = {
   sortieScolaires?: Prisma.SortieScolaireCreateNestedManyWithoutClasseInput
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutDroitInscriptionsInput = {
@@ -2725,6 +3287,9 @@ export type ClasseUncheckedCreateWithoutDroitInscriptionsInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -2741,6 +3306,8 @@ export type ClasseUncheckedCreateWithoutDroitInscriptionsInput = {
   sortieScolaires?: Prisma.SortieScolaireUncheckedCreateNestedManyWithoutClasseInput
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutDroitInscriptionsInput = {
@@ -2782,6 +3349,11 @@ export type ClasseUpdateWithoutDroitInscriptionsInput = {
   sortieScolaires?: Prisma.SortieScolaireUpdateManyWithoutClasseNestedInput
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutDroitInscriptionsInput = {
@@ -2791,6 +3363,9 @@ export type ClasseUncheckedUpdateWithoutDroitInscriptionsInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -2807,6 +3382,8 @@ export type ClasseUncheckedUpdateWithoutDroitInscriptionsInput = {
   sortieScolaires?: Prisma.SortieScolaireUncheckedUpdateManyWithoutClasseNestedInput
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateWithoutEcolagesInput = {
@@ -2832,6 +3409,11 @@ export type ClasseCreateWithoutEcolagesInput = {
   sortieScolaires?: Prisma.SortieScolaireCreateNestedManyWithoutClasseInput
   historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutEcolagesInput = {
@@ -2841,6 +3423,9 @@ export type ClasseUncheckedCreateWithoutEcolagesInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
   profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
   matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
@@ -2857,6 +3442,8 @@ export type ClasseUncheckedCreateWithoutEcolagesInput = {
   sortieScolaires?: Prisma.SortieScolaireUncheckedCreateNestedManyWithoutClasseInput
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutEcolagesInput = {
@@ -2898,6 +3485,11 @@ export type ClasseUpdateWithoutEcolagesInput = {
   sortieScolaires?: Prisma.SortieScolaireUpdateManyWithoutClasseNestedInput
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutEcolagesInput = {
@@ -2907,6 +3499,9 @@ export type ClasseUncheckedUpdateWithoutEcolagesInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -2923,6 +3518,538 @@ export type ClasseUncheckedUpdateWithoutEcolagesInput = {
   sortieScolaires?: Prisma.SortieScolaireUncheckedUpdateManyWithoutClasseNestedInput
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
+}
+
+export type ClasseCreateWithoutNiveauInput = {
+  id?: string
+  nom: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutClassesInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
+  professeurPrincipal?: Prisma.ProfesseurCreateNestedOneWithoutClassesPrincipalesDesInput
+  notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
+}
+
+export type ClasseUncheckedCreateWithoutNiveauInput = {
+  id?: string
+  nom: string
+  schoolId: string
+  professeurPrincipalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sectionId?: string | null
+  optionId?: string | null
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
+}
+
+export type ClasseCreateOrConnectWithoutNiveauInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutNiveauInput, Prisma.ClasseUncheckedCreateWithoutNiveauInput>
+}
+
+export type ClasseCreateManyNiveauInputEnvelope = {
+  data: Prisma.ClasseCreateManyNiveauInput | Prisma.ClasseCreateManyNiveauInput[]
+  skipDuplicates?: boolean
+}
+
+export type ClasseUpsertWithWhereUniqueWithoutNiveauInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  update: Prisma.XOR<Prisma.ClasseUpdateWithoutNiveauInput, Prisma.ClasseUncheckedUpdateWithoutNiveauInput>
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutNiveauInput, Prisma.ClasseUncheckedCreateWithoutNiveauInput>
+}
+
+export type ClasseUpdateWithWhereUniqueWithoutNiveauInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  data: Prisma.XOR<Prisma.ClasseUpdateWithoutNiveauInput, Prisma.ClasseUncheckedUpdateWithoutNiveauInput>
+}
+
+export type ClasseUpdateManyWithWhereWithoutNiveauInput = {
+  where: Prisma.ClasseScalarWhereInput
+  data: Prisma.XOR<Prisma.ClasseUpdateManyMutationInput, Prisma.ClasseUncheckedUpdateManyWithoutNiveauInput>
+}
+
+export type ClasseCreateWithoutSectionInput = {
+  id?: string
+  nom: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutClassesInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
+  professeurPrincipal?: Prisma.ProfesseurCreateNestedOneWithoutClassesPrincipalesDesInput
+  notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
+}
+
+export type ClasseUncheckedCreateWithoutSectionInput = {
+  id?: string
+  nom: string
+  schoolId: string
+  professeurPrincipalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  niveauId?: string | null
+  optionId?: string | null
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
+}
+
+export type ClasseCreateOrConnectWithoutSectionInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutSectionInput, Prisma.ClasseUncheckedCreateWithoutSectionInput>
+}
+
+export type ClasseCreateManySectionInputEnvelope = {
+  data: Prisma.ClasseCreateManySectionInput | Prisma.ClasseCreateManySectionInput[]
+  skipDuplicates?: boolean
+}
+
+export type ClasseUpsertWithWhereUniqueWithoutSectionInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  update: Prisma.XOR<Prisma.ClasseUpdateWithoutSectionInput, Prisma.ClasseUncheckedUpdateWithoutSectionInput>
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutSectionInput, Prisma.ClasseUncheckedCreateWithoutSectionInput>
+}
+
+export type ClasseUpdateWithWhereUniqueWithoutSectionInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  data: Prisma.XOR<Prisma.ClasseUpdateWithoutSectionInput, Prisma.ClasseUncheckedUpdateWithoutSectionInput>
+}
+
+export type ClasseUpdateManyWithWhereWithoutSectionInput = {
+  where: Prisma.ClasseScalarWhereInput
+  data: Prisma.XOR<Prisma.ClasseUpdateManyMutationInput, Prisma.ClasseUncheckedUpdateManyWithoutSectionInput>
+}
+
+export type ClasseCreateWithoutOptionInput = {
+  id?: string
+  nom: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutClassesInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
+  professeurPrincipal?: Prisma.ProfesseurCreateNestedOneWithoutClassesPrincipalesDesInput
+  notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
+}
+
+export type ClasseUncheckedCreateWithoutOptionInput = {
+  id?: string
+  nom: string
+  schoolId: string
+  professeurPrincipalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
+}
+
+export type ClasseCreateOrConnectWithoutOptionInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutOptionInput, Prisma.ClasseUncheckedCreateWithoutOptionInput>
+}
+
+export type ClasseCreateManyOptionInputEnvelope = {
+  data: Prisma.ClasseCreateManyOptionInput | Prisma.ClasseCreateManyOptionInput[]
+  skipDuplicates?: boolean
+}
+
+export type ClasseUpsertWithWhereUniqueWithoutOptionInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  update: Prisma.XOR<Prisma.ClasseUpdateWithoutOptionInput, Prisma.ClasseUncheckedUpdateWithoutOptionInput>
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutOptionInput, Prisma.ClasseUncheckedCreateWithoutOptionInput>
+}
+
+export type ClasseUpdateWithWhereUniqueWithoutOptionInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  data: Prisma.XOR<Prisma.ClasseUpdateWithoutOptionInput, Prisma.ClasseUncheckedUpdateWithoutOptionInput>
+}
+
+export type ClasseUpdateManyWithWhereWithoutOptionInput = {
+  where: Prisma.ClasseScalarWhereInput
+  data: Prisma.XOR<Prisma.ClasseUpdateManyMutationInput, Prisma.ClasseUncheckedUpdateManyWithoutOptionInput>
+}
+
+export type ClasseCreateWithoutAffectationAnciennesClassesInput = {
+  id?: string
+  nom: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutClassesInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
+  professeurPrincipal?: Prisma.ProfesseurCreateNestedOneWithoutClassesPrincipalesDesInput
+  notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+}
+
+export type ClasseUncheckedCreateWithoutAffectationAnciennesClassesInput = {
+  id?: string
+  nom: string
+  schoolId: string
+  professeurPrincipalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+}
+
+export type ClasseCreateOrConnectWithoutAffectationAnciennesClassesInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutAffectationAnciennesClassesInput, Prisma.ClasseUncheckedCreateWithoutAffectationAnciennesClassesInput>
+}
+
+export type ClasseCreateWithoutAffectationNouvellesClassesInput = {
+  id?: string
+  nom: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutClassesInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
+  professeurPrincipal?: Prisma.ProfesseurCreateNestedOneWithoutClassesPrincipalesDesInput
+  notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
+}
+
+export type ClasseUncheckedCreateWithoutAffectationNouvellesClassesInput = {
+  id?: string
+  nom: string
+  schoolId: string
+  professeurPrincipalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
+}
+
+export type ClasseCreateOrConnectWithoutAffectationNouvellesClassesInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutAffectationNouvellesClassesInput, Prisma.ClasseUncheckedCreateWithoutAffectationNouvellesClassesInput>
+}
+
+export type ClasseUpsertWithoutAffectationAnciennesClassesInput = {
+  update: Prisma.XOR<Prisma.ClasseUpdateWithoutAffectationAnciennesClassesInput, Prisma.ClasseUncheckedUpdateWithoutAffectationAnciennesClassesInput>
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutAffectationAnciennesClassesInput, Prisma.ClasseUncheckedCreateWithoutAffectationAnciennesClassesInput>
+  where?: Prisma.ClasseWhereInput
+}
+
+export type ClasseUpdateToOneWithWhereWithoutAffectationAnciennesClassesInput = {
+  where?: Prisma.ClasseWhereInput
+  data: Prisma.XOR<Prisma.ClasseUpdateWithoutAffectationAnciennesClassesInput, Prisma.ClasseUncheckedUpdateWithoutAffectationAnciennesClassesInput>
+}
+
+export type ClasseUpdateWithoutAffectationAnciennesClassesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutClassesNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
+  professeurPrincipal?: Prisma.ProfesseurUpdateOneWithoutClassesPrincipalesDesNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+}
+
+export type ClasseUncheckedUpdateWithoutAffectationAnciennesClassesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+}
+
+export type ClasseUpsertWithoutAffectationNouvellesClassesInput = {
+  update: Prisma.XOR<Prisma.ClasseUpdateWithoutAffectationNouvellesClassesInput, Prisma.ClasseUncheckedUpdateWithoutAffectationNouvellesClassesInput>
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutAffectationNouvellesClassesInput, Prisma.ClasseUncheckedCreateWithoutAffectationNouvellesClassesInput>
+  where?: Prisma.ClasseWhereInput
+}
+
+export type ClasseUpdateToOneWithWhereWithoutAffectationNouvellesClassesInput = {
+  where?: Prisma.ClasseWhereInput
+  data: Prisma.XOR<Prisma.ClasseUpdateWithoutAffectationNouvellesClassesInput, Prisma.ClasseUncheckedUpdateWithoutAffectationNouvellesClassesInput>
+}
+
+export type ClasseUpdateWithoutAffectationNouvellesClassesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutClassesNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
+  professeurPrincipal?: Prisma.ProfesseurUpdateOneWithoutClassesPrincipalesDesNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
+}
+
+export type ClasseUncheckedUpdateWithoutAffectationNouvellesClassesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseCreateManySchoolInput = {
@@ -2931,6 +4058,9 @@ export type ClasseCreateManySchoolInput = {
   professeurPrincipalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
 }
 
 export type ClasseUpdateWithoutSchoolInput = {
@@ -2956,6 +4086,11 @@ export type ClasseUpdateWithoutSchoolInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutSchoolInput = {
@@ -2964,6 +4099,9 @@ export type ClasseUncheckedUpdateWithoutSchoolInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -2981,6 +4119,8 @@ export type ClasseUncheckedUpdateWithoutSchoolInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutSchoolInput = {
@@ -2989,6 +4129,9 @@ export type ClasseUncheckedUpdateManyWithoutSchoolInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ClasseCreateManyProfesseurPrincipalInput = {
@@ -2997,6 +4140,9 @@ export type ClasseCreateManyProfesseurPrincipalInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
 }
 
 export type ClasseUpdateWithoutProfsInput = {
@@ -3022,6 +4168,11 @@ export type ClasseUpdateWithoutProfsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutProfsInput = {
@@ -3031,6 +4182,9 @@ export type ClasseUncheckedUpdateWithoutProfsInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
@@ -3047,6 +4201,8 @@ export type ClasseUncheckedUpdateWithoutProfsInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutProfsInput = {
@@ -3056,6 +4212,9 @@ export type ClasseUncheckedUpdateManyWithoutProfsInput = {
   professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ClasseUpdateWithoutProfesseurPrincipalInput = {
@@ -3081,6 +4240,11 @@ export type ClasseUpdateWithoutProfesseurPrincipalInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutProfesseurPrincipalInput = {
@@ -3089,6 +4253,9 @@ export type ClasseUncheckedUpdateWithoutProfesseurPrincipalInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
   profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
   matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
@@ -3106,6 +4273,8 @@ export type ClasseUncheckedUpdateWithoutProfesseurPrincipalInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutProfesseurPrincipalInput = {
@@ -3114,6 +4283,255 @@ export type ClasseUncheckedUpdateManyWithoutProfesseurPrincipalInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type ClasseCreateManyNiveauInput = {
+  id?: string
+  nom: string
+  schoolId: string
+  professeurPrincipalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sectionId?: string | null
+  optionId?: string | null
+}
+
+export type ClasseUpdateWithoutNiveauInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutClassesNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
+  professeurPrincipal?: Prisma.ProfesseurUpdateOneWithoutClassesPrincipalesDesNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
+}
+
+export type ClasseUncheckedUpdateWithoutNiveauInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
+}
+
+export type ClasseUncheckedUpdateManyWithoutNiveauInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type ClasseCreateManySectionInput = {
+  id?: string
+  nom: string
+  schoolId: string
+  professeurPrincipalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  niveauId?: string | null
+  optionId?: string | null
+}
+
+export type ClasseUpdateWithoutSectionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutClassesNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
+  professeurPrincipal?: Prisma.ProfesseurUpdateOneWithoutClassesPrincipalesDesNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
+}
+
+export type ClasseUncheckedUpdateWithoutSectionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
+}
+
+export type ClasseUncheckedUpdateManyWithoutSectionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type ClasseCreateManyOptionInput = {
+  id?: string
+  nom: string
+  schoolId: string
+  professeurPrincipalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+}
+
+export type ClasseUpdateWithoutOptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutClassesNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
+  professeurPrincipal?: Prisma.ProfesseurUpdateOneWithoutClassesPrincipalesDesNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
+}
+
+export type ClasseUncheckedUpdateWithoutOptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
+}
+
+export type ClasseUncheckedUpdateManyWithoutOptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -3139,6 +4557,8 @@ export type ClasseCountOutputType = {
   historiqueClasses: number
   droitInscriptions: number
   ecolages: number
+  affectationNouvellesClasses: number
+  affectationAnciennesClasses: number
 }
 
 export type ClasseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3159,6 +4579,8 @@ export type ClasseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   historiqueClasses?: boolean | ClasseCountOutputTypeCountHistoriqueClassesArgs
   droitInscriptions?: boolean | ClasseCountOutputTypeCountDroitInscriptionsArgs
   ecolages?: boolean | ClasseCountOutputTypeCountEcolagesArgs
+  affectationNouvellesClasses?: boolean | ClasseCountOutputTypeCountAffectationNouvellesClassesArgs
+  affectationAnciennesClasses?: boolean | ClasseCountOutputTypeCountAffectationAnciennesClassesArgs
 }
 
 /**
@@ -3290,6 +4712,20 @@ export type ClasseCountOutputTypeCountEcolagesArgs<ExtArgs extends runtime.Types
   where?: Prisma.EcolageWhereInput
 }
 
+/**
+ * ClasseCountOutputType without action
+ */
+export type ClasseCountOutputTypeCountAffectationNouvellesClassesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AffectationClasseWhereInput
+}
+
+/**
+ * ClasseCountOutputType without action
+ */
+export type ClasseCountOutputTypeCountAffectationAnciennesClassesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AffectationClasseWhereInput
+}
+
 
 export type ClasseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3298,6 +4734,9 @@ export type ClasseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   professeurPrincipalId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  niveauId?: boolean
+  sectionId?: boolean
+  optionId?: boolean
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   eleves?: boolean | Prisma.Classe$elevesArgs<ExtArgs>
   profs?: boolean | Prisma.Classe$profsArgs<ExtArgs>
@@ -3317,6 +4756,11 @@ export type ClasseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   historiqueClasses?: boolean | Prisma.Classe$historiqueClassesArgs<ExtArgs>
   droitInscriptions?: boolean | Prisma.Classe$droitInscriptionsArgs<ExtArgs>
   ecolages?: boolean | Prisma.Classe$ecolagesArgs<ExtArgs>
+  niveau?: boolean | Prisma.Classe$niveauArgs<ExtArgs>
+  section?: boolean | Prisma.Classe$sectionArgs<ExtArgs>
+  option?: boolean | Prisma.Classe$optionArgs<ExtArgs>
+  affectationNouvellesClasses?: boolean | Prisma.Classe$affectationNouvellesClassesArgs<ExtArgs>
+  affectationAnciennesClasses?: boolean | Prisma.Classe$affectationAnciennesClassesArgs<ExtArgs>
   _count?: boolean | Prisma.ClasseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["classe"]>
 
@@ -3327,8 +4771,14 @@ export type ClasseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   professeurPrincipalId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  niveauId?: boolean
+  sectionId?: boolean
+  optionId?: boolean
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   professeurPrincipal?: boolean | Prisma.Classe$professeurPrincipalArgs<ExtArgs>
+  niveau?: boolean | Prisma.Classe$niveauArgs<ExtArgs>
+  section?: boolean | Prisma.Classe$sectionArgs<ExtArgs>
+  option?: boolean | Prisma.Classe$optionArgs<ExtArgs>
 }, ExtArgs["result"]["classe"]>
 
 export type ClasseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -3338,8 +4788,14 @@ export type ClasseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   professeurPrincipalId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  niveauId?: boolean
+  sectionId?: boolean
+  optionId?: boolean
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   professeurPrincipal?: boolean | Prisma.Classe$professeurPrincipalArgs<ExtArgs>
+  niveau?: boolean | Prisma.Classe$niveauArgs<ExtArgs>
+  section?: boolean | Prisma.Classe$sectionArgs<ExtArgs>
+  option?: boolean | Prisma.Classe$optionArgs<ExtArgs>
 }, ExtArgs["result"]["classe"]>
 
 export type ClasseSelectScalar = {
@@ -3349,9 +4805,12 @@ export type ClasseSelectScalar = {
   professeurPrincipalId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  niveauId?: boolean
+  sectionId?: boolean
+  optionId?: boolean
 }
 
-export type ClasseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nom" | "schoolId" | "professeurPrincipalId" | "createdAt" | "updatedAt", ExtArgs["result"]["classe"]>
+export type ClasseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nom" | "schoolId" | "professeurPrincipalId" | "createdAt" | "updatedAt" | "niveauId" | "sectionId" | "optionId", ExtArgs["result"]["classe"]>
 export type ClasseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   eleves?: boolean | Prisma.Classe$elevesArgs<ExtArgs>
@@ -3372,15 +4831,26 @@ export type ClasseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   historiqueClasses?: boolean | Prisma.Classe$historiqueClassesArgs<ExtArgs>
   droitInscriptions?: boolean | Prisma.Classe$droitInscriptionsArgs<ExtArgs>
   ecolages?: boolean | Prisma.Classe$ecolagesArgs<ExtArgs>
+  niveau?: boolean | Prisma.Classe$niveauArgs<ExtArgs>
+  section?: boolean | Prisma.Classe$sectionArgs<ExtArgs>
+  option?: boolean | Prisma.Classe$optionArgs<ExtArgs>
+  affectationNouvellesClasses?: boolean | Prisma.Classe$affectationNouvellesClassesArgs<ExtArgs>
+  affectationAnciennesClasses?: boolean | Prisma.Classe$affectationAnciennesClassesArgs<ExtArgs>
   _count?: boolean | Prisma.ClasseCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClasseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   professeurPrincipal?: boolean | Prisma.Classe$professeurPrincipalArgs<ExtArgs>
+  niveau?: boolean | Prisma.Classe$niveauArgs<ExtArgs>
+  section?: boolean | Prisma.Classe$sectionArgs<ExtArgs>
+  option?: boolean | Prisma.Classe$optionArgs<ExtArgs>
 }
 export type ClasseIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   professeurPrincipal?: boolean | Prisma.Classe$professeurPrincipalArgs<ExtArgs>
+  niveau?: boolean | Prisma.Classe$niveauArgs<ExtArgs>
+  section?: boolean | Prisma.Classe$sectionArgs<ExtArgs>
+  option?: boolean | Prisma.Classe$optionArgs<ExtArgs>
 }
 
 export type $ClassePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3405,6 +4875,11 @@ export type $ClassePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     historiqueClasses: Prisma.$HistoriqueClassePayload<ExtArgs>[]
     droitInscriptions: Prisma.$DroitInscriptionPayload<ExtArgs>[]
     ecolages: Prisma.$EcolagePayload<ExtArgs>[]
+    niveau: Prisma.$NiveauPayload<ExtArgs> | null
+    section: Prisma.$SectionPayload<ExtArgs> | null
+    option: Prisma.$OptionPayload<ExtArgs> | null
+    affectationNouvellesClasses: Prisma.$AffectationClassePayload<ExtArgs>[]
+    affectationAnciennesClasses: Prisma.$AffectationClassePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3413,6 +4888,9 @@ export type $ClassePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     professeurPrincipalId: string | null
     createdAt: Date
     updatedAt: Date
+    niveauId: string | null
+    sectionId: string | null
+    optionId: string | null
   }, ExtArgs["result"]["classe"]>
   composites: {}
 }
@@ -3826,6 +5304,11 @@ export interface Prisma__ClasseClient<T, Null = never, ExtArgs extends runtime.T
   historiqueClasses<T extends Prisma.Classe$historiqueClassesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$historiqueClassesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HistoriqueClassePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   droitInscriptions<T extends Prisma.Classe$droitInscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$droitInscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DroitInscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ecolages<T extends Prisma.Classe$ecolagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$ecolagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EcolagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  niveau<T extends Prisma.Classe$niveauArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$niveauArgs<ExtArgs>>): Prisma.Prisma__NiveauClient<runtime.Types.Result.GetResult<Prisma.$NiveauPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  section<T extends Prisma.Classe$sectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$sectionArgs<ExtArgs>>): Prisma.Prisma__SectionClient<runtime.Types.Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  option<T extends Prisma.Classe$optionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$optionArgs<ExtArgs>>): Prisma.Prisma__OptionClient<runtime.Types.Result.GetResult<Prisma.$OptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  affectationNouvellesClasses<T extends Prisma.Classe$affectationNouvellesClassesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$affectationNouvellesClassesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AffectationClassePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  affectationAnciennesClasses<T extends Prisma.Classe$affectationAnciennesClassesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$affectationAnciennesClassesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AffectationClassePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3861,6 +5344,9 @@ export interface ClasseFieldRefs {
   readonly professeurPrincipalId: Prisma.FieldRef<"Classe", 'String'>
   readonly createdAt: Prisma.FieldRef<"Classe", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Classe", 'DateTime'>
+  readonly niveauId: Prisma.FieldRef<"Classe", 'String'>
+  readonly sectionId: Prisma.FieldRef<"Classe", 'String'>
+  readonly optionId: Prisma.FieldRef<"Classe", 'String'>
 }
     
 
@@ -4686,6 +6172,111 @@ export type Classe$ecolagesArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.EcolageScalarFieldEnum | Prisma.EcolageScalarFieldEnum[]
+}
+
+/**
+ * Classe.niveau
+ */
+export type Classe$niveauArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Niveau
+   */
+  select?: Prisma.NiveauSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Niveau
+   */
+  omit?: Prisma.NiveauOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NiveauInclude<ExtArgs> | null
+  where?: Prisma.NiveauWhereInput
+}
+
+/**
+ * Classe.section
+ */
+export type Classe$sectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Section
+   */
+  select?: Prisma.SectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Section
+   */
+  omit?: Prisma.SectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SectionInclude<ExtArgs> | null
+  where?: Prisma.SectionWhereInput
+}
+
+/**
+ * Classe.option
+ */
+export type Classe$optionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Option
+   */
+  select?: Prisma.OptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Option
+   */
+  omit?: Prisma.OptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OptionInclude<ExtArgs> | null
+  where?: Prisma.OptionWhereInput
+}
+
+/**
+ * Classe.affectationNouvellesClasses
+ */
+export type Classe$affectationNouvellesClassesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AffectationClasse
+   */
+  select?: Prisma.AffectationClasseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AffectationClasse
+   */
+  omit?: Prisma.AffectationClasseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AffectationClasseInclude<ExtArgs> | null
+  where?: Prisma.AffectationClasseWhereInput
+  orderBy?: Prisma.AffectationClasseOrderByWithRelationInput | Prisma.AffectationClasseOrderByWithRelationInput[]
+  cursor?: Prisma.AffectationClasseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AffectationClasseScalarFieldEnum | Prisma.AffectationClasseScalarFieldEnum[]
+}
+
+/**
+ * Classe.affectationAnciennesClasses
+ */
+export type Classe$affectationAnciennesClassesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AffectationClasse
+   */
+  select?: Prisma.AffectationClasseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AffectationClasse
+   */
+  omit?: Prisma.AffectationClasseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AffectationClasseInclude<ExtArgs> | null
+  where?: Prisma.AffectationClasseWhereInput
+  orderBy?: Prisma.AffectationClasseOrderByWithRelationInput | Prisma.AffectationClasseOrderByWithRelationInput[]
+  cursor?: Prisma.AffectationClasseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AffectationClasseScalarFieldEnum | Prisma.AffectationClasseScalarFieldEnum[]
 }
 
 /**

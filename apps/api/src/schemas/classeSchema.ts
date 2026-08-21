@@ -9,6 +9,9 @@ export const createClasseSchema = z.object({
     .min(2, "Le nom de la classe doit contenir au moins 2 caractères")
     .max(50, "Le nom de la classe ne peut pas dépasser 50 caractères"),
   schoolId: z.string().optional(), // schoolId est optionnel car il sera déduit du token JWT
+  niveauId: z.string().uuid("Un niveau valide est requis"),
+  sectionId: z.string().uuid().optional().nullable(),
+  optionId: z.string().uuid().optional().nullable(),
 });
 
 export const updateClasseSchema = z.object({
@@ -18,6 +21,9 @@ export const updateClasseSchema = z.object({
     .min(2, "Le nom de la classe doit contenir au moins 2 caractères")
     .max(50, "Le nom de la classe ne peut pas dépasser 50 caractères")
     .optional(),
+  niveauId: z.string().uuid().optional().nullable(),
+  sectionId: z.string().uuid().optional().nullable(),
+  optionId: z.string().uuid().optional().nullable(),
 });
 
 export type CreateClasseInput = z.infer<typeof createClasseSchema>;

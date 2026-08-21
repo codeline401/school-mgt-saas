@@ -21,6 +21,60 @@ function isAuthorizhedForSchool(
   return userSchoolId === ressourceSchoolId;
 }
 
+/**
+ * Vérifie que le niveau, la section et l'option fournis (le cas échéant) existent bien
+ * et appartiennent à la même école que la classe, pour éviter tout rattachement inter-écoles.
+ */
+async function validateClasseStructure(
+  schoolId: string,
+  data: {
+    niveauId?: string | null;
+    sectionId?: string | null;
+    optionId?: string | null;
+  },
+): Promise<string | null> {
+  if (data.niveauId) {
+    const niveau = await prisma.niveau.findUnique({
+      where: { id: data.niveauId },
+      select: { schoolId: true },
+    });
+    if (!niveau || niveau.schoolId !== schoolId) {
+      return "Niveau invalide ou n'appartenant pas à cette école.";
+    }
+  }
+
+  if (data.sectionId) {
+    const section = await prisma.section.findUnique({
+      where: { id: data.sectionId },
+      select: { schoolId: true, niveauId: true },
+    });
+    if (!section || section.schoolId !== schoolId) {
+      return "Section invalide ou n'appartenant pas à cette école.";
+    }
+    if (data.niveauId && section.niveauId !== data.niveauId) {
+      return "La section spécifiée n'appartient pas au niveau spécifié.";
+    }
+  }
+
+  if (data.optionId) {
+    const option = await prisma.option.findUnique({
+      where: { id: data.optionId },
+      select: { schoolId: true },
+    });
+    if (!option || option.schoolId !== schoolId) {
+      return "Option invalide ou n'appartenant pas à cette école.";
+    }
+  }
+
+  return null;
+}
+
+const CLASSE_STRUCTURE_INCLUDE = {
+  niveau: true,
+  section: true,
+  option: true,
+} as const;
+
 // GET /api/classes — liste les classes de l'école de l'utilisateur connecté
 // SUDO_ADMIN peut filtrer via ?schoolId=<id>
 
@@ -80,6 +134,7 @@ export const getAllClasses = async (req: Request, res: Response) => {
             profs: true,
           },
         },
+        ...CLASSE_STRUCTURE_INCLUDE,
       },
       orderBy: { nom: "asc" },
     });
@@ -125,11 +180,23 @@ export const createClasse = async (req: Request, res: Response) => {
       }
     }
 
-    // 2. Création de la classe avec le schoolId retenu
+    // 2. Validation de la structure pédagogique (niveau / section / option)
+    const structureError = await validateClasseStructure(
+      schoolId,
+      validatedData,
+    );
+    if (structureError) {
+      return res.status(400).json({ error: structureError });
+    }
+
+    // 3. Création de la classe avec le schoolId retenu
     const newClasse = await prisma.classe.create({
       data: {
         nom: validatedData.nom,
         schoolId: schoolId, // Assignation dynamique
+        niveauId: validatedData.niveauId ?? null,
+        sectionId: validatedData.sectionId ?? null,
+        optionId: validatedData.optionId ?? null,
       },
       include: {
         _count: {
@@ -138,6 +205,7 @@ export const createClasse = async (req: Request, res: Response) => {
             profs: true,
           },
         },
+        ...CLASSE_STRUCTURE_INCLUDE,
       },
     });
 
@@ -166,6 +234,7 @@ export const getClasseById = async (req: Request, res: Response) => {
       include: {
         profs: true, // Inclure les professeurs de la classe
         _count: { select: { eleves: true, profs: true } },
+        ...CLASSE_STRUCTURE_INCLUDE,
       },
     });
 
@@ -215,13 +284,48 @@ export const updateClasse = async (req: Request, res: Response) => {
       return res.status(403).json({ error: "Accès refusé à cette classe" });
     }
 
+    const effectiveStructure = {
+      niveauId:
+        validatedData.niveauId === undefined
+          ? existingClasse.niveauId
+          : validatedData.niveauId,
+      sectionId:
+        validatedData.sectionId === undefined
+          ? existingClasse.sectionId
+          : validatedData.sectionId,
+      optionId:
+        validatedData.optionId === undefined
+          ? existingClasse.optionId
+          : validatedData.optionId,
+    };
+
+    const structureError = await validateClasseStructure(
+      existingClasse.schoolId,
+      effectiveStructure,
+    );
+    if (structureError) {
+      return res.status(400).json({ error: structureError });
+    }
+
     const updatedClasse = await prisma.classe.update({
       where: { id },
       // Construire le payload en excluant les champs undefined (exactOptionalPropertyTypes)
       data: {
         ...(validatedData.nom !== undefined ? { nom: validatedData.nom } : {}),
+        ...(validatedData.niveauId !== undefined
+          ? { niveauId: validatedData.niveauId }
+          : {}),
+        ...(validatedData.sectionId !== undefined
+          ? { sectionId: validatedData.sectionId }
+          : {}),
+        ...(validatedData.optionId !== undefined
+          ? { optionId: validatedData.optionId }
+          : {}),
       },
-      include: { _count: { select: { eleves: true, profs: true } } },
+      include: {
+        _count: { select: { eleves: true, profs: true } },
+        ...CLASSE_STRUCTURE_INCLUDE,
+      },
     });
 
     res.status(200).json(updatedClasse);
