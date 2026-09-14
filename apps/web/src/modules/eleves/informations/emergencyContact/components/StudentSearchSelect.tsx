@@ -85,7 +85,7 @@ export function StudentSearchSelect({
           </div>
         )}
 
-        {!isLoading && search.trim() && filteredStudents.length === 0 && (
+        {!isLoading && !isError && search.trim() && filteredStudents.length === 0 && (
           <div role="alert" className="alert alert-warning mt-3">
             <span>Aucun élève trouvé pour cette recherche.</span>
           </div>

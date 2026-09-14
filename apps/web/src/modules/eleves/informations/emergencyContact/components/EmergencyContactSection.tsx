@@ -23,6 +23,7 @@ export function EmergencyContactSection({
     useState<FicheEleveComplete | null>(null);
 
   const canEdit = user?.role === "ADMIN" || user?.role === "SUDO_ADMIN";
+  const activeStudentId = selectedStudent?.id ?? initialStudentId;
 
   const handleStudentSelect = (student: FicheEleveComplete) => {
     setSelectedStudent(student);
@@ -42,11 +43,11 @@ export function EmergencyContactSection({
       </div>
 
       <StudentSearchSelect
-        selectedStudentId={selectedStudent?.id ?? initialStudentId}
+        selectedStudentId={activeStudentId}
         onSelect={handleStudentSelect}
       />
 
-      {!selectedStudent && (
+      {!activeStudentId && (
         <div className="rounded-lg border border-dashed border-base-300 p-8 text-center">
           <p className="font-medium">Aucun élève sélectionné</p>
           <p className="mt-1 text-sm text-base-content/60">
@@ -55,8 +56,8 @@ export function EmergencyContactSection({
         </div>
       )}
 
-      {selectedStudent && (
-        <EmergencyContactCard eleveId={selectedStudent.id} canEdit={canEdit} />
+      {activeStudentId && (
+        <EmergencyContactCard eleveId={activeStudentId} canEdit={canEdit} />
       )}
     </div>
   );

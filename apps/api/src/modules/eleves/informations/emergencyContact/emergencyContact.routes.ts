@@ -7,6 +7,7 @@ import { Role } from "../../../../generated/prisma/enums.js";
 import {
   getStudentEmergencyContact,
   updateStudentEmergencyContact,
+  patchStudentEmergencyContact,
 } from "./emergencyContact.controller.js";
 
 const router = Router();
@@ -40,7 +41,7 @@ router.put(
 router.patch(
   "/contact-urgence/:eleveId",
   authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
-  updateStudentEmergencyContact,
+  patchStudentEmergencyContact,
 );
 
 export default router;

@@ -181,7 +181,7 @@ function GestionElevesPage() {
       case "classe":
         return <ClasseAffectationTab eleveId={eleveId} />;
       case "urgence":
-        return <EmergencyContactSection />;
+        return <EmergencyContactSection initialStudentId={eleveId} />;
       default:
         return null;
     }

@@ -562,17 +562,15 @@ export default function FicheElevePage() {
         </SectionCard>
 
         {/* SECTION: Contact d'urgence */}
-        {eleve.isRelationContact && (
-          <SectionCard
-            title="Contact d'urgence"
-            icon={<ShieldAlert size={18} />}
-          >
-            <EmergencyContactCard
-              eleveId={eleve.id}
-              canEdit={user?.role === "ADMIN" || user?.role === "SUDO_ADMIN"}
-            />
-          </SectionCard>
-        )}
+        <SectionCard
+          title="Contact d'urgence"
+          icon={<ShieldAlert size={18} />}
+        >
+          <EmergencyContactCard
+            eleveId={eleve.id}
+            canEdit={user?.role === "ADMIN" || user?.role === "SUDO_ADMIN"}
+          />
+        </SectionCard>
 
         {/* SECTION: Profession (si élève travaille) */}
         {eleve.professionEleve && (

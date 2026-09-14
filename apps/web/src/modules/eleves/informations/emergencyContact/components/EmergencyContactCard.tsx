@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   useEmergencyContact,
   useUpdateEmergencyContact,
@@ -36,18 +36,6 @@ export function EmergencyContactCard({
     relationName: null as string | null,
     relationTelephone: null as string | null,
   });
-
-  useEffect(() => {
-    if (!data) return;
-
-    setForm({
-      isRelationContact: data.isRelationContact,
-      relationName: data.relationName,
-      relationTelephone: data.relationTelephone ?? null,
-    });
-
-    setIsEditing(false);
-  }, [data]);
 
   const handleEdit = () => {
     if (!data) return;

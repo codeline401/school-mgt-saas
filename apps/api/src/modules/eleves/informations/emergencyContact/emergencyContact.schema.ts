@@ -40,8 +40,23 @@ export const updateEmergencyContactSchema = baseEmergencyContactSchema
     path: ["relationName"],
   });
 
+export const patchEmergencyContactSchema = z
+  .object({
+    isRelationContact: z.boolean().optional(),
+    relationName: z.string().trim().max(150).nullable().optional(),
+    relationTelephone: z.string().trim().max(30).nullable().optional(),
+  })
+  .refine(validateEmergencyContact, {
+    message:
+      "Le nom et le téléphone du contact d'urgence sont requis si le contact est activé",
+    path: ["relationName"],
+  });
+
 // Types TypeScript
 export type EmergencyContact = z.infer<typeof emergencyContactSchema>;
 export type UpdateEmergencyContact = z.infer<
   typeof updateEmergencyContactSchema
+>;
+export type PatchEmergencyContact = z.infer<
+  typeof patchEmergencyContactSchema
 >;

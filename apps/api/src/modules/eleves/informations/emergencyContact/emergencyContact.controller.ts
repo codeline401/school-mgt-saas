@@ -1,7 +1,10 @@
 import { Response, Request } from "express";
 import { ZodError } from "zod";
 import { EmergencyContactService } from "./emergencyContact.service.js";
-import { emergencyContactSchema } from "./emergencyContact.schema.js";
+import {
+  emergencyContactSchema,
+  patchEmergencyContactSchema,
+} from "./emergencyContact.schema.js";
 
 export class EmergencyContactError extends Error {
   status = 500; // Default to Internal Server Error
@@ -124,6 +127,59 @@ export const updateStudentEmergencyContact = async (
       res,
       error,
       "Erreur interne du serveur lors de la mise à jour du contact d'urgence",
+    );
+  }
+};
+
+/**
+ * PATCH /api/eleves/informations/contact-urgence/:eleveId
+ * Fusionne les champs fournis avec le contact courant avant validation.
+ */
+export const patchStudentEmergencyContact = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ message: "Utilisateur non authentifié" });
+    }
+
+    const eleveId = req.params.eleveId as string;
+    const patch = patchEmergencyContactSchema.parse(req.body);
+    const current = await EmergencyContactService.getByStudentId(eleveId, {
+      id: req.user.id,
+      role: req.user.role,
+      schoolId: req.user.schoolId,
+    });
+
+    const merged = emergencyContactSchema.parse({
+      isRelationContact: patch.isRelationContact ?? current.isRelationContact,
+      relationName:
+        patch.relationName !== undefined
+          ? patch.relationName
+          : current.relationName,
+      relationTelephone:
+        patch.relationTelephone !== undefined
+          ? patch.relationTelephone
+          : current.relationTelephone,
+    });
+
+    const result = await EmergencyContactService.updateByStudentId(
+      eleveId,
+      merged,
+      {
+        id: req.user.id,
+        role: req.user.role,
+        schoolId: req.user.schoolId,
+      },
+    );
+
+    return res.status(200).json(result);
+  } catch (error) {
+    return sendEmergencyContactError(
+      res,
+      error,
+      "Erreur interne du serveur lors de la mise à jour partielle du contact d'urgence",
     );
   }
 };
