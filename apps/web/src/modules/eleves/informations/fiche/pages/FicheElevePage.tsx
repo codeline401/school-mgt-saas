@@ -19,6 +19,7 @@ import {
   Briefcase,
   Mail,
   Search,
+  ShieldAlert,
 } from "lucide-react";
 import {
   useFicheEleve,
@@ -30,6 +31,7 @@ import { useAuthStore } from "../../../../../store/authStore";
 import { getApiError } from "../../../../../lib/api";
 import FicheEleveFormModal from "../components/FicheEleveFormModal";
 import ConfirmModal from "../../../../../components/ConfirmModal";
+import { EmergencyContactCard } from "../../emergencyContact/components/EmergencyContactCard";
 
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: Formater les dates en français
@@ -560,25 +562,15 @@ export default function FicheElevePage() {
         </SectionCard>
 
         {/* SECTION: Contact d'urgence */}
-        {eleve.isRelationContact && (
-          <SectionCard
-            title="Contact d'urgence"
-            icon={<AlertCircle size={18} />}
-          >
-            <div className="space-y-1">
-              <InfoRow
-                icon={<User size={14} />}
-                label="Nom"
-                value={eleve.relationName}
-              />
-              <InfoRow
-                icon={<Phone size={14} />}
-                label="Téléphone"
-                value={eleve.relationTelephone}
-              />
-            </div>
-          </SectionCard>
-        )}
+        <SectionCard
+          title="Contact d'urgence"
+          icon={<ShieldAlert size={18} />}
+        >
+          <EmergencyContactCard
+            eleveId={eleve.id}
+            canEdit={user?.role === "ADMIN" || user?.role === "SUDO_ADMIN"}
+          />
+        </SectionCard>
 
         {/* SECTION: Profession (si élève travaille) */}
         {eleve.professionEleve && (

@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import ficheRoutes from "./informations/fiche/fiche.routes.js";
 import responsableRoutes from "./informations/responsable/responsable.routes.js";
+import emergencyContactRoutes from "./informations/emergencyContact/emergencyContact.routes.js";
 
 const router = Router();
 
@@ -18,5 +19,6 @@ const router = Router();
 
 router.use("/informations", ficheRoutes);
 router.use("/informations", responsableRoutes);
+router.use("/informations", emergencyContactRoutes);
 
 export default router;

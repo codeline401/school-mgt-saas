@@ -24,6 +24,7 @@ import FicheElevePage from "./informations/fiche/pages/FicheElevePage";
 import FicheEleveFormModal from "./informations/fiche/components/FicheEleveFormModal";
 import ResponsablesPage from "./informations/responsable/pages/ResponsablesPage";
 import ClasseAffectationTab from "./informations/affectation/ClasseAffectationTab";
+import { EmergencyContactSection } from "./informations/emergencyContact/components/EmergencyContactSection";
 
 type MainTab =
   | "informations"
@@ -180,21 +181,7 @@ function GestionElevesPage() {
       case "classe":
         return <ClasseAffectationTab eleveId={eleveId} />;
       case "urgence":
-        return (
-          <DevelopmentPlaceholder
-            icon={ShieldCheck}
-            title="Contacts d’urgence"
-            description="Numéros d’urgence, contacts à prévenir et informations médicales de sécurité."
-          />
-        );
-      case "historique":
-        return (
-          <DevelopmentPlaceholder
-            icon={BookOpen}
-            title="Historique administratif"
-            description="Anciennes classes, réinscriptions, changements, événements et parcours de l’élève."
-          />
-        );
+        return <EmergencyContactSection initialStudentId={eleveId} />;
       default:
         return null;
     }
