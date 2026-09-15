@@ -25,6 +25,7 @@ import FicheEleveFormModal from "./informations/fiche/components/FicheEleveFormM
 import ResponsablesPage from "./informations/responsable/pages/ResponsablesPage";
 import ClasseAffectationTab from "./informations/affectation/ClasseAffectationTab";
 import { EmergencyContactSection } from "./informations/emergencyContact/components/EmergencyContactSection";
+import { HistoriqueSection } from "./informations/historique/components/HistoriqueSection";
 
 type MainTab =
   | "informations"
@@ -182,6 +183,8 @@ function GestionElevesPage() {
         return <ClasseAffectationTab eleveId={eleveId} />;
       case "urgence":
         return <EmergencyContactSection initialStudentId={eleveId} />;
+      case "historique":
+        return <HistoriqueSection initialStudentId={eleveId} />;
       default:
         return null;
     }
