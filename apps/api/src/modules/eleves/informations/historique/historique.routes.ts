@@ -17,7 +17,7 @@ router.use(authenticate);
  */
 router.get(
   "/historique/:eleveId",
-  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN, Role.PROF),
+  authorizeRoles(Role.ADMIN, Role.SUDO_ADMIN),
   getEleveHistorique,
 );
 
