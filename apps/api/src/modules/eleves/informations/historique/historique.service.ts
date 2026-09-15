@@ -185,7 +185,10 @@ export class HistoriqueEleveService {
       throw new HistoriqueEleveNotFoundError();
     }
 
-    if (user.role !== "SUDO_ADMIN" && user.schoolId !== student.schoolId) {
+    if (
+      user.role !== "SUDO_ADMIN" &&
+      (!user.schoolId || user.schoolId !== student.schoolId)
+    ) {
       throw new HistoriqueEleveForbiddenError();
     }
 
@@ -227,35 +230,15 @@ export class HistoriqueEleveService {
       second.dateInscription.localeCompare(first.dateInscription),
     );
 
-    const administrativeEvents = [
-      ...student.admissions.map((admission) => ({
+    const administrativeEvents = student.admissions
+      .map((admission) => ({
         id: admission.id,
         type: "ADMISSION" as const,
         status: admission.statut,
         description: admission.notesAdmin ?? "Dossier d'admission de l'élève",
         date: admission.createdAt.toISOString(),
-      })),
-
-      {
-        id: `${student.id}-statut`,
-        type: "STATUT_ELEVE" as const,
-        status: student.statut,
-        description: `Statut actuel de l'élève : ${student.statut}`,
-        date: student.updatedAt.toISOString(),
-      },
-
-      ...(student.situationFinAnnee
-        ? [
-            {
-              id: `${student.id}-situation-fin-annee`,
-              type: "FIN_ANNEE" as const,
-              status: student.situationFinAnnee,
-              description: `Situation de fin d'année : ${student.situationFinAnnee}`,
-              date: student.updatedAt.toISOString(),
-            },
-          ]
-        : []),
-    ].sort((first, second) => second.date.localeCompare(first.date));
+      }))
+      .sort((first, second) => second.date.localeCompare(first.date));
 
     return {
       eleve: {
