@@ -12,6 +12,7 @@
     "test": "npm run test --workspaces --if-present"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
     "@prisma/client": "^7.6.0"
   }
 }

@@ -258,6 +258,8 @@ export type UserWhereInput = {
   userDeleting?: Prisma.EleveListRelationFilter
   affectationClassesEffectuePar?: Prisma.AffectationClasseListRelationFilter
   affectationClasses?: Prisma.AffectationClasseListRelationFilter
+  paiementEnregistres?: Prisma.PaiementEcolageListRelationFilter
+  paiementEcolages?: Prisma.PaiementEcolageListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -300,6 +302,8 @@ export type UserOrderByWithRelationInput = {
   userDeleting?: Prisma.EleveOrderByRelationAggregateInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseOrderByRelationAggregateInput
   affectationClasses?: Prisma.AffectationClasseOrderByRelationAggregateInput
+  paiementEnregistres?: Prisma.PaiementEcolageOrderByRelationAggregateInput
+  paiementEcolages?: Prisma.PaiementEcolageOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -345,6 +349,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   userDeleting?: Prisma.EleveListRelationFilter
   affectationClassesEffectuePar?: Prisma.AffectationClasseListRelationFilter
   affectationClasses?: Prisma.AffectationClasseListRelationFilter
+  paiementEnregistres?: Prisma.PaiementEcolageListRelationFilter
+  paiementEcolages?: Prisma.PaiementEcolageListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -420,6 +426,8 @@ export type UserCreateInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -461,6 +469,8 @@ export type UserUncheckedCreateInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -502,6 +512,8 @@ export type UserUpdateInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -543,6 +555,8 @@ export type UserUncheckedUpdateInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1062,6 +1076,36 @@ export type UserUpdateOneWithoutElevesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutElevesInput, Prisma.UserUpdateWithoutElevesInput>, Prisma.UserUncheckedUpdateWithoutElevesInput>
 }
 
+export type UserCreateNestedOneWithoutPaiementEnregistresInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPaiementEnregistresInput, Prisma.UserUncheckedCreateWithoutPaiementEnregistresInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaiementEnregistresInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutPaiementEcolagesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPaiementEcolagesInput, Prisma.UserUncheckedCreateWithoutPaiementEcolagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaiementEcolagesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPaiementEnregistresNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPaiementEnregistresInput, Prisma.UserUncheckedCreateWithoutPaiementEnregistresInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaiementEnregistresInput
+  upsert?: Prisma.UserUpsertWithoutPaiementEnregistresInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPaiementEnregistresInput, Prisma.UserUpdateWithoutPaiementEnregistresInput>, Prisma.UserUncheckedUpdateWithoutPaiementEnregistresInput>
+}
+
+export type UserUpdateOneWithoutPaiementEcolagesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPaiementEcolagesInput, Prisma.UserUncheckedCreateWithoutPaiementEcolagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaiementEcolagesInput
+  upsert?: Prisma.UserUpsertWithoutPaiementEcolagesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPaiementEcolagesInput, Prisma.UserUpdateWithoutPaiementEcolagesInput>, Prisma.UserUncheckedUpdateWithoutPaiementEcolagesInput>
+}
+
 export type UserCreateNestedOneWithoutParentInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutParentInput, Prisma.UserUncheckedCreateWithoutParentInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutParentInput
@@ -1146,6 +1190,8 @@ export type UserCreateWithoutSchoolInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSchoolInput = {
@@ -1186,6 +1232,8 @@ export type UserUncheckedCreateWithoutSchoolInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSchoolInput = {
@@ -1269,6 +1317,8 @@ export type UserCreateWithoutProfesseurInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfesseurInput = {
@@ -1309,6 +1359,8 @@ export type UserUncheckedCreateWithoutProfesseurInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfesseurInput = {
@@ -1365,6 +1417,8 @@ export type UserUpdateWithoutProfesseurInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfesseurInput = {
@@ -1405,6 +1459,8 @@ export type UserUncheckedUpdateWithoutProfesseurInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutContratsInput = {
@@ -1445,6 +1501,8 @@ export type UserCreateWithoutContratsInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutContratsInput = {
@@ -1485,6 +1543,8 @@ export type UserUncheckedCreateWithoutContratsInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutContratsInput = {
@@ -1541,6 +1601,8 @@ export type UserUpdateWithoutContratsInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutContratsInput = {
@@ -1581,6 +1643,8 @@ export type UserUncheckedUpdateWithoutContratsInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRemplacementsInput = {
@@ -1621,6 +1685,8 @@ export type UserCreateWithoutRemplacementsInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRemplacementsInput = {
@@ -1661,6 +1727,8 @@ export type UserUncheckedCreateWithoutRemplacementsInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRemplacementsInput = {
@@ -1717,6 +1785,8 @@ export type UserUpdateWithoutRemplacementsInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRemplacementsInput = {
@@ -1757,6 +1827,8 @@ export type UserUncheckedUpdateWithoutRemplacementsInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotesInput = {
@@ -1797,6 +1869,8 @@ export type UserCreateWithoutNotesInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotesInput = {
@@ -1837,6 +1911,8 @@ export type UserUncheckedCreateWithoutNotesInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotesInput = {
@@ -1893,6 +1969,8 @@ export type UserUpdateWithoutNotesInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesInput = {
@@ -1933,6 +2011,8 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDocumentsInput = {
@@ -1973,6 +2053,8 @@ export type UserCreateWithoutDocumentsInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDocumentsInput = {
@@ -2013,6 +2095,8 @@ export type UserUncheckedCreateWithoutDocumentsInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDocumentsInput = {
@@ -2069,6 +2153,8 @@ export type UserUpdateWithoutDocumentsInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDocumentsInput = {
@@ -2109,6 +2195,8 @@ export type UserUncheckedUpdateWithoutDocumentsInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -2149,6 +2237,8 @@ export type UserCreateWithoutNotificationsInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -2189,6 +2279,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -2245,6 +2337,8 @@ export type UserUpdateWithoutNotificationsInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -2285,6 +2379,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDeliberationSessionsInput = {
@@ -2325,6 +2421,8 @@ export type UserCreateWithoutDeliberationSessionsInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeliberationSessionsInput = {
@@ -2365,6 +2463,8 @@ export type UserUncheckedCreateWithoutDeliberationSessionsInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeliberationSessionsInput = {
@@ -2410,6 +2510,8 @@ export type UserCreateWithoutDeliberationSessionsValidéesInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeliberationSessionsValidéesInput = {
@@ -2450,6 +2552,8 @@ export type UserUncheckedCreateWithoutDeliberationSessionsValidéesInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeliberationSessionsValidéesInput = {
@@ -2506,6 +2610,8 @@ export type UserUpdateWithoutDeliberationSessionsInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeliberationSessionsInput = {
@@ -2546,6 +2652,8 @@ export type UserUncheckedUpdateWithoutDeliberationSessionsInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutDeliberationSessionsValidéesInput = {
@@ -2597,6 +2705,8 @@ export type UserUpdateWithoutDeliberationSessionsValidéesInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput = {
@@ -2637,6 +2747,8 @@ export type UserUncheckedUpdateWithoutDeliberationSessionsValidéesInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExamensCreesInput = {
@@ -2677,6 +2789,8 @@ export type UserCreateWithoutExamensCreesInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExamensCreesInput = {
@@ -2717,6 +2831,8 @@ export type UserUncheckedCreateWithoutExamensCreesInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExamensCreesInput = {
@@ -2773,6 +2889,8 @@ export type UserUpdateWithoutExamensCreesInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamensCreesInput = {
@@ -2813,6 +2931,8 @@ export type UserUncheckedUpdateWithoutExamensCreesInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExamenSurveillancesInput = {
@@ -2853,6 +2973,8 @@ export type UserCreateWithoutExamenSurveillancesInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExamenSurveillancesInput = {
@@ -2893,6 +3015,8 @@ export type UserUncheckedCreateWithoutExamenSurveillancesInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExamenSurveillancesInput = {
@@ -2949,6 +3073,8 @@ export type UserUpdateWithoutExamenSurveillancesInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamenSurveillancesInput = {
@@ -2989,6 +3115,8 @@ export type UserUncheckedUpdateWithoutExamenSurveillancesInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExamenIncidentsInput = {
@@ -3029,6 +3157,8 @@ export type UserCreateWithoutExamenIncidentsInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExamenIncidentsInput = {
@@ -3069,6 +3199,8 @@ export type UserUncheckedCreateWithoutExamenIncidentsInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExamenIncidentsInput = {
@@ -3125,6 +3257,8 @@ export type UserUpdateWithoutExamenIncidentsInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExamenIncidentsInput = {
@@ -3165,6 +3299,8 @@ export type UserUncheckedUpdateWithoutExamenIncidentsInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSignatureInput = {
@@ -3205,6 +3341,8 @@ export type UserCreateWithoutSignatureInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSignatureInput = {
@@ -3245,6 +3383,8 @@ export type UserUncheckedCreateWithoutSignatureInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSignatureInput = {
@@ -3301,6 +3441,8 @@ export type UserUpdateWithoutSignatureInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSignatureInput = {
@@ -3341,6 +3483,8 @@ export type UserUncheckedUpdateWithoutSignatureInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReservationSallesInput = {
@@ -3381,6 +3525,8 @@ export type UserCreateWithoutReservationSallesInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReservationSallesInput = {
@@ -3421,6 +3567,8 @@ export type UserUncheckedCreateWithoutReservationSallesInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReservationSallesInput = {
@@ -3477,6 +3625,8 @@ export type UserUpdateWithoutReservationSallesInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReservationSallesInput = {
@@ -3517,6 +3667,8 @@ export type UserUncheckedUpdateWithoutReservationSallesInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMouvementStocksInput = {
@@ -3557,6 +3709,8 @@ export type UserCreateWithoutMouvementStocksInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMouvementStocksInput = {
@@ -3597,6 +3751,8 @@ export type UserUncheckedCreateWithoutMouvementStocksInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMouvementStocksInput = {
@@ -3653,6 +3809,8 @@ export type UserUpdateWithoutMouvementStocksInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMouvementStocksInput = {
@@ -3693,6 +3851,8 @@ export type UserUncheckedUpdateWithoutMouvementStocksInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPretParInput = {
@@ -3733,6 +3893,8 @@ export type UserCreateWithoutPretParInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPretParInput = {
@@ -3773,6 +3935,8 @@ export type UserUncheckedCreateWithoutPretParInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPretParInput = {
@@ -3818,6 +3982,8 @@ export type UserCreateWithoutRetourneParInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRetourneParInput = {
@@ -3858,6 +4024,8 @@ export type UserUncheckedCreateWithoutRetourneParInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRetourneParInput = {
@@ -3914,6 +4082,8 @@ export type UserUpdateWithoutPretParInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPretParInput = {
@@ -3954,6 +4124,8 @@ export type UserUncheckedUpdateWithoutPretParInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutRetourneParInput = {
@@ -4005,6 +4177,8 @@ export type UserUpdateWithoutRetourneParInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRetourneParInput = {
@@ -4045,6 +4219,8 @@ export type UserUncheckedUpdateWithoutRetourneParInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTicketMaintenancesCreeInput = {
@@ -4085,6 +4261,8 @@ export type UserCreateWithoutTicketMaintenancesCreeInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTicketMaintenancesCreeInput = {
@@ -4125,6 +4303,8 @@ export type UserUncheckedCreateWithoutTicketMaintenancesCreeInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTicketMaintenancesCreeInput = {
@@ -4170,6 +4350,8 @@ export type UserCreateWithoutTicketMaintenancesAssigneeInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTicketMaintenancesAssigneeInput = {
@@ -4210,6 +4392,8 @@ export type UserUncheckedCreateWithoutTicketMaintenancesAssigneeInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTicketMaintenancesAssigneeInput = {
@@ -4266,6 +4450,8 @@ export type UserUpdateWithoutTicketMaintenancesCreeInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTicketMaintenancesCreeInput = {
@@ -4306,6 +4492,8 @@ export type UserUncheckedUpdateWithoutTicketMaintenancesCreeInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutTicketMaintenancesAssigneeInput = {
@@ -4357,6 +4545,8 @@ export type UserUpdateWithoutTicketMaintenancesAssigneeInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTicketMaintenancesAssigneeInput = {
@@ -4397,6 +4587,8 @@ export type UserUncheckedUpdateWithoutTicketMaintenancesAssigneeInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutInterventionMaintenancesTechnicianInput = {
@@ -4437,6 +4629,8 @@ export type UserCreateWithoutInterventionMaintenancesTechnicianInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInterventionMaintenancesTechnicianInput = {
@@ -4477,6 +4671,8 @@ export type UserUncheckedCreateWithoutInterventionMaintenancesTechnicianInput = 
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInterventionMaintenancesTechnicianInput = {
@@ -4522,6 +4718,8 @@ export type UserCreateWithoutInterventionMaintenancesInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInterventionMaintenancesInput = {
@@ -4562,6 +4760,8 @@ export type UserUncheckedCreateWithoutInterventionMaintenancesInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInterventionMaintenancesInput = {
@@ -4618,6 +4818,8 @@ export type UserUpdateWithoutInterventionMaintenancesTechnicianInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInterventionMaintenancesTechnicianInput = {
@@ -4658,6 +4860,8 @@ export type UserUncheckedUpdateWithoutInterventionMaintenancesTechnicianInput = 
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutInterventionMaintenancesInput = {
@@ -4709,6 +4913,8 @@ export type UserUpdateWithoutInterventionMaintenancesInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInterventionMaintenancesInput = {
@@ -4749,6 +4955,8 @@ export type UserUncheckedUpdateWithoutInterventionMaintenancesInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSortieScolairesInput = {
@@ -4789,6 +4997,8 @@ export type UserCreateWithoutSortieScolairesInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSortieScolairesInput = {
@@ -4829,6 +5039,8 @@ export type UserUncheckedCreateWithoutSortieScolairesInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSortieScolairesInput = {
@@ -4885,6 +5097,8 @@ export type UserUpdateWithoutSortieScolairesInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSortieScolairesInput = {
@@ -4925,6 +5139,8 @@ export type UserUncheckedUpdateWithoutSortieScolairesInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutParticipantSortiesInput = {
@@ -4965,6 +5181,8 @@ export type UserCreateWithoutParticipantSortiesInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutParticipantSortiesInput = {
@@ -5005,6 +5223,8 @@ export type UserUncheckedCreateWithoutParticipantSortiesInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutParticipantSortiesInput = {
@@ -5061,6 +5281,8 @@ export type UserUpdateWithoutParticipantSortiesInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParticipantSortiesInput = {
@@ -5101,6 +5323,8 @@ export type UserUncheckedUpdateWithoutParticipantSortiesInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserDeletingInput = {
@@ -5141,6 +5365,8 @@ export type UserCreateWithoutUserDeletingInput = {
   eleves?: Prisma.EleveCreateNestedManyWithoutUserInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserDeletingInput = {
@@ -5181,6 +5407,8 @@ export type UserUncheckedCreateWithoutUserDeletingInput = {
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutUserInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserDeletingInput = {
@@ -5226,6 +5454,8 @@ export type UserCreateWithoutElevesInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutElevesInput = {
@@ -5266,6 +5496,8 @@ export type UserUncheckedCreateWithoutElevesInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutElevesInput = {
@@ -5322,6 +5554,8 @@ export type UserUpdateWithoutUserDeletingInput = {
   eleves?: Prisma.EleveUpdateManyWithoutUserNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserDeletingInput = {
@@ -5362,6 +5596,8 @@ export type UserUncheckedUpdateWithoutUserDeletingInput = {
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutUserNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutElevesInput = {
@@ -5413,6 +5649,8 @@ export type UserUpdateWithoutElevesInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutElevesInput = {
@@ -5453,6 +5691,376 @@ export type UserUncheckedUpdateWithoutElevesInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPaiementEnregistresInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  school?: Prisma.SchoolCreateNestedOneWithoutUsersInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
+  sortieScolaires?: Prisma.SortieScolaireCreateNestedManyWithoutOrganisateurInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutAccompagnateurInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutUserInput
+  userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
+  affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
+  affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPaiementEnregistresInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  schoolId?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedCreateNestedManyWithoutOrganisateurInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutAccompagnateurInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutUserInput
+  userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
+  affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
+  affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPaiementEnregistresInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPaiementEnregistresInput, Prisma.UserUncheckedCreateWithoutPaiementEnregistresInput>
+}
+
+export type UserCreateWithoutPaiementEcolagesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  school?: Prisma.SchoolCreateNestedOneWithoutUsersInput
+  contrats?: Prisma.ContratCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceCreateNestedManyWithoutTechnicienInput
+  sortieScolaires?: Prisma.SortieScolaireCreateNestedManyWithoutOrganisateurInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutAccompagnateurInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutUserInput
+  userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
+  affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
+  affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+}
+
+export type UserUncheckedCreateWithoutPaiementEcolagesInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  schoolId?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  dateNaissance?: Date | string | null
+  photoUrl?: string | null
+  contrats?: Prisma.ContratUncheckedCreateNestedManyWithoutUserInput
+  remplacements?: Prisma.RemplacementUncheckedCreateNestedManyWithoutRemplacantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutCreatedByInput
+  professeur?: Prisma.ProfesseurUncheckedCreateNestedOneWithoutUserInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  parent?: Prisma.ParentUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutValidatedByInput
+  examensCrees?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutCreatedByInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedCreateNestedManyWithoutUserInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedCreateNestedManyWithoutCreatedByInput
+  signature?: Prisma.SignatureUncheckedCreateNestedOneWithoutUserInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedCreateNestedManyWithoutUserInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedCreateNestedManyWithoutUserInput
+  pretPar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutPretParInput
+  retournePar?: Prisma.PretEquipementUncheckedCreateNestedManyWithoutRetourParInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutCreeParInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedCreateNestedManyWithoutAssigneAInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutUserInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedCreateNestedManyWithoutTechnicienInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedCreateNestedManyWithoutOrganisateurInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutAccompagnateurInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutUserInput
+  userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
+  affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
+  affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+}
+
+export type UserCreateOrConnectWithoutPaiementEcolagesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPaiementEcolagesInput, Prisma.UserUncheckedCreateWithoutPaiementEcolagesInput>
+}
+
+export type UserUpsertWithoutPaiementEnregistresInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPaiementEnregistresInput, Prisma.UserUncheckedUpdateWithoutPaiementEnregistresInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPaiementEnregistresInput, Prisma.UserUncheckedCreateWithoutPaiementEnregistresInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPaiementEnregistresInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPaiementEnregistresInput, Prisma.UserUncheckedUpdateWithoutPaiementEnregistresInput>
+}
+
+export type UserUpdateWithoutPaiementEnregistresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneWithoutUsersNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUpdateManyWithoutOrganisateurNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutAccompagnateurNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutUserNestedInput
+  userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
+  affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
+  affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPaiementEnregistresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedUpdateManyWithoutOrganisateurNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutAccompagnateurNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutUserNestedInput
+  userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
+  affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
+  affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutPaiementEcolagesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPaiementEcolagesInput, Prisma.UserUncheckedUpdateWithoutPaiementEcolagesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPaiementEcolagesInput, Prisma.UserUncheckedCreateWithoutPaiementEcolagesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPaiementEcolagesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPaiementEcolagesInput, Prisma.UserUncheckedUpdateWithoutPaiementEcolagesInput>
+}
+
+export type UserUpdateWithoutPaiementEcolagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  school?: Prisma.SchoolUpdateOneWithoutUsersNestedInput
+  contrats?: Prisma.ContratUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUpdateManyWithoutTechnicienNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUpdateManyWithoutOrganisateurNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutAccompagnateurNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutUserNestedInput
+  userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
+  affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
+  affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPaiementEcolagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contrats?: Prisma.ContratUncheckedUpdateManyWithoutUserNestedInput
+  remplacements?: Prisma.RemplacementUncheckedUpdateManyWithoutRemplacantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  professeur?: Prisma.ProfesseurUncheckedUpdateOneWithoutUserNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  parent?: Prisma.ParentUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  deliberationSessionsValidées?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutValidatedByNestedInput
+  examensCrees?: Prisma.ExamenSessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  examenSurveillances?: Prisma.ExamenSurveillanceUncheckedUpdateManyWithoutUserNestedInput
+  examenIncidents?: Prisma.ExamenIncidentUncheckedUpdateManyWithoutCreatedByNestedInput
+  signature?: Prisma.SignatureUncheckedUpdateOneWithoutUserNestedInput
+  reservationSalles?: Prisma.ReservationSalleUncheckedUpdateManyWithoutUserNestedInput
+  mouvementStocks?: Prisma.MouvementStockUncheckedUpdateManyWithoutUserNestedInput
+  pretPar?: Prisma.PretEquipementUncheckedUpdateManyWithoutPretParNestedInput
+  retournePar?: Prisma.PretEquipementUncheckedUpdateManyWithoutRetourParNestedInput
+  ticketMaintenancesCree?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutCreeParNestedInput
+  ticketMaintenancesAssignee?: Prisma.TicketMaintenanceUncheckedUpdateManyWithoutAssigneANestedInput
+  interventionMaintenances?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutUserNestedInput
+  interventionMaintenancesTechnician?: Prisma.InterventionMaintenanceUncheckedUpdateManyWithoutTechnicienNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedUpdateManyWithoutOrganisateurNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutAccompagnateurNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutUserNestedInput
+  userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
+  affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
+  affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
 }
 
 export type UserCreateWithoutParentInput = {
@@ -5493,6 +6101,8 @@ export type UserCreateWithoutParentInput = {
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutParentInput = {
@@ -5533,6 +6143,8 @@ export type UserUncheckedCreateWithoutParentInput = {
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutParentInput = {
@@ -5589,6 +6201,8 @@ export type UserUpdateWithoutParentInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParentInput = {
@@ -5629,6 +6243,8 @@ export type UserUncheckedUpdateWithoutParentInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAffectationClassesEffectueParInput = {
@@ -5669,6 +6285,8 @@ export type UserCreateWithoutAffectationClassesEffectueParInput = {
   eleves?: Prisma.EleveCreateNestedManyWithoutUserInput
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAffectationClassesEffectueParInput = {
@@ -5709,6 +6327,8 @@ export type UserUncheckedCreateWithoutAffectationClassesEffectueParInput = {
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutUserInput
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutUserInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAffectationClassesEffectueParInput = {
@@ -5754,6 +6374,8 @@ export type UserCreateWithoutAffectationClassesInput = {
   eleves?: Prisma.EleveCreateNestedManyWithoutUserInput
   userDeleting?: Prisma.EleveCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseCreateNestedManyWithoutEffectueParInput
+  paiementEnregistres?: Prisma.PaiementEcolageCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAffectationClassesInput = {
@@ -5794,6 +6416,8 @@ export type UserUncheckedCreateWithoutAffectationClassesInput = {
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutUserInput
   userDeleting?: Prisma.EleveUncheckedCreateNestedManyWithoutDeletedByInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEffectueParInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutAgentInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAffectationClassesInput = {
@@ -5850,6 +6474,8 @@ export type UserUpdateWithoutAffectationClassesEffectueParInput = {
   eleves?: Prisma.EleveUpdateManyWithoutUserNestedInput
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAffectationClassesEffectueParInput = {
@@ -5890,6 +6516,8 @@ export type UserUncheckedUpdateWithoutAffectationClassesEffectueParInput = {
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutUserNestedInput
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutAffectationClassesInput = {
@@ -5941,6 +6569,8 @@ export type UserUpdateWithoutAffectationClassesInput = {
   eleves?: Prisma.EleveUpdateManyWithoutUserNestedInput
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAffectationClassesInput = {
@@ -5981,6 +6611,8 @@ export type UserUncheckedUpdateWithoutAffectationClassesInput = {
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutUserNestedInput
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManySchoolInput = {
@@ -6034,6 +6666,8 @@ export type UserUpdateWithoutSchoolInput = {
   userDeleting?: Prisma.EleveUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSchoolInput = {
@@ -6074,6 +6708,8 @@ export type UserUncheckedUpdateWithoutSchoolInput = {
   userDeleting?: Prisma.EleveUncheckedUpdateManyWithoutDeletedByNestedInput
   affectationClassesEffectuePar?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEffectueParNestedInput
   affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutUserNestedInput
+  paiementEnregistres?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutAgentNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutSchoolInput = {
@@ -6119,6 +6755,8 @@ export type UserCountOutputType = {
   userDeleting: number
   affectationClassesEffectuePar: number
   affectationClasses: number
+  paiementEnregistres: number
+  paiementEcolages: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6146,6 +6784,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   userDeleting?: boolean | UserCountOutputTypeCountUserDeletingArgs
   affectationClassesEffectuePar?: boolean | UserCountOutputTypeCountAffectationClassesEffectueParArgs
   affectationClasses?: boolean | UserCountOutputTypeCountAffectationClassesArgs
+  paiementEnregistres?: boolean | UserCountOutputTypeCountPaiementEnregistresArgs
+  paiementEcolages?: boolean | UserCountOutputTypeCountPaiementEcolagesArgs
 }
 
 /**
@@ -6326,6 +6966,20 @@ export type UserCountOutputTypeCountAffectationClassesArgs<ExtArgs extends runti
   where?: Prisma.AffectationClasseWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPaiementEnregistresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaiementEcolageWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPaiementEcolagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaiementEcolageWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -6367,6 +7021,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   userDeleting?: boolean | Prisma.User$userDeletingArgs<ExtArgs>
   affectationClassesEffectuePar?: boolean | Prisma.User$affectationClassesEffectueParArgs<ExtArgs>
   affectationClasses?: boolean | Prisma.User$affectationClassesArgs<ExtArgs>
+  paiementEnregistres?: boolean | Prisma.User$paiementEnregistresArgs<ExtArgs>
+  paiementEcolages?: boolean | Prisma.User$paiementEcolagesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -6444,6 +7100,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   userDeleting?: boolean | Prisma.User$userDeletingArgs<ExtArgs>
   affectationClassesEffectuePar?: boolean | Prisma.User$affectationClassesEffectueParArgs<ExtArgs>
   affectationClasses?: boolean | Prisma.User$affectationClassesArgs<ExtArgs>
+  paiementEnregistres?: boolean | Prisma.User$paiementEnregistresArgs<ExtArgs>
+  paiementEcolages?: boolean | Prisma.User$paiementEcolagesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6484,6 +7142,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     userDeleting: Prisma.$ElevePayload<ExtArgs>[]
     affectationClassesEffectuePar: Prisma.$AffectationClassePayload<ExtArgs>[]
     affectationClasses: Prisma.$AffectationClassePayload<ExtArgs>[]
+    paiementEnregistres: Prisma.$PaiementEcolagePayload<ExtArgs>[]
+    paiementEcolages: Prisma.$PaiementEcolagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -6919,6 +7579,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   userDeleting<T extends Prisma.User$userDeletingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userDeletingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ElevePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   affectationClassesEffectuePar<T extends Prisma.User$affectationClassesEffectueParArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$affectationClassesEffectueParArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AffectationClassePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   affectationClasses<T extends Prisma.User$affectationClassesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$affectationClassesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AffectationClassePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  paiementEnregistres<T extends Prisma.User$paiementEnregistresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paiementEnregistresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaiementEcolagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  paiementEcolages<T extends Prisma.User$paiementEcolagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paiementEcolagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaiementEcolagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8009,6 +8671,54 @@ export type User$affectationClassesArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.AffectationClasseScalarFieldEnum | Prisma.AffectationClasseScalarFieldEnum[]
+}
+
+/**
+ * User.paiementEnregistres
+ */
+export type User$paiementEnregistresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaiementEcolage
+   */
+  select?: Prisma.PaiementEcolageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaiementEcolage
+   */
+  omit?: Prisma.PaiementEcolageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaiementEcolageInclude<ExtArgs> | null
+  where?: Prisma.PaiementEcolageWhereInput
+  orderBy?: Prisma.PaiementEcolageOrderByWithRelationInput | Prisma.PaiementEcolageOrderByWithRelationInput[]
+  cursor?: Prisma.PaiementEcolageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaiementEcolageScalarFieldEnum | Prisma.PaiementEcolageScalarFieldEnum[]
+}
+
+/**
+ * User.paiementEcolages
+ */
+export type User$paiementEcolagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaiementEcolage
+   */
+  select?: Prisma.PaiementEcolageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaiementEcolage
+   */
+  omit?: Prisma.PaiementEcolageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaiementEcolageInclude<ExtArgs> | null
+  where?: Prisma.PaiementEcolageWhereInput
+  orderBy?: Prisma.PaiementEcolageOrderByWithRelationInput | Prisma.PaiementEcolageOrderByWithRelationInput[]
+  cursor?: Prisma.PaiementEcolageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaiementEcolageScalarFieldEnum | Prisma.PaiementEcolageScalarFieldEnum[]
 }
 
 /**

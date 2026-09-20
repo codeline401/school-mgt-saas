@@ -104,6 +104,7 @@ export const ModelName = {
   ProfessionEleve: 'ProfessionEleve',
   DroitInscription: 'DroitInscription',
   Ecolage: 'Ecolage',
+  PaiementEcolage: 'PaiementEcolage',
   Parent: 'Parent',
   ResponsableEleve: 'ResponsableEleve',
   Niveau: 'Niveau',
@@ -1011,10 +1012,31 @@ export const EcolageScalarFieldEnum = {
   classeId: 'classeId',
   schoolId: 'schoolId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  statutPaiement: 'statutPaiement'
 } as const
 
 export type EcolageScalarFieldEnum = (typeof EcolageScalarFieldEnum)[keyof typeof EcolageScalarFieldEnum]
+
+
+export const PaiementEcolageScalarFieldEnum = {
+  id: 'id',
+  numeroRecu: 'numeroRecu',
+  montant: 'montant',
+  modePaiement: 'modePaiement',
+  referencePaiement: 'referencePaiement',
+  datePaiement: 'datePaiement',
+  remarque: 'remarque',
+  eleveId: 'eleveId',
+  ecolageId: 'ecolageId',
+  schoolId: 'schoolId',
+  agentId: 'agentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type PaiementEcolageScalarFieldEnum = (typeof PaiementEcolageScalarFieldEnum)[keyof typeof PaiementEcolageScalarFieldEnum]
 
 
 export const ParentScalarFieldEnum = {

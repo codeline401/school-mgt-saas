@@ -307,6 +307,11 @@ export type DroitInscription = Prisma.DroitInscriptionModel
  */
 export type Ecolage = Prisma.EcolageModel
 /**
+ * Model PaiementEcolage
+ * 
+ */
+export type PaiementEcolage = Prisma.PaiementEcolageModel
+/**
  * Model Parent
  * 
  */

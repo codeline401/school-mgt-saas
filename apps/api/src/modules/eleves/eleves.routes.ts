@@ -4,6 +4,7 @@ import ficheRoutes from "./informations/fiche/fiche.routes.js";
 import responsableRoutes from "./informations/responsable/responsable.routes.js";
 import emergencyContactRoutes from "./informations/emergencyContact/emergencyContact.routes.js";
 import historiqueRoutes from "./informations/historique/historique.routes.js";
+import paiementRoutes from "./ecolages/paiement/paiement.routes.js";
 
 const router = Router();
 
@@ -22,5 +23,7 @@ router.use("/informations", ficheRoutes);
 router.use("/informations", responsableRoutes);
 router.use("/informations", emergencyContactRoutes);
 router.use("/informations", historiqueRoutes);
+
+router.use("/ecolages", paiementRoutes);
 
 export default router;

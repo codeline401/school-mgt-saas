@@ -469,6 +469,26 @@ export const SituationFamiliale = {
 export type SituationFamiliale = (typeof SituationFamiliale)[keyof typeof SituationFamiliale]
 
 
+export const ModePaiement = {
+  ESPECES: 'ESPECES',
+  VIREMENT: 'VIREMENT',
+  CHEQUE: 'CHEQUE',
+  MOBILE_MONEY: 'MOBILE_MONEY'
+} as const
+
+export type ModePaiement = (typeof ModePaiement)[keyof typeof ModePaiement]
+
+
+export const StatutPaiementEcolage = {
+  IMPAYE: 'IMPAYE',
+  PARTIEL: 'PARTIEL',
+  PAYE: 'PAYE',
+  EN_RETARD: 'EN_RETARD'
+} as const
+
+export type StatutPaiementEcolage = (typeof StatutPaiementEcolage)[keyof typeof StatutPaiementEcolage]
+
+
 export const TypeResponsable = {
   PARENT: 'PARENT',
   TUTEUR: 'TUTEUR'
