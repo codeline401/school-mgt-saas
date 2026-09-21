@@ -1,3 +1,4 @@
+import { Decimal } from "@prisma/client/runtime/client";
 import { prisma } from "../../../../lib/prisma.js";
 import {
   EnregistrerPaiementInput,
@@ -71,6 +72,53 @@ export class PaiementFraisIntrouvableError extends Error {
 function moisSuivantScolaire(mois: number): number | null {
   if (mois === 8) return null;
   return mois === 12 ? 1 : mois + 1;
+}
+
+function estConflitNumeroRecu(error: unknown): boolean {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    (error as { code?: string }).code === "P2002" &&
+    Array.isArray((error as { meta?: { target?: unknown } }).meta?.target) &&
+    (
+      (error as { meta?: { target?: unknown[] } }).meta!.target as unknown[]
+    ).includes("numeroRecu")
+  );
+}
+
+/**
+ * Crée un paiement avec un numéro de reçu garanti unique, en réessayant en cas
+ * de collision concurrente (comptage identique pour deux requêtes simultanées).
+ */
+async function creerPaiementAvecRecuUnique(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tx: any,
+  schoolId: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: Record<string, any>,
+) {
+  const MAX_TENTATIVES = 5;
+
+  for (let tentative = 0; tentative < MAX_TENTATIVES; tentative++) {
+    const compteur = await tx.paiementEcolage.count({ where: { schoolId } });
+    const suffixe = tentative === 0 ? "" : `-${tentative}`;
+    const numeroRecu = `REC-${schoolId.slice(0, 8).toUpperCase()}-${Date.now()}-${compteur + 1}${suffixe}`;
+
+    try {
+      return await tx.paiementEcolage.create({
+        data: { ...data, numeroRecu },
+      });
+    } catch (error) {
+      if (estConflitNumeroRecu(error) && tentative < MAX_TENTATIVES - 1) {
+        continue;
+      }
+      throw error;
+    }
+  }
+
+  throw new Error(
+    "Impossible de générer un numéro de reçu unique après plusieurs tentatives",
+  );
 }
 
 export class PaiementEcolageService {
@@ -202,20 +250,51 @@ export class PaiementEcolageService {
       );
     }
 
-    return prisma.$transaction(async (tx) => {
-      const ecolage = await tx.ecolage.findUnique({
+    // Rejeu d'une requête déjà traitée (ex: retry réseau) : on renvoie le paiement existant sans rien recréer.
+    if (input.idempotencyKey) {
+      const paiementExistant = await prisma.paiementEcolage.findUnique({
         where: {
-          eleveId_anneeScolaire_mois: {
-            eleveId,
-            anneeScolaire: input.anneeScolaire,
-            mois: input.mois!,
+          schoolId_idempotencyKey: {
+            schoolId: eleve.schoolId,
+            idempotencyKey: input.idempotencyKey,
           },
         },
       });
 
-      if (!ecolage) {
+      if (paiementExistant) {
+        return {
+          id: paiementExistant.id,
+          numeroRecu: paiementExistant.numeroRecu,
+          montant: paiementExistant.montant.toString(),
+          modePaiement: paiementExistant.modePaiement,
+          referencePaiement: paiementExistant.referencePaiement,
+          datePaiement: paiementExistant.datePaiement.toISOString(),
+          remarque: paiementExistant.remarque,
+          statutEcolage: "PARTIEL", // Statut réel déjà appliqué lors du premier appel ; non recalculé ici.
+          agentId: paiementExistant.agentId,
+          createdAt: paiementExistant.createdAt.toISOString(),
+          excedentAppliqueMoisSuivant: null,
+        };
+      }
+    }
+
+    return prisma.$transaction(async (tx) => {
+      // Verrouille la ligne d'écolage ciblée pour empêcher deux encaissements concurrents sur le même mois.
+      const verrouille = await tx.$queryRaw<{ id: string }[]>`
+        SELECT id FROM "Ecolage"
+        WHERE "eleveId" = ${eleveId}
+          AND "anneeScolaire" = ${input.anneeScolaire}
+          AND mois = ${input.mois}
+        FOR UPDATE
+      `;
+
+      if (verrouille.length === 0) {
         throw new PaiementFraisIntrouvableError();
       }
+
+      const ecolage = await tx.ecolage.findUniqueOrThrow({
+        where: { id: verrouille[0]!.id },
+      });
 
       const paiementExistants = await tx.paiementEcolage.aggregate({
         // Récupération de la somme des paiements existants pour cet écolage
@@ -223,24 +302,28 @@ export class PaiementEcolageService {
         _sum: { montant: true },
       });
 
-      const totalDejaPaye = Number(paiementExistants._sum.montant ?? 0); // Montant total déjà payé pour cet écolage
-      const montantDu = Number(ecolage.montant); // Montant total dû pour cet écolage
-      const resteDuMoisCourant = montantDu - totalDejaPaye;
+      const totalDejaPaye = paiementExistants._sum.montant ?? new Decimal(0); // Montant total déjà payé pour cet écolage
+      const montantDu = ecolage.montant; // Montant total dû pour cet écolage
+      const resteDuMoisCourant = montantDu.minus(totalDejaPaye);
 
       // Empêche un double encaissement sur un mois déjà soldé (ex: re-sélection du même mois payé).
-      if (resteDuMoisCourant <= 0) {
+      if (resteDuMoisCourant.lessThanOrEqualTo(0)) {
         throw new PaiementMoisDejaSoldeError();
       }
 
+      const montantSaisi = new Decimal(input.montantSaisi);
+
       // Ce qui dépasse le solde du mois courant doit être reporté sur le mois suivant.
-      const montantAppliqueMoisCourant = Math.min(
-        input.montantSaisi,
+      const montantAppliqueMoisCourant = Decimal.min(
+        montantSaisi,
         resteDuMoisCourant,
       );
-      const excedent = input.montantSaisi - montantAppliqueMoisCourant;
+      const excedent = montantSaisi.minus(montantAppliqueMoisCourant);
 
       let ecolageMoisSuivant: typeof ecolage | null = null;
-      if (excedent > 0) {
+      let resteDuMoisSuivant: Decimal | null = null;
+
+      if (excedent.greaterThan(0)) {
         const prochainMois = moisSuivantScolaire(input.mois!);
 
         // Août est le dernier mois de l'année scolaire : rien à reporter au-delà.
@@ -262,29 +345,42 @@ export class PaiementEcolageService {
         if (!ecolageMoisSuivant) {
           throw new PaiementExcedentSansMoisSuivantError();
         }
+
+        const paiementsMoisSuivant = await tx.paiementEcolage.aggregate({
+          where: { ecolageId: ecolageMoisSuivant.id },
+          _sum: { montant: true },
+        });
+        const totalDejaPayeMoisSuivant =
+          paiementsMoisSuivant._sum.montant ?? new Decimal(0);
+        resteDuMoisSuivant = ecolageMoisSuivant.montant.minus(
+          totalDejaPayeMoisSuivant,
+        );
+
+        // On ne reporte que sur un seul mois suivant : au-delà, la saisie doit être fractionnée manuellement.
+        if (excedent.greaterThan(resteDuMoisSuivant)) {
+          throw new PaiementExcedentSansMoisSuivantError(
+            "Le montant saisi dépasse le solde dû du mois courant et du mois suivant. Réduisez le montant ou encaissez en plusieurs fois.",
+          );
+        }
       }
-      const statutMoisCourant =
-        montantAppliqueMoisCourant >= resteDuMoisCourant ? "PAYE" : "PARTIEL";
 
-      // Numéro de reçu unique: compteur par école + horodatage
-      const compteur = await tx.paiementEcolage.count({
-        where: { schoolId: eleve.schoolId },
-      });
-      const numeroRecu = `REC-${eleve.schoolId.slice(0, 8).toUpperCase()}-${Date.now()}-${compteur + 1}`; // Génération d'un numéro de reçu unique pour ce paiement
+      const statutMoisCourant = montantAppliqueMoisCourant.greaterThanOrEqualTo(
+        resteDuMoisCourant,
+      )
+        ? "PAYE"
+        : "PARTIEL";
 
-      const paiement = await tx.paiementEcolage.create({
-        data: {
-          numeroRecu,
-          montant: montantAppliqueMoisCourant,
-          modePaiement: input.modePaiement,
-          referencePaiement: input.referencePaiement ?? null,
-          datePaiement: input.datePaiement,
-          remarque: input.remarque ?? null,
-          eleveId,
-          ecolageId: ecolage.id,
-          schoolId: eleve.schoolId,
-          agentId: user.id,
-        },
+      const paiement = await creerPaiementAvecRecuUnique(tx, eleve.schoolId, {
+        montant: montantAppliqueMoisCourant,
+        modePaiement: input.modePaiement,
+        referencePaiement: input.referencePaiement ?? null,
+        datePaiement: input.datePaiement,
+        remarque: input.remarque ?? null,
+        idempotencyKey: input.idempotencyKey ?? null,
+        eleveId,
+        ecolageId: ecolage.id,
+        schoolId: eleve.schoolId,
+        agentId: user.id,
       });
 
       await tx.ecolage.update({
@@ -294,37 +390,24 @@ export class PaiementEcolageService {
 
       let excedentAppliqueMoisSuivant: string | null = null;
 
-      if (excedent > 0 && ecolageMoisSuivant) {
-        const paiementsMoisSuivant = await tx.paiementEcolage.aggregate({
-          where: { ecolageId: ecolageMoisSuivant.id },
-          _sum: { montant: true },
-        });
-        const totalDejaPayeMoisSuivant = Number(
-          paiementsMoisSuivant._sum.montant ?? 0,
-        );
-        const montantDuMoisSuivant = Number(ecolageMoisSuivant.montant);
-
-        const numeroRecuSuivant = `REC-${eleve.schoolId.slice(0, 8).toUpperCase()}-${Date.now()}-${compteur + 2}`;
-
-        await tx.paiementEcolage.create({
-          data: {
-            numeroRecu: numeroRecuSuivant,
-            montant: excedent,
-            modePaiement: input.modePaiement,
-            referencePaiement: input.referencePaiement ?? null,
-            datePaiement: input.datePaiement,
-            remarque: `Excédent reporté depuis le mois ${input.mois}`,
-            eleveId,
-            ecolageId: ecolageMoisSuivant.id,
-            schoolId: eleve.schoolId,
-            agentId: user.id,
-          },
+      if (excedent.greaterThan(0) && ecolageMoisSuivant && resteDuMoisSuivant) {
+        await creerPaiementAvecRecuUnique(tx, eleve.schoolId, {
+          montant: excedent,
+          modePaiement: input.modePaiement,
+          referencePaiement: input.referencePaiement ?? null,
+          datePaiement: input.datePaiement,
+          remarque: `Excédent reporté depuis le mois ${input.mois}`,
+          eleveId,
+          ecolageId: ecolageMoisSuivant.id,
+          schoolId: eleve.schoolId,
+          agentId: user.id,
         });
 
-        const statutMoisSuivant =
-          totalDejaPayeMoisSuivant + excedent >= montantDuMoisSuivant
-            ? "PAYE"
-            : "PARTIEL";
+        const statutMoisSuivant = excedent.greaterThanOrEqualTo(
+          resteDuMoisSuivant,
+        )
+          ? "PAYE"
+          : "PARTIEL";
 
         await tx.ecolage.update({
           where: { id: ecolageMoisSuivant.id },

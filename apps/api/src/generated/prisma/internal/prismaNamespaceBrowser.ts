@@ -1029,6 +1029,7 @@ export const PaiementEcolageScalarFieldEnum = {
   referencePaiement: 'referencePaiement',
   datePaiement: 'datePaiement',
   remarque: 'remarque',
+  idempotencyKey: 'idempotencyKey',
   eleveId: 'eleveId',
   ecolageId: 'ecolageId',
   schoolId: 'schoolId',

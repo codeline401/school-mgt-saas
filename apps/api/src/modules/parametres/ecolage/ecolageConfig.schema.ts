@@ -31,7 +31,7 @@ export const upsertEcolageConfigSchema = z
         "Année scolaire invalide, format attendu : AAAA-AAAA",
       ),
     montantMensuel: z.coerce.number().positive("Le montant doit être positif"),
-    jourEcheance: z.number().int().min(1).max(31).default(10),
+    jourEcheance: z.number().int().min(1).max(28).default(10),
     penaliteRetard: z.coerce.number().nonnegative().nullish(),
     mois: z
       .array(moisEcheanceSchema)

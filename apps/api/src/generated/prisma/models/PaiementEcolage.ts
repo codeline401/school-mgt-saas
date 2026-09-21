@@ -42,6 +42,7 @@ export type PaiementEcolageMinAggregateOutputType = {
   referencePaiement: string | null
   datePaiement: Date | null
   remarque: string | null
+  idempotencyKey: string | null
   eleveId: string | null
   ecolageId: string | null
   schoolId: string | null
@@ -59,6 +60,7 @@ export type PaiementEcolageMaxAggregateOutputType = {
   referencePaiement: string | null
   datePaiement: Date | null
   remarque: string | null
+  idempotencyKey: string | null
   eleveId: string | null
   ecolageId: string | null
   schoolId: string | null
@@ -76,6 +78,7 @@ export type PaiementEcolageCountAggregateOutputType = {
   referencePaiement: number
   datePaiement: number
   remarque: number
+  idempotencyKey: number
   eleveId: number
   ecolageId: number
   schoolId: number
@@ -103,6 +106,7 @@ export type PaiementEcolageMinAggregateInputType = {
   referencePaiement?: true
   datePaiement?: true
   remarque?: true
+  idempotencyKey?: true
   eleveId?: true
   ecolageId?: true
   schoolId?: true
@@ -120,6 +124,7 @@ export type PaiementEcolageMaxAggregateInputType = {
   referencePaiement?: true
   datePaiement?: true
   remarque?: true
+  idempotencyKey?: true
   eleveId?: true
   ecolageId?: true
   schoolId?: true
@@ -137,6 +142,7 @@ export type PaiementEcolageCountAggregateInputType = {
   referencePaiement?: true
   datePaiement?: true
   remarque?: true
+  idempotencyKey?: true
   eleveId?: true
   ecolageId?: true
   schoolId?: true
@@ -241,6 +247,7 @@ export type PaiementEcolageGroupByOutputType = {
   referencePaiement: string | null
   datePaiement: Date
   remarque: string | null
+  idempotencyKey: string | null
   eleveId: string
   ecolageId: string
   schoolId: string
@@ -281,6 +288,7 @@ export type PaiementEcolageWhereInput = {
   referencePaiement?: Prisma.StringNullableFilter<"PaiementEcolage"> | string | null
   datePaiement?: Prisma.DateTimeFilter<"PaiementEcolage"> | Date | string
   remarque?: Prisma.StringNullableFilter<"PaiementEcolage"> | string | null
+  idempotencyKey?: Prisma.StringNullableFilter<"PaiementEcolage"> | string | null
   eleveId?: Prisma.StringFilter<"PaiementEcolage"> | string
   ecolageId?: Prisma.StringFilter<"PaiementEcolage"> | string
   schoolId?: Prisma.StringFilter<"PaiementEcolage"> | string
@@ -303,6 +311,7 @@ export type PaiementEcolageOrderByWithRelationInput = {
   referencePaiement?: Prisma.SortOrderInput | Prisma.SortOrder
   datePaiement?: Prisma.SortOrder
   remarque?: Prisma.SortOrderInput | Prisma.SortOrder
+  idempotencyKey?: Prisma.SortOrderInput | Prisma.SortOrder
   eleveId?: Prisma.SortOrder
   ecolageId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
@@ -320,6 +329,7 @@ export type PaiementEcolageOrderByWithRelationInput = {
 export type PaiementEcolageWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   numeroRecu?: string
+  schoolId_idempotencyKey?: Prisma.PaiementEcolageSchoolIdIdempotencyKeyCompoundUniqueInput
   AND?: Prisma.PaiementEcolageWhereInput | Prisma.PaiementEcolageWhereInput[]
   OR?: Prisma.PaiementEcolageWhereInput[]
   NOT?: Prisma.PaiementEcolageWhereInput | Prisma.PaiementEcolageWhereInput[]
@@ -328,6 +338,7 @@ export type PaiementEcolageWhereUniqueInput = Prisma.AtLeast<{
   referencePaiement?: Prisma.StringNullableFilter<"PaiementEcolage"> | string | null
   datePaiement?: Prisma.DateTimeFilter<"PaiementEcolage"> | Date | string
   remarque?: Prisma.StringNullableFilter<"PaiementEcolage"> | string | null
+  idempotencyKey?: Prisma.StringNullableFilter<"PaiementEcolage"> | string | null
   eleveId?: Prisma.StringFilter<"PaiementEcolage"> | string
   ecolageId?: Prisma.StringFilter<"PaiementEcolage"> | string
   schoolId?: Prisma.StringFilter<"PaiementEcolage"> | string
@@ -340,7 +351,7 @@ export type PaiementEcolageWhereUniqueInput = Prisma.AtLeast<{
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   agent?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-}, "id" | "numeroRecu">
+}, "id" | "numeroRecu" | "schoolId_idempotencyKey">
 
 export type PaiementEcolageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -350,6 +361,7 @@ export type PaiementEcolageOrderByWithAggregationInput = {
   referencePaiement?: Prisma.SortOrderInput | Prisma.SortOrder
   datePaiement?: Prisma.SortOrder
   remarque?: Prisma.SortOrderInput | Prisma.SortOrder
+  idempotencyKey?: Prisma.SortOrderInput | Prisma.SortOrder
   eleveId?: Prisma.SortOrder
   ecolageId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
@@ -375,6 +387,7 @@ export type PaiementEcolageScalarWhereWithAggregatesInput = {
   referencePaiement?: Prisma.StringNullableWithAggregatesFilter<"PaiementEcolage"> | string | null
   datePaiement?: Prisma.DateTimeWithAggregatesFilter<"PaiementEcolage"> | Date | string
   remarque?: Prisma.StringNullableWithAggregatesFilter<"PaiementEcolage"> | string | null
+  idempotencyKey?: Prisma.StringNullableWithAggregatesFilter<"PaiementEcolage"> | string | null
   eleveId?: Prisma.StringWithAggregatesFilter<"PaiementEcolage"> | string
   ecolageId?: Prisma.StringWithAggregatesFilter<"PaiementEcolage"> | string
   schoolId?: Prisma.StringWithAggregatesFilter<"PaiementEcolage"> | string
@@ -392,6 +405,7 @@ export type PaiementEcolageCreateInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   eleve: Prisma.EleveCreateNestedOneWithoutPaiementEcolagesInput
@@ -409,6 +423,7 @@ export type PaiementEcolageUncheckedCreateInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   eleveId: string
   ecolageId: string
   schoolId: string
@@ -426,6 +441,7 @@ export type PaiementEcolageUpdateInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eleve?: Prisma.EleveUpdateOneRequiredWithoutPaiementEcolagesNestedInput
@@ -443,6 +459,7 @@ export type PaiementEcolageUncheckedUpdateInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   ecolageId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -460,6 +477,7 @@ export type PaiementEcolageCreateManyInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   eleveId: string
   ecolageId: string
   schoolId: string
@@ -477,6 +495,7 @@ export type PaiementEcolageUpdateManyMutationInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -489,6 +508,7 @@ export type PaiementEcolageUncheckedUpdateManyInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   ecolageId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -508,6 +528,11 @@ export type PaiementEcolageOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type PaiementEcolageSchoolIdIdempotencyKeyCompoundUniqueInput = {
+  schoolId: string
+  idempotencyKey: string
+}
+
 export type PaiementEcolageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   numeroRecu?: Prisma.SortOrder
@@ -516,6 +541,7 @@ export type PaiementEcolageCountOrderByAggregateInput = {
   referencePaiement?: Prisma.SortOrder
   datePaiement?: Prisma.SortOrder
   remarque?: Prisma.SortOrder
+  idempotencyKey?: Prisma.SortOrder
   eleveId?: Prisma.SortOrder
   ecolageId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
@@ -537,6 +563,7 @@ export type PaiementEcolageMaxOrderByAggregateInput = {
   referencePaiement?: Prisma.SortOrder
   datePaiement?: Prisma.SortOrder
   remarque?: Prisma.SortOrder
+  idempotencyKey?: Prisma.SortOrder
   eleveId?: Prisma.SortOrder
   ecolageId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
@@ -554,6 +581,7 @@ export type PaiementEcolageMinOrderByAggregateInput = {
   referencePaiement?: Prisma.SortOrder
   datePaiement?: Prisma.SortOrder
   remarque?: Prisma.SortOrder
+  idempotencyKey?: Prisma.SortOrder
   eleveId?: Prisma.SortOrder
   ecolageId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
@@ -789,6 +817,7 @@ export type PaiementEcolageCreateWithoutAgentInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   eleve: Prisma.EleveCreateNestedOneWithoutPaiementEcolagesInput
@@ -805,6 +834,7 @@ export type PaiementEcolageUncheckedCreateWithoutAgentInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   eleveId: string
   ecolageId: string
   schoolId: string
@@ -831,6 +861,7 @@ export type PaiementEcolageCreateWithoutUserInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   eleve: Prisma.EleveCreateNestedOneWithoutPaiementEcolagesInput
@@ -847,6 +878,7 @@ export type PaiementEcolageUncheckedCreateWithoutUserInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   eleveId: string
   ecolageId: string
   schoolId: string
@@ -892,6 +924,7 @@ export type PaiementEcolageScalarWhereInput = {
   referencePaiement?: Prisma.StringNullableFilter<"PaiementEcolage"> | string | null
   datePaiement?: Prisma.DateTimeFilter<"PaiementEcolage"> | Date | string
   remarque?: Prisma.StringNullableFilter<"PaiementEcolage"> | string | null
+  idempotencyKey?: Prisma.StringNullableFilter<"PaiementEcolage"> | string | null
   eleveId?: Prisma.StringFilter<"PaiementEcolage"> | string
   ecolageId?: Prisma.StringFilter<"PaiementEcolage"> | string
   schoolId?: Prisma.StringFilter<"PaiementEcolage"> | string
@@ -925,6 +958,7 @@ export type PaiementEcolageCreateWithoutSchoolInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   eleve: Prisma.EleveCreateNestedOneWithoutPaiementEcolagesInput
@@ -941,6 +975,7 @@ export type PaiementEcolageUncheckedCreateWithoutSchoolInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   eleveId: string
   ecolageId: string
   agentId: string
@@ -983,6 +1018,7 @@ export type PaiementEcolageCreateWithoutEleveInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   ecolage: Prisma.EcolageCreateNestedOneWithoutPaiementEcolagesInput
@@ -999,6 +1035,7 @@ export type PaiementEcolageUncheckedCreateWithoutEleveInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   ecolageId: string
   schoolId: string
   agentId: string
@@ -1041,6 +1078,7 @@ export type PaiementEcolageCreateWithoutEcolageInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   eleve: Prisma.EleveCreateNestedOneWithoutPaiementEcolagesInput
@@ -1057,6 +1095,7 @@ export type PaiementEcolageUncheckedCreateWithoutEcolageInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   eleveId: string
   schoolId: string
   agentId: string
@@ -1099,6 +1138,7 @@ export type PaiementEcolageCreateManyAgentInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   eleveId: string
   ecolageId: string
   schoolId: string
@@ -1115,6 +1155,7 @@ export type PaiementEcolageCreateManyUserInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   eleveId: string
   ecolageId: string
   schoolId: string
@@ -1131,6 +1172,7 @@ export type PaiementEcolageUpdateWithoutAgentInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eleve?: Prisma.EleveUpdateOneRequiredWithoutPaiementEcolagesNestedInput
@@ -1147,6 +1189,7 @@ export type PaiementEcolageUncheckedUpdateWithoutAgentInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   ecolageId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1163,6 +1206,7 @@ export type PaiementEcolageUncheckedUpdateManyWithoutAgentInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   ecolageId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1179,6 +1223,7 @@ export type PaiementEcolageUpdateWithoutUserInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eleve?: Prisma.EleveUpdateOneRequiredWithoutPaiementEcolagesNestedInput
@@ -1195,6 +1240,7 @@ export type PaiementEcolageUncheckedUpdateWithoutUserInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   ecolageId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1211,6 +1257,7 @@ export type PaiementEcolageUncheckedUpdateManyWithoutUserInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   ecolageId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1227,6 +1274,7 @@ export type PaiementEcolageCreateManySchoolInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   eleveId: string
   ecolageId: string
   agentId: string
@@ -1243,6 +1291,7 @@ export type PaiementEcolageUpdateWithoutSchoolInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eleve?: Prisma.EleveUpdateOneRequiredWithoutPaiementEcolagesNestedInput
@@ -1259,6 +1308,7 @@ export type PaiementEcolageUncheckedUpdateWithoutSchoolInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   ecolageId?: Prisma.StringFieldUpdateOperationsInput | string
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1275,6 +1325,7 @@ export type PaiementEcolageUncheckedUpdateManyWithoutSchoolInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   ecolageId?: Prisma.StringFieldUpdateOperationsInput | string
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1291,6 +1342,7 @@ export type PaiementEcolageCreateManyEleveInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   ecolageId: string
   schoolId: string
   agentId: string
@@ -1307,6 +1359,7 @@ export type PaiementEcolageUpdateWithoutEleveInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ecolage?: Prisma.EcolageUpdateOneRequiredWithoutPaiementEcolagesNestedInput
@@ -1323,6 +1376,7 @@ export type PaiementEcolageUncheckedUpdateWithoutEleveInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ecolageId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1339,6 +1393,7 @@ export type PaiementEcolageUncheckedUpdateManyWithoutEleveInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ecolageId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1355,6 +1410,7 @@ export type PaiementEcolageCreateManyEcolageInput = {
   referencePaiement?: string | null
   datePaiement?: Date | string
   remarque?: string | null
+  idempotencyKey?: string | null
   eleveId: string
   schoolId: string
   agentId: string
@@ -1371,6 +1427,7 @@ export type PaiementEcolageUpdateWithoutEcolageInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eleve?: Prisma.EleveUpdateOneRequiredWithoutPaiementEcolagesNestedInput
@@ -1387,6 +1444,7 @@ export type PaiementEcolageUncheckedUpdateWithoutEcolageInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1403,6 +1461,7 @@ export type PaiementEcolageUncheckedUpdateManyWithoutEcolageInput = {
   referencePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   datePaiement?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idempotencyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1421,6 +1480,7 @@ export type PaiementEcolageSelect<ExtArgs extends runtime.Types.Extensions.Inter
   referencePaiement?: boolean
   datePaiement?: boolean
   remarque?: boolean
+  idempotencyKey?: boolean
   eleveId?: boolean
   ecolageId?: boolean
   schoolId?: boolean
@@ -1443,6 +1503,7 @@ export type PaiementEcolageSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   referencePaiement?: boolean
   datePaiement?: boolean
   remarque?: boolean
+  idempotencyKey?: boolean
   eleveId?: boolean
   ecolageId?: boolean
   schoolId?: boolean
@@ -1465,6 +1526,7 @@ export type PaiementEcolageSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   referencePaiement?: boolean
   datePaiement?: boolean
   remarque?: boolean
+  idempotencyKey?: boolean
   eleveId?: boolean
   ecolageId?: boolean
   schoolId?: boolean
@@ -1487,6 +1549,7 @@ export type PaiementEcolageSelectScalar = {
   referencePaiement?: boolean
   datePaiement?: boolean
   remarque?: boolean
+  idempotencyKey?: boolean
   eleveId?: boolean
   ecolageId?: boolean
   schoolId?: boolean
@@ -1496,7 +1559,7 @@ export type PaiementEcolageSelectScalar = {
   userId?: boolean
 }
 
-export type PaiementEcolageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "numeroRecu" | "montant" | "modePaiement" | "referencePaiement" | "datePaiement" | "remarque" | "eleveId" | "ecolageId" | "schoolId" | "agentId" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["paiementEcolage"]>
+export type PaiementEcolageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "numeroRecu" | "montant" | "modePaiement" | "referencePaiement" | "datePaiement" | "remarque" | "idempotencyKey" | "eleveId" | "ecolageId" | "schoolId" | "agentId" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["paiementEcolage"]>
 export type PaiementEcolageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
   ecolage?: boolean | Prisma.EcolageDefaultArgs<ExtArgs>
@@ -1536,6 +1599,7 @@ export type $PaiementEcolagePayload<ExtArgs extends runtime.Types.Extensions.Int
     referencePaiement: string | null
     datePaiement: Date
     remarque: string | null
+    idempotencyKey: string | null
     eleveId: string
     ecolageId: string
     schoolId: string
@@ -1978,6 +2042,7 @@ export interface PaiementEcolageFieldRefs {
   readonly referencePaiement: Prisma.FieldRef<"PaiementEcolage", 'String'>
   readonly datePaiement: Prisma.FieldRef<"PaiementEcolage", 'DateTime'>
   readonly remarque: Prisma.FieldRef<"PaiementEcolage", 'String'>
+  readonly idempotencyKey: Prisma.FieldRef<"PaiementEcolage", 'String'>
   readonly eleveId: Prisma.FieldRef<"PaiementEcolage", 'String'>
   readonly ecolageId: Prisma.FieldRef<"PaiementEcolage", 'String'>
   readonly schoolId: Prisma.FieldRef<"PaiementEcolage", 'String'>

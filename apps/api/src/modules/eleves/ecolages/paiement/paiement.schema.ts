@@ -29,11 +29,20 @@ export const enregistrementPaiementSchema = z
     referencePaiement: z.string().trim().max(100).nullish(),
     datePaiement: z.coerce.date().default(() => new Date()),
     remarque: z.string().trim().max(1000).nullish(),
+    // Fournie par le client pour éviter un double encaissement en cas de ré-essai réseau.
+    idempotencyKey: z.string().trim().min(1).max(200).nullish(),
   })
-  .refine((data) => data.typeFrais !== "ECOLAGE" || data.mois !== null, {
+  .refine((data) => data.typeFrais !== "ECOLAGE" || data.mois != null, {
     message: "Le mois est requis pour un paiement d'écolage",
     path: ["mois"],
-  });
+  })
+  .refine(
+    (data) => data.modePaiement === "ESPECES" || !!data.referencePaiement,
+    {
+      message: "La référence est requise pour ce mode de paiement",
+      path: ["referencePaiement"],
+    },
+  );
 
 export const paiementResponseSchema = z.object({
   id: z.string().uuid(),

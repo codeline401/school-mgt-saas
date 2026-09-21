@@ -1956,6 +1956,9 @@ model PaiementEcolage {
   datePaiement      DateTime     @default(now())
   remarque          String?
 
+  // Clé fournie par le client pour dédupliquer un ré-essai réseau (rejoue = même paiement retourné).
+  idempotencyKey String?
+
   eleveId String
   eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
 
@@ -1978,6 +1981,8 @@ model PaiementEcolage {
   @@index([ecolageId])
   @@index([schoolId])
   @@index([agentId])
+  // Autorise plusieurs lignes sans clé (idempotencyKey null), mais interdit un doublon pour une même clé/école.
+  @@unique([schoolId, idempotencyKey])
 }
 
 model EcolageConfig {
