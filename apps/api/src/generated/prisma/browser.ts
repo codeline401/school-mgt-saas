@@ -288,6 +288,16 @@ export type Ecolage = Prisma.EcolageModel
  */
 export type PaiementEcolage = Prisma.PaiementEcolageModel
 /**
+ * Model EcolageConfig
+ * 
+ */
+export type EcolageConfig = Prisma.EcolageConfigModel
+/**
+ * Model EcolageEcheance
+ * 
+ */
+export type EcolageEcheance = Prisma.EcolageEcheanceModel
+/**
  * Model Parent
  * 
  */

@@ -46,6 +46,8 @@ export const paiementResponseSchema = z.object({
   statutEcolage: z.enum(["IMPAYE", "PARTIEL", "PAYE", "EN_RETARD"]),
   agentId: z.string().uuid(),
   createdAt: z.string().datetime(),
+  // Rempli uniquement quand l'excédent du mois courant a été reporté sur le mois suivant.
+  excedentAppliqueMoisSuivant: z.string().nullable(),
 });
 
 export const saisiePaiementSchema = z

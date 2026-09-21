@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { api } from "../../../../../lib/api";
+import { api, getApiError } from "../../../../../lib/api";
 
 export type ModePaiement = "ESPECES" | "VIREMENT" | "CHEQUE" | "MOBILE_MONEY";
 export type TypeFrais = "ECOLAGE" | "DROIT_INSCRIPTION" | "FRAIS_EXAMEN";
@@ -14,6 +14,10 @@ export type EcolageLigne = {
   montant: string;
   montantPaye: string;
   statutPaiement: StatutPaiementEcolage;
+  dateEcheance: string | null;
+  // false / null dès que la classe n'a pas de pénalité configurée (cas majoritaire).
+  penaliteApplicable: boolean;
+  montantPenalite: string | null;
 };
 
 /** Payload envoyé à l'API pour encaisser un paiement d'écolage */
@@ -39,6 +43,8 @@ export type PaiementResponse = {
   statutEcolage: StatutPaiementEcolage;
   agentId: string;
   createdAt: string;
+  // Rempli si l'excédent saisi a été reporté automatiquement sur le mois suivant.
+  excedentAppliqueMoisSuivant: string | null;
 };
 
 export const ecolagesEleveKeys = {
@@ -83,7 +89,19 @@ export function calculerStatutFinancier(ecolages: EcolageLigne[]) {
     return total + (Number(e.montant) - Number(e.montantPaye));
   }, 0);
 
-  return { moisPayes, moisEnRetard, moisPartiels, resteAPayer };
+  // Somme uniquement des pénalités réellement applicables (jamais calculée à 0).
+  const penalitesCumulees = ecolages.reduce((total, e) => {
+    if (!e.penaliteApplicable || !e.montantPenalite) return total;
+    return total + Number(e.montantPenalite);
+  }, 0);
+
+  return {
+    moisPayes,
+    moisEnRetard,
+    moisPartiels,
+    resteAPayer,
+    penalitesCumulees,
+  };
 }
 
 /**
@@ -115,11 +133,16 @@ export function useEnregistrerPaiement(eleveId?: string) {
         });
       }
       toast.success(`Paiement encaissé — Reçu n° ${paiement.numeroRecu}`);
+      if (paiement.excedentAppliqueMoisSuivant) {
+        toast(
+          `Excédent de ${paiement.excedentAppliqueMoisSuivant} reporté sur le mois suivant.`,
+        );
+      }
     },
     onError: (error) => {
-      const message =
-        error?.message ?? "Erreur lors de l'encaissement du paiement";
-      toast.error(message);
+      toast.error(
+        getApiError(error, "Erreur lors de l'encaissement du paiement"),
+      );
     },
   });
 }

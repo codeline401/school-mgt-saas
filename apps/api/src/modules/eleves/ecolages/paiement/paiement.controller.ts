@@ -8,6 +8,8 @@ import {
   PaiementEleveForbiddenError,
   PaiementEleveNotFoundError,
   PaiementFraisIntrouvableError,
+  PaiementMoisDejaSoldeError,
+  PaiementExcedentSansMoisSuivantError,
 } from "./paiement.service.js";
 import { ZodError } from "zod";
 
@@ -94,15 +96,20 @@ export const enregistrerPaiementEcolage = async (
       return res.status(404).json({ message: error.message });
     }
 
+    if (error instanceof PaiementMoisDejaSoldeError) {
+      return res.status(409).json({ message: error.message });
+    }
+
+    if (error instanceof PaiementExcedentSansMoisSuivantError) {
+      return res.status(400).json({ message: error.message });
+    }
+
     console.error(
       "Erreur lors de l'enregistrement du paiement d'écolage:",
       error,
     );
-    return res
-      .status(500)
-      .json({
-        message:
-          "Erreur interne lors de l'enregistrement du paiement d'écolage",
-      });
+    return res.status(500).json({
+      message: "Erreur interne lors de l'enregistrement du paiement d'écolage",
+    });
   }
 };

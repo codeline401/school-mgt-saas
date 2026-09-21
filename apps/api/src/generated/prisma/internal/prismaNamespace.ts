@@ -438,6 +438,8 @@ export const ModelName = {
   DroitInscription: 'DroitInscription',
   Ecolage: 'Ecolage',
   PaiementEcolage: 'PaiementEcolage',
+  EcolageConfig: 'EcolageConfig',
+  EcolageEcheance: 'EcolageEcheance',
   Parent: 'Parent',
   ResponsableEleve: 'ResponsableEleve',
   Niveau: 'Niveau',
@@ -459,7 +461,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse"
+    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4459,6 +4461,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    EcolageConfig: {
+      payload: Prisma.$EcolageConfigPayload<ExtArgs>
+      fields: Prisma.EcolageConfigFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EcolageConfigFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageConfigPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EcolageConfigFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageConfigPayload>
+        }
+        findFirst: {
+          args: Prisma.EcolageConfigFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageConfigPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EcolageConfigFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageConfigPayload>
+        }
+        findMany: {
+          args: Prisma.EcolageConfigFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageConfigPayload>[]
+        }
+        create: {
+          args: Prisma.EcolageConfigCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageConfigPayload>
+        }
+        createMany: {
+          args: Prisma.EcolageConfigCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EcolageConfigCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageConfigPayload>[]
+        }
+        delete: {
+          args: Prisma.EcolageConfigDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageConfigPayload>
+        }
+        update: {
+          args: Prisma.EcolageConfigUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageConfigPayload>
+        }
+        deleteMany: {
+          args: Prisma.EcolageConfigDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EcolageConfigUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EcolageConfigUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageConfigPayload>[]
+        }
+        upsert: {
+          args: Prisma.EcolageConfigUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageConfigPayload>
+        }
+        aggregate: {
+          args: Prisma.EcolageConfigAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEcolageConfig>
+        }
+        groupBy: {
+          args: Prisma.EcolageConfigGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EcolageConfigGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EcolageConfigCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EcolageConfigCountAggregateOutputType> | number
+        }
+      }
+    }
+    EcolageEcheance: {
+      payload: Prisma.$EcolageEcheancePayload<ExtArgs>
+      fields: Prisma.EcolageEcheanceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EcolageEcheanceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageEcheancePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EcolageEcheanceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageEcheancePayload>
+        }
+        findFirst: {
+          args: Prisma.EcolageEcheanceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageEcheancePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EcolageEcheanceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageEcheancePayload>
+        }
+        findMany: {
+          args: Prisma.EcolageEcheanceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageEcheancePayload>[]
+        }
+        create: {
+          args: Prisma.EcolageEcheanceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageEcheancePayload>
+        }
+        createMany: {
+          args: Prisma.EcolageEcheanceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EcolageEcheanceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageEcheancePayload>[]
+        }
+        delete: {
+          args: Prisma.EcolageEcheanceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageEcheancePayload>
+        }
+        update: {
+          args: Prisma.EcolageEcheanceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageEcheancePayload>
+        }
+        deleteMany: {
+          args: Prisma.EcolageEcheanceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EcolageEcheanceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EcolageEcheanceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageEcheancePayload>[]
+        }
+        upsert: {
+          args: Prisma.EcolageEcheanceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EcolageEcheancePayload>
+        }
+        aggregate: {
+          args: Prisma.EcolageEcheanceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEcolageEcheance>
+        }
+        groupBy: {
+          args: Prisma.EcolageEcheanceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EcolageEcheanceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EcolageEcheanceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EcolageEcheanceCountAggregateOutputType> | number
+        }
+      }
+    }
     Parent: {
       payload: Prisma.$ParentPayload<ExtArgs>
       fields: Prisma.ParentFieldRefs
@@ -5852,6 +6002,36 @@ export const PaiementEcolageScalarFieldEnum = {
 export type PaiementEcolageScalarFieldEnum = (typeof PaiementEcolageScalarFieldEnum)[keyof typeof PaiementEcolageScalarFieldEnum]
 
 
+export const EcolageConfigScalarFieldEnum = {
+  id: 'id',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  anneeScolaire: 'anneeScolaire',
+  montantMensuel: 'montantMensuel',
+  jourEcheance: 'jourEcheance',
+  penaliteRetard: 'penaliteRetard',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type EcolageConfigScalarFieldEnum = (typeof EcolageConfigScalarFieldEnum)[keyof typeof EcolageConfigScalarFieldEnum]
+
+
+export const EcolageEcheanceScalarFieldEnum = {
+  id: 'id',
+  configId: 'configId',
+  mois: 'mois',
+  montant: 'montant',
+  dateEcheance: 'dateEcheance',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EcolageEcheanceScalarFieldEnum = (typeof EcolageEcheanceScalarFieldEnum)[keyof typeof EcolageEcheanceScalarFieldEnum]
+
+
 export const ParentScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
@@ -6911,6 +7091,8 @@ export type GlobalOmitConfig = {
   droitInscription?: Prisma.DroitInscriptionOmit
   ecolage?: Prisma.EcolageOmit
   paiementEcolage?: Prisma.PaiementEcolageOmit
+  ecolageConfig?: Prisma.EcolageConfigOmit
+  ecolageEcheance?: Prisma.EcolageEcheanceOmit
   parent?: Prisma.ParentOmit
   responsableEleve?: Prisma.ResponsableEleveOmit
   niveau?: Prisma.NiveauOmit

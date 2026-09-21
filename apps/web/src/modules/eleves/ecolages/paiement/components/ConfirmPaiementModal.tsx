@@ -1,4 +1,4 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, AlertTriangle } from "lucide-react";
 
 type ConfirmPaiementModalValues = {
   typeFrais: string;
@@ -12,6 +12,9 @@ type ConfirmPaiementModalProps = {
   isOpen: boolean;
   values: ConfirmPaiementModalValues | null;
   isPending: boolean;
+  // Montant restant dû pour le mois sélectionné, utilisé pour signaler un paiement partiel.
+  montantDu?: number | null;
+  isPaiementPartiel?: boolean;
   onConfirm: () => void;
   onClose: () => void;
 };
@@ -21,6 +24,8 @@ export function ConfirmPaiementModal({
   isOpen,
   values,
   isPending,
+  montantDu,
+  isPaiementPartiel,
   onConfirm,
   onClose,
 }: ConfirmPaiementModalProps) {
@@ -55,6 +60,17 @@ export function ConfirmPaiementModal({
             </p>
           )}
         </div>
+
+        {isPaiementPartiel && (
+          <div role="alert" className="alert alert-warning mt-4">
+            <AlertTriangle size={18} />
+            <span>
+              Le montant saisi est inférieur au montant dû
+              {montantDu != null ? ` (${montantDu})` : ""}. Ce paiement sera
+              enregistré comme <strong>partiel</strong>.
+            </span>
+          </div>
+        )}
 
         <p className="mt-4 text-sm text-warning">
           Cette action est définitive et génère un reçu d’encaissement.

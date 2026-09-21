@@ -11,6 +11,10 @@ export type EcolageLigneResponse = {
   montant: string;
   montantPaye: string;
   statutPaiement: string;
+  dateEcheance: string | null;
+  // Uniquement rempli quand le retard est avéré ET qu'une pénalité > 0 est configurée sur la classe.
+  penaliteApplicable: boolean;
+  montantPenalite: string | null;
 };
 
 type UserContext = {
@@ -35,6 +39,24 @@ export class PaiementEleveForbiddenError extends Error {
   }
 }
 
+export class PaiementMoisDejaSoldeError extends Error {
+  status = 409;
+  constructor(message = "Ce mois est déjà entièrement payé") {
+    super(message);
+    this.name = "PaiementMoisDejaSoldeError";
+  }
+}
+
+export class PaiementExcedentSansMoisSuivantError extends Error {
+  status = 400;
+  constructor(
+    message = "Le montant saisi dépasse le solde dû et aucun mois suivant n'existe pour reporter l'excédent. Réduisez le montant.",
+  ) {
+    super(message);
+    this.name = "PaiementExcedentSansMoisSuivantError";
+  }
+}
+
 export class PaiementFraisIntrouvableError extends Error {
   status = 404;
   constructor(
@@ -43,6 +65,12 @@ export class PaiementFraisIntrouvableError extends Error {
     super(message); // Appel du constructeur de la classe parente Error avec le message fourni
     this.name = "PaiementFraisIntruvableError";
   }
+}
+
+// Renvoie le mois calendaire suivant dans l'année scolaire (Sept.→Août), ou null si Août (dernier mois).
+function moisSuivantScolaire(mois: number): number | null {
+  if (mois === 8) return null;
+  return mois === 12 ? 1 : mois + 1;
 }
 
 export class PaiementEcolageService {
@@ -73,11 +101,58 @@ export class PaiementEcolageService {
       },
     });
 
+    // Récupère les échéances/pénalités configurées pour les classes concernées,
+    // pour éviter une requête par ligne d'écolage.
+    const classeIds = [
+      ...new Set(
+        ecolages.map((e) => e.classeId).filter((id): id is string => !!id),
+      ),
+    ];
+
+    const configs = classeIds.length
+      ? await prisma.ecolageConfig.findMany({
+          where: { classeId: { in: classeIds } },
+          include: { echeances: true },
+        })
+      : [];
+
+    const echeanceParCle = new Map<
+      string,
+      { dateEcheance: Date; penaliteRetard: number }
+    >();
+    for (const config of configs) {
+      const penaliteRetard = Number(config.penaliteRetard ?? 0);
+      for (const echeance of config.echeances) {
+        echeanceParCle.set(
+          `${config.classeId}-${config.anneeScolaire}-${echeance.mois}`,
+          { dateEcheance: echeance.dateEcheance, penaliteRetard },
+        );
+      }
+    }
+
+    const maintenant = new Date();
+
     return ecolages.map((ecolage) => {
       const montantPaye = ecolage.paiementEcolages.reduce(
         (total, paiement) => total + Number(paiement.montant),
         0,
       );
+      const montantRestant = Number(ecolage.montant) - montantPaye;
+
+      const echeance = ecolage.classeId
+        ? echeanceParCle.get(
+            `${ecolage.classeId}-${ecolage.anneeScolaire}-${ecolage.mois}`,
+          )
+        : undefined;
+
+      const enRetard =
+        montantRestant > 0 &&
+        !!echeance &&
+        echeance.dateEcheance.getTime() < maintenant.getTime();
+
+      // Pas de pénalité affichée si la classe n'en a pas configuré (valeur 0/nulle).
+      const penaliteApplicable =
+        enRetard && (echeance?.penaliteRetard ?? 0) > 0;
 
       return {
         id: ecolage.id,
@@ -86,6 +161,11 @@ export class PaiementEcolageService {
         montant: ecolage.montant.toString(),
         montantPaye: montantPaye.toString(),
         statutPaiement: ecolage.statutPaiement,
+        dateEcheance: echeance?.dateEcheance.toISOString() ?? null,
+        penaliteApplicable,
+        montantPenalite: penaliteApplicable
+          ? String(echeance!.penaliteRetard)
+          : null,
       };
     });
   }
@@ -144,10 +224,47 @@ export class PaiementEcolageService {
       });
 
       const totalDejaPaye = Number(paiementExistants._sum.montant ?? 0); // Montant total déjà payé pour cet écolage
-      const nouveauTotal = totalDejaPaye + input.montantSaisi; // Nouveau total après ajout du paiement saisi
       const montantDu = Number(ecolage.montant); // Montant total dû pour cet écolage
+      const resteDuMoisCourant = montantDu - totalDejaPaye;
 
-      const nouveauStatut = nouveauTotal >= montantDu ? "PAYE" : "PARTIEL"; // Détermination du nouveau statut de l'écolage en fonction du montant payé
+      // Empêche un double encaissement sur un mois déjà soldé (ex: re-sélection du même mois payé).
+      if (resteDuMoisCourant <= 0) {
+        throw new PaiementMoisDejaSoldeError();
+      }
+
+      // Ce qui dépasse le solde du mois courant doit être reporté sur le mois suivant.
+      const montantAppliqueMoisCourant = Math.min(
+        input.montantSaisi,
+        resteDuMoisCourant,
+      );
+      const excedent = input.montantSaisi - montantAppliqueMoisCourant;
+
+      let ecolageMoisSuivant: typeof ecolage | null = null;
+      if (excedent > 0) {
+        const prochainMois = moisSuivantScolaire(input.mois!);
+
+        // Août est le dernier mois de l'année scolaire : rien à reporter au-delà.
+        if (prochainMois === null) {
+          throw new PaiementExcedentSansMoisSuivantError();
+        }
+
+        ecolageMoisSuivant = await tx.ecolage.findUnique({
+          where: {
+            eleveId_anneeScolaire_mois: {
+              eleveId,
+              anneeScolaire: input.anneeScolaire,
+              mois: prochainMois,
+            },
+          },
+        });
+
+        // Aucune ligne d'écolage générée pour ce mois suivant : on bloque toute la saisie.
+        if (!ecolageMoisSuivant) {
+          throw new PaiementExcedentSansMoisSuivantError();
+        }
+      }
+      const statutMoisCourant =
+        montantAppliqueMoisCourant >= resteDuMoisCourant ? "PAYE" : "PARTIEL";
 
       // Numéro de reçu unique: compteur par école + horodatage
       const compteur = await tx.paiementEcolage.count({
@@ -158,7 +275,7 @@ export class PaiementEcolageService {
       const paiement = await tx.paiementEcolage.create({
         data: {
           numeroRecu,
-          montant: input.montantSaisi,
+          montant: montantAppliqueMoisCourant,
           modePaiement: input.modePaiement,
           referencePaiement: input.referencePaiement ?? null,
           datePaiement: input.datePaiement,
@@ -172,8 +289,50 @@ export class PaiementEcolageService {
 
       await tx.ecolage.update({
         where: { id: ecolage.id },
-        data: { statutPaiement: nouveauStatut },
+        data: { statutPaiement: statutMoisCourant },
       });
+
+      let excedentAppliqueMoisSuivant: string | null = null;
+
+      if (excedent > 0 && ecolageMoisSuivant) {
+        const paiementsMoisSuivant = await tx.paiementEcolage.aggregate({
+          where: { ecolageId: ecolageMoisSuivant.id },
+          _sum: { montant: true },
+        });
+        const totalDejaPayeMoisSuivant = Number(
+          paiementsMoisSuivant._sum.montant ?? 0,
+        );
+        const montantDuMoisSuivant = Number(ecolageMoisSuivant.montant);
+
+        const numeroRecuSuivant = `REC-${eleve.schoolId.slice(0, 8).toUpperCase()}-${Date.now()}-${compteur + 2}`;
+
+        await tx.paiementEcolage.create({
+          data: {
+            numeroRecu: numeroRecuSuivant,
+            montant: excedent,
+            modePaiement: input.modePaiement,
+            referencePaiement: input.referencePaiement ?? null,
+            datePaiement: input.datePaiement,
+            remarque: `Excédent reporté depuis le mois ${input.mois}`,
+            eleveId,
+            ecolageId: ecolageMoisSuivant.id,
+            schoolId: eleve.schoolId,
+            agentId: user.id,
+          },
+        });
+
+        const statutMoisSuivant =
+          totalDejaPayeMoisSuivant + excedent >= montantDuMoisSuivant
+            ? "PAYE"
+            : "PARTIEL";
+
+        await tx.ecolage.update({
+          where: { id: ecolageMoisSuivant.id },
+          data: { statutPaiement: statutMoisSuivant },
+        });
+
+        excedentAppliqueMoisSuivant = excedent.toString();
+      }
 
       return {
         id: paiement.id,
@@ -183,9 +342,10 @@ export class PaiementEcolageService {
         referencePaiement: paiement.referencePaiement,
         datePaiement: paiement.datePaiement.toISOString(),
         remarque: paiement.remarque,
-        statutEcolage: nouveauStatut,
+        statutEcolage: statutMoisCourant,
         agentId: paiement.agentId,
         createdAt: paiement.createdAt.toISOString(),
+        excedentAppliqueMoisSuivant,
       };
     });
   }

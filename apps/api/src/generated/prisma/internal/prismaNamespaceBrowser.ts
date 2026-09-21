@@ -105,6 +105,8 @@ export const ModelName = {
   DroitInscription: 'DroitInscription',
   Ecolage: 'Ecolage',
   PaiementEcolage: 'PaiementEcolage',
+  EcolageConfig: 'EcolageConfig',
+  EcolageEcheance: 'EcolageEcheance',
   Parent: 'Parent',
   ResponsableEleve: 'ResponsableEleve',
   Niveau: 'Niveau',
@@ -1037,6 +1039,36 @@ export const PaiementEcolageScalarFieldEnum = {
 } as const
 
 export type PaiementEcolageScalarFieldEnum = (typeof PaiementEcolageScalarFieldEnum)[keyof typeof PaiementEcolageScalarFieldEnum]
+
+
+export const EcolageConfigScalarFieldEnum = {
+  id: 'id',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  anneeScolaire: 'anneeScolaire',
+  montantMensuel: 'montantMensuel',
+  jourEcheance: 'jourEcheance',
+  penaliteRetard: 'penaliteRetard',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type EcolageConfigScalarFieldEnum = (typeof EcolageConfigScalarFieldEnum)[keyof typeof EcolageConfigScalarFieldEnum]
+
+
+export const EcolageEcheanceScalarFieldEnum = {
+  id: 'id',
+  configId: 'configId',
+  mois: 'mois',
+  montant: 'montant',
+  dateEcheance: 'dateEcheance',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EcolageEcheanceScalarFieldEnum = (typeof EcolageEcheanceScalarFieldEnum)[keyof typeof EcolageEcheanceScalarFieldEnum]
 
 
 export const ParentScalarFieldEnum = {

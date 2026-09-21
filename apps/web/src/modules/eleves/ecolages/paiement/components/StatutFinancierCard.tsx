@@ -1,4 +1,4 @@
-import { CheckCircle2, AlertTriangle, Wallet2 } from "lucide-react";
+import { CheckCircle2, AlertTriangle, Wallet2, Siren } from "lucide-react";
 import {
   useEcolagesEleve,
   calculerStatutFinancier,
@@ -42,7 +42,7 @@ export function StatutFinancierCard({ eleveId }: StatutFinancierCardProps) {
     );
   }
 
-  const { moisPayes, moisEnRetard, resteAPayer } =
+  const { moisPayes, moisEnRetard, resteAPayer, penalitesCumulees } =
     calculerStatutFinancier(ecolages);
 
   return (
@@ -75,6 +75,21 @@ export function StatutFinancierCard({ eleveId }: StatutFinancierCardProps) {
             </div>
           </div>
         </div>
+
+        {/* N'apparaît que si la classe a une pénalité de retard configurée (> 0) et effectivement due. */}
+        {penalitesCumulees > 0 && (
+          <div className="mt-3 flex items-center gap-3 rounded-lg border border-error/30 bg-error/10 p-3">
+            <Siren size={20} className="text-error" />
+            <div>
+              <p className="text-sm text-base-content/60">
+                Pénalités de retard cumulées
+              </p>
+              <p className="font-semibold text-error">
+                {formatMontant(penalitesCumulees)}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
