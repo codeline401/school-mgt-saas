@@ -26,6 +26,7 @@ import ResponsablesPage from "./informations/responsable/pages/ResponsablesPage"
 import ClasseAffectationTab from "./informations/affectation/ClasseAffectationTab";
 import { EmergencyContactSection } from "./informations/emergencyContact/components/EmergencyContactSection";
 import { HistoriqueSection } from "./informations/historique/components/HistoriqueSection";
+import { PaiementEcolageSection } from "./ecolages/paiement/components/PaiementEcolageSection";
 
 type MainTab =
   | "informations"
@@ -193,13 +194,7 @@ function GestionElevesPage() {
   const renderEcolageContent = () => {
     switch (activeEcolageSubTab) {
       case "paiements":
-        return (
-          <DevelopmentPlaceholder
-            icon={Wallet}
-            title="Paiements & encaissements"
-            description="Suivi des versements, soldes, échéances et régularisation du compte élève."
-          />
-        );
+        return <PaiementEcolageSection initialEleveId={eleveId} />;
       case "factures":
         return (
           <DevelopmentPlaceholder

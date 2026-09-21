@@ -64,6 +64,10 @@ model User {
   userDeleting                       Eleve[]                   @relation("EleveDeletedBy")
   affectationClassesEffectuePar      AffectationClasse[]       @relation("AffectationEffectue")
   affectationClasses                 AffectationClasse[]
+  paiementEnregistres                PaiementEcolage[]         @relation("PaiementsEnregistresPar")
+  paiementEcolages                   PaiementEcolage[]
+  ecolageConfigsCreees               EcolageConfig[]           @relation("EcolageConfigCreerPar")
+  ecolageConfigs                     EcolageConfig[]
 }
 
 // Modele SAAS
@@ -131,6 +135,8 @@ model School {
   sections                 Section[]
   options                  Option[]
   affectationClasses       AffectationClasse[]
+  paiementEcolages         PaiementEcolage[]
+  ecolageConfigs           EcolageConfig[]
 }
 
 model Classe {
@@ -171,6 +177,7 @@ model Classe {
   optionId                    String?
   affectationNouvellesClasses AffectationClasse[]   @relation("NouvelleClasse")
   affectationAnciennesClasses AffectationClasse[]   @relation("AncienneClasse")
+  ecolageConfigs              EcolageConfig[]
 
   @@unique([schoolId, nom])
   @@index([professeurPrincipalId])
@@ -1792,6 +1799,7 @@ model Eleve {
   userId                String?
   responsableEleves     ResponsableEleve[]
   affectationClasses    AffectationClasse[]
+  paiementEcolages      PaiementEcolage[]
 
   // Contraintes & Index
   @@unique([schoolId, matricule])
@@ -1914,12 +1922,117 @@ model Ecolage {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  statutPaiement   StatutPaiementEcolage @default(IMPAYE)
+  paiementEcolages PaiementEcolage[]
+
   // 🔧 FIX: si l'écolage est mensuel/trimestriel, adapte cette contrainte
   // (ajoute un champ "periode" ou "mois" et inclus-le dans le @@unique)
   @@unique([eleveId, anneeScolaire, mois])
   @@index([eleveId])
   @@index([schoolId])
   @@index([classeId])
+}
+
+enum ModePaiement {
+  ESPECES
+  VIREMENT
+  CHEQUE
+  MOBILE_MONEY
+}
+
+enum StatutPaiementEcolage {
+  IMPAYE
+  PARTIEL
+  PAYE
+  EN_RETARD
+}
+
+model PaiementEcolage {
+  id                String       @id @default(uuid())
+  numeroRecu        String       @unique
+  montant           Decimal      @db.Decimal(10, 2)
+  modePaiement      ModePaiement
+  referencePaiement String?
+  datePaiement      DateTime     @default(now())
+  remarque          String?
+
+  // Clé fournie par le client pour dédupliquer un ré-essai réseau (rejoue = même paiement retourné).
+  idempotencyKey String?
+
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  ecolageId String
+  ecolage   Ecolage @relation(fields: [ecolageId], references: [id], onDelete: Cascade)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  // Traçabilité de l'agent qui a saisi le paiement
+  agentId String
+  agent   User   @relation("PaiementsEnregistresPar", fields: [agentId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+
+  @@index([eleveId])
+  @@index([ecolageId])
+  @@index([schoolId])
+  @@index([agentId])
+  // Autorise plusieurs lignes sans clé (idempotencyKey null), mais interdit un doublon pour une même clé/école.
+  @@unique([schoolId, idempotencyKey])
+}
+
+model EcolageConfig {
+  id String @id @default(uuid())
+
+  classeId String
+  classe   Classe @relation(fields: [classeId], references: [id], onDelete: Cascade)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  anneeScolaire String // format AAAA-AAAA
+
+  montantMensuel Decimal @db.Decimal(10, 2) // montant par défaut appliqué aux mois
+
+  jourEcheance Int @default(10) // jour du mois (1-28) avant lequel le paiement est attendu
+
+  penaliteRetard Decimal? @db.Decimal(10, 2) // pénalité appliquée en cas de retard de paiement
+
+  echeances EcolageEcheance[]
+
+  // Traçabilité: qui a défini/modifié ce paramétrage
+  createdById String?
+  createdBy   User?   @relation("EcolageConfigCreerPar", fields: [createdById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+
+  @@unique([classeId, anneeScolaire])
+  @@index([schoolId])
+  @@index([classeId])
+}
+
+model EcolageEcheance {
+  id String @id @default(uuid())
+
+  configId String
+  config   EcolageConfig @relation(fields: [configId], references: [id], onDelete: Cascade)
+
+  mois         Int // 1 à 12
+  montant      Decimal  @db.Decimal(10, 2) // montant dû ce mois-là (peut différer du montant mensuel par défaut)
+  dateEcheance DateTime // date à laquelle le paiement est attendu
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([configId, mois])
+  @@index([configId])
 }
 
 model Parent {

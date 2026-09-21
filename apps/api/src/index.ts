@@ -31,6 +31,7 @@ import matieresRoutes from "./routes/matieresRoute.js"; // Importation des route
 // gestion eleves
 import elevesRoutes from "./modules/eleves/eleves.routes.js"; // Importation des routes pour la gestion des élèves
 import affectationRoutes from "./modules/eleves/informations/affectation/affectation.routes.js"; // Niveaux, sections, options et affectations de classe
+import ecolageConfigRoutes from "./modules/parametres/ecolage/ecolageConfig.routes.js";
 
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
@@ -51,6 +52,7 @@ app.use("/api/programme-realise", programmeRoutes); // Ajout des routes pour le 
 app.use("/api/documents", documentRoutes); // Ajout des routes pour les documents pédagogiques
 app.use("/api/logistique", logistiqueRoutes); // Ajout des routes pour la logistique (locaux, stocks, inventaire, maintenance)
 app.use("/api/stocks", articleStockRoutes); // Ajout des routes pour la gestion des articles en stock
+app.use("/api/parametres/ecolage", ecolageConfigRoutes); // Ajout des routes pour la configuration de l'écolage
 
 app.use("/api/eleves", elevesRoutes); // Ajout des routes pour la gestion des élèves
 

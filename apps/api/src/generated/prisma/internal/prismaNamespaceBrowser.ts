@@ -104,6 +104,9 @@ export const ModelName = {
   ProfessionEleve: 'ProfessionEleve',
   DroitInscription: 'DroitInscription',
   Ecolage: 'Ecolage',
+  PaiementEcolage: 'PaiementEcolage',
+  EcolageConfig: 'EcolageConfig',
+  EcolageEcheance: 'EcolageEcheance',
   Parent: 'Parent',
   ResponsableEleve: 'ResponsableEleve',
   Niveau: 'Niveau',
@@ -1011,10 +1014,62 @@ export const EcolageScalarFieldEnum = {
   classeId: 'classeId',
   schoolId: 'schoolId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  statutPaiement: 'statutPaiement'
 } as const
 
 export type EcolageScalarFieldEnum = (typeof EcolageScalarFieldEnum)[keyof typeof EcolageScalarFieldEnum]
+
+
+export const PaiementEcolageScalarFieldEnum = {
+  id: 'id',
+  numeroRecu: 'numeroRecu',
+  montant: 'montant',
+  modePaiement: 'modePaiement',
+  referencePaiement: 'referencePaiement',
+  datePaiement: 'datePaiement',
+  remarque: 'remarque',
+  idempotencyKey: 'idempotencyKey',
+  eleveId: 'eleveId',
+  ecolageId: 'ecolageId',
+  schoolId: 'schoolId',
+  agentId: 'agentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type PaiementEcolageScalarFieldEnum = (typeof PaiementEcolageScalarFieldEnum)[keyof typeof PaiementEcolageScalarFieldEnum]
+
+
+export const EcolageConfigScalarFieldEnum = {
+  id: 'id',
+  classeId: 'classeId',
+  schoolId: 'schoolId',
+  anneeScolaire: 'anneeScolaire',
+  montantMensuel: 'montantMensuel',
+  jourEcheance: 'jourEcheance',
+  penaliteRetard: 'penaliteRetard',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type EcolageConfigScalarFieldEnum = (typeof EcolageConfigScalarFieldEnum)[keyof typeof EcolageConfigScalarFieldEnum]
+
+
+export const EcolageEcheanceScalarFieldEnum = {
+  id: 'id',
+  configId: 'configId',
+  mois: 'mois',
+  montant: 'montant',
+  dateEcheance: 'dateEcheance',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EcolageEcheanceScalarFieldEnum = (typeof EcolageEcheanceScalarFieldEnum)[keyof typeof EcolageEcheanceScalarFieldEnum]
 
 
 export const ParentScalarFieldEnum = {

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Calendar, GraduationCap, Settings } from "lucide-react";
+import { Calendar, GraduationCap, Settings, Wallet } from "lucide-react";
 import PeriodesTab from "../components/parametres/PeriodesTab";
 import StructuresScolairesTab from "../components/parametres/StructuresScolairesTab";
+import EcolageConfigTab from "../components/parametres/EcolageConfigTab";
 
 const TABS = [
   { id: "periodes", label: "Périodes scolaires", icon: Calendar },
@@ -10,6 +11,7 @@ const TABS = [
     label: "Structures scolaires",
     icon: GraduationCap,
   },
+  { id: "ecolage", label: "Écolage", icon: Wallet },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -42,6 +44,7 @@ export default function ParametresPage() {
       <div role="tabpanel">
         {activeTab === "periodes" && <PeriodesTab />}
         {activeTab === "structures" && <StructuresScolairesTab />}
+        {activeTab === "ecolage" && <EcolageConfigTab />}
       </div>
     </div>
   );
