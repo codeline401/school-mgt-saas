@@ -98,6 +98,10 @@ export class FactureService {
       };
     }
 
+    const dateFinExclusive = query.dateFin
+      ? new Date(query.dateFin.getTime() + 24 * 60 * 60 * 1000)
+      : undefined;
+
     const where = {
       eleveId, // Filtre par l'identifiant de l'élève
       schoolId: eleve.schoolId, // Filtre par l'identifiant de l'école de l'élève
@@ -107,7 +111,7 @@ export class FactureService {
       ...((query.dateDebut || query.dateFin) && {
         datePaiement: {
           ...(query.dateDebut && { gte: query.dateDebut }),
-          ...(query.dateFin && { lte: query.dateFin }),
+          ...(dateFinExclusive && { lt: dateFinExclusive }), // fix review
         },
       }), // Filtre par la période de paiement si elle est spécifiée dans la requête
     };
@@ -235,7 +239,7 @@ export class FactureService {
 
     // 2. Transmettre à Puppeteer
     const pdfBuffer = await pdfGenerator.htmlToPdf(htmlContent, {
-      format: isThermal ? undefined : "A5",
+      format: isThermal ? "THERMAL" : "A5",
       orientation: "portrait",
     });
 

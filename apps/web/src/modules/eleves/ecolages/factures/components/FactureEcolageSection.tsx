@@ -52,6 +52,8 @@ export function FacturesEcolageSection({ initialEleveId }: Props) {
     limit: 10,
   });
 
+  const [anneeInput, setAnneeInput] = useState("");
+
   const eleveId = selectedEleve?.id ?? initialEleveId;
 
   const facturesQuery = useFacturesEleve(eleveId, filters);
@@ -109,10 +111,14 @@ export function FacturesEcolageSection({ initialEleveId }: Props) {
                     id="facture-annee"
                     className="input input-bordered"
                     placeholder="2026-2027"
-                    value={filters.anneeScolaire ?? ""}
-                    onChange={(event) =>
-                      updateFilter("anneeScolaire", event.target.value)
-                    }
+                    value={anneeInput}
+                    onChange={(event) => {
+                      const value = event.target.value;
+                      setAnneeInput(value);
+                      if (value === "" || /^\d{4}-\d{4}$/.test(value)) {
+                        updateFilter("anneeScolaire", value);
+                      }
+                    }}
                   />
                 </fieldset>
 

@@ -23,8 +23,8 @@ export type FactureDetail = FactureResume & {
     adresse: string | null;
     telephone: string | null;
     email: string | null;
-    logourl: string | null;
-    numAutorsation: string | null;
+    logoUrl: string | null;
+    numAutorisation: string | null;
   };
   eleve: {
     id: string;
@@ -102,16 +102,24 @@ export function usePrintFacture() {
   const queryClient = useQueryClient();
 
   return async (factureId: string, format: "A5" | "THERMAL") => {
-    const response = await api.get<Blob>(
-      `/api/eleves/ecolages/factures/${factureId}/print`,
-      { params: { format }, responseType: "blob" },
-    );
+    const printWindow = window.open("", "_blank");
+    let response;
+    try {
+      response = await api.get<Blob>(
+        `/api/eleves/ecolages/factures/${factureId}/print`,
+        { params: { format }, responseType: "blob", timeout: 60_000 },
+      );
+    } catch (error) {
+      printWindow?.close();
+      throw error;
+    } // fix review
 
     // Création d'une URL Blob pour ouverture/impression directe
     const fileUrl = window.URL.createObjectURL(
       new Blob([response.data], { type: "application/pdf" }),
     );
-    window.open(fileUrl, "_blank");
+    if (printWindow) printWindow.location.href = fileUrl;
+    else window.open(fileUrl, "_blank");
 
     window.setTimeout(() => {
       URL.revokeObjectURL(fileUrl);

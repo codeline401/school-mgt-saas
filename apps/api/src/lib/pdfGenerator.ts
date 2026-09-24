@@ -36,7 +36,10 @@ export class PdfGenerator {
 
   async htmlToPdf(
     html: string,
-    options?: { format?: ExportFormat; orientation?: ExportOrientation },
+    options?: {
+      format?: ExportFormat | "A5" | "THERMAL"; // fix reveiw
+      orientation?: ExportOrientation;
+    },
   ): Promise<Buffer> {
     const browser = await this.getBrowser();
     const page = await browser.newPage();

@@ -31,7 +31,7 @@ export const listeFactureQuerySchema = z
       !data.dateDebut || !data.dateFin || data.dateDebut <= data.dateFin,
     {
       message: "La date de début doit précéder la date de fin",
-      path: ["dateFIn"],
+      path: ["dateFin"], // fix review
     },
   );
 

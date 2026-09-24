@@ -1,5 +1,6 @@
 import { X, Printer } from "lucide-react";
 import { useFactureDetail, usePrintFacture } from "../hooks/useFacturesEleve";
+import toast from "react-hot-toast";
 
 type Props = {
   factureId: string | null;
@@ -30,7 +31,12 @@ export function FactureDetailModal({ factureId, onClose }: Props) {
 
   async function handlePrint(format: "A5" | "THERMAL") {
     if (!factureId) return;
-    await printFacture(factureId, format);
+    try {
+      // fix review
+      await printFacture(factureId, format);
+    } catch {
+      toast.error("Impossible de générer le reçu.");
+    }
   }
 
   return (
