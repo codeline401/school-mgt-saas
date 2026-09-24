@@ -27,6 +27,7 @@ import ClasseAffectationTab from "./informations/affectation/ClasseAffectationTa
 import { EmergencyContactSection } from "./informations/emergencyContact/components/EmergencyContactSection";
 import { HistoriqueSection } from "./informations/historique/components/HistoriqueSection";
 import { PaiementEcolageSection } from "./ecolages/paiement/components/PaiementEcolageSection";
+import { FacturesEcolageSection } from "./ecolages/factures/components/FactureEcolageSection";
 
 type MainTab =
   | "informations"
@@ -196,13 +197,7 @@ function GestionElevesPage() {
       case "paiements":
         return <PaiementEcolageSection initialEleveId={eleveId} />;
       case "factures":
-        return (
-          <DevelopmentPlaceholder
-            icon={FileText}
-            title="Factures & reçus"
-            description="Génération, consultation et archivage des documents financiers de l’élève."
-          />
-        );
+        return <FacturesEcolageSection initialEleveId={eleveId} />;
       case "bourses":
         return (
           <DevelopmentPlaceholder

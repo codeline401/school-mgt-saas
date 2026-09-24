@@ -101,6 +101,34 @@ export class TemplateEngine {
       };
       return map[a] ?? a;
     });
+
+    Handlebars.registerHelper("modePaiementLabel", (mode: string) => {
+      const map: Record<string, string> = {
+        ESPECES: "Espèces",
+        VIREMENT: "Virement",
+        CHEQUE: "Chèque",
+        MOBILE_MONEY: "Mobile Money",
+      };
+      return map[mode] ?? mode;
+    });
+
+    Handlebars.registerHelper("moisLabel", (mois: number | null) => {
+      const label = [
+        "Janvier",
+        "Février",
+        "Mars",
+        "Avril",
+        "Mai",
+        "Juin",
+        "Juillet",
+        "Août",
+        "Septembre",
+        "Octobre",
+        "Novembre",
+        "Décembre",
+      ];
+      return mois ? (label[mois - 1] ?? "") : ""; // Return the month label based on the month number, or an empty string if null or out of range.
+    });
   }
 
   async compile<T extends Record<string, unknown>>(

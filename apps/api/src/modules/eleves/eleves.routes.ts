@@ -5,6 +5,7 @@ import responsableRoutes from "./informations/responsable/responsable.routes.js"
 import emergencyContactRoutes from "./informations/emergencyContact/emergencyContact.routes.js";
 import historiqueRoutes from "./informations/historique/historique.routes.js";
 import paiementRoutes from "./ecolages/paiement/paiement.routes.js";
+import factureRoutes from "./ecolages/factures/facture.routes.js";
 
 const router = Router();
 
@@ -25,5 +26,6 @@ router.use("/informations", emergencyContactRoutes);
 router.use("/informations", historiqueRoutes);
 
 router.use("/ecolages", paiementRoutes);
+router.use("/ecolages", factureRoutes);
 
 export default router;

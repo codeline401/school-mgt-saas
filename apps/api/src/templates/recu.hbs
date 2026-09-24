@@ -1,0 +1,109 @@
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reçu {{facture.numeroRecu}}</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: "Helvetica Neue", Arial, sans-serif; color: #1a1a1a; }{{#if
+        isThermal
+      }}
+        @page { size: 80mm 200mm; margin: 0; } body { font-size: 10px; padding:
+        6mm 4mm; } .school-name { font-size: 12px; font-weight: 700; text-align:
+        center; } .header-meta { font-size: 8px; text-align: center; color:
+        #444; margin-bottom: 6px; } .title-bar { text-align: center;
+        font-weight: 700; margin: 6px 0; border-top: 1px dashed #000;
+        border-bottom: 1px dashed #000; padding: 4px 0; } .row { display: flex;
+        justify-content: space-between; margin: 2px 0; } .total { font-weight:
+        700; font-size: 12px; border-top: 1px dashed #000; margin-top: 6px;
+        padding-top: 4px; } .footer { text-align: center; font-size: 8px;
+        margin-top: 10px; }
+      {{else}}
+        @page { size: 148mm 210mm; margin: 15mm 12mm; } body { font-size: 12px;
+        padding: 10mm; } .header { display: flex; justify-content:
+        space-between; align-items: center; border-bottom: 3px solid #2563eb;
+        padding-bottom: 12px; margin-bottom: 16px; } .header img { height: 48px;
+        } .school-name { font-size: 16px; font-weight: 700; color: #2563eb; }
+        .header-meta { font-size: 10px; color: #666; } .title-bar { background:
+        #2563eb; color: #fff; text-align: center; padding: 8px; border-radius:
+        6px; font-size: 13px; font-weight: 700; margin-bottom: 16px; } .row {
+        display: flex; justify-content: space-between; padding: 4px 0;
+        border-bottom: 1px solid #eee; } .total { font-weight: 700; font-size:
+        14px; margin-top: 10px; padding-top: 8px; border-top: 2px solid #2563eb;
+        } .footer { margin-top: 24px; font-size: 10px; color: #666; text-align:
+        center; }
+      {{/if}}
+    </style>
+  </head>
+  <body>
+    {{#if isThermal}}
+      <div class="school-name">{{uppercase facture.ecole.nom}}</div>
+      <div class="header-meta">
+        {{#if facture.ecole.adresse}}{{facture.ecole.adresse}}<br />{{/if}}
+        {{#if facture.ecole.telephone}}Tél: {{facture.ecole.telephone}}{{/if}}
+      </div>
+    {{else}}
+      <div class="header">
+        <div>
+          {{#if facture.ecole.logoUrl}}<img
+              src="{{facture.ecole.logoUrl}}"
+              alt="logo"
+            />{{/if}}
+          <div class="school-name">{{facture.ecole.nom}}</div>
+          <div class="header-meta">
+            {{facture.ecole.adresse}}{{#if facture.ecole.telephone}}
+              · Tél:
+              {{facture.ecole.telephone}}{{/if}}
+          </div>
+        </div>
+        <div class="header-meta">Reçu n° {{facture.numeroRecu}}</div>
+      </div>
+    {{/if}}
+
+    <div class="title-bar">REÇU D'ENCAISSEMENT
+      {{#if isThermal}}#{{facture.numeroRecu}}{{/if}}</div>
+
+    <div class="row"><span>Élève</span><span>{{facture.eleve.nom}}
+        {{facture.eleve.prenom}}</span></div>
+    <div class="row"><span>Matricule</span><span
+      >{{facture.eleve.matricule}}</span></div>
+    {{#if facture.eleve.classe}}
+      <div class="row"><span>Classe</span><span
+        >{{facture.eleve.classe.nom}}</span></div>
+    {{/if}}
+    {{#if facture.anneeScolaire}}
+      <div class="row"><span>Année scolaire</span><span
+        >{{facture.anneeScolaire}}</span></div>
+    {{/if}}
+    {{#if facture.mois}}
+      <div class="row"><span>Période</span><span>{{moisLabel
+            facture.mois
+          }}</span></div>
+    {{/if}}
+    <div class="row"><span>Mode de paiement</span><span>{{modePaiementLabel
+          facture.modePaiement
+        }}</span></div>
+    {{#if facture.referencePaiement}}
+      <div class="row"><span>Référence</span><span
+        >{{facture.referencePaiement}}</span></div>
+    {{/if}}
+    <div class="row"><span>Date</span><span>{{formatDate
+          facture.datePaiement
+        }}</span></div>
+
+    <div class="total row"><span>Montant encaissé</span><span
+      >{{facture.montant}} {{facture.ecole.devise}}</span></div>
+
+    {{#if facture.remarque}}
+      <div class="row"><span>Remarque</span><span
+        >{{facture.remarque}}</span></div>
+    {{/if}}
+
+    <div class="footer">
+      Encaissé par
+      {{facture.agent.prenom}}
+      {{facture.agent.nom}}
+      — Imprimé le
+      {{formatDate dateImpression}}
+    </div>
+  </body>
+</html>

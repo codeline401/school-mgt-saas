@@ -1,4 +1,4 @@
-import puppeteer, { Browser } from "puppeteer";
+import puppeteer, { Browser, PaperFormat } from "puppeteer";
 import type { ExportFormat, ExportOrientation } from "@school-mgt/types";
 
 // ============================================================================
@@ -43,28 +43,30 @@ export class PdfGenerator {
 
     try {
       await page.setContent(html, {
-        // FIX : "networkidle0" retiré des types Puppeteer récents — on attend
-        // "load" puis "domcontentloaded" pour un équivalent fiable
         waitUntil: ["load", "domcontentloaded"],
         timeout: 30000,
       });
+
+      // Si le format est "THERMAL", on ne passe pas de paperFormat à Puppeteer :
+      // il utilisera la taille définie dans la règle CSS @page du HTML
+      const isThermal = options?.format === "THERMAL";
+      const paperFormat: PaperFormat | undefined = isThermal
+        ? undefined
+        : ((options?.format as PaperFormat) ?? "A4");
+
       const pdf = await page.pdf({
-        format: options?.format ?? "A4",
+        format: paperFormat,
+        preferCSSPageSize: true, // Priorité aux dimensions CSS @page
         landscape: options?.orientation === "landscape",
         printBackground: true,
-        preferCSSPageSize: true,
-        margin: { top: "15mm", right: "12mm", bottom: "15mm", left: "12mm" },
+        margin: isThermal
+          ? { top: "0mm", right: "0mm", bottom: "0mm", left: "0mm" }
+          : { top: "10mm", right: "10mm", bottom: "10mm", left: "10mm" },
       });
+
       return Buffer.from(pdf);
     } finally {
       await page.close();
-    }
-  }
-
-  async close(): Promise<void> {
-    if (this.browser) {
-      await this.browser.close();
-      this.browser = null;
     }
   }
 }
