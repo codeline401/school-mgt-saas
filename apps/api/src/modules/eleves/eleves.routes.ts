@@ -26,6 +26,13 @@ router.use("/informations", emergencyContactRoutes);
 router.use("/informations", historiqueRoutes);
 
 router.use("/ecolages", paiementRoutes);
+
+/**
+ * Facture routes mounted under /ecolages:
+ * - GET /api/eleves/ecolages/factures (lister les factures)
+ * - GET /api/eleves/ecolages/factures/:factureId (obtenir une facture)
+ * - GET /api/eleves/ecolages/factures/:factureId/print (imprimer une facture en PDF)
+ */
 router.use("/ecolages", factureRoutes);
 
 export default router;
