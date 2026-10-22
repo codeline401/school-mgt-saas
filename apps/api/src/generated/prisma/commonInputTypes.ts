@@ -1197,6 +1197,23 @@ export type EnumModePaiementWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumModePaiementFilter<$PrismaModel>
 }
 
+export type EnumStatutAjournementFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutAjournement | Prisma.EnumStatutAjournementFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutAjournement[] | Prisma.ListEnumStatutAjournementFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutAjournement[] | Prisma.ListEnumStatutAjournementFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutAjournementFilter<$PrismaModel> | $Enums.StatutAjournement
+}
+
+export type EnumStatutAjournementWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutAjournement | Prisma.EnumStatutAjournementFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutAjournement[] | Prisma.ListEnumStatutAjournementFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutAjournement[] | Prisma.ListEnumStatutAjournementFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutAjournementWithAggregatesFilter<$PrismaModel> | $Enums.StatutAjournement
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutAjournementFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutAjournementFilter<$PrismaModel>
+}
+
 export type EnumTypeResponsableFilter<$PrismaModel = never> = {
   equals?: $Enums.TypeResponsable | Prisma.EnumTypeResponsableFieldRefInput<$PrismaModel>
   in?: $Enums.TypeResponsable[] | Prisma.ListEnumTypeResponsableFieldRefInput<$PrismaModel>
@@ -2360,6 +2377,23 @@ export type NestedEnumModePaiementWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumModePaiementFilter<$PrismaModel>
   _max?: Prisma.NestedEnumModePaiementFilter<$PrismaModel>
+}
+
+export type NestedEnumStatutAjournementFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutAjournement | Prisma.EnumStatutAjournementFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutAjournement[] | Prisma.ListEnumStatutAjournementFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutAjournement[] | Prisma.ListEnumStatutAjournementFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutAjournementFilter<$PrismaModel> | $Enums.StatutAjournement
+}
+
+export type NestedEnumStatutAjournementWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutAjournement | Prisma.EnumStatutAjournementFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutAjournement[] | Prisma.ListEnumStatutAjournementFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutAjournement[] | Prisma.ListEnumStatutAjournementFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutAjournementWithAggregatesFilter<$PrismaModel> | $Enums.StatutAjournement
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutAjournementFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutAjournementFilter<$PrismaModel>
 }
 
 export type NestedEnumTypeResponsableFilter<$PrismaModel = never> = {

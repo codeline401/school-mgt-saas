@@ -6,6 +6,7 @@ import emergencyContactRoutes from "./informations/emergencyContact/emergencyCon
 import historiqueRoutes from "./informations/historique/historique.routes.js";
 import paiementRoutes from "./ecolages/paiement/paiement.routes.js";
 import factureRoutes from "./ecolages/factures/facture.routes.js";
+import ajournementRoutes from "./ecolages/ajournement/ajournement.routes.js";
 
 const router = Router();
 
@@ -25,6 +26,7 @@ router.use("/informations", responsableRoutes);
 router.use("/informations", emergencyContactRoutes);
 router.use("/informations", historiqueRoutes);
 
+router.use("/ecolages/ajournements", ajournementRoutes);
 router.use("/ecolages", paiementRoutes);
 
 /**

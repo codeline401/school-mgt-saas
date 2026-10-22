@@ -68,6 +68,7 @@ model User {
   paiementEcolages                   PaiementEcolage[]
   ecolageConfigsCreees               EcolageConfig[]           @relation("EcolageConfigCreerPar")
   ecolageConfigs                     EcolageConfig[]
+  ajournementsTraites                Ajournement[]             @relation("AjournementTraites")
 }
 
 // Modele SAAS
@@ -137,6 +138,7 @@ model School {
   affectationClasses       AffectationClasse[]
   paiementEcolages         PaiementEcolage[]
   ecolageConfigs           EcolageConfig[]
+  ajournements             Ajournement[]
 }
 
 model Classe {
@@ -1800,6 +1802,7 @@ model Eleve {
   responsableEleves     ResponsableEleve[]
   affectationClasses    AffectationClasse[]
   paiementEcolages      PaiementEcolage[]
+  ajournementsLignes    AjournementLigne[]
 
   // Contraintes & Index
   @@unique([schoolId, matricule])
@@ -1922,8 +1925,9 @@ model Ecolage {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  statutPaiement   StatutPaiementEcolage @default(IMPAYE)
-  paiementEcolages PaiementEcolage[]
+  statutPaiement     StatutPaiementEcolage @default(IMPAYE)
+  paiementEcolages   PaiementEcolage[]
+  ajournementsLignes AjournementLigne[]
 
   // 🔧 FIX: si l'écolage est mensuel/trimestriel, adapte cette contrainte
   // (ajoute un champ "periode" ou "mois" et inclus-le dans le @@unique)
@@ -1977,12 +1981,12 @@ model PaiementEcolage {
   user      User?    @relation(fields: [userId], references: [id])
   userId    String?
 
+  // Autorise plusieurs lignes sans clé (idempotencyKey null), mais interdit un doublon pour une même clé/école.
+  @@unique([schoolId, idempotencyKey])
   @@index([eleveId])
   @@index([ecolageId])
   @@index([schoolId])
   @@index([agentId])
-  // Autorise plusieurs lignes sans clé (idempotencyKey null), mais interdit un doublon pour une même clé/école.
-  @@unique([schoolId, idempotencyKey])
 }
 
 model EcolageConfig {
@@ -2035,6 +2039,77 @@ model EcolageEcheance {
   @@index([configId])
 }
 
+enum StatutAjournement {
+  EN_ATTENTE
+  ACCEPTE
+  REFUSE
+  CONTRE_PROPOSITION
+  CONTRE_PROPOSITION_ACCEPTE
+  CONTRE_PROPOSITION_REFUSE
+  ANNULE
+}
+
+// Modèle représentant une demande d'ajournement effectuée par un parent pour un écolage spécifique.
+model Ajournement {
+  id String @id @default(uuid())
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  parentId String
+  parent   Parent @relation(fields: [parentId], references: [id], onDelete: Cascade)
+
+  motif  String
+  statut StatutAjournement @default(EN_ATTENTE)
+
+  // Décision admin
+  commentaireAdmin String?
+  traiteParId      String?
+  traitePar        User?     @relation("AjournementTraites", fields: [traiteParId], references: [id], onDelete: SetNull)
+  dateDecision     DateTime?
+
+  // Réponse du parent à une contre-proposition
+  dateReponseParent DateTime?
+
+  ligne AjournementLigne[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId, statut])
+  @@index([parentId])
+  @@index([traiteParId])
+}
+
+// Détails des lignes d'un ajournement (chaque ligne correspond à un élève et un écolage spécifique)
+model AjournementLigne {
+  id String @id @default(uuid())
+
+  ajournementId String
+  ajournement   Ajournement @relation(fields: [ajournementId], references: [id], onDelete: Cascade)
+
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  ecolageId String
+  ecolage   Ecolage @relation(fields: [ecolageId], references: [id], onDelete: Cascade)
+
+  dateEcheanceOrigine DateTime // échéance au moment de la demande (historique)
+  dateDemandee        DateTime
+  dateProposee        DateTime? // contre-proposition admin
+  dateAppliquee       DateTime? // date à laquelle la contre-proposition a été appliquée
+
+  // Vrai tant que la demande en EN_ATTENTE ou CONTRE_PROPOSITION ; sert à l'unicité
+  estActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([ajournementId])
+  @@index([eleveId])
+  @@index([ecolageId])
+}
+
 model Parent {
   id        String  @id @default(uuid())
   nom       String
@@ -2058,6 +2133,7 @@ model Parent {
   autorisationParents AutorisationParent[]
   adresses            Adresse[]
   eleves              Eleve[]              @relation("ResponsableFrais")
+  ajournements        Ajournement[]
 
   // Affiliations explicites (un responsable peut être lié à plusieurs élèves)
   affiliations ResponsableEleve[]

@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.8.0
- * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
+ * Prisma Client JS version: 7.10.1
+ * Query Engine version: d1b3f377ca835d73fd50954a5e22128b9ebdd6b8
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.8.0",
-  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
+  client: "7.10.1",
+  engine: "d1b3f377ca835d73fd50954a5e22128b9ebdd6b8"
 }
 
 /**
@@ -156,6 +156,19 @@ export type Subset<T, U> = {
 };
 
 /**
+ * Resolved type of the argument passed to the `PrismaClient` constructor.
+ *
+ * When called without a narrower options type (the common case), this resolves
+ * to `PrismaClientOptions` directly, which produces a clear TypeScript error
+ * message (`not assignable to parameter of type 'PrismaClientOptions'`) when
+ * the argument is missing or incomplete. When the user supplies a narrower
+ * options type (e.g. via a literal), it falls back to `Subset` to keep
+ * filtering out unknown properties.
+ */
+export type PrismaClientConstructorArgs<Options extends PrismaClientOptions> =
+  [PrismaClientOptions] extends [Options] ? PrismaClientOptions : Subset<Options, PrismaClientOptions>;
+
+/**
  * SelectSubset
  * @desc From `T` pick properties that exist in `U`. Simple version of Intersection.
  * Additionally, it validates, if both select and include are present. If the case, it errors.
@@ -187,7 +200,7 @@ type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 export type XOR<T, U> =
   T extends object ?
   U extends object ?
-    (Without<T, U> & U) | (Without<U, T> & T)
+    ((Without<T, U> & U) | (Without<U, T> & T)) & object
   : U : T
 
 
@@ -440,6 +453,8 @@ export const ModelName = {
   PaiementEcolage: 'PaiementEcolage',
   EcolageConfig: 'EcolageConfig',
   EcolageEcheance: 'EcolageEcheance',
+  Ajournement: 'Ajournement',
+  AjournementLigne: 'AjournementLigne',
   Parent: 'Parent',
   ResponsableEleve: 'ResponsableEleve',
   Niveau: 'Niveau',
@@ -461,7 +476,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse"
+    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4609,6 +4624,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Ajournement: {
+      payload: Prisma.$AjournementPayload<ExtArgs>
+      fields: Prisma.AjournementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AjournementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AjournementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementPayload>
+        }
+        findFirst: {
+          args: Prisma.AjournementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AjournementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementPayload>
+        }
+        findMany: {
+          args: Prisma.AjournementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementPayload>[]
+        }
+        create: {
+          args: Prisma.AjournementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementPayload>
+        }
+        createMany: {
+          args: Prisma.AjournementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AjournementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementPayload>[]
+        }
+        delete: {
+          args: Prisma.AjournementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementPayload>
+        }
+        update: {
+          args: Prisma.AjournementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementPayload>
+        }
+        deleteMany: {
+          args: Prisma.AjournementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AjournementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AjournementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementPayload>[]
+        }
+        upsert: {
+          args: Prisma.AjournementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementPayload>
+        }
+        aggregate: {
+          args: Prisma.AjournementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAjournement>
+        }
+        groupBy: {
+          args: Prisma.AjournementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AjournementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AjournementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AjournementCountAggregateOutputType> | number
+        }
+      }
+    }
+    AjournementLigne: {
+      payload: Prisma.$AjournementLignePayload<ExtArgs>
+      fields: Prisma.AjournementLigneFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AjournementLigneFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementLignePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AjournementLigneFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementLignePayload>
+        }
+        findFirst: {
+          args: Prisma.AjournementLigneFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementLignePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AjournementLigneFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementLignePayload>
+        }
+        findMany: {
+          args: Prisma.AjournementLigneFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementLignePayload>[]
+        }
+        create: {
+          args: Prisma.AjournementLigneCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementLignePayload>
+        }
+        createMany: {
+          args: Prisma.AjournementLigneCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AjournementLigneCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementLignePayload>[]
+        }
+        delete: {
+          args: Prisma.AjournementLigneDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementLignePayload>
+        }
+        update: {
+          args: Prisma.AjournementLigneUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementLignePayload>
+        }
+        deleteMany: {
+          args: Prisma.AjournementLigneDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AjournementLigneUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AjournementLigneUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementLignePayload>[]
+        }
+        upsert: {
+          args: Prisma.AjournementLigneUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AjournementLignePayload>
+        }
+        aggregate: {
+          args: Prisma.AjournementLigneAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAjournementLigne>
+        }
+        groupBy: {
+          args: Prisma.AjournementLigneGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AjournementLigneGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AjournementLigneCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AjournementLigneCountAggregateOutputType> | number
+        }
+      }
+    }
     Parent: {
       payload: Prisma.$ParentPayload<ExtArgs>
       fields: Prisma.ParentFieldRefs
@@ -6033,6 +6196,40 @@ export const EcolageEcheanceScalarFieldEnum = {
 export type EcolageEcheanceScalarFieldEnum = (typeof EcolageEcheanceScalarFieldEnum)[keyof typeof EcolageEcheanceScalarFieldEnum]
 
 
+export const AjournementScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  parentId: 'parentId',
+  motif: 'motif',
+  statut: 'statut',
+  commentaireAdmin: 'commentaireAdmin',
+  traiteParId: 'traiteParId',
+  dateDecision: 'dateDecision',
+  dateReponseParent: 'dateReponseParent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AjournementScalarFieldEnum = (typeof AjournementScalarFieldEnum)[keyof typeof AjournementScalarFieldEnum]
+
+
+export const AjournementLigneScalarFieldEnum = {
+  id: 'id',
+  ajournementId: 'ajournementId',
+  eleveId: 'eleveId',
+  ecolageId: 'ecolageId',
+  dateEcheanceOrigine: 'dateEcheanceOrigine',
+  dateDemandee: 'dateDemandee',
+  dateProposee: 'dateProposee',
+  dateAppliquee: 'dateAppliquee',
+  estActive: 'estActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AjournementLigneScalarFieldEnum = (typeof AjournementLigneScalarFieldEnum)[keyof typeof AjournementLigneScalarFieldEnum]
+
+
 export const ParentScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
@@ -6902,6 +7099,20 @@ export type ListEnumModePaiementFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
+ * Reference to a field of type 'StatutAjournement'
+ */
+export type EnumStatutAjournementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutAjournement'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutAjournement[]'
+ */
+export type ListEnumStatutAjournementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutAjournement[]'>
+    
+
+
+/**
  * Reference to a field of type 'TypeResponsable'
  */
 export type EnumTypeResponsableFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeResponsable'>
@@ -6938,19 +7149,10 @@ export type BatchPayload = {
 export const defineExtension = runtime.Extensions.defineExtension as unknown as runtime.Types.Extensions.ExtendsHook<"define", TypeMapCb, runtime.Types.Extensions.DefaultArgs>
 export type DefaultPrismaClient = PrismaClient
 export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
-export type PrismaClientOptions = ({
-  /**
-   * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-pg`.
-   */
-  adapter: runtime.SqlDriverAdapterFactory
-  accelerateUrl?: never
-} | {
-  /**
-   * Prisma Accelerate URL allowing the client to connect through Accelerate instead of a direct database.
-   */
-  accelerateUrl: string
-  adapter?: never
-}) & {
+/**
+ * Options common to all variants of `PrismaClientOptions`, regardless of whether you connect to your database through a driver adapter or through Prisma Accelerate.
+ */
+export interface PrismaClientBaseOptions {
   /**
    * @default "colorless"
    */
@@ -7037,6 +7239,56 @@ export type PrismaClientOptions = ({
    */
   queryPlanCacheMaxSize?: number
 }
+
+/**
+ * `PrismaClient` options for connecting to your database through Prisma Accelerate instead of a driver adapter.
+ * 
+ * Learn more: https://pris.ly/d/accelerate
+ */
+export interface PrismaClientOptionsWithAccelerateUrl extends PrismaClientBaseOptions {
+  /**
+   * The Prisma Accelerate connection URL. Use this option to connect to your database through Prisma Accelerate instead of using a driver adapter to connect directly.
+   * 
+   * Learn more: https://pris.ly/d/accelerate
+   */
+  accelerateUrl: string
+  adapter?: never
+}
+
+/**
+ * `PrismaClient` options for connecting to your database through a driver adapter. This is the common case in Prisma 7.
+ * 
+ * Learn more: https://pris.ly/d/driver-adapters
+ */
+export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions {
+  /**
+   * A driver adapter that PrismaClient uses to connect to your database, such as the ones provided by `@prisma/adapter-pg`, `@prisma/adapter-libsql`, `@prisma/adapter-planetscale`, etc.
+   * 
+   * A driver adapter is **required** unless you connect to your database through Prisma Accelerate (in which case use `accelerateUrl` instead).
+   * 
+   * Learn more: https://pris.ly/d/driver-adapters
+   * 
+   * @example
+   * ```ts
+   * import { PrismaPg } from '@prisma/adapter-pg'
+   * import { PrismaClient } from './generated/prisma/client'
+   * 
+   * const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
+   * const prisma = new PrismaClient({ adapter })
+   * ```
+   */
+  adapter: runtime.SqlDriverAdapterFactory
+  accelerateUrl?: never
+}
+
+/**
+ * Options passed to the `PrismaClient` constructor.
+ * 
+ * A driver adapter (or, alternatively, a Prisma Accelerate URL) is **required**. See {@link PrismaClientOptionsWithAdapter} and {@link PrismaClientOptionsWithAccelerateUrl} for the two variants. All other properties live in {@link PrismaClientBaseOptions} and are optional.
+ * 
+ * Learn more about driver adapters: https://pris.ly/d/driver-adapters
+ */
+export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   school?: Prisma.SchoolOmit
@@ -7094,6 +7346,8 @@ export type GlobalOmitConfig = {
   paiementEcolage?: Prisma.PaiementEcolageOmit
   ecolageConfig?: Prisma.EcolageConfigOmit
   ecolageEcheance?: Prisma.EcolageEcheanceOmit
+  ajournement?: Prisma.AjournementOmit
+  ajournementLigne?: Prisma.AjournementLigneOmit
   parent?: Prisma.ParentOmit
   responsableEleve?: Prisma.ResponsableEleveOmit
   niveau?: Prisma.NiveauOmit

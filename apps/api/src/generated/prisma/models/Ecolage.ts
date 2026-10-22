@@ -264,6 +264,7 @@ export type EcolageWhereInput = {
   classe?: Prisma.XOR<Prisma.ClasseNullableScalarRelationFilter, Prisma.ClasseWhereInput> | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   paiementEcolages?: Prisma.PaiementEcolageListRelationFilter
+  ajournementsLignes?: Prisma.AjournementLigneListRelationFilter
 }
 
 export type EcolageOrderByWithRelationInput = {
@@ -281,6 +282,7 @@ export type EcolageOrderByWithRelationInput = {
   classe?: Prisma.ClasseOrderByWithRelationInput
   school?: Prisma.SchoolOrderByWithRelationInput
   paiementEcolages?: Prisma.PaiementEcolageOrderByRelationAggregateInput
+  ajournementsLignes?: Prisma.AjournementLigneOrderByRelationAggregateInput
 }
 
 export type EcolageWhereUniqueInput = Prisma.AtLeast<{
@@ -302,6 +304,7 @@ export type EcolageWhereUniqueInput = Prisma.AtLeast<{
   classe?: Prisma.XOR<Prisma.ClasseNullableScalarRelationFilter, Prisma.ClasseWhereInput> | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   paiementEcolages?: Prisma.PaiementEcolageListRelationFilter
+  ajournementsLignes?: Prisma.AjournementLigneListRelationFilter
 }, "id" | "eleveId_anneeScolaire_mois">
 
 export type EcolageOrderByWithAggregationInput = {
@@ -350,6 +353,7 @@ export type EcolageCreateInput = {
   classe?: Prisma.ClasseCreateNestedOneWithoutEcolagesInput
   school: Prisma.SchoolCreateNestedOneWithoutEcolagesInput
   paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutEcolageInput
+  ajournementsLignes?: Prisma.AjournementLigneCreateNestedManyWithoutEcolageInput
 }
 
 export type EcolageUncheckedCreateInput = {
@@ -364,6 +368,7 @@ export type EcolageUncheckedCreateInput = {
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
   paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutEcolageInput
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedCreateNestedManyWithoutEcolageInput
 }
 
 export type EcolageUpdateInput = {
@@ -378,6 +383,7 @@ export type EcolageUpdateInput = {
   classe?: Prisma.ClasseUpdateOneWithoutEcolagesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEcolagesNestedInput
   paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutEcolageNestedInput
+  ajournementsLignes?: Prisma.AjournementLigneUpdateManyWithoutEcolageNestedInput
 }
 
 export type EcolageUncheckedUpdateInput = {
@@ -392,6 +398,7 @@ export type EcolageUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
   paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutEcolageNestedInput
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedUpdateManyWithoutEcolageNestedInput
 }
 
 export type EcolageCreateManyInput = {
@@ -644,6 +651,20 @@ export type EcolageUpdateOneRequiredWithoutPaiementEcolagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EcolageUpdateToOneWithWhereWithoutPaiementEcolagesInput, Prisma.EcolageUpdateWithoutPaiementEcolagesInput>, Prisma.EcolageUncheckedUpdateWithoutPaiementEcolagesInput>
 }
 
+export type EcolageCreateNestedOneWithoutAjournementsLignesInput = {
+  create?: Prisma.XOR<Prisma.EcolageCreateWithoutAjournementsLignesInput, Prisma.EcolageUncheckedCreateWithoutAjournementsLignesInput>
+  connectOrCreate?: Prisma.EcolageCreateOrConnectWithoutAjournementsLignesInput
+  connect?: Prisma.EcolageWhereUniqueInput
+}
+
+export type EcolageUpdateOneRequiredWithoutAjournementsLignesNestedInput = {
+  create?: Prisma.XOR<Prisma.EcolageCreateWithoutAjournementsLignesInput, Prisma.EcolageUncheckedCreateWithoutAjournementsLignesInput>
+  connectOrCreate?: Prisma.EcolageCreateOrConnectWithoutAjournementsLignesInput
+  upsert?: Prisma.EcolageUpsertWithoutAjournementsLignesInput
+  connect?: Prisma.EcolageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EcolageUpdateToOneWithWhereWithoutAjournementsLignesInput, Prisma.EcolageUpdateWithoutAjournementsLignesInput>, Prisma.EcolageUncheckedUpdateWithoutAjournementsLignesInput>
+}
+
 export type EcolageCreateWithoutSchoolInput = {
   id?: string
   anneeScolaire: string
@@ -655,6 +676,7 @@ export type EcolageCreateWithoutSchoolInput = {
   eleve: Prisma.EleveCreateNestedOneWithoutEcolagesInput
   classe?: Prisma.ClasseCreateNestedOneWithoutEcolagesInput
   paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutEcolageInput
+  ajournementsLignes?: Prisma.AjournementLigneCreateNestedManyWithoutEcolageInput
 }
 
 export type EcolageUncheckedCreateWithoutSchoolInput = {
@@ -668,6 +690,7 @@ export type EcolageUncheckedCreateWithoutSchoolInput = {
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
   paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutEcolageInput
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedCreateNestedManyWithoutEcolageInput
 }
 
 export type EcolageCreateOrConnectWithoutSchoolInput = {
@@ -723,6 +746,7 @@ export type EcolageCreateWithoutClasseInput = {
   eleve: Prisma.EleveCreateNestedOneWithoutEcolagesInput
   school: Prisma.SchoolCreateNestedOneWithoutEcolagesInput
   paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutEcolageInput
+  ajournementsLignes?: Prisma.AjournementLigneCreateNestedManyWithoutEcolageInput
 }
 
 export type EcolageUncheckedCreateWithoutClasseInput = {
@@ -736,6 +760,7 @@ export type EcolageUncheckedCreateWithoutClasseInput = {
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
   paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutEcolageInput
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedCreateNestedManyWithoutEcolageInput
 }
 
 export type EcolageCreateOrConnectWithoutClasseInput = {
@@ -775,6 +800,7 @@ export type EcolageCreateWithoutEleveInput = {
   classe?: Prisma.ClasseCreateNestedOneWithoutEcolagesInput
   school: Prisma.SchoolCreateNestedOneWithoutEcolagesInput
   paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutEcolageInput
+  ajournementsLignes?: Prisma.AjournementLigneCreateNestedManyWithoutEcolageInput
 }
 
 export type EcolageUncheckedCreateWithoutEleveInput = {
@@ -788,6 +814,7 @@ export type EcolageUncheckedCreateWithoutEleveInput = {
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
   paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutEcolageInput
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedCreateNestedManyWithoutEcolageInput
 }
 
 export type EcolageCreateOrConnectWithoutEleveInput = {
@@ -827,6 +854,7 @@ export type EcolageCreateWithoutPaiementEcolagesInput = {
   eleve: Prisma.EleveCreateNestedOneWithoutEcolagesInput
   classe?: Prisma.ClasseCreateNestedOneWithoutEcolagesInput
   school: Prisma.SchoolCreateNestedOneWithoutEcolagesInput
+  ajournementsLignes?: Prisma.AjournementLigneCreateNestedManyWithoutEcolageInput
 }
 
 export type EcolageUncheckedCreateWithoutPaiementEcolagesInput = {
@@ -840,6 +868,7 @@ export type EcolageUncheckedCreateWithoutPaiementEcolagesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedCreateNestedManyWithoutEcolageInput
 }
 
 export type EcolageCreateOrConnectWithoutPaiementEcolagesInput = {
@@ -869,6 +898,7 @@ export type EcolageUpdateWithoutPaiementEcolagesInput = {
   eleve?: Prisma.EleveUpdateOneRequiredWithoutEcolagesNestedInput
   classe?: Prisma.ClasseUpdateOneWithoutEcolagesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEcolagesNestedInput
+  ajournementsLignes?: Prisma.AjournementLigneUpdateManyWithoutEcolageNestedInput
 }
 
 export type EcolageUncheckedUpdateWithoutPaiementEcolagesInput = {
@@ -882,6 +912,79 @@ export type EcolageUncheckedUpdateWithoutPaiementEcolagesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedUpdateManyWithoutEcolageNestedInput
+}
+
+export type EcolageCreateWithoutAjournementsLignesInput = {
+  id?: string
+  anneeScolaire: string
+  mois: number
+  montant: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  statutPaiement?: $Enums.StatutPaiementEcolage
+  eleve: Prisma.EleveCreateNestedOneWithoutEcolagesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutEcolagesInput
+  school: Prisma.SchoolCreateNestedOneWithoutEcolagesInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutEcolageInput
+}
+
+export type EcolageUncheckedCreateWithoutAjournementsLignesInput = {
+  id?: string
+  anneeScolaire: string
+  mois: number
+  montant: runtime.Decimal | runtime.DecimalJsLike | number | string
+  eleveId: string
+  classeId?: string | null
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  statutPaiement?: $Enums.StatutPaiementEcolage
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutEcolageInput
+}
+
+export type EcolageCreateOrConnectWithoutAjournementsLignesInput = {
+  where: Prisma.EcolageWhereUniqueInput
+  create: Prisma.XOR<Prisma.EcolageCreateWithoutAjournementsLignesInput, Prisma.EcolageUncheckedCreateWithoutAjournementsLignesInput>
+}
+
+export type EcolageUpsertWithoutAjournementsLignesInput = {
+  update: Prisma.XOR<Prisma.EcolageUpdateWithoutAjournementsLignesInput, Prisma.EcolageUncheckedUpdateWithoutAjournementsLignesInput>
+  create: Prisma.XOR<Prisma.EcolageCreateWithoutAjournementsLignesInput, Prisma.EcolageUncheckedCreateWithoutAjournementsLignesInput>
+  where?: Prisma.EcolageWhereInput
+}
+
+export type EcolageUpdateToOneWithWhereWithoutAjournementsLignesInput = {
+  where?: Prisma.EcolageWhereInput
+  data: Prisma.XOR<Prisma.EcolageUpdateWithoutAjournementsLignesInput, Prisma.EcolageUncheckedUpdateWithoutAjournementsLignesInput>
+}
+
+export type EcolageUpdateWithoutAjournementsLignesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  mois?: Prisma.IntFieldUpdateOperationsInput | number
+  montant?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  eleve?: Prisma.EleveUpdateOneRequiredWithoutEcolagesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutEcolagesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutEcolagesNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutEcolageNestedInput
+}
+
+export type EcolageUncheckedUpdateWithoutAjournementsLignesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  mois?: Prisma.IntFieldUpdateOperationsInput | number
+  montant?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  eleveId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutEcolageNestedInput
 }
 
 export type EcolageCreateManySchoolInput = {
@@ -907,6 +1010,7 @@ export type EcolageUpdateWithoutSchoolInput = {
   eleve?: Prisma.EleveUpdateOneRequiredWithoutEcolagesNestedInput
   classe?: Prisma.ClasseUpdateOneWithoutEcolagesNestedInput
   paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutEcolageNestedInput
+  ajournementsLignes?: Prisma.AjournementLigneUpdateManyWithoutEcolageNestedInput
 }
 
 export type EcolageUncheckedUpdateWithoutSchoolInput = {
@@ -920,6 +1024,7 @@ export type EcolageUncheckedUpdateWithoutSchoolInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
   paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutEcolageNestedInput
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedUpdateManyWithoutEcolageNestedInput
 }
 
 export type EcolageUncheckedUpdateManyWithoutSchoolInput = {
@@ -957,6 +1062,7 @@ export type EcolageUpdateWithoutClasseInput = {
   eleve?: Prisma.EleveUpdateOneRequiredWithoutEcolagesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEcolagesNestedInput
   paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutEcolageNestedInput
+  ajournementsLignes?: Prisma.AjournementLigneUpdateManyWithoutEcolageNestedInput
 }
 
 export type EcolageUncheckedUpdateWithoutClasseInput = {
@@ -970,6 +1076,7 @@ export type EcolageUncheckedUpdateWithoutClasseInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
   paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutEcolageNestedInput
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedUpdateManyWithoutEcolageNestedInput
 }
 
 export type EcolageUncheckedUpdateManyWithoutClasseInput = {
@@ -1007,6 +1114,7 @@ export type EcolageUpdateWithoutEleveInput = {
   classe?: Prisma.ClasseUpdateOneWithoutEcolagesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEcolagesNestedInput
   paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutEcolageNestedInput
+  ajournementsLignes?: Prisma.AjournementLigneUpdateManyWithoutEcolageNestedInput
 }
 
 export type EcolageUncheckedUpdateWithoutEleveInput = {
@@ -1020,6 +1128,7 @@ export type EcolageUncheckedUpdateWithoutEleveInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
   paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutEcolageNestedInput
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedUpdateManyWithoutEcolageNestedInput
 }
 
 export type EcolageUncheckedUpdateManyWithoutEleveInput = {
@@ -1041,10 +1150,12 @@ export type EcolageUncheckedUpdateManyWithoutEleveInput = {
 
 export type EcolageCountOutputType = {
   paiementEcolages: number
+  ajournementsLignes: number
 }
 
 export type EcolageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   paiementEcolages?: boolean | EcolageCountOutputTypeCountPaiementEcolagesArgs
+  ajournementsLignes?: boolean | EcolageCountOutputTypeCountAjournementsLignesArgs
 }
 
 /**
@@ -1064,6 +1175,13 @@ export type EcolageCountOutputTypeCountPaiementEcolagesArgs<ExtArgs extends runt
   where?: Prisma.PaiementEcolageWhereInput
 }
 
+/**
+ * EcolageCountOutputType without action
+ */
+export type EcolageCountOutputTypeCountAjournementsLignesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AjournementLigneWhereInput
+}
+
 
 export type EcolageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1080,6 +1198,7 @@ export type EcolageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   classe?: boolean | Prisma.Ecolage$classeArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   paiementEcolages?: boolean | Prisma.Ecolage$paiementEcolagesArgs<ExtArgs>
+  ajournementsLignes?: boolean | Prisma.Ecolage$ajournementsLignesArgs<ExtArgs>
   _count?: boolean | Prisma.EcolageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ecolage"]>
 
@@ -1134,6 +1253,7 @@ export type EcolageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   classe?: boolean | Prisma.Ecolage$classeArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   paiementEcolages?: boolean | Prisma.Ecolage$paiementEcolagesArgs<ExtArgs>
+  ajournementsLignes?: boolean | Prisma.Ecolage$ajournementsLignesArgs<ExtArgs>
   _count?: boolean | Prisma.EcolageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EcolageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1154,6 +1274,7 @@ export type $EcolagePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     classe: Prisma.$ClassePayload<ExtArgs> | null
     school: Prisma.$SchoolPayload<ExtArgs>
     paiementEcolages: Prisma.$PaiementEcolagePayload<ExtArgs>[]
+    ajournementsLignes: Prisma.$AjournementLignePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1564,6 +1685,7 @@ export interface Prisma__EcolageClient<T, Null = never, ExtArgs extends runtime.
   classe<T extends Prisma.Ecolage$classeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ecolage$classeArgs<ExtArgs>>): Prisma.Prisma__ClasseClient<runtime.Types.Result.GetResult<Prisma.$ClassePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   paiementEcolages<T extends Prisma.Ecolage$paiementEcolagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ecolage$paiementEcolagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaiementEcolagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ajournementsLignes<T extends Prisma.Ecolage$ajournementsLignesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ecolage$ajournementsLignesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AjournementLignePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2044,6 +2166,30 @@ export type Ecolage$paiementEcolagesArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.PaiementEcolageScalarFieldEnum | Prisma.PaiementEcolageScalarFieldEnum[]
+}
+
+/**
+ * Ecolage.ajournementsLignes
+ */
+export type Ecolage$ajournementsLignesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AjournementLigne
+   */
+  select?: Prisma.AjournementLigneSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AjournementLigne
+   */
+  omit?: Prisma.AjournementLigneOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AjournementLigneInclude<ExtArgs> | null
+  where?: Prisma.AjournementLigneWhereInput
+  orderBy?: Prisma.AjournementLigneOrderByWithRelationInput | Prisma.AjournementLigneOrderByWithRelationInput[]
+  cursor?: Prisma.AjournementLigneWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AjournementLigneScalarFieldEnum | Prisma.AjournementLigneScalarFieldEnum[]
 }
 
 /**

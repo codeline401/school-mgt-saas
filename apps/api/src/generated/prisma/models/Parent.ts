@@ -236,6 +236,7 @@ export type ParentWhereInput = {
   autorisationParents?: Prisma.AutorisationParentListRelationFilter
   adresses?: Prisma.AdresseListRelationFilter
   eleves?: Prisma.EleveListRelationFilter
+  ajournements?: Prisma.AjournementListRelationFilter
   affiliations?: Prisma.ResponsableEleveListRelationFilter
 }
 
@@ -257,6 +258,7 @@ export type ParentOrderByWithRelationInput = {
   autorisationParents?: Prisma.AutorisationParentOrderByRelationAggregateInput
   adresses?: Prisma.AdresseOrderByRelationAggregateInput
   eleves?: Prisma.EleveOrderByRelationAggregateInput
+  ajournements?: Prisma.AjournementOrderByRelationAggregateInput
   affiliations?: Prisma.ResponsableEleveOrderByRelationAggregateInput
 }
 
@@ -281,6 +283,7 @@ export type ParentWhereUniqueInput = Prisma.AtLeast<{
   autorisationParents?: Prisma.AutorisationParentListRelationFilter
   adresses?: Prisma.AdresseListRelationFilter
   eleves?: Prisma.EleveListRelationFilter
+  ajournements?: Prisma.AjournementListRelationFilter
   affiliations?: Prisma.ResponsableEleveListRelationFilter
 }, "id" | "userId">
 
@@ -334,6 +337,7 @@ export type ParentCreateInput = {
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveCreateNestedManyWithoutResponsableInput
 }
 
@@ -353,6 +357,7 @@ export type ParentUncheckedCreateInput = {
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementUncheckedCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveUncheckedCreateNestedManyWithoutResponsableInput
 }
 
@@ -372,6 +377,7 @@ export type ParentUpdateInput = {
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUpdateManyWithoutResponsableNestedInput
 }
 
@@ -391,6 +397,7 @@ export type ParentUncheckedUpdateInput = {
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUncheckedUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUncheckedUpdateManyWithoutResponsableNestedInput
 }
 
@@ -632,6 +639,20 @@ export type ParentUpdateOneWithoutAdressesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ParentUpdateToOneWithWhereWithoutAdressesInput, Prisma.ParentUpdateWithoutAdressesInput>, Prisma.ParentUncheckedUpdateWithoutAdressesInput>
 }
 
+export type ParentCreateNestedOneWithoutAjournementsInput = {
+  create?: Prisma.XOR<Prisma.ParentCreateWithoutAjournementsInput, Prisma.ParentUncheckedCreateWithoutAjournementsInput>
+  connectOrCreate?: Prisma.ParentCreateOrConnectWithoutAjournementsInput
+  connect?: Prisma.ParentWhereUniqueInput
+}
+
+export type ParentUpdateOneRequiredWithoutAjournementsNestedInput = {
+  create?: Prisma.XOR<Prisma.ParentCreateWithoutAjournementsInput, Prisma.ParentUncheckedCreateWithoutAjournementsInput>
+  connectOrCreate?: Prisma.ParentCreateOrConnectWithoutAjournementsInput
+  upsert?: Prisma.ParentUpsertWithoutAjournementsInput
+  connect?: Prisma.ParentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ParentUpdateToOneWithWhereWithoutAjournementsInput, Prisma.ParentUpdateWithoutAjournementsInput>, Prisma.ParentUncheckedUpdateWithoutAjournementsInput>
+}
+
 export type EnumTypeResponsableFieldUpdateOperationsInput = {
   set?: $Enums.TypeResponsable
 }
@@ -665,6 +686,7 @@ export type ParentCreateWithoutUserInput = {
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveCreateNestedManyWithoutResponsableInput
 }
 
@@ -683,6 +705,7 @@ export type ParentUncheckedCreateWithoutUserInput = {
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementUncheckedCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveUncheckedCreateNestedManyWithoutResponsableInput
 }
 
@@ -717,6 +740,7 @@ export type ParentUpdateWithoutUserInput = {
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUpdateManyWithoutResponsableNestedInput
 }
 
@@ -735,6 +759,7 @@ export type ParentUncheckedUpdateWithoutUserInput = {
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUncheckedUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUncheckedUpdateManyWithoutResponsableNestedInput
 }
 
@@ -753,6 +778,7 @@ export type ParentCreateWithoutSchoolInput = {
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveCreateNestedManyWithoutResponsableInput
 }
 
@@ -771,6 +797,7 @@ export type ParentUncheckedCreateWithoutSchoolInput = {
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementUncheckedCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveUncheckedCreateNestedManyWithoutResponsableInput
 }
 
@@ -832,6 +859,7 @@ export type ParentCreateWithoutAutorisationParentsInput = {
   user?: Prisma.UserCreateNestedOneWithoutParentInput
   adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveCreateNestedManyWithoutResponsableInput
 }
 
@@ -850,6 +878,7 @@ export type ParentUncheckedCreateWithoutAutorisationParentsInput = {
   elevesEnfants?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementUncheckedCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveUncheckedCreateNestedManyWithoutResponsableInput
 }
 
@@ -884,6 +913,7 @@ export type ParentUpdateWithoutAutorisationParentsInput = {
   user?: Prisma.UserUpdateOneWithoutParentNestedInput
   adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUpdateManyWithoutResponsableNestedInput
 }
 
@@ -902,6 +932,7 @@ export type ParentUncheckedUpdateWithoutAutorisationParentsInput = {
   elevesEnfants?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUncheckedUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUncheckedUpdateManyWithoutResponsableNestedInput
 }
 
@@ -920,6 +951,7 @@ export type ParentCreateWithoutElevesInput = {
   user?: Prisma.UserCreateNestedOneWithoutParentInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
+  ajournements?: Prisma.AjournementCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveCreateNestedManyWithoutResponsableInput
 }
 
@@ -938,6 +970,7 @@ export type ParentUncheckedCreateWithoutElevesInput = {
   elevesEnfants?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
+  ajournements?: Prisma.AjournementUncheckedCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveUncheckedCreateNestedManyWithoutResponsableInput
 }
 
@@ -961,6 +994,7 @@ export type ParentCreateWithoutElevesEnfantsInput = {
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveCreateNestedManyWithoutResponsableInput
 }
 
@@ -979,6 +1013,7 @@ export type ParentUncheckedCreateWithoutElevesEnfantsInput = {
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementUncheckedCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveUncheckedCreateNestedManyWithoutResponsableInput
 }
 
@@ -1013,6 +1048,7 @@ export type ParentUpdateWithoutElevesInput = {
   user?: Prisma.UserUpdateOneWithoutParentNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
+  ajournements?: Prisma.AjournementUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUpdateManyWithoutResponsableNestedInput
 }
 
@@ -1031,6 +1067,7 @@ export type ParentUncheckedUpdateWithoutElevesInput = {
   elevesEnfants?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
+  ajournements?: Prisma.AjournementUncheckedUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUncheckedUpdateManyWithoutResponsableNestedInput
 }
 
@@ -1060,6 +1097,7 @@ export type ParentUpdateWithoutElevesEnfantsInput = {
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUpdateManyWithoutResponsableNestedInput
 }
 
@@ -1078,6 +1116,7 @@ export type ParentUncheckedUpdateWithoutElevesEnfantsInput = {
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUncheckedUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUncheckedUpdateManyWithoutResponsableNestedInput
 }
 
@@ -1096,6 +1135,7 @@ export type ParentCreateWithoutAdressesInput = {
   user?: Prisma.UserCreateNestedOneWithoutParentInput
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveCreateNestedManyWithoutResponsableInput
 }
 
@@ -1114,6 +1154,7 @@ export type ParentUncheckedCreateWithoutAdressesInput = {
   elevesEnfants?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementUncheckedCreateNestedManyWithoutParentInput
   affiliations?: Prisma.ResponsableEleveUncheckedCreateNestedManyWithoutResponsableInput
 }
 
@@ -1148,6 +1189,7 @@ export type ParentUpdateWithoutAdressesInput = {
   user?: Prisma.UserUpdateOneWithoutParentNestedInput
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUpdateManyWithoutResponsableNestedInput
 }
 
@@ -1165,6 +1207,99 @@ export type ParentUncheckedUpdateWithoutAdressesInput = {
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   elevesEnfants?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUncheckedUpdateManyWithoutParentNestedInput
+  affiliations?: Prisma.ResponsableEleveUncheckedUpdateManyWithoutResponsableNestedInput
+}
+
+export type ParentCreateWithoutAjournementsInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  type?: $Enums.TypeResponsable
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutParentsInput
+  elevesEnfants?: Prisma.EleveCreateNestedManyWithoutParentInput
+  user?: Prisma.UserCreateNestedOneWithoutParentInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
+  affiliations?: Prisma.ResponsableEleveCreateNestedManyWithoutResponsableInput
+}
+
+export type ParentUncheckedCreateWithoutAjournementsInput = {
+  id?: string
+  nom: string
+  prenom: string
+  email?: string | null
+  telephone?: string | null
+  adresse?: string | null
+  schoolId: string
+  type?: $Enums.TypeResponsable
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId?: string | null
+  elevesEnfants?: Prisma.EleveUncheckedCreateNestedManyWithoutParentInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
+  adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
+  affiliations?: Prisma.ResponsableEleveUncheckedCreateNestedManyWithoutResponsableInput
+}
+
+export type ParentCreateOrConnectWithoutAjournementsInput = {
+  where: Prisma.ParentWhereUniqueInput
+  create: Prisma.XOR<Prisma.ParentCreateWithoutAjournementsInput, Prisma.ParentUncheckedCreateWithoutAjournementsInput>
+}
+
+export type ParentUpsertWithoutAjournementsInput = {
+  update: Prisma.XOR<Prisma.ParentUpdateWithoutAjournementsInput, Prisma.ParentUncheckedUpdateWithoutAjournementsInput>
+  create: Prisma.XOR<Prisma.ParentCreateWithoutAjournementsInput, Prisma.ParentUncheckedCreateWithoutAjournementsInput>
+  where?: Prisma.ParentWhereInput
+}
+
+export type ParentUpdateToOneWithWhereWithoutAjournementsInput = {
+  where?: Prisma.ParentWhereInput
+  data: Prisma.XOR<Prisma.ParentUpdateWithoutAjournementsInput, Prisma.ParentUncheckedUpdateWithoutAjournementsInput>
+}
+
+export type ParentUpdateWithoutAjournementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeResponsableFieldUpdateOperationsInput | $Enums.TypeResponsable
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutParentsNestedInput
+  elevesEnfants?: Prisma.EleveUpdateManyWithoutParentNestedInput
+  user?: Prisma.UserUpdateOneWithoutParentNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
+  affiliations?: Prisma.ResponsableEleveUpdateManyWithoutResponsableNestedInput
+}
+
+export type ParentUncheckedUpdateWithoutAjournementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTypeResponsableFieldUpdateOperationsInput | $Enums.TypeResponsable
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elevesEnfants?: Prisma.EleveUncheckedUpdateManyWithoutParentNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
+  adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
   affiliations?: Prisma.ResponsableEleveUncheckedUpdateManyWithoutResponsableNestedInput
 }
@@ -1185,6 +1320,7 @@ export type ParentCreateWithoutAffiliationsInput = {
   autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementCreateNestedManyWithoutParentInput
 }
 
 export type ParentUncheckedCreateWithoutAffiliationsInput = {
@@ -1203,6 +1339,7 @@ export type ParentUncheckedCreateWithoutAffiliationsInput = {
   autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutParentInput
   adresses?: Prisma.AdresseUncheckedCreateNestedManyWithoutParentInput
   eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutResponsableInput
+  ajournements?: Prisma.AjournementUncheckedCreateNestedManyWithoutParentInput
 }
 
 export type ParentCreateOrConnectWithoutAffiliationsInput = {
@@ -1237,6 +1374,7 @@ export type ParentUpdateWithoutAffiliationsInput = {
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUpdateManyWithoutParentNestedInput
 }
 
 export type ParentUncheckedUpdateWithoutAffiliationsInput = {
@@ -1255,6 +1393,7 @@ export type ParentUncheckedUpdateWithoutAffiliationsInput = {
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUncheckedUpdateManyWithoutParentNestedInput
 }
 
 export type ParentCreateManySchoolInput = {
@@ -1285,6 +1424,7 @@ export type ParentUpdateWithoutSchoolInput = {
   autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUpdateManyWithoutResponsableNestedInput
 }
 
@@ -1303,6 +1443,7 @@ export type ParentUncheckedUpdateWithoutSchoolInput = {
   autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutParentNestedInput
   adresses?: Prisma.AdresseUncheckedUpdateManyWithoutParentNestedInput
   eleves?: Prisma.EleveUncheckedUpdateManyWithoutResponsableNestedInput
+  ajournements?: Prisma.AjournementUncheckedUpdateManyWithoutParentNestedInput
   affiliations?: Prisma.ResponsableEleveUncheckedUpdateManyWithoutResponsableNestedInput
 }
 
@@ -1329,6 +1470,7 @@ export type ParentCountOutputType = {
   autorisationParents: number
   adresses: number
   eleves: number
+  ajournements: number
   affiliations: number
 }
 
@@ -1337,6 +1479,7 @@ export type ParentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   autorisationParents?: boolean | ParentCountOutputTypeCountAutorisationParentsArgs
   adresses?: boolean | ParentCountOutputTypeCountAdressesArgs
   eleves?: boolean | ParentCountOutputTypeCountElevesArgs
+  ajournements?: boolean | ParentCountOutputTypeCountAjournementsArgs
   affiliations?: boolean | ParentCountOutputTypeCountAffiliationsArgs
 }
 
@@ -1381,6 +1524,13 @@ export type ParentCountOutputTypeCountElevesArgs<ExtArgs extends runtime.Types.E
 /**
  * ParentCountOutputType without action
  */
+export type ParentCountOutputTypeCountAjournementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AjournementWhereInput
+}
+
+/**
+ * ParentCountOutputType without action
+ */
 export type ParentCountOutputTypeCountAffiliationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ResponsableEleveWhereInput
 }
@@ -1404,6 +1554,7 @@ export type ParentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   autorisationParents?: boolean | Prisma.Parent$autorisationParentsArgs<ExtArgs>
   adresses?: boolean | Prisma.Parent$adressesArgs<ExtArgs>
   eleves?: boolean | Prisma.Parent$elevesArgs<ExtArgs>
+  ajournements?: boolean | Prisma.Parent$ajournementsArgs<ExtArgs>
   affiliations?: boolean | Prisma.Parent$affiliationsArgs<ExtArgs>
   _count?: boolean | Prisma.ParentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["parent"]>
@@ -1462,6 +1613,7 @@ export type ParentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   autorisationParents?: boolean | Prisma.Parent$autorisationParentsArgs<ExtArgs>
   adresses?: boolean | Prisma.Parent$adressesArgs<ExtArgs>
   eleves?: boolean | Prisma.Parent$elevesArgs<ExtArgs>
+  ajournements?: boolean | Prisma.Parent$ajournementsArgs<ExtArgs>
   affiliations?: boolean | Prisma.Parent$affiliationsArgs<ExtArgs>
   _count?: boolean | Prisma.ParentCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1483,6 +1635,7 @@ export type $ParentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     autorisationParents: Prisma.$AutorisationParentPayload<ExtArgs>[]
     adresses: Prisma.$AdressePayload<ExtArgs>[]
     eleves: Prisma.$ElevePayload<ExtArgs>[]
+    ajournements: Prisma.$AjournementPayload<ExtArgs>[]
     affiliations: Prisma.$ResponsableElevePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1897,6 +2050,7 @@ export interface Prisma__ParentClient<T, Null = never, ExtArgs extends runtime.T
   autorisationParents<T extends Prisma.Parent$autorisationParentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Parent$autorisationParentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutorisationParentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   adresses<T extends Prisma.Parent$adressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Parent$adressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdressePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   eleves<T extends Prisma.Parent$elevesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Parent$elevesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ElevePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ajournements<T extends Prisma.Parent$ajournementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Parent$ajournementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AjournementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   affiliations<T extends Prisma.Parent$affiliationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Parent$affiliationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResponsableElevePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2451,6 +2605,30 @@ export type Parent$elevesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.EleveScalarFieldEnum | Prisma.EleveScalarFieldEnum[]
+}
+
+/**
+ * Parent.ajournements
+ */
+export type Parent$ajournementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ajournement
+   */
+  select?: Prisma.AjournementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ajournement
+   */
+  omit?: Prisma.AjournementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AjournementInclude<ExtArgs> | null
+  where?: Prisma.AjournementWhereInput
+  orderBy?: Prisma.AjournementOrderByWithRelationInput | Prisma.AjournementOrderByWithRelationInput[]
+  cursor?: Prisma.AjournementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AjournementScalarFieldEnum | Prisma.AjournementScalarFieldEnum[]
 }
 
 /**

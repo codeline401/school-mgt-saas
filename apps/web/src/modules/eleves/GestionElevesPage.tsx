@@ -10,7 +10,6 @@ import {
   FileText,
   GraduationCap,
   HeartPulse,
-  Landmark,
   School,
   ShieldCheck,
   Star,
@@ -28,6 +27,8 @@ import { EmergencyContactSection } from "./informations/emergencyContact/compone
 import { HistoriqueSection } from "./informations/historique/components/HistoriqueSection";
 import { PaiementEcolageSection } from "./ecolages/paiement/components/PaiementEcolageSection";
 import { FacturesEcolageSection } from "./ecolages/factures/components/FactureEcolageSection";
+import { AjournementEcolageSection } from "./ecolages/ajournement/components/AjournementEcolageSection";
+import { useAuthStore } from "../../store/authStore";
 
 type MainTab =
   | "informations"
@@ -47,7 +48,7 @@ type InformationSubTab =
 type EcolageSubTab =
   | "paiements"
   | "factures"
-  | "bourses"
+  | "ajournements"
   | "relances"
   | "garanties";
 
@@ -105,7 +106,7 @@ const informationTabs: TabItem<InformationSubTab>[] = [
 const ecolageTabs: TabItem<EcolageSubTab>[] = [
   { value: "paiements", label: "Paiements", icon: Wallet },
   { value: "factures", label: "Factures", icon: FileText },
-  { value: "bourses", label: "Bourses", icon: Landmark },
+  { value: "ajournements", label: "Ajournements", icon: CalendarClock },
   { value: "relances", label: "Relances", icon: CalendarClock },
   { value: "garanties", label: "Garanties", icon: ShieldCheck },
 ];
@@ -198,14 +199,8 @@ function GestionElevesPage() {
         return <PaiementEcolageSection initialEleveId={eleveId} />;
       case "factures":
         return <FacturesEcolageSection initialEleveId={eleveId} />;
-      case "bourses":
-        return (
-          <DevelopmentPlaceholder
-            icon={Landmark}
-            title="Bourses & aides"
-            description="Droits à bourse, montants, conditions, décisions et suivi des aides sociales."
-          />
-        );
+      case "ajournements":
+        return <AjournementEcolageSection initialEleveId={eleveId} />;
       case "relances":
         return (
           <DevelopmentPlaceholder
@@ -415,6 +410,10 @@ function GestionElevesPage() {
     }
   };
 
+  const user = useAuthStore((state) => state.user);
+  const canManageAjournements =
+    user?.role === "ADMIN" || user?.role === "SUDO_ADMIN";
+
   return (
     <>
       <FicheEleveFormModal
@@ -526,17 +525,22 @@ function GestionElevesPage() {
         {activeSubTab === "ecolage" && (
           <div>
             <div role="tablist" className="tabs tabs-boxed mb-6">
-              {ecolageTabs.map(({ value, label, icon: Icon }) => (
-                <button
-                  key={value}
-                  role="tab"
-                  className={`tab ${activeEcolageSubTab === value ? "tab-active" : ""}`}
-                  onClick={() => setActiveEcolageSubTab(value)}
-                >
-                  <Icon size={16} className="mr-2" />
-                  {label}
-                </button>
-              ))}
+              {ecolageTabs
+                .filter(
+                  ({ value }) =>
+                    value !== "ajournements" || canManageAjournements,
+                )
+                .map(({ value, label, icon: Icon }) => (
+                  <button
+                    key={value}
+                    role="tab"
+                    className={`tab ${activeEcolageSubTab === value ? "tab-active" : ""}`}
+                    onClick={() => setActiveEcolageSubTab(value)}
+                  >
+                    <Icon size={16} className="mr-2" />
+                    {label}
+                  </button>
+                ))}
             </div>
             {renderEcolageContent()}
           </div>
