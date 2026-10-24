@@ -23,14 +23,14 @@
   --color-secondary: var(--primary-hover);
   --color-secondary-content: #ffffff;
   --color-accent: var(--accent);
-  --color-accent-content: #ffffff;
+  --color-accent-content: var(--text-main);
   --color-neutral: var(--sidebar);
   --color-neutral-content: #e2e8f0;
 
   --color-info: var(--accent);
-  --color-info-content: #ffffff;
+  --color-info-content: var(--text-main);
   --color-success: var(--success);
-  --color-success-content: #ffffff;
+  --color-success-content: var(--text-main);
   --color-warning: var(--warning);
   --color-warning-content: var(--warning-foreground);
   --color-error: var(--danger);
