@@ -20,6 +20,7 @@ import type {
 } from "@school-mgt/types";
 // BulletinTemplate est utilisé comme type de retour de la query ci-dessous.
 import { DEFAULT_BULLETIN_CONFIG } from "@school-mgt/types";
+import { themeHex } from "../../lib/themeTokens";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -491,7 +492,7 @@ function handlePrint(
 
       const rangHtml =
         config.showRang && rang !== null
-          ? `<div style="font-size:1.2rem;font-weight:600">${rang}/${effectif}</div><div style="font-size:.75rem;color:#666">Rang</div>`
+          ? `<div style="font-size:1.2rem;font-weight:600">${rang}/${effectif}</div><div style="font-size:.75rem;color:var(--print-muted)">Rang</div>`
           : "";
 
       return `
@@ -504,7 +505,7 @@ function handlePrint(
           </div>
           <div style="text-align:right">
             <div style="font-size:1.4rem;font-weight:700">${moyenneGenerale !== null ? moyenneGenerale.toFixed(2) + "/20" : "—"}</div>
-            <div style="font-size:.75rem;color:#666">Moy. générale</div>
+            <div style="font-size:.75rem;color:var(--print-muted)">Moy. générale</div>
             ${rangHtml}
           </div>
         </div>
@@ -538,19 +539,26 @@ function handlePrint(
   <meta charset="UTF-8"/>
   <title>Bulletins — ${esc(nomClasse)}</title>
   <style>
+    :root {
+      --print-text-main: ${themeHex.textMain};
+      --print-muted: ${themeHex.textMuted};
+      --print-border: ${themeHex.border};
+      --print-head-bg: ${themeHex.pageBackground};
+      --print-emphasis: ${themeHex.sidebar};
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; font-size: 12px; }
-    body { padding: 1cm; }
-    .ecole { font-size: 13px; font-weight: 600; text-align: center; margin-bottom: 10px; border-bottom: 2px solid #333; padding-bottom: 6px; }
-    .bulletin { page-break-after: always; border: 1px solid #ccc; border-radius: 6px; padding: 16px; margin-bottom: 24px; }
+    body { padding: 1cm; color: var(--print-text-main); }
+    .ecole { font-size: 13px; font-weight: 600; text-align: center; margin-bottom: 10px; border-bottom: 2px solid var(--print-emphasis); padding-bottom: 6px; }
+    .bulletin { page-break-after: always; border: 1px solid var(--print-border); border-radius: 6px; padding: 16px; margin-bottom: 24px; }
     .bulletin:last-child { page-break-after: avoid; }
     .entete { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
     .entete strong { font-size: 14px; }
-    .entete span { color: #555; font-size: 11px; }
+    .entete span { color: var(--print-muted); font-size: 11px; }
     table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
-    th, td { border: 1px solid #ddd; padding: 5px 8px; }
-    th { background: #f3f4f6; font-weight: 600; }
-    tfoot td { background: #f9fafb; }
-    .pied { margin-top: 12px; font-size: 11px; color: #555; border-top: 1px solid #ddd; padding-top: 8px; }
+    th, td { border: 1px solid var(--print-border); padding: 5px 8px; }
+    th { background: var(--print-head-bg); font-weight: 600; }
+    tfoot td { background: var(--print-head-bg); }
+    .pied { margin-top: 12px; font-size: 11px; color: var(--print-muted); border-top: 1px solid var(--print-border); padding-top: 8px; }
     @page { size: A4; margin: 1cm; }
   </style>
 </head>

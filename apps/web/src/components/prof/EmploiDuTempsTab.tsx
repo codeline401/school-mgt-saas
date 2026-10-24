@@ -159,7 +159,7 @@ export default function EmploiDuTempsTab({ profId }: Props) {
                     height,
                     backgroundColor: bgColor ?? undefined,
                     ...(bgColor
-                      ? { color: "#fff" }
+                      ? { color: "var(--color-base-100)" }
                       : {}),
                   }}
                   title={`${c.heureDebut}–${c.heureFin}${c.intitule ? ` · ${c.intitule}` : ""}`}

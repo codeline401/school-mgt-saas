@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { UserPlus, Loader2, GraduationCap, KeyRound, Info } from "lucide-react";
 import { useRegister, type RegisterInput } from "../hooks/useAuth";
 import { getApiError } from "../lib/api";
+import { themeHex } from "../lib/themeTokens";
 
 const ROLES = [
   { value: "ADMIN", label: "Directeur / Administrateur" },
@@ -56,13 +57,13 @@ export default function RegisterPage() {
         <div
           className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-10"
           style={{
-            background: "radial-gradient(circle, #4caf50, transparent)",
+            background: `radial-gradient(circle, ${themeHex.accent}, transparent)`,
           }}
         />
         <div
           className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full opacity-10"
           style={{
-            background: "radial-gradient(circle, #3949ab, transparent)",
+            background: `radial-gradient(circle, ${themeHex.primary}, transparent)`,
           }}
         />
       </div>
@@ -72,15 +73,17 @@ export default function RegisterPage() {
         <div className="text-center mb-8">
           <div
             className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4"
-            style={{ background: "linear-gradient(135deg, #2e7d32, #4caf50)" }}
+            style={{
+              background: `linear-gradient(135deg, ${themeHex.primary}, ${themeHex.accent})`,
+            }}
           >
             <GraduationCap size={32} className="text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-white font-display">
+          <h1 className="text-4xl font-bold text-text-main font-display">
             Créer un compte
           </h1>
-          <p className="text-blue-200 mt-2">
-            Rejoignez la plateforme scolaire 🇲🇬
+          <p className="text-muted mt-2">
+            Rejoignez la plateforme de Gestion d'Ecole
           </p>
         </div>
 
@@ -221,7 +224,7 @@ export default function RegisterPage() {
                 type="submit"
                 disabled={registerMutation.isPending}
                 aria-busy={registerMutation.isPending}
-                className="btn btn-success btn-block mt-2"
+                className="btn btn-primary btn-block mt-2"
               >
                 {registerMutation.isPending ? (
                   <>
@@ -253,7 +256,7 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        <p className="text-center text-blue-300/50 text-xs mt-6">
+        <p className="text-center text-muted/80 text-xs mt-6">
           by codeline401 © 2026 School SaaS Madagascar — Tous droits réservés
         </p>
       </div>

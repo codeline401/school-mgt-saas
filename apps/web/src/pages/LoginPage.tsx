@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { LogIn, Loader2, GraduationCap } from "lucide-react";
 import { useLogin } from "../hooks/useAuth";
 import { getApiError } from "../lib/api";
+import { themeHex } from "../lib/themeTokens";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -21,13 +22,13 @@ export default function LoginPage() {
         <div
           className="absolute -top-32 -left-32 w-96 h-96 rounded-full opacity-10"
           style={{
-            background: "radial-gradient(circle, #4caf50, transparent)",
+            background: `radial-gradient(circle, ${themeHex.accent}, transparent)`,
           }}
         />
         <div
           className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full opacity-10"
           style={{
-            background: "radial-gradient(circle, #3949ab, transparent)",
+            background: `radial-gradient(circle, ${themeHex.primary}, transparent)`,
           }}
         />
       </div>
@@ -37,15 +38,17 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <div
             className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4"
-            style={{ background: "linear-gradient(135deg, #2e7d32, #4caf50)" }}
+            style={{
+              background: `linear-gradient(135deg, ${themeHex.primary}, ${themeHex.accent})`,
+            }}
           >
             <GraduationCap size={32} className="text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-white font-display">
-            School SaaS
+          <h1 className="text-4xl font-bold text-text-main font-display">
+            e-anatra
           </h1>
-          <p className="text-blue-200 mt-2 font-medium">
-            Plateforme de Gestion Scolaire 🇲🇬
+          <p className="text-muted mt-2 font-medium">
+            Plateforme de Gestion d'École
           </p>
         </div>
 
@@ -92,7 +95,7 @@ export default function LoginPage() {
                 type="submit"
                 disabled={loginMutation.isPending}
                 aria-busy={loginMutation.isPending}
-                className="btn btn-success btn-block mt-2"
+                className="btn btn-primary btn-block mt-2"
               >
                 {loginMutation.isPending ? (
                   <>
@@ -122,7 +125,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <p className="text-center text-blue-300/50 text-xs mt-6">
+        <p className="text-center text-muted/80 text-xs mt-6">
           by codeline401 © 2026 School SaaS Madagascar — Tous droits réservés
         </p>
       </div>

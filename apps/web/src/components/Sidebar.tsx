@@ -332,13 +332,16 @@ const MENU: MenuEntry[] = [
   },
 ];
 
-const BASE = "flex items-center gap-3 p-3 rounded-lg transition-colors text-sm";
-const ACTIVE = "bg-white/10 text-white font-semibold";
-const IDLE = "text-white/60 hover:bg-white/5 hover:text-white/90";
+const BASE =
+  "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150 text-sm";
+const ACTIVE =
+  "bg-primary text-white font-semibold shadow-sm";
+const IDLE =
+  "text-base-100/80 hover:bg-white/10 hover:text-white font-medium";
 const DISABLED =
-  "text-white/25 cursor-default px-3 py-2 text-sm flex items-center gap-3";
+  "text-base-100/35 cursor-default px-3 py-2 text-sm flex items-center gap-3";
 const SUB =
-  "flex items-center gap-3 pl-8 py-2 pr-3 rounded-lg transition-colors text-sm";
+  "flex items-center gap-3 pl-8 pr-3 py-2 rounded-lg transition-all duration-150 text-sm";
 
 function Sidebar() {
   const user = useAuthStore((s) => s.user);
@@ -363,12 +366,12 @@ function Sidebar() {
     roles === null || (!!user && roles.includes(user.role as Role));
 
   return (
-    <div className="w-64 bg-white/5 backdrop-blur-sm h-screen border-r border-white/10 p-4 shrink-0 flex flex-col">
-      <h2 className="text-xl font-bold text-emerald-400 mb-8 px-2">
+    <div className="w-64 h-screen bg-sidebar border-r border-primary/25 p-4 shrink-0 flex flex-col shadow-[0_10px_30px_-18px_rgba(15,23,42,0.45)]">
+      <h2 className="text-xl font-bold text-white mb-8 px-2 tracking-tight">
         School SaaS MG
       </h2>
 
-      <nav className="space-y-0.5 flex-1 overflow-y-auto">
+      <nav className="space-y-1 flex-1 overflow-y-auto pr-1">
         {MENU.map((entry) => {
           /* ── Placeholder ── */
           if (!isGroup(entry) && !isItem(entry)) {
@@ -380,7 +383,7 @@ function Sidebar() {
               >
                 <entry.icon className="w-5 h-5 shrink-0 opacity-50" />
                 <span>{entry.label}</span>
-                <span className="ml-auto text-[10px] bg-white/10 rounded px-1 py-0.5 leading-none">
+                <span className="ml-auto text-[10px] bg-white/10 text-base-100/70 rounded px-1 py-0.5 leading-none">
                   Soon
                 </span>
               </div>
@@ -410,14 +413,14 @@ function Sidebar() {
                   <entry.icon className="w-5 h-5 shrink-0" />
                   <span className="flex-1 text-left">{entry.label}</span>
                   {isOpen ? (
-                    <ChevronDown className="w-4 h-4 opacity-60" />
+                    <ChevronDown className="w-4 h-4 opacity-50" />
                   ) : (
-                    <ChevronRight className="w-4 h-4 opacity-60" />
+                    <ChevronRight className="w-4 h-4 opacity-50" />
                   )}
                 </button>
 
                 {isOpen && (
-                  <div className="mt-0.5 space-y-0.5">
+                  <div className="mt-1 space-y-0.5 border-l border-base-300/80 ml-2 pl-1.5">
                     {children.map((child) => (
                       <NavLink
                         key={child.path}

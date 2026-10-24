@@ -40,7 +40,7 @@ import CirculairesTab from "./modules/communication/CirculairesTab";
 const DashboardTemp = () => (
   <div>
     <p className="text-2xl font-bold">Bienvenu(e) sur School Management</p>
-    <p className="text-gray-500 mt-2">
+    <p className="text-muted mt-2">
       Sélectionnez une section dans le menu pour commencer
     </p>
   </div>
@@ -49,7 +49,18 @@ const DashboardTemp = () => (
 function App() {
   return (
     <BrowserRouter>
-      <Toaster position="bottom-center" />
+      <Toaster
+        position="bottom-center"
+        toastOptions={{
+          className: "border border-border bg-base-100 text-text-main shadow-sm",
+          success: {
+            className: "border border-success bg-base-100 text-text-main",
+          },
+          error: {
+            className: "border border-danger bg-base-100 text-text-main",
+          },
+        }}
+      />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
