@@ -31,6 +31,8 @@ type ActionForm = {
   dates: Record<string, string>;
 };
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
 const STATUTS: Array<{ value: StatutAjournement; label: string }> = [
   { value: "EN_ATTENTE", label: "En attente" },
   { value: "ACCEPTE", label: "Acceptées" },
@@ -321,8 +323,16 @@ export function AjournementEcolageSection({ initialEleveId }: Props) {
   });
 
   const eleveId = selectedEleve?.id ?? initialEleveId;
+  const dateRangeInvalide =
+    Boolean(filters.dateDebut && filters.dateFin) &&
+    filters.dateDebut! > filters.dateFin!;
   const queryFilters: AjournementFilters = {
     ...filters,
+    parentId:
+      filters.parentId && UUID_RE.test(filters.parentId)
+        ? filters.parentId
+        : undefined,
+    ...(dateRangeInvalide ? { dateDebut: undefined, dateFin: undefined } : {}),
     ...(eleveId ? { eleveId } : {}),
   };
 

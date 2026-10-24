@@ -37,7 +37,7 @@ export class AjournementError extends Error {
 
 // Classe représentant une erreur spécifique lorsque le parent associé à un transport est introuvable.
 export class AjournementParentIntrouvableError extends AjournementError {
-  constructor(message = "Aucun profil associé à ce transport") {
+  constructor(message = "Aucun profil parent associé à ce compte") {
     super(403, message, "AjournementParentIntrouvableError");
   }
 }

@@ -2109,7 +2109,7 @@ model AjournementLigne {
   @@index([ajournementId])
   @@index([eleveId])
   @@index([ecolageId])
-  @@unique([ecolageId], where: raw("\"estActive\" = true"))
+  @@unique([ecolageId], where: raw("\"estActive\" = true"), map: "AjournementLigne_ecolageId_estActive_key")
 }
 
 model Parent {

@@ -76,7 +76,7 @@ export const refuserAjournementSchema = z.object({
 // Schéma de validation pour la contre-proposition d'un ajournement
 export const contrePropositionSchema = z
   .object({
-    commentaire: z.string().trim().min(1, "Le commentaire es requis").max(1000),
+    commentaire: z.string().trim().min(1, "Le commentaire est requis").max(1000),
     lignes: z
       .array(
         z.object({

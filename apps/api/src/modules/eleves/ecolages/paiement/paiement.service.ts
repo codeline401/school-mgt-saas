@@ -142,7 +142,14 @@ export class PaiementEcolageService {
     const ecolages = await prisma.ecolage.findMany({
       where: { eleveId, schoolId: eleve.schoolId },
       orderBy: [{ anneeScolaire: "desc" }, { mois: "asc" }],
-      include: {
+      select: {
+        id: true,
+        anneeScolaire: true,
+        mois: true,
+        montant: true,
+        classeId: true,
+        statutPaiement: true,
+        dateEcheanceAJournee: true,
         paiementEcolages: {
           select: { montant: true },
         },
@@ -192,11 +199,12 @@ export class PaiementEcolageService {
             `${ecolage.classeId}-${ecolage.anneeScolaire}-${ecolage.mois}`,
           )
         : undefined;
+      const dateEcheance = ecolage.dateEcheanceAJournee ?? echeance?.dateEcheance;
 
       const enRetard =
         montantRestant > 0 &&
-        !!echeance &&
-        echeance.dateEcheance.getTime() < maintenant.getTime();
+        !!dateEcheance &&
+        dateEcheance.getTime() < maintenant.getTime();
 
       // Pas de pénalité affichée si la classe n'en a pas configuré (valeur 0/nulle).
       const penaliteApplicable =
@@ -209,7 +217,7 @@ export class PaiementEcolageService {
         montant: ecolage.montant.toString(),
         montantPaye: montantPaye.toString(),
         statutPaiement: ecolage.statutPaiement,
-        dateEcheance: echeance?.dateEcheance.toISOString() ?? null,
+        dateEcheance: dateEcheance?.toISOString() ?? null,
         penaliteApplicable,
         montantPenalite: penaliteApplicable
           ? String(echeance!.penaliteRetard)
