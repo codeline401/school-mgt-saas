@@ -47,6 +47,7 @@ export type EcolageMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   statutPaiement: $Enums.StatutPaiementEcolage | null
+  dateEcheanceAJournee: Date | null
 }
 
 export type EcolageMaxAggregateOutputType = {
@@ -60,6 +61,7 @@ export type EcolageMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   statutPaiement: $Enums.StatutPaiementEcolage | null
+  dateEcheanceAJournee: Date | null
 }
 
 export type EcolageCountAggregateOutputType = {
@@ -73,6 +75,7 @@ export type EcolageCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   statutPaiement: number
+  dateEcheanceAJournee: number
   _all: number
 }
 
@@ -98,6 +101,7 @@ export type EcolageMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   statutPaiement?: true
+  dateEcheanceAJournee?: true
 }
 
 export type EcolageMaxAggregateInputType = {
@@ -111,6 +115,7 @@ export type EcolageMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   statutPaiement?: true
+  dateEcheanceAJournee?: true
 }
 
 export type EcolageCountAggregateInputType = {
@@ -124,6 +129,7 @@ export type EcolageCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   statutPaiement?: true
+  dateEcheanceAJournee?: true
   _all?: true
 }
 
@@ -224,6 +230,7 @@ export type EcolageGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   statutPaiement: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee: Date | null
   _count: EcolageCountAggregateOutputType | null
   _avg: EcolageAvgAggregateOutputType | null
   _sum: EcolageSumAggregateOutputType | null
@@ -260,6 +267,7 @@ export type EcolageWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Ecolage"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ecolage"> | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFilter<"Ecolage"> | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.DateTimeNullableFilter<"Ecolage"> | Date | string | null
   eleve?: Prisma.XOR<Prisma.EleveScalarRelationFilter, Prisma.EleveWhereInput>
   classe?: Prisma.XOR<Prisma.ClasseNullableScalarRelationFilter, Prisma.ClasseWhereInput> | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
@@ -278,6 +286,7 @@ export type EcolageOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   statutPaiement?: Prisma.SortOrder
+  dateEcheanceAJournee?: Prisma.SortOrderInput | Prisma.SortOrder
   eleve?: Prisma.EleveOrderByWithRelationInput
   classe?: Prisma.ClasseOrderByWithRelationInput
   school?: Prisma.SchoolOrderByWithRelationInput
@@ -300,6 +309,7 @@ export type EcolageWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Ecolage"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ecolage"> | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFilter<"Ecolage"> | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.DateTimeNullableFilter<"Ecolage"> | Date | string | null
   eleve?: Prisma.XOR<Prisma.EleveScalarRelationFilter, Prisma.EleveWhereInput>
   classe?: Prisma.XOR<Prisma.ClasseNullableScalarRelationFilter, Prisma.ClasseWhereInput> | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
@@ -318,6 +328,7 @@ export type EcolageOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   statutPaiement?: Prisma.SortOrder
+  dateEcheanceAJournee?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.EcolageCountOrderByAggregateInput
   _avg?: Prisma.EcolageAvgOrderByAggregateInput
   _max?: Prisma.EcolageMaxOrderByAggregateInput
@@ -339,6 +350,7 @@ export type EcolageScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Ecolage"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Ecolage"> | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageWithAggregatesFilter<"Ecolage"> | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.DateTimeNullableWithAggregatesFilter<"Ecolage"> | Date | string | null
 }
 
 export type EcolageCreateInput = {
@@ -349,6 +361,7 @@ export type EcolageCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   eleve: Prisma.EleveCreateNestedOneWithoutEcolagesInput
   classe?: Prisma.ClasseCreateNestedOneWithoutEcolagesInput
   school: Prisma.SchoolCreateNestedOneWithoutEcolagesInput
@@ -367,6 +380,7 @@ export type EcolageUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutEcolageInput
   ajournementsLignes?: Prisma.AjournementLigneUncheckedCreateNestedManyWithoutEcolageInput
 }
@@ -379,6 +393,7 @@ export type EcolageUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eleve?: Prisma.EleveUpdateOneRequiredWithoutEcolagesNestedInput
   classe?: Prisma.ClasseUpdateOneWithoutEcolagesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEcolagesNestedInput
@@ -397,6 +412,7 @@ export type EcolageUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutEcolageNestedInput
   ajournementsLignes?: Prisma.AjournementLigneUncheckedUpdateManyWithoutEcolageNestedInput
 }
@@ -412,6 +428,7 @@ export type EcolageCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
 }
 
 export type EcolageUpdateManyMutationInput = {
@@ -422,6 +439,7 @@ export type EcolageUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EcolageUncheckedUpdateManyInput = {
@@ -435,6 +453,7 @@ export type EcolageUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EcolageListRelationFilter = {
@@ -464,6 +483,7 @@ export type EcolageCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   statutPaiement?: Prisma.SortOrder
+  dateEcheanceAJournee?: Prisma.SortOrder
 }
 
 export type EcolageAvgOrderByAggregateInput = {
@@ -482,6 +502,7 @@ export type EcolageMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   statutPaiement?: Prisma.SortOrder
+  dateEcheanceAJournee?: Prisma.SortOrder
 }
 
 export type EcolageMinOrderByAggregateInput = {
@@ -495,6 +516,7 @@ export type EcolageMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   statutPaiement?: Prisma.SortOrder
+  dateEcheanceAJournee?: Prisma.SortOrder
 }
 
 export type EcolageSumOrderByAggregateInput = {
@@ -673,6 +695,7 @@ export type EcolageCreateWithoutSchoolInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   eleve: Prisma.EleveCreateNestedOneWithoutEcolagesInput
   classe?: Prisma.ClasseCreateNestedOneWithoutEcolagesInput
   paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutEcolageInput
@@ -689,6 +712,7 @@ export type EcolageUncheckedCreateWithoutSchoolInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutEcolageInput
   ajournementsLignes?: Prisma.AjournementLigneUncheckedCreateNestedManyWithoutEcolageInput
 }
@@ -733,6 +757,7 @@ export type EcolageScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Ecolage"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ecolage"> | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFilter<"Ecolage"> | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.DateTimeNullableFilter<"Ecolage"> | Date | string | null
 }
 
 export type EcolageCreateWithoutClasseInput = {
@@ -743,6 +768,7 @@ export type EcolageCreateWithoutClasseInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   eleve: Prisma.EleveCreateNestedOneWithoutEcolagesInput
   school: Prisma.SchoolCreateNestedOneWithoutEcolagesInput
   paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutEcolageInput
@@ -759,6 +785,7 @@ export type EcolageUncheckedCreateWithoutClasseInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutEcolageInput
   ajournementsLignes?: Prisma.AjournementLigneUncheckedCreateNestedManyWithoutEcolageInput
 }
@@ -797,6 +824,7 @@ export type EcolageCreateWithoutEleveInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   classe?: Prisma.ClasseCreateNestedOneWithoutEcolagesInput
   school: Prisma.SchoolCreateNestedOneWithoutEcolagesInput
   paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutEcolageInput
@@ -813,6 +841,7 @@ export type EcolageUncheckedCreateWithoutEleveInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutEcolageInput
   ajournementsLignes?: Prisma.AjournementLigneUncheckedCreateNestedManyWithoutEcolageInput
 }
@@ -851,6 +880,7 @@ export type EcolageCreateWithoutPaiementEcolagesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   eleve: Prisma.EleveCreateNestedOneWithoutEcolagesInput
   classe?: Prisma.ClasseCreateNestedOneWithoutEcolagesInput
   school: Prisma.SchoolCreateNestedOneWithoutEcolagesInput
@@ -868,6 +898,7 @@ export type EcolageUncheckedCreateWithoutPaiementEcolagesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   ajournementsLignes?: Prisma.AjournementLigneUncheckedCreateNestedManyWithoutEcolageInput
 }
 
@@ -895,6 +926,7 @@ export type EcolageUpdateWithoutPaiementEcolagesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eleve?: Prisma.EleveUpdateOneRequiredWithoutEcolagesNestedInput
   classe?: Prisma.ClasseUpdateOneWithoutEcolagesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEcolagesNestedInput
@@ -912,6 +944,7 @@ export type EcolageUncheckedUpdateWithoutPaiementEcolagesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ajournementsLignes?: Prisma.AjournementLigneUncheckedUpdateManyWithoutEcolageNestedInput
 }
 
@@ -923,6 +956,7 @@ export type EcolageCreateWithoutAjournementsLignesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   eleve: Prisma.EleveCreateNestedOneWithoutEcolagesInput
   classe?: Prisma.ClasseCreateNestedOneWithoutEcolagesInput
   school: Prisma.SchoolCreateNestedOneWithoutEcolagesInput
@@ -940,6 +974,7 @@ export type EcolageUncheckedCreateWithoutAjournementsLignesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
   paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutEcolageInput
 }
 
@@ -967,6 +1002,7 @@ export type EcolageUpdateWithoutAjournementsLignesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eleve?: Prisma.EleveUpdateOneRequiredWithoutEcolagesNestedInput
   classe?: Prisma.ClasseUpdateOneWithoutEcolagesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEcolagesNestedInput
@@ -984,6 +1020,7 @@ export type EcolageUncheckedUpdateWithoutAjournementsLignesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutEcolageNestedInput
 }
 
@@ -997,6 +1034,7 @@ export type EcolageCreateManySchoolInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
 }
 
 export type EcolageUpdateWithoutSchoolInput = {
@@ -1007,6 +1045,7 @@ export type EcolageUpdateWithoutSchoolInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eleve?: Prisma.EleveUpdateOneRequiredWithoutEcolagesNestedInput
   classe?: Prisma.ClasseUpdateOneWithoutEcolagesNestedInput
   paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutEcolageNestedInput
@@ -1023,6 +1062,7 @@ export type EcolageUncheckedUpdateWithoutSchoolInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutEcolageNestedInput
   ajournementsLignes?: Prisma.AjournementLigneUncheckedUpdateManyWithoutEcolageNestedInput
 }
@@ -1037,6 +1077,7 @@ export type EcolageUncheckedUpdateManyWithoutSchoolInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EcolageCreateManyClasseInput = {
@@ -1049,6 +1090,7 @@ export type EcolageCreateManyClasseInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
 }
 
 export type EcolageUpdateWithoutClasseInput = {
@@ -1059,6 +1101,7 @@ export type EcolageUpdateWithoutClasseInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eleve?: Prisma.EleveUpdateOneRequiredWithoutEcolagesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEcolagesNestedInput
   paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutEcolageNestedInput
@@ -1075,6 +1118,7 @@ export type EcolageUncheckedUpdateWithoutClasseInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutEcolageNestedInput
   ajournementsLignes?: Prisma.AjournementLigneUncheckedUpdateManyWithoutEcolageNestedInput
 }
@@ -1089,6 +1133,7 @@ export type EcolageUncheckedUpdateManyWithoutClasseInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EcolageCreateManyEleveInput = {
@@ -1101,6 +1146,7 @@ export type EcolageCreateManyEleveInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statutPaiement?: $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Date | string | null
 }
 
 export type EcolageUpdateWithoutEleveInput = {
@@ -1111,6 +1157,7 @@ export type EcolageUpdateWithoutEleveInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classe?: Prisma.ClasseUpdateOneWithoutEcolagesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEcolagesNestedInput
   paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutEcolageNestedInput
@@ -1127,6 +1174,7 @@ export type EcolageUncheckedUpdateWithoutEleveInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutEcolageNestedInput
   ajournementsLignes?: Prisma.AjournementLigneUncheckedUpdateManyWithoutEcolageNestedInput
 }
@@ -1141,6 +1189,7 @@ export type EcolageUncheckedUpdateManyWithoutEleveInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statutPaiement?: Prisma.EnumStatutPaiementEcolageFieldUpdateOperationsInput | $Enums.StatutPaiementEcolage
+  dateEcheanceAJournee?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1194,6 +1243,7 @@ export type EcolageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   statutPaiement?: boolean
+  dateEcheanceAJournee?: boolean
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.Ecolage$classeArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
@@ -1213,6 +1263,7 @@ export type EcolageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   createdAt?: boolean
   updatedAt?: boolean
   statutPaiement?: boolean
+  dateEcheanceAJournee?: boolean
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.Ecolage$classeArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
@@ -1229,6 +1280,7 @@ export type EcolageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   createdAt?: boolean
   updatedAt?: boolean
   statutPaiement?: boolean
+  dateEcheanceAJournee?: boolean
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.Ecolage$classeArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
@@ -1245,9 +1297,10 @@ export type EcolageSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   statutPaiement?: boolean
+  dateEcheanceAJournee?: boolean
 }
 
-export type EcolageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "anneeScolaire" | "mois" | "montant" | "eleveId" | "classeId" | "schoolId" | "createdAt" | "updatedAt" | "statutPaiement", ExtArgs["result"]["ecolage"]>
+export type EcolageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "anneeScolaire" | "mois" | "montant" | "eleveId" | "classeId" | "schoolId" | "createdAt" | "updatedAt" | "statutPaiement" | "dateEcheanceAJournee", ExtArgs["result"]["ecolage"]>
 export type EcolageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
   classe?: boolean | Prisma.Ecolage$classeArgs<ExtArgs>
@@ -1287,6 +1340,7 @@ export type $EcolagePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     createdAt: Date
     updatedAt: Date
     statutPaiement: $Enums.StatutPaiementEcolage
+    dateEcheanceAJournee: Date | null
   }, ExtArgs["result"]["ecolage"]>
   composites: {}
 }
@@ -1725,6 +1779,7 @@ export interface EcolageFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Ecolage", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Ecolage", 'DateTime'>
   readonly statutPaiement: Prisma.FieldRef<"Ecolage", 'StatutPaiementEcolage'>
+  readonly dateEcheanceAJournee: Prisma.FieldRef<"Ecolage", 'DateTime'>
 }
     
 

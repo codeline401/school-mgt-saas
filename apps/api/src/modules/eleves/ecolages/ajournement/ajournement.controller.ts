@@ -41,14 +41,13 @@ async function executer(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: "Donnéés invalides",
-        details: error.issues,
+        error: error.issues,
       });
     }
 
     if (error instanceof AjournementError) {
       return res.status(error.status).json({
-        message: error.message,
+        error: error.message,
       });
     }
 

@@ -663,8 +663,19 @@ export class AjournementService {
     query: ListeAjournemntQuery,
     user: UserContext,
   ): Promise<AjournementListResponse> {
-    const schoolId = user.schoolId === "SUDO_ADMIN" ? null : user.schoolId;
-    return lister(construireWhere(query, schoolId, query.parentId!), query);
+    let schoolId: string | null;
+    if (user.role === "SUDO_ADMIN") {
+      schoolId = null;
+    } else {
+      if (!user.schoolId) {
+        throw new AjournementForbiddenError(
+          "Aucune école associée à l'utilisateur",
+        );
+      }
+      schoolId = user.schoolId;
+    }
+
+    return lister(construireWhere(query, schoolId, query.parentId ?? null), query);
   }
 
   /**
@@ -745,7 +756,7 @@ export class AjournementService {
       input.lignes.length !== lignesParId.size ||
       input.lignes.some((l) => !lignesParId.has(l.ligneId))
     ) {
-      throw new AjournementDateInvalideError();
+      throw new AjournementLignesInvaldesError();
     }
 
     // Vérifie que toutes les lignes proposées correspondent aux lignes existantes et qu'aucune ligne n'est manquante.

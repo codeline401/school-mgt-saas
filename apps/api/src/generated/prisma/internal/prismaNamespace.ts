@@ -6139,7 +6139,8 @@ export const EcolageScalarFieldEnum = {
   schoolId: 'schoolId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  statutPaiement: 'statutPaiement'
+  statutPaiement: 'statutPaiement',
+  dateEcheanceAJournee: 'dateEcheanceAJournee'
 } as const
 
 export type EcolageScalarFieldEnum = (typeof EcolageScalarFieldEnum)[keyof typeof EcolageScalarFieldEnum]

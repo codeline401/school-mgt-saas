@@ -1926,6 +1926,7 @@ model Ecolage {
   updatedAt DateTime @updatedAt
 
   statutPaiement     StatutPaiementEcolage @default(IMPAYE)
+  dateEcheanceAJournee DateTime?
   paiementEcolages   PaiementEcolage[]
   ajournementsLignes AjournementLigne[]
 
@@ -2108,6 +2109,7 @@ model AjournementLigne {
   @@index([ajournementId])
   @@index([eleveId])
   @@index([ecolageId])
+  @@unique([ecolageId], where: raw("\"estActive\" = true"))
 }
 
 model Parent {

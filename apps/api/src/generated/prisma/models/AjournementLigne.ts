@@ -254,12 +254,12 @@ export type AjournementLigneOrderByWithRelationInput = {
 
 export type AjournementLigneWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  ecolageId?: string
   AND?: Prisma.AjournementLigneWhereInput | Prisma.AjournementLigneWhereInput[]
   OR?: Prisma.AjournementLigneWhereInput[]
   NOT?: Prisma.AjournementLigneWhereInput | Prisma.AjournementLigneWhereInput[]
   ajournementId?: Prisma.StringFilter<"AjournementLigne"> | string
   eleveId?: Prisma.StringFilter<"AjournementLigne"> | string
-  ecolageId?: Prisma.StringFilter<"AjournementLigne"> | string
   dateEcheanceOrigine?: Prisma.DateTimeFilter<"AjournementLigne"> | Date | string
   dateDemandee?: Prisma.DateTimeFilter<"AjournementLigne"> | Date | string
   dateProposee?: Prisma.DateTimeNullableFilter<"AjournementLigne"> | Date | string | null
@@ -270,7 +270,7 @@ export type AjournementLigneWhereUniqueInput = Prisma.AtLeast<{
   ajournement?: Prisma.XOR<Prisma.AjournementScalarRelationFilter, Prisma.AjournementWhereInput>
   eleve?: Prisma.XOR<Prisma.EleveScalarRelationFilter, Prisma.EleveWhereInput>
   ecolage?: Prisma.XOR<Prisma.EcolageScalarRelationFilter, Prisma.EcolageWhereInput>
-}, "id">
+}, "id" | "ecolageId">
 
 export type AjournementLigneOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
