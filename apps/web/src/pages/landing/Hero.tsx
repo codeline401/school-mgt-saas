@@ -123,7 +123,7 @@ export default function Hero() {
             href="#fonctionnalites"
             className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
           >
-            <PlayCircle size={18} /> Voir une démo
+            <PlayCircle size={18} /> Découvrir les fonctionnalités
           </a>
         </div>
 

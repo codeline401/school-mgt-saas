@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { UserPlus, Loader2, GraduationCap, KeyRound, Info } from "lucide-react";
 import { useRegister, type RegisterInput } from "../hooks/useAuth";
 import { getApiError } from "../lib/api";
@@ -13,7 +13,22 @@ const ROLES = [
   { value: "PARENT", label: "Parent d'élève" },
 ] as const;
 
+const PLANS = [
+  { id: "starter", label: "Starter" },
+  { id: "pro", label: "Pro" },
+  { id: "premium", label: "Premium" },
+] as const;
+
 export default function RegisterPage() {
+  // Formule choisie sur la landing page (liste blanche), conservée pour après l'inscription
+  const [searchParams] = useSearchParams();
+  const planParam = searchParams.get("plan");
+  const plan = PLANS.find((p) => p.id === planParam);
+
+  useEffect(() => {
+    if (plan) localStorage.setItem("selectedPlan", plan.id);
+  }, [plan]);
+
   const [formData, setFormData] = useState<RegisterInput>({
     nom: "",
     prenom: "",
@@ -85,6 +100,11 @@ export default function RegisterPage() {
           <p className="text-muted mt-2">
             Rejoignez la plateforme de Gestion d'Ecole e-anatra
           </p>
+          {plan && (
+            <p className="mt-2 text-sm font-medium text-primary">
+              Formule sélectionnée : {plan.label}
+            </p>
+          )}
         </div>
 
         {/* Carte DaisyUI */}

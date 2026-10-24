@@ -110,7 +110,7 @@ export default function Pricing() {
               </ul>
 
               <Link
-                to="/register"
+                to={`/register?plan=${p.name.toLowerCase()}`}
                 className={`mt-8 rounded-xl px-4 py-2.5 text-center text-sm font-semibold transition ${
                   p.featured
                     ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-700"
