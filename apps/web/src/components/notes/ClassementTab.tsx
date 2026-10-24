@@ -273,10 +273,10 @@ export default function ClassementTab() {
                   key={e.eleve.id}
                   className={`flex flex-col items-center gap-1 p-3 rounded-box border ${
                     e.rang === 1
-                      ? "border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20"
+                      ? "border-primary bg-primary-soft"
                       : e.rang === 2
-                        ? "border-gray-400 bg-gray-50 dark:bg-gray-800/20"
-                        : "border-amber-600 bg-amber-50 dark:bg-amber-900/20"
+                        ? "border-border bg-base-100"
+                        : "border-accent bg-base-200"
                   }`}
                 >
                   <span className="text-2xl">{MEDAILLES[e.rang - 1]}</span>

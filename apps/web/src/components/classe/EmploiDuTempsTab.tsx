@@ -11,6 +11,7 @@ import { api, getApiError } from "../../lib/api";
 import toast from "react-hot-toast";
 import ConfirmModal from "../ConfirmModal";
 import { CalendarDays, Pencil, Plus, Trash2 } from "lucide-react";
+import { themeHex } from "../../lib/themeTokens";
 
 const JOURS: { key: JourSemaine; label: string }[] = [
   { key: "LUNDI", label: "Lundi" },
@@ -22,14 +23,14 @@ const JOURS: { key: JourSemaine; label: string }[] = [
 ];
 
 const PRESET_COLORS = [
-  "#3B82F6", // bleu
-  "#10B981", // vert
-  "#F59E0B", // ambre
-  "#EF4444", // rouge
-  "#8B5CF6", // violet
-  "#EC4899", // rose
-  "#06B6D4", // cyan
-  "#F97316", // orange
+  themeHex.primary,
+  themeHex.success,
+  themeHex.warning,
+  themeHex.danger,
+  themeHex.accent,
+  themeHex.sidebar,
+  themeHex.primaryHover,
+  themeHex.warningForeground,
 ];
 
 interface Props {
@@ -309,8 +310,8 @@ export default function EmploiDuTempsTab({ classeId, canManage }: Props) {
                             style={{
                               backgroundColor: c.couleur
                                 ? `${c.couleur}22`
-                                : "hsl(var(--b2))",
-                              borderLeft: `3px solid ${c.couleur ?? "hsl(var(--p))"}`,
+                                : "var(--page-background)",
+                              borderLeft: `3px solid ${c.couleur ?? "var(--primary)"}`,
                             }}
                           >
                             <span className="font-medium text-xs leading-snug block truncate">

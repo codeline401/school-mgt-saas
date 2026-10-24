@@ -1,32 +1,186 @@
 @import "tailwindcss";
-@plugin "daisyui";
 @config "../tailwind.config.js";
 
-/* Variables globales du thème */
+/* Un seul thème (clair) : aucun basculement automatique selon l'OS/navigateur */
+@plugin "daisyui" {
+  themes: false;
+  logs: false;
+}
+
+@plugin "daisyui/theme" {
+  name: "schoolsaas";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #ffffff;
+  --color-base-200: var(--page-background);
+  --color-base-300: var(--border-color);
+  --color-base-content: var(--text-main);
+
+  --color-primary: var(--primary);
+  --color-primary-content: #ffffff;
+  --color-secondary: var(--primary-hover);
+  --color-secondary-content: #ffffff;
+  --color-accent: var(--accent);
+  --color-accent-content: #ffffff;
+  --color-neutral: var(--sidebar);
+  --color-neutral-content: #e2e8f0;
+
+  --color-info: var(--accent);
+  --color-info-content: #ffffff;
+  --color-success: var(--success);
+  --color-success-content: #ffffff;
+  --color-warning: var(--warning);
+  --color-warning-content: var(--warning-foreground);
+  --color-error: var(--danger);
+  --color-error-content: #ffffff;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* `dark:` ne dépend plus de prefers-color-scheme (variable selon navigateur) */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
-  --imperial: #1a237e;
-  --imperial-dark: #0a0e45;
-  --emerald: #2e7d32;
-  --emerald-light: #4caf50;
+  color-scheme: light only;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-soft: #eef2ff;
+  --sidebar: #1e1b4b;
+  --accent: #14b8a6;
+  --success: #16a34a;
+  --warning: #f59e0b;
+  --warning-foreground: #92400e;
+  --danger: #dc2626;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --page-background: #f8fafc;
+  --badge-paid-bg: #ccfbf1;
+  --badge-paid-text: #115e59;
+  --badge-ajourne-bg: #fef3c7;
+  --badge-ajourne-text: #92400e;
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.05), 0 1px 3px rgb(15 23 42 / 0.06);
+  --shadow-card-hover: 0 4px 6px -1px rgb(15 23 42 / 0.07),
+    0 10px 24px -8px rgb(15 23 42 / 0.12);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: "DM Sans", sans-serif;
-  background: linear-gradient(135deg, #0a0e45 0%, #1a237e 50%, #0d3b0e 100%);
+  font-family: "DM Sans", system-ui, sans-serif;
+  background-color: var(--page-background);
+  color: var(--text-main);
   min-height: 100vh;
 }
 
-/* Texture subtile sur les fonds */
+/* Cartes, tableaux, formulaires */
+.card,
+.stats {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+}
+.card {
+  transition: box-shadow 0.2s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+.modal-box {
+  box-shadow: 0 20px 50px -12px rgb(15 23 42 / 0.25);
+}
+
+.table {
+  --color-base-200: var(--page-background);
+}
+.table :where(thead th) {
+  background-color: var(--page-background);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding-block: 0.875rem;
+}
+.table :where(tbody td) {
+  padding-block: 0.75rem;
+}
+.table :where(tbody tr:hover) {
+  background-color: color-mix(in srgb, var(--page-background) 55%, #e2e8f0);
+}
+
+.input,
+.select,
+.textarea {
+  border-color: var(--border-color);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.input:focus,
+.input:focus-within,
+.select:focus,
+.textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgb(79 70 229 / 0.15);
+  outline: none;
+}
+
+.btn {
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.06);
+}
+.btn-ghost,
+.btn-link {
+  box-shadow: none;
+}
+
+.badge {
+  font-weight: 500;
+}
+
+.badge-status-paid {
+  background-color: var(--badge-paid-bg);
+  color: var(--badge-paid-text);
+  border-color: transparent;
+}
+
+.badge-status-ajourne {
+  background-color: var(--badge-ajourne-bg);
+  color: var(--badge-ajourne-text);
+  border-color: transparent;
+}
+
+.tabs-bordered > .tab {
+  border-color: transparent;
+  color: var(--text-muted);
+}
+
+.tabs-bordered > .tab-active {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.toast,
+[data-sonner-toast] {
+  border: 1px solid var(--border-color);
+}
+
 .bg-texture {
   background-image:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(26, 35, 126, 0.08) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(46, 125, 50, 0.08) 0%,
-      transparent 50%
-    );
+    radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--primary) 14%, transparent) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 50%);
 }
