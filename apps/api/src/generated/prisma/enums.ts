@@ -489,6 +489,19 @@ export const StatutPaiementEcolage = {
 export type StatutPaiementEcolage = (typeof StatutPaiementEcolage)[keyof typeof StatutPaiementEcolage]
 
 
+export const StatutAjournement = {
+  EN_ATTENTE: 'EN_ATTENTE',
+  ACCEPTE: 'ACCEPTE',
+  REFUSE: 'REFUSE',
+  CONTRE_PROPOSITION: 'CONTRE_PROPOSITION',
+  CONTRE_PROPOSITION_ACCEPTE: 'CONTRE_PROPOSITION_ACCEPTE',
+  CONTRE_PROPOSITION_REFUSE: 'CONTRE_PROPOSITION_REFUSE',
+  ANNULE: 'ANNULE'
+} as const
+
+export type StatutAjournement = (typeof StatutAjournement)[keyof typeof StatutAjournement]
+
+
 export const TypeResponsable = {
   PARENT: 'PARENT',
   TUTEUR: 'TUTEUR'

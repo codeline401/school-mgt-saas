@@ -107,6 +107,8 @@ export const ModelName = {
   PaiementEcolage: 'PaiementEcolage',
   EcolageConfig: 'EcolageConfig',
   EcolageEcheance: 'EcolageEcheance',
+  Ajournement: 'Ajournement',
+  AjournementLigne: 'AjournementLigne',
   Parent: 'Parent',
   ResponsableEleve: 'ResponsableEleve',
   Niveau: 'Niveau',
@@ -1015,7 +1017,8 @@ export const EcolageScalarFieldEnum = {
   schoolId: 'schoolId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  statutPaiement: 'statutPaiement'
+  statutPaiement: 'statutPaiement',
+  dateEcheanceAJournee: 'dateEcheanceAJournee'
 } as const
 
 export type EcolageScalarFieldEnum = (typeof EcolageScalarFieldEnum)[keyof typeof EcolageScalarFieldEnum]
@@ -1070,6 +1073,40 @@ export const EcolageEcheanceScalarFieldEnum = {
 } as const
 
 export type EcolageEcheanceScalarFieldEnum = (typeof EcolageEcheanceScalarFieldEnum)[keyof typeof EcolageEcheanceScalarFieldEnum]
+
+
+export const AjournementScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  parentId: 'parentId',
+  motif: 'motif',
+  statut: 'statut',
+  commentaireAdmin: 'commentaireAdmin',
+  traiteParId: 'traiteParId',
+  dateDecision: 'dateDecision',
+  dateReponseParent: 'dateReponseParent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AjournementScalarFieldEnum = (typeof AjournementScalarFieldEnum)[keyof typeof AjournementScalarFieldEnum]
+
+
+export const AjournementLigneScalarFieldEnum = {
+  id: 'id',
+  ajournementId: 'ajournementId',
+  eleveId: 'eleveId',
+  ecolageId: 'ecolageId',
+  dateEcheanceOrigine: 'dateEcheanceOrigine',
+  dateDemandee: 'dateDemandee',
+  dateProposee: 'dateProposee',
+  dateAppliquee: 'dateAppliquee',
+  estActive: 'estActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AjournementLigneScalarFieldEnum = (typeof AjournementLigneScalarFieldEnum)[keyof typeof AjournementLigneScalarFieldEnum]
 
 
 export const ParentScalarFieldEnum = {

@@ -298,6 +298,16 @@ export type EcolageConfig = Prisma.EcolageConfigModel
  */
 export type EcolageEcheance = Prisma.EcolageEcheanceModel
 /**
+ * Model Ajournement
+ * 
+ */
+export type Ajournement = Prisma.AjournementModel
+/**
+ * Model AjournementLigne
+ * 
+ */
+export type AjournementLigne = Prisma.AjournementLigneModel
+/**
  * Model Parent
  * 
  */
