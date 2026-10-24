@@ -36,6 +36,7 @@ import SmsTab from "./modules/communication/SmsTab";
 import ReunionsTab from "./modules/communication/ReunionsTab";
 import DocumentsTab from "./modules/communication/DocumentsTab";
 import CirculairesTab from "./modules/communication/CirculairesTab";
+import LandingPage from "./pages/LandingPage";
 
 const DashboardTemp = () => (
   <div>
@@ -62,6 +63,7 @@ function App() {
         }}
       />
       <Routes>
+        <Route path="/accueil" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 

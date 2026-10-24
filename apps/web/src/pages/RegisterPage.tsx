@@ -83,7 +83,7 @@ export default function RegisterPage() {
             Créer un compte
           </h1>
           <p className="text-muted mt-2">
-            Rejoignez la plateforme de Gestion d'Ecole
+            Rejoignez la plateforme de Gestion d'Ecole e-anatra
           </p>
         </div>
 
