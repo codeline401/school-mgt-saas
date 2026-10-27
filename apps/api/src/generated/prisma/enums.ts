@@ -502,6 +502,44 @@ export const StatutAjournement = {
 export type StatutAjournement = (typeof StatutAjournement)[keyof typeof StatutAjournement]
 
 
+export const TypeRelance = {
+  MANUELLE: 'MANUELLE',
+  AUTOMATIQUE: 'AUTOMATIQUE'
+} as const
+
+export type TypeRelance = (typeof TypeRelance)[keyof typeof TypeRelance]
+
+
+export const CanalRelance = {
+  NOTIFICATION: 'NOTIFICATION',
+  EMAIL: 'EMAIL',
+  SMS: 'SMS',
+  WHATSAPP: 'WHATSAPP'
+} as const
+
+export type CanalRelance = (typeof CanalRelance)[keyof typeof CanalRelance]
+
+
+export const CiblageRelance = {
+  ELEVES: 'ELEVES',
+  CLASSE: 'CLASSE',
+  TOUS_RETARDS: 'TOUS_RETARDS'
+} as const
+
+export type CiblageRelance = (typeof CiblageRelance)[keyof typeof CiblageRelance]
+
+
+export const StatutRelance = {
+  EN_ATTENTE: 'EN_ATTENTE',
+  EN_COURS: 'EN_COURS',
+  ENVOYE: 'ENVOYE',
+  ECHOUE: 'ECHOUE',
+  ANNULEE: 'ANNULEE'
+} as const
+
+export type StatutRelance = (typeof StatutRelance)[keyof typeof StatutRelance]
+
+
 export const TypeResponsable = {
   PARENT: 'PARENT',
   TUTEUR: 'TUTEUR'

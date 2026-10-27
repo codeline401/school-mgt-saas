@@ -29,6 +29,7 @@ import { PaiementEcolageSection } from "./ecolages/paiement/components/PaiementE
 import { FacturesEcolageSection } from "./ecolages/factures/components/FactureEcolageSection";
 import { AjournementEcolageSection } from "./ecolages/ajournement/components/AjournementEcolageSection";
 import { useAuthStore } from "../../store/authStore";
+import { RelanceEcolageSection } from "./ecolages/relances/components/RelanceEcolageSection";
 
 type MainTab =
   | "informations"
@@ -202,13 +203,7 @@ function GestionElevesPage() {
       case "ajournements":
         return <AjournementEcolageSection initialEleveId={eleveId} />;
       case "relances":
-        return (
-          <DevelopmentPlaceholder
-            icon={CalendarClock}
-            title="Relances & rappels"
-            description="Plan de relance, échéances à venir, impayés et alertes automatiques."
-          />
-        );
+        return <RelanceEcolageSection />;
       case "garanties":
         return (
           <DevelopmentPlaceholder

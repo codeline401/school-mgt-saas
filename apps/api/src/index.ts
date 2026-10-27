@@ -33,6 +33,9 @@ import elevesRoutes from "./modules/eleves/eleves.routes.js"; // Importation des
 import affectationRoutes from "./modules/eleves/informations/affectation/affectation.routes.js"; // Niveaux, sections, options et affectations de classe
 import ecolageConfigRoutes from "./modules/parametres/ecolage/ecolageConfig.routes.js";
 
+// gestion des relances (planificateur auto)
+import { demarrerPlanificateurRelances } from "./modules/eleves/ecolages/relances/relance.service.js";
+
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -203,6 +206,8 @@ app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).json({ error: "Une erreur inattendue est survenue." });
 });
 
+// Démarrage du planificateur de relances
+demarrerPlanificateurRelances();
 // Lancement du serveur
 app.listen(PORT, () => {
   console.log(`Serveur API démarré sur le port ${PORT}`);
