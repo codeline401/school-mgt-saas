@@ -84,7 +84,8 @@ export function rendreMessage(
   };
 
   // Remplace les placeholders dans le modèle par les valeurs correspondantes du destinataire
-  return modele.replace(/\{\{\s*(\w+)\s+\}\}/g, (m, cle) => valeurs[cle] ?? m);
+  // review The pattern \s+ before \}\} needs at least one space. {{ nom_parent }} matches, but {{nom_parent}} and {{ nom_parent}} do not. Those placeholders stay in the message that parents receive. Use \s* on both sides.
+  return modele.replace(/\{\{\s*(\w+)\s*\}\}/g, (m, cle) => valeurs[cle] ?? m);
 }
 
 /**
@@ -435,7 +436,7 @@ export class RelanceService {
       where: {
         type: "AUTOMATIQUE",
         statut: "EN_ATTENTE",
-        dateExecution: { lte: now },
+        dateProgrammee: { lte: now }, // review: use the scheduled date to determine due automatic reminders
       },
       select: { id: true },
     });

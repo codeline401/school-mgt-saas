@@ -117,7 +117,9 @@ export function useCreerRelance() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (input: CreerRelanceInput) => {
-      const { data } = await api.post<Relance>(BASE_URL, input);
+      const { data } = await api.post<Relance>(BASE_URL, input, {
+        timeout: 60_000, // review : set a 60-second timeout for creating a relance to handle potential delays in the API response
+      });
       return data;
     },
     onSuccess: (relance) => {

@@ -41,7 +41,7 @@ async function executer(
       return res.status(400).json({ error: error.issues });
     }
     if (error instanceof RelanceError) {
-      return res.status(400).json({ error: error.message });
+      return res.status(error.status).json({ error: error.message });
     }
     console.error(`${messageErreur}: `, error);
     return res.status(500).json({ error: "Erreur interne du serveur" });
