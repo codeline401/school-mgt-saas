@@ -308,6 +308,11 @@ export type Ajournement = Prisma.AjournementModel
  */
 export type AjournementLigne = Prisma.AjournementLigneModel
 /**
+ * Model RelancePaiement
+ * 
+ */
+export type RelancePaiement = Prisma.RelancePaiementModel
+/**
  * Model Parent
  * 
  */

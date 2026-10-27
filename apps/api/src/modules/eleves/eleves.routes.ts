@@ -7,6 +7,7 @@ import historiqueRoutes from "./informations/historique/historique.routes.js";
 import paiementRoutes from "./ecolages/paiement/paiement.routes.js";
 import factureRoutes from "./ecolages/factures/facture.routes.js";
 import ajournementRoutes from "./ecolages/ajournement/ajournement.routes.js";
+import relanceRoutes from "./ecolages/relances/relance.routes.js";
 
 const router = Router();
 
@@ -27,6 +28,7 @@ router.use("/informations", emergencyContactRoutes);
 router.use("/informations", historiqueRoutes);
 
 router.use("/ecolages/ajournements", ajournementRoutes);
+router.use("/ecolages/relances", relanceRoutes);
 router.use("/ecolages", paiementRoutes);
 
 /**

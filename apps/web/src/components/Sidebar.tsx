@@ -334,10 +334,8 @@ const MENU: MenuEntry[] = [
 
 const BASE =
   "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150 text-sm";
-const ACTIVE =
-  "bg-primary text-white font-semibold shadow-sm";
-const IDLE =
-  "text-base-100/80 hover:bg-white/10 hover:text-white font-medium";
+const ACTIVE = "bg-primary text-white font-semibold shadow-sm";
+const IDLE = "text-base-100/80 hover:bg-white/10 hover:text-white font-medium";
 const DISABLED =
   "text-base-100/35 cursor-default px-3 py-2 text-sm flex items-center gap-3";
 const SUB =
@@ -368,7 +366,7 @@ function Sidebar() {
   return (
     <div className="w-64 h-screen bg-sidebar border-r border-primary/25 p-4 shrink-0 flex flex-col shadow-[0_10px_30px_-18px_rgba(15,23,42,0.45)]">
       <h2 className="text-xl font-bold text-white mb-8 px-2 tracking-tight">
-        School SaaS MG
+        e-anatra
       </h2>
 
       <nav className="space-y-1 flex-1 overflow-y-auto pr-1">

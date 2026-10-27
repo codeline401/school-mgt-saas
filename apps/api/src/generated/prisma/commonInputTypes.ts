@@ -1214,6 +1214,74 @@ export type EnumStatutAjournementWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumStatutAjournementFilter<$PrismaModel>
 }
 
+export type EnumTypeRelanceFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeRelance | Prisma.EnumTypeRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeRelance[] | Prisma.ListEnumTypeRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeRelance[] | Prisma.ListEnumTypeRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeRelanceFilter<$PrismaModel> | $Enums.TypeRelance
+}
+
+export type EnumCanalRelanceFilter<$PrismaModel = never> = {
+  equals?: $Enums.CanalRelance | Prisma.EnumCanalRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.CanalRelance[] | Prisma.ListEnumCanalRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CanalRelance[] | Prisma.ListEnumCanalRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCanalRelanceFilter<$PrismaModel> | $Enums.CanalRelance
+}
+
+export type EnumCiblageRelanceFilter<$PrismaModel = never> = {
+  equals?: $Enums.CiblageRelance | Prisma.EnumCiblageRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.CiblageRelance[] | Prisma.ListEnumCiblageRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CiblageRelance[] | Prisma.ListEnumCiblageRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCiblageRelanceFilter<$PrismaModel> | $Enums.CiblageRelance
+}
+
+export type EnumStatutRelanceFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutRelance | Prisma.EnumStatutRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutRelance[] | Prisma.ListEnumStatutRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutRelance[] | Prisma.ListEnumStatutRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutRelanceFilter<$PrismaModel> | $Enums.StatutRelance
+}
+
+export type EnumTypeRelanceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeRelance | Prisma.EnumTypeRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeRelance[] | Prisma.ListEnumTypeRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeRelance[] | Prisma.ListEnumTypeRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeRelanceWithAggregatesFilter<$PrismaModel> | $Enums.TypeRelance
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeRelanceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeRelanceFilter<$PrismaModel>
+}
+
+export type EnumCanalRelanceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CanalRelance | Prisma.EnumCanalRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.CanalRelance[] | Prisma.ListEnumCanalRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CanalRelance[] | Prisma.ListEnumCanalRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCanalRelanceWithAggregatesFilter<$PrismaModel> | $Enums.CanalRelance
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCanalRelanceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCanalRelanceFilter<$PrismaModel>
+}
+
+export type EnumCiblageRelanceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CiblageRelance | Prisma.EnumCiblageRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.CiblageRelance[] | Prisma.ListEnumCiblageRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CiblageRelance[] | Prisma.ListEnumCiblageRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCiblageRelanceWithAggregatesFilter<$PrismaModel> | $Enums.CiblageRelance
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCiblageRelanceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCiblageRelanceFilter<$PrismaModel>
+}
+
+export type EnumStatutRelanceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutRelance | Prisma.EnumStatutRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutRelance[] | Prisma.ListEnumStatutRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutRelance[] | Prisma.ListEnumStatutRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutRelanceWithAggregatesFilter<$PrismaModel> | $Enums.StatutRelance
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutRelanceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutRelanceFilter<$PrismaModel>
+}
+
 export type EnumTypeResponsableFilter<$PrismaModel = never> = {
   equals?: $Enums.TypeResponsable | Prisma.EnumTypeResponsableFieldRefInput<$PrismaModel>
   in?: $Enums.TypeResponsable[] | Prisma.ListEnumTypeResponsableFieldRefInput<$PrismaModel>
@@ -2394,6 +2462,74 @@ export type NestedEnumStatutAjournementWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumStatutAjournementFilter<$PrismaModel>
   _max?: Prisma.NestedEnumStatutAjournementFilter<$PrismaModel>
+}
+
+export type NestedEnumTypeRelanceFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeRelance | Prisma.EnumTypeRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeRelance[] | Prisma.ListEnumTypeRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeRelance[] | Prisma.ListEnumTypeRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeRelanceFilter<$PrismaModel> | $Enums.TypeRelance
+}
+
+export type NestedEnumCanalRelanceFilter<$PrismaModel = never> = {
+  equals?: $Enums.CanalRelance | Prisma.EnumCanalRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.CanalRelance[] | Prisma.ListEnumCanalRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CanalRelance[] | Prisma.ListEnumCanalRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCanalRelanceFilter<$PrismaModel> | $Enums.CanalRelance
+}
+
+export type NestedEnumCiblageRelanceFilter<$PrismaModel = never> = {
+  equals?: $Enums.CiblageRelance | Prisma.EnumCiblageRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.CiblageRelance[] | Prisma.ListEnumCiblageRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CiblageRelance[] | Prisma.ListEnumCiblageRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCiblageRelanceFilter<$PrismaModel> | $Enums.CiblageRelance
+}
+
+export type NestedEnumStatutRelanceFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutRelance | Prisma.EnumStatutRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutRelance[] | Prisma.ListEnumStatutRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutRelance[] | Prisma.ListEnumStatutRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutRelanceFilter<$PrismaModel> | $Enums.StatutRelance
+}
+
+export type NestedEnumTypeRelanceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeRelance | Prisma.EnumTypeRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeRelance[] | Prisma.ListEnumTypeRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeRelance[] | Prisma.ListEnumTypeRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeRelanceWithAggregatesFilter<$PrismaModel> | $Enums.TypeRelance
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeRelanceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeRelanceFilter<$PrismaModel>
+}
+
+export type NestedEnumCanalRelanceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CanalRelance | Prisma.EnumCanalRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.CanalRelance[] | Prisma.ListEnumCanalRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CanalRelance[] | Prisma.ListEnumCanalRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCanalRelanceWithAggregatesFilter<$PrismaModel> | $Enums.CanalRelance
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCanalRelanceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCanalRelanceFilter<$PrismaModel>
+}
+
+export type NestedEnumCiblageRelanceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CiblageRelance | Prisma.EnumCiblageRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.CiblageRelance[] | Prisma.ListEnumCiblageRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CiblageRelance[] | Prisma.ListEnumCiblageRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCiblageRelanceWithAggregatesFilter<$PrismaModel> | $Enums.CiblageRelance
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCiblageRelanceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCiblageRelanceFilter<$PrismaModel>
+}
+
+export type NestedEnumStatutRelanceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutRelance | Prisma.EnumStatutRelanceFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutRelance[] | Prisma.ListEnumStatutRelanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutRelance[] | Prisma.ListEnumStatutRelanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutRelanceWithAggregatesFilter<$PrismaModel> | $Enums.StatutRelance
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutRelanceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutRelanceFilter<$PrismaModel>
 }
 
 export type NestedEnumTypeResponsableFilter<$PrismaModel = never> = {

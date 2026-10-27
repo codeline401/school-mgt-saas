@@ -455,6 +455,7 @@ export const ModelName = {
   EcolageEcheance: 'EcolageEcheance',
   Ajournement: 'Ajournement',
   AjournementLigne: 'AjournementLigne',
+  RelancePaiement: 'RelancePaiement',
   Parent: 'Parent',
   ResponsableEleve: 'ResponsableEleve',
   Niveau: 'Niveau',
@@ -476,7 +477,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse"
+    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4772,6 +4773,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RelancePaiement: {
+      payload: Prisma.$RelancePaiementPayload<ExtArgs>
+      fields: Prisma.RelancePaiementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RelancePaiementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelancePaiementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RelancePaiementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelancePaiementPayload>
+        }
+        findFirst: {
+          args: Prisma.RelancePaiementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelancePaiementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RelancePaiementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelancePaiementPayload>
+        }
+        findMany: {
+          args: Prisma.RelancePaiementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelancePaiementPayload>[]
+        }
+        create: {
+          args: Prisma.RelancePaiementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelancePaiementPayload>
+        }
+        createMany: {
+          args: Prisma.RelancePaiementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RelancePaiementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelancePaiementPayload>[]
+        }
+        delete: {
+          args: Prisma.RelancePaiementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelancePaiementPayload>
+        }
+        update: {
+          args: Prisma.RelancePaiementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelancePaiementPayload>
+        }
+        deleteMany: {
+          args: Prisma.RelancePaiementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RelancePaiementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RelancePaiementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelancePaiementPayload>[]
+        }
+        upsert: {
+          args: Prisma.RelancePaiementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelancePaiementPayload>
+        }
+        aggregate: {
+          args: Prisma.RelancePaiementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRelancePaiement>
+        }
+        groupBy: {
+          args: Prisma.RelancePaiementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RelancePaiementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RelancePaiementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RelancePaiementCountAggregateOutputType> | number
+        }
+      }
+    }
     Parent: {
       payload: Prisma.$ParentPayload<ExtArgs>
       fields: Prisma.ParentFieldRefs
@@ -6231,6 +6306,29 @@ export const AjournementLigneScalarFieldEnum = {
 export type AjournementLigneScalarFieldEnum = (typeof AjournementLigneScalarFieldEnum)[keyof typeof AjournementLigneScalarFieldEnum]
 
 
+export const RelancePaiementScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  type: 'type',
+  canal: 'canal',
+  ciblage: 'ciblage',
+  cibleIds: 'cibleIds',
+  message: 'message',
+  statut: 'statut',
+  dateProgrammee: 'dateProgrammee',
+  dateExecution: 'dateExecution',
+  recurrent: 'recurrent',
+  jourMois: 'jourMois',
+  nbDestinataires: 'nbDestinataires',
+  nbEchecs: 'nbEchecs',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RelancePaiementScalarFieldEnum = (typeof RelancePaiementScalarFieldEnum)[keyof typeof RelancePaiementScalarFieldEnum]
+
+
 export const ParentScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
@@ -7114,6 +7212,62 @@ export type ListEnumStatutAjournementFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
+ * Reference to a field of type 'TypeRelance'
+ */
+export type EnumTypeRelanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeRelance'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeRelance[]'
+ */
+export type ListEnumTypeRelanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeRelance[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CanalRelance'
+ */
+export type EnumCanalRelanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CanalRelance'>
+    
+
+
+/**
+ * Reference to a field of type 'CanalRelance[]'
+ */
+export type ListEnumCanalRelanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CanalRelance[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CiblageRelance'
+ */
+export type EnumCiblageRelanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CiblageRelance'>
+    
+
+
+/**
+ * Reference to a field of type 'CiblageRelance[]'
+ */
+export type ListEnumCiblageRelanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CiblageRelance[]'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutRelance'
+ */
+export type EnumStatutRelanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutRelance'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutRelance[]'
+ */
+export type ListEnumStatutRelanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutRelance[]'>
+    
+
+
+/**
  * Reference to a field of type 'TypeResponsable'
  */
 export type EnumTypeResponsableFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeResponsable'>
@@ -7349,6 +7503,7 @@ export type GlobalOmitConfig = {
   ecolageEcheance?: Prisma.EcolageEcheanceOmit
   ajournement?: Prisma.AjournementOmit
   ajournementLigne?: Prisma.AjournementLigneOmit
+  relancePaiement?: Prisma.RelancePaiementOmit
   parent?: Prisma.ParentOmit
   responsableEleve?: Prisma.ResponsableEleveOmit
   niveau?: Prisma.NiveauOmit

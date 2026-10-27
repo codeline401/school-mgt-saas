@@ -69,6 +69,7 @@ model User {
   ecolageConfigsCreees               EcolageConfig[]           @relation("EcolageConfigCreerPar")
   ecolageConfigs                     EcolageConfig[]
   ajournementsTraites                Ajournement[]             @relation("AjournementTraites")
+  relancePaiements                   RelancePaiement[]         @relation("RelancesCreees")
 }
 
 // Modele SAAS
@@ -139,6 +140,7 @@ model School {
   paiementEcolages         PaiementEcolage[]
   ecolageConfigs           EcolageConfig[]
   ajournements             Ajournement[]
+  relancePaiements         RelancePaiement[]
 }
 
 model Classe {
@@ -1925,10 +1927,10 @@ model Ecolage {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  statutPaiement     StatutPaiementEcolage @default(IMPAYE)
+  statutPaiement       StatutPaiementEcolage @default(IMPAYE)
   dateEcheanceAJournee DateTime?
-  paiementEcolages   PaiementEcolage[]
-  ajournementsLignes AjournementLigne[]
+  paiementEcolages     PaiementEcolage[]
+  ajournementsLignes   AjournementLigne[]
 
   // 🔧 FIX: si l'écolage est mensuel/trimestriel, adapte cette contrainte
   // (ajoute un champ "periode" ou "mois" et inclus-le dans le @@unique)
@@ -2106,10 +2108,70 @@ model AjournementLigne {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([ecolageId], where: raw("\"estActive\" = true"), map: "AjournementLigne_ecolageId_estActive_key")
   @@index([ajournementId])
   @@index([eleveId])
   @@index([ecolageId])
-  @@unique([ecolageId], where: raw("\"estActive\" = true"), map: "AjournementLigne_ecolageId_estActive_key")
+}
+
+// ------------- MODULE RELANCE ECOLAGE ----------------------
+enum TypeRelance {
+  MANUELLE
+  AUTOMATIQUE
+}
+
+enum CanalRelance {
+  NOTIFICATION
+  EMAIL
+  SMS
+  WHATSAPP
+}
+
+enum CiblageRelance {
+  ELEVES
+  CLASSE
+  TOUS_RETARDS
+}
+
+enum StatutRelance {
+  EN_ATTENTE
+  EN_COURS
+  ENVOYE
+  ECHOUE
+  ANNULEE
+}
+
+// Campagne de relance de paiement (immédiate ou programmée)
+model RelancePaiement {
+  id       String @id @default(uuid())
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  type     TypeRelance
+  canal    CanalRelance
+  ciblage  CiblageRelance
+  cibleIds String[] // IDs des élèves ou de la classe
+  message  String
+  statut   StatutRelance  @default(EN_ATTENTE)
+
+  dateProgrammee DateTime?
+  dateExecution  DateTime?
+
+  // Relance automaitque récurrente : le `jourMois` de chaque mois
+  recurrent Boolean @default(false)
+  jourMois  Int? // jour du mois pour la relance récurrente (1-31)
+
+  nbDestinataires Int @default(0)
+  nbEchecs        Int @default(0)
+
+  createdById String
+  createdBy   User   @relation("RelancesCreees", fields: [createdById], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId, statut])
+  @@index([statut, dateProgrammee])
 }
 
 model Parent {
