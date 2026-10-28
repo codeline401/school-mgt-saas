@@ -364,7 +364,7 @@ function Sidebar() {
     roles === null || (!!user && roles.includes(user.role as Role));
 
   return (
-    <div className="w-64 h-screen bg-sidebar border-r border-primary/25 p-4 shrink-0 flex flex-col shadow-[0_10px_30px_-18px_rgba(15,23,42,0.45)]">
+    <div className="sticky top-0 w-64 h-screen bg-sidebar border-r border-primary/25 p-4 shrink-0 flex flex-col shadow-[0_10px_30px_-18px_rgba(15,23,42,0.45)]">
       <h2 className="text-xl font-bold text-white mb-8 px-2 tracking-tight">
         e-anatra
       </h2>

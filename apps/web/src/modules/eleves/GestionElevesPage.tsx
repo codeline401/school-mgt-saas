@@ -30,6 +30,7 @@ import { FacturesEcolageSection } from "./ecolages/factures/components/FactureEc
 import { AjournementEcolageSection } from "./ecolages/ajournement/components/AjournementEcolageSection";
 import { useAuthStore } from "../../store/authStore";
 import { RelanceEcolageSection } from "./ecolages/relances/components/RelanceEcolageSection";
+import { SuiviAbsenceSection } from "./absence-retard/components/SuiviAbsenceSection";
 
 type MainTab =
   | "informations"
@@ -46,12 +47,8 @@ type InformationSubTab =
   | "urgence"
   | "historique";
 
-type EcolageSubTab =
-  | "paiements"
-  | "factures"
-  | "ajournements"
-  | "relances"
-  | "garanties";
+type EcolageSubTab = "paiements" | "factures" | "ajournements" | "relances";
+// | "garanties";
 
 type AbsenceSubTab =
   | "suivi"
@@ -109,7 +106,7 @@ const ecolageTabs: TabItem<EcolageSubTab>[] = [
   { value: "factures", label: "Factures", icon: FileText },
   { value: "ajournements", label: "Ajournements", icon: CalendarClock },
   { value: "relances", label: "Relances", icon: CalendarClock },
-  { value: "garanties", label: "Garanties", icon: ShieldCheck },
+  // { value: "garanties", label: "Garanties", icon: ShieldCheck },
 ];
 
 const absenceTabs: TabItem<AbsenceSubTab>[] = [
@@ -204,14 +201,14 @@ function GestionElevesPage() {
         return <AjournementEcolageSection initialEleveId={eleveId} />;
       case "relances":
         return <RelanceEcolageSection />;
-      case "garanties":
-        return (
-          <DevelopmentPlaceholder
-            icon={ShieldCheck}
-            title="Garanties & remboursements"
-            description="Cautions, avances, remboursements et suivi des montants spécifiques."
-          />
-        );
+      // case "garanties":
+      //   return (
+      //     <DevelopmentPlaceholder
+      //       icon={ShieldCheck}
+      //       title="Garanties & remboursements"
+      //       description="Cautions, avances, remboursements et suivi des montants spécifiques."
+      //     />
+      //   );
       default:
         return null;
     }
@@ -220,13 +217,7 @@ function GestionElevesPage() {
   const renderAbsenceContent = () => {
     switch (activeAbsenceSubTab) {
       case "suivi":
-        return (
-          <DevelopmentPlaceholder
-            icon={Calendar}
-            title="Suivi des absences"
-            description="Historique des absences, taux de présence, jours manqués et synthèse globale."
-          />
-        );
+        return <SuiviAbsenceSection initialEleveId={eleveId} />;
       case "justifications":
         return (
           <DevelopmentPlaceholder
