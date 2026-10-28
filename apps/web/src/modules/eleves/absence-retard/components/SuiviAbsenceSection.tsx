@@ -48,7 +48,13 @@ export function SuiviAbsenceSection({ initialEleveId }: Props) {
   const plageValide = periode.from <= periode.to;
 
   const suivi = useSuiviAbsences(eleveId, {
-    ...periode,
+    // REVIEW : For preset periods, periode is a PeriodeOption, so ...periode also copies key and label.
+    // TypeScript does not report this, because the spread comes from a variable.
+    // These two fields then go into the React Query key and the request query string (?key=...&label=...).
+    // Changing a label invalidates the cache for no reason. The API ignores the extra fields today.
+    // Pick the two fields explicitly.
+    from: periode.from,
+    to: periode.to,
     statut: statut || undefined,
     page,
     limit: LIMITE,

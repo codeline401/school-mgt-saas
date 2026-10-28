@@ -1,8 +1,13 @@
 import z from "zod";
 
-const dateISO = z
-  .string()
-  .regex(/^\d{4}-\d{2}-\d{2}$/, "Format date attendu : AAAA-MM-JJ");
+/**
+ * REVIEW
+ * dateISO only checks the regex shape. 2026-02-30 and 2026-13-45 pass suiviQuerySchema and reach the service.
+ * The query then returns an empty period instead of a 400, which contradicts the date-range validation in the PR objectives.
+ * zod ^4.3.6 has z.iso.date(), which also checks calendar validity.
+ * The from <= to string comparison in .refine stays correct for validated values.
+ */
+const dateISO = z.iso.date("Format date attendu : AAAA-MM-JJ");
 
 export const suiviParamsSchema = z.object({
   eleveId: z.string().uuid("ID élève invalide"),

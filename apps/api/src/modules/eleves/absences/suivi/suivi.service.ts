@@ -28,8 +28,10 @@ function moisCourant(): { from: string; to: string } {
   const m = now.getMonth() + 1;
   const dernierJour = new Date(y, m, 0).getDate();
   return {
-    from: `01-${pad(m)}-${y}`,
-    to: `${pad(dernierJour)}-${pad(m)}-${y}`,
+    // REVIEW :
+    // moisCourant() returns 01-10-2026 style strings. The schema, the web client, and the SuiviResponse contract use AAAA-MM-JJ. The default values are used when from or to is missing. They are compared as strings in appel.date (gte/lte). 01-10-2026 does not sort like 2026-10-01. The query returns wrong or empty results, and periode is returned in the wrong format. The bundled web client always sends from and to, so only direct API callers hit this path.
+    from: `${y}-${pad(m)}-01`,
+    to: `${y}-${pad(m)}-${pad(dernierJour)}`,
   };
 }
 
@@ -74,7 +76,9 @@ export class SuiviAbsenceService {
         where: wherePeriode,
         _count: { _all: true }, // Compte le nombre total d'absences pour chaque statut
       }),
-      prisma.presence.count({ where: wherePeriode }), // Compte le nombre total d'absences pour la période
+      // REVIEW :
+      // total comes from count({ where: wherePeriode }), which ignores query.statut. The list uses whereListe, which includes the status filter. When the user filters by status, pagination.total and totalPages describe all records in the period, not the filtered list. The UI then shows extra pages that are empty. The summary should keep ignoring the status filter, which groupBy already does. Count the paginated list with whereListe.
+      prisma.presence.count({ where: whereListe }), // Compte les lignes de la liste (période + statut)
       prisma.presence.findMany({
         where: whereListe, // Filtre les absences selon la période et le statut si fourni
         orderBy: [
@@ -103,11 +107,12 @@ export class SuiviAbsenceService {
       }),
     ]);
 
-    const compte = (s: "PRESENT" | "ABSENT" | "RETARDS") =>
-      parStatut.find((p) => p.statut === s)?._count._all ?? 0; // Retourne le nombre d'absences pour le statut donné, ou 0 si aucun
+    const compte = (
+      s: "PRESENT" | "ABSENT" | "RETARD", // REVIEW : const compte = (s: "PRESENT" | "ABSENT" | "RETARD") =>
+    ) => parStatut.find((p) => p.statut === s)?._count._all ?? 0; // Retourne le nombre d'absences pour le statut donné, ou 0 si aucun
     const present = compte("PRESENT");
     const absent = compte("ABSENT");
-    const retard = compte("RETARDS");
+    const retard = compte("RETARD");
     const totalAppels = present + absent + retard; // Calcule le nombre total d'appels pour l'élève sur la période donnée
 
     return {
