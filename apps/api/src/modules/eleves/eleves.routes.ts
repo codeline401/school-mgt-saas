@@ -8,6 +8,7 @@ import paiementRoutes from "./ecolages/paiement/paiement.routes.js";
 import factureRoutes from "./ecolages/factures/facture.routes.js";
 import ajournementRoutes from "./ecolages/ajournement/ajournement.routes.js";
 import relanceRoutes from "./ecolages/relances/relance.routes.js";
+import suiviAbsenceRoutes from "./absences/suivi/suivi.routes.js";
 
 const router = Router();
 
@@ -38,5 +39,6 @@ router.use("/ecolages", paiementRoutes);
  * - GET /api/eleves/ecolages/factures/:factureId/print (imprimer une facture en PDF)
  */
 router.use("/ecolages", factureRoutes);
+router.use("/absences/suivi", suiviAbsenceRoutes);
 
 export default router;
