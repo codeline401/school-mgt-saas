@@ -30,7 +30,8 @@ import { FacturesEcolageSection } from "./ecolages/factures/components/FactureEc
 import { AjournementEcolageSection } from "./ecolages/ajournement/components/AjournementEcolageSection";
 import { useAuthStore } from "../../store/authStore";
 import { RelanceEcolageSection } from "./ecolages/relances/components/RelanceEcolageSection";
-import { SuiviAbsenceSection } from "./absence-retard/components/SuiviAbsenceSection";
+import { SuiviAbsenceSection } from "./absence-retard/suivi/components/SuiviAbsenceSection";
+import { JustificationSection } from "./absence-retard/justifiactions/components/JustificationSection";
 
 type MainTab =
   | "informations"
@@ -219,13 +220,7 @@ function GestionElevesPage() {
       case "suivi":
         return <SuiviAbsenceSection initialEleveId={eleveId} />;
       case "justifications":
-        return (
-          <DevelopmentPlaceholder
-            icon={FileText}
-            title="Justifications"
-            description="Pièces justificatives, motifs d’absence, suivis validés ou refusés."
-          />
-        );
+        return <JustificationSection initialEleveId={eleveId} />;
       case "retards":
         return (
           <DevelopmentPlaceholder

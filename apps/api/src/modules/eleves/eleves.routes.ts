@@ -40,5 +40,7 @@ router.use("/ecolages", paiementRoutes);
  */
 router.use("/ecolages", factureRoutes);
 router.use("/absences/suivi", suiviAbsenceRoutes);
+import justificationRoutes from "./absences/justifications/justification.routes.js";
+router.use("/absences/justifications", justificationRoutes);
 
 export default router;

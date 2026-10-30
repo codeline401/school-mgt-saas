@@ -234,6 +234,7 @@ export type CreneauHoraireWhereInput = {
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   matiere?: Prisma.XOR<Prisma.MatiereNullableScalarRelationFilter, Prisma.MatiereWhereInput> | null
   appels?: Prisma.AppelListRelationFilter
+  billetEntrees?: Prisma.BilletEntreeListRelationFilter
 }
 
 export type CreneauHoraireOrderByWithRelationInput = {
@@ -252,6 +253,7 @@ export type CreneauHoraireOrderByWithRelationInput = {
   school?: Prisma.SchoolOrderByWithRelationInput
   matiere?: Prisma.MatiereOrderByWithRelationInput
   appels?: Prisma.AppelOrderByRelationAggregateInput
+  billetEntrees?: Prisma.BilletEntreeOrderByRelationAggregateInput
 }
 
 export type CreneauHoraireWhereUniqueInput = Prisma.AtLeast<{
@@ -274,6 +276,7 @@ export type CreneauHoraireWhereUniqueInput = Prisma.AtLeast<{
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   matiere?: Prisma.XOR<Prisma.MatiereNullableScalarRelationFilter, Prisma.MatiereWhereInput> | null
   appels?: Prisma.AppelListRelationFilter
+  billetEntrees?: Prisma.BilletEntreeListRelationFilter
 }, "id" | "classeId_jour_heureDebut_heureFin">
 
 export type CreneauHoraireOrderByWithAggregationInput = {
@@ -323,6 +326,7 @@ export type CreneauHoraireCreateInput = {
   school: Prisma.SchoolCreateNestedOneWithoutCreneauHorairesInput
   matiere?: Prisma.MatiereCreateNestedOneWithoutCreneauHorairesInput
   appels?: Prisma.AppelCreateNestedManyWithoutCreneauInput
+  billetEntrees?: Prisma.BilletEntreeCreateNestedManyWithoutCreneauInput
 }
 
 export type CreneauHoraireUncheckedCreateInput = {
@@ -338,6 +342,7 @@ export type CreneauHoraireUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   appels?: Prisma.AppelUncheckedCreateNestedManyWithoutCreneauInput
+  billetEntrees?: Prisma.BilletEntreeUncheckedCreateNestedManyWithoutCreneauInput
 }
 
 export type CreneauHoraireUpdateInput = {
@@ -353,6 +358,7 @@ export type CreneauHoraireUpdateInput = {
   school?: Prisma.SchoolUpdateOneRequiredWithoutCreneauHorairesNestedInput
   matiere?: Prisma.MatiereUpdateOneWithoutCreneauHorairesNestedInput
   appels?: Prisma.AppelUpdateManyWithoutCreneauNestedInput
+  billetEntrees?: Prisma.BilletEntreeUpdateManyWithoutCreneauNestedInput
 }
 
 export type CreneauHoraireUncheckedUpdateInput = {
@@ -368,6 +374,7 @@ export type CreneauHoraireUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appels?: Prisma.AppelUncheckedUpdateManyWithoutCreneauNestedInput
+  billetEntrees?: Prisma.BilletEntreeUncheckedUpdateManyWithoutCreneauNestedInput
 }
 
 export type CreneauHoraireCreateManyInput = {
@@ -617,6 +624,20 @@ export type CreneauHoraireUpdateOneRequiredWithoutAppelsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CreneauHoraireUpdateToOneWithWhereWithoutAppelsInput, Prisma.CreneauHoraireUpdateWithoutAppelsInput>, Prisma.CreneauHoraireUncheckedUpdateWithoutAppelsInput>
 }
 
+export type CreneauHoraireCreateNestedOneWithoutBilletEntreesInput = {
+  create?: Prisma.XOR<Prisma.CreneauHoraireCreateWithoutBilletEntreesInput, Prisma.CreneauHoraireUncheckedCreateWithoutBilletEntreesInput>
+  connectOrCreate?: Prisma.CreneauHoraireCreateOrConnectWithoutBilletEntreesInput
+  connect?: Prisma.CreneauHoraireWhereUniqueInput
+}
+
+export type CreneauHoraireUpdateOneRequiredWithoutBilletEntreesNestedInput = {
+  create?: Prisma.XOR<Prisma.CreneauHoraireCreateWithoutBilletEntreesInput, Prisma.CreneauHoraireUncheckedCreateWithoutBilletEntreesInput>
+  connectOrCreate?: Prisma.CreneauHoraireCreateOrConnectWithoutBilletEntreesInput
+  upsert?: Prisma.CreneauHoraireUpsertWithoutBilletEntreesInput
+  connect?: Prisma.CreneauHoraireWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CreneauHoraireUpdateToOneWithWhereWithoutBilletEntreesInput, Prisma.CreneauHoraireUpdateWithoutBilletEntreesInput>, Prisma.CreneauHoraireUncheckedUpdateWithoutBilletEntreesInput>
+}
+
 export type CreneauHoraireCreateWithoutSchoolInput = {
   id?: string
   jour: $Enums.JourSemaine
@@ -629,6 +650,7 @@ export type CreneauHoraireCreateWithoutSchoolInput = {
   classe: Prisma.ClasseCreateNestedOneWithoutCreneauHorairesInput
   matiere?: Prisma.MatiereCreateNestedOneWithoutCreneauHorairesInput
   appels?: Prisma.AppelCreateNestedManyWithoutCreneauInput
+  billetEntrees?: Prisma.BilletEntreeCreateNestedManyWithoutCreneauInput
 }
 
 export type CreneauHoraireUncheckedCreateWithoutSchoolInput = {
@@ -643,6 +665,7 @@ export type CreneauHoraireUncheckedCreateWithoutSchoolInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   appels?: Prisma.AppelUncheckedCreateNestedManyWithoutCreneauInput
+  billetEntrees?: Prisma.BilletEntreeUncheckedCreateNestedManyWithoutCreneauInput
 }
 
 export type CreneauHoraireCreateOrConnectWithoutSchoolInput = {
@@ -700,6 +723,7 @@ export type CreneauHoraireCreateWithoutClasseInput = {
   school: Prisma.SchoolCreateNestedOneWithoutCreneauHorairesInput
   matiere?: Prisma.MatiereCreateNestedOneWithoutCreneauHorairesInput
   appels?: Prisma.AppelCreateNestedManyWithoutCreneauInput
+  billetEntrees?: Prisma.BilletEntreeCreateNestedManyWithoutCreneauInput
 }
 
 export type CreneauHoraireUncheckedCreateWithoutClasseInput = {
@@ -714,6 +738,7 @@ export type CreneauHoraireUncheckedCreateWithoutClasseInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   appels?: Prisma.AppelUncheckedCreateNestedManyWithoutCreneauInput
+  billetEntrees?: Prisma.BilletEntreeUncheckedCreateNestedManyWithoutCreneauInput
 }
 
 export type CreneauHoraireCreateOrConnectWithoutClasseInput = {
@@ -754,6 +779,7 @@ export type CreneauHoraireCreateWithoutMatiereInput = {
   classe: Prisma.ClasseCreateNestedOneWithoutCreneauHorairesInput
   school: Prisma.SchoolCreateNestedOneWithoutCreneauHorairesInput
   appels?: Prisma.AppelCreateNestedManyWithoutCreneauInput
+  billetEntrees?: Prisma.BilletEntreeCreateNestedManyWithoutCreneauInput
 }
 
 export type CreneauHoraireUncheckedCreateWithoutMatiereInput = {
@@ -768,6 +794,7 @@ export type CreneauHoraireUncheckedCreateWithoutMatiereInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   appels?: Prisma.AppelUncheckedCreateNestedManyWithoutCreneauInput
+  billetEntrees?: Prisma.BilletEntreeUncheckedCreateNestedManyWithoutCreneauInput
 }
 
 export type CreneauHoraireCreateOrConnectWithoutMatiereInput = {
@@ -808,6 +835,7 @@ export type CreneauHoraireCreateWithoutAppelsInput = {
   classe: Prisma.ClasseCreateNestedOneWithoutCreneauHorairesInput
   school: Prisma.SchoolCreateNestedOneWithoutCreneauHorairesInput
   matiere?: Prisma.MatiereCreateNestedOneWithoutCreneauHorairesInput
+  billetEntrees?: Prisma.BilletEntreeCreateNestedManyWithoutCreneauInput
 }
 
 export type CreneauHoraireUncheckedCreateWithoutAppelsInput = {
@@ -822,6 +850,7 @@ export type CreneauHoraireUncheckedCreateWithoutAppelsInput = {
   couleur?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  billetEntrees?: Prisma.BilletEntreeUncheckedCreateNestedManyWithoutCreneauInput
 }
 
 export type CreneauHoraireCreateOrConnectWithoutAppelsInput = {
@@ -852,6 +881,7 @@ export type CreneauHoraireUpdateWithoutAppelsInput = {
   classe?: Prisma.ClasseUpdateOneRequiredWithoutCreneauHorairesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutCreneauHorairesNestedInput
   matiere?: Prisma.MatiereUpdateOneWithoutCreneauHorairesNestedInput
+  billetEntrees?: Prisma.BilletEntreeUpdateManyWithoutCreneauNestedInput
 }
 
 export type CreneauHoraireUncheckedUpdateWithoutAppelsInput = {
@@ -866,6 +896,83 @@ export type CreneauHoraireUncheckedUpdateWithoutAppelsInput = {
   couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  billetEntrees?: Prisma.BilletEntreeUncheckedUpdateManyWithoutCreneauNestedInput
+}
+
+export type CreneauHoraireCreateWithoutBilletEntreesInput = {
+  id?: string
+  jour: $Enums.JourSemaine
+  heureDebut: string
+  heureFin: string
+  intitule?: string | null
+  couleur?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  classe: Prisma.ClasseCreateNestedOneWithoutCreneauHorairesInput
+  school: Prisma.SchoolCreateNestedOneWithoutCreneauHorairesInput
+  matiere?: Prisma.MatiereCreateNestedOneWithoutCreneauHorairesInput
+  appels?: Prisma.AppelCreateNestedManyWithoutCreneauInput
+}
+
+export type CreneauHoraireUncheckedCreateWithoutBilletEntreesInput = {
+  id?: string
+  classeId: string
+  schoolId: string
+  jour: $Enums.JourSemaine
+  heureDebut: string
+  heureFin: string
+  intitule?: string | null
+  matiereId?: string | null
+  couleur?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutCreneauInput
+}
+
+export type CreneauHoraireCreateOrConnectWithoutBilletEntreesInput = {
+  where: Prisma.CreneauHoraireWhereUniqueInput
+  create: Prisma.XOR<Prisma.CreneauHoraireCreateWithoutBilletEntreesInput, Prisma.CreneauHoraireUncheckedCreateWithoutBilletEntreesInput>
+}
+
+export type CreneauHoraireUpsertWithoutBilletEntreesInput = {
+  update: Prisma.XOR<Prisma.CreneauHoraireUpdateWithoutBilletEntreesInput, Prisma.CreneauHoraireUncheckedUpdateWithoutBilletEntreesInput>
+  create: Prisma.XOR<Prisma.CreneauHoraireCreateWithoutBilletEntreesInput, Prisma.CreneauHoraireUncheckedCreateWithoutBilletEntreesInput>
+  where?: Prisma.CreneauHoraireWhereInput
+}
+
+export type CreneauHoraireUpdateToOneWithWhereWithoutBilletEntreesInput = {
+  where?: Prisma.CreneauHoraireWhereInput
+  data: Prisma.XOR<Prisma.CreneauHoraireUpdateWithoutBilletEntreesInput, Prisma.CreneauHoraireUncheckedUpdateWithoutBilletEntreesInput>
+}
+
+export type CreneauHoraireUpdateWithoutBilletEntreesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
+  heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
+  heureFin?: Prisma.StringFieldUpdateOperationsInput | string
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classe?: Prisma.ClasseUpdateOneRequiredWithoutCreneauHorairesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutCreneauHorairesNestedInput
+  matiere?: Prisma.MatiereUpdateOneWithoutCreneauHorairesNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutCreneauNestedInput
+}
+
+export type CreneauHoraireUncheckedUpdateWithoutBilletEntreesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  jour?: Prisma.EnumJourSemaineFieldUpdateOperationsInput | $Enums.JourSemaine
+  heureDebut?: Prisma.StringFieldUpdateOperationsInput | string
+  heureFin?: Prisma.StringFieldUpdateOperationsInput | string
+  intitule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matiereId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  couleur?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutCreneauNestedInput
 }
 
 export type CreneauHoraireCreateManySchoolInput = {
@@ -893,6 +1000,7 @@ export type CreneauHoraireUpdateWithoutSchoolInput = {
   classe?: Prisma.ClasseUpdateOneRequiredWithoutCreneauHorairesNestedInput
   matiere?: Prisma.MatiereUpdateOneWithoutCreneauHorairesNestedInput
   appels?: Prisma.AppelUpdateManyWithoutCreneauNestedInput
+  billetEntrees?: Prisma.BilletEntreeUpdateManyWithoutCreneauNestedInput
 }
 
 export type CreneauHoraireUncheckedUpdateWithoutSchoolInput = {
@@ -907,6 +1015,7 @@ export type CreneauHoraireUncheckedUpdateWithoutSchoolInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appels?: Prisma.AppelUncheckedUpdateManyWithoutCreneauNestedInput
+  billetEntrees?: Prisma.BilletEntreeUncheckedUpdateManyWithoutCreneauNestedInput
 }
 
 export type CreneauHoraireUncheckedUpdateManyWithoutSchoolInput = {
@@ -947,6 +1056,7 @@ export type CreneauHoraireUpdateWithoutClasseInput = {
   school?: Prisma.SchoolUpdateOneRequiredWithoutCreneauHorairesNestedInput
   matiere?: Prisma.MatiereUpdateOneWithoutCreneauHorairesNestedInput
   appels?: Prisma.AppelUpdateManyWithoutCreneauNestedInput
+  billetEntrees?: Prisma.BilletEntreeUpdateManyWithoutCreneauNestedInput
 }
 
 export type CreneauHoraireUncheckedUpdateWithoutClasseInput = {
@@ -961,6 +1071,7 @@ export type CreneauHoraireUncheckedUpdateWithoutClasseInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appels?: Prisma.AppelUncheckedUpdateManyWithoutCreneauNestedInput
+  billetEntrees?: Prisma.BilletEntreeUncheckedUpdateManyWithoutCreneauNestedInput
 }
 
 export type CreneauHoraireUncheckedUpdateManyWithoutClasseInput = {
@@ -1001,6 +1112,7 @@ export type CreneauHoraireUpdateWithoutMatiereInput = {
   classe?: Prisma.ClasseUpdateOneRequiredWithoutCreneauHorairesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutCreneauHorairesNestedInput
   appels?: Prisma.AppelUpdateManyWithoutCreneauNestedInput
+  billetEntrees?: Prisma.BilletEntreeUpdateManyWithoutCreneauNestedInput
 }
 
 export type CreneauHoraireUncheckedUpdateWithoutMatiereInput = {
@@ -1015,6 +1127,7 @@ export type CreneauHoraireUncheckedUpdateWithoutMatiereInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appels?: Prisma.AppelUncheckedUpdateManyWithoutCreneauNestedInput
+  billetEntrees?: Prisma.BilletEntreeUncheckedUpdateManyWithoutCreneauNestedInput
 }
 
 export type CreneauHoraireUncheckedUpdateManyWithoutMatiereInput = {
@@ -1037,10 +1150,12 @@ export type CreneauHoraireUncheckedUpdateManyWithoutMatiereInput = {
 
 export type CreneauHoraireCountOutputType = {
   appels: number
+  billetEntrees: number
 }
 
 export type CreneauHoraireCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   appels?: boolean | CreneauHoraireCountOutputTypeCountAppelsArgs
+  billetEntrees?: boolean | CreneauHoraireCountOutputTypeCountBilletEntreesArgs
 }
 
 /**
@@ -1060,6 +1175,13 @@ export type CreneauHoraireCountOutputTypeCountAppelsArgs<ExtArgs extends runtime
   where?: Prisma.AppelWhereInput
 }
 
+/**
+ * CreneauHoraireCountOutputType without action
+ */
+export type CreneauHoraireCountOutputTypeCountBilletEntreesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BilletEntreeWhereInput
+}
+
 
 export type CreneauHoraireSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1077,6 +1199,7 @@ export type CreneauHoraireSelect<ExtArgs extends runtime.Types.Extensions.Intern
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   matiere?: boolean | Prisma.CreneauHoraire$matiereArgs<ExtArgs>
   appels?: boolean | Prisma.CreneauHoraire$appelsArgs<ExtArgs>
+  billetEntrees?: boolean | Prisma.CreneauHoraire$billetEntreesArgs<ExtArgs>
   _count?: boolean | Prisma.CreneauHoraireCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["creneauHoraire"]>
 
@@ -1134,6 +1257,7 @@ export type CreneauHoraireInclude<ExtArgs extends runtime.Types.Extensions.Inter
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   matiere?: boolean | Prisma.CreneauHoraire$matiereArgs<ExtArgs>
   appels?: boolean | Prisma.CreneauHoraire$appelsArgs<ExtArgs>
+  billetEntrees?: boolean | Prisma.CreneauHoraire$billetEntreesArgs<ExtArgs>
   _count?: boolean | Prisma.CreneauHoraireCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CreneauHoraireIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1154,6 +1278,7 @@ export type $CreneauHorairePayload<ExtArgs extends runtime.Types.Extensions.Inte
     school: Prisma.$SchoolPayload<ExtArgs>
     matiere: Prisma.$MatierePayload<ExtArgs> | null
     appels: Prisma.$AppelPayload<ExtArgs>[]
+    billetEntrees: Prisma.$BilletEntreePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1565,6 +1690,7 @@ export interface Prisma__CreneauHoraireClient<T, Null = never, ExtArgs extends r
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   matiere<T extends Prisma.CreneauHoraire$matiereArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CreneauHoraire$matiereArgs<ExtArgs>>): Prisma.Prisma__MatiereClient<runtime.Types.Result.GetResult<Prisma.$MatierePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   appels<T extends Prisma.CreneauHoraire$appelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CreneauHoraire$appelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AppelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  billetEntrees<T extends Prisma.CreneauHoraire$billetEntreesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CreneauHoraire$billetEntreesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BilletEntreePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2046,6 +2172,30 @@ export type CreneauHoraire$appelsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.AppelScalarFieldEnum | Prisma.AppelScalarFieldEnum[]
+}
+
+/**
+ * CreneauHoraire.billetEntrees
+ */
+export type CreneauHoraire$billetEntreesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BilletEntree
+   */
+  select?: Prisma.BilletEntreeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BilletEntree
+   */
+  omit?: Prisma.BilletEntreeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BilletEntreeInclude<ExtArgs> | null
+  where?: Prisma.BilletEntreeWhereInput
+  orderBy?: Prisma.BilletEntreeOrderByWithRelationInput | Prisma.BilletEntreeOrderByWithRelationInput[]
+  cursor?: Prisma.BilletEntreeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BilletEntreeScalarFieldEnum | Prisma.BilletEntreeScalarFieldEnum[]
 }
 
 /**

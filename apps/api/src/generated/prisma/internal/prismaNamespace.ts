@@ -411,6 +411,8 @@ export const ModelName = {
   CreneauHoraire: 'CreneauHoraire',
   Appel: 'Appel',
   Presence: 'Presence',
+  JustificationAbsence: 'JustificationAbsence',
+  BilletEntree: 'BilletEntree',
   Notification: 'Notification',
   CahierTexte: 'CahierTexte',
   Devoir: 'Devoir',
@@ -477,7 +479,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse"
+    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "justificationAbsence" | "billetEntree" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1514,6 +1516,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.PresenceCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.PresenceCountAggregateOutputType> | number
+        }
+      }
+    }
+    JustificationAbsence: {
+      payload: Prisma.$JustificationAbsencePayload<ExtArgs>
+      fields: Prisma.JustificationAbsenceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JustificationAbsenceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JustificationAbsencePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JustificationAbsenceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JustificationAbsencePayload>
+        }
+        findFirst: {
+          args: Prisma.JustificationAbsenceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JustificationAbsencePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JustificationAbsenceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JustificationAbsencePayload>
+        }
+        findMany: {
+          args: Prisma.JustificationAbsenceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JustificationAbsencePayload>[]
+        }
+        create: {
+          args: Prisma.JustificationAbsenceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JustificationAbsencePayload>
+        }
+        createMany: {
+          args: Prisma.JustificationAbsenceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.JustificationAbsenceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JustificationAbsencePayload>[]
+        }
+        delete: {
+          args: Prisma.JustificationAbsenceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JustificationAbsencePayload>
+        }
+        update: {
+          args: Prisma.JustificationAbsenceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JustificationAbsencePayload>
+        }
+        deleteMany: {
+          args: Prisma.JustificationAbsenceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JustificationAbsenceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.JustificationAbsenceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JustificationAbsencePayload>[]
+        }
+        upsert: {
+          args: Prisma.JustificationAbsenceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JustificationAbsencePayload>
+        }
+        aggregate: {
+          args: Prisma.JustificationAbsenceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJustificationAbsence>
+        }
+        groupBy: {
+          args: Prisma.JustificationAbsenceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JustificationAbsenceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JustificationAbsenceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JustificationAbsenceCountAggregateOutputType> | number
+        }
+      }
+    }
+    BilletEntree: {
+      payload: Prisma.$BilletEntreePayload<ExtArgs>
+      fields: Prisma.BilletEntreeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BilletEntreeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BilletEntreePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BilletEntreeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BilletEntreePayload>
+        }
+        findFirst: {
+          args: Prisma.BilletEntreeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BilletEntreePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BilletEntreeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BilletEntreePayload>
+        }
+        findMany: {
+          args: Prisma.BilletEntreeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BilletEntreePayload>[]
+        }
+        create: {
+          args: Prisma.BilletEntreeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BilletEntreePayload>
+        }
+        createMany: {
+          args: Prisma.BilletEntreeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BilletEntreeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BilletEntreePayload>[]
+        }
+        delete: {
+          args: Prisma.BilletEntreeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BilletEntreePayload>
+        }
+        update: {
+          args: Prisma.BilletEntreeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BilletEntreePayload>
+        }
+        deleteMany: {
+          args: Prisma.BilletEntreeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BilletEntreeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BilletEntreeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BilletEntreePayload>[]
+        }
+        upsert: {
+          args: Prisma.BilletEntreeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BilletEntreePayload>
+        }
+        aggregate: {
+          args: Prisma.BilletEntreeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBilletEntree>
+        }
+        groupBy: {
+          args: Prisma.BilletEntreeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BilletEntreeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BilletEntreeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BilletEntreeCountAggregateOutputType> | number
         }
       }
     }
@@ -5557,10 +5707,42 @@ export const PresenceScalarFieldEnum = {
   appelId: 'appelId',
   eleveId: 'eleveId',
   statut: 'statut',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  justificationAbsenceId: 'justificationAbsenceId'
 } as const
 
 export type PresenceScalarFieldEnum = (typeof PresenceScalarFieldEnum)[keyof typeof PresenceScalarFieldEnum]
+
+
+export const JustificationAbsenceScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  eleveId: 'eleveId',
+  motif: 'motif',
+  fichierNom: 'fichierNom',
+  fichierPath: 'fichierPath',
+  fichierMime: 'fichierMime',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type JustificationAbsenceScalarFieldEnum = (typeof JustificationAbsenceScalarFieldEnum)[keyof typeof JustificationAbsenceScalarFieldEnum]
+
+
+export const BilletEntreeScalarFieldEnum = {
+  id: 'id',
+  numero: 'numero',
+  schoolId: 'schoolId',
+  eleveId: 'eleveId',
+  justificationId: 'justificationId',
+  creneauId: 'creneauId',
+  dateValidite: 'dateValidite',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type BilletEntreeScalarFieldEnum = (typeof BilletEntreeScalarFieldEnum)[keyof typeof BilletEntreeScalarFieldEnum]
 
 
 export const NotificationScalarFieldEnum = {
@@ -7459,6 +7641,8 @@ export type GlobalOmitConfig = {
   creneauHoraire?: Prisma.CreneauHoraireOmit
   appel?: Prisma.AppelOmit
   presence?: Prisma.PresenceOmit
+  justificationAbsence?: Prisma.JustificationAbsenceOmit
+  billetEntree?: Prisma.BilletEntreeOmit
   notification?: Prisma.NotificationOmit
   cahierTexte?: Prisma.CahierTexteOmit
   devoir?: Prisma.DevoirOmit

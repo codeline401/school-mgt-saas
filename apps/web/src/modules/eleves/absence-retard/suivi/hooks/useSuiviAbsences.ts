@@ -1,5 +1,5 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { api } from "../../../../lib/api";
+import { api } from "../../../../../lib/api";
 
 export type StatutPresence = "PRESENT" | "ABSENT" | "RETARD";
 
@@ -19,6 +19,7 @@ export type SuiviLigne = {
   heureFin: string;
   matiere: string | null;
   intitule: string | null;
+  justifiee: boolean;
 };
 
 export type SuiviResponse = {
