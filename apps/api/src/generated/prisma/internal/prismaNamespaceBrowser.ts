@@ -65,6 +65,8 @@ export const ModelName = {
   CreneauHoraire: 'CreneauHoraire',
   Appel: 'Appel',
   Presence: 'Presence',
+  JustificationAbsence: 'JustificationAbsence',
+  BilletEntree: 'BilletEntree',
   Notification: 'Notification',
   CahierTexte: 'CahierTexte',
   Devoir: 'Devoir',
@@ -361,10 +363,42 @@ export const PresenceScalarFieldEnum = {
   appelId: 'appelId',
   eleveId: 'eleveId',
   statut: 'statut',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  justificationAbsenceId: 'justificationAbsenceId'
 } as const
 
 export type PresenceScalarFieldEnum = (typeof PresenceScalarFieldEnum)[keyof typeof PresenceScalarFieldEnum]
+
+
+export const JustificationAbsenceScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  eleveId: 'eleveId',
+  motif: 'motif',
+  fichierNom: 'fichierNom',
+  fichierPath: 'fichierPath',
+  fichierMime: 'fichierMime',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type JustificationAbsenceScalarFieldEnum = (typeof JustificationAbsenceScalarFieldEnum)[keyof typeof JustificationAbsenceScalarFieldEnum]
+
+
+export const BilletEntreeScalarFieldEnum = {
+  id: 'id',
+  numero: 'numero',
+  schoolId: 'schoolId',
+  eleveId: 'eleveId',
+  justificationId: 'justificationId',
+  creneauId: 'creneauId',
+  dateValidite: 'dateValidite',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type BilletEntreeScalarFieldEnum = (typeof BilletEntreeScalarFieldEnum)[keyof typeof BilletEntreeScalarFieldEnum]
 
 
 export const NotificationScalarFieldEnum = {

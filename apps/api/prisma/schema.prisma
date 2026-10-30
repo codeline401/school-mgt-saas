@@ -70,6 +70,8 @@ model User {
   ecolageConfigs                     EcolageConfig[]
   ajournementsTraites                Ajournement[]             @relation("AjournementTraites")
   relancePaiements                   RelancePaiement[]         @relation("RelancesCreees")
+  justificationAbsences              JustificationAbsence[]    @relation("JustificationsCreees")
+  billetEntrees                      BilletEntree[]            @relation("BilletsCreees")
 }
 
 // Modele SAAS
@@ -141,6 +143,8 @@ model School {
   ecolageConfigs           EcolageConfig[]
   ajournements             Ajournement[]
   relancePaiements         RelancePaiement[]
+  justificationAbsences    JustificationAbsence[]
+  billetEntrees            BilletEntree[]
 }
 
 model Classe {
@@ -480,9 +484,10 @@ model CreneauHoraire {
   matiere    Matiere?    @relation(fields: [matiereId], references: [id])
   couleur    String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  appels    Appel[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  appels        Appel[]
+  billetEntrees BilletEntree[]
 
   @@unique([classeId, jour, heureDebut, heureFin])
   @@index([schoolId])
@@ -525,9 +530,60 @@ model Presence {
   appel Appel @relation(fields: [appelId], references: [id], onDelete: Cascade)
   eleve Eleve @relation(fields: [eleveId], references: [id], onDelete: Cascade)
 
-  updatedAt DateTime @updatedAt
+  updatedAt              DateTime              @updatedAt
+  justificationAbsence   JustificationAbsence? @relation(fields: [justificationAbsenceId], references: [id])
+  justificationAbsenceId String?
 
   @@unique([appelId, eleveId])
+}
+
+// Justificatif présenté pour une ou plusieurs absences/retards d'un élève
+model JustificationAbsence {
+  id       String @id @default(uuid())
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  eleveId  String
+  eleve    Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  motif       String @db.Text
+  fichierNom  String // Nom d'origine, pour l'affichage
+  fichierPath String // nom généré dans uploads/justificatifs
+  fichierMime String // type MIME du fichier (ex: application/pdf)
+
+  createdById String
+  createdBy   User   @relation("JustificationsCreees", fields: [createdById], references: [id])
+
+  presences Presence[]
+  billets   BilletEntree[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId, eleveId])
+}
+
+// Autorisation de rentrer en cours délivrée après une absence justifiée.
+model BilletEntree {
+  id       String @id @default(uuid())
+  numero   String @unique
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  eleveId  String
+  eleve    Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  justificationId String
+  justification   JustificationAbsence @relation(fields: [justificationId], references: [id], onDelete: Cascade)
+
+  creneauId    String
+  creneau      CreneauHoraire @relation(fields: [creneauId], references: [id], onDelete: Cascade)
+  dateValidite String // AAAA-MM-JJ, comme Appel.date
+
+  createdById String
+  createdBy   User     @relation("BilletsCreees", fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+
+  @@unique([eleveId, creneauId, dateValidite])
+  @@index([justificationId])
 }
 
 model Notification {
@@ -1805,6 +1861,8 @@ model Eleve {
   affectationClasses    AffectationClasse[]
   paiementEcolages      PaiementEcolage[]
   ajournementsLignes    AjournementLigne[]
+  justificationAbsences JustificationAbsence[]
+  billetEntrees         BilletEntree[]
 
   // Contraintes & Index
   @@unique([schoolId, matricule])

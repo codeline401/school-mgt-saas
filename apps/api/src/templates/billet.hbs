@@ -1,0 +1,96 @@
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @page {
+        size: 148mm 105mm;
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #0f172a;
+      }
+      .billet {
+        width: 148mm;
+        height: 105mm;
+        padding: 8mm;
+        border: 2px dashed #4f46e5;
+      }
+      h1 {
+        margin: 0;
+        font-size: 18pt;
+        color: #4f46e5;
+      }
+      .ecole {
+        font-size: 9pt;
+        color: #475569;
+      }
+      .tete {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      .numero {
+        font-size: 9pt;
+        font-weight: bold;
+      }
+      .corps {
+        margin-top: 6mm;
+        font-size: 11pt;
+        line-height: 1.6;
+      }
+      .corps strong {
+        display: inline-block;
+        min-width: 32mm;
+        color: #475569;
+        font-weight: normal;
+      }
+      .pied {
+        margin-top: 8mm;
+        display: flex;
+        justify-content: space-between;
+        font-size: 9pt;
+        color: #475569;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="billet">
+      <div class="tete">
+        <div>
+          <h1>BILLET D'ENTRÉE</h1>
+          <div class="ecole">{{billet.school.nom}}{{#if billet.school.adresse}}
+              —
+              {{billet.school.adresse}}{{/if}}</div>
+        </div>
+        <div class="numero">N° {{billet.numero}}</div>
+      </div>
+
+      <div class="corps">
+        <div><strong>Élève</strong>
+          {{uppercase billet.eleve.nom}}
+          {{billet.eleve.prenom}}</div>
+        <div><strong>Matricule</strong> {{billet.eleve.matricule}}</div>
+        <div><strong>Classe</strong> {{billet.eleve.classe.nom}}</div>
+        <div><strong>Valable le</strong>
+          {{formatDateLong billet.dateValidite}}</div>
+        <div><strong>Cours</strong>
+          {{billet.creneau.heureDebut}}
+          –
+          {{billet.creneau.heureFin}}{{#if billet.creneau.matiere}}
+            ({{billet.creneau.matiere.nom}}){{/if}}</div>
+      </div>
+
+      <div class="pied">
+        <div>Délivré par
+          {{billet.createdBy.prenom}}
+          {{billet.createdBy.nom}}</div>
+        <div>Imprimé le {{formatDate dateImpression}}</div>
+      </div>
+    </div>
+  </body>
+</html>

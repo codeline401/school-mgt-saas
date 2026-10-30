@@ -56,6 +56,7 @@ export type SuiviResponse = {
     heureFin: string;
     matiere: string | null;
     intitule: string | null;
+    justifiee: boolean;
   }>;
   pagination: {
     page: number;

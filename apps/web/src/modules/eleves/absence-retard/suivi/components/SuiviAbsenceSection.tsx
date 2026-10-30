@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Calendar, Search } from "lucide-react";
 import type { FicheEleveComplete } from "@school-mgt/types";
-import { StudentSearchSelect } from "../../informations/emergencyContact/components/StudentSearchSelect";
+import { StudentSearchSelect } from "../../../informations/emergencyContact/components/StudentSearchSelect";
 import { STATUT_CONFIG } from "../suivi.constants";
 import {
   useSuiviAbsences,

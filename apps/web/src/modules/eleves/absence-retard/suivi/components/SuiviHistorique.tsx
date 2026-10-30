@@ -37,6 +37,7 @@ export function SuiviHistorique({ lignes, pagination, onPageChange }: Props) {
                       <span className={`badge ${statut.badge}`}>
                         {statut.label}
                       </span>
+                      {l.justifiee && <span className="badge badge-outline badge-info ml-2">Justifiée</span>}
                     </td>
                   </tr>
                 );

@@ -30,6 +30,7 @@ export type PresenceMinAggregateOutputType = {
   eleveId: string | null
   statut: $Enums.StatutPresence | null
   updatedAt: Date | null
+  justificationAbsenceId: string | null
 }
 
 export type PresenceMaxAggregateOutputType = {
@@ -38,6 +39,7 @@ export type PresenceMaxAggregateOutputType = {
   eleveId: string | null
   statut: $Enums.StatutPresence | null
   updatedAt: Date | null
+  justificationAbsenceId: string | null
 }
 
 export type PresenceCountAggregateOutputType = {
@@ -46,6 +48,7 @@ export type PresenceCountAggregateOutputType = {
   eleveId: number
   statut: number
   updatedAt: number
+  justificationAbsenceId: number
   _all: number
 }
 
@@ -56,6 +59,7 @@ export type PresenceMinAggregateInputType = {
   eleveId?: true
   statut?: true
   updatedAt?: true
+  justificationAbsenceId?: true
 }
 
 export type PresenceMaxAggregateInputType = {
@@ -64,6 +68,7 @@ export type PresenceMaxAggregateInputType = {
   eleveId?: true
   statut?: true
   updatedAt?: true
+  justificationAbsenceId?: true
 }
 
 export type PresenceCountAggregateInputType = {
@@ -72,6 +77,7 @@ export type PresenceCountAggregateInputType = {
   eleveId?: true
   statut?: true
   updatedAt?: true
+  justificationAbsenceId?: true
   _all?: true
 }
 
@@ -153,6 +159,7 @@ export type PresenceGroupByOutputType = {
   eleveId: string
   statut: $Enums.StatutPresence
   updatedAt: Date
+  justificationAbsenceId: string | null
   _count: PresenceCountAggregateOutputType | null
   _min: PresenceMinAggregateOutputType | null
   _max: PresenceMaxAggregateOutputType | null
@@ -182,8 +189,10 @@ export type PresenceWhereInput = {
   eleveId?: Prisma.StringFilter<"Presence"> | string
   statut?: Prisma.EnumStatutPresenceFilter<"Presence"> | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFilter<"Presence"> | Date | string
+  justificationAbsenceId?: Prisma.StringNullableFilter<"Presence"> | string | null
   appel?: Prisma.XOR<Prisma.AppelScalarRelationFilter, Prisma.AppelWhereInput>
   eleve?: Prisma.XOR<Prisma.EleveScalarRelationFilter, Prisma.EleveWhereInput>
+  justificationAbsence?: Prisma.XOR<Prisma.JustificationAbsenceNullableScalarRelationFilter, Prisma.JustificationAbsenceWhereInput> | null
 }
 
 export type PresenceOrderByWithRelationInput = {
@@ -192,8 +201,10 @@ export type PresenceOrderByWithRelationInput = {
   eleveId?: Prisma.SortOrder
   statut?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  justificationAbsenceId?: Prisma.SortOrderInput | Prisma.SortOrder
   appel?: Prisma.AppelOrderByWithRelationInput
   eleve?: Prisma.EleveOrderByWithRelationInput
+  justificationAbsence?: Prisma.JustificationAbsenceOrderByWithRelationInput
 }
 
 export type PresenceWhereUniqueInput = Prisma.AtLeast<{
@@ -206,8 +217,10 @@ export type PresenceWhereUniqueInput = Prisma.AtLeast<{
   eleveId?: Prisma.StringFilter<"Presence"> | string
   statut?: Prisma.EnumStatutPresenceFilter<"Presence"> | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFilter<"Presence"> | Date | string
+  justificationAbsenceId?: Prisma.StringNullableFilter<"Presence"> | string | null
   appel?: Prisma.XOR<Prisma.AppelScalarRelationFilter, Prisma.AppelWhereInput>
   eleve?: Prisma.XOR<Prisma.EleveScalarRelationFilter, Prisma.EleveWhereInput>
+  justificationAbsence?: Prisma.XOR<Prisma.JustificationAbsenceNullableScalarRelationFilter, Prisma.JustificationAbsenceWhereInput> | null
 }, "id" | "appelId_eleveId">
 
 export type PresenceOrderByWithAggregationInput = {
@@ -216,6 +229,7 @@ export type PresenceOrderByWithAggregationInput = {
   eleveId?: Prisma.SortOrder
   statut?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  justificationAbsenceId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.PresenceCountOrderByAggregateInput
   _max?: Prisma.PresenceMaxOrderByAggregateInput
   _min?: Prisma.PresenceMinOrderByAggregateInput
@@ -230,6 +244,7 @@ export type PresenceScalarWhereWithAggregatesInput = {
   eleveId?: Prisma.StringWithAggregatesFilter<"Presence"> | string
   statut?: Prisma.EnumStatutPresenceWithAggregatesFilter<"Presence"> | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Presence"> | Date | string
+  justificationAbsenceId?: Prisma.StringNullableWithAggregatesFilter<"Presence"> | string | null
 }
 
 export type PresenceCreateInput = {
@@ -238,6 +253,7 @@ export type PresenceCreateInput = {
   updatedAt?: Date | string
   appel: Prisma.AppelCreateNestedOneWithoutPresencesInput
   eleve: Prisma.EleveCreateNestedOneWithoutPresencesInput
+  justificationAbsence?: Prisma.JustificationAbsenceCreateNestedOneWithoutPresencesInput
 }
 
 export type PresenceUncheckedCreateInput = {
@@ -246,6 +262,7 @@ export type PresenceUncheckedCreateInput = {
   eleveId: string
   statut: $Enums.StatutPresence
   updatedAt?: Date | string
+  justificationAbsenceId?: string | null
 }
 
 export type PresenceUpdateInput = {
@@ -254,6 +271,7 @@ export type PresenceUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appel?: Prisma.AppelUpdateOneRequiredWithoutPresencesNestedInput
   eleve?: Prisma.EleveUpdateOneRequiredWithoutPresencesNestedInput
+  justificationAbsence?: Prisma.JustificationAbsenceUpdateOneWithoutPresencesNestedInput
 }
 
 export type PresenceUncheckedUpdateInput = {
@@ -262,6 +280,7 @@ export type PresenceUncheckedUpdateInput = {
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  justificationAbsenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PresenceCreateManyInput = {
@@ -270,6 +289,7 @@ export type PresenceCreateManyInput = {
   eleveId: string
   statut: $Enums.StatutPresence
   updatedAt?: Date | string
+  justificationAbsenceId?: string | null
 }
 
 export type PresenceUpdateManyMutationInput = {
@@ -284,6 +304,7 @@ export type PresenceUncheckedUpdateManyInput = {
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  justificationAbsenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PresenceListRelationFilter = {
@@ -307,6 +328,7 @@ export type PresenceCountOrderByAggregateInput = {
   eleveId?: Prisma.SortOrder
   statut?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  justificationAbsenceId?: Prisma.SortOrder
 }
 
 export type PresenceMaxOrderByAggregateInput = {
@@ -315,6 +337,7 @@ export type PresenceMaxOrderByAggregateInput = {
   eleveId?: Prisma.SortOrder
   statut?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  justificationAbsenceId?: Prisma.SortOrder
 }
 
 export type PresenceMinOrderByAggregateInput = {
@@ -323,6 +346,7 @@ export type PresenceMinOrderByAggregateInput = {
   eleveId?: Prisma.SortOrder
   statut?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  justificationAbsenceId?: Prisma.SortOrder
 }
 
 export type PresenceCreateNestedManyWithoutAppelInput = {
@@ -369,6 +393,48 @@ export type PresenceUncheckedUpdateManyWithoutAppelNestedInput = {
 
 export type EnumStatutPresenceFieldUpdateOperationsInput = {
   set?: $Enums.StatutPresence
+}
+
+export type PresenceCreateNestedManyWithoutJustificationAbsenceInput = {
+  create?: Prisma.XOR<Prisma.PresenceCreateWithoutJustificationAbsenceInput, Prisma.PresenceUncheckedCreateWithoutJustificationAbsenceInput> | Prisma.PresenceCreateWithoutJustificationAbsenceInput[] | Prisma.PresenceUncheckedCreateWithoutJustificationAbsenceInput[]
+  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutJustificationAbsenceInput | Prisma.PresenceCreateOrConnectWithoutJustificationAbsenceInput[]
+  createMany?: Prisma.PresenceCreateManyJustificationAbsenceInputEnvelope
+  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+}
+
+export type PresenceUncheckedCreateNestedManyWithoutJustificationAbsenceInput = {
+  create?: Prisma.XOR<Prisma.PresenceCreateWithoutJustificationAbsenceInput, Prisma.PresenceUncheckedCreateWithoutJustificationAbsenceInput> | Prisma.PresenceCreateWithoutJustificationAbsenceInput[] | Prisma.PresenceUncheckedCreateWithoutJustificationAbsenceInput[]
+  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutJustificationAbsenceInput | Prisma.PresenceCreateOrConnectWithoutJustificationAbsenceInput[]
+  createMany?: Prisma.PresenceCreateManyJustificationAbsenceInputEnvelope
+  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+}
+
+export type PresenceUpdateManyWithoutJustificationAbsenceNestedInput = {
+  create?: Prisma.XOR<Prisma.PresenceCreateWithoutJustificationAbsenceInput, Prisma.PresenceUncheckedCreateWithoutJustificationAbsenceInput> | Prisma.PresenceCreateWithoutJustificationAbsenceInput[] | Prisma.PresenceUncheckedCreateWithoutJustificationAbsenceInput[]
+  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutJustificationAbsenceInput | Prisma.PresenceCreateOrConnectWithoutJustificationAbsenceInput[]
+  upsert?: Prisma.PresenceUpsertWithWhereUniqueWithoutJustificationAbsenceInput | Prisma.PresenceUpsertWithWhereUniqueWithoutJustificationAbsenceInput[]
+  createMany?: Prisma.PresenceCreateManyJustificationAbsenceInputEnvelope
+  set?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  disconnect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  delete?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  update?: Prisma.PresenceUpdateWithWhereUniqueWithoutJustificationAbsenceInput | Prisma.PresenceUpdateWithWhereUniqueWithoutJustificationAbsenceInput[]
+  updateMany?: Prisma.PresenceUpdateManyWithWhereWithoutJustificationAbsenceInput | Prisma.PresenceUpdateManyWithWhereWithoutJustificationAbsenceInput[]
+  deleteMany?: Prisma.PresenceScalarWhereInput | Prisma.PresenceScalarWhereInput[]
+}
+
+export type PresenceUncheckedUpdateManyWithoutJustificationAbsenceNestedInput = {
+  create?: Prisma.XOR<Prisma.PresenceCreateWithoutJustificationAbsenceInput, Prisma.PresenceUncheckedCreateWithoutJustificationAbsenceInput> | Prisma.PresenceCreateWithoutJustificationAbsenceInput[] | Prisma.PresenceUncheckedCreateWithoutJustificationAbsenceInput[]
+  connectOrCreate?: Prisma.PresenceCreateOrConnectWithoutJustificationAbsenceInput | Prisma.PresenceCreateOrConnectWithoutJustificationAbsenceInput[]
+  upsert?: Prisma.PresenceUpsertWithWhereUniqueWithoutJustificationAbsenceInput | Prisma.PresenceUpsertWithWhereUniqueWithoutJustificationAbsenceInput[]
+  createMany?: Prisma.PresenceCreateManyJustificationAbsenceInputEnvelope
+  set?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  disconnect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  delete?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  connect?: Prisma.PresenceWhereUniqueInput | Prisma.PresenceWhereUniqueInput[]
+  update?: Prisma.PresenceUpdateWithWhereUniqueWithoutJustificationAbsenceInput | Prisma.PresenceUpdateWithWhereUniqueWithoutJustificationAbsenceInput[]
+  updateMany?: Prisma.PresenceUpdateManyWithWhereWithoutJustificationAbsenceInput | Prisma.PresenceUpdateManyWithWhereWithoutJustificationAbsenceInput[]
+  deleteMany?: Prisma.PresenceScalarWhereInput | Prisma.PresenceScalarWhereInput[]
 }
 
 export type PresenceCreateNestedManyWithoutEleveInput = {
@@ -418,6 +484,7 @@ export type PresenceCreateWithoutAppelInput = {
   statut: $Enums.StatutPresence
   updatedAt?: Date | string
   eleve: Prisma.EleveCreateNestedOneWithoutPresencesInput
+  justificationAbsence?: Prisma.JustificationAbsenceCreateNestedOneWithoutPresencesInput
 }
 
 export type PresenceUncheckedCreateWithoutAppelInput = {
@@ -425,6 +492,7 @@ export type PresenceUncheckedCreateWithoutAppelInput = {
   eleveId: string
   statut: $Enums.StatutPresence
   updatedAt?: Date | string
+  justificationAbsenceId?: string | null
 }
 
 export type PresenceCreateOrConnectWithoutAppelInput = {
@@ -462,6 +530,49 @@ export type PresenceScalarWhereInput = {
   eleveId?: Prisma.StringFilter<"Presence"> | string
   statut?: Prisma.EnumStatutPresenceFilter<"Presence"> | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFilter<"Presence"> | Date | string
+  justificationAbsenceId?: Prisma.StringNullableFilter<"Presence"> | string | null
+}
+
+export type PresenceCreateWithoutJustificationAbsenceInput = {
+  id?: string
+  statut: $Enums.StatutPresence
+  updatedAt?: Date | string
+  appel: Prisma.AppelCreateNestedOneWithoutPresencesInput
+  eleve: Prisma.EleveCreateNestedOneWithoutPresencesInput
+}
+
+export type PresenceUncheckedCreateWithoutJustificationAbsenceInput = {
+  id?: string
+  appelId: string
+  eleveId: string
+  statut: $Enums.StatutPresence
+  updatedAt?: Date | string
+}
+
+export type PresenceCreateOrConnectWithoutJustificationAbsenceInput = {
+  where: Prisma.PresenceWhereUniqueInput
+  create: Prisma.XOR<Prisma.PresenceCreateWithoutJustificationAbsenceInput, Prisma.PresenceUncheckedCreateWithoutJustificationAbsenceInput>
+}
+
+export type PresenceCreateManyJustificationAbsenceInputEnvelope = {
+  data: Prisma.PresenceCreateManyJustificationAbsenceInput | Prisma.PresenceCreateManyJustificationAbsenceInput[]
+  skipDuplicates?: boolean
+}
+
+export type PresenceUpsertWithWhereUniqueWithoutJustificationAbsenceInput = {
+  where: Prisma.PresenceWhereUniqueInput
+  update: Prisma.XOR<Prisma.PresenceUpdateWithoutJustificationAbsenceInput, Prisma.PresenceUncheckedUpdateWithoutJustificationAbsenceInput>
+  create: Prisma.XOR<Prisma.PresenceCreateWithoutJustificationAbsenceInput, Prisma.PresenceUncheckedCreateWithoutJustificationAbsenceInput>
+}
+
+export type PresenceUpdateWithWhereUniqueWithoutJustificationAbsenceInput = {
+  where: Prisma.PresenceWhereUniqueInput
+  data: Prisma.XOR<Prisma.PresenceUpdateWithoutJustificationAbsenceInput, Prisma.PresenceUncheckedUpdateWithoutJustificationAbsenceInput>
+}
+
+export type PresenceUpdateManyWithWhereWithoutJustificationAbsenceInput = {
+  where: Prisma.PresenceScalarWhereInput
+  data: Prisma.XOR<Prisma.PresenceUpdateManyMutationInput, Prisma.PresenceUncheckedUpdateManyWithoutJustificationAbsenceInput>
 }
 
 export type PresenceCreateWithoutEleveInput = {
@@ -469,6 +580,7 @@ export type PresenceCreateWithoutEleveInput = {
   statut: $Enums.StatutPresence
   updatedAt?: Date | string
   appel: Prisma.AppelCreateNestedOneWithoutPresencesInput
+  justificationAbsence?: Prisma.JustificationAbsenceCreateNestedOneWithoutPresencesInput
 }
 
 export type PresenceUncheckedCreateWithoutEleveInput = {
@@ -476,6 +588,7 @@ export type PresenceUncheckedCreateWithoutEleveInput = {
   appelId: string
   statut: $Enums.StatutPresence
   updatedAt?: Date | string
+  justificationAbsenceId?: string | null
 }
 
 export type PresenceCreateOrConnectWithoutEleveInput = {
@@ -509,6 +622,7 @@ export type PresenceCreateManyAppelInput = {
   eleveId: string
   statut: $Enums.StatutPresence
   updatedAt?: Date | string
+  justificationAbsenceId?: string | null
 }
 
 export type PresenceUpdateWithoutAppelInput = {
@@ -516,6 +630,7 @@ export type PresenceUpdateWithoutAppelInput = {
   statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eleve?: Prisma.EleveUpdateOneRequiredWithoutPresencesNestedInput
+  justificationAbsence?: Prisma.JustificationAbsenceUpdateOneWithoutPresencesNestedInput
 }
 
 export type PresenceUncheckedUpdateWithoutAppelInput = {
@@ -523,10 +638,44 @@ export type PresenceUncheckedUpdateWithoutAppelInput = {
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  justificationAbsenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PresenceUncheckedUpdateManyWithoutAppelInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  eleveId?: Prisma.StringFieldUpdateOperationsInput | string
+  statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  justificationAbsenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type PresenceCreateManyJustificationAbsenceInput = {
+  id?: string
+  appelId: string
+  eleveId: string
+  statut: $Enums.StatutPresence
+  updatedAt?: Date | string
+}
+
+export type PresenceUpdateWithoutJustificationAbsenceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appel?: Prisma.AppelUpdateOneRequiredWithoutPresencesNestedInput
+  eleve?: Prisma.EleveUpdateOneRequiredWithoutPresencesNestedInput
+}
+
+export type PresenceUncheckedUpdateWithoutJustificationAbsenceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  appelId?: Prisma.StringFieldUpdateOperationsInput | string
+  eleveId?: Prisma.StringFieldUpdateOperationsInput | string
+  statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PresenceUncheckedUpdateManyWithoutJustificationAbsenceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  appelId?: Prisma.StringFieldUpdateOperationsInput | string
   eleveId?: Prisma.StringFieldUpdateOperationsInput | string
   statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -537,6 +686,7 @@ export type PresenceCreateManyEleveInput = {
   appelId: string
   statut: $Enums.StatutPresence
   updatedAt?: Date | string
+  justificationAbsenceId?: string | null
 }
 
 export type PresenceUpdateWithoutEleveInput = {
@@ -544,6 +694,7 @@ export type PresenceUpdateWithoutEleveInput = {
   statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appel?: Prisma.AppelUpdateOneRequiredWithoutPresencesNestedInput
+  justificationAbsence?: Prisma.JustificationAbsenceUpdateOneWithoutPresencesNestedInput
 }
 
 export type PresenceUncheckedUpdateWithoutEleveInput = {
@@ -551,6 +702,7 @@ export type PresenceUncheckedUpdateWithoutEleveInput = {
   appelId?: Prisma.StringFieldUpdateOperationsInput | string
   statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  justificationAbsenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PresenceUncheckedUpdateManyWithoutEleveInput = {
@@ -558,6 +710,7 @@ export type PresenceUncheckedUpdateManyWithoutEleveInput = {
   appelId?: Prisma.StringFieldUpdateOperationsInput | string
   statut?: Prisma.EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  justificationAbsenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -568,8 +721,10 @@ export type PresenceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   eleveId?: boolean
   statut?: boolean
   updatedAt?: boolean
+  justificationAbsenceId?: boolean
   appel?: boolean | Prisma.AppelDefaultArgs<ExtArgs>
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
+  justificationAbsence?: boolean | Prisma.Presence$justificationAbsenceArgs<ExtArgs>
 }, ExtArgs["result"]["presence"]>
 
 export type PresenceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -578,8 +733,10 @@ export type PresenceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   eleveId?: boolean
   statut?: boolean
   updatedAt?: boolean
+  justificationAbsenceId?: boolean
   appel?: boolean | Prisma.AppelDefaultArgs<ExtArgs>
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
+  justificationAbsence?: boolean | Prisma.Presence$justificationAbsenceArgs<ExtArgs>
 }, ExtArgs["result"]["presence"]>
 
 export type PresenceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -588,8 +745,10 @@ export type PresenceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   eleveId?: boolean
   statut?: boolean
   updatedAt?: boolean
+  justificationAbsenceId?: boolean
   appel?: boolean | Prisma.AppelDefaultArgs<ExtArgs>
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
+  justificationAbsence?: boolean | Prisma.Presence$justificationAbsenceArgs<ExtArgs>
 }, ExtArgs["result"]["presence"]>
 
 export type PresenceSelectScalar = {
@@ -598,20 +757,24 @@ export type PresenceSelectScalar = {
   eleveId?: boolean
   statut?: boolean
   updatedAt?: boolean
+  justificationAbsenceId?: boolean
 }
 
-export type PresenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "appelId" | "eleveId" | "statut" | "updatedAt", ExtArgs["result"]["presence"]>
+export type PresenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "appelId" | "eleveId" | "statut" | "updatedAt" | "justificationAbsenceId", ExtArgs["result"]["presence"]>
 export type PresenceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   appel?: boolean | Prisma.AppelDefaultArgs<ExtArgs>
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
+  justificationAbsence?: boolean | Prisma.Presence$justificationAbsenceArgs<ExtArgs>
 }
 export type PresenceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   appel?: boolean | Prisma.AppelDefaultArgs<ExtArgs>
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
+  justificationAbsence?: boolean | Prisma.Presence$justificationAbsenceArgs<ExtArgs>
 }
 export type PresenceIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   appel?: boolean | Prisma.AppelDefaultArgs<ExtArgs>
   eleve?: boolean | Prisma.EleveDefaultArgs<ExtArgs>
+  justificationAbsence?: boolean | Prisma.Presence$justificationAbsenceArgs<ExtArgs>
 }
 
 export type $PresencePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -619,6 +782,7 @@ export type $PresencePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     appel: Prisma.$AppelPayload<ExtArgs>
     eleve: Prisma.$ElevePayload<ExtArgs>
+    justificationAbsence: Prisma.$JustificationAbsencePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -626,6 +790,7 @@ export type $PresencePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     eleveId: string
     statut: $Enums.StatutPresence
     updatedAt: Date
+    justificationAbsenceId: string | null
   }, ExtArgs["result"]["presence"]>
   composites: {}
 }
@@ -1022,6 +1187,7 @@ export interface Prisma__PresenceClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   appel<T extends Prisma.AppelDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AppelDefaultArgs<ExtArgs>>): Prisma.Prisma__AppelClient<runtime.Types.Result.GetResult<Prisma.$AppelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   eleve<T extends Prisma.EleveDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EleveDefaultArgs<ExtArgs>>): Prisma.Prisma__EleveClient<runtime.Types.Result.GetResult<Prisma.$ElevePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  justificationAbsence<T extends Prisma.Presence$justificationAbsenceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Presence$justificationAbsenceArgs<ExtArgs>>): Prisma.Prisma__JustificationAbsenceClient<runtime.Types.Result.GetResult<Prisma.$JustificationAbsencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1056,6 +1222,7 @@ export interface PresenceFieldRefs {
   readonly eleveId: Prisma.FieldRef<"Presence", 'String'>
   readonly statut: Prisma.FieldRef<"Presence", 'StatutPresence'>
   readonly updatedAt: Prisma.FieldRef<"Presence", 'DateTime'>
+  readonly justificationAbsenceId: Prisma.FieldRef<"Presence", 'String'>
 }
     
 
@@ -1454,6 +1621,25 @@ export type PresenceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Presences to delete.
    */
   limit?: number
+}
+
+/**
+ * Presence.justificationAbsence
+ */
+export type Presence$justificationAbsenceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JustificationAbsence
+   */
+  select?: Prisma.JustificationAbsenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JustificationAbsence
+   */
+  omit?: Prisma.JustificationAbsenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JustificationAbsenceInclude<ExtArgs> | null
+  where?: Prisma.JustificationAbsenceWhereInput
 }
 
 /**

@@ -112,6 +112,16 @@ export type Appel = Prisma.AppelModel
  */
 export type Presence = Prisma.PresenceModel
 /**
+ * Model JustificationAbsence
+ * 
+ */
+export type JustificationAbsence = Prisma.JustificationAbsenceModel
+/**
+ * Model BilletEntree
+ * 
+ */
+export type BilletEntree = Prisma.BilletEntreeModel
+/**
  * Model Notification
  * 
  */

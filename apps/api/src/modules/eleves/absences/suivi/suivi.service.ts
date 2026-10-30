@@ -103,6 +103,7 @@ export class SuiviAbsenceService {
               },
             },
           },
+          justificationAbsenceId: true,
         },
       }),
     ]);
@@ -136,6 +137,7 @@ export class SuiviAbsenceService {
         heureFin: ligne.appel.creneau.heureFin,
         matiere: ligne.appel.creneau.matiere?.nom ?? null,
         intitule: ligne.appel.creneau.intitule,
+        justifiee: ligne.justificationAbsenceId !== null,
       })),
       pagination: {
         page: query.page,
