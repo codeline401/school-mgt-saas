@@ -107,16 +107,19 @@ export const loginUser = async (req: Request, res: Response) => {
           select: { id: true, nom: true },
           orderBy: { nom: "asc" },
         });
-        return res.status(200).json({ requireSchool: true, schools });
+        // Sans école existante, le SUDO_ADMIN se connecte sans scope pour pouvoir en créer une
+        if (schools.length > 0) {
+          return res.status(200).json({ requireSchool: true, schools });
+        }
+      } else {
+        const school = await prisma.school.findUnique({
+          where: { id: data.schoolId },
+        });
+        if (!school) {
+          return res.status(400).json({ error: "École introuvable" });
+        }
+        user.schoolId = school.id; // école active pour la sessions
       }
-
-      const school = await prisma.school.findUnique({
-        where: { id: data.schoolId },
-      });
-      if (!school) {
-        return res.status(400).json({ error: "École introuvable" });
-      }
-      user.schoolId = school.id; // école active pour la sessions
     }
 
     // Générer un token JWT
