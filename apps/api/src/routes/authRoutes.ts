@@ -16,10 +16,11 @@ router.post(
   registerUser,
 );
 
-// Route de connexion (publique) : 3 tentatives / 15 min par IP
+// Route de connexion (publique) : 10 échecs / 15 min par IP
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 3,
+  limit: 10,
+  skipSuccessfulRequests: true,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: "Trop de tentatives, réessayez plus tard" },

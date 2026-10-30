@@ -42,7 +42,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 app.use(
   cors({
-    origin: process.env.WEB_ORIGIN?.split(",") ?? "http://localhost:5173",
+    origin:
+      process.env.WEB_ORIGIN?.split(",").map((origin) => origin.trim()) ??
+      "http://localhost:5173",
   }),
 );
 app.use(helmet());
