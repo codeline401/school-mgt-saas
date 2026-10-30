@@ -40,7 +40,13 @@ const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-app.use(cors()); // Utilisation de CORS pour permettre les requêtes cross-origin
+app.use(
+  cors({
+    origin:
+      process.env.WEB_ORIGIN?.split(",").map((origin) => origin.trim()) ??
+      "http://localhost:5173",
+  }),
+);
 app.use(helmet());
 app.use(express.json()); // Middleware pour parser les requêtes JSON
 
