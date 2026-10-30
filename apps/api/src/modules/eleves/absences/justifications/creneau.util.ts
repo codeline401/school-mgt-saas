@@ -77,7 +77,7 @@ export function calculerPropositions(
 
     if (offset === 0 && debut <= minutes) offset = 7; // Si le créneau est déjà passé aujourd'hui, on le considère pour le prochain jour correspondant
 
-    const rang = offset * 1400 + debut; // Calcule le rang du créneau en fonction du décalage et de l'heure de début
+    const rang = offset * 1440 + debut; // Calcule le rang du créneau en fonction du décalage et de l'heure de début
     if (!prochain || rang < prochain.rang) {
       prochain = { c: creneau, offset, rang }; // On met à jour le prochain créneau avec son décalage et son rang
     }

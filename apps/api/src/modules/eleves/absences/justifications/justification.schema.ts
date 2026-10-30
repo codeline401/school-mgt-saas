@@ -3,7 +3,14 @@ import z from "zod";
 const uuid = (msg: string) => z.string().uuid(msg); //
 const dateISO = z
   .string()
-  .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format, expected AAAA-MM-JJ");
+  .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format, expected AAAA-MM-JJ")
+  .refine((s) => {
+    const [y, m, d] = s.split("-").map(Number);
+    const dt = new Date(y!, m! - 1, d!);
+    return (
+      dt.getFullYear() === y && dt.getMonth() === m! - 1 && dt.getDate() === d
+    );
+  }, "Date invalide");
 
 // En multipart, la liste arrive sous forme de chaine JSON
 const listeIds = z.preprocess(

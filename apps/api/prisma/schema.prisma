@@ -551,7 +551,7 @@ model JustificationAbsence {
   fichierMime String // type MIME du fichier (ex: application/pdf)
 
   createdById String
-  createdBy   User   @relation("JustificationsCreees", fields: [createdById], references: [id], onDelete: Cascade)
+  createdBy   User   @relation("JustificationsCreees", fields: [createdById], references: [id])
 
   presences Presence[]
   billets   BilletEntree[]
@@ -579,7 +579,7 @@ model BilletEntree {
   dateValidite String // AAAA-MM-JJ, comme Appel.date
 
   createdById String
-  createdBy   User     @relation("BilletsCreees", fields: [createdById], references: [id], onDelete: Cascade)
+  createdBy   User     @relation("BilletsCreees", fields: [createdById], references: [id])
   createdAt   DateTime @default(now())
 
   @@unique([eleveId, creneauId, dateValidite])

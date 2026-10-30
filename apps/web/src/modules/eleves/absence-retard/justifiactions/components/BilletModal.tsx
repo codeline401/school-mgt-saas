@@ -26,15 +26,26 @@ export function BilletModal({ justificationId, onClose }: Props) {
 
   async function genererEtImprimer() {
     if (!selection) return;
+
+    // 1. Ouvrir la fenêtre immédiatement de manière synchrone (conserve l'activation utilisateur)
+    const newWindow = window.open("", "_blank");
+
     try {
       const billet = await generer.mutateAsync({
         justificationId,
         creneauId: selection.creneauId,
         date: selection.date,
       });
+
+      // 2. Passer la fenêtre pré-ouverte au helper pour qu'il y injecte l'URL du PDF
       await ouvrirFichierProtege(urlBilletPdf(billet.id));
+
       onClose();
     } catch {
+      // 3. En cas d'erreur, fermer la fenêtre vide qui a été ouverte pour rien
+      if (newWindow) {
+        newWindow.close();
+      }
       // Erreur déjà notifiée par le hook
     }
   }

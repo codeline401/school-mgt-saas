@@ -12,6 +12,7 @@ import {
   jourDeLaDate,
 } from "./creneau.util.js";
 import { th } from "zod/locales";
+import { Prisma } from "../../../../generated/prisma/client.js";
 
 type UserContext = { id: string; role: string; schoolId: string | null };
 
@@ -202,6 +203,7 @@ export class JustificationService {
           id: true,
           motif: true,
           fichierNom: true,
+          createdAt: true,
           _count: { select: { presences: true } },
           billets: {
             orderBy: { createdAt: "desc" },
@@ -331,17 +333,44 @@ export class JustificationService {
 
     const compact = input.date.replaceAll("-", ""); // Transforme la date en format compact (YYYYMMDD)
     const suffixe = crypto.randomUUID().slice(0, 6).toUpperCase(); // Génère un suffixe aléatoire en majuscules
-    return prisma.billetEntree.create({
-      data: {
-        numero: `BIL-${compact}-${suffixe}`,
-        schoolId: justification.schoolId,
-        eleveId: justification.eleve.id,
-        justificationId: justification.id,
-        creneauId: creneau.id,
-        dateValidite: input.date,
-        createdById: user.id,
-      },
-    });
+    try {
+      // 3. Tentative de création
+      return await prisma.billetEntree.create({
+        data: {
+          numero: `BIL-${compact}-${suffixe}`,
+          schoolId: justification.schoolId,
+          eleveId: justification.eleve.id,
+          justificationId: justification.id,
+          creneauId: creneau.id,
+          dateValidite: input.date,
+          createdById: user.id,
+        },
+      });
+    } catch (error) {
+      // 4. Si une collision se produit (requête concurrente ou double-clic), Prisma lève P2002
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === "P2002"
+      ) {
+        // On va le chercher et le retourner proprement au lieu de faire planter la requête
+        const ticketConcurrent = await prisma.billetEntree.findUnique({
+          where: {
+            eleveId_creneauId_dateValidite: {
+              eleveId: justification.eleve.id,
+              creneauId: creneau.id,
+              dateValidite: input.date,
+            },
+          },
+        });
+
+        if (ticketConcurrent) {
+          return ticketConcurrent;
+        }
+      }
+
+      // 5. Si c'est une autre erreur, on la propage normalement
+      throw error;
+    }
   }
 
   static async getBilletPourImpression(billetId: string, user: UserContext) {
