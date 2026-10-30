@@ -38,7 +38,7 @@ export const createSchool = async (req: Request, res: Response) => {
     const validatedData = createSchoolSchema.parse(req.body); // Validation des données d'entrée
 
     const adminId = req.user!.id; // Récupérer l'ID de l'admin à partir du token d'authentification
-    const userRole = req.user!.role;
+    const userRole = req.user!.realRole;
 
     // Transaction atomique : lecture + création + mise à jour dans une seule opération
     const newSchool = await prisma.$transaction(async (tx) => {

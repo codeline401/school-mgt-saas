@@ -4,18 +4,26 @@ import { api } from "../lib/api";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-// Type de la réponse retournée par POST /api/auth/login
-interface LoginResponse {
-  user: {
-    id: string;
-    email: string;
-    nom: string;
-    prenom: string;
-    role: "SUDO_ADMIN" | "ADMIN" | "USER" | "PROF" | "ELEVE" | "PARENT";
-    schoolId: string | null;
-  };
-  token: string;
+interface SchoolOption {
+  id: string;
+  nom: string;
 }
+
+// Type de la réponse retournée par POST /api/auth/login
+type LoginResponse =
+  | { requireSchool: true; schools: SchoolOption[] }
+  | {
+      requireSchool?: false;
+      user: {
+        id: string;
+        email: string;
+        nom: string;
+        prenom: string;
+        role: "SUDO_ADMIN" | "ADMIN" | "USER" | "PROF" | "ELEVE" | "PARENT";
+        schoolId: string | null;
+      };
+      token: string;
+    };
 
 // Type pour les données de formulaire
 export interface RegisterInput {
@@ -30,6 +38,7 @@ export interface RegisterInput {
 export interface LoginInput {
   email: string;
   password: string;
+  schoolId?: string;
 }
 
 // Hook pour l'inscription
@@ -64,6 +73,7 @@ export const useLogin = () => {
 
     // Après la connexion réussie, on stocke les données de l'utilisateur et le token, puis on redirige vers le dashboard
     onSuccess: (data: LoginResponse) => {
+      if (data.requireSchool) return; // la page affiche le chois de l'école
       setAuth(data.user, data.token); // On stocke l'utilisateur et le token dans Zustand
       toast.success(`Bienvenue, ${data.user.prenom} !`); // Message de bienvenue
       navigate("/"); // Redirection vers la page d'accueil du dashboard

@@ -6,7 +6,8 @@ declare global {
     interface Request {
       user?: {
         id: string; // ID de l'utilisateur
-        role: Role;
+        role: Role; // rôle effectif : un SUDO_ADMIN rattaché à une école est vu comme ADMIN
+        realRole: Role; // rôle présent dans le token
         schoolId: string | null; // Ajout de schoolId pour les utilisateurs liés à une école
       };
     }

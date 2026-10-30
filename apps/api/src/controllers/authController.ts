@@ -75,7 +75,8 @@ export const registerUser = async (req: Request, res: Response) => {
 
     res.status(201).json(userWithoutPassword);
   } catch (error) {
-    if (error instanceof ZodError) return res.status(400).json({ error: error.issues });
+    if (error instanceof ZodError)
+      return res.status(400).json({ error: error.issues });
     console.error("Erreur lors de l'inscription:", error);
     res.status(500).json({ error: "Erreur serveur lors de l'inscription" });
   }
@@ -100,6 +101,27 @@ export const loginUser = async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Email ou mot de passe incorrect" });
     }
 
+    if (user.role === Role.SUDO_ADMIN) {
+      if (!data.schoolId) {
+        const schools = await prisma.school.findMany({
+          select: { id: true, nom: true },
+          orderBy: { nom: "asc" },
+        });
+        // Sans école existante, le SUDO_ADMIN se connecte sans scope pour pouvoir en créer une
+        if (schools.length > 0) {
+          return res.status(200).json({ requireSchool: true, schools });
+        }
+      } else {
+        const school = await prisma.school.findUnique({
+          where: { id: data.schoolId },
+        });
+        if (!school) {
+          return res.status(400).json({ error: "École introuvable" });
+        }
+        user.schoolId = school.id; // école active pour la sessions
+      }
+    }
+
     // Générer un token JWT
     const token = jwt.sign(
       { id: user.id, role: user.role, schoolId: user.schoolId },
@@ -112,7 +134,8 @@ export const loginUser = async (req: Request, res: Response) => {
 
     res.status(200).json({ user: userWithoutPassword, token });
   } catch (error) {
-    if (error instanceof ZodError) return res.status(400).json({ error: error.issues });
+    if (error instanceof ZodError)
+      return res.status(400).json({ error: error.issues });
     console.error("Erreur lors de la connexion:", error);
     res.status(500).json({ error: "Erreur serveur lors de la connexion" });
   }

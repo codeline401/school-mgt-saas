@@ -8,11 +8,18 @@ import { themeHex } from "../lib/themeTokens";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [schoolId, setSchoolId] = useState("");
+
   const loginMutation = useLogin();
+  const schools =
+    loginMutation.data && loginMutation.data.requireSchool
+      ? loginMutation.data.schools
+      : null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    loginMutation.mutate({ email, password });
+    loginMutation.mutate({ email, password, schoolId: schoolId || undefined });
   };
 
   return (
@@ -47,9 +54,7 @@ export default function LoginPage() {
           <h1 className="text-4xl font-bold text-text-main font-display">
             e-anatra
           </h1>
-          <p className="text-muted mt-2 font-medium">
-            Plateforme de Gestion d'École
-          </p>
+          <p className="text-muted mt-2 font-medium">Plateforme INTSA</p>
         </div>
 
         {/* Carte DaisyUI */}
@@ -90,6 +95,27 @@ export default function LoginPage() {
                   required
                 />
               </fieldset>
+
+              {schools && (
+                <fieldset className="fieldset">
+                  <legend className="fieldset-legend">Ecole à consulter</legend>
+                  <select
+                    className="select w-full"
+                    value={schoolId}
+                    onChange={(e) => setSchoolId(e.target.value)}
+                    required
+                  >
+                    <option value="" disabled>
+                      Choisir une école
+                    </option>
+                    {schools.map((school) => (
+                      <option key={school.id} value={school.id}>
+                        {school.nom}
+                      </option>
+                    ))}
+                  </select>
+                </fieldset>
+              )}
 
               <button
                 type="submit"
