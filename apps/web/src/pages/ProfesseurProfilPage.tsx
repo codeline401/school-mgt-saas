@@ -134,8 +134,11 @@ export default function ProfesseurProfilPage() {
     [];
 
   // Matière sélectionnée : préférée ou première de la liste
-  const selectedMatiereId =
-    preferredMatiereId || matieresDeClasseSelectionnee[0]?.id || "";
+  const selectedMatiereId = matieresDeClasseSelectionnee.some(
+    (m) => m.id === preferredMatiereId,
+  )
+    ? preferredMatiereId
+    : matieresDeClasseSelectionnee[0]?.id || "";
   const selectedMatiere = matieresDeClasseSelectionnee.find(
     (m) => m.id === selectedMatiereId,
   );
