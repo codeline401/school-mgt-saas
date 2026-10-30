@@ -5,7 +5,10 @@ import { Role } from "../generated/prisma/enums.js";
 export const registerSchema = z.object({
   email: z.string().email("Email invalide"),
   nom: z.string().trim().min(2, "Le nom doit contenir au moins 2 caractères"),
-  prenom: z.string().trim().min(2, "Le prénom doit contenir au moins 2 caractères"),
+  prenom: z
+    .string()
+    .trim()
+    .min(2, "Le prénom doit contenir au moins 2 caractères"),
   password: z
     .string()
     .min(6, "Le mot de passe doit contenir au moins 6 caractères"),
@@ -18,6 +21,7 @@ export const registerSchema = z.object({
 export const loginSchema = z.object({
   email: z.string().email("Email invalide"),
   password: z.string().min(1, "Mot de passe requis"),
+  schoolId: z.string().optional(),
 });
 
 export type RegisterInput = z.infer<typeof registerSchema>;

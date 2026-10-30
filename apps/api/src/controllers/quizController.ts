@@ -159,7 +159,7 @@ export const updateQuizStatut = async (req: Request, res: Response) => {
         .status(404)
         .json({ error: "Quiz non trouvé dans cette classe." }); // Vérifie que le quiz existe et appartient à la classe spécifiée
     }
-    if (prof?.id !== quiz.professeurId && user.role !== "SUDO_ADMIN") {
+    if (prof?.id !== quiz.professeurId && req.user!.realRole !== "SUDO_ADMIN") {
       return res.status(403).json({ error: "Accès refusé." }); // Vérifie que l'utilisateur a les droits d'accès pour modifier le quiz (SUDO_ADMIN ou professeur qui a créé le quiz)
     }
 
