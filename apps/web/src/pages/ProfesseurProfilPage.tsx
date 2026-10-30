@@ -175,7 +175,7 @@ export default function ProfesseurProfilPage() {
       if (f.specialites.trim()) body.specialites = f.specialites.trim();
       // Always send classeIds / matieresIds: empty array removes all
       body.classeIds = f.classeIds;
-      body.matieresIds = f.matieresIds;
+      body.matiereIds = f.matieresIds;
 
       const { data } = await api.put(`/api/profils/profs/${id}`, body);
       return data;
