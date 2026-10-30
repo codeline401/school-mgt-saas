@@ -299,7 +299,9 @@ export const getParents = async (req: Request, res: Response) => {
     return res.status(200).json(parents);
   } catch (error) {
     console.error("Erreur lors de la récupération des parents :", error);
-    return res.status(500).json({ error: "Erreur serveur lors de la récupération des parents" });
+    return res
+      .status(500)
+      .json({ error: "Erreur serveur lors de la récupération des parents" });
   }
 };
 
@@ -434,7 +436,7 @@ export const updateProfesseurProfil = async (req: Request, res: Response) => {
         .json({ error: "Accès refusé pour faire la modification" });
     }
 
-    const { classeIds, ...restData } = validatedData;
+    const { classeIds, matiereIds, ...restData } = validatedData;
 
     const updateData: any = Object.fromEntries(
       // ne mettre à jour que les champs qui sont définis dans la requête
@@ -458,6 +460,18 @@ export const updateProfesseurProfil = async (req: Request, res: Response) => {
       }
       // Si classeIds est fourni, on remplace entièrement la liste des classes assignées
       updateData.classes = { set: uniqueClasseIds.map((cid) => ({ id: cid })) }; // set remplace toute la relation par les nouveaux IDs fournis
+    }
+
+    if (matiereIds !== undefined) {
+      const uniqueIds = [...new Set(matiereIds)];
+      const valides = await prisma.matiere.findMany({
+        where: { id: { in: uniqueIds }, schoolId: existingProfesseur.schoolId },
+        select: { id: true },
+      });
+      if (valides.length !== uniqueIds.length) {
+        return res.status(400).json({ error: "Matière(s) invalide(s)" });
+      }
+      updateData.matieres = { set: uniqueIds.map((mid) => ({ id: mid })) };
     }
 
     const updatedProfesseur = await prisma.professeur.update({

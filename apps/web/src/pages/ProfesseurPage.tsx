@@ -20,7 +20,7 @@ type CreateProfForm = {
   adresse: string;
   specialites: string;
   classeIds: string[];
-  matieresIds: string[];
+  matiereIds: string[];
 };
 
 const EMPTY_FORM: CreateProfForm = {
@@ -31,7 +31,7 @@ const EMPTY_FORM: CreateProfForm = {
   adresse: "",
   specialites: "",
   classeIds: [],
-  matieresIds: [],
+  matiereIds: [],
 };
 
 function ProfesseursPage() {
@@ -91,7 +91,7 @@ function ProfesseursPage() {
       if (values.specialites.trim())
         body.specialites = values.specialites.trim();
       if (values.classeIds.length) body.classeIds = values.classeIds;
-      if (values.matieresIds.length) body.matiereIds = values.matieresIds;
+      if (values.matiereIds.length) body.matiereIds = values.matiereIds;
 
       const { data } = await api.post("/api/profils/profs", body);
       return data;
@@ -124,25 +124,25 @@ function ProfesseursPage() {
         : [...prev.classeIds, classeId];
 
       // Si on décoche une classe, retirer aussi ses matières
-      const matieresIds = exists
-        ? prev.matieresIds.filter((mid) => {
+      const matiereIds = exists
+        ? prev.matiereIds.filter((mid) => {
             const matiere = matieresDisponibles.find((m) => m.id === mid);
             return matiere?.classeId !== classeId;
           })
-        : prev.matieresIds;
+        : prev.matiereIds;
 
-      return { ...prev, classeIds, matieresIds };
+      return { ...prev, classeIds, matiereIds };
     });
   };
 
   const handleMatiereToggle = (matiereId: string) => {
     setForm((prev) => {
-      const exists = prev.matieresIds.includes(matiereId);
+      const exists = prev.matiereIds.includes(matiereId);
       return {
         ...prev,
-        matieresIds: exists
-          ? prev.matieresIds.filter((id) => id !== matiereId)
-          : [...prev.matieresIds, matiereId],
+        matiereIds: exists
+          ? prev.matiereIds.filter((id) => id !== matiereId)
+          : [...prev.matiereIds, matiereId],
       };
     });
   };
@@ -340,7 +340,7 @@ function ProfesseursPage() {
                                 <input
                                   type="checkbox"
                                   className="checkbox checkbox-sm"
-                                  checked={form.matieresIds.includes(m.id)}
+                                  checked={form.matiereIds.includes(m.id)}
                                   onChange={() => handleMatiereToggle(m.id)}
                                 />
                                 <span className="label-text">{m.nom}</span>

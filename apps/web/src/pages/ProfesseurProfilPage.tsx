@@ -134,8 +134,11 @@ export default function ProfesseurProfilPage() {
     [];
 
   // Matière sélectionnée : préférée ou première de la liste
-  const selectedMatiereId =
-    preferredMatiereId || matieresDeClasseSelectionnee[0]?.id || "";
+  const selectedMatiereId = matieresDeClasseSelectionnee.some(
+    (m) => m.id === preferredMatiereId,
+  )
+    ? preferredMatiereId
+    : matieresDeClasseSelectionnee[0]?.id || "";
   const selectedMatiere = matieresDeClasseSelectionnee.find(
     (m) => m.id === selectedMatiereId,
   );
@@ -175,7 +178,7 @@ export default function ProfesseurProfilPage() {
       if (f.specialites.trim()) body.specialites = f.specialites.trim();
       // Always send classeIds / matieresIds: empty array removes all
       body.classeIds = f.classeIds;
-      body.matieresIds = f.matieresIds;
+      body.matiereIds = f.matieresIds;
 
       const { data } = await api.put(`/api/profils/profs/${id}`, body);
       return data;
