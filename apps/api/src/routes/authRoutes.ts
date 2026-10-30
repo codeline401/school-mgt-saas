@@ -1,4 +1,5 @@
 import { Router } from "express";
+import rateLimit from "express-rate-limit";
 import { registerUser, loginUser } from "../controllers/authController.js";
 import { authenticate, authorizeRoles } from "../middlewares/authMiddleware.js";
 import { Role } from "../generated/prisma/enums.js";
@@ -15,7 +16,14 @@ router.post(
   registerUser,
 );
 
-// Route de connexion (publique : aucun middleware)
-router.post("/login", loginUser);
+// Route de connexion (publique) : 3 tentatives / 15 min par IP
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 3,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Trop de tentatives, réessayez plus tard" },
+});
+router.post("/login", loginLimiter, loginUser);
 
 export default router;
