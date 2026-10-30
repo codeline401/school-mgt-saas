@@ -182,8 +182,11 @@ export function useGenererBillet() {
  * La fenêtre est ouverte avant l'appel pour éviter le blocage de popup.
  * @param url L'URL du fichier protégé à ouvrir.
  */
-export async function ouvrirFichierProtege(url: string): Promise<void> {
-  const fenetre = window.open("", "_blank");
+export async function ouvrirFichierProtege(
+  url: string,
+  fenetrePreOuverte?: Window | null,
+): Promise<void> {
+  const fenetre = fenetrePreOuverte ?? window.open("", "_blank");
   try {
     const { data } = await api.get<Blob>(url, {
       responseType: "blob",

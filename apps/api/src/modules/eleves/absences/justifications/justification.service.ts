@@ -13,6 +13,7 @@ import {
 } from "./creneau.util.js";
 import { th } from "zod/locales";
 import { Prisma } from "../../../../generated/prisma/client.js";
+import crypto from "node:crypto";
 
 type UserContext = { id: string; role: string; schoolId: string | null };
 

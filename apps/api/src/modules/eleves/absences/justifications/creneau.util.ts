@@ -31,7 +31,7 @@ const pad = (n: number) => String(n).padStart(2, "0"); // Ajoute un zéro devant
 
 const enMinutes = (h: string) => {
   const [hh, mm] = h.split(":").map(Number);
-  return hh * 60 + mm!; // Convertit l'heure en minutes totales
+  return hh! * 60 + mm!; // Convertit l'heure en minutes totales
 };
 
 /**

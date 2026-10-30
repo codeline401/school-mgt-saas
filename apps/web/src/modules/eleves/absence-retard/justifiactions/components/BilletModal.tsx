@@ -38,7 +38,7 @@ export function BilletModal({ justificationId, onClose }: Props) {
       });
 
       // 2. Passer la fenêtre pré-ouverte au helper pour qu'il y injecte l'URL du PDF
-      await ouvrirFichierProtege(urlBilletPdf(billet.id));
+      await ouvrirFichierProtege(urlBilletPdf(billet.id), newWindow);
 
       onClose();
     } catch {
