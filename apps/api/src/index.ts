@@ -42,9 +42,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 app.use(
   cors({
-    origin:
-      process.env.WEB_ORIGIN?.split(",").map((origin) => origin.trim()) ??
+    origin: [
+      "https://www.e-anatra.online",
+      "https://e-anatra.online",
       "http://www.e-anatra.online",
+      "http://e-anatra.online",
+      ...(process.env.WEB_ORIGIN?.split(",").map((o) => o.trim()) ?? []),
+    ],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 app.use(helmet());
