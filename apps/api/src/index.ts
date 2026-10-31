@@ -47,6 +47,7 @@ app.use(
       "https://e-anatra.online",
       "http://www.e-anatra.online",
       "http://e-anatra.online",
+      "http://localhost:5173",
       ...(process.env.WEB_ORIGIN?.split(",").map((o) => o.trim()) ?? []),
     ],
     allowedHeaders: ["Content-Type", "Authorization"],
