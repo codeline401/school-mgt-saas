@@ -44,7 +44,7 @@ app.use(
   cors({
     origin:
       process.env.WEB_ORIGIN?.split(",").map((origin) => origin.trim()) ??
-      "http://localhost:5173",
+      "http://www.e-anatra.online",
   }),
 );
 app.use(helmet());
