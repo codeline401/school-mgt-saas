@@ -68,7 +68,15 @@ const corsOptions: cors.CorsOptions = {
   optionsSuccessStatus: 204,
 };
 
-app.set("trust proxy", 1);
+// Par défaut, seuls les proxys en IP privée sont approuvés ; TRUST_PROXY (IP/CIDR séparés par des virgules) permet de surcharger.
+app.set(
+  "trust proxy",
+  process.env.TRUST_PROXY?.split(",").map((p) => p.trim()).filter(Boolean) ?? [
+    "loopback",
+    "linklocal",
+    "uniquelocal",
+  ],
+);
 app.use(cors(corsOptions));
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 app.use(express.json()); // Middleware pour parser les requêtes JSON
