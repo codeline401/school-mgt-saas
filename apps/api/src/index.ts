@@ -40,14 +40,45 @@ const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-app.use(
-  cors({
-    origin:
-      process.env.WEB_ORIGIN?.split(",").map((origin) => origin.trim()) ??
-      "http://www.e-anatra.online",
-  }),
+// Origines normalisées (sans "/" final) ; WEB_ORIGIN s'ajoute aux valeurs par défaut
+const normalizeOrigin = (o: string) => o.trim().replace(/\/+$/, "").toLowerCase();
+const allowedOrigins = new Set(
+  [
+    "https://www.e-anatra.online",
+    "https://e-anatra.online",
+    "http://www.e-anatra.online",
+    "http://e-anatra.online",
+    "http://localhost:5173",
+    ...(process.env.WEB_ORIGIN?.split(",") ?? []),
+  ]
+    .filter(Boolean)
+    .map(normalizeOrigin),
 );
-app.use(helmet());
+
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.has(normalizeOrigin(origin))) {
+      return callback(null, true);
+    }
+    console.warn(`[CORS] Origine refusée: ${origin}`);
+    return callback(null, false);
+  },
+  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 204,
+};
+
+// Par défaut, seuls les proxys en IP privée sont approuvés ; TRUST_PROXY (IP/CIDR séparés par des virgules) permet de surcharger.
+app.set(
+  "trust proxy",
+  process.env.TRUST_PROXY?.split(",").map((p) => p.trim()).filter(Boolean) ?? [
+    "loopback",
+    "linklocal",
+    "uniquelocal",
+  ],
+);
+app.use(cors(corsOptions));
+app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 app.use(express.json()); // Middleware pour parser les requêtes JSON
 
 app.use("/api/auth", authRoutes);
