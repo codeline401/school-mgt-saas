@@ -9,6 +9,9 @@ import factureRoutes from "./ecolages/factures/facture.routes.js";
 import ajournementRoutes from "./ecolages/ajournement/ajournement.routes.js";
 import relanceRoutes from "./ecolages/relances/relance.routes.js";
 import suiviAbsenceRoutes from "./absences/suivi/suivi.routes.js";
+import justificationRoutes from "./absences/justifications/justification.routes.js";
+import alerteRoutes from "./absences/alertes/alerte.routes.js";
+import regleRoutes from "./absences/regles/regle.routes.js";
 
 const router = Router();
 
@@ -40,7 +43,9 @@ router.use("/ecolages", paiementRoutes);
  */
 router.use("/ecolages", factureRoutes);
 router.use("/absences/suivi", suiviAbsenceRoutes);
-import justificationRoutes from "./absences/justifications/justification.routes.js";
+
 router.use("/absences/justifications", justificationRoutes);
+router.use("/absences/alertes/regles", regleRoutes);
+router.use("/absences/alertes", alerteRoutes);
 
 export default router;

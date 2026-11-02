@@ -72,6 +72,7 @@ model User {
   relancePaiements                   RelancePaiement[]         @relation("RelancesCreees")
   justificationAbsences              JustificationAbsence[]    @relation("JustificationsCreees")
   billetEntrees                      BilletEntree[]            @relation("BilletsCreees")
+  regleAlertes                       RegleAlerte[]             @relation("ReglesAlerteCreees")
 }
 
 // Modele SAAS
@@ -145,6 +146,8 @@ model School {
   relancePaiements         RelancePaiement[]
   justificationAbsences    JustificationAbsence[]
   billetEntrees            BilletEntree[]
+  regleAlertes             RegleAlerte[]
+  alerteDeclenchees        AlerteDeclenchee[]
 }
 
 model Classe {
@@ -186,6 +189,7 @@ model Classe {
   affectationNouvellesClasses AffectationClasse[]   @relation("NouvelleClasse")
   affectationAnciennesClasses AffectationClasse[]   @relation("AncienneClasse")
   ecolageConfigs              EcolageConfig[]
+  regleAlertes                RegleAlerte[]
 
   @@unique([schoolId, nom])
   @@index([professeurPrincipalId])
@@ -1863,6 +1867,7 @@ model Eleve {
   ajournementsLignes    AjournementLigne[]
   justificationAbsences JustificationAbsence[]
   billetEntrees         BilletEntree[]
+  alerteDeclenchees     AlerteDeclenchee[]
 
   // Contraintes & Index
   @@unique([schoolId, matricule])
@@ -2380,4 +2385,78 @@ model AffectationClasse {
   @@index([schoolId])
   @@index([nouvelleClasseId])
   @@index([anneeScolaire])
+}
+
+// MODULE ABSENCE & RETARD > ALERTE
+enum TypeRegleAlerte {
+  ABSENCES
+  ABSENCES_NON_JUSTIFIEES
+  RETARDS
+  TAUX_PRESENCE
+}
+
+enum DestinataireAlerte {
+  ADMIN
+  PARENT
+  PROFESSEUR_PRINCIPAL
+}
+
+// Régle d'alerte d'assuidité paramétrée par l'école
+model RegleAlerte {
+  id String @id @default(uuid())
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  nom          String
+  type         TypeRegleAlerte
+  periodeJours Int             @default(30) // fenêtre glissante d'évaluation
+  classeId     String? // null = toute l'école
+  classe       Classe?         @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  actif        Boolean         @default(true)
+
+  paliers        PalierAlerte[]
+  declenchements AlerteDeclenchee[]
+
+  createdById String
+  createdBy   User     @relation("ReglesAlerteCreees", fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Seuil à partir duquel des destinataires précis sont notifiés
+model PalierAlerte {
+  id      String      @id @default(uuid())
+  regleId String
+  regle   RegleAlerte @relation(fields: [regleId], references: [id], onDelete: Cascade)
+
+  seuil        Float // TAUX_PRESENCE : déclenché quand taux <= seuil
+  destinataire DestinataireAlerte[]
+  message      String?              @db.Text
+
+  declenchements AlerteDeclenchee[]
+
+  @@unique([regleId, seuil])
+}
+
+// Journal des alertes émises ; sert aussi d'anti-doublon (un palier / élève / mois)
+model AlerteDeclenchee {
+  id       String @id @default(uuid())
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  regleId  String
+  regle    RegleAlerte  @relation(fields: [regleId], references: [id], onDelete: Cascade)
+  palierId String
+  palier   PalierAlerte @relation(fields: [palierId], references: [id], onDelete: Cascade)
+  eleveId  String
+  eleve    Eleve        @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  cycle          String // AAAA-MM
+  valeur         Float
+  nbNotification Int
+  createdAt      DateTime @default(now())
+
+  @@unique([palierId, eleveId, cycle])
+  @@index([schoolId, createdAt])
 }

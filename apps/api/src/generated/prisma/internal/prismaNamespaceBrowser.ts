@@ -117,7 +117,10 @@ export const ModelName = {
   Niveau: 'Niveau',
   Section: 'Section',
   Option: 'Option',
-  AffectationClasse: 'AffectationClasse'
+  AffectationClasse: 'AffectationClasse',
+  RegleAlerte: 'RegleAlerte',
+  PalierAlerte: 'PalierAlerte',
+  AlerteDeclenchee: 'AlerteDeclenchee'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1244,6 +1247,48 @@ export const AffectationClasseScalarFieldEnum = {
 } as const
 
 export type AffectationClasseScalarFieldEnum = (typeof AffectationClasseScalarFieldEnum)[keyof typeof AffectationClasseScalarFieldEnum]
+
+
+export const RegleAlerteScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  nom: 'nom',
+  type: 'type',
+  periodeJours: 'periodeJours',
+  classeId: 'classeId',
+  actif: 'actif',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RegleAlerteScalarFieldEnum = (typeof RegleAlerteScalarFieldEnum)[keyof typeof RegleAlerteScalarFieldEnum]
+
+
+export const PalierAlerteScalarFieldEnum = {
+  id: 'id',
+  regleId: 'regleId',
+  seuil: 'seuil',
+  destinataire: 'destinataire',
+  message: 'message'
+} as const
+
+export type PalierAlerteScalarFieldEnum = (typeof PalierAlerteScalarFieldEnum)[keyof typeof PalierAlerteScalarFieldEnum]
+
+
+export const AlerteDeclencheeScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  regleId: 'regleId',
+  palierId: 'palierId',
+  eleveId: 'eleveId',
+  cycle: 'cycle',
+  valeur: 'valeur',
+  nbNotification: 'nbNotification',
+  createdAt: 'createdAt'
+} as const
+
+export type AlerteDeclencheeScalarFieldEnum = (typeof AlerteDeclencheeScalarFieldEnum)[keyof typeof AlerteDeclencheeScalarFieldEnum]
 
 
 export const SortOrder = {

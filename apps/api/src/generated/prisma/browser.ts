@@ -352,3 +352,18 @@ export type Option = Prisma.OptionModel
  * 
  */
 export type AffectationClasse = Prisma.AffectationClasseModel
+/**
+ * Model RegleAlerte
+ * 
+ */
+export type RegleAlerte = Prisma.RegleAlerteModel
+/**
+ * Model PalierAlerte
+ * 
+ */
+export type PalierAlerte = Prisma.PalierAlerteModel
+/**
+ * Model AlerteDeclenchee
+ * 
+ */
+export type AlerteDeclenchee = Prisma.AlerteDeclencheeModel
