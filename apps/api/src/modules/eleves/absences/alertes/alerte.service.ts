@@ -124,15 +124,34 @@ function evaluer(compteurs: Compteurs, query: AlerteQuery) {
       : 100;
 
   const types: TypeAlerte[] = [];
+  // REVIEW :
+  // There are two defects in this block.
+
+  //     seuilRetards and seuilTauxPresence never add an alert type.
+  //         Only ABSENCES_REPETEES and ASSIDUITE_FAIBLE are ever pushed.
+  //         RETARDS_REPETES is never emitted, and tauxPresence is never compared to query.seuilTauxPresence.
+  //         A student with many late arrivals or a low attendance rate but few absences is filtered out at Line 180.
+  //         The "Seuil retards" and "Présence minimum (%)" inputs in AlertesSection therefore have no effect on which students are listed.
+  //         ASSIDUITE_FAIBLE is raised for unjustified absences, although ABSENCES_NON_JUSTIFIEES exists in TypeAlerte.
+
+  //     absentNonJustifie is a subset of absent, so any student with absentNonJustifie >= seuilAbsences also has absent >= seuilAbsences.
+  //         Both types are pushed, so types.length >= 2 is true and the student is CRITIQUE immediately.
+  //         ATTENTION can then only occur when the absences are mostly justified.
+
+  // Emit one type per metric, and derive the level from doubled thresholds instead of the number of types.
   if (compteurs.absent >= query.seuilAbsences) types.push("ABSENCES_REPETEES");
   if (compteurs.absentNonJustifie >= query.seuilAbsences) {
+    types.push("ABSENCES_NON_JUSTIFIEES");
+  }
+  if (compteurs.retard >= query.seuilRetards) types.push("RETARDS_REPETES");
+  if (totalAppels > 0 && tauxPresence < query.seuilTauxPresence) {
     types.push("ASSIDUITE_FAIBLE");
   }
 
-  // CRITIQUE : seuil doublé, ou plusieurs types cumulés
+  // CRITIQUE : un seuil d'absences ou de retards est doublé
   const critique =
-    types.length >= 2 ||
     compteurs.absent >= query.seuilAbsences * 2 ||
+    compteurs.absentNonJustifie >= query.seuilAbsences * 2 ||
     compteurs.retard >= query.seuilRetards * 2;
 
   return {

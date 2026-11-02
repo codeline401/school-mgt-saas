@@ -83,8 +83,10 @@ function valeuMetrique(
       return compteur.retard;
     case "TAUX_PRESENCE":
       return total >= MIN_APPELS_TAUX
-        ? (((compteur.present + compteur.retard) / total) * 1000) / 10
-        : null;
+        ? Math.round(((compteur.present + compteur.retard) / total) * 1000) / 10 // REVIEW : (x * 1000) / 10 without Math.round returns a long decimal such as 83.33333333333334.
+        : // The value is stored in AlerteDeclenchee.valeur and inserted in the notification text.
+          // The AlerteEleve.stats.tauxPresence contract uses one decimal
+          null;
   }
 }
 
@@ -111,7 +113,10 @@ export async function evaluerRegle(
     eleve: {
       schoolId: regle.schoolId,
       deletedAt: null,
-      ...(regle.classeId ? { classId: regle.classeId } : {}),
+      ...(regle.classeId ? { classeId: regle.classeId } : {}), // REVIEW : The Eleve model uses classeId. compterParEleve takes where: object, so TypeScript does not catch the error.
+      // Prisma rejects the unknown field at runtime. Every rule with a non-null classeId therefore fails.
+      // This covers the preview endpoint and the scheduler.
+      // The scheduler only logs the error and skips the rule.
     },
     appel: { date: { gte: formatDate(debut), lte: formatDate(now) } },
   });
@@ -130,6 +135,13 @@ export async function evaluerRegle(
       (taux ? b.seuil < a.seuil : b.seuil > a.seuil) ? b : a,
     );
     resultat.push({ eleveId, palier, valeur }); // Ajoute la correspondance pour l'élève avec le palier atteint et la valeur mesurée
+  }
+  // REVIEW : evaluerRegle ignores its notifier parameter.
+  // Nothing calls notifierCorrespondance. evaluerToutesLesRegles passes true, but the hourly job only computes matches and discards them.
+  // The job never writes AlerteDeclenchee rows or Notification rows.
+  // The history view stays empty and no recipient is notified. This is the main feature of the PR.
+  if (notifier && resultat.length > 0) {
+    await notifierCorrespondance(regle, resultat, now);
   }
   return resultat;
 }
@@ -261,6 +273,9 @@ export function demarrerPlanificateurAlertes(): void {
   if (timer) return; //
   timer = setInterval(async () => {
     if (enCours) return; //
+    enCours = true; // REVIEW : The finally block resets enCours, but nothing sets it to true.
+    // The overlap guard at Line 263 therefore never triggers.
+    // A slow pass can overlap the next hourly pass.
     try {
       await evaluerToutesLesRegles();
     } catch (error) {

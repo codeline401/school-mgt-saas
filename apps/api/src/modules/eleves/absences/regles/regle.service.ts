@@ -69,6 +69,7 @@ export class RegleAlerteService {
    */
   static async creer(input: RegleInput, user: UserContext) {
     const schoolId = requireSchoolId(user); // Récupère l'ID de l'école associée à l'utilisateur courant
+    await verifierClasse(input.classeId, schoolId); // REVIEW : Vérifie que la classe existe et est associée à l'école
     await prisma.regleAlerte.create({
       data: {
         schoolId,

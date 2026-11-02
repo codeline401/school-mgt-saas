@@ -128,7 +128,22 @@ export function useAlertes(filtres: AlertesFiltres, enabled = true) {
       });
       return data;
     },
-    enabled: enabled && filtres.from <= filtres.to,
+    // enabled: enabled && filtres.from <= filtres.to,
+    // REVIEW :
+    // enabled only checks from <= to. The API schema requires seuilAbsences >= 1 and seuilRetards >= 1. It also requires seuilTauxPresence between 0 and 100.
+
+    // In AlertesSection, each threshold input stores Number(event.target.value). If the user clears a field, the state becomes 0. Each keystroke also changes the query key and sends a request. The API returns 400, and the section shows "Impossible de charger les alertes."
+
+    // Validate the thresholds in enabled. The call site can also debounce them.
+    enabled:
+      enabled &&
+      !!filtres.from &&
+      !!filtres.to &&
+      filtres.from <= filtres.to &&
+      filtres.seuilAbsences >= 1 &&
+      filtres.seuilRetards >= 1 &&
+      filtres.seuilTauxPresence >= 0 &&
+      filtres.seuilTauxPresence <= 100,
     placeholderData: (previous) => previous,
   });
 }
