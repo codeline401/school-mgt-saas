@@ -140,8 +140,11 @@ export function useAlertes(filtres: AlertesFiltres, enabled = true) {
       !!filtres.from &&
       !!filtres.to &&
       filtres.from <= filtres.to &&
+      Number.isInteger(filtres.seuilAbsences) &&
       filtres.seuilAbsences >= 1 &&
+      Number.isInteger(filtres.seuilRetards) &&
       filtres.seuilRetards >= 1 &&
+      Number.isInteger(filtres.seuilTauxPresence) &&
       filtres.seuilTauxPresence >= 0 &&
       filtres.seuilTauxPresence <= 100,
     placeholderData: (previous) => previous,
