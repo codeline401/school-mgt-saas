@@ -557,3 +557,22 @@ export const TypeAffectation = {
 } as const
 
 export type TypeAffectation = (typeof TypeAffectation)[keyof typeof TypeAffectation]
+
+
+export const TypeRegleAlerte = {
+  ABSENCES: 'ABSENCES',
+  ABSENCES_NON_JUSTIFIEES: 'ABSENCES_NON_JUSTIFIEES',
+  RETARDS: 'RETARDS',
+  TAUX_PRESENCE: 'TAUX_PRESENCE'
+} as const
+
+export type TypeRegleAlerte = (typeof TypeRegleAlerte)[keyof typeof TypeRegleAlerte]
+
+
+export const DestinataireAlerte = {
+  ADMIN: 'ADMIN',
+  PARENT: 'PARENT',
+  PROFESSEUR_PRINCIPAL: 'PROFESSEUR_PRINCIPAL'
+} as const
+
+export type DestinataireAlerte = (typeof DestinataireAlerte)[keyof typeof DestinataireAlerte]

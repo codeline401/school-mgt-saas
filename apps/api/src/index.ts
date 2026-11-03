@@ -35,13 +35,15 @@ import ecolageConfigRoutes from "./modules/parametres/ecolage/ecolageConfig.rout
 
 // gestion des relances (planificateur auto)
 import { demarrerPlanificateurRelances } from "./modules/eleves/ecolages/relances/relance.service.js";
+import { demarrerPlanificateurAlertes } from "./modules/eleves/absences/alertes/alerte.moteur.js";
 
 const app = express(); // Création de l'application Express
 const PORT = process.env.PORT || 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Origines normalisées (sans "/" final) ; WEB_ORIGIN s'ajoute aux valeurs par défaut
-const normalizeOrigin = (o: string) => o.trim().replace(/\/+$/, "").toLowerCase();
+const normalizeOrigin = (o: string) =>
+  o.trim().replace(/\/+$/, "").toLowerCase();
 const allowedOrigins = new Set(
   [
     "https://www.e-anatra.online",
@@ -71,11 +73,9 @@ const corsOptions: cors.CorsOptions = {
 // Par défaut, seuls les proxys en IP privée sont approuvés ; TRUST_PROXY (IP/CIDR séparés par des virgules) permet de surcharger.
 app.set(
   "trust proxy",
-  process.env.TRUST_PROXY?.split(",").map((p) => p.trim()).filter(Boolean) ?? [
-    "loopback",
-    "linklocal",
-    "uniquelocal",
-  ],
+  process.env.TRUST_PROXY?.split(",")
+    .map((p) => p.trim())
+    .filter(Boolean) ?? ["loopback", "linklocal", "uniquelocal"],
 );
 app.use(cors(corsOptions));
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
@@ -245,6 +245,9 @@ app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
 
 // Démarrage du planificateur de relances
 demarrerPlanificateurRelances();
+// Démarrage du planificateur d'alertes
+demarrerPlanificateurAlertes();
+
 // Lancement du serveur
 app.listen(PORT, () => {
   console.log(`Serveur API démarré sur le port ${PORT}`);

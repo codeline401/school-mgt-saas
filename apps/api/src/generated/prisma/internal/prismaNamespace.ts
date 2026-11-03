@@ -463,7 +463,10 @@ export const ModelName = {
   Niveau: 'Niveau',
   Section: 'Section',
   Option: 'Option',
-  AffectationClasse: 'AffectationClasse'
+  AffectationClasse: 'AffectationClasse',
+  RegleAlerte: 'RegleAlerte',
+  PalierAlerte: 'PalierAlerte',
+  AlerteDeclenchee: 'AlerteDeclenchee'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -479,7 +482,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "justificationAbsence" | "billetEntree" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse"
+    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "justificationAbsence" | "billetEntree" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse" | "regleAlerte" | "palierAlerte" | "alerteDeclenchee"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5441,6 +5444,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RegleAlerte: {
+      payload: Prisma.$RegleAlertePayload<ExtArgs>
+      fields: Prisma.RegleAlerteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RegleAlerteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegleAlertePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RegleAlerteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegleAlertePayload>
+        }
+        findFirst: {
+          args: Prisma.RegleAlerteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegleAlertePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RegleAlerteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegleAlertePayload>
+        }
+        findMany: {
+          args: Prisma.RegleAlerteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegleAlertePayload>[]
+        }
+        create: {
+          args: Prisma.RegleAlerteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegleAlertePayload>
+        }
+        createMany: {
+          args: Prisma.RegleAlerteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RegleAlerteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegleAlertePayload>[]
+        }
+        delete: {
+          args: Prisma.RegleAlerteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegleAlertePayload>
+        }
+        update: {
+          args: Prisma.RegleAlerteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegleAlertePayload>
+        }
+        deleteMany: {
+          args: Prisma.RegleAlerteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RegleAlerteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RegleAlerteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegleAlertePayload>[]
+        }
+        upsert: {
+          args: Prisma.RegleAlerteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegleAlertePayload>
+        }
+        aggregate: {
+          args: Prisma.RegleAlerteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRegleAlerte>
+        }
+        groupBy: {
+          args: Prisma.RegleAlerteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RegleAlerteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RegleAlerteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RegleAlerteCountAggregateOutputType> | number
+        }
+      }
+    }
+    PalierAlerte: {
+      payload: Prisma.$PalierAlertePayload<ExtArgs>
+      fields: Prisma.PalierAlerteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PalierAlerteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PalierAlertePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PalierAlerteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PalierAlertePayload>
+        }
+        findFirst: {
+          args: Prisma.PalierAlerteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PalierAlertePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PalierAlerteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PalierAlertePayload>
+        }
+        findMany: {
+          args: Prisma.PalierAlerteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PalierAlertePayload>[]
+        }
+        create: {
+          args: Prisma.PalierAlerteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PalierAlertePayload>
+        }
+        createMany: {
+          args: Prisma.PalierAlerteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PalierAlerteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PalierAlertePayload>[]
+        }
+        delete: {
+          args: Prisma.PalierAlerteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PalierAlertePayload>
+        }
+        update: {
+          args: Prisma.PalierAlerteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PalierAlertePayload>
+        }
+        deleteMany: {
+          args: Prisma.PalierAlerteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PalierAlerteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PalierAlerteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PalierAlertePayload>[]
+        }
+        upsert: {
+          args: Prisma.PalierAlerteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PalierAlertePayload>
+        }
+        aggregate: {
+          args: Prisma.PalierAlerteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePalierAlerte>
+        }
+        groupBy: {
+          args: Prisma.PalierAlerteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PalierAlerteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PalierAlerteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PalierAlerteCountAggregateOutputType> | number
+        }
+      }
+    }
+    AlerteDeclenchee: {
+      payload: Prisma.$AlerteDeclencheePayload<ExtArgs>
+      fields: Prisma.AlerteDeclencheeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AlerteDeclencheeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlerteDeclencheePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AlerteDeclencheeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlerteDeclencheePayload>
+        }
+        findFirst: {
+          args: Prisma.AlerteDeclencheeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlerteDeclencheePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AlerteDeclencheeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlerteDeclencheePayload>
+        }
+        findMany: {
+          args: Prisma.AlerteDeclencheeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlerteDeclencheePayload>[]
+        }
+        create: {
+          args: Prisma.AlerteDeclencheeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlerteDeclencheePayload>
+        }
+        createMany: {
+          args: Prisma.AlerteDeclencheeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AlerteDeclencheeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlerteDeclencheePayload>[]
+        }
+        delete: {
+          args: Prisma.AlerteDeclencheeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlerteDeclencheePayload>
+        }
+        update: {
+          args: Prisma.AlerteDeclencheeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlerteDeclencheePayload>
+        }
+        deleteMany: {
+          args: Prisma.AlerteDeclencheeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AlerteDeclencheeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AlerteDeclencheeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlerteDeclencheePayload>[]
+        }
+        upsert: {
+          args: Prisma.AlerteDeclencheeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlerteDeclencheePayload>
+        }
+        aggregate: {
+          args: Prisma.AlerteDeclencheeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAlerteDeclenchee>
+        }
+        groupBy: {
+          args: Prisma.AlerteDeclencheeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AlerteDeclencheeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AlerteDeclencheeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AlerteDeclencheeCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6590,6 +6815,48 @@ export const AffectationClasseScalarFieldEnum = {
 export type AffectationClasseScalarFieldEnum = (typeof AffectationClasseScalarFieldEnum)[keyof typeof AffectationClasseScalarFieldEnum]
 
 
+export const RegleAlerteScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  nom: 'nom',
+  type: 'type',
+  periodeJours: 'periodeJours',
+  classeId: 'classeId',
+  actif: 'actif',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RegleAlerteScalarFieldEnum = (typeof RegleAlerteScalarFieldEnum)[keyof typeof RegleAlerteScalarFieldEnum]
+
+
+export const PalierAlerteScalarFieldEnum = {
+  id: 'id',
+  regleId: 'regleId',
+  seuil: 'seuil',
+  destinataire: 'destinataire',
+  message: 'message'
+} as const
+
+export type PalierAlerteScalarFieldEnum = (typeof PalierAlerteScalarFieldEnum)[keyof typeof PalierAlerteScalarFieldEnum]
+
+
+export const AlerteDeclencheeScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  regleId: 'regleId',
+  palierId: 'palierId',
+  eleveId: 'eleveId',
+  cycle: 'cycle',
+  valeur: 'valeur',
+  nbNotification: 'nbNotification',
+  createdAt: 'createdAt'
+} as const
+
+export type AlerteDeclencheeScalarFieldEnum = (typeof AlerteDeclencheeScalarFieldEnum)[keyof typeof AlerteDeclencheeScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -7476,6 +7743,34 @@ export type EnumTypeAffectationFieldRefInput<$PrismaModel> = FieldRefInputType<$
 export type ListEnumTypeAffectationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeAffectation[]'>
     
 
+
+/**
+ * Reference to a field of type 'TypeRegleAlerte'
+ */
+export type EnumTypeRegleAlerteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeRegleAlerte'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeRegleAlerte[]'
+ */
+export type ListEnumTypeRegleAlerteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeRegleAlerte[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DestinataireAlerte[]'
+ */
+export type ListEnumDestinataireAlerteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DestinataireAlerte[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DestinataireAlerte'
+ */
+export type EnumDestinataireAlerteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DestinataireAlerte'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -7694,6 +7989,9 @@ export type GlobalOmitConfig = {
   section?: Prisma.SectionOmit
   option?: Prisma.OptionOmit
   affectationClasse?: Prisma.AffectationClasseOmit
+  regleAlerte?: Prisma.RegleAlerteOmit
+  palierAlerte?: Prisma.PalierAlerteOmit
+  alerteDeclenchee?: Prisma.AlerteDeclencheeOmit
 }
 
 /* Types for Logging */

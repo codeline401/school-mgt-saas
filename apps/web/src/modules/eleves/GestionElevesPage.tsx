@@ -32,6 +32,7 @@ import { useAuthStore } from "../../store/authStore";
 import { RelanceEcolageSection } from "./ecolages/relances/components/RelanceEcolageSection";
 import { SuiviAbsenceSection } from "./absence-retard/suivi/components/SuiviAbsenceSection";
 import { JustificationSection } from "./absence-retard/justifiactions/components/JustificationSection";
+import { AlertesSection } from "./absence-retard/alertes/components/AlertesSection";
 
 type MainTab =
   | "informations"
@@ -113,7 +114,7 @@ const ecolageTabs: TabItem<EcolageSubTab>[] = [
 const absenceTabs: TabItem<AbsenceSubTab>[] = [
   { value: "suivi", label: "Suivi", icon: Calendar },
   { value: "justifications", label: "Justifications", icon: FileText },
-  { value: "retards", label: "Retards", icon: CalendarClock },
+  // { value: "retards", label: "Retards", icon: CalendarClock },
   { value: "alertes", label: "Alertes", icon: Star },
   { value: "sanctions", label: "Sanctions", icon: BriefcaseBusiness },
 ];
@@ -221,22 +222,16 @@ function GestionElevesPage() {
         return <SuiviAbsenceSection initialEleveId={eleveId} />;
       case "justifications":
         return <JustificationSection initialEleveId={eleveId} />;
-      case "retards":
-        return (
-          <DevelopmentPlaceholder
-            icon={CalendarClock}
-            title="Retards & arrivées tardives"
-            description="Suivi des retards, motifs, fréquence et incidence sur la présence."
-          />
-        );
+      // case "retards":
+      // return (
+      //   <DevelopmentPlaceholder
+      //     icon={CalendarClock}
+      //     title="Retards & arrivées tardives"
+      //     description="Suivi des retards, motifs, fréquence et incidence sur la présence."
+      //   />
+      // );
       case "alertes":
-        return (
-          <DevelopmentPlaceholder
-            icon={Star}
-            title="Alertes & notification"
-            description="Déclenchement d’alertes sur les absences répétées et transmission aux parents."
-          />
-        );
+        return <AlertesSection />;
       case "sanctions":
         return (
           <DevelopmentPlaceholder

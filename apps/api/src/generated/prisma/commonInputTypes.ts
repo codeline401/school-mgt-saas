@@ -1316,6 +1316,50 @@ export type EnumTypeAffectationWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumTypeAffectationFilter<$PrismaModel>
 }
 
+export type EnumTypeRegleAlerteFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeRegleAlerte | Prisma.EnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeRegleAlerte[] | Prisma.ListEnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeRegleAlerte[] | Prisma.ListEnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeRegleAlerteFilter<$PrismaModel> | $Enums.TypeRegleAlerte
+}
+
+export type EnumTypeRegleAlerteWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeRegleAlerte | Prisma.EnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeRegleAlerte[] | Prisma.ListEnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeRegleAlerte[] | Prisma.ListEnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeRegleAlerteWithAggregatesFilter<$PrismaModel> | $Enums.TypeRegleAlerte
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeRegleAlerteFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeRegleAlerteFilter<$PrismaModel>
+}
+
+export type FloatFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatFilter<$PrismaModel> | number
+}
+
+export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedFloatFilter<$PrismaModel>
+  _min?: Prisma.NestedFloatFilter<$PrismaModel>
+  _max?: Prisma.NestedFloatFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -2564,6 +2608,39 @@ export type NestedEnumTypeAffectationWithAggregatesFilter<$PrismaModel = never> 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTypeAffectationFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTypeAffectationFilter<$PrismaModel>
+}
+
+export type NestedEnumTypeRegleAlerteFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeRegleAlerte | Prisma.EnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeRegleAlerte[] | Prisma.ListEnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeRegleAlerte[] | Prisma.ListEnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeRegleAlerteFilter<$PrismaModel> | $Enums.TypeRegleAlerte
+}
+
+export type NestedEnumTypeRegleAlerteWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeRegleAlerte | Prisma.EnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeRegleAlerte[] | Prisma.ListEnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeRegleAlerte[] | Prisma.ListEnumTypeRegleAlerteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeRegleAlerteWithAggregatesFilter<$PrismaModel> | $Enums.TypeRegleAlerte
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeRegleAlerteFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeRegleAlerteFilter<$PrismaModel>
+}
+
+export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedFloatFilter<$PrismaModel>
+  _min?: Prisma.NestedFloatFilter<$PrismaModel>
+  _max?: Prisma.NestedFloatFilter<$PrismaModel>
 }
 
 

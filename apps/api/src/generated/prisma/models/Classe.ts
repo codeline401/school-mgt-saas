@@ -239,6 +239,7 @@ export type ClasseWhereInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseListRelationFilter
   affectationAnciennesClasses?: Prisma.AffectationClasseListRelationFilter
   ecolageConfigs?: Prisma.EcolageConfigListRelationFilter
+  regleAlertes?: Prisma.RegleAlerteListRelationFilter
 }
 
 export type ClasseOrderByWithRelationInput = {
@@ -276,6 +277,7 @@ export type ClasseOrderByWithRelationInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseOrderByRelationAggregateInput
   affectationAnciennesClasses?: Prisma.AffectationClasseOrderByRelationAggregateInput
   ecolageConfigs?: Prisma.EcolageConfigOrderByRelationAggregateInput
+  regleAlertes?: Prisma.RegleAlerteOrderByRelationAggregateInput
 }
 
 export type ClasseWhereUniqueInput = Prisma.AtLeast<{
@@ -317,6 +319,7 @@ export type ClasseWhereUniqueInput = Prisma.AtLeast<{
   affectationNouvellesClasses?: Prisma.AffectationClasseListRelationFilter
   affectationAnciennesClasses?: Prisma.AffectationClasseListRelationFilter
   ecolageConfigs?: Prisma.EcolageConfigListRelationFilter
+  regleAlertes?: Prisma.RegleAlerteListRelationFilter
 }, "id" | "schoolId_nom">
 
 export type ClasseOrderByWithAggregationInput = {
@@ -379,6 +382,7 @@ export type ClasseCreateInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateInput = {
@@ -411,6 +415,7 @@ export type ClasseUncheckedCreateInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUpdateInput = {
@@ -443,6 +448,7 @@ export type ClasseUpdateInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateInput = {
@@ -475,6 +481,7 @@ export type ClasseUncheckedUpdateInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateManyInput = {
@@ -1099,6 +1106,22 @@ export type ClasseUpdateOneWithoutAffectationNouvellesClassesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClasseUpdateToOneWithWhereWithoutAffectationNouvellesClassesInput, Prisma.ClasseUpdateWithoutAffectationNouvellesClassesInput>, Prisma.ClasseUncheckedUpdateWithoutAffectationNouvellesClassesInput>
 }
 
+export type ClasseCreateNestedOneWithoutRegleAlertesInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutRegleAlertesInput, Prisma.ClasseUncheckedCreateWithoutRegleAlertesInput>
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutRegleAlertesInput
+  connect?: Prisma.ClasseWhereUniqueInput
+}
+
+export type ClasseUpdateOneWithoutRegleAlertesNestedInput = {
+  create?: Prisma.XOR<Prisma.ClasseCreateWithoutRegleAlertesInput, Prisma.ClasseUncheckedCreateWithoutRegleAlertesInput>
+  connectOrCreate?: Prisma.ClasseCreateOrConnectWithoutRegleAlertesInput
+  upsert?: Prisma.ClasseUpsertWithoutRegleAlertesInput
+  disconnect?: Prisma.ClasseWhereInput | boolean
+  delete?: Prisma.ClasseWhereInput | boolean
+  connect?: Prisma.ClasseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClasseUpdateToOneWithWhereWithoutRegleAlertesInput, Prisma.ClasseUpdateWithoutRegleAlertesInput>, Prisma.ClasseUncheckedUpdateWithoutRegleAlertesInput>
+}
+
 export type ClasseCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -1128,6 +1151,7 @@ export type ClasseCreateWithoutSchoolInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutSchoolInput = {
@@ -1159,6 +1183,7 @@ export type ClasseUncheckedCreateWithoutSchoolInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutSchoolInput = {
@@ -1231,6 +1256,7 @@ export type ClasseCreateWithoutProfsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutProfsInput = {
@@ -1262,6 +1288,7 @@ export type ClasseUncheckedCreateWithoutProfsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutProfsInput = {
@@ -1298,6 +1325,7 @@ export type ClasseCreateWithoutProfesseurPrincipalInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutProfesseurPrincipalInput = {
@@ -1329,6 +1357,7 @@ export type ClasseUncheckedCreateWithoutProfesseurPrincipalInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutProfesseurPrincipalInput = {
@@ -1402,6 +1431,7 @@ export type ClasseCreateWithoutMatieresInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutMatieresInput = {
@@ -1433,6 +1463,7 @@ export type ClasseUncheckedCreateWithoutMatieresInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutMatieresInput = {
@@ -1480,6 +1511,7 @@ export type ClasseUpdateWithoutMatieresInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutMatieresInput = {
@@ -1511,6 +1543,7 @@ export type ClasseUncheckedUpdateWithoutMatieresInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutNotesInput = {
@@ -1542,6 +1575,7 @@ export type ClasseCreateWithoutNotesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutNotesInput = {
@@ -1573,6 +1607,7 @@ export type ClasseUncheckedCreateWithoutNotesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutNotesInput = {
@@ -1620,6 +1655,7 @@ export type ClasseUpdateWithoutNotesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutNotesInput = {
@@ -1651,6 +1687,7 @@ export type ClasseUncheckedUpdateWithoutNotesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutDocumentsInput = {
@@ -1682,6 +1719,7 @@ export type ClasseCreateWithoutDocumentsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutDocumentsInput = {
@@ -1713,6 +1751,7 @@ export type ClasseUncheckedCreateWithoutDocumentsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutDocumentsInput = {
@@ -1760,6 +1799,7 @@ export type ClasseUpdateWithoutDocumentsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutDocumentsInput = {
@@ -1791,6 +1831,7 @@ export type ClasseUncheckedUpdateWithoutDocumentsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutCreneauHorairesInput = {
@@ -1822,6 +1863,7 @@ export type ClasseCreateWithoutCreneauHorairesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutCreneauHorairesInput = {
@@ -1853,6 +1895,7 @@ export type ClasseUncheckedCreateWithoutCreneauHorairesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutCreneauHorairesInput = {
@@ -1900,6 +1943,7 @@ export type ClasseUpdateWithoutCreneauHorairesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutCreneauHorairesInput = {
@@ -1931,6 +1975,7 @@ export type ClasseUncheckedUpdateWithoutCreneauHorairesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutAppelsInput = {
@@ -1962,6 +2007,7 @@ export type ClasseCreateWithoutAppelsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutAppelsInput = {
@@ -1993,6 +2039,7 @@ export type ClasseUncheckedCreateWithoutAppelsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutAppelsInput = {
@@ -2040,6 +2087,7 @@ export type ClasseUpdateWithoutAppelsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutAppelsInput = {
@@ -2071,6 +2119,7 @@ export type ClasseUncheckedUpdateWithoutAppelsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutCahierTextesInput = {
@@ -2102,6 +2151,7 @@ export type ClasseCreateWithoutCahierTextesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutCahierTextesInput = {
@@ -2133,6 +2183,7 @@ export type ClasseUncheckedCreateWithoutCahierTextesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutCahierTextesInput = {
@@ -2180,6 +2231,7 @@ export type ClasseUpdateWithoutCahierTextesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutCahierTextesInput = {
@@ -2211,6 +2263,7 @@ export type ClasseUncheckedUpdateWithoutCahierTextesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutQuizzesInput = {
@@ -2242,6 +2295,7 @@ export type ClasseCreateWithoutQuizzesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutQuizzesInput = {
@@ -2273,6 +2327,7 @@ export type ClasseUncheckedCreateWithoutQuizzesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutQuizzesInput = {
@@ -2320,6 +2375,7 @@ export type ClasseUpdateWithoutQuizzesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutQuizzesInput = {
@@ -2351,6 +2407,7 @@ export type ClasseUncheckedUpdateWithoutQuizzesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutDeliberationSessionsInput = {
@@ -2382,6 +2439,7 @@ export type ClasseCreateWithoutDeliberationSessionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutDeliberationSessionsInput = {
@@ -2413,6 +2471,7 @@ export type ClasseUncheckedCreateWithoutDeliberationSessionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutDeliberationSessionsInput = {
@@ -2460,6 +2519,7 @@ export type ClasseUpdateWithoutDeliberationSessionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutDeliberationSessionsInput = {
@@ -2491,6 +2551,7 @@ export type ClasseUncheckedUpdateWithoutDeliberationSessionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutExamenSessionsInput = {
@@ -2522,6 +2583,7 @@ export type ClasseCreateWithoutExamenSessionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutExamenSessionsInput = {
@@ -2553,6 +2615,7 @@ export type ClasseUncheckedCreateWithoutExamenSessionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutExamenSessionsInput = {
@@ -2600,6 +2663,7 @@ export type ClasseUpdateWithoutExamenSessionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutExamenSessionsInput = {
@@ -2631,6 +2695,7 @@ export type ClasseUncheckedUpdateWithoutExamenSessionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutChapitresInput = {
@@ -2662,6 +2727,7 @@ export type ClasseCreateWithoutChapitresInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutChapitresInput = {
@@ -2693,6 +2759,7 @@ export type ClasseUncheckedCreateWithoutChapitresInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutChapitresInput = {
@@ -2740,6 +2807,7 @@ export type ClasseUpdateWithoutChapitresInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutChapitresInput = {
@@ -2771,6 +2839,7 @@ export type ClasseUncheckedUpdateWithoutChapitresInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutSallesInput = {
@@ -2802,6 +2871,7 @@ export type ClasseCreateWithoutSallesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutSallesInput = {
@@ -2833,6 +2903,7 @@ export type ClasseUncheckedCreateWithoutSallesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutSallesInput = {
@@ -2880,6 +2951,7 @@ export type ClasseUpdateWithoutSallesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutSallesInput = {
@@ -2911,6 +2983,7 @@ export type ClasseUncheckedUpdateWithoutSallesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutSortieScolairesInput = {
@@ -2942,6 +3015,7 @@ export type ClasseCreateWithoutSortieScolairesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutSortieScolairesInput = {
@@ -2973,6 +3047,7 @@ export type ClasseUncheckedCreateWithoutSortieScolairesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutSortieScolairesInput = {
@@ -3020,6 +3095,7 @@ export type ClasseUpdateWithoutSortieScolairesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutSortieScolairesInput = {
@@ -3051,6 +3127,7 @@ export type ClasseUncheckedUpdateWithoutSortieScolairesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutElevesInput = {
@@ -3082,6 +3159,7 @@ export type ClasseCreateWithoutElevesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutElevesInput = {
@@ -3113,6 +3191,7 @@ export type ClasseUncheckedCreateWithoutElevesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutElevesInput = {
@@ -3160,6 +3239,7 @@ export type ClasseUpdateWithoutElevesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutElevesInput = {
@@ -3191,6 +3271,7 @@ export type ClasseUncheckedUpdateWithoutElevesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutHistoriqueClassesInput = {
@@ -3222,6 +3303,7 @@ export type ClasseCreateWithoutHistoriqueClassesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutHistoriqueClassesInput = {
@@ -3253,6 +3335,7 @@ export type ClasseUncheckedCreateWithoutHistoriqueClassesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutHistoriqueClassesInput = {
@@ -3300,6 +3383,7 @@ export type ClasseUpdateWithoutHistoriqueClassesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutHistoriqueClassesInput = {
@@ -3331,6 +3415,7 @@ export type ClasseUncheckedUpdateWithoutHistoriqueClassesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutDroitInscriptionsInput = {
@@ -3362,6 +3447,7 @@ export type ClasseCreateWithoutDroitInscriptionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutDroitInscriptionsInput = {
@@ -3393,6 +3479,7 @@ export type ClasseUncheckedCreateWithoutDroitInscriptionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutDroitInscriptionsInput = {
@@ -3440,6 +3527,7 @@ export type ClasseUpdateWithoutDroitInscriptionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutDroitInscriptionsInput = {
@@ -3471,6 +3559,7 @@ export type ClasseUncheckedUpdateWithoutDroitInscriptionsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutEcolagesInput = {
@@ -3502,6 +3591,7 @@ export type ClasseCreateWithoutEcolagesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutEcolagesInput = {
@@ -3533,6 +3623,7 @@ export type ClasseUncheckedCreateWithoutEcolagesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutEcolagesInput = {
@@ -3580,6 +3671,7 @@ export type ClasseUpdateWithoutEcolagesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutEcolagesInput = {
@@ -3611,6 +3703,7 @@ export type ClasseUncheckedUpdateWithoutEcolagesInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutEcolageConfigsInput = {
@@ -3642,6 +3735,7 @@ export type ClasseCreateWithoutEcolageConfigsInput = {
   option?: Prisma.OptionCreateNestedOneWithoutClasseInput
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutEcolageConfigsInput = {
@@ -3673,6 +3767,7 @@ export type ClasseUncheckedCreateWithoutEcolageConfigsInput = {
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutEcolageConfigsInput = {
@@ -3720,6 +3815,7 @@ export type ClasseUpdateWithoutEcolageConfigsInput = {
   option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutEcolageConfigsInput = {
@@ -3751,6 +3847,7 @@ export type ClasseUncheckedUpdateWithoutEcolageConfigsInput = {
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseCreateWithoutNiveauInput = {
@@ -3782,6 +3879,7 @@ export type ClasseCreateWithoutNiveauInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutNiveauInput = {
@@ -3813,6 +3911,7 @@ export type ClasseUncheckedCreateWithoutNiveauInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutNiveauInput = {
@@ -3870,6 +3969,7 @@ export type ClasseCreateWithoutSectionInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutSectionInput = {
@@ -3901,6 +4001,7 @@ export type ClasseUncheckedCreateWithoutSectionInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutSectionInput = {
@@ -3958,6 +4059,7 @@ export type ClasseCreateWithoutOptionInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutOptionInput = {
@@ -3989,6 +4091,7 @@ export type ClasseUncheckedCreateWithoutOptionInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutOptionInput = {
@@ -4046,6 +4149,7 @@ export type ClasseCreateWithoutAffectationAnciennesClassesInput = {
   option?: Prisma.OptionCreateNestedOneWithoutClasseInput
   affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutAffectationAnciennesClassesInput = {
@@ -4077,6 +4181,7 @@ export type ClasseUncheckedCreateWithoutAffectationAnciennesClassesInput = {
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutAffectationAnciennesClassesInput = {
@@ -4113,6 +4218,7 @@ export type ClasseCreateWithoutAffectationNouvellesClassesInput = {
   option?: Prisma.OptionCreateNestedOneWithoutClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseUncheckedCreateWithoutAffectationNouvellesClassesInput = {
@@ -4144,6 +4250,7 @@ export type ClasseUncheckedCreateWithoutAffectationNouvellesClassesInput = {
   ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedCreateNestedManyWithoutClasseInput
 }
 
 export type ClasseCreateOrConnectWithoutAffectationNouvellesClassesInput = {
@@ -4191,6 +4298,7 @@ export type ClasseUpdateWithoutAffectationAnciennesClassesInput = {
   option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutAffectationAnciennesClassesInput = {
@@ -4222,6 +4330,7 @@ export type ClasseUncheckedUpdateWithoutAffectationAnciennesClassesInput = {
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUpsertWithoutAffectationNouvellesClassesInput = {
@@ -4264,6 +4373,7 @@ export type ClasseUpdateWithoutAffectationNouvellesClassesInput = {
   option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutAffectationNouvellesClassesInput = {
@@ -4293,6 +4403,151 @@ export type ClasseUncheckedUpdateWithoutAffectationNouvellesClassesInput = {
   historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
   droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
   ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
+  ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
+}
+
+export type ClasseCreateWithoutRegleAlertesInput = {
+  id?: string
+  nom: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutClassesInput
+  eleves?: Prisma.EleveCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereCreateNestedManyWithoutClasseInput
+  professeurPrincipal?: Prisma.ProfesseurCreateNestedOneWithoutClassesPrincipalesDesInput
+  notes?: Prisma.NoteCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutClasseInput
+  niveau?: Prisma.NiveauCreateNestedOneWithoutClassesInput
+  section?: Prisma.SectionCreateNestedOneWithoutClassesInput
+  option?: Prisma.OptionCreateNestedOneWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseCreateNestedManyWithoutAncienneClasseInput
+  ecolageConfigs?: Prisma.EcolageConfigCreateNestedManyWithoutClasseInput
+}
+
+export type ClasseUncheckedCreateWithoutRegleAlertesInput = {
+  id?: string
+  nom: string
+  schoolId: string
+  professeurPrincipalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  niveauId?: string | null
+  sectionId?: string | null
+  optionId?: string | null
+  eleves?: Prisma.EleveUncheckedCreateNestedManyWithoutClasseInput
+  profs?: Prisma.ProfesseurUncheckedCreateNestedManyWithoutClassesInput
+  matieres?: Prisma.MatiereUncheckedCreateNestedManyWithoutClasseInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutClasseInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutClasseInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedCreateNestedManyWithoutClasseInput
+  appels?: Prisma.AppelUncheckedCreateNestedManyWithoutClasseInput
+  cahierTextes?: Prisma.CahierTexteUncheckedCreateNestedManyWithoutClasseInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutClasseInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedCreateNestedManyWithoutClasseInput
+  examenSessions?: Prisma.ExamenSessionUncheckedCreateNestedManyWithoutClasseInput
+  chapitres?: Prisma.ChapitreUncheckedCreateNestedManyWithoutClasseInput
+  salles?: Prisma.SalleUncheckedCreateNestedManyWithoutClasseInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedCreateNestedManyWithoutClasseInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutClasseInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutClasseInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutClasseInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutNouvelleClasseInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutAncienneClasseInput
+  ecolageConfigs?: Prisma.EcolageConfigUncheckedCreateNestedManyWithoutClasseInput
+}
+
+export type ClasseCreateOrConnectWithoutRegleAlertesInput = {
+  where: Prisma.ClasseWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutRegleAlertesInput, Prisma.ClasseUncheckedCreateWithoutRegleAlertesInput>
+}
+
+export type ClasseUpsertWithoutRegleAlertesInput = {
+  update: Prisma.XOR<Prisma.ClasseUpdateWithoutRegleAlertesInput, Prisma.ClasseUncheckedUpdateWithoutRegleAlertesInput>
+  create: Prisma.XOR<Prisma.ClasseCreateWithoutRegleAlertesInput, Prisma.ClasseUncheckedCreateWithoutRegleAlertesInput>
+  where?: Prisma.ClasseWhereInput
+}
+
+export type ClasseUpdateToOneWithWhereWithoutRegleAlertesInput = {
+  where?: Prisma.ClasseWhereInput
+  data: Prisma.XOR<Prisma.ClasseUpdateWithoutRegleAlertesInput, Prisma.ClasseUncheckedUpdateWithoutRegleAlertesInput>
+}
+
+export type ClasseUpdateWithoutRegleAlertesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutClassesNestedInput
+  eleves?: Prisma.EleveUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUpdateManyWithoutClasseNestedInput
+  professeurPrincipal?: Prisma.ProfesseurUpdateOneWithoutClassesPrincipalesDesNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutClasseNestedInput
+  niveau?: Prisma.NiveauUpdateOneWithoutClassesNestedInput
+  section?: Prisma.SectionUpdateOneWithoutClassesNestedInput
+  option?: Prisma.OptionUpdateOneWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
+  affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
+  ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+}
+
+export type ClasseUncheckedUpdateWithoutRegleAlertesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  professeurPrincipalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  niveauId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eleves?: Prisma.EleveUncheckedUpdateManyWithoutClasseNestedInput
+  profs?: Prisma.ProfesseurUncheckedUpdateManyWithoutClassesNestedInput
+  matieres?: Prisma.MatiereUncheckedUpdateManyWithoutClasseNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutClasseNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutClasseNestedInput
+  creneauHoraires?: Prisma.CreneauHoraireUncheckedUpdateManyWithoutClasseNestedInput
+  appels?: Prisma.AppelUncheckedUpdateManyWithoutClasseNestedInput
+  cahierTextes?: Prisma.CahierTexteUncheckedUpdateManyWithoutClasseNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutClasseNestedInput
+  deliberationSessions?: Prisma.DeliberationSessionUncheckedUpdateManyWithoutClasseNestedInput
+  examenSessions?: Prisma.ExamenSessionUncheckedUpdateManyWithoutClasseNestedInput
+  chapitres?: Prisma.ChapitreUncheckedUpdateManyWithoutClasseNestedInput
+  salles?: Prisma.SalleUncheckedUpdateManyWithoutClasseNestedInput
+  sortieScolaires?: Prisma.SortieScolaireUncheckedUpdateManyWithoutClasseNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutClasseNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutClasseNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutClasseNestedInput
+  affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
 }
@@ -4337,6 +4592,7 @@ export type ClasseUpdateWithoutSchoolInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutSchoolInput = {
@@ -4368,6 +4624,7 @@ export type ClasseUncheckedUpdateWithoutSchoolInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutSchoolInput = {
@@ -4421,6 +4678,7 @@ export type ClasseUpdateWithoutProfsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutProfsInput = {
@@ -4452,6 +4710,7 @@ export type ClasseUncheckedUpdateWithoutProfsInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutProfsInput = {
@@ -4495,6 +4754,7 @@ export type ClasseUpdateWithoutProfesseurPrincipalInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutProfesseurPrincipalInput = {
@@ -4526,6 +4786,7 @@ export type ClasseUncheckedUpdateWithoutProfesseurPrincipalInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutProfesseurPrincipalInput = {
@@ -4579,6 +4840,7 @@ export type ClasseUpdateWithoutNiveauInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutNiveauInput = {
@@ -4610,6 +4872,7 @@ export type ClasseUncheckedUpdateWithoutNiveauInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutNiveauInput = {
@@ -4663,6 +4926,7 @@ export type ClasseUpdateWithoutSectionInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutSectionInput = {
@@ -4694,6 +4958,7 @@ export type ClasseUncheckedUpdateWithoutSectionInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutSectionInput = {
@@ -4747,6 +5012,7 @@ export type ClasseUpdateWithoutOptionInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateWithoutOptionInput = {
@@ -4778,6 +5044,7 @@ export type ClasseUncheckedUpdateWithoutOptionInput = {
   affectationNouvellesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutNouvelleClasseNestedInput
   affectationAnciennesClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutAncienneClasseNestedInput
   ecolageConfigs?: Prisma.EcolageConfigUncheckedUpdateManyWithoutClasseNestedInput
+  regleAlertes?: Prisma.RegleAlerteUncheckedUpdateManyWithoutClasseNestedInput
 }
 
 export type ClasseUncheckedUpdateManyWithoutOptionInput = {
@@ -4817,6 +5084,7 @@ export type ClasseCountOutputType = {
   affectationNouvellesClasses: number
   affectationAnciennesClasses: number
   ecolageConfigs: number
+  regleAlertes: number
 }
 
 export type ClasseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4840,6 +5108,7 @@ export type ClasseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   affectationNouvellesClasses?: boolean | ClasseCountOutputTypeCountAffectationNouvellesClassesArgs
   affectationAnciennesClasses?: boolean | ClasseCountOutputTypeCountAffectationAnciennesClassesArgs
   ecolageConfigs?: boolean | ClasseCountOutputTypeCountEcolageConfigsArgs
+  regleAlertes?: boolean | ClasseCountOutputTypeCountRegleAlertesArgs
 }
 
 /**
@@ -4992,6 +5261,13 @@ export type ClasseCountOutputTypeCountEcolageConfigsArgs<ExtArgs extends runtime
   where?: Prisma.EcolageConfigWhereInput
 }
 
+/**
+ * ClasseCountOutputType without action
+ */
+export type ClasseCountOutputTypeCountRegleAlertesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RegleAlerteWhereInput
+}
+
 
 export type ClasseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -5028,6 +5304,7 @@ export type ClasseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   affectationNouvellesClasses?: boolean | Prisma.Classe$affectationNouvellesClassesArgs<ExtArgs>
   affectationAnciennesClasses?: boolean | Prisma.Classe$affectationAnciennesClassesArgs<ExtArgs>
   ecolageConfigs?: boolean | Prisma.Classe$ecolageConfigsArgs<ExtArgs>
+  regleAlertes?: boolean | Prisma.Classe$regleAlertesArgs<ExtArgs>
   _count?: boolean | Prisma.ClasseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["classe"]>
 
@@ -5104,6 +5381,7 @@ export type ClasseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   affectationNouvellesClasses?: boolean | Prisma.Classe$affectationNouvellesClassesArgs<ExtArgs>
   affectationAnciennesClasses?: boolean | Prisma.Classe$affectationAnciennesClassesArgs<ExtArgs>
   ecolageConfigs?: boolean | Prisma.Classe$ecolageConfigsArgs<ExtArgs>
+  regleAlertes?: boolean | Prisma.Classe$regleAlertesArgs<ExtArgs>
   _count?: boolean | Prisma.ClasseCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClasseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5149,6 +5427,7 @@ export type $ClassePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     affectationNouvellesClasses: Prisma.$AffectationClassePayload<ExtArgs>[]
     affectationAnciennesClasses: Prisma.$AffectationClassePayload<ExtArgs>[]
     ecolageConfigs: Prisma.$EcolageConfigPayload<ExtArgs>[]
+    regleAlertes: Prisma.$RegleAlertePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5579,6 +5858,7 @@ export interface Prisma__ClasseClient<T, Null = never, ExtArgs extends runtime.T
   affectationNouvellesClasses<T extends Prisma.Classe$affectationNouvellesClassesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$affectationNouvellesClassesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AffectationClassePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   affectationAnciennesClasses<T extends Prisma.Classe$affectationAnciennesClassesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$affectationAnciennesClassesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AffectationClassePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ecolageConfigs<T extends Prisma.Classe$ecolageConfigsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$ecolageConfigsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EcolageConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  regleAlertes<T extends Prisma.Classe$regleAlertesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classe$regleAlertesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RegleAlertePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6571,6 +6851,30 @@ export type Classe$ecolageConfigsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.EcolageConfigScalarFieldEnum | Prisma.EcolageConfigScalarFieldEnum[]
+}
+
+/**
+ * Classe.regleAlertes
+ */
+export type Classe$regleAlertesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RegleAlerte
+   */
+  select?: Prisma.RegleAlerteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RegleAlerte
+   */
+  omit?: Prisma.RegleAlerteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegleAlerteInclude<ExtArgs> | null
+  where?: Prisma.RegleAlerteWhereInput
+  orderBy?: Prisma.RegleAlerteOrderByWithRelationInput | Prisma.RegleAlerteOrderByWithRelationInput[]
+  cursor?: Prisma.RegleAlerteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RegleAlerteScalarFieldEnum | Prisma.RegleAlerteScalarFieldEnum[]
 }
 
 /**
