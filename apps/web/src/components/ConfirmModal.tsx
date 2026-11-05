@@ -1,10 +1,14 @@
-import { Trash } from "lucide-react";
+import { Trash, Check } from "lucide-react";
 import { useEffect, useRef } from "react"; // Importation de useEffect et useRef depuis React;
+
+type ConfirmIcon = "danger" | "success";
 
 interface ConfirmModalProps {
   isOpen: boolean;
   title: string;
   message: string;
+  // Ajout de props d'icône optionnelle "danger" | "success"
+  icon?: ConfirmIcon;
   confirmLabel?: string;
   cancelLabel?: string;
   isLoading?: boolean;
@@ -12,10 +16,16 @@ interface ConfirmModalProps {
   onCancel: () => void;
 }
 
+const ICON_STYLES: Record<ConfirmIcon, string> = {
+  danger: "bg-error/10 text-error",
+  success: "bg-success/10 text-success",
+};
+
 export default function ConfirmModal({
   isOpen,
   title,
   message,
+  icon = "danger", // comportement historique conservé pour les usages existants et ne pas casser l'affichage par défaut
   confirmLabel = "Confirmer",
   cancelLabel = "Annuler",
   isLoading = false,
@@ -37,8 +47,8 @@ export default function ConfirmModal({
       <div className="modal-box max-w-sm">
         {/* Icône + Titre */}
         <div className="flex flex-col items-center text-center gap-3 py-2">
-          <div className="bg-error/10 text-error rounded-full p-3">
-            <Trash size={24} />
+          <div className={`${ICON_STYLES[icon]} rounded-full p-3`}>
+            {icon === "success" ? <Check size={24} /> : <Trash size={24} />}
           </div>
           <h3 className="font-bold text-lg">{title}</h3>
           <p className="text-base-content/60 text-sm">{message}</p>

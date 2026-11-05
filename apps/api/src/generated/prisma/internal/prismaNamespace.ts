@@ -466,7 +466,8 @@ export const ModelName = {
   AffectationClasse: 'AffectationClasse',
   RegleAlerte: 'RegleAlerte',
   PalierAlerte: 'PalierAlerte',
-  AlerteDeclenchee: 'AlerteDeclenchee'
+  AlerteDeclenchee: 'AlerteDeclenchee',
+  SanctionEleve: 'SanctionEleve'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -482,7 +483,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "justificationAbsence" | "billetEntree" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse" | "regleAlerte" | "palierAlerte" | "alerteDeclenchee"
+    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "justificationAbsence" | "billetEntree" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse" | "regleAlerte" | "palierAlerte" | "alerteDeclenchee" | "sanctionEleve"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5666,6 +5667,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SanctionEleve: {
+      payload: Prisma.$SanctionElevePayload<ExtArgs>
+      fields: Prisma.SanctionEleveFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SanctionEleveFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SanctionElevePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SanctionEleveFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SanctionElevePayload>
+        }
+        findFirst: {
+          args: Prisma.SanctionEleveFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SanctionElevePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SanctionEleveFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SanctionElevePayload>
+        }
+        findMany: {
+          args: Prisma.SanctionEleveFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SanctionElevePayload>[]
+        }
+        create: {
+          args: Prisma.SanctionEleveCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SanctionElevePayload>
+        }
+        createMany: {
+          args: Prisma.SanctionEleveCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SanctionEleveCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SanctionElevePayload>[]
+        }
+        delete: {
+          args: Prisma.SanctionEleveDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SanctionElevePayload>
+        }
+        update: {
+          args: Prisma.SanctionEleveUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SanctionElevePayload>
+        }
+        deleteMany: {
+          args: Prisma.SanctionEleveDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SanctionEleveUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SanctionEleveUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SanctionElevePayload>[]
+        }
+        upsert: {
+          args: Prisma.SanctionEleveUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SanctionElevePayload>
+        }
+        aggregate: {
+          args: Prisma.SanctionEleveAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSanctionEleve>
+        }
+        groupBy: {
+          args: Prisma.SanctionEleveGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SanctionEleveGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SanctionEleveCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SanctionEleveCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6857,6 +6932,24 @@ export const AlerteDeclencheeScalarFieldEnum = {
 export type AlerteDeclencheeScalarFieldEnum = (typeof AlerteDeclencheeScalarFieldEnum)[keyof typeof AlerteDeclencheeScalarFieldEnum]
 
 
+export const SanctionEleveScalarFieldEnum = {
+  id: 'id',
+  eleveId: 'eleveId',
+  schoolId: 'schoolId',
+  type: 'type',
+  motif: 'motif',
+  details: 'details',
+  dateSanction: 'dateSanction',
+  dateFin: 'dateFin',
+  statut: 'statut',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SanctionEleveScalarFieldEnum = (typeof SanctionEleveScalarFieldEnum)[keyof typeof SanctionEleveScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -7771,6 +7864,34 @@ export type ListEnumDestinataireAlerteFieldRefInput<$PrismaModel> = FieldRefInpu
 export type EnumDestinataireAlerteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DestinataireAlerte'>
     
 
+
+/**
+ * Reference to a field of type 'TypesSanction'
+ */
+export type EnumTypesSanctionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypesSanction'>
+    
+
+
+/**
+ * Reference to a field of type 'TypesSanction[]'
+ */
+export type ListEnumTypesSanctionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypesSanction[]'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutSanction'
+ */
+export type EnumStatutSanctionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutSanction'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutSanction[]'
+ */
+export type ListEnumStatutSanctionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutSanction[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -7992,6 +8113,7 @@ export type GlobalOmitConfig = {
   regleAlerte?: Prisma.RegleAlerteOmit
   palierAlerte?: Prisma.PalierAlerteOmit
   alerteDeclenchee?: Prisma.AlerteDeclencheeOmit
+  sanctionEleve?: Prisma.SanctionEleveOmit
 }
 
 /* Types for Logging */
