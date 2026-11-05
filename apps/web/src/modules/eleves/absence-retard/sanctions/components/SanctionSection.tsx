@@ -223,7 +223,7 @@ export function SanctionsSection({ initialEleveId }: Props) {
         </p>
       )}
 
-      {query.data && (
+      {query.data && !query.isPlaceholderData && (
         <>
           <div className="overflow-x-auto rounded border border-base-200">
             <table className="table">

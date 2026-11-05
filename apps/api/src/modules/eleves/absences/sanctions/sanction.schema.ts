@@ -17,7 +17,7 @@ export const creerSanctionSchema = z.object({
   eleveId: z.string().uuid(),
   type: typeSanctionSchema,
   motif: z.string().trim().min(5).max(2000),
-  details: z.string().trim().max(2000).optional(),
+  details: z.string().trim().max(2000).nullable().optional(),
   dateSanction: dateISO,
   dateFin: dateISO.nullable().optional(),
 });

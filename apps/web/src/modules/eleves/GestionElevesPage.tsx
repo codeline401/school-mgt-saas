@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 import {
   BookOpen,
@@ -146,7 +146,7 @@ const documentTabs: TabItem<DocumentSubTab>[] = [
 
 function GestionElevesPage() {
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { id: eleveId } = useParams<{ id: string }>();
   const [activeSubTab, setActiveSubTab] = useState<MainTab>(
     PATH_TO_TAB[location.pathname] || "informations",
@@ -170,12 +170,12 @@ function GestionElevesPage() {
     if (tab) setActiveSubTab(tab);
   }, [location.pathname]);
 
-  const handleTabChange = (tab: MainTab) => {
-    const path = Object.keys(PATH_TO_TAB).find(
-      (key) => PATH_TO_TAB[key] === tab,
-    );
-    if (path) navigate(path);
-  };
+  // const handleTabChange = (tab: MainTab) => {
+  //   const path = Object.keys(PATH_TO_TAB).find(
+  //     (key) => PATH_TO_TAB[key] === tab,
+  //   );
+  //   if (path) navigate(path);
+  // };
 
   const renderInformationContent = () => {
     switch (activeInfoSubTab) {
@@ -423,7 +423,7 @@ function GestionElevesPage() {
           </div>
         </div>
 
-        <div role="tablist" className="tabs tabs-bordered mb-6">
+        {/* <div role="tablist" className="tabs tabs-bordered mb-6">
           <button
             role="tab"
             className={`tab ${activeSubTab === "informations" ? "tab-active" : ""}`}
@@ -472,7 +472,7 @@ function GestionElevesPage() {
             <FileText size={16} className="mr-2" />
             Dossiers & documents
           </button>
-        </div>
+        </div> */}
 
         {activeSubTab === "informations" && (
           <div>

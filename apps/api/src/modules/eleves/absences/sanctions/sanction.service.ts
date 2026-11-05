@@ -35,6 +35,21 @@ function scopeEcole(user: UserContext): Prisma.SanctionEleveWhereInput {
 }
 
 /**
+ * Vérifie que la date de sanction n'est pas postérieure à la date de fin
+ * @param dateSanction La date de la sanction
+ * @param dateFin La date de fin de la sanction (peut être null)
+ * @throws SanctionError si la date de sanction est postérieure à la date de fin
+ */
+function verifierDate(dateSanction: Date, dateFin: Date | null) {
+  if (dateFin && dateSanction > dateFin) {
+    throw new SanctionError(
+      "La date de sanction ne peut pas être postérieure à la date de fin",
+      400,
+    );
+  }
+}
+
+/**
  * Recherche une sanction par son identifiant en tenant compte du scope de l'utilisateur
  * @param sanctionId L'identifiant de la sanction à rechercher
  * @param user L'utilisateur effectuant la requête
@@ -125,6 +140,14 @@ export class SanctionService {
       throw new SanctionError("Élève non trouvé", 404);
     }
 
+    // Prépa des objest Date
+    const dateSanction = new Date(`${input.dateSanction}T00:00:00Z`);
+    const dateFin = input.dateFin
+      ? new Date(`${input.dateFin}T00:00:00Z`)
+      : null;
+    // vérifications des dates avant la création en base
+    verifierDate(dateSanction, dateFin);
+
     return prisma.sanctionEleve.create({
       data: {
         schoolId: eleve.schoolId,
@@ -133,8 +156,8 @@ export class SanctionService {
         type: input.type,
         motif: input.motif,
         details: input.details ?? null,
-        dateSanction: new Date(`${input.dateSanction}T00:00:00Z`), // Conversion de la date de sanction en objet Date
-        dateFin: input.dateFin ? new Date(`${input.dateFin}T00:00:00Z`) : null,
+        dateSanction,
+        dateFin,
       },
       include: {
         eleve: {
@@ -162,22 +185,50 @@ export class SanctionService {
       );
     }
 
-    return prisma.sanctionEleve.update({
-      where: { id: sanctionId },
-      data: {
-        ...input,
-        ...(input.dateSanction
-          ? { dateSanction: new Date(`${input.dateSanction}T00:00:00Z`) }
-          : {}),
-        ...(input.dateFin !== undefined // Vérifie si la date de fin est définie dans l'input
-          ? {
-              dateFin: input.dateFin // Si la date de fin est fournie, la convertir en objet Date, sinon mettre à null
-                ? new Date(`${input.dateFin}T00:00:00Z`)
-                : null, // Mettre à null si la date de fin n'est pas fournie
-            }
-          : {}),
-      },
-    });
+    // Calcul des valeurs effectives (fusion avec l'existant)
+    const dateSanction = input.dateSanction
+      ? new Date(`${input.dateSanction}T00:00:00Z`)
+      : sanction.dateSanction;
+
+    const dateFin =
+      input.dateFin !== undefined
+        ? input.dateFin
+          ? new Date(`${input.dateFin}T00:00:00Z`)
+          : null
+        : sanction.dateFin;
+
+    // vérification des date
+    verifierDate(dateSanction, dateFin);
+
+    try {
+      return await prisma.sanctionEleve.update({
+        where: { id: sanctionId, statut: "EN_COURS" },
+        data: {
+          ...input,
+          ...(input.dateSanction
+            ? { dateSanction: new Date(`${input.dateSanction}T00:00:00Z`) }
+            : {}),
+          ...(input.dateFin !== undefined // Vérifie si la date de fin est définie dans l'input
+            ? {
+                dateFin: input.dateFin // Si la date de fin est fournie, la convertir en objet Date, sinon mettre à null
+                  ? new Date(`${input.dateFin}T00:00:00Z`)
+                  : null, // Mettre à null si la date de fin n'est pas fournie
+              }
+            : {}),
+        },
+      });
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === "P2025"
+      ) {
+        throw new SanctionError(
+          "Impossible de modifier une sanction qui n'est pas en cours",
+          400,
+        );
+      }
+      throw error;
+    }
   }
 
   /**
@@ -200,9 +251,19 @@ export class SanctionService {
       throw new SanctionError("Transition de statut invalide", 400);
     }
 
-    return prisma.sanctionEleve.update({
-      where: { id: sanctionId },
-      data: { statut },
-    });
+    try {
+      return await prisma.sanctionEleve.update({
+        where: { id: sanctionId, statut: "EN_COURS" },
+        data: { statut },
+      });
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === "P2025"
+      ) {
+        throw new SanctionError("Cette sanction a déjà été clôturée", 409);
+      }
+      throw error;
+    }
   }
 }

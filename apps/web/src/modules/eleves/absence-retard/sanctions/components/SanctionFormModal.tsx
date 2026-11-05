@@ -47,13 +47,17 @@ export function SanctionFormModal({
   async function soumettre(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    await onSave({
-      type,
-      motif: motif.trim(),
-      details: details.trim() || undefined,
-      dateSanction,
-      dateFin: dateFin || null,
-    });
+    try {
+      await onSave({
+        type,
+        motif: motif.trim(),
+        details: details.trim() || null,
+        dateSanction,
+        dateFin: dateFin || null,
+      });
+    } catch {
+      return;
+    }
   }
 
   return (
