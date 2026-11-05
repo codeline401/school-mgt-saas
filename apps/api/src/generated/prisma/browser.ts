@@ -367,3 +367,8 @@ export type PalierAlerte = Prisma.PalierAlerteModel
  * 
  */
 export type AlerteDeclenchee = Prisma.AlerteDeclencheeModel
+/**
+ * Model SanctionEleve
+ * 
+ */
+export type SanctionEleve = Prisma.SanctionEleveModel

@@ -73,6 +73,7 @@ model User {
   justificationAbsences              JustificationAbsence[]    @relation("JustificationsCreees")
   billetEntrees                      BilletEntree[]            @relation("BilletsCreees")
   regleAlertes                       RegleAlerte[]             @relation("ReglesAlerteCreees")
+  sanctionEleves                     SanctionEleve[]           @relation("SanctionsCreees")
 }
 
 // Modele SAAS
@@ -148,6 +149,7 @@ model School {
   billetEntrees            BilletEntree[]
   regleAlertes             RegleAlerte[]
   alerteDeclenchees        AlerteDeclenchee[]
+  sanctionEleves           SanctionEleve[]
 }
 
 model Classe {
@@ -1868,6 +1870,7 @@ model Eleve {
   justificationAbsences JustificationAbsence[]
   billetEntrees         BilletEntree[]
   alerteDeclenchees     AlerteDeclenchee[]
+  sanctionEleves        SanctionEleve[]
 
   // Contraintes & Index
   @@unique([schoolId, matricule])
@@ -2459,4 +2462,45 @@ model AlerteDeclenchee {
 
   @@unique([palierId, eleveId, cycle])
   @@index([schoolId, createdAt])
+}
+
+// GE > Absence > Santions
+enum TypesSanction {
+  AVERTISSEMENT
+  BLAME
+  RETENUE
+  EXCLUSION_TEMPORAIRE
+  CONVOCATION_PARENT
+  AUTRE
+}
+
+enum StatutSanction {
+  EN_COURS
+  TERMINEE
+  ANNULEE
+}
+
+model SanctionEleve {
+  id String @id @default(uuid())
+
+  eleveId  String
+  eleve    Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  type         TypesSanction
+  motif        String         @db.Text
+  details      String?        @db.Text
+  dateSanction DateTime       @db.Date
+  dateFin      DateTime?      @db.Date
+  statut       StatutSanction @default(EN_COURS)
+
+  createdById String
+  createdBy   User   @relation("SanctionsCreees", fields: [createdById], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId, dateSanction])
+  @@index([eleveId, statut])
 }

@@ -33,6 +33,7 @@ import { RelanceEcolageSection } from "./ecolages/relances/components/RelanceEco
 import { SuiviAbsenceSection } from "./absence-retard/suivi/components/SuiviAbsenceSection";
 import { JustificationSection } from "./absence-retard/justifiactions/components/JustificationSection";
 import { AlertesSection } from "./absence-retard/alertes/components/AlertesSection";
+import { SanctionsSection } from "./absence-retard/sanctions/components/SanctionSection";
 
 type MainTab =
   | "informations"
@@ -233,13 +234,7 @@ function GestionElevesPage() {
       case "alertes":
         return <AlertesSection />;
       case "sanctions":
-        return (
-          <DevelopmentPlaceholder
-            icon={BriefcaseBusiness}
-            title="Sanctions & discipline"
-            description="Avertissements, convocations, incidents et suivi disciplinaire associé."
-          />
-        );
+        return <SanctionsSection initialEleveId={eleveId} />;
       default:
         return null;
     }

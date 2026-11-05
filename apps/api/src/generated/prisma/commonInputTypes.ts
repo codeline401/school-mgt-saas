@@ -1360,6 +1360,40 @@ export type FloatWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedFloatFilter<$PrismaModel>
 }
 
+export type EnumTypesSanctionFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypesSanction | Prisma.EnumTypesSanctionFieldRefInput<$PrismaModel>
+  in?: $Enums.TypesSanction[] | Prisma.ListEnumTypesSanctionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypesSanction[] | Prisma.ListEnumTypesSanctionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypesSanctionFilter<$PrismaModel> | $Enums.TypesSanction
+}
+
+export type EnumStatutSanctionFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutSanction | Prisma.EnumStatutSanctionFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutSanction[] | Prisma.ListEnumStatutSanctionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutSanction[] | Prisma.ListEnumStatutSanctionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutSanctionFilter<$PrismaModel> | $Enums.StatutSanction
+}
+
+export type EnumTypesSanctionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypesSanction | Prisma.EnumTypesSanctionFieldRefInput<$PrismaModel>
+  in?: $Enums.TypesSanction[] | Prisma.ListEnumTypesSanctionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypesSanction[] | Prisma.ListEnumTypesSanctionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypesSanctionWithAggregatesFilter<$PrismaModel> | $Enums.TypesSanction
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypesSanctionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypesSanctionFilter<$PrismaModel>
+}
+
+export type EnumStatutSanctionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutSanction | Prisma.EnumStatutSanctionFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutSanction[] | Prisma.ListEnumStatutSanctionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutSanction[] | Prisma.ListEnumStatutSanctionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutSanctionWithAggregatesFilter<$PrismaModel> | $Enums.StatutSanction
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutSanctionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutSanctionFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -2641,6 +2675,40 @@ export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatFilter<$PrismaModel>
   _min?: Prisma.NestedFloatFilter<$PrismaModel>
   _max?: Prisma.NestedFloatFilter<$PrismaModel>
+}
+
+export type NestedEnumTypesSanctionFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypesSanction | Prisma.EnumTypesSanctionFieldRefInput<$PrismaModel>
+  in?: $Enums.TypesSanction[] | Prisma.ListEnumTypesSanctionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypesSanction[] | Prisma.ListEnumTypesSanctionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypesSanctionFilter<$PrismaModel> | $Enums.TypesSanction
+}
+
+export type NestedEnumStatutSanctionFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutSanction | Prisma.EnumStatutSanctionFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutSanction[] | Prisma.ListEnumStatutSanctionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutSanction[] | Prisma.ListEnumStatutSanctionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutSanctionFilter<$PrismaModel> | $Enums.StatutSanction
+}
+
+export type NestedEnumTypesSanctionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypesSanction | Prisma.EnumTypesSanctionFieldRefInput<$PrismaModel>
+  in?: $Enums.TypesSanction[] | Prisma.ListEnumTypesSanctionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypesSanction[] | Prisma.ListEnumTypesSanctionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypesSanctionWithAggregatesFilter<$PrismaModel> | $Enums.TypesSanction
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypesSanctionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypesSanctionFilter<$PrismaModel>
+}
+
+export type NestedEnumStatutSanctionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutSanction | Prisma.EnumStatutSanctionFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutSanction[] | Prisma.ListEnumStatutSanctionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutSanction[] | Prisma.ListEnumStatutSanctionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutSanctionWithAggregatesFilter<$PrismaModel> | $Enums.StatutSanction
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutSanctionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutSanctionFilter<$PrismaModel>
 }
 
 

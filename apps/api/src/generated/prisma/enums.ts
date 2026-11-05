@@ -576,3 +576,24 @@ export const DestinataireAlerte = {
 } as const
 
 export type DestinataireAlerte = (typeof DestinataireAlerte)[keyof typeof DestinataireAlerte]
+
+
+export const TypesSanction = {
+  AVERTISSEMENT: 'AVERTISSEMENT',
+  BLAME: 'BLAME',
+  RETENUE: 'RETENUE',
+  EXCLUSION_TEMPORAIRE: 'EXCLUSION_TEMPORAIRE',
+  CONVOCATION_PARENT: 'CONVOCATION_PARENT',
+  AUTRE: 'AUTRE'
+} as const
+
+export type TypesSanction = (typeof TypesSanction)[keyof typeof TypesSanction]
+
+
+export const StatutSanction = {
+  EN_COURS: 'EN_COURS',
+  TERMINEE: 'TERMINEE',
+  ANNULEE: 'ANNULEE'
+} as const
+
+export type StatutSanction = (typeof StatutSanction)[keyof typeof StatutSanction]
