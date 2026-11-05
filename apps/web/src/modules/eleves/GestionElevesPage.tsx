@@ -146,7 +146,6 @@ const documentTabs: TabItem<DocumentSubTab>[] = [
 
 function GestionElevesPage() {
   const location = useLocation();
-  // const navigate = useNavigate();
   const { id: eleveId } = useParams<{ id: string }>();
   const [activeSubTab, setActiveSubTab] = useState<MainTab>(
     PATH_TO_TAB[location.pathname] || "informations",
@@ -422,57 +421,6 @@ function GestionElevesPage() {
             </button>
           </div>
         </div>
-
-        {/* <div role="tablist" className="tabs tabs-bordered mb-6">
-          <button
-            role="tab"
-            className={`tab ${activeSubTab === "informations" ? "tab-active" : ""}`}
-            onClick={() => handleTabChange("informations")}
-          >
-            <UserRound size={16} className="mr-2" />
-            Informations
-          </button>
-          <button
-            role="tab"
-            className={`tab ${activeSubTab === "ecolage" ? "tab-active" : ""}`}
-            onClick={() => handleTabChange("ecolage")}
-          >
-            <Wallet size={16} className="mr-2" />
-            Écolage
-          </button>
-          <button
-            role="tab"
-            className={`tab ${activeSubTab === "absences" ? "tab-active" : ""}`}
-            onClick={() => handleTabChange("absences")}
-          >
-            <Calendar size={16} className="mr-2" />
-            Absences & retards
-          </button>
-          <button
-            role="tab"
-            className={`tab ${activeSubTab === "parcours" ? "tab-active" : ""}`}
-            onClick={() => handleTabChange("parcours")}
-          >
-            <BookOpen size={16} className="mr-2" />
-            Parcours & évaluations
-          </button>
-          <button
-            role="tab"
-            className={`tab ${activeSubTab === "vie-scolaire" ? "tab-active" : ""}`}
-            onClick={() => handleTabChange("vie-scolaire")}
-          >
-            <ClipboardCheck size={16} className="mr-2" />
-            Vie scolaire
-          </button>
-          <button
-            role="tab"
-            className={`tab ${activeSubTab === "documents" ? "tab-active" : ""}`}
-            onClick={() => handleTabChange("documents")}
-          >
-            <FileText size={16} className="mr-2" />
-            Dossiers & documents
-          </button>
-        </div> */}
 
         {activeSubTab === "informations" && (
           <div>
