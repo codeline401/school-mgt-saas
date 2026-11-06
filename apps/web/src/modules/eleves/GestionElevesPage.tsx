@@ -34,6 +34,7 @@ import { SuiviAbsenceSection } from "./absence-retard/suivi/components/SuiviAbse
 import { JustificationSection } from "./absence-retard/justifiactions/components/JustificationSection";
 import { AlertesSection } from "./absence-retard/alertes/components/AlertesSection";
 import { SanctionsSection } from "./absence-retard/sanctions/components/SanctionSection";
+import { NotesParcoursSection } from "./parcours/notes/components/NotesParcoursSection";
 
 type MainTab =
   | "informations"
@@ -242,13 +243,7 @@ function GestionElevesPage() {
   const renderParcoursContent = () => {
     switch (activeParcoursSubTab) {
       case "notes":
-        return (
-          <DevelopmentPlaceholder
-            icon={BookOpen}
-            title="Notes & devoirs"
-            description="Moyennes, matières, épreuves, coefficients et progression académique."
-          />
-        );
+        return <NotesParcoursSection initialEleveId={eleveId} />;
       case "bulletins":
         return (
           <DevelopmentPlaceholder
