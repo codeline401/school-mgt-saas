@@ -1,6 +1,6 @@
 import { Router } from "express";
-import sanctionRoutes from "./absences/sanctions/sanction.routes.js";
 
+import sanctionRoutes from "./absences/sanctions/sanction.routes.js";
 import ficheRoutes from "./informations/fiche/fiche.routes.js";
 import responsableRoutes from "./informations/responsable/responsable.routes.js";
 import emergencyContactRoutes from "./informations/emergencyContact/emergencyContact.routes.js";
@@ -13,6 +13,8 @@ import suiviAbsenceRoutes from "./absences/suivi/suivi.routes.js";
 import justificationRoutes from "./absences/justifications/justification.routes.js";
 import alerteRoutes from "./absences/alertes/alerte.routes.js";
 import regleRoutes from "./absences/regles/regle.routes.js";
+
+import noteRoutes from "./parcours/notes/note.routes.js";
 
 const router = Router();
 
@@ -49,5 +51,7 @@ router.use("/absences/justifications", justificationRoutes);
 router.use("/absences/alertes/regles", regleRoutes);
 router.use("/absences/alertes", alerteRoutes);
 router.use("/absences/sanctions", sanctionRoutes);
+
+router.use("/parcours/notes", noteRoutes);
 
 export default router;
