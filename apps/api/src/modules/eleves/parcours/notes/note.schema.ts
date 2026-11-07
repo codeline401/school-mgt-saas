@@ -19,7 +19,7 @@ export const listeNotesQuerySchema = z
     from: dateISO.optional(),
     to: dateISO.optional(),
     page: z.coerce.number().int().min(1).default(1),
-    limit: z.coerce.number().int().min(1).max(10).default(1),
+    limit: z.coerce.number().int().min(1).max(10).default(10),
   })
   .refine((query) => !query.from || !query.to || query.from <= query.to, {
     message: "La date de début doit précéder la date de fin",

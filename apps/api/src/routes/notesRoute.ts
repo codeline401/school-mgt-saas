@@ -98,7 +98,7 @@ router.get(
 router.post(
   "/",
   authenticate,
-  authorizeRoles(Role.PROF, Role.SUDO_ADMIN),
+  authorizeRoles(Role.PROF, Role.SUDO_ADMIN, Role.ADMIN),
   upload.single("feuille"), //
   createClasseNote,
 );
@@ -110,7 +110,7 @@ router.post(
 router.put(
   "/:noteId",
   authenticate,
-  authorizeRoles(Role.SUDO_ADMIN, Role.PROF),
+  authorizeRoles(Role.SUDO_ADMIN, Role.PROF, Role.ADMIN),
   upload.single("feuille"),
   updateClasseNote,
 );

@@ -92,7 +92,7 @@ export class NoteParcoursService {
         note: Number(ligne.note),
         noteMax: Number(ligne.noteMax),
         coefficient: Number(ligne.coefficient),
-        dateEval: ligne.dateEval.toDateString(),
+        dateEval: ligne.dateEval.toISOString(),
       })),
       pagination: {
         page: query.page,

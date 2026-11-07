@@ -70,6 +70,9 @@ export function NotesParcoursSection({ initialEleveId }: Props) {
   }
 
   function selectionnerEleve(student: FicheEleveComplete) {
+    if (student.id !== eleveId) {
+      setFiltres((courant) => ({ ...courant, matiereId: "", periodeId: "" }));
+    }
     setEleveId(student.id);
     setPage(1);
   }
