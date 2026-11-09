@@ -98,11 +98,13 @@ export function useUpdateEleve(eleveId: string) {
       );
       return data;
     },
-    onSuccess: (updatedEleve) => {
-      // Mise à jour du cache de détail
-      queryClient.setQueryData(ficheEleveKeys.detail(eleveId), updatedEleve);
+    onSuccess: async () => {
+      // 1. On attend uniquement le rafraîchissement de la fiche de détail
+      await queryClient.invalidateQueries({
+        queryKey: ficheEleveKeys.detail(eleveId),
+      });
 
-      // Invalider la liste pour refléter les changements
+      // 2. On déclenche la liste en arrière-plan sans bloquer la fin de la mutation
       queryClient.invalidateQueries({ queryKey: ficheEleveKeys.lists() });
 
       toast.success("Fiche élève mise à jour avec succès");
