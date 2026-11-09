@@ -65,11 +65,15 @@ export const createClasseNote = async (req: Request, res: Response) => {
   try {
     const { classeId } = req.params as { classeId: string };
 
-    if (req.user!.realRole !== "PROF" && req.user!.realRole !== "SUDO_ADMIN") {
+    if (
+      req.user!.realRole !== "PROF" &&
+      req.user!.realRole !== "ADMIN" &&
+      req.user!.realRole !== "SUDO_ADMIN"
+    ) {
       removeUploadedFile((req as any).file?.path);
-      return res
-        .status(403)
-        .json({ error: "Seul un professeur peut saisir une note." });
+      return res.status(403).json({
+        error: "Seul un professeur ou un administrateur peut saisir une note.",
+      });
     }
 
     const validatedData = createNoteSchema.parse(req.body);
@@ -187,6 +191,7 @@ export const updateClasseNote = async (req: Request, res: Response) => {
 
     if (
       req.user!.realRole !== "SUDO_ADMIN" &&
+      req.user!.realRole !== "ADMIN" &&
       existingNote.createdById !== req.user!.id
     ) {
       removeUploadedFile((req as any).file?.path);
