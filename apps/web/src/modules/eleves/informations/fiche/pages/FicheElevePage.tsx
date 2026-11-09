@@ -50,6 +50,41 @@ function formatDate(date?: string | null): string {
 }
 
 // ═══════════════════════════════════════════════════════════════════
+// HELPER: Fomratage age
+// ═══════════════════════════════════════════════════════════════════
+function formatAge(dateNaissance?: string | null): string {
+  if (!dateNaissance) return "—";
+
+  const parties = /^(\d{4})-(\d{2})-(\d{2})/.exec(dateNaissance);
+  if (!parties) return "—";
+
+  const annee = Number(parties[1]);
+  const mois = Number(parties[2]);
+  const jour = Number(parties[3]);
+  const naissance = new Date(Date.UTC(annee, mois - 1, jour));
+
+  if (
+    naissance.getUTCFullYear() !== annee ||
+    naissance.getUTCMonth() !== mois - 1 ||
+    naissance.getUTCDate() !== jour
+  ) {
+    return "—";
+  }
+
+  const aujourdHui = new Date();
+  let moisComplets =
+    (aujourdHui.getFullYear() - annee) * 12 + aujourdHui.getMonth() + 1 - mois;
+
+  if (aujourdHui.getDate() < jour) moisComplets--;
+  if (moisComplets < 0) return "—";
+
+  const ans = Math.floor(moisComplets / 12);
+  const moisRestants = moisComplets % 12;
+  const ageEnAns = `${ans} ${ans === 1 ? "an" : "ans"}`;
+
+  return ans < 6 ? `${ageEnAns} et ${moisRestants} mois` : ageEnAns;
+}
+// ═══════════════════════════════════════════════════════════════════
 // HELPER: Formater les montants
 // ═══════════════════════════════════════════════════════════════════
 function formatMontant(montant: number | string | null | undefined): string {
@@ -434,7 +469,7 @@ export default function FicheElevePage() {
                   <div>
                     <p className="text-xs text-base-content/60">Âge</p>
                     <p className="font-semibold">
-                      {eleve.age ? `${eleve.age} ans` : "—"}
+                      {formatAge(eleve.dateNaissance)}
                     </p>
                   </div>
                 </div>
@@ -562,10 +597,7 @@ export default function FicheElevePage() {
         </SectionCard>
 
         {/* SECTION: Contact d'urgence */}
-        <SectionCard
-          title="Contact d'urgence"
-          icon={<ShieldAlert size={18} />}
-        >
+        <SectionCard title="Contact d'urgence" icon={<ShieldAlert size={18} />}>
           <EmergencyContactCard
             eleveId={eleve.id}
             canEdit={user?.role === "ADMIN" || user?.role === "SUDO_ADMIN"}

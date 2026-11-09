@@ -98,12 +98,13 @@ export function useUpdateEleve(eleveId: string) {
       );
       return data;
     },
-    onSuccess: (updatedEleve) => {
-      // Mise à jour du cache de détail
-      queryClient.setQueryData(ficheEleveKeys.detail(eleveId), updatedEleve);
-
-      // Invalider la liste pour refléter les changements
-      queryClient.invalidateQueries({ queryKey: ficheEleveKeys.lists() });
+    onSuccess: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: ficheEleveKeys.detail(eleveId),
+        }),
+        queryClient.invalidateQueries({ queryKey: ficheEleveKeys.lists() }),
+      ]);
 
       toast.success("Fiche élève mise à jour avec succès");
     },
