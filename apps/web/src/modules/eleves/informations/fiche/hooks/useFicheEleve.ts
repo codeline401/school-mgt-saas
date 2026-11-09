@@ -99,12 +99,13 @@ export function useUpdateEleve(eleveId: string) {
       return data;
     },
     onSuccess: async () => {
-      await Promise.all([
-        queryClient.invalidateQueries({
-          queryKey: ficheEleveKeys.detail(eleveId),
-        }),
-        queryClient.invalidateQueries({ queryKey: ficheEleveKeys.lists() }),
-      ]);
+      // 1. On attend uniquement le rafraîchissement de la fiche de détail
+      await queryClient.invalidateQueries({
+        queryKey: ficheEleveKeys.detail(eleveId),
+      });
+
+      // 2. On déclenche la liste en arrière-plan sans bloquer la fin de la mutation
+      queryClient.invalidateQueries({ queryKey: ficheEleveKeys.lists() });
 
       toast.success("Fiche élève mise à jour avec succès");
     },
