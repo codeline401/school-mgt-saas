@@ -43,7 +43,7 @@ export const createNoteSchema = z.object({
   matiereId: z.string().uuid("L'ID de la matière doit être un UUID valide"),
   periodeId: z.preprocess(
     (value) => (value === "" ? null : value),
-    z.string().uuid("Préiode invalide").nullable().optional(),
+    z.string().uuid("Période invalide").nullable().optional(),
   ),
   commentaire: z
     .string()
