@@ -3,7 +3,12 @@
 import { z } from "zod"; // Importation de Zod pour la validation des données
 
 /** Types d'évaluation supportés. */
-export const TYPE_NOTE_VALUES = ["INTERROGATION", "DS", "EXAMEN", "AUTRE"] as const;
+export const TYPE_NOTE_VALUES = [
+  "INTERROGATION",
+  "DS",
+  "EXAMEN",
+  "AUTRE",
+] as const;
 export type TypeNoteValue = (typeof TYPE_NOTE_VALUES)[number];
 
 /**
@@ -36,6 +41,10 @@ export const createNoteSchema = z.object({
     .default(1),
   eleveId: z.string().uuid("L'ID de l'élève doit être un UUID valide"),
   matiereId: z.string().uuid("L'ID de la matière doit être un UUID valide"),
+  periodeId: z.preprocess(
+    (value) => (value === "" ? null : value),
+    z.string().uuid("Période invalide").nullable().optional(),
+  ),
   commentaire: z
     .string()
     .max(500, "Le commentaire doit contenir au maximum 500 caractères")
@@ -58,6 +67,10 @@ export const updateNoteSchema = z.object({
     .min(0, "La note doit être supérieure ou égale à 0")
     .optional(),
   noteMax: z.coerce.number().min(1).optional(),
+  periodeId: z.preprocess(
+    (value) => (value === "" ? null : value),
+    z.string().uuid("Période invalide").nullable().optional(),
+  ),
   coefficient: z.coerce.number().int().min(1).optional(),
   commentaire: z
     .string()

@@ -43,8 +43,6 @@ function getTodayLocal(): string {
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-
-
 /**
  * Parse un string de date sans décaler le jour dû à l'UTC.
  * Les strings "YYYY-MM-DD" et les datetimes ISO ("YYYY-MM-DDTHH:...") sont
@@ -81,6 +79,7 @@ interface NoteForm {
   classeId: string; // sélection préalable de la classe
   eleveId: string;
   matiereId: string;
+  periodeId: string;
   titre: string;
   note: string;
   noteMax: string;
@@ -95,6 +94,7 @@ const EMPTY_FORM: NoteForm = {
   classeId: "",
   eleveId: "",
   matiereId: "",
+  periodeId: "",
   titre: "",
   note: "",
   noteMax: "20",
@@ -168,6 +168,7 @@ export default function SaisieNotesTab() {
       const { data } = await api.get(`/api/classes/${form.classeId}/matieres`);
       return data;
     },
+
     enabled: !!form.classeId,
   });
 
@@ -178,6 +179,7 @@ export default function SaisieNotesTab() {
       formData.append("titre", values.titre);
       formData.append("eleveId", values.eleveId);
       formData.append("matiereId", values.matiereId);
+      formData.append("periodeId", values.periodeId);
       formData.append("note", values.note);
       formData.append("noteMax", values.noteMax);
       formData.append("coefficient", values.coefficient);
@@ -263,6 +265,7 @@ export default function SaisieNotesTab() {
       classeId: note.classeId,
       eleveId: note.eleveId,
       matiereId: note.matiereId ?? note.matiere?.id ?? "",
+      periodeId: note.periodeId ?? "",
       titre: note.titre,
       note: String(note.note),
       noteMax: String(note.noteMax),
@@ -293,6 +296,7 @@ export default function SaisieNotesTab() {
       if (name === "classeId") {
         next.eleveId = "";
         next.matiereId = "";
+        next.periodeId = "";
       }
       return next;
     });
@@ -306,6 +310,17 @@ export default function SaisieNotesTab() {
     e.preventDefault();
     saveMutation.mutate(form);
   }
+
+  const periodes = useQuery({
+    queryKey: ["classe-periode", form.classeId],
+    queryFn: async () => {
+      const { data } = await api.get<
+        Array<{ id: string; nom: string; anneeScolaire: string }>
+      >(`/api/classes/${form.classeId}/notes/periodes`);
+      return data;
+    },
+    enabled: !!form.classeId,
+  });
 
   // ── Rendu ──────────────────────────────────────────────────────────────────
 
@@ -438,22 +453,23 @@ export default function SaisieNotesTab() {
                         {n.commentaire ?? "—"}
                       </td>
                       <td className="text-center">
-		        {n.feuillePath ? (
-				    <a
-				          href={`${API_URL}/uploads/feuilles/${n.feuillePath.split(/[\\/]/).pop()}`}
-					        target="_blank"
-						      rel="noopener noreferrer"
-						            className="btn btn-ghost btn-xs"
-							          aria-label="Voir la feuille corrigée"
-								      >
-								            <FileText size={14} className="text-info" />
-									        </a>
-										  ) : (
-										      <span className="text-base-content/30 text-xs">—</span>
-										        )}
-											</td>
-          
-                      
+                        {n.feuillePath ? (
+                          <a
+                            href={`${API_URL}/uploads/feuilles/${n.feuillePath.split(/[\\/]/).pop()}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn btn-ghost btn-xs"
+                            aria-label="Voir la feuille corrigée"
+                          >
+                            <FileText size={14} className="text-info" />
+                          </a>
+                        ) : (
+                          <span className="text-base-content/30 text-xs">
+                            —
+                          </span>
+                        )}
+                      </td>
+
                       {canWrite && (
                         <td className="text-right space-x-1">
                           <button
@@ -564,6 +580,29 @@ export default function SaisieNotesTab() {
                   </option>
                 ))}
               </select>
+            </fieldset>
+
+            <fieldset className="fieldset">
+              <span className="label">Période</span>
+              <select
+                className="select select-bordered w-full"
+                name="periodeId"
+                value={form.periodeId}
+                onChange={handleChange}
+                disabled={!form.classeId || periodes.isLoading}
+              >
+                <option value="">Sans période</option>
+                {periodes.data?.map((periode) => (
+                  <option key={periode.id} value={periode.id}>
+                    {periode.nom} — {periode.anneeScolaire}
+                  </option>
+                ))}
+              </select>
+              {periodes.isError && (
+                <span className="text-error text-sm">
+                  Impossible de charger les périodes.
+                </span>
+              )}
             </fieldset>
 
             {/* ── 4. Titre de l'évaluation ──────────────────────────── */}

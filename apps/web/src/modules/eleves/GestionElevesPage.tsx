@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -35,6 +35,7 @@ import { JustificationSection } from "./absence-retard/justifiactions/components
 import { AlertesSection } from "./absence-retard/alertes/components/AlertesSection";
 import { SanctionsSection } from "./absence-retard/sanctions/components/SanctionSection";
 import { NotesParcoursSection } from "./parcours/notes/components/NotesParcoursSection";
+import { BulletinSection } from "./parcours/bulletins/components/BulletinSection";
 
 type MainTab =
   | "informations"
@@ -148,9 +149,7 @@ const documentTabs: TabItem<DocumentSubTab>[] = [
 function GestionElevesPage() {
   const location = useLocation();
   const { id: eleveId } = useParams<{ id: string }>();
-  const [activeSubTab, setActiveSubTab] = useState<MainTab>(
-    PATH_TO_TAB[location.pathname] || "informations",
-  );
+  const activeSubTab = PATH_TO_TAB[location.pathname] || "informations";
   const [activeInfoSubTab, setActiveInfoSubTab] =
     useState<InformationSubTab>("fiche");
   const [activeEcolageSubTab, setActiveEcolageSubTab] =
@@ -164,11 +163,6 @@ function GestionElevesPage() {
   const [activeDocumentSubTab, setActiveDocumentSubTab] =
     useState<DocumentSubTab>("pieces");
   const [isCreateEleveModalOpen, setIsCreateEleveModalOpen] = useState(false);
-
-  useEffect(() => {
-    const tab = PATH_TO_TAB[location.pathname];
-    if (tab) setActiveSubTab(tab);
-  }, [location.pathname]);
 
   // const handleTabChange = (tab: MainTab) => {
   //   const path = Object.keys(PATH_TO_TAB).find(
@@ -245,13 +239,7 @@ function GestionElevesPage() {
       case "notes":
         return <NotesParcoursSection initialEleveId={eleveId} />;
       case "bulletins":
-        return (
-          <DevelopmentPlaceholder
-            icon={FileText}
-            title="Bulletins & relevés"
-            description="Téléchargement, consultation et historique des bulletins trimestriels."
-          />
-        );
+        return <BulletinSection initialEleveId={eleveId} />;
       case "progression":
         return (
           <DevelopmentPlaceholder

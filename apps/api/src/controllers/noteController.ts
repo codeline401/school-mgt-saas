@@ -13,6 +13,38 @@ import {
   computeMoyennesAuto,
   computeClassement,
 } from "../services/note.service.js";
+/**
+ * Vérifie si la période appartient à l'école donnée.
+ * @param periodeId L'identifiant de la période à vérifier.
+ * @param schoolId L'identifiant de l'école.
+ * @returns true si la période existe et appartient à l'école, false sinon.
+ */
+async function periodeDeLEcole(
+  periodeId: string | null | undefined,
+  schoolId: string,
+): Promise<boolean> {
+  if (!periodeId) return true;
+
+  const periode = await prisma.periode.findFirst({
+    where: { id: periodeId, schoolId },
+    select: { id: true },
+  });
+
+  return !!periode; // Retourne true si la période existe et appartient à l'école, false sinon.
+}
+
+function normalizePeriodeIdFromBody(
+  body: Record<string, unknown> | undefined,
+): string | null | undefined {
+  if (!body) return undefined;
+
+  const raw = body.periodeId ?? body.periodId;
+  if (raw === undefined || raw === null) return undefined;
+  if (typeof raw !== "string") return undefined;
+
+  const trimmed = raw.trim();
+  return trimmed === "" ? null : trimmed;
+}
 
 // --- GET /api/classes/:classeId/notes ---------------------------------------------------
 
@@ -76,11 +108,19 @@ export const createClasseNote = async (req: Request, res: Response) => {
       });
     }
 
-    const validatedData = createNoteSchema.parse(req.body);
+    const normalizedPeriodeId = normalizePeriodeIdFromBody(
+      req.body as Record<string, unknown>,
+    );
+    const validatedData = createNoteSchema.parse({
+      ...req.body,
+      ...(normalizedPeriodeId !== undefined
+        ? { periodeId: normalizedPeriodeId }
+        : {}),
+    });
 
     const classe = await prisma.classe.findUnique({ where: { id: classeId } });
     if (!classe) {
-      removeUploadedFile((req as any).file?.path);
+      removeUploadedFile(req.file?.path);
       return res.status(404).json({ error: "Classe non trouvé" });
     }
 
@@ -91,12 +131,19 @@ export const createClasseNote = async (req: Request, res: Response) => {
         classe.schoolId,
       )
     ) {
-      removeUploadedFile((req as any).file?.path);
+      removeUploadedFile(req.file?.path);
       return res.status(403).json({ error: "Accès refusé." });
     }
 
+    if (!(await periodeDeLEcole(validatedData.periodeId, classe.schoolId))) {
+      removeUploadedFile(req.file?.path);
+      return res
+        .status(400)
+        .json({ error: "La période spécifiée n'appartient pas à l'école." });
+    }
+
     if (validatedData.note > validatedData.noteMax) {
-      removeUploadedFile((req as any).file?.path);
+      removeUploadedFile(req.file?.path);
       return res.status(400).json({
         error: `La note (${validatedData.note}) ne peut pas dépasser la note maximale (${validatedData.noteMax})`,
       });
@@ -106,7 +153,7 @@ export const createClasseNote = async (req: Request, res: Response) => {
       where: { id: validatedData.eleveId, classeId },
     });
     if (!eleve) {
-      removeUploadedFile((req as any).file?.path);
+      removeUploadedFile(req.file?.path);
       return res
         .status(404)
         .json({ error: "Elève non trouvé dans cette classe" });
@@ -116,7 +163,7 @@ export const createClasseNote = async (req: Request, res: Response) => {
       where: { id: validatedData.matiereId, classeId },
     });
     if (!matiere) {
-      removeUploadedFile((req as any).file?.path);
+      removeUploadedFile(req.file?.path);
       return res
         .status(404)
         .json({ error: "Matière non trouvé dans cette classe." });
@@ -134,7 +181,7 @@ export const createClasseNote = async (req: Request, res: Response) => {
 
     res.status(201).json(note);
   } catch (err) {
-    removeUploadedFile((req as any).file?.path);
+    removeUploadedFile(req.file?.path);
     if (err instanceof ZodError) {
       return res.status(400).json({ error: err.issues });
     }
@@ -166,13 +213,25 @@ export const updateClasseNote = async (req: Request, res: Response) => {
       classeId: string;
       noteId: string;
     };
-    const validatedData = updateNoteSchema.parse(req.body);
+    const normalizedPeriodeId = normalizePeriodeIdFromBody(
+      req.body as Record<string, unknown>,
+    );
+    const validatedData = updateNoteSchema.parse({
+      ...req.body,
+      ...(normalizedPeriodeId !== undefined
+        ? { periodeId: normalizedPeriodeId }
+        : {}),
+    });
+
+    // console.log("Période reçue: ", (req.body as any).periodeId);
+    // console.log("Période reçue (alias periodId): ", (req.body as any).periodId);
+    // console.log("Période validée: ", validatedData.periodeId);
 
     const existingNote = await prisma.note.findFirst({
       where: { id: noteId, classeId },
     });
     if (!existingNote) {
-      removeUploadedFile((req as any).file?.path);
+      removeUploadedFile(req.file?.path);
       return res.status(404).json({ error: "Note non trouvé" });
     }
 
@@ -183,10 +242,19 @@ export const updateClasseNote = async (req: Request, res: Response) => {
         existingNote.schoolId,
       )
     ) {
-      removeUploadedFile((req as any).file?.path);
+      removeUploadedFile(req.file?.path);
       return res
         .status(403)
         .json({ error: "Accès refusé à la modification des notes" });
+    }
+
+    if (
+      !(await periodeDeLEcole(validatedData.periodeId, existingNote.schoolId))
+    ) {
+      removeUploadedFile(req.file?.path);
+      return res
+        .status(400)
+        .json({ error: "Période introuvable dans cette école" });
     }
 
     if (
@@ -194,7 +262,7 @@ export const updateClasseNote = async (req: Request, res: Response) => {
       req.user!.realRole !== "ADMIN" &&
       existingNote.createdById !== req.user!.id
     ) {
-      removeUploadedFile((req as any).file?.path);
+      removeUploadedFile(req.file?.path);
       return res.status(403).json({
         error: "Vous ne pouvez modifier que les notes que vous avez saisies.",
       });
@@ -204,13 +272,13 @@ export const updateClasseNote = async (req: Request, res: Response) => {
       validatedData.noteMax ?? Number(existingNote.noteMax);
     const effectiveNote = validatedData.note ?? Number(existingNote.note);
     if (effectiveNote > effectiveNoteMax) {
-      removeUploadedFile((req as any).file?.path);
+      removeUploadedFile(req.file?.path);
       return res.status(400).json({
         error: `La note ne peut pas dépasser la note maximale (${effectiveNoteMax})`,
       });
     }
 
-    const newFile = (req as any).file;
+    const newFile = req.file;
     const newFeuillePath = newFile?.path ?? null;
 
     const updatedNote = await updateNote(
@@ -220,6 +288,8 @@ export const updateClasseNote = async (req: Request, res: Response) => {
       !!newFile,
     );
 
+    // console.log("Période enregistrée :", updatedNote.periodeId);
+
     // Supprimer l'ancien fichier après la mise à jour réussie en BDD
     if (newFile && existingNote.feuillePath) {
       removeUploadedFile(existingNote.feuillePath);
@@ -227,7 +297,7 @@ export const updateClasseNote = async (req: Request, res: Response) => {
 
     res.status(200).json(updatedNote);
   } catch (err) {
-    removeUploadedFile((req as any).file?.path);
+    removeUploadedFile(req.file?.path);
     if (err instanceof ZodError) {
       return res.status(400).json({ error: err.issues });
     }
