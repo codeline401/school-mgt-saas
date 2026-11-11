@@ -294,6 +294,7 @@ export interface Note extends BaseEntity {
   eleveId: string; // ID de l'élève concerné
   matiereId: string; // ID de la matière concernée
   classeId: string; // ID de la classe concernée
+  periodeId: string | null;
   createdById: string; // ID du professeur qui a créé la note
   eleve?: NoteEleveResume; // Résumé de l'élève (inclus si demandé avec include)
   matiere?: NoteMatiereResume; // Résumé de la matière (inclus si demandé avec include)

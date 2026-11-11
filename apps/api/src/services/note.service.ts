@@ -16,6 +16,7 @@ export interface NoteCreateInput {
   dateEval?: Date;
   eleveId: string;
   matiereId: string;
+  periodeId?: string | null;
 }
 
 export interface NoteUpdateInput {
@@ -25,6 +26,7 @@ export interface NoteUpdateInput {
   commentaire?: string | null;
   typeNote?: string;
   dateEval?: Date;
+  periodeId?: string | null;
 }
 
 export interface DateFilter {
@@ -173,6 +175,7 @@ export async function createNote(
       classeId,
       schoolId,
       createdById,
+      periodeId: data.periodeId ?? null,
     },
   });
 }
@@ -200,6 +203,7 @@ export async function updateNote(
         : {}),
       ...(data.dateEval !== undefined ? { dateEval: data.dateEval } : {}),
       ...(hasNewFile ? { feuillePath: newFeuillePath } : {}),
+      ...(data.periodeId !== undefined ? { periodeId: data.periodeId } : {}),
     },
   });
 }

@@ -166,20 +166,22 @@ export const exportController = {
         });
         return;
       }
-      const { eleveId, periodeId, options: rawOptions } = parsed.data;
-      const options = mergeExportOptions(rawOptions);
+      const {
+        eleveId,
+        classeId: classeDemandeId, // on renomme pour clarifier que c'est la classe demandée dans l'export
+        periodeId,
+        options: rawOptions,
+      } = parsed.data;
+
+      const options = mergeExportOptions(rawOptions); // fusionne les options d'export avec les valeurs par défaut
 
       const eleve = await prisma.eleve.findFirst({
         where: {
           id: eleveId,
-          schoolId: req.user!.schoolId as string,
-        },
-        include: {
-          classe: {
-            include: {
-              school: schoolSelect,
-            },
-          },
+          deletedAt: null,
+          ...(req.user!.role === "SUDO_ADMIN"
+            ? {}
+            : { schoolId: req.user!.schoolId ?? "" }),
         },
       });
       if (!eleve) {
@@ -187,23 +189,66 @@ export const exportController = {
         return;
       }
 
-      if (!eleve.classeId || !eleve.classe) {
-        res.status(400).json({ error: "L'élève n'est pas affecté à une classe" });
+      const classeId = classeDemandeId ?? eleve.classeId; // on utilise la classe demandée si fournie, sinon celle de l'élève
+
+      if (!classeId) {
+        res.status(400).json({ error: "Aucune classe sélectionnée" }); // on retourne une erreur si aucune classe n'est sélectionnée
         return;
       }
 
-      const periode = await prisma.periode.findFirst({
-        where: { id: periodeId, schoolId: req.user!.schoolId as string },
-      });
-      if (!periode) {
-        res.status(404).json({ error: "Période introuvable" });
+      const [classe, periode] = await Promise.all([
+        prisma.classe.findFirst({
+          where: { id: classeId, schoolId: eleve.schoolId },
+          include: { school: schoolSelect },
+        }),
+        prisma.periode.findFirst({
+          where: { id: periodeId, schoolId: eleve.schoolId },
+        }),
+      ]);
+
+      if (!classe || !periode) {
+        res.status(404).json({ error: "Classe ou période introuvable" }); // on retourne une erreur si la classe ou la période n'existe pas
+        return;
+      }
+
+      const [historique, affectation] = await Promise.all([
+        prisma.historiqueClasse.findFirst({
+          where: { eleveId, classeId, anneeScolaire: periode.anneeScolaire },
+          select: { id: true },
+        }),
+        prisma.affectationClasse.findFirst({
+          where: {
+            eleveId,
+            schoolId: eleve.schoolId,
+            anneeScolaire: periode.anneeScolaire,
+            OR: [
+              { ancienneClasseId: classeId },
+              { nouvelleClasseId: classeId },
+            ],
+          },
+          select: { id: true },
+        }),
+      ]);
+
+      if (eleve.classeId !== classeId && !historique && !affectation) {
+        res.status(404).json({
+          error: "Cette classe ne figure pas dans le parcours de l'élève",
+        });
         return;
       }
 
       const notes = await prisma.note.findMany({
-        where: { eleveId, periodeId },
+        where: { eleveId, classeId, periodeId, schoolId: eleve.schoolId },
         include: { matiere: true },
       });
+
+      if (notes.length === 0) {
+        res.status(422).json({
+          error:
+            "Aucune note liée à cette période pour l'élève et la classe sélectionnée",
+        });
+        return;
+      }
 
       const { moyenneGenerale, parMatiere } = computeStudentAverages(
         notes.map((n) => ({
@@ -256,15 +301,15 @@ export const exportController = {
             return m;
           }),
       );
-      const allSorted = [...moyennesAutres, moyenneGenerale].sort(
-        (a, b) => b - a,
-      );
-      const rang = allSorted.indexOf(moyenneGenerale) + 1;
+      // const allSorted = [...moyennesAutres, moyenneGenerale].sort(
+      //   (a, b) => b - a,
+      // );
+      // const rang = allSorted.indexOf(moyenneGenerale) + 1;
 
       // Récupère la signature du directeur (ADMIN de l'école)
       const admin = await prisma.user.findFirst({
         where: {
-          schoolId: eleve.classe.schoolId,
+          schoolId: classe.schoolId,
           role: { in: ["ADMIN", "SUDO_ADMIN"] },
         },
         include: { signature: true },
@@ -273,7 +318,7 @@ export const exportController = {
       // FIX : prof principal désigné via Classe.professeurPrincipalId,
       // au lieu d'un professeur arbitraire parmi ceux affectés à la classe.
       const classeAvecPrincipal = (await prisma.classe.findUnique({
-        where: { id: eleve.classeId },
+        where: { id: classeId },
         include: {
           professeurPrincipal: {
             include: { user: { include: { signature: true } } },
@@ -306,7 +351,7 @@ export const exportController = {
           )
         : null;
 
-      const config = await resolveTemplateConfig(eleve.classe.schoolId);
+      const config = await resolveTemplateConfig(classe.schoolId);
 
       const data: BulletinData = {
         eleve: {
@@ -316,7 +361,7 @@ export const exportController = {
           dateNaissance: eleve.dateNaissance?.toISOString() ?? null,
           photoUrl: eleve.photoUrl,
         },
-        classe: { id: eleve.classe.id, nom: eleve.classe.nom },
+        classe: { id: classeId, nom: classe.nom },
         periode: {
           id: periode.id,
           nom: periode.nom,
@@ -325,14 +370,14 @@ export const exportController = {
         },
         subjects,
         moyenneGenerale,
-        rang,
-        totalEleves: elevesClasse.length,
+        rang: null,
+        totalEleves: 0,
         appreciationConseil: null,
         decision: null,
         mention: null,
         avertissement: null,
         config,
-        school: mapSchool(eleve.classe.school),
+        school: mapSchool(classe.school),
         dateGeneration: new Date().toISOString(),
         watermark: options.watermark,
         primaryColor: options.primaryColor ?? "#2563eb",
@@ -396,7 +441,9 @@ export const exportController = {
         return;
       }
       if (!eleve.classeId || !eleve.classe) {
-        res.status(400).json({ error: "L'élève n'est pas affecté à une classe" });
+        res
+          .status(400)
+          .json({ error: "L'élève n'est pas affecté à une classe" });
         return;
       }
       const periode = await prisma.periode.findFirst({

@@ -12,6 +12,10 @@ const exportOptionsSchema = z
 
 export const bulletinExportSchema = z.object({
   eleveId: z.string().uuid("L'identifiant de l'élève est invalide"),
+  classeId: z
+    .string()
+    .uuid("L'indentifiant de la classe est invalide")
+    .optional(), // on le met en faculatatif pour ne pas casser les appels existants
   periodeId: z.string().uuid("L'identifiant de la période est invalide"),
   options: exportOptionsSchema,
 });

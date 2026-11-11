@@ -35,6 +35,7 @@ import { JustificationSection } from "./absence-retard/justifiactions/components
 import { AlertesSection } from "./absence-retard/alertes/components/AlertesSection";
 import { SanctionsSection } from "./absence-retard/sanctions/components/SanctionSection";
 import { NotesParcoursSection } from "./parcours/notes/components/NotesParcoursSection";
+import { BulletinSection } from "./parcours/bulletins/components/BulletinSection";
 
 type MainTab =
   | "informations"
@@ -245,13 +246,7 @@ function GestionElevesPage() {
       case "notes":
         return <NotesParcoursSection initialEleveId={eleveId} />;
       case "bulletins":
-        return (
-          <DevelopmentPlaceholder
-            icon={FileText}
-            title="Bulletins & relevés"
-            description="Téléchargement, consultation et historique des bulletins trimestriels."
-          />
-        );
+        return <BulletinSection initialEleveId={eleveId} />;
       case "progression":
         return (
           <DevelopmentPlaceholder
