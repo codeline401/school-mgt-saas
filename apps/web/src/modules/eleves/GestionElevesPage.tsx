@@ -36,6 +36,7 @@ import { AlertesSection } from "./absence-retard/alertes/components/AlertesSecti
 import { SanctionsSection } from "./absence-retard/sanctions/components/SanctionSection";
 import { NotesParcoursSection } from "./parcours/notes/components/NotesParcoursSection";
 import { BulletinSection } from "./parcours/bulletins/components/BulletinSection";
+import { ProgressionSection } from "./parcours/progression/components/ProgressionSection";
 
 type MainTab =
   | "informations"
@@ -242,10 +243,9 @@ function GestionElevesPage() {
         return <BulletinSection initialEleveId={eleveId} />;
       case "progression":
         return (
-          <DevelopmentPlaceholder
-            icon={GraduationCap}
-            title="Progression scolaire"
-            description="Suivi des performances, évolutions, points forts et axes d’amélioration."
+          <ProgressionSection
+            key={eleveId ?? "progression"}
+            initialEleveId={eleveId}
           />
         );
       case "orientation":

@@ -11,8 +11,8 @@
     "test": "echo \"No Web tests configured yet\""
   },
   "dependencies": {
-    "@school-mgt/types": "*",
     "@hookform/resolvers": "^5.2.2",
+    "@school-mgt/types": "*",
     "@tailwindcss/postcss": "^4.2.2",
     "@tailwindcss/vite": "^4.2.2",
     "@tanstack/react-query": "^5.96.2",
@@ -24,6 +24,7 @@
     "react-hook-form": "^7.85.0",
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^7.14.0",
+    "recharts": "^3.10.1",
     "xlsx": "^0.18.5",
     "zustand": "^5.0.12"
   },
@@ -42,7 +43,7 @@
     "postcss": "^8.5.8",
     "tailwindcss": "^4.2.2",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.57.0",
+    "typescript-eslint": "^8.36.0",
     "vite": "^8.0.16"
   }
 }

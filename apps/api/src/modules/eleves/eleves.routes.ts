@@ -1,4 +1,5 @@
 import { Router } from "express";
+import progressionRoutes from "./parcours/progression/progression.routes.js";
 
 import sanctionRoutes from "./absences/sanctions/sanction.routes.js";
 import ficheRoutes from "./informations/fiche/fiche.routes.js";
@@ -53,5 +54,6 @@ router.use("/absences/alertes", alerteRoutes);
 router.use("/absences/sanctions", sanctionRoutes);
 
 router.use("/parcours/notes", noteRoutes);
+router.use("/parcours/progression", progressionRoutes);
 
 export default router;
