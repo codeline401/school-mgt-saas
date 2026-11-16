@@ -27,8 +27,11 @@ export function ProgressionFilters({
   return (
     <div className="grid gap-3 sm:grid-cols-3">
       <fieldset className="fieldset">
-        <legend className="fieldset-legend">Classe</legend>
+        <legend id="legend-classe" className="fieldset-legend">
+          Classe
+        </legend>
         <select
+          aria-labelledby="legend-classe"
           className="select select-sm select-bordered w-full"
           value={classeId}
           onChange={(event) => onClasseChange(event.target.value)}
@@ -43,8 +46,11 @@ export function ProgressionFilters({
       </fieldset>
 
       <fieldset className="fieldset">
-        <legend className="fieldset-legend">Période</legend>
+        <legend id="legend-periode" className="fieldset-legend">
+          Période
+        </legend>
         <select
+          aria-labelledby="legend-periode"
           className="select select-sm select-bordered w-full"
           value={periodeId}
           disabled={!classeId}
@@ -60,8 +66,11 @@ export function ProgressionFilters({
       </fieldset>
 
       <fieldset className="fieldset">
-        <legend className="fieldset-legend">Matière</legend>
+        <legend id="legend-matiere" className="fieldset-legend">
+          Matière
+        </legend>
         <select
+          aria-labelledby="legend-matiere"
           className="select select-sm select-bordered w-full"
           value={matiereId}
           disabled={!classeId}

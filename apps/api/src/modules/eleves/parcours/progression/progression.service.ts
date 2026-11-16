@@ -154,40 +154,43 @@ export class ProgressionService {
 
     for (const note of notes) {
       const date = dateISO(note.dateEval);
-      const key = query.matiereId
-        ? `matière:${note.periode?.id ?? "sans-periode"} : ${date}` // Clé unique pour chaque matière et date
-        : note.periode //
-          ? `periode:${note.periode.id}` // Clé unique pour chaque période
-          : `date:${date}`; // Clé unique pour chaque date
 
-      const groupeExistant = groupes.get(key); // Récupère le groupe existant pour cette clé, s'il existe
+      // Détermination de la clé et de l'ordre selon qu'on filtre par matière ou non
+      const key = query.matiereId
+        ? `matière:${note.periode?.id ?? "sans-periode"} : ${date}` // Clé unique par date d'évaluation si matiereId est présent
+        : note.periode
+          ? `periode:${note.periode.id}` // Clé unique par période
+          : `date:${date}`;
+
+      // Si query.matiereId est présent, on se base strictement sur dateEval. Sinon on garde la période.
+      const timestampOrdre = query.matiereId
+        ? note.dateEval.getTime()
+        : (note.periode?.dateDebut?.getTime() ?? note.dateEval.getTime());
+
+      const groupeExistant = groupes.get(key);
 
       if (groupeExistant) {
-        groupeExistant.notes.push(note); // Ajoute la note au groupe existant
-        groupeExistant.ordre = Math.min(
-          groupeExistant.ordre,
-          note.periode?.dateDebut?.getTime() ?? note.dateEval.getTime(),
-        );
+        groupeExistant.notes.push(note);
+        groupeExistant.ordre = Math.min(groupeExistant.ordre, timestampOrdre);
       } else {
         groupes.set(key, {
-          // Crée un nouveau groupe pour cette clé
-          periode: note.periode // Inclut les informations de la période si elle existe
+          periode: note.periode
             ? {
                 id: note.periode.id,
                 nom: note.periode.nom,
                 anneeScolaire: note.periode.anneeScolaire,
               }
             : null,
-          date: query.matiereId || !note.periode ? date : null, // Inclut la date si c'est une matière ou s'il n'y a pas de période associée
-          ...(query.matiereId ? { matiere: note.matiere } : {}), // Inclut les informations de la matière si c'est une matière spécifique
-          notes: [note], // Initialise le groupe avec la note actuelle
-          ordre: note.periode?.dateDebut?.getTime() ?? note.dateEval.getTime(), // Définit l'ordre du groupe en fonction de la date de début de la période ou de la date de l'évaluation
+          date: query.matiereId || !note.periode ? date : null,
+          ...(query.matiereId ? { matiere: note.matiere } : {}),
+          notes: [note],
+          ordre: timestampOrdre,
         });
       }
     }
 
     const points: ProgressionPoint[] = [...groupes.values()]
-      .sort((a, b) => a.ordre - b.ordre) // Transforme les groupes en tableau de points de progression et les trie par ordre
+      .sort((a, b) => a.ordre - b.ordre) // Correction du tiret manquant
       .map((groupe) => ({
         periode: groupe.periode,
         date: groupe.date,
@@ -195,12 +198,12 @@ export class ProgressionService {
         ...(groupe.matiere ? { matiere: groupe.matiere } : {}),
       }));
 
-    const notesParMatiere = new Map<string, LigneNote[]>(); // Regroupe les notes par matière
+    const notesParMatiere = new Map<string, LigneNote[]>();
 
     for (const note of notes) {
-      const groupe = notesParMatiere.get(note.matiere.id) ?? []; // Récupère le groupe de notes pour cette matière, ou initialise un tableau vide s'il n'existe pas
-      groupe.push(note); // Ajoute la note au groupe
-      notesParMatiere.set(note.matiere.id, groupe); // Met à jour le groupe dans la map
+      const groupe = notesParMatiere.get(note.matiere.id) ?? [];
+      groupe.push(note);
+      notesParMatiere.set(note.matiere.id, groupe);
     }
 
     const moyennesMatieres: ProgressionMatiere[] = [
@@ -208,23 +211,23 @@ export class ProgressionService {
     ]
       .map(([matiereId, notesMatiere]) => ({
         id: matiereId,
-        nom: notesMatiere[0].matiere.nom, // Utilise le nom de la matière à partir de la première note du groupe
-        moyenne: weightedAvg(notesMatiere), // Calcule la moyenne pondérée des notes pour cette matière
+        nom: notesMatiere[0].matiere.nom,
+        moyenne: weightedAvg(notesMatiere),
       }))
       .filter(
         (matiere): matiere is ProgressionMatiere & { moyenne: number } =>
-          matiere.moyenne !== null, // Filtre les matières qui ont une moyenne calculée
+          matiere.moyenne !== null,
       )
-      .sort((a, b) => a.moyenne - b.moyenne); // Trie les matières par moyenne croissante
+      .sort((a, b) => a.moyenne - b.moyenne); // Correction du tiret manquant
 
     return {
       eleve,
       points,
       resume: {
-        moyenneGenerale: weightedAvg(notes), // Calcule la moyenne générale de toutes les notes de l'élève
-        meilleureMatiere: moyennesMatieres.at(-1) ?? null, // Récupère la matière avec la meilleure moyenne, ou null si aucune matière n'a de moyenne
-        moinsBonneMatiere: moyennesMatieres[0] ?? null, // Récupère la matière avec la moins bonne moyenne, ou null si aucune matière n'a de moyenne
-        tendance: calculerTendance(points), // Calcule la tendance des points de progression de l'élève
+        moyenneGenerale: weightedAvg(notes),
+        meilleureMatiere: moyennesMatieres.at(-1) ?? null,
+        moinsBonneMatiere: moyennesMatieres[0] ?? null,
+        tendance: calculerTendance(points),
       },
     };
   }

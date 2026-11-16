@@ -15,11 +15,17 @@ type Props = {
 };
 
 function libellePoint(point: ProgressionPoint): string {
+  if (point.date) {
+    const dateFormatee = new Date(`${point.date}T00:00:00`).toLocaleDateString(
+      "fr-FR",
+    );
+    // Si on a une période et une date, on affiche les deux pour plus de clarté
+    return point.periode
+      ? `${dateFormatee} (${point.periode.nom})`
+      : dateFormatee;
+  }
   if (point.periode) {
     return `${point.periode.nom} (${point.periode.anneeScolaire})`;
-  }
-  if (point.date) {
-    return new Date(`${point.date}T00:00:00`).toLocaleDateString("fr-FR");
   }
   return "Sans période";
 }
