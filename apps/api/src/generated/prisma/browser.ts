@@ -372,3 +372,8 @@ export type AlerteDeclenchee = Prisma.AlerteDeclencheeModel
  * 
  */
 export type SanctionEleve = Prisma.SanctionEleveModel
+/**
+ * Model SuiviSante
+ * 
+ */
+export type SuiviSante = Prisma.SuiviSanteModel

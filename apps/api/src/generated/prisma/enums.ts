@@ -597,3 +597,24 @@ export const StatutSanction = {
 } as const
 
 export type StatutSanction = (typeof StatutSanction)[keyof typeof StatutSanction]
+
+
+export const TypeSuiviSante = {
+  ALLERGIE: 'ALLERGIE',
+  VISITE_MEDICALE: 'VISITE_MEDICALE',
+  SOIN: 'SOIN',
+  MALADIE: 'MALADIE',
+  ACCIDENT: 'ACCIDENT'
+} as const
+
+export type TypeSuiviSante = (typeof TypeSuiviSante)[keyof typeof TypeSuiviSante]
+
+
+export const GraviteSante = {
+  FAIBLE: 'FAIBLE',
+  MODEREE: 'MODEREE',
+  ELEVEE: 'ELEVEE',
+  URGENTE: 'URGENTE'
+} as const
+
+export type GraviteSante = (typeof GraviteSante)[keyof typeof GraviteSante]

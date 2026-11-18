@@ -1394,6 +1394,40 @@ export type EnumStatutSanctionWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumStatutSanctionFilter<$PrismaModel>
 }
 
+export type EnumTypeSuiviSanteFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeSuiviSante | Prisma.EnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeSuiviSante[] | Prisma.ListEnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeSuiviSante[] | Prisma.ListEnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeSuiviSanteFilter<$PrismaModel> | $Enums.TypeSuiviSante
+}
+
+export type EnumGraviteSanteNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.GraviteSante | Prisma.EnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  in?: $Enums.GraviteSante[] | Prisma.ListEnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.GraviteSante[] | Prisma.ListEnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumGraviteSanteNullableFilter<$PrismaModel> | $Enums.GraviteSante | null
+}
+
+export type EnumTypeSuiviSanteWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeSuiviSante | Prisma.EnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeSuiviSante[] | Prisma.ListEnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeSuiviSante[] | Prisma.ListEnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeSuiviSanteWithAggregatesFilter<$PrismaModel> | $Enums.TypeSuiviSante
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeSuiviSanteFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeSuiviSanteFilter<$PrismaModel>
+}
+
+export type EnumGraviteSanteNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GraviteSante | Prisma.EnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  in?: $Enums.GraviteSante[] | Prisma.ListEnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.GraviteSante[] | Prisma.ListEnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumGraviteSanteNullableWithAggregatesFilter<$PrismaModel> | $Enums.GraviteSante | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGraviteSanteNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGraviteSanteNullableFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -2709,6 +2743,40 @@ export type NestedEnumStatutSanctionWithAggregatesFilter<$PrismaModel = never> =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumStatutSanctionFilter<$PrismaModel>
   _max?: Prisma.NestedEnumStatutSanctionFilter<$PrismaModel>
+}
+
+export type NestedEnumTypeSuiviSanteFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeSuiviSante | Prisma.EnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeSuiviSante[] | Prisma.ListEnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeSuiviSante[] | Prisma.ListEnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeSuiviSanteFilter<$PrismaModel> | $Enums.TypeSuiviSante
+}
+
+export type NestedEnumGraviteSanteNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.GraviteSante | Prisma.EnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  in?: $Enums.GraviteSante[] | Prisma.ListEnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.GraviteSante[] | Prisma.ListEnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumGraviteSanteNullableFilter<$PrismaModel> | $Enums.GraviteSante | null
+}
+
+export type NestedEnumTypeSuiviSanteWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeSuiviSante | Prisma.EnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeSuiviSante[] | Prisma.ListEnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TypeSuiviSante[] | Prisma.ListEnumTypeSuiviSanteFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTypeSuiviSanteWithAggregatesFilter<$PrismaModel> | $Enums.TypeSuiviSante
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeSuiviSanteFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeSuiviSanteFilter<$PrismaModel>
+}
+
+export type NestedEnumGraviteSanteNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GraviteSante | Prisma.EnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  in?: $Enums.GraviteSante[] | Prisma.ListEnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.GraviteSante[] | Prisma.ListEnumGraviteSanteFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumGraviteSanteNullableWithAggregatesFilter<$PrismaModel> | $Enums.GraviteSante | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGraviteSanteNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGraviteSanteNullableFilter<$PrismaModel>
 }
 
 
