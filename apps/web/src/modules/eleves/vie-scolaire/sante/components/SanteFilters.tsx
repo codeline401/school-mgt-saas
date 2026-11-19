@@ -1,3 +1,4 @@
+import { useId } from "react";
 import type { GraviteSante, TypeSuiviSante } from "../hooks/useSante";
 
 type TypeFiltre = TypeSuiviSante | "";
@@ -45,11 +46,21 @@ export function SanteFilters({
   onFromChange,
   onToChange,
 }: Props) {
+  const baseId = useId();
+  const typeId = `${baseId}-type`;
+  const fromId = `${baseId}-from`;
+  const toId = `${baseId}-to`;
+
+  const isInValidRange = Boolean(from && to && from > to);
+
   return (
     <div className="grid gap-3 sm:grid-cols-3">
       <fieldset className="fieldset">
-        <legend className="fieldset-legend">Type</legend>
+        <label htmlFor={typeId} className="fieldset-legend">
+          Type
+        </label>
         <select
+          id={typeId}
           className="select select-sm select-bordered w-full"
           value={type}
           onChange={(event) => onTypeChange(event.target.value as TypeFiltre)}
@@ -64,8 +75,11 @@ export function SanteFilters({
       </fieldset>
 
       <fieldset className="fieldset">
-        <legend className="fieldset-legend">Du</legend>
+        <label htmlFor={fromId} className="fieldset-legend">
+          Du
+        </label>
         <input
+          id={fromId}
           className="input input-sm input-bordered w-full"
           type="date"
           value={from}
@@ -75,8 +89,11 @@ export function SanteFilters({
       </fieldset>
 
       <fieldset className="fieldset">
-        <legend className="fieldset-legend">Au</legend>
+        <label htmlFor={toId} className="fieldset-legend">
+          Au
+        </label>
         <input
+          id={toId}
           className="input input-sm input-bordered w-full"
           type="date"
           value={to}
@@ -84,6 +101,12 @@ export function SanteFilters({
           onChange={(event) => onToChange(event.target.value)}
         />
       </fieldset>
+
+      {isInValidRange && (
+        <p className="text-sm text-red-500 col-span-3">
+          La date de début doit être antérieure à la date de fin.
+        </p>
+      )}
     </div>
   );
 }

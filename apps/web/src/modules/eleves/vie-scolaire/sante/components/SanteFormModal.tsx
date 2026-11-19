@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import type {
   CreerSuiviSanteInput,
   GraviteSante,
@@ -37,6 +37,20 @@ export function SanteFormModal({
   onClose,
   onSave,
 }: Props) {
+  const baseId = useId();
+  const headingId = `${baseId}-heading`;
+  const typeId = `${baseId}-type`;
+  const titreId = `${baseId}-titre`;
+  const descriptionId = `${baseId}-description`;
+  const graviteId = `${baseId}-gravite`;
+  const dateEvenementId = `${baseId}-date-evenement`;
+  const dateFinId = `${baseId}-date-fin`;
+
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const initialFocusRef = useRef<HTMLSelectElement | HTMLInputElement | null>(
+    null,
+  );
+
   const [type, setType] = useState<TypeSuiviSante>(suivi?.type ?? "ALLERGIE");
   const [titre, setTitre] = useState(suivi?.titre ?? "");
   const [description, setDescription] = useState(suivi?.description ?? "");
@@ -50,19 +64,73 @@ export function SanteFormModal({
   const [notifierParents, setNotifierParents] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
 
+  useEffect(() => {
+    const opener =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+    const dialog = dialogRef.current;
+
+    if (dialog && !dialog.open) {
+      dialog.showModal();
+    }
+
+    requestAnimationFrame(() => {
+      initialFocusRef.current?.focus();
+    });
+
+    return () => {
+      if (dialog?.open) {
+        dialog.close();
+      }
+      opener?.focus();
+    };
+  }, []);
+
+  function effacerErreur() {
+    if (erreur !== null) {
+      setErreur(null);
+    }
+  }
+
   async function soumettre(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setErreur(null);
 
     try {
       if (suivi) {
-        await onSave({
-          titre: titre.trim(),
-          description: description.trim() || null,
-          gravite: gravite || null,
-          dateEvenement,
-          dateFin: dateFin || null,
-        });
+        const payload: ModifierSuiviSanteInput = {};
+
+        const initialTitre = suivi.titre.trim();
+        const nextTitre = titre.trim();
+        if (nextTitre !== initialTitre) {
+          payload.titre = nextTitre;
+        }
+
+        const initialDescription = suivi.description?.trim() || null;
+        const nextDescription = description.trim() || null;
+        if (nextDescription !== initialDescription) {
+          payload.description = nextDescription;
+        }
+
+        const initialGravite = suivi.gravite || null;
+        const nextGravite = gravite || null;
+        if (nextGravite !== initialGravite) {
+          payload.gravite = nextGravite;
+        }
+
+        const initialDateEvenement = datePourInput(suivi.dateEvenement);
+        if (dateEvenement !== initialDateEvenement) {
+          payload.dateEvenement = dateEvenement;
+        }
+
+        const initialDateFin = datePourInput(suivi.dateFin) || null;
+        const nextDateFin = dateFin || null;
+        if (nextDateFin !== initialDateFin) {
+          payload.dateFin = nextDateFin;
+        }
+
+        await onSave(payload);
         return;
       }
 
@@ -86,9 +154,19 @@ export function SanteFormModal({
   }
 
   return (
-    <div className="modal modal-open" role="dialog" aria-modal="true">
+    <dialog
+      ref={dialogRef}
+      className="modal modal-open"
+      aria-labelledby={headingId}
+      onCancel={(event) => {
+        event.preventDefault();
+        if (!pending) {
+          onClose();
+        }
+      }}
+    >
       <div className="modal-box max-w-xl">
-        <h3 className="text-lg font-bold">
+        <h3 id={headingId} className="text-lg font-bold">
           {suivi
             ? "Modifier le suivi de santé"
             : "Nouvelle information de santé"}
@@ -97,13 +175,22 @@ export function SanteFormModal({
         <form className="mt-4 space-y-3" onSubmit={soumettre}>
           {!suivi && (
             <fieldset className="fieldset">
-              <legend className="fieldset-legend">Type</legend>
+              <label htmlFor={typeId} className="fieldset-legend">
+                Type
+              </label>
               <select
+                id={typeId}
+                ref={(el) => {
+                  if (!suivi) {
+                    initialFocusRef.current = el;
+                  }
+                }}
                 className="select select-bordered w-full"
                 value={type}
-                onChange={(event) =>
-                  setType(event.target.value as TypeSuiviSante)
-                }
+                onChange={(event) => {
+                  effacerErreur();
+                  setType(event.target.value as TypeSuiviSante);
+                }}
               >
                 {Object.entries(LIBELLES_TYPE_SANTE).map(([value, label]) => (
                   <option key={value} value={value}>
@@ -115,37 +202,58 @@ export function SanteFormModal({
           )}
 
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">Titre</legend>
+            <label htmlFor={titreId} className="fieldset-legend">
+              Titre
+            </label>
             <input
+              id={titreId}
+              ref={(el) => {
+                if (suivi) {
+                  initialFocusRef.current = el;
+                }
+              }}
               className="input input-bordered w-full"
               value={titre}
               minLength={2}
               maxLength={150}
               required
-              onChange={(event) => setTitre(event.target.value)}
+              onChange={(event) => {
+                effacerErreur();
+                setTitre(event.target.value);
+              }}
             />
           </fieldset>
 
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">Description</legend>
+            <label htmlFor={descriptionId} className="fieldset-legend">
+              Description
+            </label>
             <textarea
+              id={descriptionId}
               className="textarea textarea-bordered w-full"
               rows={4}
               maxLength={4000}
               value={description}
-              onChange={(event) => setDescription(event.target.value)}
+              onChange={(event) => {
+                effacerErreur();
+                setDescription(event.target.value);
+              }}
             />
           </fieldset>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <fieldset className="fieldset">
-              <legend className="fieldset-legend">Gravité</legend>
+              <label htmlFor={graviteId} className="fieldset-legend">
+                Gravité
+              </label>
               <select
+                id={graviteId}
                 className="select select-bordered w-full"
                 value={gravite}
-                onChange={(event) =>
-                  setGravite(event.target.value as GraviteSante | "")
-                }
+                onChange={(event) => {
+                  effacerErreur();
+                  setGravite(event.target.value as GraviteSante | "");
+                }}
               >
                 <option value="">Non précisée</option>
                 {Object.entries(LIBELLES_GRAVITE).map(([value, label]) => (
@@ -157,25 +265,37 @@ export function SanteFormModal({
             </fieldset>
 
             <fieldset className="fieldset">
-              <legend className="fieldset-legend">Date</legend>
+              <label htmlFor={dateEvenementId} className="fieldset-legend">
+                Date
+              </label>
               <input
+                id={dateEvenementId}
                 className="input input-bordered w-full"
                 type="date"
                 required
                 value={dateEvenement}
                 max={dateFin || undefined}
-                onChange={(event) => setDateEvenement(event.target.value)}
+                onChange={(event) => {
+                  effacerErreur();
+                  setDateEvenement(event.target.value);
+                }}
               />
             </fieldset>
 
             <fieldset className="fieldset sm:col-span-2">
-              <legend className="fieldset-legend">Date de fin</legend>
+              <label htmlFor={dateFinId} className="fieldset-legend">
+                Date de fin
+              </label>
               <input
+                id={dateFinId}
                 className="input input-bordered w-full"
                 type="date"
                 min={dateEvenement}
                 value={dateFin}
-                onChange={(event) => setDateFin(event.target.value)}
+                onChange={(event) => {
+                  effacerErreur();
+                  setDateFin(event.target.value);
+                }}
               />
             </fieldset>
           </div>
@@ -192,7 +312,10 @@ export function SanteFormModal({
                 type="checkbox"
                 className="checkbox checkbox-sm"
                 checked={notifierParents}
-                onChange={(event) => setNotifierParents(event.target.checked)}
+                onChange={(event) => {
+                  effacerErreur();
+                  setNotifierParents(event.target.checked);
+                }}
               />
               <span>Notifier les parents ayant un compte</span>
             </label>
@@ -231,8 +354,12 @@ export function SanteFormModal({
         type="button"
         className="modal-backdrop"
         aria-label="Fermer"
-        onClick={onClose}
+        onClick={() => {
+          if (!pending) {
+            onClose();
+          }
+        }}
       />
-    </div>
+    </dialog>
   );
 }

@@ -159,7 +159,7 @@ function GestionElevesPage() {
   const [activeParcoursSubTab, setActiveParcoursSubTab] =
     useState<ParcoursSubTab>("notes");
   const [activeVieScolaireSubTab, setActiveVieScolaireSubTab] =
-    useState<VieScolaireSubTab>("discipline");
+    useState<VieScolaireSubTab>("sante");
   const [activeDocumentSubTab, setActiveDocumentSubTab] =
     useState<DocumentSubTab>("pieces");
   const [isCreateEleveModalOpen, setIsCreateEleveModalOpen] = useState(false);

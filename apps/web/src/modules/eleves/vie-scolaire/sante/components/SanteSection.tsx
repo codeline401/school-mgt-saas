@@ -55,7 +55,7 @@ export function SanteSection({ initialEleveId }: Props) {
       });
     } else if (eleveId) {
       await creer.mutateAsync({
-        ...(input as Parameters<typeof creer.mutateAsync>[0]), // Cast input to the type expected by the create mutation
+        ...(input as Parameters<typeof creer.mutateAsync>[0]),
         eleveId,
       });
     }
@@ -191,8 +191,12 @@ export function SanteSection({ initialEleveId }: Props) {
         isLoading={archiver.isPending}
         onConfirm={() => {
           if (!suiviAArchiver) return;
-          archiver.mutate(suiviAArchiver.id, {
-            onSettled: () => setSuiviAArchiver(null),
+          const targetId = suiviAArchiver.id;
+          archiver.mutate(targetId, {
+            onSettled: () =>
+              setSuiviAArchiver((current) =>
+                current?.id === targetId ? null : current,
+              ),
           });
         }}
         onCancel={() => setSuiviAArchiver(null)}

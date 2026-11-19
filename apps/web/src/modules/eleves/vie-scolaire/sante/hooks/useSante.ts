@@ -11,7 +11,7 @@ export type TypeSuiviSante =
 
 export type GraviteSante = "FAIBLE" | "MODEREE" | "ELEVEE" | "URGENTE";
 
-export type SuiviSante = {
+export type SuiviSanteBase = {
   id: string;
   schoolId: string;
   eleveId: string;
@@ -25,12 +25,21 @@ export type SuiviSante = {
   archiveeAt: string | null;
   createdAt: string;
   updatedAt: string;
+};
+
+export type SuiviSante = SuiviSanteBase & {
   createdBy: {
     id: string;
     nom: string;
     prenom: string;
   };
 };
+
+export type CreerSuiviSanteResponse = SuiviSanteBase & {
+  nbParentsNotifies: number;
+};
+
+export type ModifierSuiviSanteResponse = SuiviSanteBase;
 
 export type SuiviSanteFiltres = {
   type?: TypeSuiviSante;
@@ -105,18 +114,33 @@ export function useCreerSuiviSante() {
 
   return useMutation({
     mutationFn: async (input: CreerSuiviSanteInput) => {
-      const { data } = await api.post<SuiviSante>(BASE_URL, input);
+      const { data } = await api.post<CreerSuiviSanteResponse>(BASE_URL, input);
       return data;
     },
-    onSuccess: async (_, input) => {
+    onSuccess: async (data, input) => {
       await queryClient.invalidateQueries({
         queryKey: santeKeys.all,
       });
-      toast.success(
-        input.type === "MALADIE"
-          ? "Épisode de maladie enregistré. Les parents liés à un compte ont été notifiés."
-          : "Information de santé enregistrée.",
-      );
+
+      if (input.type === "MALADIE") {
+        toast.success(
+          data.nbParentsNotifies > 0
+            ? `Épisode de maladie enregistré. ${data.nbParentsNotifies} parent(s) lié(s) à un compte ont été notifié(s).`
+            : "Épisode de maladie enregistré. Aucun parent n’a été notifié (aucun compte parent lié).",
+        );
+        return;
+      }
+
+      if (input.type === "ACCIDENT" && input.notifierParents) {
+        toast.success(
+          data.nbParentsNotifies > 0
+            ? `Incident enregistré. ${data.nbParentsNotifies} parent(s) lié(s) à un compte ont été notifié(s).`
+            : "Incident enregistré. Aucun parent n’a été notifié (aucun compte parent lié).",
+        );
+        return;
+      }
+
+      toast.success("Information de santé enregistrée.");
     },
     onError: (error) =>
       toast.error(
@@ -136,7 +160,7 @@ export function useModifierSuiviSante() {
       suiviId: string;
       input: ModifierSuiviSanteInput;
     }) => {
-      const { data } = await api.patch<SuiviSante>(
+      const { data } = await api.patch<ModifierSuiviSanteResponse>(
         `${BASE_URL}/${suiviId}`,
         input,
       );

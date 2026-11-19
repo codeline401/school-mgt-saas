@@ -150,18 +150,10 @@ export class SuiviSanteService {
 
     const notifierParents =
       input.type === "MALADIE" ||
-      (input.type === "ACCIDENT" && input.notifierParents === true); // Détermine si les parents doivent être notifiés en fonction du type d'événement et de l'option notifierParents.
+      (input.type === "ACCIDENT" && input.notifierParents === true);
 
-    const idsParents = [
-      eleve.parentId,
-      eleve.responsableId,
-      ...eleve.responsableEleves.map(
-        (affiliation) => affiliation.responsableId,
-      ),
-    ].filter((id): id is string => id !== null); // Filtre les identifiants non nuls pour ne conserver que les parents valides.
-
-    const dateEvenement = dateUTC(input.dateEvenement); // Convertit la date de l'événement en UTC.
-    const dateFin = input.dateFin ? dateUTC(input.dateFin) : null; // Convertit la date de fin en UTC si elle est fournie.
+    const dateEvenement = dateUTC(input.dateEvenement);
+    const dateFin = input.dateFin ? dateUTC(input.dateFin) : null;
 
     return prisma.$transaction(async (tx) => {
       const suivi = await tx.suiviSante.create({
@@ -181,48 +173,73 @@ export class SuiviSanteService {
       let parentNotifieAt: Date | null = null;
       let nbParentsNotifies = 0;
 
-      if (notifierParents && idsParents.length > 0) {
-        const parents = await tx.parent.findMany({
-          where: {
-            id: { in: [...new Set(idsParents)] },
-            schoolId,
-            userId: { not: null },
+      if (notifierParents) {
+        // Relit les rattachements à jour à l'intérieur de la transaction
+        const eleveCourant = await tx.eleve.findFirst({
+          where: { id: eleve.id, schoolId, deletedAt: null },
+          select: {
+            parentId: true,
+            responsableId: true,
+            responsableEleves: {
+              select: { responsableId: true },
+            },
           },
-          select: { userId: true },
         });
 
-        const userIds = [
-          ...new Set(
-            parents
-              .map((parent) => parent.userId) // Récupère les identifiants des utilisateurs des parents.
-              .filter((userId): userId is string => userId !== null), // Filtre les identifiants non nuls pour ne conserver que les utilisateurs valides.
-          ),
-        ];
+        const idsParentsCourants = eleveCourant
+          ? [
+              eleveCourant.parentId,
+              eleveCourant.responsableId,
+              ...eleveCourant.responsableEleves.map(
+                (affiliation) => affiliation.responsableId,
+              ),
+            ].filter((id): id is string => id !== null)
+          : [];
 
-        if (userIds.length > 0) {
-          const message =
-            input.type === "MALADIE"
-              ? `L'établissement vous informe que votre enfant ${eleve.prenom} ${eleve.nom} ne se sent pas bien. veuillez contacter l'école`
-              : `L'établissement vous informe qu'un incident nécessite votre attention concernant ${eleve.prenom} ${eleve.nom}. Veuillez contacter l'école`;
-
-          await tx.notification.createMany({
-            data: userIds.map((userId) => ({
-              userId,
+        if (idsParentsCourants.length > 0) {
+          const parents = await tx.parent.findMany({
+            where: {
+              id: { in: [...new Set(idsParentsCourants)] },
               schoolId,
-              message,
-              lien: "/eleves/vie-scolaire/sante",
-            })),
+              userId: { not: null },
+            },
+            select: { userId: true },
           });
 
-          parentNotifieAt = new Date();
-          nbParentsNotifies = userIds.length;
+          const userIds = [
+            ...new Set(
+              parents
+                .map((parent) => parent.userId)
+                .filter((userId): userId is string => userId !== null),
+            ),
+          ];
 
-          await tx.suiviSante.update({
-            where: { id: suivi.id },
-            data: { parentNotifieAt },
-          });
+          if (userIds.length > 0) {
+            const message =
+              input.type === "MALADIE"
+                ? `L'établissement vous informe que votre enfant ${eleve.prenom} ${eleve.nom} ne se sent pas bien. veuillez contacter l'école`
+                : `L'établissement vous informe qu'un incident nécessite votre attention concernant ${eleve.prenom} ${eleve.nom}. Veuillez contacter l'école`;
+
+            await tx.notification.createMany({
+              data: userIds.map((userId) => ({
+                userId,
+                schoolId,
+                message,
+                lien: null, // à préciser en produit ce qu'il en faut faire
+              })),
+            });
+
+            parentNotifieAt = new Date();
+            nbParentsNotifies = userIds.length;
+
+            await tx.suiviSante.update({
+              where: { id: suivi.id },
+              data: { parentNotifieAt },
+            });
+          }
         }
       }
+
       return { ...suivi, parentNotifieAt, nbParentsNotifies };
     });
   }
@@ -239,19 +256,19 @@ export class SuiviSanteService {
     input: ModifierSuiviSanteinput,
     user: UserContext,
   ) {
-    const schoolId = requireSchoolId(user); // Récupère l'identifiant de l'école à partir du contexte utilisateur.
-    const suivi = await trouverSuiviSante(suiviId, schoolId); // Récupère le suivi de santé existant pour l'élève dans l'école spécifiée.
+    const schoolId = requireSchoolId(user);
+    const suivi = await trouverSuiviSante(suiviId, schoolId);
 
     const dateEvenement = input.dateEvenement
       ? dateUTC(input.dateEvenement)
-      : suivi.dateEvenement; // Détermine la date de l'événement à partir de l'entrée ou utilise la date existante.
+      : suivi.dateEvenement;
 
     const dateFin =
       input.dateFin !== undefined
         ? input.dateFin
           ? dateUTC(input.dateFin)
           : null
-        : suivi.dateFin; // Détermine la date de fin à partir de l'entrée ou utilise la date existante.
+        : suivi.dateFin;
 
     if (dateFin && dateEvenement > dateFin) {
       throw new SuiviSanteError(
@@ -260,19 +277,35 @@ export class SuiviSanteService {
       );
     }
 
-    return prisma.suiviSante.update({
-      where: { id: suiviId },
-      data: {
-        ...(input.titre !== undefined ? { titre: input.titre } : {}),
-        ...(input.description !== undefined
-          ? { description: input.description }
-          : {}),
-        ...(input.gravite !== undefined ? { gravite: input.gravite } : {}),
-        ...(input.dateEvenement
-          ? { dateEvenement: dateUTC(input.dateEvenement) }
-          : {}),
-        ...(input.dateFin !== undefined ? { dateFin } : {}),
-      },
+    const data: Prisma.SuiviSanteUpdateManyMutationInput = {
+      ...(input.titre !== undefined ? { titre: input.titre } : {}),
+      ...(input.description !== undefined
+        ? { description: input.description }
+        : {}),
+      ...(input.gravite !== undefined ? { gravite: input.gravite } : {}),
+      ...(input.dateEvenement
+        ? { dateEvenement: dateUTC(input.dateEvenement) }
+        : {}),
+      ...(input.dateFin !== undefined ? { dateFin } : {}),
+    };
+
+    return prisma.$transaction(async (tx) => {
+      const updated = await tx.suiviSante.updateMany({
+        where: {
+          id: suiviId,
+          schoolId,
+          archiveeAt: null,
+        },
+        data,
+      });
+
+      if (updated.count === 0) {
+        throw new SuiviSanteError("Suivi de santé introuvable.", 404);
+      }
+
+      return tx.suiviSante.findFirstOrThrow({
+        where: { id: suiviId, schoolId },
+      });
     });
   }
 
@@ -280,16 +313,27 @@ export class SuiviSanteService {
    * Archive un suivi de santé existant pour un élève dans l'école spécifiée.
    * @param suiviId L'identifiant du suivi de santé à archiver.
    * @param user Le contexte utilisateur effectuant l'archivage.
-   * @returns Le suivi de santé archivé avec son identifiant et la date d'archivage.
+   * @returns L'identifiant du suivi de santé archivé et la date d'archivage.
    */
   static async archiver(suiviId: string, user: UserContext) {
-    const schoolId = requireSchoolId(user); // Récupère l'identifiant de l'école à partir du contexte utilisateur.
-    await trouverSuiviSante(suiviId, schoolId); // Vérifie que le suivi de santé existe pour l'école spécifiée.
+    const schoolId = requireSchoolId(user);
+    await trouverSuiviSante(suiviId, schoolId);
 
-    return prisma.suiviSante.update({
-      where: { id: suiviId },
-      data: { archiveeAt: new Date() },
-      select: { id: true, archiveeAt: true },
+    const archiveeAt = new Date();
+
+    const updated = await prisma.suiviSante.updateMany({
+      where: {
+        id: suiviId,
+        schoolId,
+        archiveeAt: null,
+      },
+      data: { archiveeAt },
     });
+
+    if (updated.count === 0) {
+      throw new SuiviSanteError("Suivi de santé introuvable.", 404);
+    }
+
+    return { id: suiviId, archiveeAt };
   }
 }
