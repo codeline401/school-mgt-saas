@@ -93,43 +93,57 @@ export function SanteFormModal({
     }
   }
 
+  function construirePayloadEdition(
+    source: SuiviSante,
+  ): ModifierSuiviSanteInput {
+    const payload: ModifierSuiviSanteInput = {};
+
+    const initialTitre = source.titre.trim();
+    const nextTitre = titre.trim();
+    if (nextTitre !== initialTitre) {
+      payload.titre = nextTitre;
+    }
+
+    const initialDescription = source.description?.trim() || null;
+    const nextDescription = description.trim() || null;
+    if (nextDescription !== initialDescription) {
+      payload.description = nextDescription;
+    }
+
+    const initialGravite = source.gravite || null;
+    const nextGravite = gravite || null;
+    if (nextGravite !== initialGravite) {
+      payload.gravite = nextGravite;
+    }
+
+    const initialDateEvenement = datePourInput(source.dateEvenement);
+    if (dateEvenement !== initialDateEvenement) {
+      payload.dateEvenement = dateEvenement;
+    }
+
+    const initialDateFin = datePourInput(source.dateFin) || null;
+    const nextDateFin = dateFin || null;
+    if (nextDateFin !== initialDateFin) {
+      payload.dateFin = nextDateFin;
+    }
+
+    return payload;
+  }
+
+  const editPayload = suivi ? construirePayloadEdition(suivi) : null;
+  const hasChanges = !suivi || Object.keys(editPayload ?? {}).length > 0;
+
   async function soumettre(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setErreur(null);
 
     try {
       if (suivi) {
-        const payload: ModifierSuiviSanteInput = {};
-
-        const initialTitre = suivi.titre.trim();
-        const nextTitre = titre.trim();
-        if (nextTitre !== initialTitre) {
-          payload.titre = nextTitre;
+        const payload = construirePayloadEdition(suivi);
+        if (Object.keys(payload).length === 0) {
+          onClose();
+          return;
         }
-
-        const initialDescription = suivi.description?.trim() || null;
-        const nextDescription = description.trim() || null;
-        if (nextDescription !== initialDescription) {
-          payload.description = nextDescription;
-        }
-
-        const initialGravite = suivi.gravite || null;
-        const nextGravite = gravite || null;
-        if (nextGravite !== initialGravite) {
-          payload.gravite = nextGravite;
-        }
-
-        const initialDateEvenement = datePourInput(suivi.dateEvenement);
-        if (dateEvenement !== initialDateEvenement) {
-          payload.dateEvenement = dateEvenement;
-        }
-
-        const initialDateFin = datePourInput(suivi.dateFin) || null;
-        const nextDateFin = dateFin || null;
-        if (nextDateFin !== initialDateFin) {
-          payload.dateFin = nextDateFin;
-        }
-
         await onSave(payload);
         return;
       }
@@ -339,7 +353,7 @@ export function SanteFormModal({
             <button
               type="submit"
               className="btn btn-primary"
-              disabled={pending}
+              disabled={pending || !hasChanges}
             >
               {pending && (
                 <span className="loading loading-spinner loading-sm" />
