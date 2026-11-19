@@ -467,7 +467,8 @@ export const ModelName = {
   RegleAlerte: 'RegleAlerte',
   PalierAlerte: 'PalierAlerte',
   AlerteDeclenchee: 'AlerteDeclenchee',
-  SanctionEleve: 'SanctionEleve'
+  SanctionEleve: 'SanctionEleve',
+  SuiviSante: 'SuiviSante'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -483,7 +484,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "justificationAbsence" | "billetEntree" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse" | "regleAlerte" | "palierAlerte" | "alerteDeclenchee" | "sanctionEleve"
+    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "justificationAbsence" | "billetEntree" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse" | "regleAlerte" | "palierAlerte" | "alerteDeclenchee" | "sanctionEleve" | "suiviSante"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5741,6 +5742,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SuiviSante: {
+      payload: Prisma.$SuiviSantePayload<ExtArgs>
+      fields: Prisma.SuiviSanteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SuiviSanteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SuiviSantePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SuiviSanteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SuiviSantePayload>
+        }
+        findFirst: {
+          args: Prisma.SuiviSanteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SuiviSantePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SuiviSanteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SuiviSantePayload>
+        }
+        findMany: {
+          args: Prisma.SuiviSanteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SuiviSantePayload>[]
+        }
+        create: {
+          args: Prisma.SuiviSanteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SuiviSantePayload>
+        }
+        createMany: {
+          args: Prisma.SuiviSanteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SuiviSanteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SuiviSantePayload>[]
+        }
+        delete: {
+          args: Prisma.SuiviSanteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SuiviSantePayload>
+        }
+        update: {
+          args: Prisma.SuiviSanteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SuiviSantePayload>
+        }
+        deleteMany: {
+          args: Prisma.SuiviSanteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SuiviSanteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SuiviSanteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SuiviSantePayload>[]
+        }
+        upsert: {
+          args: Prisma.SuiviSanteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SuiviSantePayload>
+        }
+        aggregate: {
+          args: Prisma.SuiviSanteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSuiviSante>
+        }
+        groupBy: {
+          args: Prisma.SuiviSanteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SuiviSanteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SuiviSanteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SuiviSanteCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6950,6 +7025,26 @@ export const SanctionEleveScalarFieldEnum = {
 export type SanctionEleveScalarFieldEnum = (typeof SanctionEleveScalarFieldEnum)[keyof typeof SanctionEleveScalarFieldEnum]
 
 
+export const SuiviSanteScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  eleveId: 'eleveId',
+  type: 'type',
+  titre: 'titre',
+  description: 'description',
+  gravite: 'gravite',
+  dateEvenement: 'dateEvenement',
+  dateFin: 'dateFin',
+  parentNotifieAt: 'parentNotifieAt',
+  archiveeAt: 'archiveeAt',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SuiviSanteScalarFieldEnum = (typeof SuiviSanteScalarFieldEnum)[keyof typeof SuiviSanteScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -7892,6 +7987,34 @@ export type EnumStatutSanctionFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 export type ListEnumStatutSanctionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutSanction[]'>
     
 
+
+/**
+ * Reference to a field of type 'TypeSuiviSante'
+ */
+export type EnumTypeSuiviSanteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeSuiviSante'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeSuiviSante[]'
+ */
+export type ListEnumTypeSuiviSanteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeSuiviSante[]'>
+    
+
+
+/**
+ * Reference to a field of type 'GraviteSante'
+ */
+export type EnumGraviteSanteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GraviteSante'>
+    
+
+
+/**
+ * Reference to a field of type 'GraviteSante[]'
+ */
+export type ListEnumGraviteSanteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GraviteSante[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -8114,6 +8237,7 @@ export type GlobalOmitConfig = {
   palierAlerte?: Prisma.PalierAlerteOmit
   alerteDeclenchee?: Prisma.AlerteDeclencheeOmit
   sanctionEleve?: Prisma.SanctionEleveOmit
+  suiviSante?: Prisma.SuiviSanteOmit
 }
 
 /* Types for Logging */

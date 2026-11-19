@@ -74,6 +74,7 @@ model User {
   billetEntrees                      BilletEntree[]            @relation("BilletsCreees")
   regleAlertes                       RegleAlerte[]             @relation("ReglesAlerteCreees")
   sanctionEleves                     SanctionEleve[]           @relation("SanctionsCreees")
+  suiviSantes                        SuiviSante[]              @relation("SuivisSanteCrees")
 }
 
 // Modele SAAS
@@ -150,6 +151,7 @@ model School {
   regleAlertes             RegleAlerte[]
   alerteDeclenchees        AlerteDeclenchee[]
   sanctionEleves           SanctionEleve[]
+  suiviSantes              SuiviSante[]
 }
 
 model Classe {
@@ -1871,6 +1873,7 @@ model Eleve {
   billetEntrees         BilletEntree[]
   alerteDeclenchees     AlerteDeclenchee[]
   sanctionEleves        SanctionEleve[]
+  suiviSantes           SuiviSante[]
 
   // Contraintes & Index
   @@unique([schoolId, matricule])
@@ -2503,4 +2506,47 @@ model SanctionEleve {
 
   @@index([schoolId, dateSanction])
   @@index([eleveId, statut])
+}
+
+// =========== MODULE - VIE SCOLAIRE ==================
+enum TypeSuiviSante {
+  ALLERGIE
+  VISITE_MEDICALE
+  SOIN
+  MALADIE
+  ACCIDENT
+}
+
+enum GraviteSante {
+  FAIBLE
+  MODEREE
+  ELEVEE
+  URGENTE
+}
+
+model SuiviSante {
+  id       String @id @default(uuid())
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  type            TypeSuiviSante
+  titre           String
+  description     String?        @db.Text
+  gravite         GraviteSante?
+  dateEvenement   DateTime       @db.Date
+  dateFin         DateTime?      @db.Date
+  parentNotifieAt DateTime?
+  archiveeAt      DateTime?
+
+  createdById String
+  createdBy   User   @relation("SuivisSanteCrees", fields: [createdById], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId, type, dateEvenement])
+  @@index([eleveId, archiveeAt])
 }

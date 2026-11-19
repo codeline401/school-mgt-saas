@@ -6,14 +6,12 @@ import {
   BriefcaseBusiness,
   Calendar,
   CalendarClock,
-  ClipboardCheck,
   FileText,
   GraduationCap,
   HeartPulse,
   School,
   ShieldCheck,
   Star,
-  Trophy,
   UserRound,
   Users,
   Wallet,
@@ -37,6 +35,7 @@ import { SanctionsSection } from "./absence-retard/sanctions/components/Sanction
 import { NotesParcoursSection } from "./parcours/notes/components/NotesParcoursSection";
 import { BulletinSection } from "./parcours/bulletins/components/BulletinSection";
 import { ProgressionSection } from "./parcours/progression/components/ProgressionSection";
+import { SanteSection } from "./vie-scolaire/sante/components/SanteSection";
 
 type MainTab =
   | "informations"
@@ -127,14 +126,14 @@ const parcoursTabs: TabItem<ParcoursSubTab>[] = [
   { value: "notes", label: "Notes", icon: BookOpen },
   { value: "bulletins", label: "Bulletins", icon: FileText },
   { value: "progression", label: "Progression", icon: GraduationCap },
-  { value: "orientation", label: "Orientation", icon: Star },
-  { value: "projets", label: "Projets", icon: Trophy },
+  // { value: "orientation", label: "Orientation", icon: Star },
+  // { value: "projets", label: "Projets", icon: Trophy },
 ];
 
 const vieScolaireTabs: TabItem<VieScolaireSubTab>[] = [
-  { value: "discipline", label: "Discipline", icon: ClipboardCheck },
-  { value: "activites", label: "Activités", icon: Trophy },
-  { value: "recompenses", label: "Récompenses", icon: Star },
+  // { value: "discipline", label: "Discipline", icon: ClipboardCheck },
+  // { value: "activites", label: "Activités", icon: Trophy },
+  // { value: "recompenses", label: "Récompenses", icon: Star },
   { value: "sante", label: "Santé & sécurité", icon: HeartPulse },
   { value: "transport", label: "Transport & cantine", icon: CalendarClock },
 ];
@@ -160,7 +159,7 @@ function GestionElevesPage() {
   const [activeParcoursSubTab, setActiveParcoursSubTab] =
     useState<ParcoursSubTab>("notes");
   const [activeVieScolaireSubTab, setActiveVieScolaireSubTab] =
-    useState<VieScolaireSubTab>("discipline");
+    useState<VieScolaireSubTab>("sante");
   const [activeDocumentSubTab, setActiveDocumentSubTab] =
     useState<DocumentSubTab>("pieces");
   const [isCreateEleveModalOpen, setIsCreateEleveModalOpen] = useState(false);
@@ -248,22 +247,22 @@ function GestionElevesPage() {
             initialEleveId={eleveId}
           />
         );
-      case "orientation":
-        return (
-          <DevelopmentPlaceholder
-            icon={Star}
-            title="Orientation & parcours"
-            description="Filières, options, conseils d’orientation et trajectoires de formation."
-          />
-        );
-      case "projets":
-        return (
-          <DevelopmentPlaceholder
-            icon={Trophy}
-            title="Projets & réalisations"
-            description="Travaux, concours, projets personnels, participations et résultats remarquables."
-          />
-        );
+      // case "orientation":
+      //   return (
+      //     <DevelopmentPlaceholder
+      //       icon={Star}
+      //       title="Orientation & parcours"
+      //       description="Filières, options, conseils d’orientation et trajectoires de formation."
+      //     />
+      //   );
+      // case "projets":
+      //   return (
+      //     <DevelopmentPlaceholder
+      //       icon={Trophy}
+      //       title="Projets & réalisations"
+      //       description="Travaux, concours, projets personnels, participations et résultats remarquables."
+      //     />
+      //   );
       default:
         return null;
     }
@@ -271,38 +270,32 @@ function GestionElevesPage() {
 
   const renderVieScolaireContent = () => {
     switch (activeVieScolaireSubTab) {
-      case "discipline":
-        return (
-          <DevelopmentPlaceholder
-            icon={ClipboardCheck}
-            title="Discipline & comportement"
-            description="Observations, incidents, avertissements et suivi des comportements scolaires."
-          />
-        );
-      case "activites":
-        return (
-          <DevelopmentPlaceholder
-            icon={Trophy}
-            title="Activités extrascolaires"
-            description="Clubs, sport, culture, clubs digitaux, stages et participation associée."
-          />
-        );
-      case "recompenses":
-        return (
-          <DevelopmentPlaceholder
-            icon={Star}
-            title="Récompenses & distinctions"
-            description="Médailles, félicitations, badges, encouragements et distinctions."
-          />
-        );
+      // case "discipline":
+      //   return (
+      //     <DevelopmentPlaceholder
+      //       icon={ClipboardCheck}
+      //       title="Discipline & comportement"
+      //       description="Observations, incidents, avertissements et suivi des comportements scolaires."
+      //     />
+      //   );
+      // case "activites":
+      //   return (
+      //     <DevelopmentPlaceholder
+      //       icon={Trophy}
+      //       title="Activités extrascolaires"
+      //       description="Clubs, sport, culture, clubs digitaux, stages et participation associée."
+      //     />
+      //   );
+      // case "recompenses":
+      //   return (
+      //     <DevelopmentPlaceholder
+      //       icon={Star}
+      //       title="Récompenses & distinctions"
+      //       description="Médailles, félicitations, badges, encouragements et distinctions."
+      //     />
+      //   );
       case "sante":
-        return (
-          <DevelopmentPlaceholder
-            icon={HeartPulse}
-            title="Santé & sécurité"
-            description="Allergies, soins, visites médicales, accident et procédures de sécurité."
-          />
-        );
+        return <SanteSection initialEleveId={eleveId} />;
       case "transport":
         return (
           <DevelopmentPlaceholder

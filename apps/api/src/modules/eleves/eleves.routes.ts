@@ -16,6 +16,7 @@ import alerteRoutes from "./absences/alertes/alerte.routes.js";
 import regleRoutes from "./absences/regles/regle.routes.js";
 
 import noteRoutes from "./parcours/notes/note.routes.js";
+import santeRoutes from "./vie-scolaire/sante/sante.routes.js";
 
 const router = Router();
 
@@ -55,5 +56,7 @@ router.use("/absences/sanctions", sanctionRoutes);
 
 router.use("/parcours/notes", noteRoutes);
 router.use("/parcours/progression", progressionRoutes);
+
+router.use("/vie-scolaire/sante", santeRoutes);
 
 export default router;

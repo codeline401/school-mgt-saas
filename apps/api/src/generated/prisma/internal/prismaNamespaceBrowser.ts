@@ -121,7 +121,8 @@ export const ModelName = {
   RegleAlerte: 'RegleAlerte',
   PalierAlerte: 'PalierAlerte',
   AlerteDeclenchee: 'AlerteDeclenchee',
-  SanctionEleve: 'SanctionEleve'
+  SanctionEleve: 'SanctionEleve',
+  SuiviSante: 'SuiviSante'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1308,6 +1309,26 @@ export const SanctionEleveScalarFieldEnum = {
 } as const
 
 export type SanctionEleveScalarFieldEnum = (typeof SanctionEleveScalarFieldEnum)[keyof typeof SanctionEleveScalarFieldEnum]
+
+
+export const SuiviSanteScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  eleveId: 'eleveId',
+  type: 'type',
+  titre: 'titre',
+  description: 'description',
+  gravite: 'gravite',
+  dateEvenement: 'dateEvenement',
+  dateFin: 'dateFin',
+  parentNotifieAt: 'parentNotifieAt',
+  archiveeAt: 'archiveeAt',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SuiviSanteScalarFieldEnum = (typeof SuiviSanteScalarFieldEnum)[keyof typeof SuiviSanteScalarFieldEnum]
 
 
 export const SortOrder = {
