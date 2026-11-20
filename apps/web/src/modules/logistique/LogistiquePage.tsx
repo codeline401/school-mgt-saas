@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Building2, Package, Monitor, Wrench } from "lucide-react";
+import { Building2, Package, Monitor, Wrench, Utensils } from "lucide-react";
 import LocauxTab from "./LocauxTab";
 import StocksTab from "./StocksTab";
 import InventaireTab from "./InventaireTab";
 import MaintenanceTab from "./MaintenanceTab";
+import CantineTab from "./CantineTab";
 
-type TabType = "locaux" | "stocks" | "inventaire" | "maintenance";
+type TabType = "locaux" | "stocks" | "inventaire" | "maintenance" | "cantine";
 
 function LogistiquePage() {
   const [activeTab, setActiveTab] = useState<TabType>("locaux");
@@ -58,6 +59,14 @@ function LogistiquePage() {
           <Wrench size={18} />
           Maintenance
         </button>
+        <button
+          role="tab"
+          className={`tab gap-2 ${activeTab === "cantine" ? "tab-active" : ""}`}
+          onClick={() => setActiveTab("cantine")}
+        >
+          <Utensils size={18} />
+          Cantine
+        </button>
       </div>
 
       {/* Contenu des onglets */}
@@ -66,6 +75,7 @@ function LogistiquePage() {
         {activeTab === "stocks" && <StocksTab />}
         {activeTab === "inventaire" && <InventaireTab />}
         {activeTab === "maintenance" && <MaintenanceTab />}
+        {activeTab === "cantine" && <CantineTab />}
       </div>
     </div>
   );

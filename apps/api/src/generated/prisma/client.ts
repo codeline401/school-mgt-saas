@@ -401,3 +401,8 @@ export type SanctionEleve = Prisma.SanctionEleveModel
  * 
  */
 export type SuiviSante = Prisma.SuiviSanteModel
+/**
+ * Model OffreCantine
+ * 
+ */
+export type OffreCantine = Prisma.OffreCantineModel

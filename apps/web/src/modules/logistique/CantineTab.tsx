@@ -8,8 +8,9 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
+import { CantineOffresTab } from "./components/CantineTab";
 
-type SubTab = "menus" | "inscriptions" | "personnel" | "stock";
+type SubTab = "menus" | "inscriptions" | "forfaits" | "personnel" | "stock";
 
 /**
  * COMPOSANT CANTINE TAB
@@ -65,6 +66,14 @@ function CantineTab() {
         </button>
         <button
           role="tab"
+          className={`tab ${activeSubTab === "forfaits" ? "tab-active" : ""}`}
+          onClick={() => setActiveSubTab("forfaits")}
+        >
+          <UtensilsCrossed size={16} className="mr-2" />
+          Forfaits
+        </button>
+        <button
+          role="tab"
           className={`tab ${activeSubTab === "personnel" ? "tab-active" : ""}`}
           onClick={() => setActiveSubTab("personnel")}
         >
@@ -97,6 +106,8 @@ function CantineTab() {
           description="Gestion des inscriptions cantine avec allergies, régimes spéciaux et restrictions."
         />
       )}
+
+      {activeSubTab === "forfaits" && <CantineOffresTab />}
 
       {activeSubTab === "personnel" && (
         <DevelopmentPlaceholder
