@@ -8,7 +8,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
-import { CantineOffresTab } from "./components/CantineTab";
+import { CantineOffresTab } from "./components/CantineOffreTab";
 
 type SubTab = "menus" | "inscriptions" | "forfaits" | "personnel" | "stock";
 
