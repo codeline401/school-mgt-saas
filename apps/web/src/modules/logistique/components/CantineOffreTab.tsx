@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { Pencil, Plus, Utensils } from "lucide-react";
 import {
   useCreerOffreCantine,
@@ -11,8 +11,8 @@ import {
 } from "../hooks/useCantine";
 
 type FormState =
-  | { mode: "creation" }
-  | { mode: "edition"; offre: OffreCantine }
+  | { sessionId: number; mode: "creation" }
+  | { sessionId: number; mode: "edition"; offre: OffreCantine }
   | null;
 
 type OffreFormProps = {
@@ -22,6 +22,8 @@ type OffreFormProps = {
   onSave: (input: OffreCantineInput) => Promise<void>;
 };
 
+const ANNEE_SCOLAIRE_REGEX = /^\d{4}-\d{4}$/;
+
 function anneeScolaireCourante(): string {
   const now = new Date();
   const debut = now.getMonth() >= 8 ? now.getFullYear() : now.getFullYear() - 1;
@@ -29,6 +31,15 @@ function anneeScolaireCourante(): string {
 }
 
 function OffreForm({ offre, pending, onCancel, onSave }: OffreFormProps) {
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const nomInputRef = useRef<HTMLInputElement | null>(null);
+
+  const titleId = useId();
+  const nomId = useId();
+  const descriptionId = useId();
+  const anneeScolaireId = useId();
+  const tarifMensuelId = useId();
+
   const [nom, setNom] = useState(offre?.nom ?? "");
   const [description, setDescription] = useState(offre?.description ?? "");
   const [anneeScolaire, setAnneeScolaire] = useState(
@@ -41,6 +52,29 @@ function OffreForm({ offre, pending, onCancel, onSave }: OffreFormProps) {
     offre?.joursSemaine ?? ["LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI"],
   );
   const [erreur, setErreur] = useState<string | null>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (!dialog.open) {
+      dialog.showModal();
+    }
+
+    nomInputRef.current?.focus();
+
+    const handleCancel = (event: Event) => {
+      event.preventDefault();
+      if (!pending) {
+        onCancel();
+      }
+    };
+
+    dialog.addEventListener("cancel", handleCancel);
+    return () => {
+      dialog.removeEventListener("cancel", handleCancel);
+    };
+  }, [onCancel, pending]);
 
   function basculerJour(jour: JourSemaine) {
     setJoursSemaine((current) =>
@@ -70,16 +104,30 @@ function OffreForm({ offre, pending, onCancel, onSave }: OffreFormProps) {
   }
 
   return (
-    <div className="modal modal-open" role="dialog" aria-modal="true">
+    <dialog
+      ref={dialogRef}
+      aria-modal="true"
+      aria-labelledby={titleId}
+      className="modal"
+      onClick={(event) => {
+        if (event.target === dialogRef.current && !pending) {
+          onCancel();
+        }
+      }}
+    >
       <div className="modal-box max-w-xl">
-        <h3 className="text-lg font-bold">
+        <h3 id={titleId} className="text-lg font-bold">
           {offre ? "Modifier le forfait" : "Nouveau forfait cantine"}
         </h3>
 
         <form className="mt-4 space-y-3" onSubmit={soumettre}>
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">Nom</legend>
+            <label htmlFor={nomId} className="fieldset-legend">
+              Nom
+            </label>
             <input
+              id={nomId}
+              ref={nomInputRef}
               className="input input-bordered w-full"
               required
               minLength={2}
@@ -90,8 +138,11 @@ function OffreForm({ offre, pending, onCancel, onSave }: OffreFormProps) {
           </fieldset>
 
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">Description</legend>
+            <label htmlFor={descriptionId} className="fieldset-legend">
+              Description
+            </label>
             <textarea
+              id={descriptionId}
               className="textarea textarea-bordered w-full"
               rows={3}
               maxLength={2000}
@@ -102,8 +153,11 @@ function OffreForm({ offre, pending, onCancel, onSave }: OffreFormProps) {
 
           <div className="grid gap-3 sm:grid-cols-2">
             <fieldset className="fieldset">
-              <legend className="fieldset-legend">Année scolaire</legend>
+              <label htmlFor={anneeScolaireId} className="fieldset-legend">
+                Année scolaire
+              </label>
               <input
+                id={anneeScolaireId}
                 className="input input-bordered w-full"
                 required
                 pattern="\d{4}-\d{4}"
@@ -114,11 +168,15 @@ function OffreForm({ offre, pending, onCancel, onSave }: OffreFormProps) {
             </fieldset>
 
             <fieldset className="fieldset">
-              <legend className="fieldset-legend">Tarif mensuel</legend>
+              <label htmlFor={tarifMensuelId} className="fieldset-legend">
+                Tarif mensuel
+              </label>
               <input
+                id={tarifMensuelId}
                 className="input input-bordered w-full"
                 type="number"
                 min="0"
+                max="99999999.99"
                 step="0.01"
                 required
                 value={tarifMensuel}
@@ -172,29 +230,73 @@ function OffreForm({ offre, pending, onCancel, onSave }: OffreFormProps) {
           </div>
         </form>
       </div>
-
-      <button
-        type="button"
-        className="modal-backdrop"
-        aria-label="Fermer"
-        onClick={onCancel}
-      />
-    </div>
+    </dialog>
   );
 }
 
 export function CantineOffresTab() {
-  const [anneeScolaire, setAnneeScolaire] = useState("");
+  const filtreAnneeInputId = useId();
+  const [filtreAnneeDraft, setFiltreAnneeDraft] = useState("");
   const [formState, setFormState] = useState<FormState>(null);
 
+  const sessionCounterRef = useRef(0);
+  const openerRef = useRef<HTMLElement | null>(null);
+
+  const trimmedFiltre = filtreAnneeDraft.trim();
+  const isFiltreValide =
+    trimmedFiltre === "" || ANNEE_SCOLAIRE_REGEX.test(trimmedFiltre);
+  const filtreAnneeAppliquee =
+    trimmedFiltre !== "" && ANNEE_SCOLAIRE_REGEX.test(trimmedFiltre)
+      ? trimmedFiltre
+      : undefined;
+
   const offresQuery = useOffresCantine(
-    anneeScolaire ? { anneeScolaire } : undefined,
+    filtreAnneeAppliquee ? { anneeScolaire: filtreAnneeAppliquee } : undefined,
   );
   const creer = useCreerOffreCantine();
   const modifier = useModifierOffreCantine();
   const desactiver = useDesactiverOffreCantine();
 
-  async function enregistrer(input: OffreCantineInput) {
+  function ouvrirCreation(trigger: HTMLElement) {
+    sessionCounterRef.current += 1;
+    openerRef.current = trigger;
+    setFormState({
+      sessionId: sessionCounterRef.current,
+      mode: "creation",
+    });
+  }
+
+  function ouvrirEdition(trigger: HTMLElement, offre: OffreCantine) {
+    sessionCounterRef.current += 1;
+    openerRef.current = trigger;
+    setFormState({
+      sessionId: sessionCounterRef.current,
+      mode: "edition",
+      offre,
+    });
+  }
+
+  function fermerFormulaire(expectedSessionId?: number) {
+    setFormState((current) => {
+      if (!current) return null;
+      if (
+        expectedSessionId !== undefined &&
+        current.sessionId !== expectedSessionId
+      ) {
+        return current;
+      }
+
+      const opener = openerRef.current;
+      openerRef.current = null;
+      requestAnimationFrame(() => {
+        opener?.focus();
+      });
+
+      return null;
+    });
+  }
+
+  async function enregistrer(sessionId: number, input: OffreCantineInput) {
     if (formState?.mode === "edition") {
       await modifier.mutateAsync({
         offreId: formState.offre.id,
@@ -204,7 +306,7 @@ export function CantineOffresTab() {
       await creer.mutateAsync(input);
     }
 
-    setFormState(null);
+    fermerFormulaire(sessionId);
   }
 
   return (
@@ -223,22 +325,30 @@ export function CantineOffresTab() {
         <button
           type="button"
           className="btn btn-primary btn-sm"
-          onClick={() => setFormState({ mode: "creation" })}
+          onClick={(event) => ouvrirCreation(event.currentTarget)}
         >
           <Plus size={16} />
           Nouveau forfait
         </button>
       </header>
 
-      <label className="fieldset max-w-xs">
-        <span className="label">Année scolaire</span>
+      <div className="fieldset max-w-xs">
+        <label htmlFor={filtreAnneeInputId} className="label">
+          Année scolaire
+        </label>
         <input
+          id={filtreAnneeInputId}
           className="input input-bordered"
-          placeholder="Toutes les années"
-          value={anneeScolaire}
-          onChange={(event) => setAnneeScolaire(event.target.value)}
+          placeholder="Toutes les années (ex. 2026-2027)"
+          value={filtreAnneeDraft}
+          onChange={(event) => setFiltreAnneeDraft(event.target.value)}
         />
-      </label>
+        {!isFiltreValide && (
+          <p className="mt-1 text-xs text-warning">
+            Saisissez une année complète au format AAAA-AAAA pour filtrer.
+          </p>
+        )}
+      </div>
 
       {offresQuery.isLoading && (
         <div className="flex justify-center py-10" aria-busy="true">
@@ -305,7 +415,9 @@ export function CantineOffresTab() {
                         className="btn btn-ghost btn-sm btn-square"
                         aria-label={`Modifier ${offre.nom}`}
                         title="Modifier"
-                        onClick={() => setFormState({ mode: "edition", offre })}
+                        onClick={(event) =>
+                          ouvrirEdition(event.currentTarget, offre)
+                        }
                       >
                         <Pencil size={16} />
                       </button>
@@ -339,12 +451,14 @@ export function CantineOffresTab() {
       {formState && (
         <OffreForm
           key={
-            formState.mode === "edition" ? formState.offre.id : "nouvelle-offre"
+            formState.mode === "edition"
+              ? `edition-${formState.offre.id}-${formState.sessionId}`
+              : `creation-${formState.sessionId}`
           }
           offre={formState.mode === "edition" ? formState.offre : undefined}
           pending={creer.isPending || modifier.isPending}
-          onCancel={() => setFormState(null)}
-          onSave={enregistrer}
+          onCancel={() => fermerFormulaire(formState.sessionId)}
+          onSave={(input) => enregistrer(formState.sessionId, input)}
         />
       )}
     </section>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import {
   UtensilsCrossed,
   PlusIcon,
@@ -12,14 +12,52 @@ import { CantineOffresTab } from "./components/CantineTab";
 
 type SubTab = "menus" | "inscriptions" | "forfaits" | "personnel" | "stock";
 
-/**
- * COMPOSANT CANTINE TAB
- *
- * Gestion de la cantine et de la restauration scolaire
- */
+const SUB_TABS: {
+  id: SubTab;
+  label: string;
+  Icon: typeof ClipboardList;
+}[] = [
+  { id: "menus", label: "Menus de la semaine", Icon: ClipboardList },
+  { id: "inscriptions", label: "Inscriptions & Régimes", Icon: Users },
+  { id: "forfaits", label: "Forfaits", Icon: UtensilsCrossed },
+  { id: "personnel", label: "Personnel de cuisine", Icon: Users },
+  { id: "stock", label: "Stock alimentaire", Icon: ShoppingCart },
+];
 
 function CantineTab() {
   const [activeSubTab, setActiveSubTab] = useState<SubTab>("menus");
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const selectAndFocusTab = (index: number) => {
+    const normalizedIndex = (index + SUB_TABS.length) % SUB_TABS.length;
+    const nextTab = SUB_TABS[normalizedIndex];
+    setActiveSubTab(nextTab.id);
+    tabRefs.current[normalizedIndex]?.focus();
+  };
+
+  const handleKeyDown = (
+    e: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    switch (e.key) {
+      case "ArrowRight":
+        e.preventDefault();
+        selectAndFocusTab(index + 1);
+        break;
+      case "ArrowLeft":
+        e.preventDefault();
+        selectAndFocusTab(index - 1);
+        break;
+      case "Home":
+        e.preventDefault();
+        selectAndFocusTab(0);
+        break;
+      case "End":
+        e.preventDefault();
+        selectAndFocusTab(SUB_TABS.length - 1);
+        break;
+    }
+  };
 
   return (
     <div>
@@ -35,11 +73,11 @@ function CantineTab() {
           </div>
         </div>
         <div className="flex gap-2">
-          <button className="btn btn-outline btn-sm gap-2">
+          <button type="button" className="btn btn-outline btn-sm gap-2">
             <Calendar size={16} />
             Planning hebdo
           </button>
-          <button className="btn btn-primary btn-sm gap-2">
+          <button type="button" className="btn btn-primary btn-sm gap-2">
             <PlusIcon size={16} />
             Créer menu
           </button>
@@ -47,82 +85,104 @@ function CantineTab() {
       </div>
 
       {/* Sous-onglets */}
-      <div role="tablist" className="tabs tabs-bordered mb-6">
-        <button
-          role="tab"
-          className={`tab ${activeSubTab === "menus" ? "tab-active" : ""}`}
-          onClick={() => setActiveSubTab("menus")}
-        >
-          <ClipboardList size={16} className="mr-2" />
-          Menus de la semaine
-        </button>
-        <button
-          role="tab"
-          className={`tab ${activeSubTab === "inscriptions" ? "tab-active" : ""}`}
-          onClick={() => setActiveSubTab("inscriptions")}
-        >
-          <Users size={16} className="mr-2" />
-          Inscriptions & Régimes
-        </button>
-        <button
-          role="tab"
-          className={`tab ${activeSubTab === "forfaits" ? "tab-active" : ""}`}
-          onClick={() => setActiveSubTab("forfaits")}
-        >
-          <UtensilsCrossed size={16} className="mr-2" />
-          Forfaits
-        </button>
-        <button
-          role="tab"
-          className={`tab ${activeSubTab === "personnel" ? "tab-active" : ""}`}
-          onClick={() => setActiveSubTab("personnel")}
-        >
-          <Users size={16} className="mr-2" />
-          Personnel de cuisine
-        </button>
-        <button
-          role="tab"
-          className={`tab ${activeSubTab === "stock" ? "tab-active" : ""}`}
-          onClick={() => setActiveSubTab("stock")}
-        >
-          <ShoppingCart size={16} className="mr-2" />
-          Stock alimentaire
-        </button>
+      <div
+        role="tablist"
+        aria-label="Sections de la cantine"
+        className="tabs tabs-bordered mb-6"
+      >
+        {SUB_TABS.map(({ id, label, Icon }, index) => {
+          const isSelected = activeSubTab === id;
+          const tabId = `cantine-tab-${id}`;
+          const panelId = `cantine-panel-${id}`;
+
+          return (
+            <button
+              key={id}
+              ref={(el) => {
+                tabRefs.current[index] = el;
+              }}
+              id={tabId}
+              type="button"
+              role="tab"
+              aria-selected={isSelected}
+              aria-controls={panelId}
+              tabIndex={isSelected ? 0 : -1}
+              className={`tab ${isSelected ? "tab-active" : ""}`}
+              onClick={() => setActiveSubTab(id)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+            >
+              <Icon size={16} className="mr-2" />
+              {label}
+            </button>
+          );
+        })}
       </div>
 
-      {/* Contenu des sous-onglets */}
+      {/* Panneau actif */}
       {activeSubTab === "menus" && (
-        <DevelopmentPlaceholder
-          icon={ClipboardList}
-          title="Menus de la semaine"
-          description="Planification et publication des menus hebdomadaires avec compositions nutritionnelles."
-        />
+        <div
+          id="cantine-panel-menus"
+          role="tabpanel"
+          aria-labelledby="cantine-tab-menus"
+        >
+          <DevelopmentPlaceholder
+            icon={ClipboardList}
+            title="Menus de la semaine"
+            description="Planification et publication des menus hebdomadaires avec compositions nutritionnelles."
+          />
+        </div>
       )}
 
       {activeSubTab === "inscriptions" && (
-        <DevelopmentPlaceholder
-          icon={Users}
-          title="Inscriptions & Régimes alimentaires"
-          description="Gestion des inscriptions cantine avec allergies, régimes spéciaux et restrictions."
-        />
+        <div
+          id="cantine-panel-inscriptions"
+          role="tabpanel"
+          aria-labelledby="cantine-tab-inscriptions"
+        >
+          <DevelopmentPlaceholder
+            icon={Users}
+            title="Inscriptions & Régimes alimentaires"
+            description="Gestion des inscriptions cantine avec allergies, régimes spéciaux et restrictions."
+          />
+        </div>
       )}
 
-      {activeSubTab === "forfaits" && <CantineOffresTab />}
+      {activeSubTab === "forfaits" && (
+        <div
+          id="cantine-panel-forfaits"
+          role="tabpanel"
+          aria-labelledby="cantine-tab-forfaits"
+        >
+          <CantineOffresTab />
+        </div>
+      )}
 
       {activeSubTab === "personnel" && (
-        <DevelopmentPlaceholder
-          icon={Users}
-          title="Personnel de cuisine"
-          description="Planning du personnel, équipes, formations hygiène et certifications HACCP."
-        />
+        <div
+          id="cantine-panel-personnel"
+          role="tabpanel"
+          aria-labelledby="cantine-tab-personnel"
+        >
+          <DevelopmentPlaceholder
+            icon={Users}
+            title="Personnel de cuisine"
+            description="Planning du personnel, équipes, formations hygiène et certifications HACCP."
+          />
+        </div>
       )}
 
       {activeSubTab === "stock" && (
-        <DevelopmentPlaceholder
-          icon={ShoppingCart}
-          title="Stock alimentaire & Approvisionnement"
-          description="Suivi des stocks alimentaires, commandes fournisseurs et dates de péremption."
-        />
+        <div
+          id="cantine-panel-stock"
+          role="tabpanel"
+          aria-labelledby="cantine-tab-stock"
+        >
+          <DevelopmentPlaceholder
+            icon={ShoppingCart}
+            title="Stock alimentaire & Approvisionnement"
+            description="Suivi des stocks alimentaires, commandes fournisseurs et dates de péremption."
+          />
+        </div>
       )}
     </div>
   );

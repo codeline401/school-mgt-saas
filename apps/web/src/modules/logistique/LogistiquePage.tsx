@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { Building2, Package, Monitor, Wrench, Utensils } from "lucide-react";
 import LocauxTab from "./LocauxTab";
 import StocksTab from "./StocksTab";
@@ -8,8 +8,52 @@ import CantineTab from "./CantineTab";
 
 type TabType = "locaux" | "stocks" | "inventaire" | "maintenance" | "cantine";
 
+const TABS: {
+  id: TabType;
+  label: string;
+  Icon: typeof Building2;
+}[] = [
+  { id: "locaux", label: "Locaux", Icon: Building2 },
+  { id: "stocks", label: "Stocks", Icon: Package },
+  { id: "inventaire", label: "Inventaire", Icon: Monitor },
+  { id: "maintenance", label: "Maintenance", Icon: Wrench },
+  { id: "cantine", label: "Cantine", Icon: Utensils },
+];
+
 function LogistiquePage() {
   const [activeTab, setActiveTab] = useState<TabType>("locaux");
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const selectAndFocusTab = (index: number) => {
+    const normalizedIndex = (index + TABS.length) % TABS.length;
+    const nextTab = TABS[normalizedIndex];
+    setActiveTab(nextTab.id);
+    tabRefs.current[normalizedIndex]?.focus();
+  };
+
+  const handleKeyDown = (
+    e: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    switch (e.key) {
+      case "ArrowRight":
+        e.preventDefault();
+        selectAndFocusTab(index + 1);
+        break;
+      case "ArrowLeft":
+        e.preventDefault();
+        selectAndFocusTab(index - 1);
+        break;
+      case "Home":
+        e.preventDefault();
+        selectAndFocusTab(0);
+        break;
+      case "End":
+        e.preventDefault();
+        selectAndFocusTab(TABS.length - 1);
+        break;
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -23,59 +67,86 @@ function LogistiquePage() {
       </div>
 
       {/* Navigation par onglets (Tabs) avec DaisyUI */}
-      <div role="tablist" className="tabs tabs-boxed bg-base-200 mb-6">
-        <button
-          role="tab"
-          className={`tab gap-2 ${activeTab === "locaux" ? "tab-active" : ""}`}
-          onClick={() => setActiveTab("locaux")}
-        >
-          <Building2 size={18} />
-          Locaux
-        </button>
+      <div
+        role="tablist"
+        aria-label="Sections de gestion logistique"
+        className="tabs tabs-boxed bg-base-200 mb-6"
+      >
+        {TABS.map(({ id, label, Icon }, index) => {
+          const isSelected = activeTab === id;
+          const tabId = `logistique-tab-${id}`;
+          const panelId = `logistique-panel-${id}`;
 
-        <button
-          role="tab"
-          className={`tab gap-2 ${activeTab === "stocks" ? "tab-active" : ""}`}
-          onClick={() => setActiveTab("stocks")}
-        >
-          <Package size={18} />
-          Stocks
-        </button>
-
-        <button
-          role="tab"
-          className={`tab gap-2 ${activeTab === "inventaire" ? "tab-active" : ""}`}
-          onClick={() => setActiveTab("inventaire")}
-        >
-          <Monitor size={18} />
-          Inventaire
-        </button>
-
-        <button
-          role="tab"
-          className={`tab gap-2 ${activeTab === "maintenance" ? "tab-active" : ""}`}
-          onClick={() => setActiveTab("maintenance")}
-        >
-          <Wrench size={18} />
-          Maintenance
-        </button>
-        <button
-          role="tab"
-          className={`tab gap-2 ${activeTab === "cantine" ? "tab-active" : ""}`}
-          onClick={() => setActiveTab("cantine")}
-        >
-          <Utensils size={18} />
-          Cantine
-        </button>
+          return (
+            <button
+              key={id}
+              ref={(el) => {
+                tabRefs.current[index] = el;
+              }}
+              id={tabId}
+              type="button"
+              role="tab"
+              aria-selected={isSelected}
+              aria-controls={panelId}
+              tabIndex={isSelected ? 0 : -1}
+              className={`tab gap-2 ${isSelected ? "tab-active" : ""}`}
+              onClick={() => setActiveTab(id)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+            >
+              <Icon size={18} />
+              {label}
+            </button>
+          );
+        })}
       </div>
 
       {/* Contenu des onglets */}
       <div className="tab-content">
-        {activeTab === "locaux" && <LocauxTab />}
-        {activeTab === "stocks" && <StocksTab />}
-        {activeTab === "inventaire" && <InventaireTab />}
-        {activeTab === "maintenance" && <MaintenanceTab />}
-        {activeTab === "cantine" && <CantineTab />}
+        {activeTab === "locaux" && (
+          <div
+            id="logistique-panel-locaux"
+            role="tabpanel"
+            aria-labelledby="logistique-tab-locaux"
+          >
+            <LocauxTab />
+          </div>
+        )}
+        {activeTab === "stocks" && (
+          <div
+            id="logistique-panel-stocks"
+            role="tabpanel"
+            aria-labelledby="logistique-tab-stocks"
+          >
+            <StocksTab />
+          </div>
+        )}
+        {activeTab === "inventaire" && (
+          <div
+            id="logistique-panel-inventaire"
+            role="tabpanel"
+            aria-labelledby="logistique-tab-inventaire"
+          >
+            <InventaireTab />
+          </div>
+        )}
+        {activeTab === "maintenance" && (
+          <div
+            id="logistique-panel-maintenance"
+            role="tabpanel"
+            aria-labelledby="logistique-tab-maintenance"
+          >
+            <MaintenanceTab />
+          </div>
+        )}
+        {activeTab === "cantine" && (
+          <div
+            id="logistique-panel-cantine"
+            role="tabpanel"
+            aria-labelledby="logistique-tab-cantine"
+          >
+            <CantineTab />
+          </div>
+        )}
       </div>
     </div>
   );
