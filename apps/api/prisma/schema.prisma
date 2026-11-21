@@ -152,6 +152,7 @@ model School {
   alerteDeclenchees        AlerteDeclenchee[]
   sanctionEleves           SanctionEleve[]
   suiviSantes              SuiviSante[]
+  offreCantines            OffreCantine[]
 }
 
 model Classe {
@@ -2549,4 +2550,24 @@ model SuiviSante {
 
   @@index([schoolId, type, dateEvenement])
   @@index([eleveId, archiveeAt])
+}
+
+// =========== MODULE - LOGISTIQUE : CANTINE ================
+model OffreCantine {
+  id            String        @id @default(uuid())
+  nom           String
+  description   String?       @db.Text
+  anneeScolaire String
+  tarifMensuel  Decimal       @db.Decimal(10, 2)
+  joursSemaine  JourSemaine[]
+  actif         Boolean       @default(true)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([schoolId, nom, anneeScolaire])
+  @@index([schoolId, actif]) // Index to quickly find active offers for a school
 }

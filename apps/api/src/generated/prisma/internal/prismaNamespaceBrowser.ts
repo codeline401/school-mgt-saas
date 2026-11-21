@@ -122,7 +122,8 @@ export const ModelName = {
   PalierAlerte: 'PalierAlerte',
   AlerteDeclenchee: 'AlerteDeclenchee',
   SanctionEleve: 'SanctionEleve',
-  SuiviSante: 'SuiviSante'
+  SuiviSante: 'SuiviSante',
+  OffreCantine: 'OffreCantine'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1329,6 +1330,22 @@ export const SuiviSanteScalarFieldEnum = {
 } as const
 
 export type SuiviSanteScalarFieldEnum = (typeof SuiviSanteScalarFieldEnum)[keyof typeof SuiviSanteScalarFieldEnum]
+
+
+export const OffreCantineScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  description: 'description',
+  anneeScolaire: 'anneeScolaire',
+  tarifMensuel: 'tarifMensuel',
+  joursSemaine: 'joursSemaine',
+  actif: 'actif',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OffreCantineScalarFieldEnum = (typeof OffreCantineScalarFieldEnum)[keyof typeof OffreCantineScalarFieldEnum]
 
 
 export const SortOrder = {

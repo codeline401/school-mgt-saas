@@ -6,6 +6,7 @@ import maintenanceRoutes from "./maintenance/maintenance.routes.js";
 import reservationsRoutes from "./reservations/reservation.routes.js";
 import transportRoutes from "./transport/transport.routes.js";
 import sortieRoutes from "./sortie/sortie.routes.js";
+import cantineRoutes from "./cantine/cantine.routes.js";
 
 const router = Router();
 
@@ -17,6 +18,7 @@ const router = Router();
  * - /api/logistique/stocks : Gestion des fournitures pédagogiques et alertes de seuil
  * - /api/logistique/inventaire : Gestion du matériel informatique et suivi des prêts
  * - /api/logistique/maintenance : Gestion des tickets de pannes et suivi des interventions
+ * - /api/logistique/cantine : Gestion des offres de cantine
  */
 
 router.use("/locaux", locauxRoutes);
@@ -26,5 +28,6 @@ router.use("/maintenance", maintenanceRoutes);
 router.use("/reservations", reservationsRoutes);
 router.use("/transport", transportRoutes);
 router.use("/sortie", sortieRoutes);
+router.use("/cantine", cantineRoutes);
 
 export default router;
