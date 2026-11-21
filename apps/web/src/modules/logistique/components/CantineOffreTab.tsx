@@ -9,6 +9,7 @@ import {
   type OffreCantine,
   type OffreCantineInput,
 } from "../hooks/useCantine";
+import { getApiError } from "../../../lib/api";
 
 type FormState =
   | { sessionId: number; mode: "creation" }
@@ -53,6 +54,7 @@ function OffreForm({ offre, pending, onCancel, onSave }: OffreFormProps) {
   );
   const [erreur, setErreur] = useState<string | null>(null);
 
+  // 1. Ouverture de la modale et focus initial uniquement au montage
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
@@ -62,6 +64,12 @@ function OffreForm({ offre, pending, onCancel, onSave }: OffreFormProps) {
     }
 
     nomInputRef.current?.focus();
+  }, []);
+
+  // 2. Synchronisation de l'écouteur Escape sans réinitialiser le focus
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
 
     const handleCancel = (event: Event) => {
       event.preventDefault();
@@ -97,9 +105,7 @@ function OffreForm({ offre, pending, onCancel, onSave }: OffreFormProps) {
         joursSemaine,
       });
     } catch (error) {
-      setErreur(
-        error instanceof Error ? error.message : "Impossible d’enregistrer.",
-      );
+      setErreur(getApiError(error, "Impossible d’enregistrer."));
     }
   }
 
