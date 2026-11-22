@@ -7,7 +7,7 @@ export const eleveCantineParamsSchema = z.object({
 });
 
 export const affectationCantineParamsSchema = z.object({
-  affectionId: z.string().uuid("Identifiant de l'affectation invalide"),
+  affectationId: z.string().uuid("Identifiant de l'affectation invalide"),
 });
 
 export const creerAffectationCantineSchema = z

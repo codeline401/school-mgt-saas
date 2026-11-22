@@ -53,7 +53,7 @@ export class AffectationCantineService {
    * @returns La liste des affectations à la cantine pour l'élève spécifié
    */
   static async listerPourEleve(eleveId: string, user: UserContext) {
-    const schoolId = requireSchool(user); // Vérifie que l'utilisateur appartient à une école et récupère son ID
+    const schoolId = requireSchool(user);
 
     const eleve = await prisma.eleve.findFirst({
       where: { id: eleveId, schoolId, deletedAt: null },
@@ -83,7 +83,13 @@ export class AffectationCantineService {
    * @returns L'affectation à la cantine créée
    */
   static async creer(input: CreerAffectationCantineInput, user: UserContext) {
-    const schoolId = requireSchool(user); // Vérifie que l'utilisateur appartient à une école et récupère son ID
+    const schoolId = requireSchool(user);
+
+    const offreWhere = {
+      id: input.offreCantineId,
+      schoolId,
+      actif: true,
+    };
 
     const [eleve, offre] = await Promise.all([
       prisma.eleve.findFirst({
@@ -91,11 +97,7 @@ export class AffectationCantineService {
         select: { id: true },
       }),
       prisma.offreCantine.findFirst({
-        where: {
-          id: input.offreCantineId,
-          schoolId,
-          actif: true,
-        },
+        where: offreWhere,
         select: {
           id: true,
           anneeScolaire: true,
@@ -107,25 +109,37 @@ export class AffectationCantineService {
       throw new AffectationCantineError("Elève introuvable", 404);
     }
     if (!offre) {
-      throw new AffectationCantineError(
-        "Forfait de cantine cantine introuvable",
-        404,
-      );
+      throw new AffectationCantineError("Forfait de cantine introuvable", 404);
     }
 
-    const dateDebut = dateUTC(input.dateDebut); // Convertit la date de début en objet Date UTC
-    const dateFin = input.dateFin ? dateUTC(input.dateFin) : null; // Convertit la date de fin en objet Date UTC
+    const dateDebut = dateUTC(input.dateDebut);
+    const dateFin = input.dateFin ? dateUTC(input.dateFin) : null;
 
     try {
       return await prisma.$transaction(
         async (tx) => {
+          const offreCourante = await tx.offreCantine.findFirst({
+            where: offreWhere,
+            select: {
+              id: true,
+              anneeScolaire: true,
+            },
+          });
+
+          if (!offreCourante) {
+            throw new AffectationCantineError(
+              "Forfait de cantine introuvable",
+              404,
+            );
+          }
+
           const affectationActive = await tx.affectationCantine.findFirst({
             where: {
               eleveId: eleve.id,
               schoolId,
               statut: "ACTIVE",
               offreCantine: {
-                is: { anneeScolaire: offre.anneeScolaire },
+                is: { anneeScolaire: offreCourante.anneeScolaire },
               },
             },
             select: { id: true },
@@ -141,7 +155,7 @@ export class AffectationCantineService {
           return tx.affectationCantine.create({
             data: {
               eleveId: eleve.id,
-              offreCantineId: offre.id,
+              offreCantineId: offreCourante.id,
               schoolId,
               createdById: user.id,
               dateDebut,
@@ -162,7 +176,7 @@ export class AffectationCantineService {
           });
         },
         {
-          isolationLevel: Prisma.TransactionIsolationLevel.Serializable, // Assure que la transaction est isolée pour éviter les conflits de lecture/écriture
+          isolationLevel: Prisma.TransactionIsolationLevel.Serializable,
         },
       );
     } catch (error) {
@@ -176,7 +190,7 @@ export class AffectationCantineService {
         error.code === "P2034"
       ) {
         throw new AffectationCantineError(
-          "Une inscription cantine vient d'être crééé pour cet élève. Recharger la liste",
+          "Une inscription cantine vient d'être créée pour cet élève. Recharger la liste",
           409,
         );
       }
@@ -186,10 +200,10 @@ export class AffectationCantineService {
 
   static async terminer(
     affectationCantineId: string,
-    dateFinInput: string | undefined,
+    dateFinInput: TerminerAffectationCantineInput["dateFin"],
     user: UserContext,
   ) {
-    const schoolId = requireSchool(user); // Récupère l'ID de l'école à partir du contexte utilisateur
+    const schoolId = requireSchool(user);
 
     const affectation = await prisma.affectationCantine.findFirst({
       where: { id: affectationCantineId, schoolId, statut: "ACTIVE" },
@@ -204,7 +218,7 @@ export class AffectationCantineService {
 
     const dateFin = dateFinInput
       ? dateUTC(dateFinInput)
-      : dateUTC(new Date().toISOString().slice(0, 10)); // Utilise la date du jour si aucune date de fin n'est fournie
+      : dateUTC(new Date().toISOString().slice(0, 10));
 
     if (dateFin < affectation.dateDebut) {
       throw new AffectationCantineError(

@@ -63,6 +63,9 @@ export function TransportCantineSection({ initialEleveId }: Props) {
     setEleveIdInitial(undefined);
     setOffreCantineId("");
     setRouteId("");
+    setRegimeSpecial("");
+    setArretMontee("");
+    setArretDescente("");
   }
 
   async function inscrireCantine() {

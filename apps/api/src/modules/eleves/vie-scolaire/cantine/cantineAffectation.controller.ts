@@ -8,6 +8,7 @@ import {
   affectationCantineParamsSchema,
   creerAffectationCantineSchema,
   eleveCantineParamsSchema,
+  terminerAffectationCantineSchema,
 } from "./cantineAffectation.schema.js";
 
 function contexteUtilisateur(req: Request) {
@@ -29,7 +30,7 @@ function contexteUtilisateur(req: Request) {
  */
 function parametreString(value: string | string[] | undefined): string {
   if (Array.isArray(value)) {
-    throw new AffectationCantineError("Indetifiant invalide", 400);
+    throw new AffectationCantineError("Identifiant invalide", 400);
   }
 
   return value ?? ""; // Retourne une chaîne vide si la valeur est indéfinie
@@ -62,10 +63,10 @@ export const listerAffectationCantineEleve = async (
   res: Response,
 ) => {
   try {
-    const user = contexteUtilisateur(req); // Récupère le contexte de l'utilisateur authentifié
-    const eleveId = eleveCantineParamsSchema.parse({
+    const user = contexteUtilisateur(req);
+    const { eleveId } = eleveCantineParamsSchema.parse({
       eleveId: parametreString(req.params.eleveId),
-    }).eleveId; // Récupère uniquement l'identifiant de l'élève validé par le schéma
+    });
 
     const data = await AffectationCantineService.listerPourEleve(eleveId, user);
 
@@ -77,9 +78,9 @@ export const listerAffectationCantineEleve = async (
 
 export const creerAffectationCantine = async (req: Request, res: Response) => {
   try {
-    const user = contexteUtilisateur(req); // Récupère le contexte de l'utilisateur authentifié
-    const input = creerAffectationCantineSchema.parse(req.body); // Valide et parse les données de la requête
-    const data = await AffectationCantineService.creer(input, user); // Crée une nouvelle affectation cantine pour l'élève
+    const user = contexteUtilisateur(req);
+    const input = creerAffectationCantineSchema.parse(req.body);
+    const data = await AffectationCantineService.creer(input, user);
 
     return res.status(201).json(data);
   } catch (error) {
@@ -92,13 +93,12 @@ export const terminerAffectationCantine = async (
   res: Response,
 ) => {
   try {
-    const user = contexteUtilisateur(req); // Récupère le contexte de l'utilisateur authentifié
-    const affectationId = affectationCantineParamsSchema.parse({
-      affectionId: parametreString(req.params.affectionId),
-    }).affectionId; // Récupère uniquement l'identifiant de l'affectation validé par le schéma
+    const user = contexteUtilisateur(req);
+    const { affectationId } = affectationCantineParamsSchema.parse({
+      affectationId: parametreString(req.params.affectationId),
+    });
 
-    const dateFin =
-      typeof req.body?.dateFin === "string" ? req.body.dateFin : undefined; // Si la date de fin n'est pas une chaîne, on la considère comme non définie
+    const { dateFin } = terminerAffectationCantineSchema.parse(req.body ?? {});
     const data = await AffectationCantineService.terminer(
       affectationId,
       dateFin,
