@@ -618,3 +618,12 @@ export const GraviteSante = {
 } as const
 
 export type GraviteSante = (typeof GraviteSante)[keyof typeof GraviteSante]
+
+
+export const StatutAffectationCantine = {
+  ACTIVE: 'ACTIVE',
+  SUSPENDUE: 'SUSPENDUE',
+  TERMINEE: 'TERMINEE'
+} as const
+
+export type StatutAffectationCantine = (typeof StatutAffectationCantine)[keyof typeof StatutAffectationCantine]

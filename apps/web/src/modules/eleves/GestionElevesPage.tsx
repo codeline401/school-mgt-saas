@@ -36,6 +36,7 @@ import { NotesParcoursSection } from "./parcours/notes/components/NotesParcoursS
 import { BulletinSection } from "./parcours/bulletins/components/BulletinSection";
 import { ProgressionSection } from "./parcours/progression/components/ProgressionSection";
 import { SanteSection } from "./vie-scolaire/sante/components/SanteSection";
+import { TransportCantineSection } from "./vie-scolaire/cantine-transport/components/TransportCantineSection";
 
 type MainTab =
   | "informations"
@@ -297,13 +298,7 @@ function GestionElevesPage() {
       case "sante":
         return <SanteSection initialEleveId={eleveId} />;
       case "transport":
-        return (
-          <DevelopmentPlaceholder
-            icon={CalendarClock}
-            title="Transport & cantine"
-            description="Abonnement, repas, suivi quotidien, règles et service annexe de l’établissement."
-          />
-        );
+        return <TransportCantineSection initialEleveId={eleveId} />;
       default:
         return null;
     }

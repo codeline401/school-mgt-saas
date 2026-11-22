@@ -406,3 +406,8 @@ export type SuiviSante = Prisma.SuiviSanteModel
  * 
  */
 export type OffreCantine = Prisma.OffreCantineModel
+/**
+ * Model AffectationCantine
+ * 
+ */
+export type AffectationCantine = Prisma.AffectationCantineModel

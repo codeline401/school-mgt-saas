@@ -253,6 +253,7 @@ export type OffreCantineWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"OffreCantine"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OffreCantine"> | Date | string
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  affectationCantines?: Prisma.AffectationCantineListRelationFilter
 }
 
 export type OffreCantineOrderByWithRelationInput = {
@@ -267,6 +268,7 @@ export type OffreCantineOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   school?: Prisma.SchoolOrderByWithRelationInput
+  affectationCantines?: Prisma.AffectationCantineOrderByRelationAggregateInput
 }
 
 export type OffreCantineWhereUniqueInput = Prisma.AtLeast<{
@@ -285,6 +287,7 @@ export type OffreCantineWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"OffreCantine"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OffreCantine"> | Date | string
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  affectationCantines?: Prisma.AffectationCantineListRelationFilter
 }, "id" | "schoolId_nom_anneeScolaire">
 
 export type OffreCantineOrderByWithAggregationInput = {
@@ -332,6 +335,7 @@ export type OffreCantineCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   school: Prisma.SchoolCreateNestedOneWithoutOffreCantinesInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutOffreCantineInput
 }
 
 export type OffreCantineUncheckedCreateInput = {
@@ -345,6 +349,7 @@ export type OffreCantineUncheckedCreateInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutOffreCantineInput
 }
 
 export type OffreCantineUpdateInput = {
@@ -358,6 +363,7 @@ export type OffreCantineUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   school?: Prisma.SchoolUpdateOneRequiredWithoutOffreCantinesNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutOffreCantineNestedInput
 }
 
 export type OffreCantineUncheckedUpdateInput = {
@@ -371,6 +377,7 @@ export type OffreCantineUncheckedUpdateInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutOffreCantineNestedInput
 }
 
 export type OffreCantineCreateManyInput = {
@@ -480,6 +487,11 @@ export type OffreCantineSumOrderByAggregateInput = {
   tarifMensuel?: Prisma.SortOrder
 }
 
+export type OffreCantineScalarRelationFilter = {
+  is?: Prisma.OffreCantineWhereInput
+  isNot?: Prisma.OffreCantineWhereInput
+}
+
 export type OffreCantineCreateNestedManyWithoutSchoolInput = {
   create?: Prisma.XOR<Prisma.OffreCantineCreateWithoutSchoolInput, Prisma.OffreCantineUncheckedCreateWithoutSchoolInput> | Prisma.OffreCantineCreateWithoutSchoolInput[] | Prisma.OffreCantineUncheckedCreateWithoutSchoolInput[]
   connectOrCreate?: Prisma.OffreCantineCreateOrConnectWithoutSchoolInput | Prisma.OffreCantineCreateOrConnectWithoutSchoolInput[]
@@ -531,6 +543,20 @@ export type OffreCantineUpdatejoursSemaineInput = {
   push?: $Enums.JourSemaine | $Enums.JourSemaine[]
 }
 
+export type OffreCantineCreateNestedOneWithoutAffectationCantinesInput = {
+  create?: Prisma.XOR<Prisma.OffreCantineCreateWithoutAffectationCantinesInput, Prisma.OffreCantineUncheckedCreateWithoutAffectationCantinesInput>
+  connectOrCreate?: Prisma.OffreCantineCreateOrConnectWithoutAffectationCantinesInput
+  connect?: Prisma.OffreCantineWhereUniqueInput
+}
+
+export type OffreCantineUpdateOneRequiredWithoutAffectationCantinesNestedInput = {
+  create?: Prisma.XOR<Prisma.OffreCantineCreateWithoutAffectationCantinesInput, Prisma.OffreCantineUncheckedCreateWithoutAffectationCantinesInput>
+  connectOrCreate?: Prisma.OffreCantineCreateOrConnectWithoutAffectationCantinesInput
+  upsert?: Prisma.OffreCantineUpsertWithoutAffectationCantinesInput
+  connect?: Prisma.OffreCantineWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OffreCantineUpdateToOneWithWhereWithoutAffectationCantinesInput, Prisma.OffreCantineUpdateWithoutAffectationCantinesInput>, Prisma.OffreCantineUncheckedUpdateWithoutAffectationCantinesInput>
+}
+
 export type OffreCantineCreateWithoutSchoolInput = {
   id?: string
   nom: string
@@ -541,6 +567,7 @@ export type OffreCantineCreateWithoutSchoolInput = {
   actif?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutOffreCantineInput
 }
 
 export type OffreCantineUncheckedCreateWithoutSchoolInput = {
@@ -553,6 +580,7 @@ export type OffreCantineUncheckedCreateWithoutSchoolInput = {
   actif?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutOffreCantineInput
 }
 
 export type OffreCantineCreateOrConnectWithoutSchoolInput = {
@@ -597,6 +625,74 @@ export type OffreCantineScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"OffreCantine"> | Date | string
 }
 
+export type OffreCantineCreateWithoutAffectationCantinesInput = {
+  id?: string
+  nom: string
+  description?: string | null
+  anneeScolaire: string
+  tarifMensuel: runtime.Decimal | runtime.DecimalJsLike | number | string
+  joursSemaine?: Prisma.OffreCantineCreatejoursSemaineInput | $Enums.JourSemaine[]
+  actif?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  school: Prisma.SchoolCreateNestedOneWithoutOffreCantinesInput
+}
+
+export type OffreCantineUncheckedCreateWithoutAffectationCantinesInput = {
+  id?: string
+  nom: string
+  description?: string | null
+  anneeScolaire: string
+  tarifMensuel: runtime.Decimal | runtime.DecimalJsLike | number | string
+  joursSemaine?: Prisma.OffreCantineCreatejoursSemaineInput | $Enums.JourSemaine[]
+  actif?: boolean
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type OffreCantineCreateOrConnectWithoutAffectationCantinesInput = {
+  where: Prisma.OffreCantineWhereUniqueInput
+  create: Prisma.XOR<Prisma.OffreCantineCreateWithoutAffectationCantinesInput, Prisma.OffreCantineUncheckedCreateWithoutAffectationCantinesInput>
+}
+
+export type OffreCantineUpsertWithoutAffectationCantinesInput = {
+  update: Prisma.XOR<Prisma.OffreCantineUpdateWithoutAffectationCantinesInput, Prisma.OffreCantineUncheckedUpdateWithoutAffectationCantinesInput>
+  create: Prisma.XOR<Prisma.OffreCantineCreateWithoutAffectationCantinesInput, Prisma.OffreCantineUncheckedCreateWithoutAffectationCantinesInput>
+  where?: Prisma.OffreCantineWhereInput
+}
+
+export type OffreCantineUpdateToOneWithWhereWithoutAffectationCantinesInput = {
+  where?: Prisma.OffreCantineWhereInput
+  data: Prisma.XOR<Prisma.OffreCantineUpdateWithoutAffectationCantinesInput, Prisma.OffreCantineUncheckedUpdateWithoutAffectationCantinesInput>
+}
+
+export type OffreCantineUpdateWithoutAffectationCantinesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  tarifMensuel?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  joursSemaine?: Prisma.OffreCantineUpdatejoursSemaineInput | $Enums.JourSemaine[]
+  actif?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  school?: Prisma.SchoolUpdateOneRequiredWithoutOffreCantinesNestedInput
+}
+
+export type OffreCantineUncheckedUpdateWithoutAffectationCantinesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  anneeScolaire?: Prisma.StringFieldUpdateOperationsInput | string
+  tarifMensuel?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  joursSemaine?: Prisma.OffreCantineUpdatejoursSemaineInput | $Enums.JourSemaine[]
+  actif?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type OffreCantineCreateManySchoolInput = {
   id?: string
   nom: string
@@ -619,6 +715,7 @@ export type OffreCantineUpdateWithoutSchoolInput = {
   actif?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutOffreCantineNestedInput
 }
 
 export type OffreCantineUncheckedUpdateWithoutSchoolInput = {
@@ -631,6 +728,7 @@ export type OffreCantineUncheckedUpdateWithoutSchoolInput = {
   actif?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutOffreCantineNestedInput
 }
 
 export type OffreCantineUncheckedUpdateManyWithoutSchoolInput = {
@@ -646,6 +744,35 @@ export type OffreCantineUncheckedUpdateManyWithoutSchoolInput = {
 }
 
 
+/**
+ * Count Type OffreCantineCountOutputType
+ */
+
+export type OffreCantineCountOutputType = {
+  affectationCantines: number
+}
+
+export type OffreCantineCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  affectationCantines?: boolean | OffreCantineCountOutputTypeCountAffectationCantinesArgs
+}
+
+/**
+ * OffreCantineCountOutputType without action
+ */
+export type OffreCantineCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OffreCantineCountOutputType
+   */
+  select?: Prisma.OffreCantineCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * OffreCantineCountOutputType without action
+ */
+export type OffreCantineCountOutputTypeCountAffectationCantinesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AffectationCantineWhereInput
+}
+
 
 export type OffreCantineSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -659,6 +786,8 @@ export type OffreCantineSelect<ExtArgs extends runtime.Types.Extensions.Internal
   createdAt?: boolean
   updatedAt?: boolean
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  affectationCantines?: boolean | Prisma.OffreCantine$affectationCantinesArgs<ExtArgs>
+  _count?: boolean | Prisma.OffreCantineCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["offreCantine"]>
 
 export type OffreCantineSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -705,6 +834,8 @@ export type OffreCantineSelectScalar = {
 export type OffreCantineOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nom" | "description" | "anneeScolaire" | "tarifMensuel" | "joursSemaine" | "actif" | "schoolId" | "createdAt" | "updatedAt", ExtArgs["result"]["offreCantine"]>
 export type OffreCantineInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  affectationCantines?: boolean | Prisma.OffreCantine$affectationCantinesArgs<ExtArgs>
+  _count?: boolean | Prisma.OffreCantineCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OffreCantineIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
@@ -717,6 +848,7 @@ export type $OffreCantinePayload<ExtArgs extends runtime.Types.Extensions.Intern
   name: "OffreCantine"
   objects: {
     school: Prisma.$SchoolPayload<ExtArgs>
+    affectationCantines: Prisma.$AffectationCantinePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1124,6 +1256,7 @@ readonly fields: OffreCantineFieldRefs;
 export interface Prisma__OffreCantineClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  affectationCantines<T extends Prisma.OffreCantine$affectationCantinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OffreCantine$affectationCantinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AffectationCantinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1561,6 +1694,30 @@ export type OffreCantineDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many OffreCantines to delete.
    */
   limit?: number
+}
+
+/**
+ * OffreCantine.affectationCantines
+ */
+export type OffreCantine$affectationCantinesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AffectationCantine
+   */
+  select?: Prisma.AffectationCantineSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AffectationCantine
+   */
+  omit?: Prisma.AffectationCantineOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AffectationCantineInclude<ExtArgs> | null
+  where?: Prisma.AffectationCantineWhereInput
+  orderBy?: Prisma.AffectationCantineOrderByWithRelationInput | Prisma.AffectationCantineOrderByWithRelationInput[]
+  cursor?: Prisma.AffectationCantineWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AffectationCantineScalarFieldEnum | Prisma.AffectationCantineScalarFieldEnum[]
 }
 
 /**

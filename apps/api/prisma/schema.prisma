@@ -75,6 +75,7 @@ model User {
   regleAlertes                       RegleAlerte[]             @relation("ReglesAlerteCreees")
   sanctionEleves                     SanctionEleve[]           @relation("SanctionsCreees")
   suiviSantes                        SuiviSante[]              @relation("SuivisSanteCrees")
+  affectationCantines                AffectationCantine[]      @relation("AffectationsCantineCrees")
 }
 
 // Modele SAAS
@@ -153,6 +154,7 @@ model School {
   sanctionEleves           SanctionEleve[]
   suiviSantes              SuiviSante[]
   offreCantines            OffreCantine[]
+  affectationCantines      AffectationCantine[]
 }
 
 model Classe {
@@ -1875,6 +1877,7 @@ model Eleve {
   alerteDeclenchees     AlerteDeclenchee[]
   sanctionEleves        SanctionEleve[]
   suiviSantes           SuiviSante[]
+  affectationCantines   AffectationCantine[]
 
   // Contraintes & Index
   @@unique([schoolId, matricule])
@@ -2565,9 +2568,44 @@ model OffreCantine {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  affectationCantines AffectationCantine[]
 
   @@unique([schoolId, nom, anneeScolaire])
   @@index([schoolId, actif]) // Index to quickly find active offers for a school
+}
+
+enum StatutAffectationCantine {
+  ACTIVE
+  SUSPENDUE
+  TERMINEE
+}
+
+model AffectationCantine {
+  id String @id @default(uuid())
+
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  offreCantineId String
+  offreCantine   OffreCantine @relation(fields: [offreCantineId], references: [id], onDelete: Restrict)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  statut        StatutAffectationCantine @default(ACTIVE)
+  dateDebut     DateTime                 @default(now()) @db.Date
+  dateFin       DateTime?                @db.Date
+  regimeSpecial String?
+
+  createdById String
+  createdBy   User   @relation("AffectationsCantineCrees", fields: [createdById], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId, statut])
+  @@index([eleveId, statut])
+  @@index([offreCantineId])
 }
