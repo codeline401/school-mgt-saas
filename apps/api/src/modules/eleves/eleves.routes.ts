@@ -10,6 +10,7 @@ import paiementRoutes from "./ecolages/paiement/paiement.routes.js";
 import factureRoutes from "./ecolages/factures/facture.routes.js";
 import ajournementRoutes from "./ecolages/ajournement/ajournement.routes.js";
 import relanceRoutes from "./ecolages/relances/relance.routes.js";
+import cantineAffectationRoutes from "./vie-scolaire/cantine/cantineAffectation.routes.js";
 import suiviAbsenceRoutes from "./absences/suivi/suivi.routes.js";
 import justificationRoutes from "./absences/justifications/justification.routes.js";
 import alerteRoutes from "./absences/alertes/alerte.routes.js";
@@ -58,5 +59,6 @@ router.use("/parcours/notes", noteRoutes);
 router.use("/parcours/progression", progressionRoutes);
 
 router.use("/vie-scolaire/sante", santeRoutes);
+router.use("/vie-scolaire/cantine/affectations", cantineAffectationRoutes);
 
 export default router;

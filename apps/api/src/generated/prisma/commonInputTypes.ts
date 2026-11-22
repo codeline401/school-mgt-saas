@@ -1428,6 +1428,23 @@ export type EnumGraviteSanteNullableWithAggregatesFilter<$PrismaModel = never> =
   _max?: Prisma.NestedEnumGraviteSanteNullableFilter<$PrismaModel>
 }
 
+export type EnumStatutAffectationCantineFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutAffectationCantine | Prisma.EnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutAffectationCantine[] | Prisma.ListEnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutAffectationCantine[] | Prisma.ListEnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutAffectationCantineFilter<$PrismaModel> | $Enums.StatutAffectationCantine
+}
+
+export type EnumStatutAffectationCantineWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutAffectationCantine | Prisma.EnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutAffectationCantine[] | Prisma.ListEnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutAffectationCantine[] | Prisma.ListEnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutAffectationCantineWithAggregatesFilter<$PrismaModel> | $Enums.StatutAffectationCantine
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutAffectationCantineFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutAffectationCantineFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -2777,6 +2794,23 @@ export type NestedEnumGraviteSanteNullableWithAggregatesFilter<$PrismaModel = ne
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumGraviteSanteNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumGraviteSanteNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumStatutAffectationCantineFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutAffectationCantine | Prisma.EnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutAffectationCantine[] | Prisma.ListEnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutAffectationCantine[] | Prisma.ListEnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutAffectationCantineFilter<$PrismaModel> | $Enums.StatutAffectationCantine
+}
+
+export type NestedEnumStatutAffectationCantineWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutAffectationCantine | Prisma.EnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutAffectationCantine[] | Prisma.ListEnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatutAffectationCantine[] | Prisma.ListEnumStatutAffectationCantineFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatutAffectationCantineWithAggregatesFilter<$PrismaModel> | $Enums.StatutAffectationCantine
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutAffectationCantineFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutAffectationCantineFilter<$PrismaModel>
 }
 
 

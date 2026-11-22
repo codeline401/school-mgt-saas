@@ -469,7 +469,8 @@ export const ModelName = {
   AlerteDeclenchee: 'AlerteDeclenchee',
   SanctionEleve: 'SanctionEleve',
   SuiviSante: 'SuiviSante',
-  OffreCantine: 'OffreCantine'
+  OffreCantine: 'OffreCantine',
+  AffectationCantine: 'AffectationCantine'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -485,7 +486,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "justificationAbsence" | "billetEntree" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse" | "regleAlerte" | "palierAlerte" | "alerteDeclenchee" | "sanctionEleve" | "suiviSante" | "offreCantine"
+    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "justificationAbsence" | "billetEntree" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse" | "regleAlerte" | "palierAlerte" | "alerteDeclenchee" | "sanctionEleve" | "suiviSante" | "offreCantine" | "affectationCantine"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5891,6 +5892,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AffectationCantine: {
+      payload: Prisma.$AffectationCantinePayload<ExtArgs>
+      fields: Prisma.AffectationCantineFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AffectationCantineFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AffectationCantinePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AffectationCantineFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AffectationCantinePayload>
+        }
+        findFirst: {
+          args: Prisma.AffectationCantineFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AffectationCantinePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AffectationCantineFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AffectationCantinePayload>
+        }
+        findMany: {
+          args: Prisma.AffectationCantineFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AffectationCantinePayload>[]
+        }
+        create: {
+          args: Prisma.AffectationCantineCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AffectationCantinePayload>
+        }
+        createMany: {
+          args: Prisma.AffectationCantineCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AffectationCantineCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AffectationCantinePayload>[]
+        }
+        delete: {
+          args: Prisma.AffectationCantineDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AffectationCantinePayload>
+        }
+        update: {
+          args: Prisma.AffectationCantineUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AffectationCantinePayload>
+        }
+        deleteMany: {
+          args: Prisma.AffectationCantineDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AffectationCantineUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AffectationCantineUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AffectationCantinePayload>[]
+        }
+        upsert: {
+          args: Prisma.AffectationCantineUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AffectationCantinePayload>
+        }
+        aggregate: {
+          args: Prisma.AffectationCantineAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAffectationCantine>
+        }
+        groupBy: {
+          args: Prisma.AffectationCantineGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AffectationCantineGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AffectationCantineCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AffectationCantineCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -7136,6 +7211,23 @@ export const OffreCantineScalarFieldEnum = {
 export type OffreCantineScalarFieldEnum = (typeof OffreCantineScalarFieldEnum)[keyof typeof OffreCantineScalarFieldEnum]
 
 
+export const AffectationCantineScalarFieldEnum = {
+  id: 'id',
+  eleveId: 'eleveId',
+  offreCantineId: 'offreCantineId',
+  schoolId: 'schoolId',
+  statut: 'statut',
+  dateDebut: 'dateDebut',
+  dateFin: 'dateFin',
+  regimeSpecial: 'regimeSpecial',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AffectationCantineScalarFieldEnum = (typeof AffectationCantineScalarFieldEnum)[keyof typeof AffectationCantineScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -8106,6 +8198,20 @@ export type EnumGraviteSanteFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 export type ListEnumGraviteSanteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GraviteSante[]'>
     
 
+
+/**
+ * Reference to a field of type 'StatutAffectationCantine'
+ */
+export type EnumStatutAffectationCantineFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutAffectationCantine'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutAffectationCantine[]'
+ */
+export type ListEnumStatutAffectationCantineFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutAffectationCantine[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -8330,6 +8436,7 @@ export type GlobalOmitConfig = {
   sanctionEleve?: Prisma.SanctionEleveOmit
   suiviSante?: Prisma.SuiviSanteOmit
   offreCantine?: Prisma.OffreCantineOmit
+  affectationCantine?: Prisma.AffectationCantineOmit
 }
 
 /* Types for Logging */

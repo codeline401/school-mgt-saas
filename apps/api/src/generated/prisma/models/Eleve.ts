@@ -428,6 +428,7 @@ export type EleveWhereInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeListRelationFilter
   sanctionEleves?: Prisma.SanctionEleveListRelationFilter
   suiviSantes?: Prisma.SuiviSanteListRelationFilter
+  affectationCantines?: Prisma.AffectationCantineListRelationFilter
 }
 
 export type EleveOrderByWithRelationInput = {
@@ -487,6 +488,7 @@ export type EleveOrderByWithRelationInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeOrderByRelationAggregateInput
   sanctionEleves?: Prisma.SanctionEleveOrderByRelationAggregateInput
   suiviSantes?: Prisma.SuiviSanteOrderByRelationAggregateInput
+  affectationCantines?: Prisma.AffectationCantineOrderByRelationAggregateInput
 }
 
 export type EleveWhereUniqueInput = Prisma.AtLeast<{
@@ -551,6 +553,7 @@ export type EleveWhereUniqueInput = Prisma.AtLeast<{
   alerteDeclenchees?: Prisma.AlerteDeclencheeListRelationFilter
   sanctionEleves?: Prisma.SanctionEleveListRelationFilter
   suiviSantes?: Prisma.SuiviSanteListRelationFilter
+  affectationCantines?: Prisma.AffectationCantineListRelationFilter
 }, "id" | "schoolId_matricule" | "schoolId_nom_prenom_dateNaissance">
 
 export type EleveOrderByWithAggregationInput = {
@@ -674,6 +677,7 @@ export type EleveCreateInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateInput = {
@@ -727,6 +731,7 @@ export type EleveUncheckedCreateInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUpdateInput = {
@@ -780,6 +785,7 @@ export type EleveUpdateInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateInput = {
@@ -833,6 +839,7 @@ export type EleveUncheckedUpdateInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateManyInput = {
@@ -1637,6 +1644,20 @@ export type EleveUpdateOneRequiredWithoutSuiviSantesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutSuiviSantesInput, Prisma.EleveUpdateWithoutSuiviSantesInput>, Prisma.EleveUncheckedUpdateWithoutSuiviSantesInput>
 }
 
+export type EleveCreateNestedOneWithoutAffectationCantinesInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutAffectationCantinesInput, Prisma.EleveUncheckedCreateWithoutAffectationCantinesInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutAffectationCantinesInput
+  connect?: Prisma.EleveWhereUniqueInput
+}
+
+export type EleveUpdateOneRequiredWithoutAffectationCantinesNestedInput = {
+  create?: Prisma.XOR<Prisma.EleveCreateWithoutAffectationCantinesInput, Prisma.EleveUncheckedCreateWithoutAffectationCantinesInput>
+  connectOrCreate?: Prisma.EleveCreateOrConnectWithoutAffectationCantinesInput
+  upsert?: Prisma.EleveUpsertWithoutAffectationCantinesInput
+  connect?: Prisma.EleveWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EleveUpdateToOneWithWhereWithoutAffectationCantinesInput, Prisma.EleveUpdateWithoutAffectationCantinesInput>, Prisma.EleveUncheckedUpdateWithoutAffectationCantinesInput>
+}
+
 export type EleveCreateWithoutUserInput = {
   id?: string
   matricule: number
@@ -1687,6 +1708,7 @@ export type EleveCreateWithoutUserInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutUserInput = {
@@ -1739,6 +1761,7 @@ export type EleveUncheckedCreateWithoutUserInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutUserInput = {
@@ -1801,6 +1824,7 @@ export type EleveCreateWithoutDeletedByInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutDeletedByInput = {
@@ -1853,6 +1877,7 @@ export type EleveUncheckedCreateWithoutDeletedByInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutDeletedByInput = {
@@ -1981,6 +2006,7 @@ export type EleveCreateWithoutSchoolInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutSchoolInput = {
@@ -2033,6 +2059,7 @@ export type EleveUncheckedCreateWithoutSchoolInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutSchoolInput = {
@@ -2111,6 +2138,7 @@ export type EleveCreateWithoutClasseInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutClasseInput = {
@@ -2163,6 +2191,7 @@ export type EleveUncheckedCreateWithoutClasseInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutClasseInput = {
@@ -2241,6 +2270,7 @@ export type EleveCreateWithoutAdmissionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutAdmissionsInput = {
@@ -2293,6 +2323,7 @@ export type EleveUncheckedCreateWithoutAdmissionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutAdmissionsInput = {
@@ -2361,6 +2392,7 @@ export type EleveUpdateWithoutAdmissionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutAdmissionsInput = {
@@ -2413,6 +2445,7 @@ export type EleveUncheckedUpdateWithoutAdmissionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutNotesInput = {
@@ -2465,6 +2498,7 @@ export type EleveCreateWithoutNotesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutNotesInput = {
@@ -2517,6 +2551,7 @@ export type EleveUncheckedCreateWithoutNotesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutNotesInput = {
@@ -2585,6 +2620,7 @@ export type EleveUpdateWithoutNotesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutNotesInput = {
@@ -2637,6 +2673,7 @@ export type EleveUncheckedUpdateWithoutNotesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutPresencesInput = {
@@ -2689,6 +2726,7 @@ export type EleveCreateWithoutPresencesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutPresencesInput = {
@@ -2741,6 +2779,7 @@ export type EleveUncheckedCreateWithoutPresencesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutPresencesInput = {
@@ -2809,6 +2848,7 @@ export type EleveUpdateWithoutPresencesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutPresencesInput = {
@@ -2861,6 +2901,7 @@ export type EleveUncheckedUpdateWithoutPresencesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutJustificationAbsencesInput = {
@@ -2913,6 +2954,7 @@ export type EleveCreateWithoutJustificationAbsencesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutJustificationAbsencesInput = {
@@ -2965,6 +3007,7 @@ export type EleveUncheckedCreateWithoutJustificationAbsencesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutJustificationAbsencesInput = {
@@ -3033,6 +3076,7 @@ export type EleveUpdateWithoutJustificationAbsencesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutJustificationAbsencesInput = {
@@ -3085,6 +3129,7 @@ export type EleveUncheckedUpdateWithoutJustificationAbsencesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutBilletEntreesInput = {
@@ -3137,6 +3182,7 @@ export type EleveCreateWithoutBilletEntreesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutBilletEntreesInput = {
@@ -3189,6 +3235,7 @@ export type EleveUncheckedCreateWithoutBilletEntreesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutBilletEntreesInput = {
@@ -3257,6 +3304,7 @@ export type EleveUpdateWithoutBilletEntreesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutBilletEntreesInput = {
@@ -3309,6 +3357,7 @@ export type EleveUncheckedUpdateWithoutBilletEntreesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutSoumissionsInput = {
@@ -3361,6 +3410,7 @@ export type EleveCreateWithoutSoumissionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutSoumissionsInput = {
@@ -3413,6 +3463,7 @@ export type EleveUncheckedCreateWithoutSoumissionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutSoumissionsInput = {
@@ -3481,6 +3532,7 @@ export type EleveUpdateWithoutSoumissionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutSoumissionsInput = {
@@ -3533,6 +3585,7 @@ export type EleveUncheckedUpdateWithoutSoumissionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutDeliberationDecisionsInput = {
@@ -3585,6 +3638,7 @@ export type EleveCreateWithoutDeliberationDecisionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutDeliberationDecisionsInput = {
@@ -3637,6 +3691,7 @@ export type EleveUncheckedCreateWithoutDeliberationDecisionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutDeliberationDecisionsInput = {
@@ -3705,6 +3760,7 @@ export type EleveUpdateWithoutDeliberationDecisionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutDeliberationDecisionsInput = {
@@ -3757,6 +3813,7 @@ export type EleveUncheckedUpdateWithoutDeliberationDecisionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutAffectationTransportsInput = {
@@ -3809,6 +3866,7 @@ export type EleveCreateWithoutAffectationTransportsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutAffectationTransportsInput = {
@@ -3861,6 +3919,7 @@ export type EleveUncheckedCreateWithoutAffectationTransportsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutAffectationTransportsInput = {
@@ -3929,6 +3988,7 @@ export type EleveUpdateWithoutAffectationTransportsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutAffectationTransportsInput = {
@@ -3981,6 +4041,7 @@ export type EleveUncheckedUpdateWithoutAffectationTransportsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutParticipantSortiesInput = {
@@ -4033,6 +4094,7 @@ export type EleveCreateWithoutParticipantSortiesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutParticipantSortiesInput = {
@@ -4085,6 +4147,7 @@ export type EleveUncheckedCreateWithoutParticipantSortiesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutParticipantSortiesInput = {
@@ -4153,6 +4216,7 @@ export type EleveUpdateWithoutParticipantSortiesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutParticipantSortiesInput = {
@@ -4205,6 +4269,7 @@ export type EleveUncheckedUpdateWithoutParticipantSortiesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutAutorisationParentsInput = {
@@ -4257,6 +4322,7 @@ export type EleveCreateWithoutAutorisationParentsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutAutorisationParentsInput = {
@@ -4309,6 +4375,7 @@ export type EleveUncheckedCreateWithoutAutorisationParentsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutAutorisationParentsInput = {
@@ -4377,6 +4444,7 @@ export type EleveUpdateWithoutAutorisationParentsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutAutorisationParentsInput = {
@@ -4429,6 +4497,7 @@ export type EleveUncheckedUpdateWithoutAutorisationParentsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutHistoriqueClassesInput = {
@@ -4481,6 +4550,7 @@ export type EleveCreateWithoutHistoriqueClassesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutHistoriqueClassesInput = {
@@ -4533,6 +4603,7 @@ export type EleveUncheckedCreateWithoutHistoriqueClassesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutHistoriqueClassesInput = {
@@ -4601,6 +4672,7 @@ export type EleveUpdateWithoutHistoriqueClassesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutHistoriqueClassesInput = {
@@ -4653,6 +4725,7 @@ export type EleveUncheckedUpdateWithoutHistoriqueClassesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutAdresseInput = {
@@ -4705,6 +4778,7 @@ export type EleveCreateWithoutAdresseInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutAdresseInput = {
@@ -4757,6 +4831,7 @@ export type EleveUncheckedCreateWithoutAdresseInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutAdresseInput = {
@@ -4825,6 +4900,7 @@ export type EleveUpdateWithoutAdresseInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutAdresseInput = {
@@ -4877,6 +4953,7 @@ export type EleveUncheckedUpdateWithoutAdresseInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutProfessionEleveInput = {
@@ -4929,6 +5006,7 @@ export type EleveCreateWithoutProfessionEleveInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutProfessionEleveInput = {
@@ -4981,6 +5059,7 @@ export type EleveUncheckedCreateWithoutProfessionEleveInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutProfessionEleveInput = {
@@ -5049,6 +5128,7 @@ export type EleveUpdateWithoutProfessionEleveInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutProfessionEleveInput = {
@@ -5101,6 +5181,7 @@ export type EleveUncheckedUpdateWithoutProfessionEleveInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutDroitInscriptionsInput = {
@@ -5153,6 +5234,7 @@ export type EleveCreateWithoutDroitInscriptionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutDroitInscriptionsInput = {
@@ -5205,6 +5287,7 @@ export type EleveUncheckedCreateWithoutDroitInscriptionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutDroitInscriptionsInput = {
@@ -5273,6 +5356,7 @@ export type EleveUpdateWithoutDroitInscriptionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutDroitInscriptionsInput = {
@@ -5325,6 +5409,7 @@ export type EleveUncheckedUpdateWithoutDroitInscriptionsInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutEcolagesInput = {
@@ -5377,6 +5462,7 @@ export type EleveCreateWithoutEcolagesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutEcolagesInput = {
@@ -5429,6 +5515,7 @@ export type EleveUncheckedCreateWithoutEcolagesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutEcolagesInput = {
@@ -5497,6 +5584,7 @@ export type EleveUpdateWithoutEcolagesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutEcolagesInput = {
@@ -5549,6 +5637,7 @@ export type EleveUncheckedUpdateWithoutEcolagesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutPaiementEcolagesInput = {
@@ -5601,6 +5690,7 @@ export type EleveCreateWithoutPaiementEcolagesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutPaiementEcolagesInput = {
@@ -5653,6 +5743,7 @@ export type EleveUncheckedCreateWithoutPaiementEcolagesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutPaiementEcolagesInput = {
@@ -5721,6 +5812,7 @@ export type EleveUpdateWithoutPaiementEcolagesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutPaiementEcolagesInput = {
@@ -5773,6 +5865,7 @@ export type EleveUncheckedUpdateWithoutPaiementEcolagesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutAjournementsLignesInput = {
@@ -5825,6 +5918,7 @@ export type EleveCreateWithoutAjournementsLignesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutAjournementsLignesInput = {
@@ -5877,6 +5971,7 @@ export type EleveUncheckedCreateWithoutAjournementsLignesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutAjournementsLignesInput = {
@@ -5945,6 +6040,7 @@ export type EleveUpdateWithoutAjournementsLignesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutAjournementsLignesInput = {
@@ -5997,6 +6093,7 @@ export type EleveUncheckedUpdateWithoutAjournementsLignesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutParentInput = {
@@ -6049,6 +6146,7 @@ export type EleveCreateWithoutParentInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutParentInput = {
@@ -6101,6 +6199,7 @@ export type EleveUncheckedCreateWithoutParentInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutParentInput = {
@@ -6163,6 +6262,7 @@ export type EleveCreateWithoutResponsableInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutResponsableInput = {
@@ -6215,6 +6315,7 @@ export type EleveUncheckedCreateWithoutResponsableInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutResponsableInput = {
@@ -6309,6 +6410,7 @@ export type EleveCreateWithoutResponsableElevesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutResponsableElevesInput = {
@@ -6361,6 +6463,7 @@ export type EleveUncheckedCreateWithoutResponsableElevesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutResponsableElevesInput = {
@@ -6429,6 +6532,7 @@ export type EleveUpdateWithoutResponsableElevesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutResponsableElevesInput = {
@@ -6481,6 +6585,7 @@ export type EleveUncheckedUpdateWithoutResponsableElevesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutAffectationClassesInput = {
@@ -6533,6 +6638,7 @@ export type EleveCreateWithoutAffectationClassesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutAffectationClassesInput = {
@@ -6585,6 +6691,7 @@ export type EleveUncheckedCreateWithoutAffectationClassesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutAffectationClassesInput = {
@@ -6653,6 +6760,7 @@ export type EleveUpdateWithoutAffectationClassesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutAffectationClassesInput = {
@@ -6705,6 +6813,7 @@ export type EleveUncheckedUpdateWithoutAffectationClassesInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutAlerteDeclencheesInput = {
@@ -6757,6 +6866,7 @@ export type EleveCreateWithoutAlerteDeclencheesInput = {
   billetEntrees?: Prisma.BilletEntreeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutAlerteDeclencheesInput = {
@@ -6809,6 +6919,7 @@ export type EleveUncheckedCreateWithoutAlerteDeclencheesInput = {
   billetEntrees?: Prisma.BilletEntreeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutAlerteDeclencheesInput = {
@@ -6877,6 +6988,7 @@ export type EleveUpdateWithoutAlerteDeclencheesInput = {
   billetEntrees?: Prisma.BilletEntreeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutAlerteDeclencheesInput = {
@@ -6929,6 +7041,7 @@ export type EleveUncheckedUpdateWithoutAlerteDeclencheesInput = {
   billetEntrees?: Prisma.BilletEntreeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutSanctionElevesInput = {
@@ -6981,6 +7094,7 @@ export type EleveCreateWithoutSanctionElevesInput = {
   billetEntrees?: Prisma.BilletEntreeCreateNestedManyWithoutEleveInput
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutSanctionElevesInput = {
@@ -7033,6 +7147,7 @@ export type EleveUncheckedCreateWithoutSanctionElevesInput = {
   billetEntrees?: Prisma.BilletEntreeUncheckedCreateNestedManyWithoutEleveInput
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutSanctionElevesInput = {
@@ -7101,6 +7216,7 @@ export type EleveUpdateWithoutSanctionElevesInput = {
   billetEntrees?: Prisma.BilletEntreeUpdateManyWithoutEleveNestedInput
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutSanctionElevesInput = {
@@ -7153,6 +7269,7 @@ export type EleveUncheckedUpdateWithoutSanctionElevesInput = {
   billetEntrees?: Prisma.BilletEntreeUncheckedUpdateManyWithoutEleveNestedInput
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateWithoutSuiviSantesInput = {
@@ -7205,6 +7322,7 @@ export type EleveCreateWithoutSuiviSantesInput = {
   billetEntrees?: Prisma.BilletEntreeCreateNestedManyWithoutEleveInput
   alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineCreateNestedManyWithoutEleveInput
 }
 
 export type EleveUncheckedCreateWithoutSuiviSantesInput = {
@@ -7257,6 +7375,7 @@ export type EleveUncheckedCreateWithoutSuiviSantesInput = {
   billetEntrees?: Prisma.BilletEntreeUncheckedCreateNestedManyWithoutEleveInput
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedCreateNestedManyWithoutEleveInput
 }
 
 export type EleveCreateOrConnectWithoutSuiviSantesInput = {
@@ -7325,6 +7444,7 @@ export type EleveUpdateWithoutSuiviSantesInput = {
   billetEntrees?: Prisma.BilletEntreeUpdateManyWithoutEleveNestedInput
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutSuiviSantesInput = {
@@ -7377,6 +7497,235 @@ export type EleveUncheckedUpdateWithoutSuiviSantesInput = {
   billetEntrees?: Prisma.BilletEntreeUncheckedUpdateManyWithoutEleveNestedInput
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveCreateWithoutAffectationCantinesInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  adresse?: Prisma.AdresseCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveCreateNestedOneWithoutEleveInput
+  responsable?: Prisma.ParentCreateNestedOneWithoutElevesInput
+  school: Prisma.SchoolCreateNestedOneWithoutElevesInput
+  classe?: Prisma.ClasseCreateNestedOneWithoutElevesInput
+  historiqueClasses?: Prisma.HistoriqueClasseCreateNestedManyWithoutEleveInput
+  parent?: Prisma.ParentCreateNestedOneWithoutElevesEnfantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutUserDeletingInput
+  admissions?: Prisma.DossierAdmissionCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionCreateNestedManyWithoutEleveInput
+  user?: Prisma.UserCreateNestedOneWithoutElevesInput
+  responsableEleves?: Prisma.ResponsableEleveCreateNestedManyWithoutEleveInput
+  affectationClasses?: Prisma.AffectationClasseCreateNestedManyWithoutEleveInput
+  paiementEcolages?: Prisma.PaiementEcolageCreateNestedManyWithoutEleveInput
+  ajournementsLignes?: Prisma.AjournementLigneCreateNestedManyWithoutEleveInput
+  justificationAbsences?: Prisma.JustificationAbsenceCreateNestedManyWithoutEleveInput
+  billetEntrees?: Prisma.BilletEntreeCreateNestedManyWithoutEleveInput
+  alerteDeclenchees?: Prisma.AlerteDeclencheeCreateNestedManyWithoutEleveInput
+  sanctionEleves?: Prisma.SanctionEleveCreateNestedManyWithoutEleveInput
+  suiviSantes?: Prisma.SuiviSanteCreateNestedManyWithoutEleveInput
+}
+
+export type EleveUncheckedCreateWithoutAffectationCantinesInput = {
+  id?: string
+  matricule: number
+  nom: string
+  prenom: string
+  genre?: $Enums.Genre | null
+  dateNaissance?: Date | string | null
+  lieuNaissance?: string | null
+  telephone?: string | null
+  photoUrl?: string | null
+  situationFinAnnee?: $Enums.StatutFinAnnee | null
+  situationFamiliale?: $Enums.SituationFamiliale | null
+  dateInscription?: Date | string | null
+  ecoleOrigine?: string | null
+  nationalite?: string | null
+  responsableId?: string | null
+  statut?: $Enums.StatutEleve
+  isRelationContact?: boolean
+  relationName?: string | null
+  relationTelephone?: string | null
+  remarque?: string | null
+  schoolId: string
+  classeId?: string | null
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  deletedById?: string | null
+  userId?: string | null
+  adresse?: Prisma.AdresseUncheckedCreateNestedOneWithoutEleveInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedCreateNestedOneWithoutEleveInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedCreateNestedManyWithoutEleveInput
+  admissions?: Prisma.DossierAdmissionUncheckedCreateNestedManyWithoutEleveInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutEleveInput
+  presences?: Prisma.PresenceUncheckedCreateNestedManyWithoutEleveInput
+  soumissions?: Prisma.SoumissionUncheckedCreateNestedManyWithoutEleveInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedCreateNestedManyWithoutEleveInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedCreateNestedManyWithoutEleveInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedCreateNestedManyWithoutEleveInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedCreateNestedManyWithoutEleveInput
+  ecolages?: Prisma.EcolageUncheckedCreateNestedManyWithoutEleveInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedCreateNestedManyWithoutEleveInput
+  responsableEleves?: Prisma.ResponsableEleveUncheckedCreateNestedManyWithoutEleveInput
+  affectationClasses?: Prisma.AffectationClasseUncheckedCreateNestedManyWithoutEleveInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedCreateNestedManyWithoutEleveInput
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedCreateNestedManyWithoutEleveInput
+  justificationAbsences?: Prisma.JustificationAbsenceUncheckedCreateNestedManyWithoutEleveInput
+  billetEntrees?: Prisma.BilletEntreeUncheckedCreateNestedManyWithoutEleveInput
+  alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedCreateNestedManyWithoutEleveInput
+  sanctionEleves?: Prisma.SanctionEleveUncheckedCreateNestedManyWithoutEleveInput
+  suiviSantes?: Prisma.SuiviSanteUncheckedCreateNestedManyWithoutEleveInput
+}
+
+export type EleveCreateOrConnectWithoutAffectationCantinesInput = {
+  where: Prisma.EleveWhereUniqueInput
+  create: Prisma.XOR<Prisma.EleveCreateWithoutAffectationCantinesInput, Prisma.EleveUncheckedCreateWithoutAffectationCantinesInput>
+}
+
+export type EleveUpsertWithoutAffectationCantinesInput = {
+  update: Prisma.XOR<Prisma.EleveUpdateWithoutAffectationCantinesInput, Prisma.EleveUncheckedUpdateWithoutAffectationCantinesInput>
+  create: Prisma.XOR<Prisma.EleveCreateWithoutAffectationCantinesInput, Prisma.EleveUncheckedCreateWithoutAffectationCantinesInput>
+  where?: Prisma.EleveWhereInput
+}
+
+export type EleveUpdateToOneWithWhereWithoutAffectationCantinesInput = {
+  where?: Prisma.EleveWhereInput
+  data: Prisma.XOR<Prisma.EleveUpdateWithoutAffectationCantinesInput, Prisma.EleveUncheckedUpdateWithoutAffectationCantinesInput>
+}
+
+export type EleveUpdateWithoutAffectationCantinesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adresse?: Prisma.AdresseUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUpdateOneWithoutEleveNestedInput
+  responsable?: Prisma.ParentUpdateOneWithoutElevesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutElevesNestedInput
+  classe?: Prisma.ClasseUpdateOneWithoutElevesNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUpdateManyWithoutEleveNestedInput
+  parent?: Prisma.ParentUpdateOneWithoutElevesEnfantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutUserDeletingNestedInput
+  admissions?: Prisma.DossierAdmissionUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUpdateManyWithoutEleveNestedInput
+  user?: Prisma.UserUpdateOneWithoutElevesNestedInput
+  responsableEleves?: Prisma.ResponsableEleveUpdateManyWithoutEleveNestedInput
+  affectationClasses?: Prisma.AffectationClasseUpdateManyWithoutEleveNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUpdateManyWithoutEleveNestedInput
+  ajournementsLignes?: Prisma.AjournementLigneUpdateManyWithoutEleveNestedInput
+  justificationAbsences?: Prisma.JustificationAbsenceUpdateManyWithoutEleveNestedInput
+  billetEntrees?: Prisma.BilletEntreeUpdateManyWithoutEleveNestedInput
+  alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
+  sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
+  suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+}
+
+export type EleveUncheckedUpdateWithoutAffectationCantinesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  matricule?: Prisma.IntFieldUpdateOperationsInput | number
+  nom?: Prisma.StringFieldUpdateOperationsInput | string
+  prenom?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+  dateNaissance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lieuNaissance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  situationFinAnnee?: Prisma.NullableEnumStatutFinAnneeFieldUpdateOperationsInput | $Enums.StatutFinAnnee | null
+  situationFamiliale?: Prisma.NullableEnumSituationFamilialeFieldUpdateOperationsInput | $Enums.SituationFamiliale | null
+  dateInscription?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ecoleOrigine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEleveFieldUpdateOperationsInput | $Enums.StatutEleve
+  isRelationContact?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relationName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationTelephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  classeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adresse?: Prisma.AdresseUncheckedUpdateOneWithoutEleveNestedInput
+  professionEleve?: Prisma.ProfessionEleveUncheckedUpdateOneWithoutEleveNestedInput
+  historiqueClasses?: Prisma.HistoriqueClasseUncheckedUpdateManyWithoutEleveNestedInput
+  admissions?: Prisma.DossierAdmissionUncheckedUpdateManyWithoutEleveNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutEleveNestedInput
+  presences?: Prisma.PresenceUncheckedUpdateManyWithoutEleveNestedInput
+  soumissions?: Prisma.SoumissionUncheckedUpdateManyWithoutEleveNestedInput
+  deliberationDecisions?: Prisma.DeliberationDecisionUncheckedUpdateManyWithoutEleveNestedInput
+  affectationTransports?: Prisma.AffectationTransportUncheckedUpdateManyWithoutEleveNestedInput
+  participantSorties?: Prisma.ParticipantSortieUncheckedUpdateManyWithoutEleveNestedInput
+  autorisationParents?: Prisma.AutorisationParentUncheckedUpdateManyWithoutEleveNestedInput
+  ecolages?: Prisma.EcolageUncheckedUpdateManyWithoutEleveNestedInput
+  droitInscriptions?: Prisma.DroitInscriptionUncheckedUpdateManyWithoutEleveNestedInput
+  responsableEleves?: Prisma.ResponsableEleveUncheckedUpdateManyWithoutEleveNestedInput
+  affectationClasses?: Prisma.AffectationClasseUncheckedUpdateManyWithoutEleveNestedInput
+  paiementEcolages?: Prisma.PaiementEcolageUncheckedUpdateManyWithoutEleveNestedInput
+  ajournementsLignes?: Prisma.AjournementLigneUncheckedUpdateManyWithoutEleveNestedInput
+  justificationAbsences?: Prisma.JustificationAbsenceUncheckedUpdateManyWithoutEleveNestedInput
+  billetEntrees?: Prisma.BilletEntreeUncheckedUpdateManyWithoutEleveNestedInput
+  alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
+  sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
+  suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveCreateManyUserInput = {
@@ -7489,6 +7838,7 @@ export type EleveUpdateWithoutUserInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutUserInput = {
@@ -7541,6 +7891,7 @@ export type EleveUncheckedUpdateWithoutUserInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutUserInput = {
@@ -7623,6 +7974,7 @@ export type EleveUpdateWithoutDeletedByInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutDeletedByInput = {
@@ -7675,6 +8027,7 @@ export type EleveUncheckedUpdateWithoutDeletedByInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutDeletedByInput = {
@@ -7787,6 +8140,7 @@ export type EleveUpdateWithoutSchoolInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutSchoolInput = {
@@ -7839,6 +8193,7 @@ export type EleveUncheckedUpdateWithoutSchoolInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutSchoolInput = {
@@ -7951,6 +8306,7 @@ export type EleveUpdateWithoutClasseInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutClasseInput = {
@@ -8003,6 +8359,7 @@ export type EleveUncheckedUpdateWithoutClasseInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutClasseInput = {
@@ -8145,6 +8502,7 @@ export type EleveUpdateWithoutParentInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutParentInput = {
@@ -8197,6 +8555,7 @@ export type EleveUncheckedUpdateWithoutParentInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutParentInput = {
@@ -8279,6 +8638,7 @@ export type EleveUpdateWithoutResponsableInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateWithoutResponsableInput = {
@@ -8331,6 +8691,7 @@ export type EleveUncheckedUpdateWithoutResponsableInput = {
   alerteDeclenchees?: Prisma.AlerteDeclencheeUncheckedUpdateManyWithoutEleveNestedInput
   sanctionEleves?: Prisma.SanctionEleveUncheckedUpdateManyWithoutEleveNestedInput
   suiviSantes?: Prisma.SuiviSanteUncheckedUpdateManyWithoutEleveNestedInput
+  affectationCantines?: Prisma.AffectationCantineUncheckedUpdateManyWithoutEleveNestedInput
 }
 
 export type EleveUncheckedUpdateManyWithoutResponsableInput = {
@@ -8389,6 +8750,7 @@ export type EleveCountOutputType = {
   alerteDeclenchees: number
   sanctionEleves: number
   suiviSantes: number
+  affectationCantines: number
 }
 
 export type EleveCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -8412,6 +8774,7 @@ export type EleveCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   alerteDeclenchees?: boolean | EleveCountOutputTypeCountAlerteDeclencheesArgs
   sanctionEleves?: boolean | EleveCountOutputTypeCountSanctionElevesArgs
   suiviSantes?: boolean | EleveCountOutputTypeCountSuiviSantesArgs
+  affectationCantines?: boolean | EleveCountOutputTypeCountAffectationCantinesArgs
 }
 
 /**
@@ -8564,6 +8927,13 @@ export type EleveCountOutputTypeCountSuiviSantesArgs<ExtArgs extends runtime.Typ
   where?: Prisma.SuiviSanteWhereInput
 }
 
+/**
+ * EleveCountOutputType without action
+ */
+export type EleveCountOutputTypeCountAffectationCantinesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AffectationCantineWhereInput
+}
+
 
 export type EleveSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -8622,6 +8992,7 @@ export type EleveSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   alerteDeclenchees?: boolean | Prisma.Eleve$alerteDeclencheesArgs<ExtArgs>
   sanctionEleves?: boolean | Prisma.Eleve$sanctionElevesArgs<ExtArgs>
   suiviSantes?: boolean | Prisma.Eleve$suiviSantesArgs<ExtArgs>
+  affectationCantines?: boolean | Prisma.Eleve$affectationCantinesArgs<ExtArgs>
   _count?: boolean | Prisma.EleveCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["eleve"]>
 
@@ -8760,6 +9131,7 @@ export type EleveInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   alerteDeclenchees?: boolean | Prisma.Eleve$alerteDeclencheesArgs<ExtArgs>
   sanctionEleves?: boolean | Prisma.Eleve$sanctionElevesArgs<ExtArgs>
   suiviSantes?: boolean | Prisma.Eleve$suiviSantesArgs<ExtArgs>
+  affectationCantines?: boolean | Prisma.Eleve$affectationCantinesArgs<ExtArgs>
   _count?: boolean | Prisma.EleveCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EleveIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -8810,6 +9182,7 @@ export type $ElevePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     alerteDeclenchees: Prisma.$AlerteDeclencheePayload<ExtArgs>[]
     sanctionEleves: Prisma.$SanctionElevePayload<ExtArgs>[]
     suiviSantes: Prisma.$SuiviSantePayload<ExtArgs>[]
+    affectationCantines: Prisma.$AffectationCantinePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -9262,6 +9635,7 @@ export interface Prisma__EleveClient<T, Null = never, ExtArgs extends runtime.Ty
   alerteDeclenchees<T extends Prisma.Eleve$alerteDeclencheesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$alerteDeclencheesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlerteDeclencheePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sanctionEleves<T extends Prisma.Eleve$sanctionElevesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$sanctionElevesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SanctionElevePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   suiviSantes<T extends Prisma.Eleve$suiviSantesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$suiviSantesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SuiviSantePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  affectationCantines<T extends Prisma.Eleve$affectationCantinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Eleve$affectationCantinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AffectationCantinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10330,6 +10704,30 @@ export type Eleve$suiviSantesArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.SuiviSanteScalarFieldEnum | Prisma.SuiviSanteScalarFieldEnum[]
+}
+
+/**
+ * Eleve.affectationCantines
+ */
+export type Eleve$affectationCantinesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AffectationCantine
+   */
+  select?: Prisma.AffectationCantineSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AffectationCantine
+   */
+  omit?: Prisma.AffectationCantineOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AffectationCantineInclude<ExtArgs> | null
+  where?: Prisma.AffectationCantineWhereInput
+  orderBy?: Prisma.AffectationCantineOrderByWithRelationInput | Prisma.AffectationCantineOrderByWithRelationInput[]
+  cursor?: Prisma.AffectationCantineWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AffectationCantineScalarFieldEnum | Prisma.AffectationCantineScalarFieldEnum[]
 }
 
 /**
