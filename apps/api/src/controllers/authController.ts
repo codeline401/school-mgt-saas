@@ -17,8 +17,13 @@ export const registerUser = async (req: Request, res: Response) => {
     //
     const data = registerSchema.parse(req.body); // Validation des données d'entrée
 
-    if (data.role === Role.SUDO_ADMIN && req.user?.realRole !== Role.SUDO_ADMIN) {
-      return res.status(403).json({ error: "Création d'un SUDO_ADMIN non autorisée" });
+    if (
+      data.role === Role.SUDO_ADMIN &&
+      req.user?.realRole !== Role.SUDO_ADMIN
+    ) {
+      return res
+        .status(403)
+        .json({ error: "Création d'un SUDO_ADMIN non autorisée" });
     }
 
     // Vérifier si l'utilisateur existe déjà
@@ -92,8 +97,13 @@ export const loginUser = async (req: Request, res: Response) => {
     const data = loginSchema.parse(req.body); // Validation des données d'entrée
 
     // Vérifier si l'utilisateur existe
-    const user = await prisma.user.findUnique({
-      where: { email: data.email },
+    const user = await prisma.user.findFirst({
+      where: {
+        email: {
+          equals: data.email,
+          mode: "insensitive", // pour ignorer la casse lors de la comparaison des emails
+        },
+      },
     });
     if (!user) {
       return res.status(400).json({ error: "Email ou mot de passe incorrect" });

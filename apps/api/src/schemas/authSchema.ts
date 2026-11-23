@@ -3,7 +3,7 @@ import { Role } from "../generated/prisma/enums.js";
 
 // Schema d'inscription pour la validation des données d'inscription et de connexion
 export const registerSchema = z.object({
-  email: z.string().email("Email invalide"),
+  email: z.string().trim().toLowerCase().email("Email invalide"), // pour normaliser l'email
   nom: z.string().trim().min(2, "Le nom doit contenir au moins 2 caractères"),
   prenom: z
     .string()

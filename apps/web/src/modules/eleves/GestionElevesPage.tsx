@@ -16,7 +16,7 @@ import {
   Users,
   Wallet,
 } from "lucide-react";
-import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
+// import DevelopmentPlaceholder from "../../components/common/DevelopmentPlaceholder";
 import FicheElevePage from "./informations/fiche/pages/FicheElevePage";
 import FicheEleveFormModal from "./informations/fiche/components/FicheEleveFormModal";
 import ResponsablesPage from "./informations/responsable/pages/ResponsablesPage";
@@ -37,6 +37,7 @@ import { BulletinSection } from "./parcours/bulletins/components/BulletinSection
 import { ProgressionSection } from "./parcours/progression/components/ProgressionSection";
 import { SanteSection } from "./vie-scolaire/sante/components/SanteSection";
 import { TransportCantineSection } from "./vie-scolaire/cantine-transport/components/TransportCantineSection";
+import { PiecesJointesSection } from "./dossiers/components/PiecesJointesSection";
 
 type MainTab =
   | "informations"
@@ -141,10 +142,10 @@ const vieScolaireTabs: TabItem<VieScolaireSubTab>[] = [
 
 const documentTabs: TabItem<DocumentSubTab>[] = [
   { value: "pieces", label: "Pièces jointes", icon: FileText },
-  { value: "fichiers", label: "Fichiers élèves", icon: School },
-  { value: "contrats", label: "Contrats", icon: BriefcaseBusiness },
-  { value: "attestations", label: "Attestations", icon: ShieldCheck },
-  { value: "archives", label: "Archives", icon: BookOpen },
+  // { value: "fichiers", label: "Fichiers élèves", icon: School },
+  // { value: "contrats", label: "Contrats", icon: BriefcaseBusiness },
+  // { value: "attestations", label: "Attestations", icon: ShieldCheck },
+  // { value: "archives", label: "Archives", icon: BookOpen },
 ];
 
 function GestionElevesPage() {
@@ -307,45 +308,39 @@ function GestionElevesPage() {
   const renderDocumentContent = () => {
     switch (activeDocumentSubTab) {
       case "pieces":
-        return (
-          <DevelopmentPlaceholder
-            icon={FileText}
-            title="Pièces jointes"
-            description="Documents d’inscription, pièces administratives, certificats et justificatifs."
-          />
-        );
-      case "fichiers":
-        return (
-          <DevelopmentPlaceholder
-            icon={School}
-            title="Fichiers élèves"
-            description="Dossier numérique, documents générés, reçus, attestations et fichiers téléversés."
-          />
-        );
-      case "contrats":
-        return (
-          <DevelopmentPlaceholder
-            icon={BriefcaseBusiness}
-            title="Contrats & engagements"
-            description="Contrat d’inscription, conventions, engagements de participation et accords."
-          />
-        );
-      case "attestations":
-        return (
-          <DevelopmentPlaceholder
-            icon={ShieldCheck}
-            title="Attestations"
-            description="Attestation de scolarité, de présence, de stage et autres documents officiels."
-          />
-        );
-      case "archives":
-        return (
-          <DevelopmentPlaceholder
-            icon={BookOpen}
-            title="Archives"
-            description="Historique complet des documents, dates, versions et archivage administrative."
-          />
-        );
+        return <PiecesJointesSection initialEleveId={eleveId} />;
+      // case "fichiers":
+      //   return (
+      //     <DevelopmentPlaceholder
+      //       icon={School}
+      //       title="Fichiers élèves"
+      //       description="Dossier numérique, documents générés, reçus, attestations et fichiers téléversés."
+      //     />
+      //   );
+      // case "contrats":
+      //   return (
+      //     <DevelopmentPlaceholder
+      //       icon={BriefcaseBusiness}
+      //       title="Contrats & engagements"
+      //       description="Contrat d’inscription, conventions, engagements de participation et accords."
+      //     />
+      //   );
+      // case "attestations":
+      //   return (
+      //     <DevelopmentPlaceholder
+      //       icon={ShieldCheck}
+      //       title="Attestations"
+      //       description="Attestation de scolarité, de présence, de stage et autres documents officiels."
+      //     />
+      //   );
+      // case "archives":
+      //   return (
+      //     <DevelopmentPlaceholder
+      //       icon={BookOpen}
+      //       title="Archives"
+      //       description="Historique complet des documents, dates, versions et archivage administrative."
+      //     />
+      //   );
       default:
         return null;
     }

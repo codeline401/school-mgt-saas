@@ -76,6 +76,7 @@ model User {
   sanctionEleves                     SanctionEleve[]           @relation("SanctionsCreees")
   suiviSantes                        SuiviSante[]              @relation("SuivisSanteCrees")
   affectationCantines                AffectationCantine[]      @relation("AffectationsCantineCrees")
+  eleveAttachements                  EleveAttachement[]        @relation("EleveAttachementsCrees")
 }
 
 // Modele SAAS
@@ -155,6 +156,7 @@ model School {
   suiviSantes              SuiviSante[]
   offreCantines            OffreCantine[]
   affectationCantines      AffectationCantine[]
+  eleveAttachements        EleveAttachement[]
 }
 
 model Classe {
@@ -1878,6 +1880,7 @@ model Eleve {
   sanctionEleves        SanctionEleve[]
   suiviSantes           SuiviSante[]
   affectationCantines   AffectationCantine[]
+  eleveAttachements     EleveAttachement[]
 
   // Contraintes & Index
   @@unique([schoolId, matricule])
@@ -2608,4 +2611,47 @@ model AffectationCantine {
   @@index([schoolId, statut])
   @@index([eleveId, statut])
   @@index([offreCantineId])
+}
+
+// =========== MODULE - GESTION ELEVE - PIECES JOINTES ================
+enum EleveAttachementType {
+  CERTIFICAT_NAISSANCE
+  CERTIFICAT_RESIDENCE
+  CERTIFICAT_MEDICAL
+  PIECE_IDENTITE_TUTEUR
+  AUTRE
+}
+
+enum EleveAttachementStatus {
+  PENDING_UPLOAD
+  READY
+}
+
+model EleveAttachement {
+  id        String                 @id @default(uuid())
+  type      EleveAttachementType
+  status    EleveAttachementStatus @default(PENDING_UPLOAD)
+  fileName  String
+  mimeType  String
+  sizeBytes Int
+
+  objectKey String @unique
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  eleveId String
+  eleve   Eleve  @relation(fields: [eleveId], references: [id], onDelete: Cascade)
+
+  createdById String
+  createdBy   User   @relation("EleveAttachementsCrees", fields: [createdById], references: [id])
+
+  verifiedAt DateTime?
+  archivedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([schoolId, eleveId, createdAt])
+  @@index([schoolId, eleveId, archivedAt])
+  @@index([eleveId, status])
 }
