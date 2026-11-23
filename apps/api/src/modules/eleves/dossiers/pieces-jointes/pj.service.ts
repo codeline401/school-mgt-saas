@@ -197,7 +197,10 @@ export class EleveAttachementService {
         attachmentId: attachement.id,
         uploadUrl,
         method: "PUT" as const,
-        headers: { "content-Type": input.mimeType },
+        headers: {
+          "content-Type": input.mimeType,
+          "If-None-Match": "*",
+        },
         expiresIn: 300,
       };
     } catch (error) {
