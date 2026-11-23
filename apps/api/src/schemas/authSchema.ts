@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { Role } from "../generated/prisma/enums.js";
 
-// Schema d'inscription pour la validation des données d'inscription et de connexion
+// Schema d'inscription et de connexion avec normalisation systématique de l'email
 export const registerSchema = z.object({
   email: z.string().trim().toLowerCase().email("Email invalide"), // pour normaliser l'email
   nom: z.string().trim().min(2, "Le nom doit contenir au moins 2 caractères"),
@@ -15,13 +15,13 @@ export const registerSchema = z.object({
   role: z.nativeEnum(Role),
 
   // Optionnel : uniquement pour USER, PROF, ELEVE, PARENT
-  inviteCode: z.string().optional(),
+  inviteCode: z.string().trim().optional(),
 });
 
 export const loginSchema = z.object({
-  email: z.string().email("Email invalide"),
+  email: z.string().trim().toLowerCase().email("Email invalide"),
   password: z.string().min(1, "Mot de passe requis"),
-  schoolId: z.string().optional(),
+  schoolId: z.string().trim().optional(),
 });
 
 export type RegisterInput = z.infer<typeof registerSchema>;

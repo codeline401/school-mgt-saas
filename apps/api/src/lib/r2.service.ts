@@ -2,18 +2,38 @@ import {
   DeleteObjectCommand,
   GetObjectCommand,
   HeadObjectCommand,
+  PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
+const DEFAULT_PRESIGNED_EXPIRES_IN = 300; // 5 minutes
+
 function requireEnv(name: string): string {
-  const value = process.env[name]; // Récupère la valeur de la variable d'environnement
+  const value = process.env[name]?.trim(); // Récupère et nettoie la variable d'environnement
   if (!value) {
     throw new Error(
       `Variable d'environnement ${name} manquante ou non définie`,
     );
   }
   return value;
+}
+
+function sanitizeContentDispositionFileName(fileName: string): {
+  asciiFallback: string;
+  encodedUtf8: string;
+} {
+  // Supprime les caractères de contrôle pour éviter toute injection d'en-tête HTTP
+  const cleaned =
+    fileName.replace(/[\r\n\x00-\x1f\x7f]/g, "_").trim() || "document";
+  const asciiFallback =
+    cleaned
+      .normalize("NFKD")
+      .replace(/[^\x20-\x7E]/g, "_")
+      .replace(/"/g, "_") || "document";
+  const encodedUtf8 = encodeURIComponent(cleaned);
+
+  return { asciiFallback, encodedUtf8 };
 }
 
 const accountId = requireEnv("R2_ACCOUNT_ID"); // Récupère l'ID du compte R2 depuis les variables d'environnement
@@ -29,30 +49,45 @@ export const r2Client = new S3Client({
 });
 
 /**
- * Crée une URL signée pour l'upload d'un objet dans le bucket R2.
- * @param objectKey - La clé de l'objet à uploader.
- * @param mimeType - Le type MIME de l'objet.
- * @returns Une promesse résolue avec l'URL signée pour l'upload.
+ * Crée une URL signée en mode création uniquement (If-None-Match: "*")
+ * afin d'empêcher l'écrasement d'un objet déjà présent sur R2.
+ * @param objectKey La clé de l'objet à créer
+ * @param mimeType Le type MIME de l'objet
+ * @param expiresIn La durée de validité de l'URL signée en secondes
+ * @returns L'URL signée pour l'upload
+ * @throws Error si la clé d'objet est vide ou si la création de l'URL échoue
  */
 export async function creerUrlUpload(
   objectKey: string,
   mimeType: string,
+  expiresIn: number = DEFAULT_PRESIGNED_EXPIRES_IN,
 ): Promise<string> {
-  const command = new (await import("@aws-sdk/client-s3")).PutObjectCommand({
+  if (!objectKey.trim()) {
+    throw new Error("La clé d'objet R2 (objectKey) est obligatoire");
+  }
+
+  // IfNoneMatch: "*" impose à R2 de refuser le PUT (412 Precondition Failed) si objectKey existe déjà
+  const command = new PutObjectCommand({
     Bucket: R2_BUCKET_NAME,
     Key: objectKey,
     ContentType: mimeType,
+    IfNoneMatch: "*",
   });
 
-  return getSignedUrl(r2Client, command, { expiresIn: 300 }); // Génère une URL signée pour l'upload avec une expiration de 5 minutes (300 secondes)
+  return getSignedUrl(r2Client, command, { expiresIn });
 }
 
 /**
- * Vérifie l'existence d'un objet dans le bucket R2.
- * @param objectKey - La clé de l'objet à vérifier.
- * @returns Une promesse résolue avec les métadonnées de l'objet si celui-ci existe, ou une erreur si l'objet n'existe pas.
+ * Vérifie l'existence d'un objet dans le bucket R2 et retourne ses métadonnées.
+ * @param objectKey La clé de l'objet à vérifier
+ * @returns Les métadonnées de l'objet si trouvé
+ * @throws Error si la clé d'objet est vide ou si l'objet n'existe pas
  */
-export async function veriferObject(objectKey: string) {
+export async function verifierObject(objectKey: string) {
+  if (!objectKey.trim()) {
+    throw new Error("La clé d'objet R2 (objectKey) est obligatoire");
+  }
+
   return r2Client.send(
     new HeadObjectCommand({
       Bucket: R2_BUCKET_NAME,
@@ -61,36 +96,53 @@ export async function veriferObject(objectKey: string) {
   );
 }
 
+// Alias conservé si d'autres modules importent encore "veriferObject"
+export const veriferObject = verifierObject;
+
 /**
- * Crée une URL signée pour le téléchargement d'un objet depuis le bucket R2.
- * @param objectKey - La clé de l'objet à télécharger.
- * @param fileName - Le nom de fichier à utiliser pour le téléchargement.
- * @param mimeType - Le type MIME de l'objet.
- * @returns Une promesse résolue avec l'URL signée pour le téléchargement.
+ * Crée une URL signée pour le téléchargement (GET) d'un objet depuis le bucket R2.
+ * @param objectKey La clé de l'objet à télécharger
+ * @param fileName Le nom de fichier à utiliser pour le téléchargement
+ * @param mimeType Le type MIME attendu de l'objet
+ * @param expiresIn La durée de validité de l'URL signée en secondes
+ * @returns L'URL signée pour le téléchargement
+ * @throws Error si la clé d'objet est vide ou si la création de l'URL échoue
  */
 export async function creerUrlTelechargement(
   objectKey: string,
   fileName: string,
   mimeType: string,
+  expiresIn: number = DEFAULT_PRESIGNED_EXPIRES_IN,
 ): Promise<string> {
+  if (!objectKey.trim()) {
+    throw new Error("La clé d'objet R2 (objectKey) est obligatoire");
+  }
+
+  const { asciiFallback, encodedUtf8 } =
+    sanitizeContentDispositionFileName(fileName);
+
   return getSignedUrl(
     r2Client,
     new GetObjectCommand({
       Bucket: R2_BUCKET_NAME,
       Key: objectKey,
-      ResponseContentDisposition: `attachment; filename*=UTF-8''${encodeURIComponent(fileName)}`, // Force le téléchargement avec le nom de fichier spécifié
-      ResponseContentType: mimeType, // Définit le type MIME de l'objet pour le téléchargement
+      ResponseContentDisposition: `attachment; filename="${asciiFallback}"; filename*=UTF-8''${encodedUtf8}`,
+      ResponseContentType: mimeType,
     }),
-    { expiresIn: 300 }, // Génère une URL signée pour le téléchargement avec une expiration de 5 minutes (300 secondes)
+    { expiresIn },
   );
 }
 
 /**
  * Supprime un objet du bucket R2.
- * @param objectKey - La clé de l'objet à supprimer.
- * @returns Une promesse résolue lorsque l'objet est supprimé.
+ * @param objectKey La clé de l'objet à supprimer
+ * @throws Error si la clé d'objet est vide ou si la suppression échoue
  */
 export async function supprimerObject(objectKey: string): Promise<void> {
+  if (!objectKey.trim()) {
+    throw new Error("La clé d'objet R2 (objectKey) est obligatoire");
+  }
+
   await r2Client.send(
     new DeleteObjectCommand({
       Bucket: R2_BUCKET_NAME,

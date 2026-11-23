@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { ZodError } from "zod";
+import { Prisma } from "../generated/prisma/client.js";
 import { prisma } from "../lib/prisma.js";
 import { registerSchema, loginSchema } from "../schemas/authSchema.js";
 import { Role } from "../generated/prisma/enums.js";
@@ -11,11 +12,26 @@ if (!JWT_SECRET) {
   throw new Error("JWT_SECRET environment variable is required");
 }
 
+// Vérifie si l'erreur provient d'une contrainte d'unicité Prisma (P2002)
+function isUniqueConstraintError(error: unknown): boolean {
+  if (
+    error instanceof Prisma.PrismaClientKnownRequestError &&
+    error.code === "P2002"
+  ) {
+    return true;
+  }
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error as { code?: unknown }).code === "P2002"
+  );
+}
+
 // Inscription d'un nouvel utilisateur
 export const registerUser = async (req: Request, res: Response) => {
   try {
-    //
-    const data = registerSchema.parse(req.body); // Validation des données d'entrée
+    const data = registerSchema.parse(req.body); // Validation + normalisation email (trim + toLowerCase)
 
     if (
       data.role === Role.SUDO_ADMIN &&
@@ -26,10 +42,17 @@ export const registerUser = async (req: Request, res: Response) => {
         .json({ error: "Création d'un SUDO_ADMIN non autorisée" });
     }
 
-    // Vérifier si l'utilisateur existe déjà
-    const existingUser = await prisma.user.findUnique({
-      where: { email: data.email },
+    // Vérifier si l'utilisateur existe déjà (insensible à la casse pour éviter les variantes Alice@ vs alice@)
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        email: {
+          equals: data.email,
+          mode: "insensitive",
+        },
+      },
+      select: { id: true },
     });
+
     if (existingUser) {
       return res.status(400).json({ error: "Email déjà utilisé" });
     }
@@ -45,7 +68,7 @@ export const registerUser = async (req: Request, res: Response) => {
       // Il crééra son école plus tard dans le Dashboard après sa connexion
       schoolId = null;
     } else if (data.role === Role.SUDO_ADMIN) {
-      // Le sudo-admin n'appartient à aucun école
+      // Le sudo-admin n'appartient à aucune école
       schoolId = null;
     } else {
       // Pour USER, PROF, ELEVE, PARENT : l'inviteCode est obligatoire pour rejoindre une école existante
@@ -67,7 +90,7 @@ export const registerUser = async (req: Request, res: Response) => {
       schoolId = school.id; // On assigne l'école trouvée à l'utilisateur
     }
 
-    // Création de l'utilisateur
+    // Création de l'utilisateur avec l'email normalisé en minuscules
     const newUser = await prisma.user.create({
       data: {
         email: data.email,
@@ -79,43 +102,65 @@ export const registerUser = async (req: Request, res: Response) => {
       },
     });
 
-    // On ne renvoit pas le mot de passe dans la réponse
+    // On ne renvoie pas le mot de passe dans la réponse
     const { password, ...userWithoutPassword } = newUser;
 
-    res.status(201).json(userWithoutPassword);
+    return res.status(201).json(userWithoutPassword);
   } catch (error) {
-    if (error instanceof ZodError)
+    if (error instanceof ZodError) {
       return res.status(400).json({ error: error.issues });
+    }
+    if (isUniqueConstraintError(error)) {
+      return res.status(400).json({ error: "Email déjà utilisé" });
+    }
     console.error("Erreur lors de l'inscription:", error);
-    res.status(500).json({ error: "Erreur serveur lors de l'inscription" });
+    return res
+      .status(500)
+      .json({ error: "Erreur serveur lors de l'inscription" });
   }
 };
 
 // Connexion d'un utilisateur
 export const loginUser = async (req: Request, res: Response) => {
   try {
-    const data = loginSchema.parse(req.body); // Validation des données d'entrée
+    const data = loginSchema.parse(req.body); // Validation + normalisation email (trim + toLowerCase)
 
-    // Vérifier si l'utilisateur existe
-    const user = await prisma.user.findFirst({
+    // Récupère les comptes correspondant de façon insensible à la casse
+    // Si d'anciens doublons de casse existent en base, on teste le mot de passe sur chaque candidat
+    const candidates = await prisma.user.findMany({
       where: {
         email: {
           equals: data.email,
-          mode: "insensitive", // pour ignorer la casse lors de la comparaison des emails
+          mode: "insensitive",
         },
       },
+      orderBy: [{ email: "asc" }, { createdAt: "asc" }],
     });
-    if (!user) {
+
+    if (candidates.length === 0) {
       return res.status(400).json({ error: "Email ou mot de passe incorrect" });
     }
 
-    // Vérifier le mot de passe
-    const isPasswordValid = await bcrypt.compare(data.password, user.password);
-    if (!isPasswordValid) {
+    // Sélectionne le compte dont le mot de passe est valide
+    let matchedUser: (typeof candidates)[number] | null = null;
+    for (const candidate of candidates) {
+      const isPasswordValid = await bcrypt.compare(
+        data.password,
+        candidate.password,
+      );
+      if (isPasswordValid) {
+        matchedUser = candidate;
+        break;
+      }
+    }
+
+    if (!matchedUser) {
       return res.status(400).json({ error: "Email ou mot de passe incorrect" });
     }
 
-    if (user.role === Role.SUDO_ADMIN) {
+    let activeSchoolId = matchedUser.schoolId;
+
+    if (matchedUser.role === Role.SUDO_ADMIN) {
       if (!data.schoolId) {
         const schools = await prisma.school.findMany({
           select: { id: true, nom: true },
@@ -132,25 +177,38 @@ export const loginUser = async (req: Request, res: Response) => {
         if (!school) {
           return res.status(400).json({ error: "École introuvable" });
         }
-        user.schoolId = school.id; // école active pour la sessions
+        activeSchoolId = school.id; // école active pour la session
       }
     }
 
     // Générer un token JWT
     const token = jwt.sign(
-      { id: user.id, role: user.role, schoolId: user.schoolId },
+      {
+        id: matchedUser.id,
+        role: matchedUser.role,
+        schoolId: activeSchoolId,
+      },
       JWT_SECRET,
       { expiresIn: "8h" },
     );
 
-    // On ne renvoit pas le mot de passe dans la réponse
-    const { password, ...userWithoutPassword } = user;
+    // On ne renvoie pas le mot de passe dans la réponse
+    const { password, ...userWithoutPassword } = matchedUser;
 
-    res.status(200).json({ user: userWithoutPassword, token });
+    return res.status(200).json({
+      user: {
+        ...userWithoutPassword,
+        schoolId: activeSchoolId,
+      },
+      token,
+    });
   } catch (error) {
-    if (error instanceof ZodError)
+    if (error instanceof ZodError) {
       return res.status(400).json({ error: error.issues });
+    }
     console.error("Erreur lors de la connexion:", error);
-    res.status(500).json({ error: "Erreur serveur lors de la connexion" });
+    return res
+      .status(500)
+      .json({ error: "Erreur serveur lors de la connexion" });
   }
 };

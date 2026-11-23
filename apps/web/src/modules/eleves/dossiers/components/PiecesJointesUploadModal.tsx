@@ -145,6 +145,7 @@ export function StudentAttachmentUploadModal({
         className="modal-backdrop"
         aria-label="Fermer"
         onClick={onClose}
+        disabled={pending}
       />
     </div>
   );

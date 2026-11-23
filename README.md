@@ -17,7 +17,7 @@ Ce projet utilise une structure MONOREPO et respècte des règles de gestion str
 
 Avant de commencer, assurez-vous d'avoir installer sur votre machine :
 
-- [Node.js](https://nodejs.com/) (20.19 à 20.x, 22.12 à 22.x, ou 24 et versions ultérieures)
+- [Node.js](https://nodejs.com/) (22.12 à 22.x, ou 24 et versions ultérieures)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) (doit être en cours d'éxecution)
 - [Git](https://git-scm.com/)
 
