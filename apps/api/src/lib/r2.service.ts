@@ -57,11 +57,20 @@ export const r2Client = new S3Client({
  * @returns L'URL signée pour l'upload
  * @throws Error si la clé d'objet est vide ou si la création de l'URL échoue
  */
+export type PresignedUpload = {
+  uploadUrl: string;
+  headers: {
+    "Content-Type": string;
+    "If-None-Match": "*";
+  };
+  expiresIn: number;
+};
+
 export async function creerUrlUpload(
   objectKey: string,
   mimeType: string,
   expiresIn: number = DEFAULT_PRESIGNED_EXPIRES_IN,
-): Promise<string> {
+): Promise<PresignedUpload> {
   if (!objectKey.trim()) {
     throw new Error("La clé d'objet R2 (objectKey) est obligatoire");
   }
@@ -74,7 +83,16 @@ export async function creerUrlUpload(
     IfNoneMatch: "*",
   });
 
-  return getSignedUrl(r2Client, command, { expiresIn });
+  const uploadUrl = await getSignedUrl(r2Client, command, { expiresIn });
+
+  return {
+    uploadUrl,
+    headers: {
+      "Content-Type": mimeType,
+      "If-None-Match": "*",
+    },
+    expiresIn,
+  };
 }
 
 /**

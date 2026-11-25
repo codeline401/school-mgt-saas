@@ -192,16 +192,11 @@ export class EleveAttachementService {
     });
 
     try {
-      const uploadUrl = await creerUrlUpload(objectKey, input.mimeType);
+      const presignedUpload = await creerUrlUpload(objectKey, input.mimeType);
       return {
         attachmentId: attachement.id,
-        uploadUrl,
+        ...presignedUpload,
         method: "PUT" as const,
-        headers: {
-          "content-Type": input.mimeType,
-          "If-None-Match": "*",
-        },
-        expiresIn: 300,
       };
     } catch (error) {
       // En cas d'erreur lors de la création de l'URL de téléchargement, supprime l'attachement créé pour éviter les fichiers orphelins
