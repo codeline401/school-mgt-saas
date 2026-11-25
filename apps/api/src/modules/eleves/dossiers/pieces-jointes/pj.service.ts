@@ -220,9 +220,24 @@ export class EleveAttachementService {
   ) {
     const attachement = await trouverPieceJointe(attachementId, user, eleveId); // Vérifie que l'attachement appartient à l'élève et à l'école
 
+    if (attachement.status === "READY") {
+      return prisma.eleveAttachement.findUniqueOrThrow({
+        where: { id: attachement.id },
+        select: {
+          id: true,
+          type: true,
+          fileName: true,
+          mimeType: true,
+          sizeBytes: true,
+          status: true,
+          verifiedAt: true,
+        },
+      });
+    }
+
     if (attachement.status !== "PENDING_UPLOAD") {
       throw new EleveAttachementError(
-        "Cette pièce jointe a déjà été validée.",
+        "Cette pièce jointe ne peut pas être validée.",
         409,
       );
     }
@@ -338,13 +353,20 @@ export class EleveAttachementService {
     attachementId: string,
     user: UserContext,
   ) {
-    const attachement = await trouverPieceJointe(attachementId, user, eleveId); // Vérifie que l'attachement appartient à l'élève et à l'école
+    const attachement = await trouverPieceJointe(attachementId, user, eleveId);
 
-    await supprimerObject(attachement.objectKey); // Supprime l'objet du stockage
-    await prisma.eleveAttachement.delete({
+    if (attachement.status !== "READY") {
+      throw new EleveAttachementError("Pièce jointe non disponible.", 409);
+    }
+
+    if (attachement.archivedAt) {
+      throw new EleveAttachementError("Pièce jointe déjà archivée.", 409);
+    }
+
+    return prisma.eleveAttachement.update({
       where: { id: attachement.id },
+      data: { archivedAt: new Date() },
+      select: { id: true, archivedAt: true },
     });
-
-    return { id: attachement.id }; // Retourne l'ID de la pièce jointe supprimée
   }
 }

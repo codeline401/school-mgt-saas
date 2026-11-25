@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { StudentAttachmentType } from "../hooks/usePiecesJointes";
 
 type Props = {
@@ -23,6 +23,7 @@ export function StudentAttachmentUploadModal({
   onClose,
   onUpload,
 }: Props) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [type, setType] = useState<StudentAttachmentType>(
     "CERTIFICAT_NAISSANCE",
   );
@@ -50,6 +51,17 @@ export function StudentAttachmentUploadModal({
     setFile(candidate);
   }
 
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (!dialog.open) dialog.showModal();
+
+    return () => {
+      if (dialog.open) dialog.close();
+    };
+  }, []);
+
   async function soumettre(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!file) {
@@ -70,7 +82,21 @@ export function StudentAttachmentUploadModal({
   }
 
   return (
-    <div className="modal modal-open" role="dialog" aria-modal="true">
+    <dialog
+      ref={dialogRef}
+      className="modal"
+      aria-modal="true"
+      onCancel={(event) => {
+        event.preventDefault();
+        if (!pending) onClose();
+      }}
+      onClose={() => {
+        if (!pending) onClose();
+      }}
+      onClick={(event) => {
+        if (event.target === event.currentTarget && !pending) onClose();
+      }}
+    >
       <div className="modal-box max-w-lg">
         <h3 className="text-lg font-bold">Ajouter une pièce jointe</h3>
 
@@ -140,13 +166,6 @@ export function StudentAttachmentUploadModal({
         </form>
       </div>
 
-      <button
-        type="button"
-        className="modal-backdrop"
-        aria-label="Fermer"
-        onClick={onClose}
-        disabled={pending}
-      />
-    </div>
+    </dialog>
   );
 }

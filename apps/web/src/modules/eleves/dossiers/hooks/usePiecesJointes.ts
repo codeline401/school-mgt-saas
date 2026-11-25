@@ -56,6 +56,18 @@ export function useStudentAttachments(
   });
 }
 
+type UploadAttempt = {
+  eleveId: string;
+  type: StudentAttachmentType;
+  attachmentId?: string;
+  uploaded: boolean;
+  uploadUrl?: string;
+  method?: "PUT";
+  headers?: Record<string, string>;
+};
+
+const uploadAttempts = new WeakMap<File, UploadAttempt>();
+
 export function useUploadStudentAttachment() {
   const queryClient = useQueryClient();
 
@@ -69,30 +81,69 @@ export function useUploadStudentAttachment() {
       type: StudentAttachmentType;
       file: File;
     }) => {
-      const { data: upload } = await api.post<UploadUrlResponse>(
-        `${BASE_URL}/${eleveId}/attachments/upload-url`,
-        {
-          type,
-          fileName: file.name,
-          mimeType: file.type,
-          sizeBytes: file.size,
-        },
-      );
+      let attempt = uploadAttempts.get(file);
 
-      const response = await fetch(upload.uploadUrl, {
-        method: upload.method,
-        headers: upload.headers,
-        body: file,
-      });
+      if (
+        !attempt ||
+        attempt.eleveId !== eleveId ||
+        attempt.type !== type
+      ) {
+        attempt = { eleveId, type, uploaded: false };
+      }
 
-      if (!response.ok) {
-        throw new Error("Échec de l'envoi du fichier vers le stockage.");
+      if (!attempt.attachmentId) {
+        const { data: upload } = await api.post<UploadUrlResponse>(
+          `${BASE_URL}/${eleveId}/attachments/upload-url`,
+          {
+            type,
+            fileName: file.name,
+            mimeType: file.type,
+            sizeBytes: file.size,
+          },
+        );
+
+        attempt.attachmentId = upload.attachmentId;
+        attempt.uploadUrl = upload.uploadUrl;
+        attempt.method = upload.method;
+        attempt.headers = upload.headers;
+        uploadAttempts.set(file, attempt);
+
+        const response = await fetch(upload.uploadUrl, {
+          method: upload.method,
+          headers: upload.headers,
+          body: file,
+        });
+
+        if (!response.ok) {
+          throw new Error("Échec de l'envoi du fichier vers le stockage.");
+        }
+
+        attempt.uploaded = true;
+        uploadAttempts.set(file, attempt);
+      } else if (!attempt.uploaded) {
+        if (!attempt.uploadUrl || !attempt.method || !attempt.headers) {
+          throw new Error("Impossible de reprendre l'envoi du fichier.");
+        }
+
+        const response = await fetch(attempt.uploadUrl, {
+          method: attempt.method,
+          headers: attempt.headers,
+          body: file,
+        });
+
+        if (!response.ok) {
+          throw new Error("Échec de l'envoi du fichier vers le stockage.");
+        }
+
+        attempt.uploaded = true;
+        uploadAttempts.set(file, attempt);
       }
 
       const { data: attachment } = await api.post<StudentAttachment>(
-        `${BASE_URL}/${eleveId}/attachments/${upload.attachmentId}/confirm`,
+        `${BASE_URL}/${eleveId}/attachments/${attempt.attachmentId}/confirm`,
       );
 
+      uploadAttempts.delete(file);
       return attachment;
     },
     onSuccess: async (_attachment, variables) => {

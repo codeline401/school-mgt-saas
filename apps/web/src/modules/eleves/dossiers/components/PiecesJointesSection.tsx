@@ -54,7 +54,16 @@ export function PiecesJointesSection({ initialEleveId }: Props) {
     mutation.mutate(
       { eleveId, attachmentId: attachment.id },
       {
-        onSettled: () => setConfirmation(null),
+        onSettled: () =>
+          setConfirmation((current) => {
+            if (
+              current?.attachment.id === attachment.id &&
+              current.action === action
+            ) {
+              return null;
+            }
+            return current;
+          }),
       },
     );
   }

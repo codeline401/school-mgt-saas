@@ -134,7 +134,7 @@ export const loginUser = async (req: Request, res: Response) => {
           mode: "insensitive",
         },
       },
-      orderBy: [{ email: "asc" }, { createdAt: "asc" }],
+      orderBy: [{ email: "asc" }, { id: "asc" }],
     });
 
     if (candidates.length === 0) {
