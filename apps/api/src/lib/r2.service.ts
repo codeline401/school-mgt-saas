@@ -36,17 +36,46 @@ function sanitizeContentDispositionFileName(fileName: string): {
   return { asciiFallback, encodedUtf8 };
 }
 
-const accountId = requireEnv("R2_ACCOUNT_ID"); // Récupère l'ID du compte R2 depuis les variables d'environnement
-export const R2_BUCKET_NAME = requireEnv("R2_BUCKET_NAME"); // Récupère le nom du bucket R2 depuis les variables d'environnement
+type R2RuntimeConfig = {
+  accountId: string;
+  bucketName: string;
+  accessKeyId: string;
+  secretAccessKey: string;
+};
 
-export const r2Client = new S3Client({
-  region: "auto",
-  endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
-  credentials: {
-    accessKeyId: requireEnv("R2_ACCESS_KEY_ID"),
-    secretAccessKey: requireEnv("R2_SECRET_ACCESS_KEY"),
-  },
-});
+let r2RuntimeConfig: R2RuntimeConfig | null = null;
+let r2Client: S3Client | null = null;
+
+function getR2RuntimeConfig(): R2RuntimeConfig {
+  if (!r2RuntimeConfig) {
+    r2RuntimeConfig = {
+      accountId: requireEnv("R2_ACCOUNT_ID"),
+      bucketName: requireEnv("R2_BUCKET_NAME"),
+      accessKeyId: requireEnv("R2_ACCESS_KEY_ID"),
+      secretAccessKey: requireEnv("R2_SECRET_ACCESS_KEY"),
+    };
+  }
+  return r2RuntimeConfig;
+}
+
+function getR2Client(): S3Client {
+  if (!r2Client) {
+    const config = getR2RuntimeConfig();
+    r2Client = new S3Client({
+      region: "auto",
+      endpoint: `https://${config.accountId}.r2.cloudflarestorage.com`,
+      credentials: {
+        accessKeyId: config.accessKeyId,
+        secretAccessKey: config.secretAccessKey,
+      },
+    });
+  }
+  return r2Client;
+}
+
+export function getR2BucketName(): string {
+  return getR2RuntimeConfig().bucketName;
+}
 
 /**
  * Crée une URL signée en mode création uniquement (If-None-Match: "*")
@@ -77,13 +106,13 @@ export async function creerUrlUpload(
 
   // IfNoneMatch: "*" impose à R2 de refuser le PUT (412 Precondition Failed) si objectKey existe déjà
   const command = new PutObjectCommand({
-    Bucket: R2_BUCKET_NAME,
+    Bucket: getR2BucketName(),
     Key: objectKey,
     ContentType: mimeType,
     IfNoneMatch: "*",
   });
 
-  const uploadUrl = await getSignedUrl(r2Client, command, { expiresIn });
+  const uploadUrl = await getSignedUrl(getR2Client(), command, { expiresIn });
 
   return {
     uploadUrl,
@@ -106,9 +135,9 @@ export async function verifierObject(objectKey: string) {
     throw new Error("La clé d'objet R2 (objectKey) est obligatoire");
   }
 
-  return r2Client.send(
+  return getR2Client().send(
     new HeadObjectCommand({
-      Bucket: R2_BUCKET_NAME,
+      Bucket: getR2BucketName(),
       Key: objectKey,
     }),
   );
@@ -140,9 +169,9 @@ export async function creerUrlTelechargement(
     sanitizeContentDispositionFileName(fileName);
 
   return getSignedUrl(
-    r2Client,
+    getR2Client(),
     new GetObjectCommand({
-      Bucket: R2_BUCKET_NAME,
+      Bucket: getR2BucketName(),
       Key: objectKey,
       ResponseContentDisposition: `attachment; filename="${asciiFallback}"; filename*=UTF-8''${encodedUtf8}`,
       ResponseContentType: mimeType,
@@ -161,9 +190,9 @@ export async function supprimerObject(objectKey: string): Promise<void> {
     throw new Error("La clé d'objet R2 (objectKey) est obligatoire");
   }
 
-  await r2Client.send(
+  await getR2Client().send(
     new DeleteObjectCommand({
-      Bucket: R2_BUCKET_NAME,
+      Bucket: getR2BucketName(),
       Key: objectKey,
     }),
   );

@@ -91,7 +91,7 @@ export function StudentAttachmentUploadModal({
         if (!pending) onClose();
       }}
       onClose={() => {
-        if (!pending) onClose();
+        if (!pending && !dialogRef.current?.open) onClose();
       }}
       onClick={(event) => {
         if (event.target === event.currentTarget && !pending) onClose();
