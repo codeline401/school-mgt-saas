@@ -627,3 +627,22 @@ export const StatutAffectationCantine = {
 } as const
 
 export type StatutAffectationCantine = (typeof StatutAffectationCantine)[keyof typeof StatutAffectationCantine]
+
+
+export const EleveAttachementType = {
+  CERTIFICAT_NAISSANCE: 'CERTIFICAT_NAISSANCE',
+  CERTIFICAT_RESIDENCE: 'CERTIFICAT_RESIDENCE',
+  CERTIFICAT_MEDICAL: 'CERTIFICAT_MEDICAL',
+  PIECE_IDENTITE_TUTEUR: 'PIECE_IDENTITE_TUTEUR',
+  AUTRE: 'AUTRE'
+} as const
+
+export type EleveAttachementType = (typeof EleveAttachementType)[keyof typeof EleveAttachementType]
+
+
+export const EleveAttachementStatus = {
+  PENDING_UPLOAD: 'PENDING_UPLOAD',
+  READY: 'READY'
+} as const
+
+export type EleveAttachementStatus = (typeof EleveAttachementStatus)[keyof typeof EleveAttachementStatus]

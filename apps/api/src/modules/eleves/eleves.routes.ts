@@ -7,7 +7,8 @@ import responsableRoutes from "./informations/responsable/responsable.routes.js"
 import emergencyContactRoutes from "./informations/emergencyContact/emergencyContact.routes.js";
 import historiqueRoutes from "./informations/historique/historique.routes.js";
 import paiementRoutes from "./ecolages/paiement/paiement.routes.js";
-import factureRoutes from "./ecolages/factures/facture.routes.js";
+import santeRoutes from "./vie-scolaire/sante/sante.routes.js";
+import pjRoutes from "./dossiers/pieces-jointes/pj.routes.js";
 import ajournementRoutes from "./ecolages/ajournement/ajournement.routes.js";
 import relanceRoutes from "./ecolages/relances/relance.routes.js";
 import cantineAffectationRoutes from "./vie-scolaire/cantine/cantineAffectation.routes.js";
@@ -17,7 +18,8 @@ import alerteRoutes from "./absences/alertes/alerte.routes.js";
 import regleRoutes from "./absences/regles/regle.routes.js";
 
 import noteRoutes from "./parcours/notes/note.routes.js";
-import santeRoutes from "./vie-scolaire/sante/sante.routes.js";
+import factureRoutes from "./ecolages/factures/facture.routes.js";
+// import santeRoutes from "./vie-scolaire/sante/sante.routes.js";
 
 const router = Router();
 
@@ -60,5 +62,7 @@ router.use("/parcours/progression", progressionRoutes);
 
 router.use("/vie-scolaire/sante", santeRoutes);
 router.use("/vie-scolaire/cantine/affectations", cantineAffectationRoutes);
+
+router.use("/dossiers/pieces-jointes", pjRoutes);
 
 export default router;

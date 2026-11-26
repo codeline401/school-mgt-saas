@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.10.1
- * Query Engine version: d1b3f377ca835d73fd50954a5e22128b9ebdd6b8
+ * Prisma Client JS version: 7.8.0
+ * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.10.1",
-  engine: "d1b3f377ca835d73fd50954a5e22128b9ebdd6b8"
+  client: "7.8.0",
+  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
 }
 
 /**
@@ -156,19 +156,6 @@ export type Subset<T, U> = {
 };
 
 /**
- * Resolved type of the argument passed to the `PrismaClient` constructor.
- *
- * When called without a narrower options type (the common case), this resolves
- * to `PrismaClientOptions` directly, which produces a clear TypeScript error
- * message (`not assignable to parameter of type 'PrismaClientOptions'`) when
- * the argument is missing or incomplete. When the user supplies a narrower
- * options type (e.g. via a literal), it falls back to `Subset` to keep
- * filtering out unknown properties.
- */
-export type PrismaClientConstructorArgs<Options extends PrismaClientOptions> =
-  [PrismaClientOptions] extends [Options] ? PrismaClientOptions : Subset<Options, PrismaClientOptions>;
-
-/**
  * SelectSubset
  * @desc From `T` pick properties that exist in `U`. Simple version of Intersection.
  * Additionally, it validates, if both select and include are present. If the case, it errors.
@@ -200,7 +187,7 @@ type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 export type XOR<T, U> =
   T extends object ?
   U extends object ?
-    ((Without<T, U> & U) | (Without<U, T> & T)) & object
+    (Without<T, U> & U) | (Without<U, T> & T)
   : U : T
 
 
@@ -470,7 +457,8 @@ export const ModelName = {
   SanctionEleve: 'SanctionEleve',
   SuiviSante: 'SuiviSante',
   OffreCantine: 'OffreCantine',
-  AffectationCantine: 'AffectationCantine'
+  AffectationCantine: 'AffectationCantine',
+  EleveAttachement: 'EleveAttachement'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -486,7 +474,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "justificationAbsence" | "billetEntree" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse" | "regleAlerte" | "palierAlerte" | "alerteDeclenchee" | "sanctionEleve" | "suiviSante" | "offreCantine" | "affectationCantine"
+    modelProps: "user" | "school" | "classe" | "professeur" | "dossierAdmission" | "contrat" | "remplacement" | "matiere" | "periode" | "note" | "document" | "creneauHoraire" | "appel" | "presence" | "justificationAbsence" | "billetEntree" | "notification" | "cahierTexte" | "devoir" | "quiz" | "question" | "soumission" | "reponse" | "bulletinTemplate" | "deliberationSession" | "deliberationDecision" | "examenSalle" | "examenSession" | "examenSurveillance" | "examenIncident" | "signature" | "chapitre" | "sousChapitre" | "batiment" | "salle" | "reservationSalle" | "articleStock" | "mouvementStock" | "equipement" | "pretEquipement" | "ticketMaintenance" | "interventionMaintenance" | "vehicule" | "chauffeur" | "route" | "affectationTransport" | "sortieScolaire" | "participantSortie" | "autorisationParent" | "eleve" | "historiqueClasse" | "adresse" | "professionEleve" | "droitInscription" | "ecolage" | "paiementEcolage" | "ecolageConfig" | "ecolageEcheance" | "ajournement" | "ajournementLigne" | "relancePaiement" | "parent" | "responsableEleve" | "niveau" | "section" | "option" | "affectationClasse" | "regleAlerte" | "palierAlerte" | "alerteDeclenchee" | "sanctionEleve" | "suiviSante" | "offreCantine" | "affectationCantine" | "eleveAttachement"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5966,6 +5954,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    EleveAttachement: {
+      payload: Prisma.$EleveAttachementPayload<ExtArgs>
+      fields: Prisma.EleveAttachementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EleveAttachementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EleveAttachementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EleveAttachementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EleveAttachementPayload>
+        }
+        findFirst: {
+          args: Prisma.EleveAttachementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EleveAttachementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EleveAttachementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EleveAttachementPayload>
+        }
+        findMany: {
+          args: Prisma.EleveAttachementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EleveAttachementPayload>[]
+        }
+        create: {
+          args: Prisma.EleveAttachementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EleveAttachementPayload>
+        }
+        createMany: {
+          args: Prisma.EleveAttachementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EleveAttachementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EleveAttachementPayload>[]
+        }
+        delete: {
+          args: Prisma.EleveAttachementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EleveAttachementPayload>
+        }
+        update: {
+          args: Prisma.EleveAttachementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EleveAttachementPayload>
+        }
+        deleteMany: {
+          args: Prisma.EleveAttachementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EleveAttachementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EleveAttachementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EleveAttachementPayload>[]
+        }
+        upsert: {
+          args: Prisma.EleveAttachementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EleveAttachementPayload>
+        }
+        aggregate: {
+          args: Prisma.EleveAttachementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEleveAttachement>
+        }
+        groupBy: {
+          args: Prisma.EleveAttachementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EleveAttachementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EleveAttachementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EleveAttachementCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -7228,6 +7290,26 @@ export const AffectationCantineScalarFieldEnum = {
 export type AffectationCantineScalarFieldEnum = (typeof AffectationCantineScalarFieldEnum)[keyof typeof AffectationCantineScalarFieldEnum]
 
 
+export const EleveAttachementScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  status: 'status',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  sizeBytes: 'sizeBytes',
+  objectKey: 'objectKey',
+  schoolId: 'schoolId',
+  eleveId: 'eleveId',
+  createdById: 'createdById',
+  verifiedAt: 'verifiedAt',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EleveAttachementScalarFieldEnum = (typeof EleveAttachementScalarFieldEnum)[keyof typeof EleveAttachementScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -8212,6 +8294,34 @@ export type EnumStatutAffectationCantineFieldRefInput<$PrismaModel> = FieldRefIn
 export type ListEnumStatutAffectationCantineFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutAffectationCantine[]'>
     
 
+
+/**
+ * Reference to a field of type 'EleveAttachementType'
+ */
+export type EnumEleveAttachementTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EleveAttachementType'>
+    
+
+
+/**
+ * Reference to a field of type 'EleveAttachementType[]'
+ */
+export type ListEnumEleveAttachementTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EleveAttachementType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'EleveAttachementStatus'
+ */
+export type EnumEleveAttachementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EleveAttachementStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'EleveAttachementStatus[]'
+ */
+export type ListEnumEleveAttachementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EleveAttachementStatus[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -8222,10 +8332,19 @@ export type BatchPayload = {
 export const defineExtension = runtime.Extensions.defineExtension as unknown as runtime.Types.Extensions.ExtendsHook<"define", TypeMapCb, runtime.Types.Extensions.DefaultArgs>
 export type DefaultPrismaClient = PrismaClient
 export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
-/**
- * Options common to all variants of `PrismaClientOptions`, regardless of whether you connect to your database through a driver adapter or through Prisma Accelerate.
- */
-export interface PrismaClientBaseOptions {
+export type PrismaClientOptions = ({
+  /**
+   * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-pg`.
+   */
+  adapter: runtime.SqlDriverAdapterFactory
+  accelerateUrl?: never
+} | {
+  /**
+   * Prisma Accelerate URL allowing the client to connect through Accelerate instead of a direct database.
+   */
+  accelerateUrl: string
+  adapter?: never
+}) & {
   /**
    * @default "colorless"
    */
@@ -8312,56 +8431,6 @@ export interface PrismaClientBaseOptions {
    */
   queryPlanCacheMaxSize?: number
 }
-
-/**
- * `PrismaClient` options for connecting to your database through Prisma Accelerate instead of a driver adapter.
- * 
- * Learn more: https://pris.ly/d/accelerate
- */
-export interface PrismaClientOptionsWithAccelerateUrl extends PrismaClientBaseOptions {
-  /**
-   * The Prisma Accelerate connection URL. Use this option to connect to your database through Prisma Accelerate instead of using a driver adapter to connect directly.
-   * 
-   * Learn more: https://pris.ly/d/accelerate
-   */
-  accelerateUrl: string
-  adapter?: never
-}
-
-/**
- * `PrismaClient` options for connecting to your database through a driver adapter. This is the common case in Prisma 7.
- * 
- * Learn more: https://pris.ly/d/driver-adapters
- */
-export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions {
-  /**
-   * A driver adapter that PrismaClient uses to connect to your database, such as the ones provided by `@prisma/adapter-pg`, `@prisma/adapter-libsql`, `@prisma/adapter-planetscale`, etc.
-   * 
-   * A driver adapter is **required** unless you connect to your database through Prisma Accelerate (in which case use `accelerateUrl` instead).
-   * 
-   * Learn more: https://pris.ly/d/driver-adapters
-   * 
-   * @example
-   * ```ts
-   * import { PrismaPg } from '@prisma/adapter-pg'
-   * import { PrismaClient } from './generated/prisma/client'
-   * 
-   * const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
-   * const prisma = new PrismaClient({ adapter })
-   * ```
-   */
-  adapter: runtime.SqlDriverAdapterFactory
-  accelerateUrl?: never
-}
-
-/**
- * Options passed to the `PrismaClient` constructor.
- * 
- * A driver adapter (or, alternatively, a Prisma Accelerate URL) is **required**. See {@link PrismaClientOptionsWithAdapter} and {@link PrismaClientOptionsWithAccelerateUrl} for the two variants. All other properties live in {@link PrismaClientBaseOptions} and are optional.
- * 
- * Learn more about driver adapters: https://pris.ly/d/driver-adapters
- */
-export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   school?: Prisma.SchoolOmit
@@ -8437,6 +8506,7 @@ export type GlobalOmitConfig = {
   suiviSante?: Prisma.SuiviSanteOmit
   offreCantine?: Prisma.OffreCantineOmit
   affectationCantine?: Prisma.AffectationCantineOmit
+  eleveAttachement?: Prisma.EleveAttachementOmit
 }
 
 /* Types for Logging */

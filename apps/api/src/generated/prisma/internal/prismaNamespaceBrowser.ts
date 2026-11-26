@@ -124,7 +124,8 @@ export const ModelName = {
   SanctionEleve: 'SanctionEleve',
   SuiviSante: 'SuiviSante',
   OffreCantine: 'OffreCantine',
-  AffectationCantine: 'AffectationCantine'
+  AffectationCantine: 'AffectationCantine',
+  EleveAttachement: 'EleveAttachement'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1364,6 +1365,26 @@ export const AffectationCantineScalarFieldEnum = {
 } as const
 
 export type AffectationCantineScalarFieldEnum = (typeof AffectationCantineScalarFieldEnum)[keyof typeof AffectationCantineScalarFieldEnum]
+
+
+export const EleveAttachementScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  status: 'status',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  sizeBytes: 'sizeBytes',
+  objectKey: 'objectKey',
+  schoolId: 'schoolId',
+  eleveId: 'eleveId',
+  createdById: 'createdById',
+  verifiedAt: 'verifiedAt',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EleveAttachementScalarFieldEnum = (typeof EleveAttachementScalarFieldEnum)[keyof typeof EleveAttachementScalarFieldEnum]
 
 
 export const SortOrder = {

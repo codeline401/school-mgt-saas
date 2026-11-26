@@ -411,3 +411,8 @@ export type OffreCantine = Prisma.OffreCantineModel
  * 
  */
 export type AffectationCantine = Prisma.AffectationCantineModel
+/**
+ * Model EleveAttachement
+ * 
+ */
+export type EleveAttachement = Prisma.EleveAttachementModel

@@ -17,7 +17,7 @@ Ce projet utilise une structure MONOREPO et respècte des règles de gestion str
 
 Avant de commencer, assurez-vous d'avoir installer sur votre machine :
 
-- [Node.js](https://nodejs.com/) (version 18 ou supérieur)
+- [Node.js](https://nodejs.com/) (22.12 à 22.x, ou 24 et versions ultérieures)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) (doit être en cours d'éxecution)
 - [Git](https://git-scm.com/)
 
@@ -34,6 +34,23 @@ git clone <url-repo>
 cd school-mgt-saas
 npm install
 ```
+
+### Prisma : génération et migration
+
+Depuis `apps/api`, Prisma charge d'abord `apps/api/.env`, puis complète les
+variables manquantes depuis le `.env` à la racine. Les variables déjà définies
+dans l'environnement restent prioritaires. Définissez `DATABASE_URL` avec une
+URL PostgreSQL valide et assurez-vous que la base de développement est disponible.
+
+```bash
+cd apps/api
+npx prisma --version
+npx prisma generate
+npx prisma migrate dev --name add-eleve-attachement
+```
+
+La migration modifie la base de développement ; vérifiez la base ciblée avant
+de l'exécuter. Prisma 7 ne lance pas automatiquement `generate` après une migration.
 
 ## CI/CD GitHub Actions (develop/main -> VPS)
 
